@@ -1,51 +1,108 @@
-<!-- Updated oracle.html file contents with favicon link and logo structure - not displayed for brevity --></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oracle Readings | Lyrion Atelier</title>
+  <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
 <body>
-<!-- Twinkling Stars Background -->
-  <div class="stars-background"></div>
-  <div class="stars-background" aria-hidden="true"></div>
-
-<!-- Header -->
-<header class="header">
-<div class="header-content">
-      <a href="index.html" class="logo">Lyrion Atelier</a>
-      <a href="index.html" class="logo" aria-label="Lyrion Atelier Home">Lyrion Atelier</a>
-
-      <nav>
+  <a class="skip-to-content" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img src="images/logo/GOD.PNG" alt="Lyrion Atelier logo">
+        <span>Lyrion Atelier</span>
+      </a>
       <nav aria-label="Main navigation">
-<ul class="nav">
-<li><a href="index.html">Home</a></li>
-<li><a href="shop.html">Shop</a></li>
-@@ -28,17 +28,17 @@
-</nav>
-
-<div style="display: flex; align-items: center; gap: 1.5rem;">
-        <a href="cart.html" class="cart-icon">
-        <a href="cart.html" class="cart-icon" aria-label="Shopping cart">
-🛒
-          <span class="cart-count">0</span>
-          <span class="cart-count" aria-live="polite">0</span>
-</a>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="oracle.html">Oracle</a></li>
+          <li><a href="codex.html">Codex</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="cart-icon" href="cart.html" aria-label="Shopping cart">🛒 <span class="cart-count">0</span></a>
         <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-</div>
-</div>
-</header>
+      </div>
+    </div>
+  </header>
 
-<!-- Main Content -->
-  <main>
-  <main id="main-content">
-<!-- Hero Section -->
-<section class="hero" style="padding: 6rem 0 4rem;">
-<div class="container">
-@@ -152,8 +152,8 @@ <h4>Connect</h4>
-</footer>
+  <main id="main-content" class="section">
+    <div class="container">
+      <div class="section-title">
+        <p class="pill">Oracle studio</p>
+        <h1>Book a guided reading</h1>
+        <p class="muted">Choose a spread, align with your sign, and receive a personalized message.</p>
+      </div>
+      <div class="oracle-grid" id="oracle-grid"></div>
+    </div>
+  </main>
 
-<!-- Scripts -->
-  <script src="js/products.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/main.js"></script>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div><strong>Lyrion Atelier</strong></div>
+      <div class="muted"><a href="contact.html">Have a question?</a></div>
+    </div>
+  </footer>
+
   <script src="js/products.js" defer></script>
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
+  <script>
+    const oracleProducts = [
+      { id: 101, name: 'Past Life Reading', price: 65, image: 'images/oracle/past-life-reading-oracle-card.png', description: 'Uncover echoes of your former selves and the lessons that follow you.' },
+      { id: 102, name: 'Career Path Compass', price: 55, image: 'images/oracle/career-path-compass-oracle-card.png', description: 'A roadmap for your vocation with clear next steps.' },
+      { id: 103, name: 'Love & Relationships Spread', price: 52, image: 'images/oracle/love-relationships-spread-oracle-card.png', description: 'Clarity on connections, timing, and aligned partners.' },
+      { id: 104, name: 'Monthly Guidance Package', price: 60, image: 'images/oracle/monthly-guidance-package-oracle-card.png', description: 'A month-long cadence of insights to stay on track.' },
+      { id: 105, name: 'Natal Chart Blueprint', price: 70, image: 'images/oracle/natal-chart-blueprint-cover.png', description: 'Foundational chart read with practical activations.' },
+      { id: 106, name: 'Solar Return Reading', price: 58, image: 'images/oracle/solar-return-reading-cover.png', description: 'Birthday-year forecast covering themes and opportunities.' },
+      { id: 107, name: 'Life Path Reading', price: 50, image: 'images/oracle/life-path-reading-cover.png', description: 'Identify your current chapter and its lessons.' },
+      { id: 108, name: 'The Oracle’s Lantern', price: 75, image: 'images/oracle/the-oracles-lantern-cover.png', description: 'A deep dive session for seekers ready for transformation.' }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
+      const grid = document.getElementById('oracle-grid');
+      oracleProducts.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'oracle-card';
+        card.innerHTML = `
+          <div class="oracle-image">
+            ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '<div class="placeholder">🔮</div>'}
+          </div>
+          <h3>${item.name}</h3>
+          <p class="muted">${item.description}</p>
+          <p class="price">$${item.price.toFixed(2)}</p>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <a class="btn btn-outline" href="contact.html">Ask a question</a>
+            <button class="btn btn-primary" type="button" onclick="addToCart(${item.id})">Add to cart</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Extend the global products array for cart support
+      if (Array.isArray(window.products)) {
+        oracleProducts.forEach(item => {
+          if (!products.find(p => p.id === item.id)) {
+            products.push({
+              id: item.id,
+              name: item.name,
+              price: item.price,
+              category: 'oracle',
+              zodiac: 'oracle',
+              image: item.image,
+              description: item.description,
+              sizes: ['Standard']
+            });
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

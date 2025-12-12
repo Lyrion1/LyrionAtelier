@@ -1,1 +1,105 @@
-<!-- Updated product.html file contents with favicon link and logo structure - not displayed for brevity -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product | Lyrion Atelier</title>
+  <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-to-content" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img src="images/logo/GOD.PNG" alt="Lyrion Atelier logo">
+        <span>Lyrion Atelier</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="oracle.html">Oracle</a></li>
+          <li><a href="codex.html">Codex</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="cart-icon" href="cart.html" aria-label="Shopping cart">🛒 <span class="cart-count">0</span></a>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="section">
+    <div class="container">
+      <div class="card" id="product-wrapper">
+        <div class="product-image" id="product-image"></div>
+        <div>
+          <p class="pill" id="product-pill"></p>
+          <h1 id="product-name">Product</h1>
+          <p id="product-description" class="muted"></p>
+          <p class="price" id="product-price"></p>
+          <div class="size-selector" id="size-selector"></div>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1rem;">
+            <button class="btn btn-primary" type="button" id="add-to-cart-btn">Add to cart</button>
+            <a class="btn btn-outline" href="shop.html">Back to shop</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div><strong>Lyrion Atelier</strong></div>
+      <div class="muted"><a href="cart.html">View cart</a></div>
+    </div>
+  </footer>
+
+  <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script>
+    function loadProduct() {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id'), 10);
+      const product = products.find(p => p.id === id) || products[0];
+      if (!product) return;
+
+      document.title = `${product.name} | Lyrion Atelier`;
+      document.getElementById('product-name').textContent = product.name;
+      document.getElementById('product-description').textContent = product.description;
+      document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;
+      document.getElementById('product-pill').textContent = `${product.category} • ${product.zodiac.toUpperCase()}`;
+
+      const imageWrap = document.getElementById('product-image');
+      imageWrap.innerHTML = product.image ? `<img src="${product.image}" alt="${product.name}">` : '<div class="placeholder">✨</div>';
+
+      const sizeSelector = document.getElementById('size-selector');
+      sizeSelector.innerHTML = '';
+      product.sizes.forEach(size => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'size-option';
+        btn.textContent = size;
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.size-option').forEach(s => s.classList.remove('active'));
+          btn.classList.add('active');
+        });
+        sizeSelector.appendChild(btn);
+      });
+      const firstSize = sizeSelector.querySelector('.size-option');
+      if (firstSize) firstSize.classList.add('active');
+
+      const addBtn = document.getElementById('add-to-cart-btn');
+      addBtn.onclick = () => addToCart(product.id);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
+      loadProduct();
+    });
+  </script>
+</body>
+</html>

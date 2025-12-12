@@ -1,1 +1,112 @@
-<!-- Updated index.html file contents with favicon link and logo structure - not displayed for brevity -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lyrion Atelier | Celestial Boutique</title>
+  <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-to-content" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img src="images/logo/GOD.PNG" alt="Lyrion Atelier logo">
+        <span>Lyrion Atelier</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="oracle.html">Oracle</a></li>
+          <li><a href="codex.html">Codex</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="cart-icon" href="cart.html" aria-label="Shopping cart">
+          🛒 <span class="cart-count">0</span>
+        </a>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="container hero-content">
+        <div>
+          <p class="eyebrow">Celestial couture</p>
+          <h1>Starlit apparel & oracle guidance</h1>
+          <p>Astrology-inspired apparel, guided readings, and mystical tools designed to keep you aligned with the cosmos.</p>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <a class="btn btn-primary" href="shop.html">Shop collection</a>
+            <a class="btn btn-outline" href="oracle.html">Book an oracle</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Why Lyrion Atelier?</h3>
+          <ul style="list-style: none; padding:0; margin:0; display:grid; gap:0.5rem;">
+            <li>✨ 20 zodiac-inspired garments</li>
+            <li>🔮 8 guided oracle readings</li>
+            <li>🚚 Free shipping over $50</li>
+            <li>♿ Accessible, keyboard-friendly experience</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <p class="pill">Featured</p>
+          <h2>Customer favorites</h2>
+          <p class="muted">A handful of pieces and readings to explore first.</p>
+        </div>
+        <div class="grid" id="featured-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Lyrion Atelier</strong><br>
+        Crafted under the stars.
+      </div>
+      <div class="muted">Need help? <a href="contact.html">Contact us</a></div>
+    </div>
+  </footer>
+
+  <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
+      const featured = products.slice(0, 4);
+      const grid = document.getElementById('featured-grid');
+      featured.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <div class="product-image">
+            ${product.image ? `<img src="${product.image}" alt="${product.name}">` : `<div class="placeholder">✨</div>`}
+          </div>
+          <div>
+            <h3>${product.name}</h3>
+            <p class="muted">${product.description}</p>
+            <p class="price">$${product.price.toFixed(2)}</p>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <a class="btn btn-outline" href="product.html?id=${product.id}">View</a>
+            <button class="btn btn-primary" type="button" onclick="addToCart(${product.id})">Add to cart</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    });
+  </script>
+</body>
+</html>
