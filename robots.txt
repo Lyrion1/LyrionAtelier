@@ -1,0 +1,15 @@
+# robots.txt for Lyrion Atelier
+# This file tells search engines how to crawl the site
+
+User-agent: *
+Allow: /
+Disallow: /checkout.html
+Disallow: /checkout
+Disallow: /cart.html
+Disallow: /cart
+
+# Sitemap location
+Sitemap: https://lyrionatelier.com/sitemap.xml
+
+# Crawl delay (optional, in seconds)
+Crawl-delay: 1

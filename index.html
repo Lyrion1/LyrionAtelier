@@ -5,21 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Lyrion Atelier - Discover your cosmic style with astrology-themed clothing and oracle readings. Shop celestial fashion for every zodiac sign.">
   <meta name="keywords" content="astrology clothing, zodiac fashion, oracle readings, celestial apparel, cosmic style">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lyrionatelier.com/">
+  <meta property="og:title" content="Lyrion Atelier - Unlock Your Cosmic Style">
+  <meta property="og:description" content="Embrace the celestial energy with astrology-inspired fashion designed for your unique zodiac journey.">
+  <meta property="og:image" content="https://lyrionatelier.com/images/og-image.jpg">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://lyrionatelier.com/">
+  <meta property="twitter:title" content="Lyrion Atelier - Unlock Your Cosmic Style">
+  <meta property="twitter:description" content="Embrace the celestial energy with astrology-inspired fashion designed for your unique zodiac journey.">
+  <meta property="twitter:image" content="https://lyrionatelier.com/images/twitter-image.jpg">
+  
   <title>Lyrion Atelier - Unlock Your Cosmic Style</title>
+  
+  <!-- Preconnect to external domains for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
   <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <!-- JSON-LD Structured Data for Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Lyrion Atelier",
+    "description": "Celestial fashion and mystical guidance for your cosmic journey",
+    "url": "https://lyrionatelier.com",
+    "logo": "https://lyrionatelier.com/images/logo.png",
+    "sameAs": [
+      "https://www.instagram.com/lyrionatelier",
+      "https://www.facebook.com/lyrionatelier",
+      "https://www.pinterest.com/lyrionatelier",
+      "https://www.tiktok.com/@lyrionatelier"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "info@lyrionatelier.com",
+      "contactType": "Customer Service"
+    }
+  }
+  </script>
 </head>
 <body>
   <!-- Twinkling Stars Background -->
-  <div class="stars-background"></div>
+  <div class="stars-background" aria-hidden="true"></div>
   
   <!-- Header -->
   <header class="header">
     <div class="header-content">
-      <a href="index.html" class="logo">Lyrion Atelier</a>
+      <a href="index.html" class="logo" aria-label="Lyrion Atelier Home">Lyrion Atelier</a>
       
-      <nav>
+      <nav aria-label="Main navigation">
         <ul class="nav">
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html" aria-current="page">Home</a></li>
           <li><a href="shop.html">Shop</a></li>
           <li><a href="oracle.html">The Oracle</a></li>
           <li><a href="codex.html">Codex</a></li>
@@ -28,17 +74,17 @@
       </nav>
       
       <div style="display: flex; align-items: center; gap: 1.5rem;">
-        <a href="cart.html" class="cart-icon">
+        <a href="cart.html" class="cart-icon" aria-label="Shopping cart">
           🛒
-          <span class="cart-count">0</span>
+          <span class="cart-count" aria-live="polite">0</span>
         </a>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       </div>
     </div>
   </header>
   
   <!-- Main Content -->
-  <main>
+  <main id="main-content">
     <!-- Hero Section -->
     <section class="hero">
       <div class="container">
@@ -64,7 +110,7 @@
     <!-- About Section -->
     <section class="section">
       <div class="container">
-        <div class="glass-card" style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <div class="glass-card fade-in-on-scroll" style="max-width: 800px; margin: 0 auto; text-align: center;">
           <h2>About Lyrion Atelier</h2>
           <p>At Lyrion Atelier, we believe that fashion is more than fabric—it's a manifestation of your cosmic essence. Each piece in our collection is thoughtfully designed to align with the celestial energies that guide your journey.</p>
           <p>Whether you're a fiery Aries, a dreamy Pisces, or anywhere in between, our astrology-themed apparel lets you wear your zodiac with pride. Combined with our mystical oracle readings, we offer a holistic approach to discovering your true self.</p>
@@ -76,12 +122,13 @@
     <!-- Email Signup Section -->
     <section class="section">
       <div class="container">
-        <div class="glass-card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <div class="glass-card fade-in-on-scroll" style="max-width: 600px; margin: 0 auto; text-align: center;">
           <h3>Join Our Cosmic Community</h3>
           <p>Subscribe to receive exclusive offers, astrology insights, and new collection updates.</p>
-          <form onsubmit="handleEmailSignup(event)" style="margin-top: 2rem;">
+          <form onsubmit="handleEmailSignup(event)" style="margin-top: 2rem;" aria-label="Newsletter signup">
             <div class="form-group">
-              <input type="email" class="form-input" placeholder="Enter your email" required>
+              <label for="newsletter-email" class="sr-only">Email address</label>
+              <input type="email" id="newsletter-email" class="form-input" placeholder="Enter your email" required aria-required="true">
             </div>
             <button type="submit" class="btn btn-primary">Subscribe</button>
           </form>
@@ -132,8 +179,21 @@
   </footer>
   
   <!-- Scripts -->
-  <script src="js/products.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/main.js" defer></script>
+  
+  <!-- Font loading optimization -->
+  <style>
+    /* Font display swap for better performance */
+    @font-face {
+      font-family: 'Cinzel';
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-display: swap;
+    }
+  </style>
 </body>
 </html>

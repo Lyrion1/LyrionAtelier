@@ -1,0 +1,23 @@
+# Netlify Redirects and Rewrites
+# This file enables clean URLs and SPA-like routing
+
+# Clean URLs - Remove .html extension
+/shop               /shop.html            200
+/cart               /cart.html            200
+/checkout           /checkout.html        200
+/contact            /contact.html         200
+/oracle             /oracle.html          200
+/codex              /codex.html           200
+/product            /product.html         200
+
+# Redirect old URLs (if migrating from another platform)
+# /old-shop/*         /shop/:splat          301
+
+# API proxy (if you add a backend later)
+# /api/*              https://your-backend.com/api/:splat  200
+
+# Force HTTPS
+http://*            https://:splat        301!
+
+# 404 page
+/*                  /index.html           404
