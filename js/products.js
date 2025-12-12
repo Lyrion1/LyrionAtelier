@@ -701,20 +701,28 @@ function displayFeaturedProducts() {
 function displayOracleReadings() {
   const oracleGrid = document.getElementById('oracle-grid');
   if (!oracleGrid) return;
-  
-  oracleReadings.forEach(reading => {
+
+  oracleGrid.innerHTML = '';
+  const oracleProducts = Array.isArray(products) ? products.filter(p => p.category === 'oracle') : [];
+
+  oracleProducts.forEach((reading, index) => {
     const oracleCard = document.createElement('div');
     oracleCard.className = 'oracle-card fade-in-on-scroll';
+    oracleCard.style.animationDelay = `${index * 0.05}s`;
     oracleCard.innerHTML = `
-      <div class="oracle-icon">${reading.icon}</div>
-      <h3 class="oracle-title">${reading.name}</h3>
-      <p class="oracle-description">${reading.description}</p>
-      <div class="oracle-details" style="display: flex; flex-direction: column; gap: 0.5rem; margin: 1rem 0; font-size: 0.9rem; color: var(--gray-medium);">
-        <small>📅 ${reading.duration}</small>
-        <small>📬 ${reading.delivery}</small>
+      <div class="oracle-image">
+        ${reading.image ? `<img src="${reading.image}" alt="${reading.name}" loading="lazy">` : '<div class="placeholder">⭐</div>'}
       </div>
-      <div class="oracle-price">$${reading.price}</div>
-      <button class="btn btn-secondary" onclick="purchaseReading('${reading.id}')" aria-label="Book ${reading.name}">Book Reading</button>
+      <div>
+        <p class="pill">Oracle reading</p>
+        <h3 class="oracle-title">${reading.name}</h3>
+        <p class="oracle-description">${reading.description}</p>
+      </div>
+      <div class="oracle-price">$${reading.price.toFixed(2)}</div>
+      <div class="button-row tight">
+        <a class="btn btn-outline" href="contact.html">Ask the oracle</a>
+        <button class="btn btn-primary" onclick="addToCart(${reading.id})" aria-label="Add ${reading.name} to cart">Book</button>
+      </div>
     `;
     oracleGrid.appendChild(oracleCard);
   });
