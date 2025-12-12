@@ -55,7 +55,7 @@ body::after {
               radial-gradient(circle at 90% 60%, rgba(255,255,255,0.06), transparent 18%),
               linear-gradient(120deg, rgba(167, 139, 250, 0.12), transparent 35%, rgba(251, 191, 36, 0.08));
   mix-blend-mode: screen;
-  animation: drift 38s ease-in-out infinite alternate;
+  animation: drift 24s ease-in-out infinite alternate;
 }
 
 @keyframes drift {
