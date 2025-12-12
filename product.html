@@ -41,7 +41,7 @@
           <p id="product-description" class="muted"></p>
           <p class="price" id="product-price"></p>
           <div class="size-selector" id="size-selector"></div>
-          <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1rem;">
+          <div class="button-row mt-1">
             <button class="btn btn-primary" type="button" id="add-to-cart-btn">Add to cart</button>
             <a class="btn btn-outline" href="shop.html">Back to shop</a>
           </div>
@@ -71,7 +71,7 @@
       document.getElementById('product-name').textContent = product.name;
       document.getElementById('product-description').textContent = product.description;
       document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;
-      document.getElementById('product-pill').textContent = `${product.category} • ${product.zodiac.toUpperCase()}`;
+      document.getElementById('product-pill').textContent = `${product.category} • ${(product.zodiac || '').toUpperCase()}`;
 
       const imageWrap = document.getElementById('product-image');
       imageWrap.innerHTML = product.image ? `<img src="${product.image}" alt="${product.name}">` : '<div class="placeholder">✨</div>';

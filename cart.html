@@ -54,13 +54,13 @@
           <tbody></tbody>
         </table>
         <p id="empty-cart-message" class="muted" style="display:none;">Your cart is empty. <a href="shop.html">Find something magical</a>.</p>
-        <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:space-between; margin-top:1rem;">
+        <div class="button-row space-between mt-1 gap-1">
           <div class="cart-summary">
-            <div style="display:flex; justify-content:space-between;"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
-            <div style="display:flex; justify-content:space-between;"><span>Shipping</span><strong id="cart-shipping">$0.00</strong></div>
-            <div style="display:flex; justify-content:space-between;"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+            <div class="price-row"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+            <div class="price-row"><span>Shipping</span><strong id="cart-shipping">$0.00</strong></div>
+            <div class="price-row"><span>Total</span><strong id="cart-total">$0.00</strong></div>
           </div>
-          <div style="display:flex; gap:0.75rem; align-items:flex-end; flex-wrap:wrap;">
+          <div class="button-row align-end">
             <a class="btn btn-outline" href="shop.html">Continue shopping</a>
             <button class="btn btn-primary" type="button" onclick="window.location.href='checkout.html'">Checkout</button>
             <button class="btn btn-outline" type="button" onclick="clearCart()">Clear cart</button>

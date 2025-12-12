@@ -205,6 +205,86 @@ const products = [
     image: null,
     description: "Earthy Virgo hoodie with wheat sheaf design and harvest moon imagery. Celebrating service, health, and nature.",
     sizes: ["S", "M", "L", "XL", "XXL"]
+  },
+  {
+    id: 101,
+    name: "Past Life Reading",
+    price: 65,
+    category: "oracle",
+    zodiac: "oracle",
+    image: "images/oracle/past-life-reading-oracle-card.png",
+    description: "Uncover echoes of your former selves and the lessons that follow you.",
+    sizes: ["Standard"]
+  },
+  {
+    id: 102,
+    name: "Career Path Compass",
+    price: 55,
+    category: "oracle",
+    zodiac: "oracle",
+    image: "images/oracle/career-path-compass-oracle-card.png",
+    description: "A roadmap for your vocation with clear next steps.",
+    sizes: ["Standard"]
+  },
+  {
+    id: 103,
+    name: "Love & Relationships Spread",
+    price: 52,
+    category: "oracle",
+    zodiac: "oracle",
+    image: "images/oracle/love-relationships-spread-oracle-card.png",
+    description: "Clarity on connections, timing, and aligned partners.",
+    sizes: ["Standard"]
+  },
+  {
+    id: 104,
+    name: "Monthly Guidance Package",
+    price: 60,
+    category: "oracle",
+    zodiac: "oracle",
+    image: "images/oracle/monthly-guidance-package-oracle-card.png",
+    description: "A month-long cadence of insights to stay on track.",
+    sizes: ["Standard"]
+  },
+  {
+    id: 105,
+    name: "Natal Chart Blueprint",
+    price: 70,
+    category: "oracle",
+    zodiac: "oracle",
+    image: "images/oracle/natal-chart-blueprint-cover.png",
+    description: "Foundational chart read with practical activations.",
+    sizes: ["Standard"]
+  },
+  {
+    id: 106,
+    name: "Solar Return Reading",
+    price: 58,
+    category: "oracle",
+    zodiac: "oracle",
+    image: "images/oracle/solar-return-reading-cover.png",
+    description: "Birthday-year forecast covering themes and opportunities.",
+    sizes: ["Standard"]
+  },
+  {
+    id: 107,
+    name: "Life Path Reading",
+    price: 50,
+    category: "oracle",
+    zodiac: "oracle",
+    image: "images/oracle/life-path-reading-cover.png",
+    description: "Identify your current chapter and its lessons.",
+    sizes: ["Standard"]
+  },
+  {
+    id: 108,
+    name: "The Oracle’s Lantern",
+    price: 75,
+    category: "oracle",
+    zodiac: "oracle",
+    image: "images/oracle/the-oracles-lantern-cover.png",
+    description: "A deep dive session for seekers ready for transformation.",
+    sizes: ["Standard"]
   }
 ];
 

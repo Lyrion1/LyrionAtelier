@@ -39,7 +39,7 @@
         <p class="muted">Enter your details and we'll confirm your order.</p>
       </div>
 
-      <div class="card" style="display:grid; gap:1.5rem; grid-template-columns: 2fr 1fr;">
+      <div class="card two-column-grid">
         <form id="checkout-form" data-validate="true">
           <div class="form-group">
             <label for="full-name">Full name</label>
@@ -63,9 +63,9 @@
         <div class="cart-summary">
           <h3>Order summary</h3>
           <p class="muted">Totals match your cart.</p>
-          <div style="display:flex; justify-content:space-between;"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
-          <div style="display:flex; justify-content:space-between;"><span>Shipping</span><strong id="cart-shipping">$0.00</strong></div>
-          <div style="display:flex; justify-content:space-between;"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+          <div class="price-row"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+          <div class="price-row"><span>Shipping</span><strong id="cart-shipping">$0.00</strong></div>
+          <div class="price-row"><span>Total</span><strong id="cart-total">$0.00</strong></div>
         </div>
       </div>
     </div>

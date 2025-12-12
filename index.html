@@ -40,7 +40,7 @@
           <p class="eyebrow">Celestial couture</p>
           <h1>Starlit apparel & oracle guidance</h1>
           <p>Astrology-inspired apparel, guided readings, and mystical tools designed to keep you aligned with the cosmos.</p>
-          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+          <div class="button-row">
             <a class="btn btn-primary" href="shop.html">Shop collection</a>
             <a class="btn btn-outline" href="oracle.html">Book an oracle</a>
           </div>
@@ -99,7 +99,7 @@
             <p class="muted">${product.description}</p>
             <p class="price">$${product.price.toFixed(2)}</p>
           </div>
-          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <div class="button-row tight">
             <a class="btn btn-outline" href="product.html?id=${product.id}">View</a>
             <button class="btn btn-primary" type="button" onclick="addToCart(${product.id})">Add to cart</button>
           </div>

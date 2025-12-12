@@ -39,7 +39,7 @@
         <p class="muted">Choose your sign, element, or vibe. Add anything to the cart for checkout.</p>
       </div>
 
-      <div class="card" style="margin-bottom:1rem; display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); align-items:end;">
+      <div class="card filters-panel">
         <div class="form-group">
           <label for="filter-category">Category</label>
           <select id="filter-category">
@@ -53,7 +53,18 @@
           <label for="filter-zodiac">Zodiac</label>
           <select id="filter-zodiac">
             <option value="all">All signs</option>
-            <option value="aries">Aries</option><option value="taurus">Taurus</option><option value="gemini">Gemini</option><option value="cancer">Cancer</option><option value="leo">Leo</option><option value="virgo">Virgo</option><option value="libra">Libra</option><option value="scorpio">Scorpio</option><option value="sagittarius">Sagittarius</option><option value="capricorn">Capricorn</option><option value="aquarius">Aquarius</option><option value="pisces">Pisces</option>
+            <option value="aries">Aries</option>
+            <option value="taurus">Taurus</option>
+            <option value="gemini">Gemini</option>
+            <option value="cancer">Cancer</option>
+            <option value="leo">Leo</option>
+            <option value="virgo">Virgo</option>
+            <option value="libra">Libra</option>
+            <option value="scorpio">Scorpio</option>
+            <option value="sagittarius">Sagittarius</option>
+            <option value="capricorn">Capricorn</option>
+            <option value="aquarius">Aquarius</option>
+            <option value="pisces">Pisces</option>
           </select>
         </div>
       </div>
@@ -93,7 +104,7 @@
               <h3>${product.name}</h3>
               <p class="muted">${product.description}</p>
               <p class="price">$${product.price.toFixed(2)}</p>
-              <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <div class="button-row tight">
                 <a class="btn btn-outline" href="product.html?id=${product.id}">View</a>
                 <button class="btn btn-primary" type="button" onclick="addToCart(${product.id})">Add to cart</button>
               </div>

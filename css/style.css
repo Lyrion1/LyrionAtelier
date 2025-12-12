@@ -412,6 +412,51 @@ textarea:focus {
   color: var(--muted);
 }
 
+.filters-panel {
+  margin-bottom: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: end;
+}
+
+.two-column-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 2fr 1fr;
+}
+
+.button-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.button-row.tight {
+  gap: 0.5rem;
+}
+
+.button-row.space-between {
+  justify-content: space-between;
+}
+
+.button-row.align-end {
+  align-items: flex-end;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media (max-width: 900px) {
   .nav {
     position: absolute;
