@@ -42,6 +42,21 @@
     </div>
   </main>
 
+  <section class="section lantern-cta fade-in-on-scroll">
+    <div class="lantern-glow"></div>
+    <div class="container lantern-card">
+      <div>
+        <p class="pill">Offer a light</p>
+        <h2>Light a lantern for our interceders</h2>
+        <p class="muted">A quiet, voluntary donation that fuels the keepers who pray, divine, and hold space for wishes around the world.</p>
+      </div>
+      <a class="lantern-button" href="contact.html#donations" aria-label="Light a lamp to donate">
+        <img src="images/oracle/the-oracles-lantern-cover.png" alt="The Oracle's Lantern">
+        <span>Light a lamp</span>
+      </a>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container footer-inner">
       <div><strong>Lyrion Atelier</strong></div>
@@ -52,31 +67,5 @@
   <script src="js/products.js" defer></script>
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      updateCartCount();
-      const grid = document.getElementById('oracle-grid');
-      const catalog = Array.isArray(window.products) ? window.products : [];
-      const oracleProducts = catalog.filter(p => p.category === 'oracle');
-
-      oracleProducts.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'oracle-card';
-        card.innerHTML = `
-          <div class="oracle-image">
-            ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '<div class="placeholder">🔮</div>'}
-          </div>
-          <h3>${item.name}</h3>
-          <p class="muted">${item.description}</p>
-          <p class="price">$${item.price.toFixed(2)}</p>
-          <div class="button-row tight">
-            <a class="btn btn-outline" href="contact.html">Ask a question</a>
-            <button class="btn btn-primary" type="button" onclick="addToCart(${item.id})">Add to cart</button>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    });
-  </script>
 </body>
 </html>

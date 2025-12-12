@@ -289,94 +289,6 @@ const products = [
 ];
 
 /**
- * Oracle Readings Data
- * Digital oracle readings offered as services/products
- * Each reading includes: id, name, price, icon, description, and category
- */
-const oracleReadings = [
-  {
-    id: "oracle-1",
-    name: "Past Life Reading",
-    price: 44,
-    icon: "🔮",
-    category: "oracle",
-    description: "Discover your soul's journey through time and unlock ancient wisdom. Includes detailed 15-page report.",
-    duration: "60 minutes",
-    delivery: "Digital report within 3-5 business days"
-  },
-  {
-    id: "oracle-2",
-    name: "Career Compass Reading",
-    price: 50,
-    icon: "⭐",
-    category: "oracle",
-    description: "Navigate your professional path with celestial guidance. Uncover your career strengths and opportunities.",
-    duration: "45 minutes",
-    delivery: "Digital report within 3-5 business days"
-  },
-  {
-    id: "oracle-3",
-    name: "Love Forecast Reading",
-    price: 55,
-    icon: "💫",
-    category: "oracle",
-    description: "Illuminate your romantic journey and relationship potential. Includes compatibility analysis.",
-    duration: "60 minutes",
-    delivery: "Digital report within 3-5 business days"
-  },
-  {
-    id: "oracle-4",
-    name: "Spiritual Awakening Reading",
-    price: 60,
-    icon: "✨",
-    category: "oracle",
-    description: "Deepen your connection to higher consciousness and inner truth. Explore your spiritual gifts.",
-    duration: "75 minutes",
-    delivery: "Digital report within 5-7 business days"
-  },
-  {
-    id: "oracle-5",
-    name: "Life Purpose Reading",
-    price: 65,
-    icon: "🌙",
-    category: "oracle",
-    description: "Uncover your soul's mission and align with your destiny. Comprehensive life path analysis.",
-    duration: "90 minutes",
-    delivery: "Digital report within 5-7 business days"
-  },
-  {
-    id: "oracle-6",
-    name: "Year Ahead Reading",
-    price: 75,
-    icon: "☀️",
-    category: "oracle",
-    description: "Comprehensive annual forecast for all areas of your life. Month-by-month guidance and predictions.",
-    duration: "120 minutes",
-    delivery: "Digital report within 7-10 business days"
-  },
-  {
-    id: "oracle-7",
-    name: "Soul Mate Connection",
-    price: 58,
-    icon: "💕",
-    category: "oracle",
-    description: "Deep dive into your soul mate energy and timing. Discover when and how you'll meet your divine partner.",
-    duration: "60 minutes",
-    delivery: "Digital report within 3-5 business days"
-  },
-  {
-    id: "oracle-8",
-    name: "Ancestral Wisdom Reading",
-    price: 52,
-    icon: "🌟",
-    category: "oracle",
-    description: "Connect with ancestral guidance and inherited gifts. Heal generational patterns and embrace legacy.",
-    duration: "60 minutes",
-    delivery: "Digital report within 3-5 business days"
-  }
-];
-
-/**
  * Display Products on Shop Page
  * Renders product cards with smooth animations
  * @param {Array} productsToShow - Array of products to display
@@ -701,20 +613,28 @@ function displayFeaturedProducts() {
 function displayOracleReadings() {
   const oracleGrid = document.getElementById('oracle-grid');
   if (!oracleGrid) return;
-  
-  oracleReadings.forEach(reading => {
+
+  oracleGrid.innerHTML = '';
+  const oracleProducts = Array.isArray(products) ? products.filter(p => p.category === 'oracle') : [];
+
+  oracleProducts.forEach((reading, index) => {
     const oracleCard = document.createElement('div');
     oracleCard.className = 'oracle-card fade-in-on-scroll';
+    oracleCard.style.animationDelay = `${index * 0.05}s`;
     oracleCard.innerHTML = `
-      <div class="oracle-icon">${reading.icon}</div>
-      <h3 class="oracle-title">${reading.name}</h3>
-      <p class="oracle-description">${reading.description}</p>
-      <div class="oracle-details" style="display: flex; flex-direction: column; gap: 0.5rem; margin: 1rem 0; font-size: 0.9rem; color: var(--gray-medium);">
-        <small>📅 ${reading.duration}</small>
-        <small>📬 ${reading.delivery}</small>
+      <div class="oracle-image">
+        ${reading.image ? `<img src="${reading.image}" alt="${reading.name}" loading="lazy">` : '<div class="placeholder">⭐</div>'}
       </div>
-      <div class="oracle-price">$${reading.price}</div>
-      <button class="btn btn-secondary" onclick="purchaseReading('${reading.id}')" aria-label="Book ${reading.name}">Book Reading</button>
+      <div>
+        <p class="pill">Oracle reading</p>
+        <h3 class="oracle-title">${reading.name}</h3>
+        <p class="oracle-description">${reading.description}</p>
+      </div>
+      <div class="oracle-price">$${reading.price.toFixed(2)}</div>
+      <div class="button-row tight">
+        <a class="btn btn-outline" href="contact.html">Ask the oracle</a>
+        <button class="btn btn-primary" onclick="addToCart(${reading.id})" aria-label="Add ${reading.name} to cart">Book</button>
+      </div>
     `;
     oracleGrid.appendChild(oracleCard);
   });
