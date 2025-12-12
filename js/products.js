@@ -615,7 +615,9 @@ function displayOracleReadings() {
   if (!oracleGrid) return;
 
   oracleGrid.innerHTML = '';
-  const oracleProducts = Array.isArray(products) ? products.filter(p => p.category === 'oracle') : [];
+  const oracleProducts = Array.isArray(products)
+    ? products.filter(p => p.category === 'oracle' && p.name !== "The Oracle’s Lantern")
+    : [];
 
   oracleProducts.forEach((reading, index) => {
     const oracleCard = document.createElement('div');
