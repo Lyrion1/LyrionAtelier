@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Lyrion Atelier for inquiries about celestial fashion, oracle readings, and cosmic guidance.">
+  <meta name="keywords" content="contact, customer service, inquiries, support">
+  <title>Contact Us - Lyrion Atelier</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Twinkling Stars Background -->
+  <div class="stars-background"></div>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">Lyrion Atelier</a>
+      
+      <nav>
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="oracle.html">The Oracle</a></li>
+          <li><a href="codex.html">Codex</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <div style="display: flex; align-items: center; gap: 1.5rem;">
+        <a href="cart.html" class="cart-icon">
+          🛒
+          <span class="cart-count">0</span>
+        </a>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <h1 style="margin-top: 3rem; margin-bottom: 1rem; text-align: center;">Contact Us</h1>
+      <p style="color: var(--gray-light); margin-bottom: 3rem; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Have questions about our products or readings? We're here to guide you on your cosmic journey.
+      </p>
+      
+      <div class="grid grid-2" style="max-width: 1000px; margin: 0 auto; gap: 3rem;">
+        <!-- Contact Form -->
+        <div class="glass-card">
+          <h3 style="margin-bottom: 2rem;">Send Us a Message</h3>
+          <form onsubmit="handleContactForm(event)">
+            <div class="form-group">
+              <label for="name" class="form-label">Name *</label>
+              <input type="text" id="name" name="name" class="form-input" required placeholder="Your name">
+            </div>
+            
+            <div class="form-group">
+              <label for="email" class="form-label">Email *</label>
+              <input type="email" id="email" name="email" class="form-input" required placeholder="your.email@example.com">
+            </div>
+            
+            <div class="form-group">
+              <label for="subject" class="form-label">Subject *</label>
+              <input type="text" id="subject" name="subject" class="form-input" required placeholder="How can we help?">
+            </div>
+            
+            <div class="form-group">
+              <label for="message" class="form-label">Message *</label>
+              <textarea id="message" name="message" class="form-textarea" required placeholder="Tell us more..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+          </form>
+        </div>
+        
+        <!-- Contact Information -->
+        <div>
+          <div class="glass-card" style="margin-bottom: 2rem;">
+            <h3 style="margin-bottom: 1.5rem;">Get In Touch</h3>
+            
+            <div style="margin-bottom: 1.5rem;">
+              <h5 style="color: var(--gold); margin-bottom: 0.5rem;">📧 Email</h5>
+              <p style="color: var(--gray-light);">info@lyrionatelier.com</p>
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+              <h5 style="color: var(--gold); margin-bottom: 0.5rem;">⏰ Response Time</h5>
+              <p style="color: var(--gray-light);">We typically respond within 24-48 hours</p>
+            </div>
+            
+            <div>
+              <h5 style="color: var(--gold); margin-bottom: 0.5rem;">🌟 Follow Us</h5>
+              <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <a href="#" style="color: var(--white); font-size: 1.5rem; transition: color 0.3s ease;">📱</a>
+                <a href="#" style="color: var(--white); font-size: 1.5rem; transition: color 0.3s ease;">📘</a>
+                <a href="#" style="color: var(--white); font-size: 1.5rem; transition: color 0.3s ease;">📌</a>
+                <a href="#" style="color: var(--white); font-size: 1.5rem; transition: color 0.3s ease;">🎵</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="glass-card">
+            <h3 style="margin-bottom: 1.5rem;">FAQ</h3>
+            
+            <div style="margin-bottom: 1.5rem;">
+              <h5 style="color: var(--gold); margin-bottom: 0.5rem;">What are your shipping times?</h5>
+              <p style="color: var(--gray-light); font-size: 0.95rem;">Orders typically ship within 2-3 business days. Delivery takes 5-7 business days within the US.</p>
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+              <h5 style="color: var(--gold); margin-bottom: 0.5rem;">How do oracle readings work?</h5>
+              <p style="color: var(--gray-light); font-size: 0.95rem;">After booking, we'll contact you to schedule your personalized digital reading. You'll receive a comprehensive report with insights.</p>
+            </div>
+            
+            <div>
+              <h5 style="color: var(--gold); margin-bottom: 0.5rem;">What is your return policy?</h5>
+              <p style="color: var(--gray-light); font-size: 0.95rem;">We offer 30-day returns on unworn items in original condition. Contact us to initiate a return.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Lyrion Atelier</h4>
+          <p>Celestial fashion and mystical guidance for your cosmic journey.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="shop.html">All Products</a></li>
+            <li><a href="shop.html?category=tshirt">T-Shirts</a></li>
+            <li><a href="shop.html?category=hoodie">Hoodies</a></li>
+            <li><a href="shop.html?category=sweatshirt">Sweatshirts</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="oracle.html">Oracle Readings</a></li>
+            <li><a href="codex.html">Astrology Codex</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Pinterest</a></li>
+            <li><a href="#">TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Lyrion Atelier. All rights reserved. Made with cosmic energy ✨</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
