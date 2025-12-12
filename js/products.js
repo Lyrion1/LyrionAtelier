@@ -440,41 +440,54 @@ function updateURLParameters(categories, zodiacs, minPrice, maxPrice, sortBy) {
 function loadFiltersFromURL() {
   const params = new URLSearchParams(window.location.search);
   
+  // Whitelist of valid categories and zodiac signs for security
+  const validCategories = ['tshirt', 'hoodie', 'sweatshirt'];
+  const validZodiacs = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 
+                        'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'];
+  
   // Load category filters
-  const categories = params.get('category')?.split(',') || [];
-  categories.forEach(category => {
-    const checkbox = document.querySelector(`input[name="category"][value="${category}"]`);
-    if (checkbox) checkbox.checked = true;
-  });
+  const categoryParam = params.get('category');
+  if (categoryParam) {
+    const categories = categoryParam.split(',').filter(cat => validCategories.includes(cat));
+    categories.forEach(category => {
+      const checkbox = document.querySelector(`input[name="category"][value="${CSS.escape(category)}"]`);
+      if (checkbox) checkbox.checked = true;
+    });
+  }
   
   // Load zodiac filters
-  const zodiacs = params.get('zodiac')?.split(',') || [];
-  zodiacs.forEach(zodiac => {
-    const checkbox = document.querySelector(`input[name="zodiac"][value="${zodiac}"]`);
-    if (checkbox) checkbox.checked = true;
-  });
+  const zodiacParam = params.get('zodiac');
+  if (zodiacParam) {
+    const zodiacs = zodiacParam.split(',').filter(zod => validZodiacs.includes(zod));
+    zodiacs.forEach(zodiac => {
+      const checkbox = document.querySelector(`input[name="zodiac"][value="${CSS.escape(zodiac)}"]`);
+      if (checkbox) checkbox.checked = true;
+    });
+  }
   
-  // Load price filters
+  // Load price filters with sanitization
   const minPrice = params.get('min');
   const maxPrice = params.get('max');
-  if (minPrice) {
+  if (minPrice && !isNaN(parseFloat(minPrice))) {
     const minInput = document.getElementById('min-price');
-    if (minInput) minInput.value = minPrice;
+    if (minInput) minInput.value = parseFloat(minPrice);
   }
-  if (maxPrice) {
+  if (maxPrice && !isNaN(parseFloat(maxPrice))) {
     const maxInput = document.getElementById('max-price');
-    if (maxInput) maxInput.value = maxPrice;
+    if (maxInput) maxInput.value = parseFloat(maxPrice);
   }
   
   // Load sort option
   const sortBy = params.get('sort');
-  if (sortBy) {
+  const validSorts = ['featured', 'price-low', 'price-high', 'name'];
+  if (sortBy && validSorts.includes(sortBy)) {
     const sortSelect = document.getElementById('sort-select');
     if (sortSelect) sortSelect.value = sortBy;
   }
   
   // Apply filters if any were loaded
-  if (categories.length > 0 || zodiacs.length > 0 || minPrice || maxPrice) {
+  const hasFilters = categoryParam || zodiacParam || minPrice || maxPrice;
+  if (hasFilters) {
     filterProducts();
   }
 }

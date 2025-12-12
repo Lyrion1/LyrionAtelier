@@ -918,38 +918,6 @@ main {
   transform: scale(1.2);
 }
 
-.lightbox-prev,
-.lightbox-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(139, 92, 246, 0.5);
-  border: none;
-  color: var(--white);
-  font-size: 3rem;
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: background 0.3s ease;
-}
-
-.lightbox-prev {
-  left: 20px;
-}
-
-.lightbox-next {
-  right: 20px;
-}
-
-.lightbox-prev:hover,
-.lightbox-next:hover {
-  background: var(--purple);
-}
-
 /* Loading Spinner */
 .spinner {
   display: inline-block;

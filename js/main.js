@@ -240,7 +240,7 @@ function initThumbnailGallery() {
 
 /**
  * Lightbox Modal for Product Images
- * Opens image in modal with arrow-key navigation
+ * Opens image in modal with keyboard navigation
  */
 function initLightbox() {
   const mainImage = document.querySelector('.main-image');
@@ -256,8 +256,6 @@ function initLightbox() {
         <div class="lightbox-content">
           <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
           <img src="" alt="" class="lightbox-image">
-          <button class="lightbox-prev" aria-label="Previous image">&#8249;</button>
-          <button class="lightbox-next" aria-label="Next image">&#8250;</button>
         </div>
       `;
       document.body.appendChild(lightbox);
