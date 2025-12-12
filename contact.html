@@ -1,1 +1,76 @@
-<!-- Updated contact.html file contents with favicon link and logo structure - not displayed for brevity -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Lyrion Atelier</title>
+  <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-to-content" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img src="images/logo/GOD.PNG" alt="Lyrion Atelier logo">
+        <span>Lyrion Atelier</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="oracle.html">Oracle</a></li>
+          <li><a href="codex.html">Codex</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="cart-icon" href="cart.html" aria-label="Shopping cart">🛒 <span class="cart-count">0</span></a>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="section">
+    <div class="container">
+      <div class="section-title">
+        <p class="pill">Say hello</p>
+        <h1>Contact Lyrion Atelier</h1>
+        <p class="muted">Need help choosing a reading or garment? Send us a note.</p>
+      </div>
+
+      <div class="card">
+        <form class="contact-form" onsubmit="handleContactForm(event)">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required minlength="2" placeholder="Lyrion Starwalker">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required placeholder="Share your question or intent"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Send message</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div><strong>Lyrion Atelier</strong></div>
+      <div class="muted">Prefer email? info@lyrionatelier.com</div>
+    </div>
+  </footer>
+
+  <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', updateCartCount);
+  </script>
+</body>
+</html>

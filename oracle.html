@@ -1,51 +1,82 @@
-<!-- Updated oracle.html file contents with favicon link and logo structure - not displayed for brevity --></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oracle Readings | Lyrion Atelier</title>
+  <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
 <body>
-<!-- Twinkling Stars Background -->
-  <div class="stars-background"></div>
-  <div class="stars-background" aria-hidden="true"></div>
-
-<!-- Header -->
-<header class="header">
-<div class="header-content">
-      <a href="index.html" class="logo">Lyrion Atelier</a>
-      <a href="index.html" class="logo" aria-label="Lyrion Atelier Home">Lyrion Atelier</a>
-
-      <nav>
+  <a class="skip-to-content" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img src="images/logo/GOD.PNG" alt="Lyrion Atelier logo">
+        <span>Lyrion Atelier</span>
+      </a>
       <nav aria-label="Main navigation">
-<ul class="nav">
-<li><a href="index.html">Home</a></li>
-<li><a href="shop.html">Shop</a></li>
-@@ -28,17 +28,17 @@
-</nav>
-
-<div style="display: flex; align-items: center; gap: 1.5rem;">
-        <a href="cart.html" class="cart-icon">
-        <a href="cart.html" class="cart-icon" aria-label="Shopping cart">
-🛒
-          <span class="cart-count">0</span>
-          <span class="cart-count" aria-live="polite">0</span>
-</a>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="oracle.html">Oracle</a></li>
+          <li><a href="codex.html">Codex</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="cart-icon" href="cart.html" aria-label="Shopping cart">🛒 <span class="cart-count">0</span></a>
         <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-</div>
-</div>
-</header>
+      </div>
+    </div>
+  </header>
 
-<!-- Main Content -->
-  <main>
-  <main id="main-content">
-<!-- Hero Section -->
-<section class="hero" style="padding: 6rem 0 4rem;">
-<div class="container">
-@@ -152,8 +152,8 @@ <h4>Connect</h4>
-</footer>
+  <main id="main-content" class="section">
+    <div class="container">
+      <div class="section-title">
+        <p class="pill">Oracle studio</p>
+        <h1>Book a guided reading</h1>
+        <p class="muted">Choose a spread, align with your sign, and receive a personalized message.</p>
+      </div>
+      <div class="oracle-grid" id="oracle-grid"></div>
+    </div>
+  </main>
 
-<!-- Scripts -->
-  <script src="js/products.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/main.js"></script>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div><strong>Lyrion Atelier</strong></div>
+      <div class="muted"><a href="contact.html">Have a question?</a></div>
+    </div>
+  </footer>
+
   <script src="js/products.js" defer></script>
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
+      const grid = document.getElementById('oracle-grid');
+      const catalog = Array.isArray(window.products) ? window.products : [];
+      const oracleProducts = catalog.filter(p => p.category === 'oracle');
+
+      oracleProducts.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'oracle-card';
+        card.innerHTML = `
+          <div class="oracle-image">
+            ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '<div class="placeholder">🔮</div>'}
+          </div>
+          <h3>${item.name}</h3>
+          <p class="muted">${item.description}</p>
+          <p class="price">$${item.price.toFixed(2)}</p>
+          <div class="button-row tight">
+            <a class="btn btn-outline" href="contact.html">Ask a question</a>
+            <button class="btn btn-primary" type="button" onclick="addToCart(${item.id})">Add to cart</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    });
+  </script>
 </body>
 </html>

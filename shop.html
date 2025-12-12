@@ -1,1 +1,125 @@
-<!-- Updated shop.html file contents with favicon link and logo structure - not displayed for brevity -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop | Lyrion Atelier</title>
+  <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-to-content" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img src="images/logo/GOD.PNG" alt="Lyrion Atelier logo">
+        <span>Lyrion Atelier</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="oracle.html">Oracle</a></li>
+          <li><a href="codex.html">Codex</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="cart-icon" href="cart.html" aria-label="Shopping cart">🛒 <span class="cart-count">0</span></a>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="section">
+    <div class="container">
+      <div class="section-title">
+        <p class="pill">Collection</p>
+        <h1>Shop the zodiac</h1>
+        <p class="muted">Choose your sign, element, or vibe. Add anything to the cart for checkout.</p>
+      </div>
+
+      <div class="card filters-panel">
+        <div class="form-group">
+          <label for="filter-category">Category</label>
+          <select id="filter-category">
+            <option value="all">All</option>
+            <option value="tshirt">T-shirts</option>
+            <option value="hoodie">Hoodies</option>
+            <option value="sweatshirt">Sweatshirts</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="filter-zodiac">Zodiac</label>
+          <select id="filter-zodiac">
+            <option value="all">All signs</option>
+            <option value="aries">Aries</option>
+            <option value="taurus">Taurus</option>
+            <option value="gemini">Gemini</option>
+            <option value="cancer">Cancer</option>
+            <option value="leo">Leo</option>
+            <option value="virgo">Virgo</option>
+            <option value="libra">Libra</option>
+            <option value="scorpio">Scorpio</option>
+            <option value="sagittarius">Sagittarius</option>
+            <option value="capricorn">Capricorn</option>
+            <option value="aquarius">Aquarius</option>
+            <option value="pisces">Pisces</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="products-grid" class="grid"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div><strong>Lyrion Atelier</strong> · Celestial threads</div>
+      <div class="muted"><a href="cart.html">View cart</a></div>
+    </div>
+  </footer>
+
+  <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script>
+    function renderProducts() {
+      const grid = document.getElementById('products-grid');
+      if (!grid) return;
+      const category = document.getElementById('filter-category').value;
+      const zodiac = document.getElementById('filter-zodiac').value;
+      grid.innerHTML = '';
+
+      products
+        .filter(p => (category === 'all' || p.category === category) && (zodiac === 'all' || p.zodiac === zodiac))
+        .forEach(product => {
+          const card = document.createElement('div');
+          card.className = 'product-card';
+          card.innerHTML = `
+            <div class="product-image">
+              ${product.image ? `<img src="${product.image}" alt="${product.name}">` : `<div class="placeholder">✨</div>`}
+            </div>
+            <div>
+              <h3>${product.name}</h3>
+              <p class="muted">${product.description}</p>
+              <p class="price">$${product.price.toFixed(2)}</p>
+              <div class="button-row tight">
+                <a class="btn btn-outline" href="product.html?id=${product.id}">View</a>
+                <button class="btn btn-primary" type="button" onclick="addToCart(${product.id})">Add to cart</button>
+              </div>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
+      document.getElementById('filter-category').addEventListener('change', renderProducts);
+      document.getElementById('filter-zodiac').addEventListener('change', renderProducts);
+      renderProducts();
+    });
+  </script>
+</body>
+</html>

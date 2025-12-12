@@ -1,1 +1,105 @@
-<!-- Updated checkout.html file contents with favicon link and logo structure - not displayed for brevity -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Lyrion Atelier</title>
+  <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-to-content" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img src="images/logo/GOD.PNG" alt="Lyrion Atelier logo">
+        <span>Lyrion Atelier</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="oracle.html">Oracle</a></li>
+          <li><a href="codex.html">Codex</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="cart-icon" href="cart.html" aria-label="Shopping cart">🛒 <span class="cart-count">0</span></a>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="section">
+    <div class="container">
+      <div class="section-title">
+        <p class="pill">Secure checkout</p>
+        <h1>Ready to send to the stars</h1>
+        <p class="muted">Enter your details and we'll confirm your order.</p>
+      </div>
+
+      <div class="card two-column-grid">
+        <form id="checkout-form" data-validate="true">
+          <div class="form-group">
+            <label for="full-name">Full name</label>
+            <input id="full-name" name="full-name" type="text" required minlength="2" placeholder="Aurora Vega">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" placeholder="+1 (555) 555-5555">
+          </div>
+          <div class="form-group">
+            <label for="address">Shipping address</label>
+            <textarea id="address" name="address" rows="3" required placeholder="123 Cosmic Way, Celestial City"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Place order</button>
+        </form>
+
+        <div class="cart-summary">
+          <h3>Order summary</h3>
+          <p class="muted">Totals match your cart.</p>
+          <div class="price-row"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+          <div class="price-row"><span>Shipping</span><strong id="cart-shipping">$0.00</strong></div>
+          <div class="price-row"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div><strong>Lyrion Atelier</strong></div>
+      <div class="muted"><a href="cart.html">Review cart</a></div>
+    </div>
+  </footer>
+
+  <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script>
+    function refreshSummary() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const shipping = subtotal > 50 ? 0 : (cart.length ? 5.99 : 0);
+      const total = subtotal + shipping;
+      document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+      document.getElementById('cart-shipping').textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
+      document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
+      refreshSummary();
+      document.getElementById('checkout-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        showToast('Order received! (demo)', 'success');
+      });
+    });
+  </script>
+</body>
+</html>
