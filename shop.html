@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shop celestial clothing and zodiac apparel at Lyrion Atelier. Find your perfect astrology-themed fashion.">
+  <meta name="keywords" content="buy zodiac clothing, astrology shirts, celestial hoodies, cosmic fashion">
+  <title>Shop - Lyrion Atelier</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Twinkling Stars Background -->
+  <div class="stars-background"></div>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">Lyrion Atelier</a>
+      
+      <nav>
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="oracle.html">The Oracle</a></li>
+          <li><a href="codex.html">Codex</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <div style="display: flex; align-items: center; gap: 1.5rem;">
+        <a href="cart.html" class="cart-icon">
+          🛒
+          <span class="cart-count">0</span>
+        </a>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <h1 style="margin-top: 3rem; margin-bottom: 1rem;">Celestial Collection</h1>
+      <p style="color: var(--gray-light); margin-bottom: 2rem;">Discover astrology-inspired fashion designed for every zodiac sign.</p>
+      
+      <div class="shop-layout">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar">
+          <div class="glass-card">
+            <h3 style="margin-bottom: 2rem;">Filters</h3>
+            
+            <!-- Product Type Filter -->
+            <div class="filter-group">
+              <h4 class="filter-title">Product Type</h4>
+              <div class="filter-options">
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="category" value="tshirt">
+                  <span>T-Shirts</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="category" value="hoodie">
+                  <span>Hoodies</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="category" value="sweatshirt">
+                  <span>Sweatshirts</span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Zodiac Sign Filter -->
+            <div class="filter-group">
+              <h4 class="filter-title">Zodiac Sign</h4>
+              <div class="filter-options">
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="zodiac" value="aries">
+                  <span>♈ Aries</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="zodiac" value="taurus">
+                  <span>♉ Taurus</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="zodiac" value="gemini">
+                  <span>♊ Gemini</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="zodiac" value="cancer">
+                  <span>♋ Cancer</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="zodiac" value="leo">
+                  <span>♌ Leo</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="zodiac" value="virgo">
+                  <span>♍ Virgo</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="zodiac" value="libra">
+                  <span>♎ Libra</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="zodiac" value="scorpio">
+                  <span>♏ Scorpio</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="zodiac" value="sagittarius">
+                  <span>♐ Sagittarius</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="zodiac" value="capricorn">
+                  <span>♑ Capricorn</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="zodiac" value="aquarius">
+                  <span>♒ Aquarius</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="zodiac" value="pisces">
+                  <span>♓ Pisces</span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Price Filter -->
+            <div class="filter-group">
+              <h4 class="filter-title">Price Range</h4>
+              <div style="display: flex; gap: 1rem; align-items: center;">
+                <input type="number" id="min-price" class="form-input" placeholder="Min" min="0" style="width: 80px;">
+                <span>-</span>
+                <input type="number" id="max-price" class="form-input" placeholder="Max" min="0" style="width: 80px;">
+              </div>
+            </div>
+          </div>
+        </aside>
+        
+        <!-- Products Grid -->
+        <div>
+          <!-- Sort Controls -->
+          <div class="sort-controls">
+            <div class="results-count">Showing 12 products</div>
+            <div>
+              <label for="sort-select" style="margin-right: 0.5rem; color: var(--gray-light);">Sort by:</label>
+              <select id="sort-select" class="form-select" style="width: 200px; display: inline-block;">
+                <option value="featured">Featured</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="name">Name: A-Z</option>
+              </select>
+            </div>
+          </div>
+          
+          <!-- Product Grid -->
+          <div id="product-grid" class="grid grid-3">
+            <!-- Products will be dynamically loaded here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Lyrion Atelier</h4>
+          <p>Celestial fashion and mystical guidance for your cosmic journey.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="shop.html">All Products</a></li>
+            <li><a href="shop.html?category=tshirt">T-Shirts</a></li>
+            <li><a href="shop.html?category=hoodie">Hoodies</a></li>
+            <li><a href="shop.html?category=sweatshirt">Sweatshirts</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="oracle.html">Oracle Readings</a></li>
+            <li><a href="codex.html">Astrology Codex</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Pinterest</a></li>
+            <li><a href="#">TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Lyrion Atelier. All rights reserved. Made with cosmic energy ✨</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

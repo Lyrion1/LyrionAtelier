@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lyrion Atelier - Discover your cosmic style with astrology-themed clothing and oracle readings. Shop celestial fashion for every zodiac sign.">
+  <meta name="keywords" content="astrology clothing, zodiac fashion, oracle readings, celestial apparel, cosmic style">
+  <title>Lyrion Atelier - Unlock Your Cosmic Style</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Twinkling Stars Background -->
+  <div class="stars-background"></div>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">Lyrion Atelier</a>
+      
+      <nav>
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="oracle.html">The Oracle</a></li>
+          <li><a href="codex.html">Codex</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <div style="display: flex; align-items: center; gap: 1.5rem;">
+        <a href="cart.html" class="cart-icon">
+          🛒
+          <span class="cart-count">0</span>
+        </a>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <h1>Unlock Your Cosmic Style</h1>
+        <p>Embrace the celestial energy with astrology-inspired fashion designed for your unique zodiac journey.</p>
+        <a href="shop.html" class="btn btn-secondary">Explore Collection</a>
+      </div>
+    </section>
+    
+    <!-- Featured Products Section -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Featured Products</h2>
+        <div id="product-grid" class="grid grid-4">
+          <!-- Products will be dynamically loaded here -->
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+          <a href="shop.html" class="btn btn-outline">View All Products</a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="section">
+      <div class="container">
+        <div class="glass-card" style="max-width: 800px; margin: 0 auto; text-align: center;">
+          <h2>About Lyrion Atelier</h2>
+          <p>At Lyrion Atelier, we believe that fashion is more than fabric—it's a manifestation of your cosmic essence. Each piece in our collection is thoughtfully designed to align with the celestial energies that guide your journey.</p>
+          <p>Whether you're a fiery Aries, a dreamy Pisces, or anywhere in between, our astrology-themed apparel lets you wear your zodiac with pride. Combined with our mystical oracle readings, we offer a holistic approach to discovering your true self.</p>
+          <p>Join us in celebrating the magic of the stars and unlock your cosmic potential.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Email Signup Section -->
+    <section class="section">
+      <div class="container">
+        <div class="glass-card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+          <h3>Join Our Cosmic Community</h3>
+          <p>Subscribe to receive exclusive offers, astrology insights, and new collection updates.</p>
+          <form onsubmit="handleEmailSignup(event)" style="margin-top: 2rem;">
+            <div class="form-group">
+              <input type="email" class="form-input" placeholder="Enter your email" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Lyrion Atelier</h4>
+          <p>Celestial fashion and mystical guidance for your cosmic journey.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="shop.html">All Products</a></li>
+            <li><a href="shop.html?category=tshirt">T-Shirts</a></li>
+            <li><a href="shop.html?category=hoodie">Hoodies</a></li>
+            <li><a href="shop.html?category=sweatshirt">Sweatshirts</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="oracle.html">Oracle Readings</a></li>
+            <li><a href="codex.html">Astrology Codex</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Pinterest</a></li>
+            <li><a href="#">TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Lyrion Atelier. All rights reserved. Made with cosmic energy ✨</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

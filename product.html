@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Product details at Lyrion Atelier - Celestial fashion designed for your zodiac sign.">
+  <meta name="keywords" content="product details, zodiac clothing, astrology apparel">
+  <title>Product Details - Lyrion Atelier</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Twinkling Stars Background -->
+  <div class="stars-background"></div>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">Lyrion Atelier</a>
+      
+      <nav>
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="oracle.html">The Oracle</a></li>
+          <li><a href="codex.html">Codex</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <div style="display: flex; align-items: center; gap: 1.5rem;">
+        <a href="cart.html" class="cart-icon">
+          🛒
+          <span class="cart-count">0</span>
+        </a>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main>
+    <div class="container" style="margin-top: 2rem;">
+      <a href="shop.html" style="color: var(--gold); text-decoration: none; display: inline-block; margin-bottom: 2rem;">
+        ← Back to Shop
+      </a>
+      
+      <div class="product-detail-layout">
+        <!-- Product Gallery -->
+        <div class="product-gallery">
+          <div class="main-image">
+            <!-- Placeholder: Main Product Image -->
+            <span style="color: var(--gray-medium);">Main Product Image</span>
+          </div>
+          
+          <div class="thumbnail-gallery">
+            <div class="thumbnail active">
+              <!-- Placeholder: Thumbnail 1 -->
+            </div>
+            <div class="thumbnail">
+              <!-- Placeholder: Thumbnail 2 -->
+            </div>
+            <div class="thumbnail">
+              <!-- Placeholder: Thumbnail 3 -->
+            </div>
+            <div class="thumbnail">
+              <!-- Placeholder: Thumbnail 4 -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product Details -->
+        <div>
+          <h1 id="product-name" style="margin-bottom: 1rem;">Product Name</h1>
+          <div id="product-price" style="font-size: 2rem; color: var(--purple); font-weight: 700; margin-bottom: 2rem;">$0.00</div>
+          
+          <!-- Size Selector -->
+          <div style="margin-bottom: 2rem;">
+            <label class="form-label">Select Size:</label>
+            <div class="size-selector">
+              <div class="size-option">XS</div>
+              <div class="size-option">S</div>
+              <div class="size-option active">M</div>
+              <div class="size-option">L</div>
+              <div class="size-option">XL</div>
+              <div class="size-option">XXL</div>
+            </div>
+          </div>
+          
+          <!-- Quantity Selector -->
+          <div style="margin-bottom: 2rem;">
+            <label class="form-label">Quantity:</label>
+            <input type="number" id="product-quantity" class="form-input" value="1" min="1" max="10" style="width: 100px;">
+          </div>
+          
+          <!-- Add to Cart Button -->
+          <button class="btn btn-primary add-to-cart-btn" style="width: 100%; padding: 1.25rem; font-size: 1.1rem; margin-bottom: 2rem;">
+            Add to Cart
+          </button>
+          
+          <!-- Tabs -->
+          <div class="tabs">
+            <div class="tab-buttons">
+              <button class="tab-button active" data-tab="description">Description</button>
+              <button class="tab-button" data-tab="details">Details</button>
+              <button class="tab-button" data-tab="shipping">Shipping</button>
+            </div>
+            
+            <div id="description" class="tab-content active">
+              <div class="glass-card">
+                <p id="product-description">Premium quality celestial apparel designed with your zodiac sign in mind. Crafted from soft, comfortable materials that feel as good as they look.</p>
+              </div>
+            </div>
+            
+            <div id="details" class="tab-content">
+              <div class="glass-card">
+                <ul style="list-style: none; line-height: 2;">
+                  <li>✨ 100% Premium Cotton</li>
+                  <li>✨ Unique Zodiac Constellation Design</li>
+                  <li>✨ Screen Printed with Eco-Friendly Ink</li>
+                  <li>✨ Pre-Shrunk for Perfect Fit</li>
+                  <li>✨ Machine Washable</li>
+                  <li>✨ Unisex Sizing</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div id="shipping" class="tab-content">
+              <div class="glass-card">
+                <h4 style="color: var(--gold); margin-bottom: 1rem;">Shipping Information</h4>
+                <p style="margin-bottom: 1rem;">Orders ship within 2-3 business days via USPS Priority Mail.</p>
+                <p style="margin-bottom: 1rem;"><strong>Delivery Time:</strong> 5-7 business days (US only)</p>
+                <p style="margin-bottom: 1rem;"><strong>Shipping Cost:</strong> $5.99 (FREE on orders over $50)</p>
+                <p><strong>Returns:</strong> 30-day return policy on unworn items in original condition.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Related Products -->
+      <section style="margin-top: 5rem;">
+        <h2 class="section-title">You May Also Like</h2>
+        <div class="grid grid-4">
+          <!-- Related products would be dynamically loaded here -->
+        </div>
+      </section>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Lyrion Atelier</h4>
+          <p>Celestial fashion and mystical guidance for your cosmic journey.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="shop.html">All Products</a></li>
+            <li><a href="shop.html?category=tshirt">T-Shirts</a></li>
+            <li><a href="shop.html?category=hoodie">Hoodies</a></li>
+            <li><a href="shop.html?category=sweatshirt">Sweatshirts</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="oracle.html">Oracle Readings</a></li>
+            <li><a href="codex.html">Astrology Codex</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Pinterest</a></li>
+            <li><a href="#">TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Lyrion Atelier. All rights reserved. Made with cosmic energy ✨</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
