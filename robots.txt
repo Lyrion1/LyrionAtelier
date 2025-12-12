@@ -1,4 +1,4 @@
-# robots.txt for Lyrion Atelier
+# robots.txt for Lyrīon Atelier
 # This file tells search engines how to crawl the site
 
 User-agent: *

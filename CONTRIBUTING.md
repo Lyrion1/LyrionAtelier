@@ -1,6 +1,6 @@
-# Contributing to Lyrion Atelier
+# Contributing to Lyrīon Atelier
 
-Thank you for your interest in contributing to Lyrion Atelier! This document provides guidelines for contributing to the project.
+Thank you for your interest in contributing to Lyrīon Atelier! This document provides guidelines for contributing to the project.
 
 ## Getting Started
 

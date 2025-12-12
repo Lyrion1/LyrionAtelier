@@ -1,6 +1,6 @@
-# Lyrion Atelier
+# Lyrīon Atelier
 
-Celestial oracle readings and astrological guidance for the US market - Lyrion Atelier's digital storefront.
+Celestial oracle readings and astrological guidance for the US market - Lyrīon Atelier's digital storefront.
 
 A modern, accessible e-commerce website featuring astrology-themed clothing and oracle reading services, built with vanilla JavaScript, HTML, and CSS. Optimized for performance and ready for deployment on Netlify with Stripe payment integration.
 
@@ -405,7 +405,7 @@ const shipping = subtotal > 50 ? 0 : 5.99; // Free over $50
 
 ## 📝 License
 
-© 2024 Lyrion Atelier. All rights reserved.
+© 2024 Lyrīon Atelier. All rights reserved.
 
 ## 🤝 Contributing
 
@@ -423,4 +423,3 @@ For questions or issues, contact: info@lyrionatelier.com
 ---
 
 Made with cosmic energy ✨
-

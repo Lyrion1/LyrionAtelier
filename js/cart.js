@@ -1,4 +1,4 @@
-// Lyrion Atelier - Shopping Cart Functionality
+// Lyrīon Atelier - Shopping Cart Functionality
 
 /**
  * Add Product to Cart
