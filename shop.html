@@ -3,24 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Shop celestial clothing and zodiac apparel at Lyrion Atelier. Find your perfect astrology-themed fashion.">
-  <meta name="keywords" content="buy zodiac clothing, astrology shirts, celestial hoodies, cosmic fashion">
-  <title>Shop - Lyrion Atelier</title>
+  <meta name="description" content="Shop celestial clothing and zodiac apparel at Lyrion Atelier. Find your perfect astrology-themed fashion. Filter by zodiac sign and product type.">
+  <meta name="keywords" content="buy zodiac clothing, astrology shirts, celestial hoodies, cosmic fashion, zodiac t-shirts, astrology apparel">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lyrionatelier.com/shop.html">
+  <meta property="og:title" content="Shop Celestial Collection - Lyrion Atelier">
+  <meta property="og:description" content="Discover astrology-inspired fashion designed for every zodiac sign. Shop celestial clothing and cosmic apparel.">
+  <meta property="og:image" content="https://lyrionatelier.com/images/shop-og-image.jpg">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://lyrionatelier.com/shop.html">
+  <meta property="twitter:title" content="Shop Celestial Collection - Lyrion Atelier">
+  <meta property="twitter:description" content="Discover astrology-inspired fashion designed for every zodiac sign.">
+  <meta property="twitter:image" content="https://lyrionatelier.com/images/shop-twitter-image.jpg">
+  
+  <title>Shop Celestial Collection - Lyrion Atelier</title>
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
 <body>
   <!-- Twinkling Stars Background -->
-  <div class="stars-background"></div>
+  <div class="stars-background" aria-hidden="true"></div>
   
   <!-- Header -->
   <header class="header">
     <div class="header-content">
-      <a href="index.html" class="logo">Lyrion Atelier</a>
+      <a href="index.html" class="logo" aria-label="Lyrion Atelier Home">Lyrion Atelier</a>
       
-      <nav>
+      <nav aria-label="Main navigation">
         <ul class="nav">
           <li><a href="index.html">Home</a></li>
-          <li><a href="shop.html">Shop</a></li>
+          <li><a href="shop.html" aria-current="page">Shop</a></li>
           <li><a href="oracle.html">The Oracle</a></li>
           <li><a href="codex.html">Codex</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -28,17 +49,17 @@
       </nav>
       
       <div style="display: flex; align-items: center; gap: 1.5rem;">
-        <a href="cart.html" class="cart-icon">
+        <a href="cart.html" class="cart-icon" aria-label="Shopping cart">
           🛒
-          <span class="cart-count">0</span>
+          <span class="cart-count" aria-live="polite">0</span>
         </a>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       </div>
     </div>
   </header>
   
   <!-- Main Content -->
-  <main>
+  <main id="main-content">
     <div class="container">
       <h1 style="margin-top: 3rem; margin-bottom: 1rem;">Celestial Collection</h1>
       <p style="color: var(--gray-light); margin-bottom: 2rem;">Discover astrology-inspired fashion designed for every zodiac sign.</p>
@@ -202,8 +223,8 @@
   </footer>
   
   <!-- Scripts -->
-  <script src="js/products.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

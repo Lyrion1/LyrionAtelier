@@ -10,14 +10,14 @@
 </head>
 <body>
   <!-- Twinkling Stars Background -->
-  <div class="stars-background"></div>
+  <div class="stars-background" aria-hidden="true"></div>
   
   <!-- Header -->
   <header class="header">
     <div class="header-content">
-      <a href="index.html" class="logo">Lyrion Atelier</a>
+      <a href="index.html" class="logo" aria-label="Lyrion Atelier Home">Lyrion Atelier</a>
       
-      <nav>
+      <nav aria-label="Main navigation">
         <ul class="nav">
           <li><a href="index.html">Home</a></li>
           <li><a href="shop.html">Shop</a></li>
@@ -28,17 +28,17 @@
       </nav>
       
       <div style="display: flex; align-items: center; gap: 1.5rem;">
-        <a href="cart.html" class="cart-icon">
+        <a href="cart.html" class="cart-icon" aria-label="Shopping cart">
           🛒
-          <span class="cart-count">0</span>
+          <span class="cart-count" aria-live="polite">0</span>
         </a>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       </div>
     </div>
   </header>
   
   <!-- Main Content -->
-  <main>
+  <main id="main-content">
     <div class="container">
       <h1 style="margin-top: 3rem; margin-bottom: 2rem;">Shopping Cart</h1>
       
@@ -153,8 +153,8 @@
   </footer>
   
   <!-- Scripts -->
-  <script src="js/products.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
