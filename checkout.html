@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Complete your purchase at Lyrion Atelier. Secure checkout for celestial fashion and oracle readings.">
+  <meta name="keywords" content="checkout, payment, secure purchase, astrology products">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lyrionatelier.com/checkout.html">
+  <meta property="og:title" content="Checkout - Lyrion Atelier">
+  <meta property="og:description" content="Complete your purchase securely at Lyrion Atelier.">
+  <meta property="og:image" content="https://lyrionatelier.com/images/og-image.jpg">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://lyrionatelier.com/checkout.html">
+  <meta property="twitter:title" content="Checkout - Lyrion Atelier">
+  <meta property="twitter:description" content="Complete your purchase securely at Lyrion Atelier.">
+  <meta property="twitter:image" content="https://lyrionatelier.com/images/twitter-image.jpg">
+  
+  <title>Checkout - Lyrion Atelier</title>
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Stripe.js - Load from CDN for secure payment processing -->
+  <script src="https://js.stripe.com/v3/" async></script>
+</head>
+<body>
+  <!-- Twinkling Stars Background -->
+  <div class="stars-background"></div>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo" aria-label="Lyrion Atelier Home">Lyrion Atelier</a>
+      
+      <nav aria-label="Main navigation">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="oracle.html">The Oracle</a></li>
+          <li><a href="codex.html">Codex</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <div style="display: flex; align-items: center; gap: 1.5rem;">
+        <a href="cart.html" class="cart-icon" aria-label="Shopping cart">
+          🛒
+          <span class="cart-count" aria-live="polite">0</span>
+        </a>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Test Mode Banner -->
+  <div style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #000; text-align: center; padding: 0.75rem; font-weight: 600;">
+    🧪 TEST MODE - Use test card: 4242 4242 4242 4242 | Exp: Any future date | CVC: Any 3 digits
+  </div>
+  
+  <!-- Main Content -->
+  <main id="main-content">
+    <div class="container">
+      <h1 style="margin-top: 3rem; margin-bottom: 1rem;">Secure Checkout</h1>
+      <p style="color: var(--gray-light); margin-bottom: 3rem;">Complete your cosmic journey with secure payment</p>
+      
+      <div class="checkout-layout">
+        <!-- Checkout Form -->
+        <div>
+          <form id="checkout-form" data-validate="true">
+            <!-- Shipping Information -->
+            <div class="glass-card" style="margin-bottom: 2rem;">
+              <h3 style="margin-bottom: 1.5rem;">Shipping Information</h3>
+              
+              <div class="form-group">
+                <label for="full-name" class="form-label">Full Name *</label>
+                <input type="text" id="full-name" name="full-name" class="form-input" required 
+                       placeholder="John Doe" aria-required="true">
+              </div>
+              
+              <div class="form-group">
+                <label for="email" class="form-label">Email *</label>
+                <input type="email" id="email" name="email" class="form-input" required 
+                       placeholder="your.email@example.com" aria-required="true">
+              </div>
+              
+              <div class="form-group">
+                <label for="phone" class="form-label">Phone *</label>
+                <input type="tel" id="phone" name="phone" class="form-input" required 
+                       placeholder="(555) 123-4567" aria-required="true">
+              </div>
+              
+              <div class="form-group">
+                <label for="address" class="form-label">Street Address *</label>
+                <input type="text" id="address" name="address" class="form-input" required 
+                       placeholder="123 Cosmic Lane" aria-required="true">
+              </div>
+              
+              <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem;">
+                <div class="form-group">
+                  <label for="city" class="form-label">City *</label>
+                  <input type="text" id="city" name="city" class="form-input" required 
+                         placeholder="Los Angeles" aria-required="true">
+                </div>
+                
+                <div class="form-group">
+                  <label for="state" class="form-label">State *</label>
+                  <input type="text" id="state" name="state" class="form-input" required 
+                         placeholder="CA" maxlength="2" aria-required="true">
+                </div>
+                
+                <div class="form-group">
+                  <label for="zip" class="form-label">ZIP *</label>
+                  <input type="text" id="zip" name="zip" class="form-input" required 
+                         placeholder="90210" aria-required="true">
+                </div>
+              </div>
+            </div>
+            
+            <!-- Payment Information -->
+            <div class="glass-card" style="margin-bottom: 2rem;">
+              <h3 style="margin-bottom: 1.5rem;">Payment Information</h3>
+              
+              <!-- 
+                Stripe Elements will be mounted here
+                In production, you'll need to:
+                1. Sign up for a Stripe account at https://stripe.com
+                2. Get your publishable key from the Stripe Dashboard
+                3. Initialize Stripe in a separate checkout.js file
+                4. Create a payment intent on your backend
+                5. Mount the card element below
+              -->
+              
+              <div class="form-group">
+                <label for="card-element" class="form-label">Card Details *</label>
+                <div id="card-element" class="form-input" style="padding: 0.75rem;">
+                  <!-- Stripe Card Element will be inserted here -->
+                </div>
+                <div id="card-errors" role="alert" style="color: #ef4444; font-size: 0.875rem; margin-top: 0.5rem;"></div>
+              </div>
+              
+              <div style="background: rgba(139, 92, 246, 0.1); border-left: 4px solid var(--purple); padding: 1rem; border-radius: 4px; margin-top: 1rem;">
+                <p style="font-size: 0.9rem; margin: 0;">
+                  🔒 Your payment information is encrypted and secure. We use Stripe for payment processing.
+                </p>
+              </div>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.25rem; font-size: 1.1rem;" 
+                    aria-label="Complete purchase">
+              Complete Purchase
+            </button>
+            
+            <p style="text-align: center; color: var(--gray-medium); font-size: 0.875rem; margin-top: 1rem;">
+              By completing this purchase, you agree to our Terms of Service and Privacy Policy
+            </p>
+          </form>
+        </div>
+        
+        <!-- Order Summary -->
+        <div>
+          <div class="glass-card">
+            <div id="checkout-cart-summary">
+              <!-- Cart summary will be dynamically loaded here -->
+            </div>
+            
+            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(139, 92, 246, 0.1);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--gray-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                <span>✨</span>
+                <span>Free shipping on orders over $50</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--gray-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                <span>📦</span>
+                <span>Ships within 2-3 business days</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--gray-light); font-size: 0.9rem;">
+                <span>🔄</span>
+                <span>30-day return policy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Lyrion Atelier</h4>
+          <p>Celestial fashion and mystical guidance for your cosmic journey.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="shop.html">All Products</a></li>
+            <li><a href="shop.html?category=tshirt">T-Shirts</a></li>
+            <li><a href="shop.html?category=hoodie">Hoodies</a></li>
+            <li><a href="shop.html?category=sweatshirt">Sweatshirts</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="oracle.html">Oracle Readings</a></li>
+            <li><a href="codex.html">Astrology Codex</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#" aria-label="Follow us on Instagram">Instagram</a></li>
+            <li><a href="#" aria-label="Follow us on Facebook">Facebook</a></li>
+            <li><a href="#" aria-label="Follow us on Pinterest">Pinterest</a></li>
+            <li><a href="#" aria-label="Follow us on TikTok">TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Lyrion Atelier. All rights reserved. Made with cosmic energy ✨</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Scripts -->
+  <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/main.js" defer></script>
+  
+  <!-- Stripe Initialization Script -->
+  <!-- 
+    To implement Stripe payment processing:
+    
+    1. Sign up at https://stripe.com and get your API keys
+    2. Create a file js/stripe-checkout.js with the following code:
+    
+    // Initialize Stripe with your publishable key
+    const stripe = Stripe('pk_test_YOUR_PUBLISHABLE_KEY');
+    const elements = stripe.elements();
+    
+    // Create and mount the card element
+    const cardElement = elements.create('card', {
+      style: {
+        base: {
+          color: '#fff',
+          fontFamily: 'Inter, sans-serif',
+          fontSize: '16px',
+          '::placeholder': {
+            color: '#94a3b8'
+          }
+        },
+        invalid: {
+          color: '#ef4444'
+        }
+      }
+    });
+    cardElement.mount('#card-element');
+    
+    // Handle real-time validation errors
+    cardElement.on('change', (event) => {
+      const displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+    
+    // Handle form submission
+    const form = document.getElementById('checkout-form');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      
+      const submitBtn = form.querySelector('button[type="submit"]');
+      showLoading(submitBtn);
+      
+      // Create payment intent on your backend
+      const response = await fetch('/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: calculateTotal() * 100, // Amount in cents
+          currency: 'usd'
+        })
+      });
+      
+      const { clientSecret } = await response.json();
+      
+      // Confirm payment with Stripe
+      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardElement,
+          billing_details: {
+            name: document.getElementById('full-name').value,
+            email: document.getElementById('email').value
+          }
+        }
+      });
+      
+      hideLoading(submitBtn);
+      
+      if (error) {
+        showToast(error.message, 'error');
+      } else if (paymentIntent.status === 'succeeded') {
+        // Payment successful!
+        localStorage.removeItem('cart');
+        showToast('Payment successful! Your order is confirmed.', 'success');
+        setTimeout(() => window.location.href = 'index.html', 2000);
+      }
+    });
+    
+    3. Include the script in this HTML file:
+    <script src="js/stripe-checkout.js"></script>
+    
+    4. Create a backend endpoint to create payment intents
+    5. Test with test cards: 4242 4242 4242 4242
+  -->
+</body>
+</html>

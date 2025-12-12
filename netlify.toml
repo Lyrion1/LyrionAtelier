@@ -1,0 +1,98 @@
+# Netlify Configuration File
+# This file configures the Netlify build and deployment settings for Lyrion Atelier
+
+[build]
+  # Directory to serve files from
+  publish = "."
+  
+  # Build command (if you add a build process later)
+  # command = "npm run build"
+
+[[headers]]
+  # Apply these headers to all routes
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Content Security Policy
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.stripe.com;"
+    
+    # Cache control for static assets
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  # HTML files should not be cached aggressively
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  # CSS and JS files
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+  # Redirect from /shop to /shop.html (if needed)
+  from = "/shop"
+  to = "/shop.html"
+  status = 200
+
+[[redirects]]
+  # Redirect from /cart to /cart.html
+  from = "/cart"
+  to = "/cart.html"
+  status = 200
+
+[[redirects]]
+  # Redirect from /checkout to /checkout.html
+  from = "/checkout"
+  to = "/checkout.html"
+  status = 200
+
+[[redirects]]
+  # Redirect from /contact to /contact.html
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  # Redirect from /oracle to /oracle.html
+  from = "/oracle"
+  to = "/oracle.html"
+  status = 200
+
+[[redirects]]
+  # Redirect from /codex to /codex.html
+  from = "/codex"
+  to = "/codex.html"
+  status = 200
+
+[[redirects]]
+  # 404 page for non-existent routes
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# Plugin configuration (optional)
+[[plugins]]
+  # Automatically optimize images
+  package = "@netlify/plugin-lighthouse"
+
+# Environment variables (set these in Netlify UI, not in this file)
+# STRIPE_PUBLISHABLE_KEY - Your Stripe publishable key
+# STRIPE_SECRET_KEY - Your Stripe secret key (backend only)
+
+# Form handling
+[build.environment]
+  # Enable Netlify Forms
+  NETLIFY_FORMS = "true"
