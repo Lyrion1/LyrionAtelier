@@ -1,4 +1,4 @@
-// Lyrion Atelier - Products Data and Management
+// Lyrīon Atelier - Products Data and Management
 
 /**
  * Products Array
@@ -532,7 +532,7 @@ function displayProductDetails() {
   }
   
   // Update page title and meta description
-  document.title = `${product.name} - Lyrion Atelier`;
+  document.title = `${product.name} - Lyrīon Atelier`;
   const metaDescription = document.querySelector('meta[name="description"]');
   if (metaDescription) {
     metaDescription.setAttribute('content', product.description);

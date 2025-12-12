@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product | Lyrion Atelier</title>
+  <title>Product | Lyrīon Atelier</title>
   <link rel="icon" type="image/png" href="images/favicon/favicon.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -12,8 +12,8 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="index.html">
-        <img src="images/logo/GOD.PNG" alt="Lyrion Atelier logo">
-        <span>Lyrion Atelier</span>
+        <img src="images/logo/GOD.PNG" alt="Lyrīon Atelier logo">
+        <span class="brand-name">Lyrīon Atelier</span>
       </a>
       <nav aria-label="Main navigation">
         <ul class="nav">
@@ -52,7 +52,7 @@
 
   <footer class="footer">
     <div class="container footer-inner">
-      <div><strong>Lyrion Atelier</strong></div>
+      <div><strong class="brand-name">Lyrīon Atelier</strong></div>
       <div class="muted"><a href="cart.html">View cart</a></div>
     </div>
   </footer>
@@ -67,7 +67,7 @@
       const product = products.find(p => p.id === id) || products[0];
       if (!product) return;
 
-      document.title = `${product.name} | Lyrion Atelier`;
+      document.title = `${product.name} | Lyrīon Atelier`;
       document.getElementById('product-name').textContent = product.name;
       document.getElementById('product-description').textContent = product.description;
       document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;

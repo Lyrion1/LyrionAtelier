@@ -1,4 +1,4 @@
-// Lyrion Atelier - Main JavaScript
+// Lyrīon Atelier - Main JavaScript
 
 /**
  * Main initialization on DOM content loaded
