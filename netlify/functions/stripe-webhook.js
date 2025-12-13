@@ -14,6 +14,7 @@ try {
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const adminNotificationEmail = 'info@lyrionatelier.com';
+const fromEmailAddress = 'Lyrion Atelier <orders@lyrionatelier.com>';
 const zeroDecimalCurrencies = new Set([
   'BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'
 ]);
@@ -120,7 +121,7 @@ exports.handler = async (event) => {
         if (customerEmail) {
           try {
             await resend.emails.send({
-              from: 'Lyrion Atelier <orders@lyrionatelier.com>',
+              from: fromEmailAddress,
               to: customerEmail,
               subject: 'Your Lyrion Atelier Order Confirmed!',
               html: `
@@ -175,7 +176,7 @@ exports.handler = async (event) => {
                 : 'https://dashboard.stripe.com/checkout/sessions';
 
             await resend.emails.send({
-              from: 'Lyrion Atelier <orders@lyrionatelier.com>',
+              from: fromEmailAddress,
               to: adminNotificationEmail,
               subject: 'New Order Received!',
               html: `
