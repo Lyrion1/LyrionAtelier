@@ -825,9 +825,9 @@ textarea:focus {
 }
 
 .tier ul {
-  list-style-position: inside;
+  list-style-position: outside;
   list-style-type: disc;
-  padding: 0;
+  padding-left: 18px;
   text-align: left;
 }
 
@@ -882,7 +882,7 @@ textarea:focus {
   font-style: italic;
 }
 
-@media (max-width: 968px) {
+@media (max-width: 900px) {
   .pricing-tiers {
     grid-template-columns: 1fr;
     gap: 24px;
