@@ -86,6 +86,8 @@ exports.handler = async (event) => {
 
       const customerEmail = session?.customer_details?.email;
       const amountPaid = typeof session.amount_total === 'number' ? (session.amount_total / 100).toFixed(2) : null;
+      const currencyCode = typeof session.currency === 'string' ? session.currency.toUpperCase() : 'USD';
+      const formattedAmount = amountPaid ? `${amountPaid} ${currencyCode}` : `0.00 ${currencyCode}`;
 
       if (!resendApiKey) {
         console.error('Resend API key missing. Skipping email notifications.');
@@ -108,7 +110,7 @@ exports.handler = async (event) => {
                   <div style="background: rgba(139, 92, 246, 0.1); padding: 24px; border-radius: 12px; border: 1px solid rgba(251, 191, 36, 0.2); margin-bottom: 24px;">
                     <h2 style="color: #fbbf24; font-size: 20px; margin-bottom: 16px;">Order Details</h2>
                     <p style="margin: 8px 0;"><strong>Order ID:</strong> ${session.id}</p>
-                    <p style="margin: 8px 0;"><strong>Amount Paid:</strong> $${amountPaid ?? '0.00'}</p>
+                    <p style="margin: 8px 0;"><strong>Amount Paid:</strong> ${formattedAmount}</p>
                     <p style="margin: 8px 0;"><strong>Payment Status:</strong> <span style="color: #10b981;">Confirmed</span></p>
                   </div>
 
@@ -138,9 +140,16 @@ exports.handler = async (event) => {
 
         if (adminNotificationEmail) {
           try {
-            const stripeDashboardUrl = session.payment_intent
-              ? `https://dashboard.stripe.com/payments/${session.payment_intent}`
-              : `https://dashboard.stripe.com/checkout/sessions/${session.id}`;
+            const paymentIntentId =
+              typeof session.payment_intent === 'string' && session.payment_intent
+                ? session.payment_intent
+                : null;
+            const checkoutSessionId = typeof session.id === 'string' ? session.id : '';
+            const stripeDashboardUrl = paymentIntentId
+              ? `https://dashboard.stripe.com/payments/${paymentIntentId}`
+              : checkoutSessionId
+                ? `https://dashboard.stripe.com/checkout/sessions/${checkoutSessionId}`
+                : 'https://dashboard.stripe.com/checkout/sessions';
 
             await resend.emails.send({
               from: 'Lyrion Atelier <orders@lyrionatelier.com>',
@@ -152,7 +161,7 @@ exports.handler = async (event) => {
                   <p><strong>Order ID:</strong> ${session.id}</p>
                   <p><strong>Customer Email:</strong> ${customerEmail ?? 'Not provided'}</p>
                   <p><strong>Customer Name:</strong> ${session?.customer_details?.name || 'Not provided'}</p>
-                  <p><strong>Amount:</strong> $${amountPaid ?? '0.00'}</p>
+                  <p><strong>Amount:</strong> ${formattedAmount}</p>
                   <p><strong>Payment Status:</strong> Paid</p>
 
                   <hr>
