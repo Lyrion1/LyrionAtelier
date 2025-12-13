@@ -7,6 +7,9 @@
   --card-alt: #24304a;
   --accent: #a78bfa;
   --accent-2: #fbbf24;
+  --accent-rgb: 167, 139, 250;
+  --accent-2-rgb: 251, 191, 36;
+  --indigo-rgb: 99, 102, 241;
   --brand-gold: #d9b76a;
   --text: #e2e8f0;
   --muted: #94a3b8;
@@ -451,11 +454,11 @@ p {
 }
 
 .newsletter-section {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(99, 102, 241, 0.08));
+  background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.15), rgba(var(--indigo-rgb), 0.08));
   padding: 100px 40px;
   margin-top: 100px;
   text-align: center;
-  border-top: 1px solid rgba(251, 191, 36, 0.2);
+  border-top: 1px solid rgba(var(--accent-2-rgb), 0.2);
 }
 
 .newsletter-container {
@@ -464,7 +467,7 @@ p {
 }
 
 .newsletter-container h2 {
-  color: #fbbf24;
+  color: var(--accent-2);
   font-family: 'Cinzel', serif;
   font-size: 40px;
   margin-bottom: 16px;
@@ -489,7 +492,7 @@ p {
   flex: 1;
   padding: 18px 24px;
   background: rgba(15, 23, 42, 0.6);
-  border: 1.5px solid rgba(251, 191, 36, 0.3);
+  border: 1.5px solid rgba(var(--accent-2-rgb), 0.3);
   border-radius: 12px;
   color: #fff;
   font-size: 16px;
@@ -498,8 +501,8 @@ p {
 
 .newsletter-form input[type="email"]:focus {
   outline: none;
-  border-color: rgba(251, 191, 36, 0.6);
-  box-shadow: 0 0 24px rgba(251, 191, 36, 0.2);
+  border-color: rgba(var(--accent-2-rgb), 0.6);
+  box-shadow: 0 0 24px rgba(var(--accent-2-rgb), 0.2);
 }
 
 .newsletter-form input[type="email"]::placeholder {
@@ -508,10 +511,10 @@ p {
 
 .newsletter-form button {
   padding: 18px 40px;
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(251, 191, 36, 0.15));
-  border: 1.5px solid rgba(251, 191, 36, 0.5);
+  background: linear-gradient(135deg, rgba(var(--accent-2-rgb), 0.25), rgba(var(--accent-2-rgb), 0.15));
+  border: 1.5px solid rgba(var(--accent-2-rgb), 0.5);
   border-radius: 12px;
-  color: #fbbf24;
+  color: var(--accent-2);
   font-weight: 700;
   font-size: 16px;
   cursor: pointer;
@@ -521,8 +524,8 @@ p {
 }
 
 .newsletter-form button:hover {
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.35), rgba(251, 191, 36, 0.2));
-  box-shadow: 0 6px 28px rgba(251, 191, 36, 0.4);
+  background: linear-gradient(135deg, rgba(var(--accent-2-rgb), 0.35), rgba(var(--accent-2-rgb), 0.2));
+  box-shadow: 0 6px 28px rgba(var(--accent-2-rgb), 0.4);
   transform: translateY(-2px);
 }
 
