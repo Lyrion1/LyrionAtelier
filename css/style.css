@@ -152,12 +152,17 @@ img {
   letter-spacing: 0.06em;
 }
 
-.logo img {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  object-fit: cover;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+.brand-logo {
+  height: 65px;
+  width: auto;
+  order: 1;
+  filter: drop-shadow(0 4px 12px rgba(251, 191, 36, 0.4));
+  transition: all 0.3s ease;
+}
+
+.brand-logo:hover {
+  filter: drop-shadow(0 6px 16px rgba(251, 191, 36, 0.6));
+  transform: scale(1.05);
 }
 
 .nav {
@@ -184,11 +189,23 @@ img {
 }
 
 .brand-name {
-  color: var(--brand-gold);
-  letter-spacing: 0.05em;
-  text-shadow: 0 6px 30px rgba(0,0,0,0.35);
-  font-family: 'Cormorant Garamond', 'Cinzel', serif;
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
   font-weight: 700;
+  color: #fbbf24;
+  letter-spacing: 3px;
+  order: 2;
+  text-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+}
+
+@media (max-width: 768px) {
+  .brand-logo {
+    height: 50px;
+  }
+  .brand-name {
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
 }
 
 .header-actions {
