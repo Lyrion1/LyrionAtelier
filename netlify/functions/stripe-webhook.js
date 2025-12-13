@@ -25,31 +25,6 @@ const logDebug = (message, value) => {
     console.log(message);
   }
 };
-// Zero-decimal currencies sourced from Stripe documentation; update if Stripe changes list
-const zeroDecimalCurrencies = new Set([
-  'bif',
-  'clp',
-  'djf',
-  'gnf',
-  'jpy',
-  'kmf',
-  'krw',
-  'mga',
-  'pyg',
-  'rwf',
-  'vuv',
-  'xaf',
-  'xof',
-  'xpf'
-]);
-const formatStripeAmount = (amount, currency) => {
-  const amountTotal = amount ?? 0;
-  const normalizedCurrency = (currency || '').toLowerCase();
-  return zeroDecimalCurrencies.has(normalizedCurrency)
-    ? amountTotal
-    : amountTotal / 100;
-};
-
 exports.handler = async (event) => {
   // Only allow POST
   if (event.httpMethod !== 'POST') {
@@ -93,13 +68,10 @@ exports.handler = async (event) => {
       console.log('✅ checkout.session.completed event received');
       logDebug('Checkout session ID:', session.id);
       logDebug('Customer associated:', () => Boolean(session.customer));
-      logDebug('Amount paid:', () =>
-        formatStripeAmount(session.amount_total, session.currency)
-      );
+      logDebug('Amount total (minor units):', session.amount_total);
+      logDebug('Currency:', session.currency);
 
-      // TODO: Send confirmation email
-      // TODO: If oracle reading, send reading to customer (tracked separately)
-      // TODO: If physical product, create Printful order (tracked separately)
+      // Add integrations here (e.g., confirmation email, oracle reading delivery, Printful order)
 
       break;
 
