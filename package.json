@@ -2,6 +2,7 @@
   "name": "lyrion-atelier",
   "version": "1.0.0",
   "dependencies": {
+    "resend": "^3.0.0",
     "stripe": "^14.21.0"
   }
 }
