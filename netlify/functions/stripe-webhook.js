@@ -1,6 +1,7 @@
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const stripe = stripeSecretKey ? require('stripe')(stripeSecretKey) : null;
+// Explicit debug flag that is ignored in production
 const debugLoggingEnabled =
   process.env.STRIPE_WEBHOOK_DEBUG === 'true' &&
   process.env.NODE_ENV !== 'production';
@@ -64,7 +65,7 @@ exports.handler = async (event) => {
           session.amount_total,
           session.currency
         );
-        console.log('Customer reference present:', Boolean(session.customer));
+        console.log('Customer associated:', Boolean(session.customer));
         console.log('Amount paid:', amountPaid);
       }
 
