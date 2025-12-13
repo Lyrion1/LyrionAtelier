@@ -851,6 +851,34 @@ textarea:focus {
   margin-bottom: 20px;
 }
 
+.event-form .form-group label {
+  color: #fbbf24;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.event-form .form-group input,
+.event-form .form-group select,
+.event-form .form-group textarea {
+  width: 100%;
+  padding: 14px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.event-form .form-group input:focus,
+.event-form .form-group select:focus,
+.event-form .form-group textarea:focus {
+  outline: none;
+  border-color: rgba(251, 191, 36, 0.6);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+}
+
 .form-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
