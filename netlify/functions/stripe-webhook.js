@@ -61,17 +61,15 @@ exports.handler = async (event) => {
     return { statusCode: 500, body: 'Server configuration error' };
   }
 
-  const sig = event.headers['stripe-signature'];
+  const headers = event.headers || {};
+  const sig = headers['stripe-signature'] || headers['Stripe-Signature'];
   if (!sig) {
     console.error('Missing Stripe signature header.');
     return { statusCode: 400, body: 'Missing Stripe signature header' };
   }
   let body = event.body;
   if (event.isBase64Encoded) {
-    body =
-      typeof event.body === 'string'
-        ? Buffer.from(event.body, 'base64')
-        : event.body;
+    body = Buffer.from(event.body || '', 'base64');
   }
   const isValidBody = typeof body === 'string' || Buffer.isBuffer(body);
   if (!isValidBody) {
