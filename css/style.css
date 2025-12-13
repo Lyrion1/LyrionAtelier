@@ -826,6 +826,7 @@ textarea:focus {
 
 .tier ul {
   list-style-position: inside;
+  list-style-type: disc;
   padding: 0;
   text-align: left;
 }
