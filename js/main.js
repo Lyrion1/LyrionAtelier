@@ -569,23 +569,3 @@ function handleEmailSignup(event) {
     form.reset();
   }, 1000);
 }
-
-/**
- * Contact Form Handler
- * Handles contact form submission with validation and feedback
- */
-function handleContactForm(event) {
-  event.preventDefault();
-  const form = event.target;
-  const submitBtn = form.querySelector('button[type="submit"]');
-  
-  // Show loading state
-  showLoading(submitBtn);
-  
-  // Simulate API call with timeout
-  setTimeout(() => {
-    hideLoading(submitBtn);
-    showToast('Thank you for your message! We will get back to you soon.', 'success');
-    form.reset();
-  }, 1000);
-}
