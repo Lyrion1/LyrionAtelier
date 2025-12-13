@@ -683,11 +683,11 @@ textarea:focus {
   font-size: 16px;
 }
 
-.form-group {
+.contact-form-section .form-group {
   margin-bottom: 24px;
 }
 
-.form-group label {
+.contact-form-section .form-group label {
   display: block;
   color: #fbbf24;
   font-weight: 500;
@@ -696,9 +696,9 @@ textarea:focus {
   letter-spacing: 1px;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
+.contact-form-section .form-group input,
+.contact-form-section .form-group select,
+.contact-form-section .form-group textarea {
   width: 100%;
   padding: 14px;
   background: rgba(15, 23, 42, 0.6);
@@ -710,9 +710,9 @@ textarea:focus {
   transition: all 0.3s ease;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+.contact-form-section .form-group input:focus,
+.contact-form-section .form-group select:focus,
+.contact-form-section .form-group textarea:focus {
   outline: none;
   border-color: rgba(251, 191, 36, 0.6);
   box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
@@ -740,4 +740,190 @@ textarea:focus {
 
 .contact-form-section .button-row {
   justify-content: center;
+}
+
+.event-submission-section {
+  padding: 100px 40px;
+  background: rgba(139, 92, 246, 0.05);
+  margin-top: 80px;
+}
+
+.submission-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.submission-container h2 {
+  color: #fbbf24;
+  font-family: 'Cinzel', serif;
+  font-size: 38px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.submission-container .subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 60px;
+}
+
+.pricing-tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.tier {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 16px;
+  padding: 40px 30px;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.tier:hover {
+  border-color: rgba(251, 191, 36, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 32px rgba(251, 191, 36, 0.2);
+}
+
+.tier.featured {
+  border-color: rgba(251, 191, 36, 0.5);
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.tier .badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fbbf24;
+  color: #0f172a;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.tier h3 {
+  color: #fbbf24;
+  font-family: 'Cinzel', serif;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.tier .price {
+  color: #fff;
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.tier ul {
+  list-style: none;
+  padding-left: 0;
+  text-align: left;
+}
+
+.tier ul li {
+  color: rgba(255, 255, 255, 0.8);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 15px;
+}
+
+.event-form {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(15, 23, 42, 0.4);
+  padding: 50px;
+  border-radius: 20px;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.event-form .form-group {
+  margin-bottom: 20px;
+}
+
+.event-form .form-group label {
+  color: #fbbf24;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.event-form .form-group input,
+.event-form .form-group select,
+.event-form .form-group textarea {
+  width: 100%;
+  padding: 14px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.event-form .form-group input:focus,
+.event-form .form-group select:focus,
+.event-form .form-group textarea:focus {
+  outline: none;
+  border-color: rgba(251, 191, 36, 0.6);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.submit-event-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(251, 191, 36, 0.15));
+  border: 2px solid rgba(251, 191, 36, 0.6);
+  border-radius: 12px;
+  color: #fbbf24;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  margin-top: 12px;
+}
+
+.submit-event-btn:hover {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.35), rgba(251, 191, 36, 0.2));
+  box-shadow: 0 8px 32px rgba(251, 191, 36, 0.4);
+  transform: translateY(-2px);
+}
+
+.form-note {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  margin-top: 16px;
+  font-style: italic;
+}
+
+@media (max-width: 900px) {
+  .pricing-tiers {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .event-form {
+    padding: 30px 20px;
+  }
 }

@@ -55,6 +55,111 @@
     </div>
   </main>
 
+  <section class="event-submission-section">
+    <div class="submission-container">
+      <h2>List Your Event</h2>
+      <p class="subtitle">Reach our community of astrology enthusiasts. Choose your listing tier:</p>
+
+      <div class="pricing-tiers">
+        <div class="tier">
+          <h3>Standard</h3>
+          <p class="price">$75</p>
+          <ul>
+            <li>Event listing for 30 days</li>
+            <li>Basic event details</li>
+            <li>Calendar placement</li>
+          </ul>
+        </div>
+
+        <div class="tier featured">
+          <span class="badge">Most Popular</span>
+          <h3>Featured</h3>
+          <p class="price">$200</p>
+          <ul>
+            <li>Top placement for 30 days</li>
+            <li>Featured badge & styling</li>
+            <li>Social media promotion</li>
+            <li>Email newsletter inclusion</li>
+          </ul>
+        </div>
+
+        <div class="tier">
+          <h3>Premium</h3>
+          <p class="price">$350</p>
+          <ul>
+            <li>Everything in Featured</li>
+            <li>Homepage banner placement</li>
+            <li>Dedicated blog post</li>
+            <li>60-day listing duration</li>
+          </ul>
+        </div>
+      </div>
+
+      <form name="event-submission" method="POST" data-netlify="true" class="event-form">
+        <input type="hidden" name="form-name" value="event-submission">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="organizer-name">Organizer Name *</label>
+            <input type="text" id="organizer-name" name="organizer-name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="organizer-email">Email *</label>
+            <input type="email" id="organizer-email" name="organizer-email" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="event-title">Event Title *</label>
+          <input type="text" id="event-title" name="event-title" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="event-date">Event Date *</label>
+            <input type="date" id="event-date" name="event-date" required>
+          </div>
+
+          <div class="form-group">
+            <label for="event-time">Event Time *</label>
+            <input type="time" id="event-time" name="event-time" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="event-location">Location *</label>
+          <input type="text" id="event-location" name="event-location" placeholder="City, State or 'Online'" required>
+        </div>
+
+        <div class="form-group">
+          <label for="event-description">Event Description *</label>
+          <textarea id="event-description" name="event-description" rows="4" required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ticket-price">Ticket Price</label>
+            <input type="text" id="ticket-price" name="ticket-price" placeholder="$0 or Free" inputmode="decimal" pattern="(\$?\d+(\.\d{1,2})?|[Ff][Rr][Ee][Ee])">
+          </div>
+
+          <div class="form-group">
+            <label for="listing-tier">Listing Tier *</label>
+            <select id="listing-tier" name="listing-tier" required>
+              <option value="">Select a tier</option>
+              <option value="standard">Standard - $75</option>
+              <option value="featured">Featured - $200</option>
+              <option value="premium">Premium - $350</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-event-btn">Submit for Review</button>
+        <p class="form-note">We'll contact you within 24 hours with payment details.</p>
+      </form>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container footer-inner">
       <div><strong class="brand-name">Lyrīon Atelier</strong></div>
