@@ -725,3 +725,7 @@ textarea:focus {
   box-shadow: 0 6px 24px rgba(251, 191, 36, 0.4);
   transform: translateY(-2px);
 }
+
+.contact-form-section .button-row {
+  justify-content: center;
+}
