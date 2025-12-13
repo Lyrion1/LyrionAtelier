@@ -25,7 +25,7 @@ const logDebug = (message, value) => {
     console.log(message);
   }
 };
-// Zero-decimal currencies sourced from Stripe documentation (checked 2025-12-13)
+// Zero-decimal currencies sourced from Stripe documentation; update if Stripe changes list
 const zeroDecimalCurrencies = new Set([
   'bif',
   'clp',
@@ -73,10 +73,8 @@ exports.handler = async (event) => {
         ? Buffer.from(event.body, 'base64')
         : event.body;
   }
-  if (
-    typeof body !== 'string' &&
-    !Buffer.isBuffer(body)
-  ) {
+  const isValidBody = typeof body === 'string' || Buffer.isBuffer(body);
+  if (!isValidBody) {
     console.error('Invalid webhook payload type.');
     return { statusCode: 400, body: 'Invalid webhook payload' };
   }
@@ -102,8 +100,8 @@ exports.handler = async (event) => {
       );
 
       // TODO: Send confirmation email
-      // TODO: If oracle reading, send reading to customer
-      // TODO: If physical product, create Printful order
+      // TODO: If oracle reading, send reading to customer (tracked separately)
+      // TODO: If physical product, create Printful order (tracked separately)
 
       break;
 
