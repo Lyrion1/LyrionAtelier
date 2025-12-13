@@ -825,8 +825,8 @@ textarea:focus {
 }
 
 .tier ul {
-  list-style-position: outside;
-  padding-left: 16px;
+  list-style-position: inside;
+  padding: 0;
   text-align: left;
 }
 
@@ -854,16 +854,16 @@ textarea:focus {
 
 .submit-event-btn {
   width: 100%;
-  padding: 18px;
+  padding: 16px;
   background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(251, 191, 36, 0.15));
   border: 2px solid rgba(251, 191, 36, 0.6);
   border-radius: 12px;
   color: #fbbf24;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   margin-top: 12px;
 }
 
