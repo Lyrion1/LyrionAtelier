@@ -825,7 +825,7 @@ textarea:focus {
 }
 
 .tier ul {
-  list-style: none;
+  list-style: inside;
   padding: 0;
   text-align: left;
 }
@@ -837,9 +837,8 @@ textarea:focus {
   font-size: 15px;
 }
 
-.tier ul li:before {
+.tier ul li::marker {
   content: "✨ ";
-  margin-right: 8px;
 }
 
 .event-form {
