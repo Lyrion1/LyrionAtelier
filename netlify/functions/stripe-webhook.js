@@ -6,11 +6,19 @@ const stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
 const debugLoggingEnabled =
   process.env.STRIPE_WEBHOOK_DEBUG === 'true' &&
   process.env.NODE_ENV !== 'production';
-const logDebug = (...args) => {
-  if (debugLoggingEnabled) {
-    console.log(...args);
+const logDebug = (message, value) => {
+  if (!debugLoggingEnabled) {
+    return;
+  }
+  if (typeof value === 'function') {
+    console.log(message, value());
+  } else if (typeof value !== 'undefined') {
+    console.log(message, value);
+  } else {
+    console.log(message);
   }
 };
+// Zero-decimal currencies sourced from Stripe documentation
 const zeroDecimalCurrencies = new Set([
   'bif',
   'clp',
@@ -51,11 +59,18 @@ exports.handler = async (event) => {
     console.error('Missing Stripe signature header.');
     return { statusCode: 400, body: 'Missing Stripe signature header' };
   }
+  const body = event.isBase64Encoded
+    ? Buffer.from(event.body || '', 'base64')
+    : event.body || '';
+  if (typeof body !== 'string' && !Buffer.isBuffer(body)) {
+    console.error('Invalid webhook payload type.');
+    return { statusCode: 400, body: 'Invalid webhook payload' };
+  }
 
   let stripeEvent;
 
   try {
-    stripeEvent = stripe.webhooks.constructEvent(event.body, sig, webhookSecret);
+    stripeEvent = stripe.webhooks.constructEvent(body, sig, webhookSecret);
   } catch (err) {
     console.error('Webhook signature verification failed:', err.message);
     return { statusCode: 400, body: `Webhook Error: ${err.message}` };
@@ -67,14 +82,10 @@ exports.handler = async (event) => {
       const session = stripeEvent.data.object;
       console.log('✅ checkout.session.completed event received');
       logDebug('Checkout session ID:', session.id);
-      if (debugLoggingEnabled) {
-        const amountPaid = formatStripeAmount(
-          session.amount_total,
-          session.currency
-        );
-        console.log('Customer associated:', Boolean(session.customer));
-        console.log('Amount paid:', amountPaid);
-      }
+      logDebug('Customer associated:', () => Boolean(session.customer));
+      logDebug('Amount paid:', () =>
+        formatStripeAmount(session.amount_total, session.currency)
+      );
 
       // TODO: Send confirmation email
       // TODO: If oracle reading, send reading to customer
