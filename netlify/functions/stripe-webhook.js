@@ -1,7 +1,12 @@
 const Stripe = require('stripe');
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-const stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
+let stripe = null;
+try {
+  stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
+} catch (err) {
+  console.error('Stripe initialization failed:', err.message);
+}
 // Explicit debug flag that is ignored in production
 const debugLoggingEnabled =
   process.env.STRIPE_WEBHOOK_DEBUG === 'true' &&
@@ -18,7 +23,7 @@ const logDebug = (message, value) => {
     console.log(message);
   }
 };
-// Zero-decimal currencies sourced from Stripe documentation
+// Zero-decimal currencies sourced from Stripe documentation (checked 2025-12-13)
 const zeroDecimalCurrencies = new Set([
   'bif',
   'clp',
@@ -60,9 +65,12 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: 'Missing Stripe signature header' };
   }
   const body = event.isBase64Encoded
-    ? Buffer.from(event.body || '', 'base64')
-    : event.body || '';
-  if (typeof body !== 'string' && !Buffer.isBuffer(body)) {
+    ? (typeof event.body === 'string' ? Buffer.from(event.body, 'base64') : event.body)
+    : event.body;
+  if (
+    typeof body !== 'string' &&
+    !Buffer.isBuffer(body)
+  ) {
     console.error('Invalid webhook payload type.');
     return { statusCode: 400, body: 'Invalid webhook payload' };
   }
