@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize smooth scrolling for anchor links
   initSmoothScroll();
   
+  // Load sample events on Codex page
+  loadEvents();
+  
   // Initialize scroll-triggered fade-in animations
   initScrollAnimations();
   
@@ -318,6 +321,40 @@ function initSmoothScroll() {
       }
     });
   });
+}
+
+// Load and display sample events
+function loadEvents() {
+  const eventsGrid = document.getElementById('eventsGrid');
+  if (!eventsGrid) return;
+  if (typeof sampleEvents === 'undefined') {
+    console.warn('Sample events data not available.');
+    return;
+  }
+
+  const eventsHTML = sampleEvents.map(event => `
+    <div class="event-card ${event.featured ? 'featured-event' : ''}">
+      ${event.featured ? '<span class="featured-badge">Featured</span>' : ''}
+      <div class="event-date">
+        <span class="month">${new Date(event.date).toLocaleDateString('en-US', { month: 'short' })}</span>
+        <span class="day">${new Date(event.date).getDate()}</span>
+      </div>
+      <div class="event-info">
+        <span class="event-category">${event.category}</span>
+        <h3>${event.title}</h3>
+        <p class="event-host">by ${event.host}</p>
+        <p class="event-details">
+          📍 ${event.location}<br>
+          🕐 ${event.time}<br>
+          💰 ${event.price}
+        </p>
+        <p class="event-description">${event.description}</p>
+        <a href="${event.ticketUrl}" class="event-btn">Learn More</a>
+      </div>
+    </div>
+  `).join('');
+
+  eventsGrid.innerHTML = eventsHTML;
 }
 
 /**

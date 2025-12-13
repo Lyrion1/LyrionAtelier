@@ -55,6 +55,17 @@
     </div>
   </main>
 
+  <section class="upcoming-events">
+    <div class="events-header">
+      <h2>Upcoming Events</h2>
+      <p>Discover workshops, gatherings, and experiences in the astrology community</p>
+    </div>
+
+    <div class="events-grid" id="eventsGrid">
+      <!-- Events will be dynamically loaded here -->
+    </div>
+  </section>
+
   <section class="event-submission-section">
     <div class="submission-container">
       <h2>List Your Event</h2>
@@ -93,6 +104,10 @@
             <li>60-day listing duration</li>
           </ul>
         </div>
+      </div>
+
+      <div class="questions-cta">
+        <p>Questions about listing your event? <a href="contact.html" class="contact-link">Get in touch →</a></p>
       </div>
 
       <form name="event-submission" method="POST" data-netlify="true" class="event-form">
@@ -169,6 +184,7 @@
 
   <script src="js/products.js" defer></script>
   <script src="js/cart.js" defer></script>
+  <script src="js/sample-events.js" defer></script>
   <script src="js/main.js" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', updateCartCount);
