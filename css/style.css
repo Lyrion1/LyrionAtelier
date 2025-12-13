@@ -7,6 +7,9 @@
   --card-alt: #24304a;
   --accent: #a78bfa;
   --accent-2: #fbbf24;
+  --accent-rgb: 167, 139, 250;
+  --accent-2-rgb: 251, 191, 36;
+  --indigo-rgb: 99, 102, 241;
   --brand-gold: #d9b76a;
   --text: #e2e8f0;
   --muted: #94a3b8;
@@ -448,6 +451,106 @@ p {
   filter: blur(40px);
   opacity: 0.85;
   pointer-events: none;
+}
+
+.newsletter-section {
+  background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.15), rgba(var(--indigo-rgb), 0.08));
+  padding: 100px 40px;
+  margin-top: 100px;
+  text-align: center;
+  border-top: 1px solid rgba(var(--accent-2-rgb), 0.2);
+}
+
+.newsletter-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.newsletter-container h2 {
+  color: var(--accent-2);
+  font-family: 'Cinzel', serif;
+  font-size: 40px;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+
+.newsletter-container > p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 12px;
+  max-width: 550px;
+  margin: 0 auto 20px;
+}
+
+.newsletter-form input[type="email"] {
+  flex: 1;
+  padding: 18px 24px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1.5px solid rgba(var(--accent-2-rgb), 0.3);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.newsletter-form input[type="email"]:focus {
+  outline: none;
+  border-color: rgba(var(--accent-2-rgb), 0.6);
+  box-shadow: 0 0 24px rgba(var(--accent-2-rgb), 0.2);
+}
+
+.newsletter-form input[type="email"]::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.newsletter-form button {
+  padding: 18px 40px;
+  background: linear-gradient(135deg, rgba(var(--accent-2-rgb), 0.25), rgba(var(--accent-2-rgb), 0.15));
+  border: 1.5px solid rgba(var(--accent-2-rgb), 0.5);
+  border-radius: 12px;
+  color: var(--accent-2);
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.newsletter-form button:hover {
+  background: linear-gradient(135deg, rgba(var(--accent-2-rgb), 0.35), rgba(var(--accent-2-rgb), 0.2));
+  box-shadow: 0 6px 28px rgba(var(--accent-2-rgb), 0.4);
+  transform: translateY(-2px);
+}
+
+.privacy-note {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .newsletter-section {
+    padding: 60px 20px;
+  }
+
+  .newsletter-container h2 {
+    font-size: 32px;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-form button {
+    width: 100%;
+  }
 }
 
 .footer {
