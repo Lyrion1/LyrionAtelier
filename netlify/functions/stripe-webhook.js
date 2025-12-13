@@ -4,7 +4,9 @@ const resendApiKey = process.env.RESEND_API_KEY;
 let resend = null;
 let resendInitializationError = null;
 try {
-  resend = resendApiKey ? new Resend(resendApiKey) : null;
+  if (resendApiKey) {
+    resend = new Resend(resendApiKey);
+  }
 } catch (err) {
   console.error('Resend initialization failed:', err.message);
   resendInitializationError = err;
@@ -85,7 +87,9 @@ exports.handler = async (event) => {
       const customerEmail = session?.customer_details?.email;
       const amountPaid = typeof session.amount_total === 'number' ? (session.amount_total / 100).toFixed(2) : null;
 
-      if (!resend) {
+      if (!resendApiKey) {
+        console.error('Resend API key missing. Skipping email notifications.');
+      } else if (!resend) {
         console.error('Resend client not configured. Skipping email notifications.', resendInitializationError);
       } else {
         if (customerEmail) {
@@ -136,7 +140,7 @@ exports.handler = async (event) => {
           try {
             const stripeDashboardUrl = session.payment_intent
               ? `https://dashboard.stripe.com/payments/${session.payment_intent}`
-              : 'https://dashboard.stripe.com/payments';
+              : `https://dashboard.stripe.com/checkout/sessions/${session.id}`;
 
             await resend.emails.send({
               from: 'Lyrion Atelier <orders@lyrionatelier.com>',
