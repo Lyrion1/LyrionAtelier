@@ -1,6 +1,7 @@
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const stripe = stripeSecretKey ? require('stripe')(stripeSecretKey) : null;
+const debugLoggingEnabled = process.env.STRIPE_WEBHOOK_DEBUG === 'true';
 const zeroDecimalCurrencies = new Set([
   'bif',
   'clp',
@@ -17,6 +18,13 @@ const zeroDecimalCurrencies = new Set([
   'xof',
   'xpf'
 ]);
+const formatStripeAmount = (amount, currency) => {
+  const amountTotal = amount ?? 0;
+  const normalizedCurrency = (currency || '').toLowerCase();
+  return zeroDecimalCurrencies.has(normalizedCurrency)
+    ? amountTotal
+    : amountTotal / 100;
+};
 
 exports.handler = async (event) => {
   // Only allow POST
@@ -49,13 +57,14 @@ exports.handler = async (event) => {
     case 'checkout.session.completed':
       const session = stripeEvent.data.object;
       console.log('✅ Payment successful:', session.id);
-      console.log('Customer:', session.customer || 'unknown');
-      const amountTotal = session.amount_total ?? 0;
-      const currency = (session.currency || '').toLowerCase();
-      const amountPaid = zeroDecimalCurrencies.has(currency)
-        ? amountTotal
-        : amountTotal / 100;
-      console.log('Amount paid:', amountPaid);
+      const amountPaid = formatStripeAmount(
+        session.amount_total,
+        session.currency
+      );
+      if (debugLoggingEnabled) {
+        console.log('Customer:', session.customer || 'unknown');
+        console.log('Amount paid:', amountPaid);
+      }
 
       // TODO: Send confirmation email
       // TODO: If oracle reading, send reading to customer
