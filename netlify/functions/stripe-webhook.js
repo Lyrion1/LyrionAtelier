@@ -2,10 +2,12 @@ const Stripe = require('stripe');
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 let stripe = null;
+let stripeInitializationError = null;
 try {
   stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
 } catch (err) {
   console.error('Stripe initialization failed:', err.message);
+  stripeInitializationError = err;
 }
 // Explicit debug flag that is ignored in production
 const debugLoggingEnabled =
@@ -54,8 +56,8 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  if (!stripe || !webhookSecret) {
-    console.error('Missing Stripe configuration.');
+  if (stripeInitializationError || !stripe || !webhookSecret) {
+    console.error('Missing Stripe configuration.', stripeInitializationError);
     return { statusCode: 500, body: 'Server configuration error' };
   }
 
@@ -64,9 +66,13 @@ exports.handler = async (event) => {
     console.error('Missing Stripe signature header.');
     return { statusCode: 400, body: 'Missing Stripe signature header' };
   }
-  const body = event.isBase64Encoded
-    ? (typeof event.body === 'string' ? Buffer.from(event.body, 'base64') : event.body)
-    : event.body;
+  let body = event.body;
+  if (event.isBase64Encoded) {
+    body =
+      typeof event.body === 'string'
+        ? Buffer.from(event.body, 'base64')
+        : event.body;
+  }
   if (
     typeof body !== 'string' &&
     !Buffer.isBuffer(body)
