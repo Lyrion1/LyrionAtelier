@@ -154,7 +154,6 @@ img {
 
 .brand-logo {
   height: clamp(48px, 6vw, 64px);
-  max-height: 64px;
   width: auto;
   order: 1;
   filter: drop-shadow(0 4px 12px rgba(251, 191, 36, 0.4));
