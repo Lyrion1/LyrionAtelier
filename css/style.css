@@ -385,6 +385,67 @@ p {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
+.trust-signals {
+  padding: 70px 40px;
+  background: rgba(139, 92, 246, 0.06);
+  border-top: 1px solid rgba(251, 191, 36, 0.15);
+  border-bottom: 1px solid rgba(251, 191, 36, 0.15);
+}
+
+.trust-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
+}
+
+.trust-item {
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.trust-item:hover {
+  transform: translateY(-5px);
+}
+
+.trust-item .icon {
+  font-size: 52px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 12px rgba(251, 191, 36, 0.3));
+}
+
+.trust-item .stat {
+  color: #fbbf24;
+  font-size: 36px;
+  font-weight: 700;
+  font-family: 'Cinzel', serif;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+}
+
+.trust-item .label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+@media (max-width: 968px) {
+  .trust-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .trust-container {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+}
+
 .lantern-cta {
   position: relative;
   overflow: hidden;
