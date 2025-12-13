@@ -683,11 +683,11 @@ textarea:focus {
   font-size: 16px;
 }
 
-.form-group {
+.contact-form-section .form-group {
   margin-bottom: 24px;
 }
 
-.form-group label {
+.contact-form-section .form-group label {
   display: block;
   color: #fbbf24;
   font-weight: 500;
@@ -696,9 +696,9 @@ textarea:focus {
   letter-spacing: 1px;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
+.contact-form-section .form-group input,
+.contact-form-section .form-group select,
+.contact-form-section .form-group textarea {
   width: 100%;
   padding: 14px;
   background: rgba(15, 23, 42, 0.6);
@@ -710,9 +710,9 @@ textarea:focus {
   transition: all 0.3s ease;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+.contact-form-section .form-group input:focus,
+.contact-form-section .form-group select:focus,
+.contact-form-section .form-group textarea:focus {
   outline: none;
   border-color: rgba(251, 191, 36, 0.6);
   box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
