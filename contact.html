@@ -44,7 +44,7 @@
           <h2>Get in Touch</h2>
           <p>Have questions about our readings? We're here to help guide your journey.</p>
 
-          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <form name="contact" method="POST" action="/contact.html" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="contact">
             <p style="display:none;">
               <label>Don't fill this out: <input name="bot-field"></label>
@@ -62,7 +62,8 @@
 
             <div class="form-group">
               <label for="reading-type">Interested in</label>
-              <select id="reading-type" name="reading-type">
+              <select id="reading-type" name="reading-type" required>
+                <option value="" disabled selected hidden>Select a service</option>
                 <option value="past-life">Past Life Reading</option>
                 <option value="career-compass">Career Compass</option>
                 <option value="love-relationships">Love & Relationships</option>
