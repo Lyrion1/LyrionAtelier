@@ -39,23 +39,48 @@
         <p class="muted">Need help choosing a reading or garment? Send us a note.</p>
       </div>
 
-      <div class="card">
-        <form class="contact-form" onsubmit="handleContactForm(event)">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" required minlength="2" placeholder="Lyrīon Starwalker">
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required placeholder="you@example.com">
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="4" required placeholder="Share your question or intent"></textarea>
-          </div>
-          <button class="btn btn-primary" type="submit">Send message</button>
-        </form>
-      </div>
+      <section class="contact-form-section">
+        <div class="form-container">
+          <h2>Get in Touch</h2>
+          <p>Have questions about our readings? We're here to help guide your journey.</p>
+
+          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="contact">
+            <p style="display:none;">
+              <label>Don't fill this out: <input name="bot-field"></label>
+            </p>
+
+            <div class="form-group">
+              <label for="name">Name *</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="reading-type">Interested in</label>
+              <select id="reading-type" name="reading-type">
+                <option>Past Life Reading</option>
+                <option>Career Compass</option>
+                <option>Love & Relationships</option>
+                <option>Full Birth Chart</option>
+                <option>Monthly Guidance</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+        </div>
+      </section>
     </div>
   </main>
 

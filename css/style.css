@@ -153,7 +153,8 @@ img {
 }
 
 .brand-logo {
-  height: 65px;
+  height: clamp(48px, 6vw, 64px);
+  max-height: 64px;
   width: auto;
   order: 1;
   filter: drop-shadow(0 4px 12px rgba(251, 191, 36, 0.4));
@@ -644,4 +645,84 @@ textarea:focus {
   .mobile-menu-toggle {
     display: inline-flex;
   }
+}
+
+.contact-form-section {
+  max-width: 700px;
+  margin: 80px auto;
+  padding: 60px 40px;
+  background: rgba(139, 92, 246, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.form-container h2 {
+  color: #fbbf24;
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.form-container > p {
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 16px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  color: #fbbf24;
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 14px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: rgba(251, 191, 36, 0.6);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(251, 191, 36, 0.1));
+  border: 1.5px solid rgba(251, 191, 36, 0.5);
+  border-radius: 10px;
+  color: #fbbf24;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(251, 191, 36, 0.15));
+  box-shadow: 0 6px 24px rgba(251, 191, 36, 0.4);
+  transform: translateY(-2px);
 }
