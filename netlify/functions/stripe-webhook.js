@@ -14,6 +14,9 @@ try {
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const adminNotificationEmail = 'info@lyrionatelier.com';
+const zeroDecimalCurrencies = new Set([
+  'BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'
+]);
 let stripe = null;
 let stripeInitializationError = null;
 try {
@@ -38,6 +41,13 @@ const logDebug = (message, value) => {
     console.log(message);
   }
 };
+const escapeHtml = (value = '') =>
+  String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 exports.handler = async (event) => {
   // Only allow POST
   if (event.httpMethod !== 'POST') {
@@ -85,9 +95,22 @@ exports.handler = async (event) => {
       logDebug('Currency:', session.currency);
 
       const customerEmail = session?.customer_details?.email;
-      const amountPaid = typeof session.amount_total === 'number' ? (session.amount_total / 100).toFixed(2) : null;
       const currencyCode = typeof session.currency === 'string' ? session.currency.toUpperCase() : 'USD';
-      const formattedAmount = amountPaid ? `${amountPaid} ${currencyCode}` : `0.00 ${currencyCode}`;
+      const isZeroDecimal = zeroDecimalCurrencies.has(currencyCode);
+      const amountNumeric =
+        typeof session.amount_total === 'number'
+          ? isZeroDecimal
+            ? session.amount_total
+            : session.amount_total / 100
+          : null;
+      const formattedAmount =
+        typeof amountNumeric === 'number'
+          ? `${amountNumeric.toFixed(isZeroDecimal ? 0 : 2)} ${currencyCode}`
+          : `0.00 ${currencyCode}`;
+      const safeSessionId = escapeHtml(session.id || '');
+      const safeAmount = escapeHtml(formattedAmount);
+      const safeCustomerEmail = escapeHtml(customerEmail ?? 'Not provided');
+      const safeCustomerName = escapeHtml(session?.customer_details?.name || 'Not provided');
 
       if (!resendApiKey) {
         console.error('Resend API key missing. Skipping email notifications.');
@@ -109,8 +132,8 @@ exports.handler = async (event) => {
 
                   <div style="background: rgba(139, 92, 246, 0.1); padding: 24px; border-radius: 12px; border: 1px solid rgba(251, 191, 36, 0.2); margin-bottom: 24px;">
                     <h2 style="color: #fbbf24; font-size: 20px; margin-bottom: 16px;">Order Details</h2>
-                    <p style="margin: 8px 0;"><strong>Order ID:</strong> ${session.id}</p>
-                    <p style="margin: 8px 0;"><strong>Amount Paid:</strong> ${formattedAmount}</p>
+                    <p style="margin: 8px 0;"><strong>Order ID:</strong> ${safeSessionId}</p>
+                    <p style="margin: 8px 0;"><strong>Amount Paid:</strong> ${safeAmount}</p>
                     <p style="margin: 8px 0;"><strong>Payment Status:</strong> <span style="color: #10b981;">Confirmed</span></p>
                   </div>
 
@@ -146,9 +169,9 @@ exports.handler = async (event) => {
                 : null;
             const checkoutSessionId = typeof session.id === 'string' ? session.id : '';
             const stripeDashboardUrl = paymentIntentId
-              ? `https://dashboard.stripe.com/payments/${paymentIntentId}`
+              ? `https://dashboard.stripe.com/payments/${encodeURIComponent(paymentIntentId)}`
               : checkoutSessionId
-                ? `https://dashboard.stripe.com/checkout/sessions/${checkoutSessionId}`
+                ? `https://dashboard.stripe.com/checkout/sessions/${encodeURIComponent(checkoutSessionId)}`
                 : 'https://dashboard.stripe.com/checkout/sessions';
 
             await resend.emails.send({
@@ -158,10 +181,10 @@ exports.handler = async (event) => {
               html: `
                 <div style="font-family: Arial, sans-serif; padding: 20px;">
                   <h2>New Order Alert!</h2>
-                  <p><strong>Order ID:</strong> ${session.id}</p>
-                  <p><strong>Customer Email:</strong> ${customerEmail ?? 'Not provided'}</p>
-                  <p><strong>Customer Name:</strong> ${session?.customer_details?.name || 'Not provided'}</p>
-                  <p><strong>Amount:</strong> ${formattedAmount}</p>
+                  <p><strong>Order ID:</strong> ${safeSessionId}</p>
+                  <p><strong>Customer Email:</strong> ${safeCustomerEmail}</p>
+                  <p><strong>Customer Name:</strong> ${safeCustomerName}</p>
+                  <p><strong>Amount:</strong> ${safeAmount}</p>
                   <p><strong>Payment Status:</strong> Paid</p>
 
                   <hr>
