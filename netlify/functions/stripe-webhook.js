@@ -1,7 +1,9 @@
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const stripe = stripeSecretKey ? require('stripe')(stripeSecretKey) : null;
-const debugLoggingEnabled = process.env.STRIPE_WEBHOOK_DEBUG === 'true';
+const debugLoggingEnabled =
+  process.env.STRIPE_WEBHOOK_DEBUG === 'true' &&
+  process.env.NODE_ENV !== 'production';
 const zeroDecimalCurrencies = new Set([
   'bif',
   'clp',
@@ -57,12 +59,12 @@ exports.handler = async (event) => {
     case 'checkout.session.completed':
       const session = stripeEvent.data.object;
       console.log('✅ Payment successful:', session.id);
-      const amountPaid = formatStripeAmount(
-        session.amount_total,
-        session.currency
-      );
       if (debugLoggingEnabled) {
-        console.log('Customer:', session.customer || 'unknown');
+        const amountPaid = formatStripeAmount(
+          session.amount_total,
+          session.currency
+        );
+        console.log('Customer reference present:', Boolean(session.customer));
         console.log('Amount paid:', amountPaid);
       }
 
