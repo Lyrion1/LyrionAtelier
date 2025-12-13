@@ -1,10 +1,16 @@
+const Stripe = require('stripe');
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-const stripe = stripeSecretKey ? require('stripe')(stripeSecretKey) : null;
+const stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
 // Explicit debug flag that is ignored in production
 const debugLoggingEnabled =
   process.env.STRIPE_WEBHOOK_DEBUG === 'true' &&
   process.env.NODE_ENV !== 'production';
+const logDebug = (...args) => {
+  if (debugLoggingEnabled) {
+    console.log(...args);
+  }
+};
 const zeroDecimalCurrencies = new Set([
   'bif',
   'clp',
@@ -59,7 +65,8 @@ exports.handler = async (event) => {
   switch (stripeEvent.type) {
     case 'checkout.session.completed':
       const session = stripeEvent.data.object;
-      console.log('✅ Payment successful:', session.id);
+      console.log('✅ checkout.session.completed event received');
+      logDebug('Checkout session ID:', session.id);
       if (debugLoggingEnabled) {
         const amountPaid = formatStripeAmount(
           session.amount_total,
@@ -77,12 +84,14 @@ exports.handler = async (event) => {
 
     case 'payment_intent.succeeded':
       const paymentIntent = stripeEvent.data.object;
-      console.log('✅ PaymentIntent succeeded:', paymentIntent.id);
+      console.log('✅ payment_intent.succeeded event received');
+      logDebug('PaymentIntent ID:', paymentIntent.id);
       break;
 
     case 'payment_intent.payment_failed':
       const failedPayment = stripeEvent.data.object;
-      console.error('❌ Payment failed:', failedPayment.id);
+      console.error('❌ payment_intent.payment_failed event received');
+      logDebug('PaymentIntent ID:', failedPayment.id);
       break;
 
     default:
