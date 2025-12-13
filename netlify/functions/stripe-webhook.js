@@ -30,6 +30,10 @@ exports.handler = async (event) => {
   }
 
   const sig = event.headers['stripe-signature'];
+  if (!sig) {
+    console.error('Missing Stripe signature header.');
+    return { statusCode: 400, body: 'Missing Stripe signature header' };
+  }
 
   let stripeEvent;
 
@@ -45,7 +49,7 @@ exports.handler = async (event) => {
     case 'checkout.session.completed':
       const session = stripeEvent.data.object;
       console.log('✅ Payment successful:', session.id);
-      console.log('Customer email:', session.customer_details?.email || 'unknown');
+      console.log('Customer:', session.customer || 'unknown');
       const amountTotal = session.amount_total ?? 0;
       const currency = (session.currency || '').toLowerCase();
       const amountPaid = zeroDecimalCurrencies.has(currency)
