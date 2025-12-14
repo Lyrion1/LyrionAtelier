@@ -95,94 +95,47 @@
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
   <script>
-  // Product data for each oracle reading
-  const oracleProducts = {
-  'natal-chart': {
-  name: 'Natal Chart Blueprint - Oracle Reading',
-  price: 70.00,
-  description: 'Foundational chart read with practical activations'
-  },
-  'solar-return': {
-  name: 'Solar Return Reading - Oracle Reading',
-  price: 58.00,
-  description: 'Birthday-year forecast covering themes and opportunities'
-  },
-  'life-path': {
-  name: 'Life Path Reading - Oracle Reading',
-  price: 50.00,
-  description: 'Identify your current chapter and its lessons'
-  },
-  'relationship': {
-  name: 'Relationship Synastry - Oracle Reading',
-  price: 88.00,
-  description: 'Compatibility and dynamics between two charts'
-  },
-  'career': {
-  name: 'Career & Purpose Reading - Oracle Reading',
-  price: 75.00,
-  description: 'Vocational guidance and life purpose insights'
-  },
-  'cosmic-blueprint': {
-  name: 'Full Cosmic Blueprint - Oracle Reading',
-  price: 155.00,
-  description: 'Comprehensive analysis combining all aspects'
-  }
+  const products = {
+  'natal-chart': { name: 'Natal Chart Blueprint - Oracle Reading', price: 70 },
+  'solar-return': { name: 'Solar Return Reading - Oracle Reading', price: 58 },
+  'life-path': { name: 'Life Path Reading - Oracle Reading', price: 50 },
+  'relationship': { name: 'Relationship Synastry - Oracle Reading', price: 88 },
+  'career': { name: 'Career & Purpose Reading - Oracle Reading', price: 75 },
+  'cosmic-blueprint': { name: 'Full Cosmic Blueprint - Oracle Reading', price: 155 }
   };
 
-  // Handle book button clicks
-  async function handleBookClick(event, productKey) {
-  const product = oracleProducts[productKey];
-
-  if (!product) {
-  console.error('Product not found:', productKey);
-  return;
-  }
-
-  // Show loading state
-  const button = event.target;
-  const originalText = button.textContent;
+  async function handleBookClick(productKey, event) {
+  const product = products[productKey];
+  const button = event?.target;
+  const originalText = button?.textContent;
+  if (button) {
   button.textContent = 'Processing...';
   button.disabled = true;
-
-  try {
-  // Create checkout session
-  const response = await fetch('/.netlify/functions/create-checkout-session', {
-  method: 'POST',
-  headers: {
-  'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-  productName: product.name,
-  productPrice: product.price,
-  }),
-  });
-
-  const data = await response.json();
-
-  if (data.error) {
-  throw new Error(data.error);
   }
 
-  // Redirect to Stripe Checkout
+  try {
+  const response = await fetch('/.netlify/functions/create-checkout-session', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ productName: product.name, productPrice: product.price })
+  });
+  const data = await response.json();
   window.location.href = data.url;
-
   } catch (error) {
-  console.error('Error:', error);
-  alert('Sorry, there was an error processing your request. Please try again.');
-  button.textContent = originalText;
+  alert('Error. Please try again.');
+  if (button) {
+  button.textContent = originalText || 'Book';
   button.disabled = false;
   }
   }
+  }
 
-  // Add click handlers to all book buttons
   document.addEventListener('DOMContentLoaded', () => {
-  // Add data-product attributes to book buttons in HTML, then:
-  const bookButtons = document.querySelectorAll('[data-product]');
-  bookButtons.forEach(button => {
-  button.addEventListener('click', (e) => {
+  document.querySelectorAll('[data-product]').forEach(btn => {
+  btn.addEventListener('click', (e) => {
   e.preventDefault();
-  const productKey = button.getAttribute('data-product');
-  handleBookClick(e, productKey);
+  window.handleBookClick = handleBookClick;
+  handleBookClick(btn.getAttribute('data-product'), e);
   });
   });
   });
