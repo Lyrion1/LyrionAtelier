@@ -212,7 +212,7 @@ const products = [
     price: 65,
     category: "oracle",
     zodiac: "oracle",
-    image: "images/oracle/past-life-reading-oracle-card.png",
+    image: "images/oracle/past-life-reading-oracle-card.webp",
     description: "Uncover echoes of your former selves and the lessons that follow you.",
     sizes: ["Standard"]
   },
@@ -222,7 +222,7 @@ const products = [
     price: 55,
     category: "oracle",
     zodiac: "oracle",
-    image: "images/oracle/career-path-compass-oracle-card.png",
+    image: "images/oracle/career-path-compass-oracle-card.webp",
     description: "A roadmap for your vocation with clear next steps.",
     sizes: ["Standard"]
   },
@@ -232,7 +232,7 @@ const products = [
     price: 52,
     category: "oracle",
     zodiac: "oracle",
-    image: "images/oracle/love-relationships-spread-oracle-card.png",
+    image: "images/oracle/love-relationships-spread-oracle-card.webp",
     description: "Clarity on connections, timing, and aligned partners.",
     sizes: ["Standard"]
   },
@@ -242,7 +242,7 @@ const products = [
     price: 60,
     category: "oracle",
     zodiac: "oracle",
-    image: "images/oracle/monthly-guidance-package-oracle-card.png",
+    image: "images/oracle/monthly-guidance-package-oracle-card.webp",
     description: "A month-long cadence of insights to stay on track.",
     sizes: ["Standard"]
   },
@@ -252,7 +252,7 @@ const products = [
     price: 70,
     category: "oracle",
     zodiac: "oracle",
-    image: "images/oracle/natal-chart-blueprint-cover.png",
+    image: "images/oracle/natal-chart-blueprint-cover.webp",
     description: "Foundational chart read with practical activations.",
     sizes: ["Standard"]
   },
@@ -262,7 +262,7 @@ const products = [
     price: 58,
     category: "oracle",
     zodiac: "oracle",
-    image: "images/oracle/solar-return-reading-cover.png",
+    image: "images/oracle/solar-return-reading-cover.webp",
     description: "Birthday-year forecast covering themes and opportunities.",
     sizes: ["Standard"]
   },
@@ -272,7 +272,7 @@ const products = [
     price: 50,
     category: "oracle",
     zodiac: "oracle",
-    image: "images/oracle/life-path-reading-cover.png",
+    image: "images/oracle/life-path-reading-cover.webp",
     description: "Identify your current chapter and its lessons.",
     sizes: ["Standard"]
   },
@@ -282,7 +282,7 @@ const products = [
     price: 75,
     category: "oracle",
     zodiac: "oracle",
-    image: "images/oracle/the-oracles-lantern-cover.png",
+    image: "images/oracle/the-oracles-lantern-cover.webp",
     description: "A deep dive session for seekers ready for transformation.",
     sizes: ["Standard"]
   }
@@ -620,42 +620,42 @@ function displayOracleReadings() {
       name: 'Natal Chart Blueprint - Oracle Reading',
       price: 70.00,
       description: 'Foundational chart read with practical activations',
-      image: 'images/oracle/natal-chart-blueprint-cover.png'
+      image: 'images/oracle/natal-chart-blueprint-cover.webp'
     },
     {
       key: 'solar-return',
       name: 'Solar Return Reading - Oracle Reading',
       price: 58.00,
       description: 'Birthday-year forecast covering themes and opportunities',
-      image: 'images/oracle/solar-return-reading-cover.png'
+      image: 'images/oracle/solar-return-reading-cover.webp'
     },
     {
       key: 'life-path',
       name: 'Life Path Reading - Oracle Reading',
       price: 50.00,
       description: 'Identify your current chapter and its lessons',
-      image: 'images/oracle/life-path-reading-cover.png'
+      image: 'images/oracle/life-path-reading-cover.webp'
     },
     {
       key: 'relationship',
       name: 'Relationship Synastry - Oracle Reading',
       price: 88.00,
       description: 'Compatibility and dynamics between two charts',
-      image: 'images/oracle/relationship-synastry-cover.png'
+      image: 'images/oracle/love-relationships-spread-oracle-card.webp'
     },
     {
       key: 'career',
       name: 'Career & Purpose Reading - Oracle Reading',
       price: 75.00,
       description: 'Vocational guidance and life purpose insights',
-      image: 'images/oracle/career-path-compass-oracle-card.png'
+      image: 'images/oracle/career-path-compass-oracle-card.webp'
     },
     {
       key: 'cosmic-blueprint',
       name: 'Full Cosmic Blueprint - Oracle Reading',
       price: 155.00,
       description: 'Comprehensive analysis combining all aspects',
-      image: 'images/oracle/the-oracles-lantern-cover.png'
+      image: 'images/oracle/the-oracles-lantern-cover.webp'
     }
   ];
 
