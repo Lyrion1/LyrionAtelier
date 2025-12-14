@@ -1,6 +1,34 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const Stripe = require('stripe');
 const { Resend } = require('resend');
-const resend = new Resend(process.env.RESEND_API_KEY);
+
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+const resendApiKey = process.env.RESEND_API_KEY;
+
+const stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
+const zeroDecimalCurrencies = new Set([
+  'BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'
+]);
+
+const escapeHtml = (value = '') =>
+  String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+const formatAmount = (amountTotal, currencyCode = 'USD') => {
+  const normalizedCurrency = currencyCode.toUpperCase();
+  const isZeroDecimal = zeroDecimalCurrencies.has(normalizedCurrency);
+  if (typeof amountTotal !== 'number') {
+    return `0.00 ${normalizedCurrency}`;
+  }
+  const divisor = isZeroDecimal ? 1 : 100;
+  const formattedAmount = (amountTotal / divisor).toFixed(isZeroDecimal ? 0 : 2);
+  return `${formattedAmount} ${normalizedCurrency}`;
+};
 
 exports.handler = async (event) => {
   // Only allow POST requests
@@ -8,36 +36,61 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  const sig = event.headers['stripe-signature'];
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!stripe || !webhookSecret) {
+    console.error('Missing Stripe configuration.');
+    return { statusCode: 500, body: 'Server configuration error' };
+  }
+
+  const headers = event.headers || {};
+  const sig = headers['stripe-signature'] || headers['Stripe-Signature'];
+  if (!sig) {
+    return { statusCode: 400, body: 'Missing Stripe signature' };
+  }
 
   let stripeEvent;
+  let body = event.body;
+  if (event.isBase64Encoded) {
+    body = Buffer.from(event.body || '', 'base64');
+  }
 
   // Verify webhook signature
   try {
-    stripeEvent = stripe.webhooks.constructEvent(event.body, sig, webhookSecret);
+    stripeEvent = stripe.webhooks.constructEvent(body, sig, webhookSecret);
   } catch (err) {
-    console.error(' Webhook signature verification failed:', err.message);
+    console.error('Webhook signature verification failed:', err.message);
     return { statusCode: 400, body: `Webhook Error: ${err.message}` };
   }
 
   // Handle different event types
   switch (stripeEvent.type) {
-    case 'checkout.session.completed':
+    case 'checkout.session.completed': {
       const session = stripeEvent.data.object;
+      const customerDetails = session.customer_details || {};
+      const currencyCode = (session.currency || 'USD').toUpperCase();
+      const amountDisplay = formatAmount(session.amount_total, currencyCode);
+      const safeSessionId = escapeHtml(session.id || '');
+      const safeCustomerName = escapeHtml(customerDetails.name || 'Valued Customer');
+      const safeCustomerEmail = escapeHtml(customerDetails.email || 'Not provided');
+      const safeAmount = escapeHtml(amountDisplay);
+      const orderDate = escapeHtml(new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' }));
       
-      console.log(' Payment successful!');
-      console.log('Order ID:', session.id);
-      console.log('Customer:', session.customer_details.email);
-      console.log('Amount:', session.amount_total / 100);
+      console.log('Payment successful!');
+      console.log('Order ID:', safeSessionId);
+      console.log('Customer:', customerDetails.email);
+      console.log('Amount:', amountDisplay);
       
       // Send confirmation email to customer
       try {
-        await resend.emails.send({
-          from: 'Lyrion Atelier <orders@lyrionatelier.com>',
-          to: session.customer_details.email,
-          subject: ' Your Lyrion Atelier Order Confirmed!',
-          html: `
+        if (!resend) {
+          console.error('Resend not configured. Skipping customer email.');
+        } else if (!customerDetails.email) {
+          console.error('Customer email missing. Skipping customer email.');
+        } else {
+          await resend.emails.send({
+            from: 'Lyrion Atelier <orders@lyrionatelier.com>',
+            to: customerDetails.email,
+            subject: 'Your Lyrion Atelier Order Confirmed!',
+            html: `
           <!DOCTYPE html>
           <html>
           <head>
@@ -63,16 +116,16 @@ exports.handler = async (event) => {
           <body>
           <div class="container">
           <div class="header">
-          <h1>Thank You! </h1>
+          <h1>Thank You!</h1>
           <p>Your order has been confirmed</p>
           </div>
           
           <div class="order-box">
           <h2>Order Details</h2>
-          <div class="order-detail"><strong>Order ID:</strong> ${session.id}</div>
-          <div class="order-detail"><strong>Customer:</strong> ${session.customer_details.name || 'Valued Customer'}</div>
-          <div class="order-detail"><strong>Email:</strong> ${session.customer_details.email}</div>
-          <div class="order-detail"><strong>Amount Paid:</strong> $${(session.amount_total / 100).toFixed(2)} USD</div>
+          <div class="order-detail"><strong>Order ID:</strong> ${safeSessionId}</div>
+          <div class="order-detail"><strong>Customer:</strong> ${safeCustomerName}</div>
+          <div class="order-detail"><strong>Email:</strong> ${safeCustomerEmail}</div>
+          <div class="order-detail"><strong>Amount Paid:</strong> ${safeAmount}</div>
           <div class="order-detail"><strong>Payment Status:</strong> <span class="status-badge">Confirmed</span></div>
           </div>
           
@@ -95,27 +148,36 @@ exports.handler = async (event) => {
           </body>
           </html>
           `
-        });
-        
-        console.log(' Customer confirmation email sent to:', session.customer_details.email);
+          });
+          
+          console.log('Customer confirmation email sent to:', customerDetails.email);
+        }
         
       } catch (emailError) {
-        console.error(' Failed to send customer email:', emailError);
+        console.error('Failed to send customer email:', emailError);
       }
       
       // Send notification email to shop owner
       try {
-        await resend.emails.send({
-          from: 'Lyrion Atelier <orders@lyrionatelier.com>',
-          to: 'admin@lyrionatelier.com',
-          subject: ' New Order Received - Lyrion Atelier',
-          html: `
+        if (!resend) {
+          console.error('Resend not configured. Skipping admin email.');
+        } else {
+          const paymentIntentId = session.payment_intent ? encodeURIComponent(session.payment_intent) : '';
+          const paymentUrl = paymentIntentId
+            ? `https://dashboard.stripe.com/payments/${paymentIntentId}`
+            : 'https://dashboard.stripe.com/payments';
+
+          await resend.emails.send({
+            from: 'Lyrion Atelier <orders@lyrionatelier.com>',
+            to: 'admin@lyrionatelier.com',
+            subject: 'New Order Received - Lyrion Atelier',
+            html: `
           <!DOCTYPE html>
           <html>
           <head>
           <style>
           body { font-family: Arial, sans-serif; padding: 20px; background-color: #f5f5f5; }
-          .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2 4px rgba(0,0,0,0.1); }
+          .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
           h2 { color: #10b981; margin-top: 0; }
           .alert-box { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; margin: 20px 0; border-radius: 4px; }
           .detail-row { padding: 8px 0; border-bottom: 1px solid #e5e7eb; }
@@ -131,78 +193,80 @@ exports.handler = async (event) => {
           </head>
           <body>
           <div class="container">
-          <h2> New Order Alert!</h2>
+          <h2>New Order Alert!</h2>
           
           <div class="alert-box">
-          <strong> Payment Received:</strong> $${(session.amount_total / 100).toFixed(2)} USD
+          <strong>Payment Received:</strong> ${safeAmount}
           </div>
           
           <h3>Order Information</h3>
           <div class="detail-row">
           <span class="label">Order ID:</span>
-          <span class="value">${session.id}</span>
+          <span class="value">${safeSessionId}</span>
           </div>
           <div class="detail-row">
           <span class="label">Customer Name:</span>
-          <span class="value">${session.customer_details.name || 'Not provided'}</span>
+          <span class="value">${safeCustomerName}</span>
           </div>
           <div class="detail-row">
           <span class="label">Customer Email:</span>
-          <span class="value">${session.customer_details.email}</span>
+          <span class="value">${safeCustomerEmail}</span>
           </div>
           <div class="detail-row">
           <span class="label">Amount Paid:</span>
-          <span class="value">$${(session.amount_total / 100).toFixed(2)} USD</span>
+          <span class="value">${safeAmount}</span>
           </div>
           <div class="detail-row">
           <span class="label">Payment Status:</span>
-          <span class="value" style="color: #10b981; font-weight: 600;"> PAID</span>
+          <span class="value" style="color: #10b981; font-weight: 600;">PAID</span>
           </div>
           <div class="detail-row">
           <span class="label">Order Date:</span>
-          <span class="value">${new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })}</span>
+          <span class="value">${orderDate}</span>
           </div>
           
           <div class="action-section">
-          <h3> Action Required:</h3>
+          <h3>Action Required:</h3>
           <div class="action-list">
           <ul>
-          <li><strong>If Oracle Reading:</strong> Create and send personalized PDF within 3-5 business days to ${session.customer_details.email}</li>
+          <li><strong>If Oracle Reading:</strong> Create and send personalized PDF within 3-5 business days to ${safeCustomerEmail}</li>
           <li><strong>If Physical Product:</strong> Create order in Printful and update customer with tracking info</li>
           <li><strong>Customer Confirmation:</strong> Customer has already received automated confirmation email</li>
           </ul>
           </div>
           </div>
           
-          <a href="https://dashboard.stripe.com/payments/${session.payment_intent}" class="btn">
+          <a href="${paymentUrl}" class="btn">
           View in Stripe Dashboard →
           </a>
           </div>
           </body>
           </html>
           `
-        });
-        
-        console.log(' Admin notification email sent to: admin@lyrionatelier.com');
+          });
+          
+          console.log('Admin notification email sent to: admin@lyrionatelier.com');
+        }
         
       } catch (emailError) {
-        console.error(' Failed to send admin email:', emailError);
+        console.error('Failed to send admin email:', emailError);
       }
       
       break;
+    }
 
     case 'payment_intent.succeeded':
       const paymentIntent = stripeEvent.data.object;
-      console.log(' PaymentIntent succeeded:', paymentIntent.id);
+      console.log('PaymentIntent succeeded:', paymentIntent.id);
       break;
 
     case 'payment_intent.payment_failed':
       const failedPayment = stripeEvent.data.object;
-      console.error(' Payment failed:', failedPayment.id);
+      console.error('Payment failed:', failedPayment.id);
       break;
 
     default:
-      console.log(` Unhandled event type: ${stripeEvent.type}`);
+      console.log(`Unhandled event type: ${stripeEvent.type}`);
   }
 
   return {
