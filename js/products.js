@@ -677,7 +677,7 @@ function displayOracleReadings() {
       <div class="oracle-price">$${reading.price.toFixed(2)}</div>
       <div class="button-row tight">
         <a class="btn btn-outline" href="contact.html">Ask the oracle</a>
-        <button class="btn btn-primary" data-product="${reading.key}" aria-label="Book ${reading.name}">Book</button>
+        <button class="btn btn-primary book-reading-btn" data-product="${reading.key}" aria-label="Book ${reading.name}">Book</button>
       </div>
     `;
     oracleGrid.appendChild(oracleCard);
