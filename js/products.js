@@ -614,10 +614,52 @@ function displayOracleReadings() {
   const oracleGrid = document.getElementById('oracle-grid');
   if (!oracleGrid) return;
 
+  const oracleProducts = [
+    {
+      key: 'natal-chart',
+      name: 'Natal Chart Blueprint - Oracle Reading',
+      price: 70.00,
+      description: 'Foundational chart read with practical activations',
+      image: 'images/oracle/natal-chart-blueprint-cover.png'
+    },
+    {
+      key: 'solar-return',
+      name: 'Solar Return Reading - Oracle Reading',
+      price: 58.00,
+      description: 'Birthday-year forecast covering themes and opportunities',
+      image: 'images/oracle/solar-return-reading-cover.png'
+    },
+    {
+      key: 'life-path',
+      name: 'Life Path Reading - Oracle Reading',
+      price: 50.00,
+      description: 'Identify your current chapter and its lessons',
+      image: 'images/oracle/life-path-reading-cover.png'
+    },
+    {
+      key: 'relationship',
+      name: 'Relationship Synastry - Oracle Reading',
+      price: 88.00,
+      description: 'Compatibility and dynamics between two charts',
+      image: 'images/oracle/relationship-synastry-cover.png'
+    },
+    {
+      key: 'career',
+      name: 'Career & Purpose Reading - Oracle Reading',
+      price: 75.00,
+      description: 'Vocational guidance and life purpose insights',
+      image: 'images/oracle/career-path-compass-oracle-card.png'
+    },
+    {
+      key: 'cosmic-blueprint',
+      name: 'Full Cosmic Blueprint - Oracle Reading',
+      price: 155.00,
+      description: 'Comprehensive analysis combining all aspects',
+      image: 'images/oracle/the-oracles-lantern-cover.png'
+    }
+  ];
+
   oracleGrid.innerHTML = '';
-  const oracleProducts = Array.isArray(products)
-    ? products.filter(p => p.category === 'oracle' && p.name !== "The Oracle’s Lantern")
-    : [];
 
   oracleProducts.forEach((reading, index) => {
     const oracleCard = document.createElement('div');
@@ -635,7 +677,7 @@ function displayOracleReadings() {
       <div class="oracle-price">$${reading.price.toFixed(2)}</div>
       <div class="button-row tight">
         <a class="btn btn-outline" href="contact.html">Ask the oracle</a>
-        <button class="btn btn-primary" onclick="addToCart(${reading.id})" aria-label="Add ${reading.name} to cart">Book</button>
+        <button class="btn btn-primary" data-product="${reading.key}" aria-label="Book ${reading.name}">Book</button>
       </div>
     `;
     oracleGrid.appendChild(oracleCard);
