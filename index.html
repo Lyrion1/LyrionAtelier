@@ -123,5 +123,102 @@
       });
     });
   </script>
+
+  <div id="oracle-widget" class="oracle-widget">
+    <div class="oracle-widget-trigger" onclick="toggleOracleWidget()">
+      <span class="oracle-icon"> </span>
+      <span class="oracle-text">Free Reading</span>
+    </div>
+    
+    <div class="oracle-widget-panel" id="oracle-panel" style="display: none;">
+      <div class="oracle-header">
+        <h3> Your Cosmic Signature</h3>
+        <button class="oracle-close" onclick="toggleOracleWidget()">×</button>
+      </div>
+      
+      <div class="oracle-content">
+        <div class="oracle-intro" id="oracle-intro">
+          <p>The stars have a message for you. When were you born?</p>
+          <input type="date" id="birth-date" class="oracle-input" max="2010-12-31">
+          <button onclick="getReading()" class="oracle-submit">Reveal</button>
+        </div>
+        
+        <div class="oracle-loading" id="oracle-loading" style="display: none;">
+          <div class="oracle-spinner"></div>
+          <p>Consulting cosmos...</p>
+        </div>
+        
+        <div class="oracle-result" id="oracle-result" style="display: none;">
+          <div class="oracle-reading-text" id="reading-text"></div>
+          <div class="oracle-urgency" id="urgency-message"></div>
+          <div class="oracle-actions">
+            <button onclick="bookReading()" class="oracle-cta">Get Full Reading</button>
+            <button onclick="shareReading()" class="oracle-share">Share</button>
+          </div>
+          <button onclick="resetWidget()" class="oracle-reset">Try Another</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  let currentReading = null;
+
+  function toggleOracleWidget() {
+    const panel = document.getElementById('oracle-panel');
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  }
+
+  async function getReading() {
+    const birthDate = document.getElementById('birth-date').value;
+    if (!birthDate) { alert('Please enter your birth date'); return; }
+    
+    document.getElementById('oracle-intro').style.display = 'none';
+    document.getElementById('oracle-loading').style.display = 'block';
+    
+    try {
+      const response = await fetch('/.netlify/functions/oracle-ai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ birthDate })
+      });
+      
+      const data = await response.json();
+      currentReading = data;
+      
+      document.getElementById('oracle-loading').style.display = 'none';
+      document.getElementById('oracle-result').style.display = 'block';
+      document.getElementById('reading-text').innerHTML = `<div class="oracle-sign">${data.zodiacSign}</div><p>${data.reading}</p>`;
+      document.getElementById('urgency-message').innerHTML = data.urgencyMessage;
+    } catch (error) {
+      console.error('Error:', error);
+      document.getElementById('oracle-loading').style.display = 'none';
+      document.getElementById('oracle-intro').style.display = 'block';
+      alert('Please try again.');
+    }
+  }
+
+  function bookReading() {
+    window.location.href = currentReading ? `oracle.html#${currentReading.recommendedReading}` : 'oracle.html';
+  }
+
+  function shareReading() {
+    if (currentReading?.shareText) {
+      if (navigator.share) {
+        navigator.share({ title: 'Lyrion Atelier', text: currentReading.shareText, url: window.location.href });
+      } else {
+        navigator.clipboard.writeText(currentReading.shareText);
+        alert('Copied! Share on social media.');
+      }
+    }
+  }
+
+  function resetWidget() {
+    document.getElementById('oracle-result').style.display = 'none';
+    document.getElementById('oracle-intro').style.display = 'block';
+    document.getElementById('birth-date').value = '';
+    currentReading = null;
+  }
+  </script>
 </body>
 </html>
