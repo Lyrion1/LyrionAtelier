@@ -4,6 +4,7 @@
 [build]
   # Directory to serve files from
   publish = "."
+  functions = "netlify/functions"
   
   # Build command (if you add a build process later)
   # command = "npm run build"
@@ -97,3 +98,6 @@
 [build.environment]
   # Enable Netlify Forms
   NETLIFY_FORMS = "true"
+
+[functions]
+  node_bundler = "esbuild"

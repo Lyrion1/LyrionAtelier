@@ -1,47 +1,16 @@
 const Stripe = require('stripe');
 const { Resend } = require('resend');
-const resendApiKey = process.env.RESEND_API_KEY;
-let resend = null;
-let resendInitializationError = null;
-try {
-  if (resendApiKey) {
-    resend = new Resend(resendApiKey);
-  }
-} catch (err) {
-  console.error('Resend initialization failed:', err.message);
-  resendInitializationError = err;
-}
+
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-const adminNotificationEmail = 'info@lyrionatelier.com';
-const fromEmailAddress = 'Lyrion Atelier <orders@lyrionatelier.com>';
+const resendApiKey = process.env.RESEND_API_KEY;
+
+const stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 const zeroDecimalCurrencies = new Set([
   'BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'
 ]);
-let stripe = null;
-let stripeInitializationError = null;
-try {
-  stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
-} catch (err) {
-  console.error('Stripe initialization failed:', err.message);
-  stripeInitializationError = err;
-}
-// Explicit debug flag that is ignored in production
-const debugLoggingEnabled =
-  process.env.STRIPE_WEBHOOK_DEBUG === 'true' &&
-  process.env.NODE_ENV !== 'production';
-const logDebug = (message, value) => {
-  if (!debugLoggingEnabled) {
-    return;
-  }
-  if (typeof value === 'function') {
-    console.log(message, value());
-  } else if (typeof value !== 'undefined') {
-    console.log(message, value);
-  } else {
-    console.log(message);
-  }
-};
+
 const escapeHtml = (value = '') =>
   String(value)
     .replace(/&/g, '&amp;')
@@ -49,35 +18,42 @@ const escapeHtml = (value = '') =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+
+const formatAmount = (amountTotal, currencyCode = 'USD') => {
+  const normalizedCurrency = currencyCode.toUpperCase();
+  const isZeroDecimal = zeroDecimalCurrencies.has(normalizedCurrency);
+  if (typeof amountTotal !== 'number') {
+    return `0.00 ${normalizedCurrency}`;
+  }
+  const divisor = isZeroDecimal ? 1 : 100;
+  const formattedAmount = (amountTotal / divisor).toFixed(isZeroDecimal ? 0 : 2);
+  return `${formattedAmount} ${normalizedCurrency}`;
+};
+
 exports.handler = async (event) => {
-  // Only allow POST
+  // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  if (stripeInitializationError || !stripe || !webhookSecret) {
-    console.error('Missing Stripe configuration.', stripeInitializationError);
+  if (!stripe || !webhookSecret) {
+    console.error('Missing Stripe configuration.');
     return { statusCode: 500, body: 'Server configuration error' };
   }
 
   const headers = event.headers || {};
   const sig = headers['stripe-signature'] || headers['Stripe-Signature'];
   if (!sig) {
-    console.error('Missing Stripe signature header.');
-    return { statusCode: 400, body: 'Missing Stripe signature header' };
+    return { statusCode: 400, body: 'Missing Stripe signature' };
   }
+
+  let stripeEvent;
   let body = event.body;
   if (event.isBase64Encoded) {
     body = Buffer.from(event.body || '', 'base64');
   }
-  const isValidBody = typeof body === 'string' || Buffer.isBuffer(body);
-  if (!isValidBody) {
-    console.error('Invalid webhook payload type.');
-    return { statusCode: 400, body: 'Invalid webhook payload' };
-  }
 
-  let stripeEvent;
-
+  // Verify webhook signature
   try {
     stripeEvent = stripe.webhooks.constructEvent(body, sig, webhookSecret);
   } catch (err) {
@@ -85,141 +61,208 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: `Webhook Error: ${err.message}` };
   }
 
-  // Handle the event
+  // Handle different event types
   switch (stripeEvent.type) {
-    case 'checkout.session.completed':
+    case 'checkout.session.completed': {
       const session = stripeEvent.data.object;
-      console.log('✅ checkout.session.completed event received');
-      logDebug('Checkout session ID:', session.id);
-      logDebug('Customer associated:', () => Boolean(session.customer));
-      logDebug('Amount total (minor units):', session.amount_total);
-      logDebug('Currency:', session.currency);
-
-      const customerEmail = session?.customer_details?.email;
-      const currencyCode = typeof session.currency === 'string' ? session.currency.toUpperCase() : 'USD';
-      const isZeroDecimal = zeroDecimalCurrencies.has(currencyCode);
-      const amountNumeric =
-        typeof session.amount_total === 'number'
-          ? isZeroDecimal
-            ? session.amount_total
-            : session.amount_total / 100
-          : null;
-      const formattedAmount =
-        typeof amountNumeric === 'number'
-          ? `${amountNumeric.toFixed(isZeroDecimal ? 0 : 2)} ${currencyCode}`
-          : `0.00 ${currencyCode}`;
+      const customerDetails = session.customer_details || {};
+      const currencyCode = (session.currency || 'USD').toUpperCase();
+      const amountDisplay = formatAmount(session.amount_total, currencyCode);
       const safeSessionId = escapeHtml(session.id || '');
-      const safeAmount = escapeHtml(formattedAmount);
-      const safeCustomerEmail = escapeHtml(customerEmail ?? 'Not provided');
-      const safeCustomerName = escapeHtml(session?.customer_details?.name || 'Not provided');
-
-      if (!resendApiKey) {
-        console.error('Resend API key missing. Skipping email notifications.');
-      } else if (!resend) {
-        console.error('Resend client not configured. Skipping email notifications.', resendInitializationError);
-      } else {
-        if (customerEmail) {
-          try {
-            await resend.emails.send({
-              from: fromEmailAddress,
-              to: customerEmail,
-              subject: 'Your Lyrion Atelier Order Confirmed!',
-              html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0f172a; color: #fff; padding: 40px; border-radius: 16px;">
-                  <div style="text-align: center; margin-bottom: 32px;">
-                    <h1 style="color: #fbbf24; font-size: 32px; margin-bottom: 8px;">Thank You!</h1>
-                    <p style="color: rgba(255,255,255,0.8); font-size: 18px;">Your order has been confirmed</p>
-                  </div>
-
-                  <div style="background: rgba(139, 92, 246, 0.1); padding: 24px; border-radius: 12px; border: 1px solid rgba(251, 191, 36, 0.2); margin-bottom: 24px;">
-                    <h2 style="color: #fbbf24; font-size: 20px; margin-bottom: 16px;">Order Details</h2>
-                    <p style="margin: 8px 0;"><strong>Order ID:</strong> ${safeSessionId}</p>
-                    <p style="margin: 8px 0;"><strong>Amount Paid:</strong> ${safeAmount}</p>
-                    <p style="margin: 8px 0;"><strong>Payment Status:</strong> <span style="color: #10b981;">Confirmed</span></p>
-                  </div>
-
-                  <div style="margin-bottom: 24px;">
-                    <h3 style="color: #fbbf24; font-size: 18px; margin-bottom: 12px;">What happens next?</h3>
-                    <ul style="line-height: 1.8; color: rgba(255,255,255,0.9);">
-                      <li>If you ordered an oracle reading, you'll receive your personalized PDF within 3-5 business days</li>
-                      <li>If you ordered merchandise, we'll send tracking info once your item ships</li>
-                      <li>Check your email for updates</li>
-                    </ul>
-                  </div>
-
-                  <div style="text-align: center; padding-top: 24px; border-top: 1px solid rgba(251, 191, 36, 0.2);">
-                    <p style="color: rgba(255,255,255,0.7); font-size: 14px;">Questions? Reply to this email or visit our <a href="https://lyrionatelier.com/contact.html" style="color: #fbbf24;">contact page</a></p>
-                  </div>
-                </div>
-              `
-            });
-
-            console.log('✅ Customer confirmation email sent');
-          } catch (emailError) {
-            console.error('❌ Failed to send customer email:', emailError);
-          }
+      const safeCustomerName = escapeHtml(customerDetails.name || 'Valued Customer');
+      const safeCustomerEmail = escapeHtml(customerDetails.email || 'Not provided');
+      const safeAmount = escapeHtml(amountDisplay);
+      const orderDate = escapeHtml(new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' }));
+      
+      console.log('Payment successful!');
+      console.log('Order ID:', safeSessionId);
+      console.log('Customer:', customerDetails.email);
+      console.log('Amount:', amountDisplay);
+      
+      // Send confirmation email to customer
+      try {
+        if (!resend) {
+          console.error('Resend not configured. Skipping customer email.');
+        } else if (!customerDetails.email) {
+          console.error('Customer email missing. Skipping customer email.');
         } else {
-          console.error('Customer email missing; skipping confirmation email.');
+          await resend.emails.send({
+            from: 'Lyrion Atelier <orders@lyrionatelier.com>',
+            to: customerDetails.email,
+            subject: 'Your Lyrion Atelier Order Confirmed!',
+            html: `
+          <!DOCTYPE html>
+          <html>
+          <head>
+          <style>
+          body { font-family: Arial, sans-serif; background-color: #0f172a; color: #ffffff; margin: 0; padding: 0; }
+          .container { max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(99, 102, 241, 0.05)); border-radius: 16px; padding: 40px; }
+          .header { text-align: center; margin-bottom: 32px; }
+          .header h1 { color: #fbbf24; font-size: 32px; margin: 0 0 8px 0; }
+          .header p { color: rgba(255,255,255,0.8); font-size: 18px; margin: 0; }
+          .order-box { background: rgba(139, 92, 246, 0.15); padding: 24px; border-radius: 12px; border: 1px solid rgba(251, 191, 36, 0.2); margin: 24px 0; }
+          .order-box h2 { color: #fbbf24; font-size: 20px; margin: 0 0 16px 0; }
+          .order-detail { margin: 8px 0; line-height: 1.6; }
+          .order-detail strong { color: #fbbf24; }
+          .status-badge { display: inline-block; background: #10b981; color: white; padding: 4px 12px; border-radius: 12px; font-size: 14px; font-weight: 600; }
+          .next-steps { margin: 24px 0; }
+          .next-steps h3 { color: #fbbf24; font-size: 18px; margin-bottom: 12px; }
+          .next-steps ul { line-height: 1.8; color: rgba(255,255,255,0.9); padding-left: 20px; }
+          .footer { text-align: center; padding-top: 24px; border-top: 1px solid rgba(251, 191, 36, 0.2); margin-top: 32px; }
+          .footer p { color: rgba(255,255,255,0.7); font-size: 14px; }
+          .footer a { color: #fbbf24; text-decoration: none; }
+          </style>
+          </head>
+          <body>
+          <div class="container">
+          <div class="header">
+          <h1>Thank You!</h1>
+          <p>Your order has been confirmed</p>
+          </div>
+          
+          <div class="order-box">
+          <h2>Order Details</h2>
+          <div class="order-detail"><strong>Order ID:</strong> ${safeSessionId}</div>
+          <div class="order-detail"><strong>Customer:</strong> ${safeCustomerName}</div>
+          <div class="order-detail"><strong>Email:</strong> ${safeCustomerEmail}</div>
+          <div class="order-detail"><strong>Amount Paid:</strong> ${safeAmount}</div>
+          <div class="order-detail"><strong>Payment Status:</strong> <span class="status-badge">Confirmed</span></div>
+          </div>
+          
+          <div class="next-steps">
+          <h3>What happens next?</h3>
+          <ul>
+          <li><strong>Oracle Readings:</strong> You'll receive your personalized PDF reading within 3-5 business days at this email address</li>
+          <li><strong>Merchandise:</strong> We'll send you tracking information once your item ships (typically 3-7 business days)</li>
+          <li><strong>Questions?</strong> Simply reply to this email - we're here to help!</li>
+          </ul>
+          </div>
+          
+          <div class="footer">
+          <p>Questions? Contact us at <a href="mailto:admin@lyrionatelier.com">admin@lyrionatelier.com</a></p>
+          <p style="margin-top: 16px; color: rgba(255,255,255,0.5); font-size: 12px;">
+          Lyrion Atelier | Celestial guidance and astrology-inspired fashion
+          </p>
+          </div>
+          </div>
+          </body>
+          </html>
+          `
+          });
+          
+          console.log('Customer confirmation email sent to:', customerDetails.email);
         }
-
-        if (adminNotificationEmail) {
-          try {
-            const paymentIntentId =
-              typeof session.payment_intent === 'string' && session.payment_intent
-                ? session.payment_intent
-                : null;
-            const checkoutSessionId = typeof session.id === 'string' ? session.id : '';
-            const stripeDashboardUrl = paymentIntentId
-              ? `https://dashboard.stripe.com/payments/${encodeURIComponent(paymentIntentId)}`
-              : checkoutSessionId
-                ? `https://dashboard.stripe.com/checkout/sessions/${encodeURIComponent(checkoutSessionId)}`
-                : 'https://dashboard.stripe.com/checkout/sessions';
-
-            await resend.emails.send({
-              from: fromEmailAddress,
-              to: adminNotificationEmail,
-              subject: 'New Order Received!',
-              html: `
-                <div style="font-family: Arial, sans-serif; padding: 20px;">
-                  <h2>New Order Alert!</h2>
-                  <p><strong>Order ID:</strong> ${safeSessionId}</p>
-                  <p><strong>Customer Email:</strong> ${safeCustomerEmail}</p>
-                  <p><strong>Customer Name:</strong> ${safeCustomerName}</p>
-                  <p><strong>Amount:</strong> ${safeAmount}</p>
-                  <p><strong>Payment Status:</strong> Paid</p>
-
-                  <hr>
-
-                  <p><strong>Action Required:</strong></p>
-                  <ul>
-                    <li>If oracle reading: Create and send PDF within 3-5 business days</li>
-                    <li>If physical product: Create order in Printful</li>
-                  </ul>
-
-                  <p><a href="${stripeDashboardUrl}">View in Stripe Dashboard</a></p>
-                </div>
-              `
-            });
-
-            console.log('✅ Admin notification email sent');
-          } catch (emailError) {
-            console.error('❌ Failed to send admin email:', emailError);
-          }
-        }
+        
+      } catch (emailError) {
+        console.error('Failed to send customer email:', emailError);
       }
+      
+      // Send notification email to shop owner
+      try {
+        if (!resend) {
+          console.error('Resend not configured. Skipping admin email.');
+        } else {
+          const paymentIntentId = session.payment_intent ? encodeURIComponent(session.payment_intent) : '';
+          const paymentUrl = paymentIntentId
+            ? `https://dashboard.stripe.com/payments/${paymentIntentId}`
+            : 'https://dashboard.stripe.com/payments';
 
+          await resend.emails.send({
+            from: 'Lyrion Atelier <orders@lyrionatelier.com>',
+            to: 'admin@lyrionatelier.com',
+            subject: 'New Order Received - Lyrion Atelier',
+            html: `
+          <!DOCTYPE html>
+          <html>
+          <head>
+          <style>
+          body { font-family: Arial, sans-serif; padding: 20px; background-color: #f5f5f5; }
+          .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+          h2 { color: #10b981; margin-top: 0; }
+          .alert-box { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; margin: 20px 0; border-radius: 4px; }
+          .detail-row { padding: 8px 0; border-bottom: 1px solid #e5e7eb; }
+          .detail-row:last-child { border-bottom: none; }
+          .label { font-weight: 600; color: #374151; display: inline-block; width: 140px; }
+          .value { color: #1f2937; }
+          .action-section { margin-top: 24px; padding-top: 24px; border-top: 2px solid #e5e7eb; }
+          .action-section h3 { color: #ef4444; font-size: 16px; }
+          .action-list { background: #fef2f2; padding: 16px; border-radius: 4px; margin-top: 12px; }
+          .action-list li { margin: 8px 0; color: #991b1b; }
+          .btn { display: inline-block; background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin-top: 16px; }
+          </style>
+          </head>
+          <body>
+          <div class="container">
+          <h2>New Order Alert!</h2>
+          
+          <div class="alert-box">
+          <strong>Payment Received:</strong> ${safeAmount}
+          </div>
+          
+          <h3>Order Information</h3>
+          <div class="detail-row">
+          <span class="label">Order ID:</span>
+          <span class="value">${safeSessionId}</span>
+          </div>
+          <div class="detail-row">
+          <span class="label">Customer Name:</span>
+          <span class="value">${safeCustomerName}</span>
+          </div>
+          <div class="detail-row">
+          <span class="label">Customer Email:</span>
+          <span class="value">${safeCustomerEmail}</span>
+          </div>
+          <div class="detail-row">
+          <span class="label">Amount Paid:</span>
+          <span class="value">${safeAmount}</span>
+          </div>
+          <div class="detail-row">
+          <span class="label">Payment Status:</span>
+          <span class="value" style="color: #10b981; font-weight: 600;">PAID</span>
+          </div>
+          <div class="detail-row">
+          <span class="label">Order Date:</span>
+          <span class="value">${orderDate}</span>
+          </div>
+          
+          <div class="action-section">
+          <h3>Action Required:</h3>
+          <div class="action-list">
+          <ul>
+          <li><strong>If Oracle Reading:</strong> Create and send personalized PDF within 3-5 business days to ${safeCustomerEmail}</li>
+          <li><strong>If Physical Product:</strong> Create order in Printful and update customer with tracking info</li>
+          <li><strong>Customer Confirmation:</strong> Customer has already received automated confirmation email</li>
+          </ul>
+          </div>
+          </div>
+          
+          <a href="${paymentUrl}" class="btn">
+          View in Stripe Dashboard →
+          </a>
+          </div>
+          </body>
+          </html>
+          `
+          });
+          
+          console.log('Admin notification email sent to: admin@lyrionatelier.com');
+        }
+        
+      } catch (emailError) {
+        console.error('Failed to send admin email:', emailError);
+      }
+      
       break;
+    }
 
     case 'payment_intent.succeeded':
       const paymentIntent = stripeEvent.data.object;
-      console.log('✅ payment_intent.succeeded event received');
-      logDebug('PaymentIntent ID:', paymentIntent.id);
+      console.log('PaymentIntent succeeded:', paymentIntent.id);
       break;
 
     case 'payment_intent.payment_failed':
       const failedPayment = stripeEvent.data.object;
-      console.error('❌ payment_intent.payment_failed event received');
-      logDebug('PaymentIntent ID:', failedPayment.id);
+      console.error('Payment failed:', failedPayment.id);
       break;
 
     default:
