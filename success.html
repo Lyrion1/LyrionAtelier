@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmed - Lyrion Atelier</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" href="images/favicon/favicon.png">
+<style>
+.success-container {
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 40px 20px;
+background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.success-card {
+max-width: 600px;
+background: rgba(15, 23, 42, 0.8);
+border: 1px solid rgba(251, 191, 36, 0.3);
+border-radius: 20px;
+padding: 60px 40px;
+text-align: center;
+backdrop-filter: blur(10px);
+}
+
+.success-icon {
+width: 80px;
+height: 80px;
+background: linear-gradient(135deg, #10b981, #059669);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+margin: 0 auto 30px;
+animation: scaleIn 0.5s ease-out;
+}
+
+.success-icon::after {
+content: "✓";
+font-size: 48px;
+color: white;
+font-weight: bold;
+}
+
+@keyframes scaleIn {
+from { transform: scale(0); }
+to { transform: scale(1); }
+}
+
+.success-title {
+color: #fbbf24;
+font-size: 36px;
+font-family: 'Cinzel', serif;
+margin: 0 0 16px 0;
+}
+
+.success-message {
+color: rgba(255, 255, 255, 0.9);
+font-size: 18px;
+line-height: 1.6;
+margin: 0 0 30px 0;
+}
+
+.success-details {
+background: rgba(139, 92, 246, 0.1);
+border: 1px solid rgba(251, 191, 36, 0.2);
+border-radius: 12px;
+padding: 24px;
+margin: 30px 0;
+text-align: left;
+}
+
+.success-details h3 {
+color: #fbbf24;
+font-size: 18px;
+margin: 0 0 16px 0;
+}
+
+.success-details ul {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.success-details li {
+color: rgba(255, 255, 255, 0.8);
+padding: 8px 0;
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.success-details li:last-child {
+border-bottom: none;
+}
+
+.success-actions {
+display: flex;
+gap: 16px;
+margin-top: 30px;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+.btn-primary {
+padding: 14px 32px;
+background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(139, 92, 246, 0.2));
+border: 1.5px solid rgba(139, 92, 246, 0.5);
+border-radius: 10px;
+color: #a78bfa;
+font-size: 16px;
+font-weight: 600;
+text-decoration: none;
+transition: all 0.3s ease;
+display: inline-block;
+}
+
+.btn-primary:hover {
+background: linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(139, 92, 246, 0.3));
+transform: translateY(-2px);
+box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+}
+
+.btn-secondary {
+padding: 14px 32px;
+background: rgba(251, 191, 36, 0.1);
+border: 1.5px solid rgba(251, 191, 36, 0.4);
+border-radius: 10px;
+color: #fbbf24;
+font-size: 16px;
+font-weight: 600;
+text-decoration: none;
+transition: all 0.3s ease;
+display: inline-block;
+}
+
+.btn-secondary:hover {
+background: rgba(251, 191, 36, 0.2);
+transform: translateY(-2px);
+box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
+}
+</style>
+</head>
+<body>
+<div class="success-container">
+<div class="success-card">
+<div class="success-icon"></div>
+<h1 class="success-title">Order Confirmed!</h1>
+<p class="success-message">
+Thank you for your celestial journey with Lyrion Atelier. Your order has been confirmed and you'll receive a confirmation email shortly.
+</p>
+
+<div class="success-details">
+<h3>What happens next?</h3>
+<ul>
+<li><strong>📧 Confirmation Email:</strong> Check your inbox for order details</li>
+<li><strong>🔮 Oracle Readings:</strong> Delivered within 3-5 business days as a personalized PDF</li>
+<li><strong>📦 Merchandise:</strong> Tracking information sent once shipped (3-7 business days)</li>
+<li><strong>💬 Questions?:</strong> Reply to your confirmation email anytime</li>
+</ul>
+</div>
+
+<div class="success-actions">
+<a href="index.html" class="btn-primary">Return Home</a>
+<a href="oracle.html" class="btn-secondary">Book Another Reading</a>
+</div>
+</div>
+</div>
+</body>
+</html>
