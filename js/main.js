@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Initialize "Skip to Content" link
   initSkipToContent();
+
+  // Initialize navigation loading overlay
+  initNavigationLoading();
 });
 
 /**
@@ -321,6 +324,48 @@ function initSmoothScroll() {
       }
     });
   });
+}
+
+/**
+ * Navigation Loading Overlay
+ * Shows a loading spinner when navigating between pages
+ */
+function initNavigationLoading() {
+  const links = document.querySelectorAll('a');
+  const overlay = createLoadingOverlay();
+
+  function shouldShowOverlay(link, event) {
+    const href = link.getAttribute('href');
+    const target = link.getAttribute('target');
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return false;
+    if (target === '_blank') return false;
+    if (event && (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0)) return false;
+    return true;
+  }
+
+  links.forEach(link => {
+    link.addEventListener('click', function(e) {
+      if (shouldShowOverlay(link, e)) {
+        overlay.classList.add('active');
+      }
+    });
+  });
+
+  window.addEventListener('beforeunload', function() {
+    overlay.classList.add('active');
+  });
+}
+
+function createLoadingOverlay() {
+  let overlay = document.getElementById('loading-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'loading-overlay';
+    overlay.className = 'loading-overlay';
+    overlay.innerHTML = '<div class="loading-spinner" aria-hidden="true"></div>';
+    document.body.appendChild(overlay);
+  }
+  return overlay;
 }
 
 // Load and display sample events
