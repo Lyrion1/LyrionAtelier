@@ -40,7 +40,11 @@ function loadProduct() {
   }
 
   const addBtn = document.getElementById('add-to-cart-btn');
-  if (addBtn && typeof addToCart === 'function') {
+  const canAddToCart = typeof addToCart === 'function';
+  if (!canAddToCart) {
+    console.error('addToCart is not available on the product page.');
+  }
+  if (addBtn && canAddToCart) {
     addBtn.addEventListener('click', () => addToCart(product.id));
   }
 }

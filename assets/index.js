@@ -14,6 +14,10 @@ function renderFeaturedProducts() {
   const featured = products.slice(0, 4);
   const grid = document.getElementById('featured-grid');
   if (!grid) return;
+  const canAddToCart = typeof addToCart === 'function';
+  if (!canAddToCart) {
+    console.error('addToCart is not available; cannot bind featured product buttons.');
+  }
 
   featured.forEach(product => {
     const card = document.createElement('div');
@@ -35,7 +39,7 @@ function renderFeaturedProducts() {
     grid.appendChild(card);
 
     const addButton = card.querySelector('.add-to-cart-btn');
-    if (addButton && typeof addToCart === 'function') {
+    if (addButton && canAddToCart) {
       addButton.addEventListener('click', () => addToCart(product.id));
     }
   });
