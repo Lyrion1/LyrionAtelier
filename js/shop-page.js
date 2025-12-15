@@ -14,19 +14,20 @@ let selectedVariant = null;
 
 function renderProducts() {
   const grid = document.getElementById('products-grid-local');
-  if (!grid) return;
+  if (!grid || !Array.isArray(window.products)) return;
   const category = document.getElementById('filter-category')?.value || 'all';
   const zodiac = document.getElementById('filter-zodiac')?.value || 'all';
   grid.innerHTML = '';
 
-  products
-    .filter(p => (category === 'all' || p.category === category) && (zodiac === 'all' || p.zodiac === zodiac))
+  window.products
+    .filter(p => p.category !== 'oracle' && (category === 'all' || p.category === category) && (zodiac === 'all' || p.zodiac === zodiac))
     .forEach(product => {
       const card = document.createElement('div');
-      card.className = 'product-card';
+      card.className = 'card product-card';
+      card.dataset.kind = 'product';
 
       const imageWrapper = document.createElement('div');
-      imageWrapper.className = 'product-image';
+      imageWrapper.className = 'card__image';
       if (product.image) {
         const img = document.createElement('img');
         img.src = product.image;
@@ -41,17 +42,19 @@ function renderProducts() {
       }
 
       const infoWrapper = document.createElement('div');
+      infoWrapper.className = 'card__body';
       const title = document.createElement('h3');
+      title.className = 'card__title';
       title.textContent = product.name;
       const desc = document.createElement('p');
-      desc.className = 'muted';
+      desc.className = 'card__desc muted';
       desc.textContent = product.description;
       const price = document.createElement('p');
-      price.className = 'price';
+      price.className = 'card__price price';
       price.textContent = `$${product.price.toFixed(2)}`;
 
       const buttonRow = document.createElement('div');
-      buttonRow.className = 'button-row tight';
+      buttonRow.className = 'card__actions button-row tight';
 
       const viewLink = document.createElement('a');
       viewLink.className = 'btn btn-outline';
@@ -75,7 +78,7 @@ function renderProducts() {
 // Load products from Printful
 async function loadPrintfulProducts() {
   const loadingEl = document.getElementById('products-loading');
-  const gridEl = document.getElementById('products-grid');
+  const gridEl = document.getElementById('shopGrid');
   const errorEl = document.getElementById('products-error');
   
   try {
@@ -92,18 +95,21 @@ async function loadPrintfulProducts() {
         const safeProductId = escapeHtml(String(product.id || ''));
         const cardButton = document.createElement('button');
         cardButton.type = 'button';
-        cardButton.className = 'product-card product-card-button';
+        cardButton.className = 'card product-card product-card-button';
         cardButton.setAttribute('aria-label', `View options for ${escapeHtml(product.name)}`);
         cardButton.dataset.productId = safeProductId;
+        cardButton.dataset.kind = 'product';
         cardButton.innerHTML = `
-          <div class="product-image">
-            <img src="${escapeHtml(product.thumbnail)}" alt="${escapeHtml(product.name)}" loading="lazy">
+          <div class="card__image">
+            <img src="${escapeHtml(product.thumbnail)}" alt="${escapeHtml(product.name)}" loading="lazy" decoding="async">
           </div>
-          <div class="product-info">
-            <h3>${escapeHtml(product.name)}</h3>
-            <p>${escapeHtml(product.description)}</p>
-            <div class="product-price">${escapeHtml(product.priceRange)}</div>
-            <button class="product-btn" type="button">View Options</button>
+          <div class="card__body">
+            <h3 class="card__title">${escapeHtml(product.name)}</h3>
+            <p class="card__desc">${escapeHtml(product.description)}</p>
+            <div class="card__price">${escapeHtml(product.priceRange)}</div>
+          </div>
+          <div class="card__actions">
+            <span class="product-btn btn btn-primary">View Options</span>
           </div>
         `;
         cardButton.addEventListener('click', () => openProductModal(product.id));
