@@ -173,7 +173,7 @@
       if (stripeState.stripeJsPromise) return stripeState.stripeJsPromise;
 
       stripeState.stripeJsPromise = new Promise((resolve, reject) => {
-        const existingScript = document.querySelector('script[src^="https://js.stripe.com/v3"]');
+        const existingScript = document.querySelector(`script[src="${STRIPE_JS_URL}"]`);
         const scriptEl = existingScript || document.createElement('script');
         const handleLoad = () => {
           if (window.Stripe) {
@@ -275,7 +275,7 @@
           }
 
           await ensureStripeJsLoaded();
-          const stripeInstance = stripeState.stripe || (window.Stripe ? window.Stripe(data.publishableKey) : null);
+          const stripeInstance = stripeState.stripe || window.Stripe(data.publishableKey);
           if (!stripeInstance) {
             throw new Error('Stripe.js not available.');
           }
