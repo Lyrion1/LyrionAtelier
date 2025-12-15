@@ -112,10 +112,17 @@ function shareReading() {
   if (currentReading?.shareText) {
     if (navigator.share) {
       navigator.share({ title: 'Lyrion Atelier', text: currentReading.shareText, url: window.location.href })
-        .catch(() => alert('Sharing failed. Please try again later.'));
+        .catch((error) => {
+          console.error('Sharing failed.', error);
+          alert('Sharing failed. Please try again later.');
+        });
     } else {
-      navigator.clipboard.writeText(currentReading.shareText);
-      alert('Copied! Share on social media.');
+      navigator.clipboard.writeText(currentReading.shareText)
+        .then(() => alert('Copied! Share on social media.'))
+        .catch((error) => {
+          console.error('Copy to clipboard failed.', error);
+          alert('Unable to copy the reading right now.');
+        });
     }
   }
 }

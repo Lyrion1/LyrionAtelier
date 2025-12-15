@@ -45,7 +45,7 @@ function loadProduct() {
     console.error('addToCart is not available on the product page.');
     return;
   }
-  if (addBtn && canAddToCart) {
+  if (addBtn) {
     addBtn.addEventListener('click', () => addToCart(product.id));
   }
 }
