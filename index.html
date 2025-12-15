@@ -13,12 +13,6 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-  </script>
 </head>
 <body>
   <a class="skip-to-content" href="#main-content">Skip to main content</a>
@@ -108,38 +102,8 @@
     </div>
   </footer>
 
-  <script src="js/products.js" defer></script>
-  <script src="js/cart.js" defer></script>
-  <script src="js/main.js" defer></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      updateCartCount();
-      const featured = products.slice(0, 4);
-      const grid = document.getElementById('featured-grid');
-      featured.forEach(product => {
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `
-          <div class="product-image">
-            ${product.image ? `<img src="${product.image}" alt="${product.name}" loading="lazy">` : `<div class="placeholder">✨</div>`}
-          </div>
-          <div>
-            <h3>${product.name}</h3>
-            <p class="muted">${product.description}</p>
-            <p class="price">$${product.price.toFixed(2)}</p>
-          </div>
-          <div class="button-row tight">
-            <a class="btn btn-outline" href="product.html?id=${product.id}">View</a>
-            <button class="btn btn-primary" type="button" onclick="addToCart(${product.id})">Add to cart</button>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    });
-  </script>
-
   <div id="oracle-widget" class="oracle-widget">
-    <div class="oracle-widget-trigger" onclick="toggleOracleWidget()">
+    <div class="oracle-widget-trigger">
       <span class="oracle-icon"> </span>
       <span class="oracle-text">Free Reading</span>
     </div>
@@ -147,14 +111,14 @@
     <div class="oracle-widget-panel" id="oracle-panel" style="display: none;">
       <div class="oracle-header">
         <h3> Your Cosmic Signature</h3>
-        <button class="oracle-close" onclick="toggleOracleWidget()">×</button>
+        <button class="oracle-close">×</button>
       </div>
       
       <div class="oracle-content">
         <div class="oracle-intro" id="oracle-intro">
           <p>The stars have a message for you. When were you born?</p>
           <input type="date" id="birth-date" class="oracle-input" max="2010-12-31">
-          <button onclick="getReading()" class="oracle-submit">Reveal</button>
+          <button class="oracle-submit">Reveal</button>
         </div>
         
         <div class="oracle-loading" id="oracle-loading" style="display: none;">
@@ -166,74 +130,19 @@
           <div class="oracle-reading-text" id="reading-text"></div>
           <div class="oracle-urgency" id="urgency-message"></div>
           <div class="oracle-actions">
-            <button onclick="bookReading()" class="oracle-cta">Get Full Reading</button>
-            <button onclick="shareReading()" class="oracle-share">Share</button>
+            <button class="oracle-cta">Get Full Reading</button>
+            <button class="oracle-share">Share</button>
           </div>
-          <button onclick="resetWidget()" class="oracle-reset">Try Another</button>
+          <button class="oracle-reset">Try Another</button>
         </div>
       </div>
     </div>
   </div>
 
-  <script>
-  let currentReading = null;
-
-  function toggleOracleWidget() {
-    const panel = document.getElementById('oracle-panel');
-    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-  }
-
-  async function getReading() {
-    const birthDate = document.getElementById('birth-date').value;
-    if (!birthDate) { alert('Please enter your birth date'); return; }
-    
-    document.getElementById('oracle-intro').style.display = 'none';
-    document.getElementById('oracle-loading').style.display = 'block';
-    
-    try {
-      const response = await fetch('/.netlify/functions/oracle-ai', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ birthDate })
-      });
-      
-      const data = await response.json();
-      currentReading = data;
-      
-      document.getElementById('oracle-loading').style.display = 'none';
-      document.getElementById('oracle-result').style.display = 'block';
-      document.getElementById('reading-text').innerHTML = `<div class="oracle-sign">${data.zodiacSign}</div><p>${data.reading}</p>`;
-      document.getElementById('urgency-message').innerHTML = data.urgencyMessage;
-    } catch (error) {
-      console.error('Error:', error);
-      document.getElementById('oracle-loading').style.display = 'none';
-      document.getElementById('oracle-intro').style.display = 'block';
-      alert('Please try again.');
-    }
-  }
-
-  function bookReading() {
-    window.location.href = currentReading ? `oracle.html#${currentReading.recommendedReading}` : 'oracle.html';
-  }
-
-  function shareReading() {
-    if (currentReading?.shareText) {
-      if (navigator.share) {
-        navigator.share({ title: 'Lyrion Atelier', text: currentReading.shareText, url: window.location.href });
-      } else {
-        navigator.clipboard.writeText(currentReading.shareText);
-        alert('Copied! Share on social media.');
-      }
-    }
-  }
-
-  function resetWidget() {
-    document.getElementById('oracle-result').style.display = 'none';
-    document.getElementById('oracle-intro').style.display = 'block';
-    document.getElementById('birth-date').value = '';
-    currentReading = null;
-  }
-  </script>
+  <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script defer src="/assets/index.js"></script>
 
 </body>
 </html>

@@ -13,12 +13,6 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-  </script>
 </head>
 <body>
   <a class="skip-to-content" href="#main-content">Skip to main content</a>
@@ -75,8 +69,8 @@
           </div>
           <div class="button-row align-end">
             <a class="btn btn-outline" href="shop.html">Continue shopping</a>
-            <button class="btn btn-primary" type="button" onclick="window.location.href='checkout.html'">Checkout</button>
-            <button class="btn btn-outline" type="button" onclick="clearCart()">Clear cart</button>
+            <button class="btn btn-primary" type="button" id="checkout-button">Checkout</button>
+            <button class="btn btn-outline" type="button" id="clear-cart-button">Clear cart</button>
           </div>
         </div>
       </div>
@@ -93,11 +87,6 @@
   <script src="js/products.js" defer></script>
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      updateCartCount();
-      displayCart();
-    });
-  </script>
+  <script defer src="/assets/cart.js"></script>
 </body>
 </html>

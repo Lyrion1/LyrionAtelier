@@ -158,18 +158,30 @@ function displayCart() {
       <td class="cart-price">$${item.price.toFixed(2)}</td>
       <td>
         <div class="quantity-controls">
-          <button class="quantity-btn" onclick="updateQuantity(${item.id}, '${item.size}', ${item.quantity - 1})" aria-label="Decrease quantity">-</button>
-          <input type="number" class="quantity-input" value="${item.quantity}" 
-                 onchange="updateQuantity(${item.id}, '${item.size}', parseInt(this.value))" min="1" aria-label="Quantity">
-          <button class="quantity-btn" onclick="updateQuantity(${item.id}, '${item.size}', ${item.quantity + 1})" aria-label="Increase quantity">+</button>
+          <button class="quantity-btn decrement" aria-label="Decrease quantity">-</button>
+          <input type="number" class="quantity-input" value="${item.quantity}" min="1" aria-label="Quantity">
+          <button class="quantity-btn increment" aria-label="Increase quantity">+</button>
         </div>
       </td>
       <td class="cart-total"><strong>$${(item.price * item.quantity).toFixed(2)}</strong></td>
       <td>
-        <button class="btn btn-outline btn-sm" onclick="removeFromCart(${item.id}, '${item.size}')" 
+        <button class="btn btn-outline btn-sm remove-item" 
                 aria-label="Remove ${item.name} from cart">Remove</button>
       </td>
     `;
+    const decrementButton = row.querySelector('.quantity-btn.decrement');
+    const incrementButton = row.querySelector('.quantity-btn.increment');
+    const quantityInput = row.querySelector('.quantity-input');
+    const removeButton = row.querySelector('.remove-item');
+
+    decrementButton?.addEventListener('click', () => updateQuantity(item.id, item.size, item.quantity - 1));
+    incrementButton?.addEventListener('click', () => updateQuantity(item.id, item.size, item.quantity + 1));
+    quantityInput?.addEventListener('change', (event) => {
+      const value = parseInt(event.target.value, 10);
+      updateQuantity(item.id, item.size, value);
+    });
+    removeButton?.addEventListener('click', () => removeFromCart(item.id, item.size));
+
     cartTableBody.appendChild(row);
   });
   
