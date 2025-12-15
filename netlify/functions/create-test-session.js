@@ -1,5 +1,8 @@
 // netlify/functions/create-test-session.js
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// Prefer test key for the test endpoint; fall back to live if not set
+const stripe = require('stripe')(
+process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY
+);
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
