@@ -3,7 +3,7 @@
 --fab-shadow:0 6px 24px rgba(119,64,255,.45),0 0 0 2px rgba(255,255,255,.08) inset;
 }
 .crystal-fab{
- position:fixed; z-index:9999;
+position:fixed; z-index:9999;
 right:calc(max(24px, env(safe-area-inset-right)) + 6px);
 bottom:calc(max(28px, env(safe-area-inset-bottom)) + 6px);
 width:var(--fab-size); height:var(--fab-size); border-radius:50%;
