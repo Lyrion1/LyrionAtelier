@@ -43,6 +43,7 @@ function loadProduct() {
   const canAddToCart = typeof addToCart === 'function';
   if (!canAddToCart) {
     console.error('addToCart is not available on the product page.');
+    return;
   }
   if (addBtn && canAddToCart) {
     addBtn.addEventListener('click', () => addToCart(product.id));

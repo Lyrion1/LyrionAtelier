@@ -17,6 +17,7 @@ function renderFeaturedProducts() {
   const canAddToCart = typeof addToCart === 'function';
   if (!canAddToCart) {
     console.error('addToCart is not available; cannot bind featured product buttons.');
+    return;
   }
 
   featured.forEach(product => {
@@ -110,7 +111,8 @@ function bookReading() {
 function shareReading() {
   if (currentReading?.shareText) {
     if (navigator.share) {
-      navigator.share({ title: 'Lyrion Atelier', text: currentReading.shareText, url: window.location.href });
+      navigator.share({ title: 'Lyrion Atelier', text: currentReading.shareText, url: window.location.href })
+        .catch(() => alert('Sharing failed. Please try again later.'));
     } else {
       navigator.clipboard.writeText(currentReading.shareText);
       alert('Copied! Share on social media.');
