@@ -101,7 +101,6 @@
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="js/shipping-config.js"></script>
-  <script src="https://js.stripe.com/v3/"></script>
   <script>
     const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
     const SHIPPING_THRESHOLD = (window.shippingConfig && window.shippingConfig.SHIPPING_THRESHOLD) || 50;
@@ -136,7 +135,6 @@
       initializingPromise: null,
       paymentElementMounted: false,
       stripeJsPromise: null,
-      publishableKey: null,
     };
 
     const allowedReturnOrigins = (window.shippingConfig && window.shippingConfig.ALLOWED_ORIGINS) || ['https://lyrionatelier.com', 'https://www.lyrionatelier.com'];
@@ -276,7 +274,6 @@
           }
 
           await ensureStripeJsLoaded();
-          stripeState.publishableKey = data.publishableKey;
           if (!stripeState.stripe && window.Stripe) {
             stripeState.stripe = window.Stripe(data.publishableKey);
           }
