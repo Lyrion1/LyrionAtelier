@@ -194,8 +194,7 @@
             return;
           }
           if (window.Stripe) {
-            existingScript.dataset.stripeLoaded = 'true';
-            resolve(window.Stripe);
+            handleLoad();
             return;
           }
           existingScript.addEventListener('load', handleLoad, { once: true });
