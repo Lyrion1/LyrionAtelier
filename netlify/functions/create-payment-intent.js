@@ -99,8 +99,6 @@ exports.handler = async (event) => {
       };
     }
 
-    const paymentIntentId = clientSecret ? extractPaymentIntentId(clientSecret) : null;
-
     const intent = await stripe.paymentIntents.create({
       amount,
       currency,
