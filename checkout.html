@@ -176,6 +176,28 @@
       };
     }
 
+    function getClientSecretFromUrl() {
+      const params = new URLSearchParams(window.location.search || '');
+      return params.get('payment_intent_client_secret');
+    }
+
+    async function updatePaymentStatus(stripe, clientSecret) {
+      if (!stripe || !clientSecret) return;
+      try {
+        const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
+        if (!paymentIntent) return;
+        if (paymentIntent.status === 'succeeded') {
+          setPaymentMessage('Payment confirmed. Your order is on the way.', 'info');
+        } else if (paymentIntent.status === 'processing') {
+          setPaymentMessage('Your payment is processing. We will update you once it completes.');
+        } else if (paymentIntent.status === 'requires_payment_method') {
+          setPaymentMessage('Your payment was not successful, please try again.', 'error');
+        }
+      } catch (statusError) {
+        console.error('Could not retrieve payment status', statusError);
+      }
+    }
+
     async function initializeStripeElements() {
       const cart = getCart();
       if (!cart.length) {
@@ -192,6 +214,7 @@
       stripeState.initializing = true;
       stripeState.initializingPromise = (async () => {
         setLoading(true);
+        const urlClientSecret = getClientSecretFromUrl();
         try {
           const response = await fetch('/.netlify/functions/create-payment-intent', {
             method: 'POST',
@@ -199,6 +222,8 @@
             body: JSON.stringify({
               items: cart,
               currency: 'usd',
+              customer: getFormData(),
+              clientSecret: urlClientSecret || undefined,
             }),
           });
 
@@ -207,6 +232,10 @@
           }
 
           const data = await response.json();
+          const clientSecret = data.clientSecret || urlClientSecret;
+          if (!data.publishableKey || !clientSecret) {
+            throw new Error('Missing payment configuration.');
+          }
 
           if (!stripeState.stripe) {
             stripeState.stripe = Stripe(data.publishableKey);
@@ -214,16 +243,19 @@
 
           unmountPaymentElement();
 
-          stripeState.clientSecret = data.clientSecret;
-          stripeState.elements = stripeState.stripe.elements({ clientSecret: data.clientSecret });
+          stripeState.clientSecret = clientSecret;
+          stripeState.elements = stripeState.stripe.elements({ clientSecret });
           stripeState.paymentElement = stripeState.elements.create('payment');
           stripeState.paymentElement.mount('#payment-element');
           stripeState.paymentElementMounted = true;
-          setPaymentMessage(PLACEHOLDER_MESSAGE);
+          setPaymentMessage('Enter your payment details to complete checkout.');
+          if (clientSecret) {
+            updatePaymentStatus(stripeState.stripe, clientSecret);
+          }
           return true;
         } catch (error) {
           console.error('Payment initialization failed', error);
-          setPaymentMessage(PLACEHOLDER_MESSAGE, 'error');
+          setPaymentMessage(error.message || PLACEHOLDER_MESSAGE, 'error');
           return false;
         } finally {
           stripeState.initializing = false;
@@ -294,7 +326,7 @@
         return;
       }
 
-      setPaymentMessage(STRIPE_CONFIRMED_NOTICE, 'info');
+      setPaymentMessage('Payment confirmed. Your order is on the way.', 'info');
       setLoading(false);
     };
 
