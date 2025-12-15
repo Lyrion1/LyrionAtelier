@@ -178,14 +178,24 @@
           document.querySelector(`script[src="${STRIPE_JS_URL}"]`) ||
           document.querySelector(`script[src="${STRIPE_JS_URL_ALT}"]`);
         const scriptEl = existingScript || document.createElement('script');
+        const scriptSrc = existingScript ? existingScript.src : STRIPE_JS_URL;
         const handleLoad = () => {
-          scriptEl.dataset.stripeLoaded = 'true';
-          resolve(window.Stripe);
+          if (window.Stripe) {
+            scriptEl.dataset.stripeLoaded = 'true';
+            resolve(window.Stripe);
+          } else {
+            reject(new Error('Stripe.js failed to load.'));
+          }
         };
 
         if (existingScript) {
-          if (existingScript.dataset.stripeLoaded === 'true' || window.Stripe) {
+          if (existingScript.dataset.stripeLoaded === 'true') {
             handleLoad();
+            return;
+          }
+          if (window.Stripe) {
+            existingScript.dataset.stripeLoaded = 'true';
+            resolve(window.Stripe);
             return;
           }
           existingScript.addEventListener('load', handleLoad, { once: true });
@@ -193,7 +203,7 @@
           return;
         }
 
-        scriptEl.src = STRIPE_JS_URL;
+        scriptEl.src = scriptSrc;
         scriptEl.async = true;
         scriptEl.addEventListener('load', handleLoad, { once: true });
         scriptEl.addEventListener('error', () => reject(new Error('Stripe.js failed to load.')), { once: true });
