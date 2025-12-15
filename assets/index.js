@@ -47,9 +47,11 @@ function renderFeaturedProducts() {
 }
 
 let currentReading = null;
+let lastOracleToggle = 0;
+const ORACLE_TOGGLE_DEBOUNCE_MS = 300;
 
 function setupOracleWidget() {
-  const widgetTrigger = document.querySelector('.oracle-widget-trigger');
+  const widgetTrigger = document.querySelector('#crystal-ball-widget');
   const closeButton = document.querySelector('.oracle-close');
   const revealButton = document.querySelector('.oracle-submit');
   const bookButton = document.querySelector('.oracle-cta');
@@ -65,6 +67,9 @@ function setupOracleWidget() {
 }
 
 function toggleOracleWidget() {
+  const now = Date.now();
+  if (now - lastOracleToggle < ORACLE_TOGGLE_DEBOUNCE_MS) return;
+  lastOracleToggle = now;
   const panel = document.getElementById('oracle-panel');
   if (!panel) return;
   panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
