@@ -108,7 +108,6 @@
     const PLACEHOLDER_MESSAGE = 'Payment not connected yet - Stripe required';
     const STRIPE_CONFIRMED_NOTICE = `${PLACEHOLDER_MESSAGE}; order confirmation remains disabled until Stripe is connected.`;
     const STRIPE_JS_URL = 'https://js.stripe.com/v3/';
-    const STRIPE_JS_URL_ALT = 'https://js.stripe.com/v3';
 
     function calculateTotals(cart) {
       const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -174,11 +173,8 @@
       if (stripeState.stripeJsPromise) return stripeState.stripeJsPromise;
 
       stripeState.stripeJsPromise = new Promise((resolve, reject) => {
-        const existingScript =
-          document.querySelector(`script[src="${STRIPE_JS_URL}"]`) ||
-          document.querySelector(`script[src="${STRIPE_JS_URL_ALT}"]`);
+        const existingScript = document.querySelector(`script[src="${STRIPE_JS_URL}"]`);
         const scriptEl = existingScript || document.createElement('script');
-        const scriptSrc = existingScript ? existingScript.src : STRIPE_JS_URL;
         const handleLoad = () => {
           if (window.Stripe) {
             scriptEl.dataset.stripeLoaded = 'true';
@@ -189,11 +185,7 @@
         };
 
         if (existingScript) {
-          if (existingScript.dataset.stripeLoaded === 'true') {
-            handleLoad();
-            return;
-          }
-          if (window.Stripe) {
+          if (existingScript.dataset.stripeLoaded === 'true' || window.Stripe) {
             handleLoad();
             return;
           }
@@ -202,7 +194,7 @@
           return;
         }
 
-        scriptEl.src = scriptSrc;
+        scriptEl.src = STRIPE_JS_URL;
         scriptEl.async = true;
         scriptEl.addEventListener('load', handleLoad, { once: true });
         scriptEl.addEventListener('error', () => reject(new Error('Stripe.js failed to load.')), { once: true });
