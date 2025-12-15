@@ -223,11 +223,19 @@
     }
 
     const variant = (product.variants || [])[0];
-    const variantId = variant ? Number(variant.id) : Number(product.id);
-    const price = variant ? Number(variant.price) : Number(product.lowestPrice);
+    const rawVariantId = variant ? variant.id : product.id;
+    const rawPrice = variant ? variant.price : product.lowestPrice;
+
+    if (rawVariantId === null || rawVariantId === undefined || rawPrice === null || rawPrice === undefined) {
+      showToast('Unable to add this item to cart right now.', 'error');
+      return;
+    }
+
+    const variantId = Number.parseInt(rawVariantId, 10);
+    const price = Number.parseFloat(rawPrice);
     const sizeLabel = variant && variant.name ? variant.name : 'One Size';
 
-    if (!variantId || !price) {
+    if (!Number.isFinite(variantId) || !Number.isFinite(price)) {
       showToast('Unable to add this item to cart right now.', 'error');
       return;
     }
@@ -236,7 +244,7 @@
       id: variantId,
       name: product.name,
       price,
-      image: variant?.image || product.thumbnail,
+      image: (variant && variant.image) ? variant.image : product.thumbnail,
       category: 'printful'
     });
   }

@@ -228,24 +228,25 @@
   const product = oracleProducts[productKey];
   const button = event?.target;
   const originalText = button?.textContent;
+
+  if (!product) {
+  showToast('This reading is unavailable right now.', 'error');
+  return;
+  }
+
   if (button) {
   button.textContent = 'Adding...';
   button.disabled = true;
   }
 
   try {
-  if (!product) {
-  showToast('This reading is unavailable right now.', 'error');
-  return;
-  }
-
   addToCart(product.id, 1, 'Digital Reading', { ...product, category: 'oracle', image: null });
-  } catch (error) {
-  showToast('Error. Please try again.', 'error');
   } finally {
   if (button) {
+  setTimeout(() => {
   button.textContent = originalText || 'Book';
   button.disabled = false;
+  }, 300);
   }
   }
   }

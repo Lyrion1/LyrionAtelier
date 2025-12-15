@@ -12,6 +12,14 @@ function addToCart(productId, quantity = 1, sizeOverride = null, customProduct =
     showToast('Product not found', 'error');
     return;
   }
+
+  const targetId = product.id;
+  const targetIdStr = String(targetId);
+  const price = Number.parseFloat(product.price);
+  if (!Number.isFinite(price)) {
+    showToast('Invalid price for this item.', 'error');
+    return;
+  }
   
   // Get selected size if on product page
   const selectedSize = document.querySelector('.size-option.active');
@@ -22,16 +30,16 @@ function addToCart(productId, quantity = 1, sizeOverride = null, customProduct =
   
   // Check if product already exists in cart with same size
   const existingItemIndex = cart.findIndex(item => 
-    item.id === productId && item.size === size
+    String(item.id) === targetIdStr && item.size === size
   );
   
   if (existingItemIndex > -1) {
     cart[existingItemIndex].quantity += quantity;
   } else {
     cart.push({
-      id: product.id,
+      id: targetId,
       name: product.name,
-      price: Number(product.price),
+      price,
       size: size,
       quantity: quantity,
       image: product.image,
