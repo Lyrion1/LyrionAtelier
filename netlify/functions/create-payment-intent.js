@@ -4,6 +4,7 @@ const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'https://lyrionatelier.co
 const SHIPPING_THRESHOLD = 50;
 const SHIPPING_COST = 5.99;
 const MINIMUM_AMOUNT_CENTS = 50;
+const DEFAULT_ORIGIN = allowedOrigins[0] || '';
 
 if (!stripeSecretKey) {
   console.warn('STRIPE_SECRET_KEY is not set. Stripe payments will fail.');
@@ -11,12 +12,16 @@ if (!stripeSecretKey) {
 
 const stripe = stripeSecretKey ? require('stripe')(stripeSecretKey) : null;
 
-const headers = {
+const baseHeaders = {
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': allowedOrigins[0] || '*',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
+
+function buildHeaders(requestOrigin) {
+  const allowOrigin = requestOrigin && allowedOrigins.includes(requestOrigin) ? requestOrigin : DEFAULT_ORIGIN;
+  return { ...baseHeaders, 'Access-Control-Allow-Origin': allowOrigin };
+}
 
 function calculateTotals(items = []) {
   const subtotal = items.reduce((sum, item) => {
@@ -31,14 +36,12 @@ function calculateTotals(items = []) {
 
 function extractPaymentIntentId(clientSecret = '') {
   const secretParts = clientSecret.split('_secret');
-  return secretParts.length ? secretParts[0] : null;
+  return secretParts.length > 1 ? secretParts[0] : null;
 }
 
 exports.handler = async (event) => {
   const requestOrigin = event.headers.origin || event.headers.Origin;
-  if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
-    headers['Access-Control-Allow-Origin'] = requestOrigin;
-  }
+  const headers = buildHeaders(requestOrigin);
 
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
@@ -58,10 +61,16 @@ exports.handler = async (event) => {
 
   try {
     const payload = JSON.parse(event.body || '{}');
-    const items = Array.isArray(payload.items) ? payload.items : [];
+    const rawItems = Array.isArray(payload.items) ? payload.items : [];
     const currency = payload.currency || 'usd';
     const customer = payload.customer || {};
     const clientSecret = payload.clientSecret;
+
+    const items = rawItems.filter((item) => {
+      const price = Number(item.price);
+      const quantity = Number(item.quantity);
+      return Number.isFinite(price) && price > 0 && Number.isFinite(quantity) && quantity > 0;
+    });
 
     if (!items.length) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Cart is empty.' }) };
