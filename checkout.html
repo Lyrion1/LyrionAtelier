@@ -188,6 +188,9 @@
             handleLoad();
             return;
           }
+          if (existingScript.parentNode) {
+            existingScript.parentNode.removeChild(existingScript);
+          }
           scriptElement = document.createElement('script');
         }
 
@@ -272,8 +275,10 @@
           }
 
           await ensureStripeJsLoaded();
-          const stripeInstance = window.Stripe(data.publishableKey);
-          if (!stripeInstance) {
+          let stripeInstance;
+          try {
+            stripeInstance = window.Stripe(data.publishableKey);
+          } catch (stripeError) {
             throw new Error('Stripe initialization failed.');
           }
           stripeState.stripe = stripeInstance;
