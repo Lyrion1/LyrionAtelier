@@ -216,33 +216,33 @@
   <script src="js/main.js" defer></script>
   <script>
   const oracleProducts = {
-  'natal-chart': { name: 'Natal Chart Blueprint - Oracle Reading', price: 70 },
-  'solar-return': { name: 'Solar Return Reading - Oracle Reading', price: 58 },
-  'life-path': { name: 'Life Path Reading - Oracle Reading', price: 50 },
-  'relationship': { name: 'Relationship Synastry - Oracle Reading', price: 88 },
-  'career': { name: 'Career & Purpose Reading - Oracle Reading', price: 75 },
-  'cosmic-blueprint': { name: 'Full Cosmic Blueprint - Oracle Reading', price: 155 }
+  'natal-chart': { id: 1001, name: 'Natal Chart Blueprint - Oracle Reading', price: 70 },
+  'solar-return': { id: 1002, name: 'Solar Return Reading - Oracle Reading', price: 58 },
+  'life-path': { id: 1003, name: 'Life Path Reading - Oracle Reading', price: 50 },
+  'relationship': { id: 1004, name: 'Relationship Synastry - Oracle Reading', price: 88 },
+  'career': { id: 1005, name: 'Career & Purpose Reading - Oracle Reading', price: 75 },
+  'cosmic-blueprint': { id: 1006, name: 'Full Cosmic Blueprint - Oracle Reading', price: 155 }
   };
 
-  async function handleBookClick(productKey, event) {
+  function handleBookClick(productKey, event) {
   const product = oracleProducts[productKey];
   const button = event?.target;
   const originalText = button?.textContent;
   if (button) {
-  button.textContent = 'Processing...';
+  button.textContent = 'Adding...';
   button.disabled = true;
   }
 
   try {
-  const response = await fetch('/.netlify/functions/create-checkout-session', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ productName: product.name, productPrice: product.price })
-  });
-  const data = await response.json();
-  window.location.href = data.url;
+  if (!product) {
+  showToast('This reading is unavailable right now.', 'error');
+  return;
+  }
+
+  addToCart(product.id, 1, 'Digital Reading', { ...product, category: 'oracle', image: null });
   } catch (error) {
-  alert('Error. Please try again.');
+  showToast('Error. Please try again.', 'error');
+  } finally {
   if (button) {
   button.textContent = originalText || 'Book';
   button.disabled = false;
