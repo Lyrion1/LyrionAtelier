@@ -130,6 +130,7 @@
       clientSecret: null,
       initializing: false,
       initializingPromise: null,
+      paymentElementMounted: false,
     };
 
     const allowedReturnOrigins = (window.shippingConfig && window.shippingConfig.ALLOWED_ORIGINS) || ['https://lyrionatelier.com', 'https://www.lyrionatelier.com'];
@@ -160,6 +161,7 @@
       if (stripeState.paymentElement) {
         stripeState.paymentElement.unmount();
         stripeState.paymentElement = null;
+        stripeState.paymentElementMounted = false;
       }
     }
 
@@ -214,6 +216,7 @@
           stripeState.elements = stripeState.stripe.elements({ clientSecret: data.clientSecret });
           stripeState.paymentElement = stripeState.elements.create('payment');
           stripeState.paymentElement.mount('#payment-element');
+          stripeState.paymentElementMounted = true;
           setPaymentMessage('');
           return true;
         } catch (error) {
@@ -249,7 +252,7 @@
         }
       }
 
-      if (!stripeState.stripe || !stripeState.elements || !stripeState.paymentElement || !stripeState.clientSecret) {
+      if (!stripeState.stripe || !stripeState.elements || !stripeState.paymentElement || !stripeState.clientSecret || !stripeState.paymentElementMounted) {
         setPaymentMessage('Payment is not ready. Please try again.', 'error');
         setLoading(false);
         return;
@@ -260,7 +263,7 @@
       const customer = getFormData();
       const returnUrlBase = resolveReturnUrlBase();
 
-      const { error } = await stripeState.stripe.confirmPayment({
+      const { error, paymentIntent } = await stripeState.stripe.confirmPayment({
         elements: stripeState.elements,
         confirmParams: {
           return_url: `${returnUrlBase}/success.html`,
@@ -272,12 +275,24 @@
             },
           },
         },
+        redirect: 'if_required',
       });
 
       if (error) {
         setPaymentMessage(error.message || 'Payment failed. Please try again.', 'error');
         setLoading(false);
+        console.log('Stripe payment not confirmed');
+        return;
       }
+
+      if (!paymentIntent || paymentIntent.status !== 'succeeded') {
+        setPaymentMessage('Payment could not be confirmed. Please try again.', 'error');
+        setLoading(false);
+        console.log('Stripe payment not confirmed');
+        return;
+      }
+
+      window.location.href = `${returnUrlBase}/success.html`;
     };
 
     window.lyrionCheckout = window.lyrionCheckout || {};
