@@ -135,6 +135,16 @@
       stripeJsPromise: null,
     };
 
+    function isStripeReady() {
+      return Boolean(
+        stripeState.stripe &&
+        stripeState.elements &&
+        stripeState.paymentElement &&
+        stripeState.paymentElementMounted &&
+        stripeState.clientSecret
+      );
+    }
+
     const allowedReturnOrigins = (window.shippingConfig && window.shippingConfig.ALLOWED_ORIGINS) || ['https://lyrionatelier.com', 'https://www.lyrionatelier.com'];
 
     function resolveReturnUrlBase() {
@@ -223,11 +233,6 @@
       };
     }
 
-    function getClientSecretFromUrl() {
-      const params = new URLSearchParams(window.location.search || '');
-      return params.get('payment_intent_client_secret');
-    }
-
     async function updatePaymentStatus(stripe, clientSecret) {
       if (!stripe || !clientSecret) return;
       try {
@@ -245,7 +250,8 @@
       }
     }
 
-    async function initializeStripeElements() {
+    async function initializeStripeElements(options = {}) {
+      const { forceRefresh = false, manageLoading = true } = options;
       const cart = getCart();
       if (!cart.length) {
         setPaymentMessage('Your cart is empty.');
@@ -254,14 +260,17 @@
         return Promise.resolve(false);
       }
 
+      if (!forceRefresh && isStripeReady()) {
+        return true;
+      }
+
       if (stripeState.initializingPromise) {
         return stripeState.initializingPromise;
       }
 
       stripeState.initializing = true;
       stripeState.initializingPromise = (async () => {
-        setLoading(true);
-        const urlClientSecret = getClientSecretFromUrl();
+        if (manageLoading) setLoading(true);
         try {
           const response = await fetch(PAYMENT_INTENT_ENDPOINT, {
             method: 'POST',
@@ -270,26 +279,30 @@
               items: cart,
               currency: 'usd',
               customer: getFormData(),
-              clientSecret: urlClientSecret || undefined,
             }),
           });
 
-          const data = await response.json().catch(() => null);
+          let data;
+          try {
+            data = await response.json();
+          } catch (parseError) {
+            data = null;
+          }
 
           if (!response.ok || !data) {
             const serverMessage = data && data.error ? data.error : 'Unable to start payment.';
             throw new Error(serverMessage);
           }
 
-          const clientSecret = data.clientSecret || urlClientSecret;
-          if (!data.publishableKey || !clientSecret) {
+          const { clientSecret, publishableKey } = data;
+          if (!clientSecret || !publishableKey) {
             throw new Error('Missing payment configuration.');
           }
 
           await ensureStripeJsLoaded();
           let stripeInstance;
           try {
-            stripeInstance = window.Stripe(data.publishableKey);
+            stripeInstance = window.Stripe(publishableKey);
           } catch (stripeError) {
             throw new Error(`Stripe initialization failed: ${stripeError && stripeError.message ? stripeError.message : stripeError}`);
           }
@@ -303,9 +316,7 @@
           stripeState.paymentElement.mount('#payment-element');
           stripeState.paymentElementMounted = true;
           setPaymentMessage('Enter your payment details to complete checkout.');
-          if (clientSecret) {
-            updatePaymentStatus(stripeState.stripe, clientSecret);
-          }
+          updatePaymentStatus(stripeState.stripe, clientSecret);
           return true;
         } catch (error) {
           console.error('Payment initialization failed', error);
@@ -313,7 +324,7 @@
           return false;
         } finally {
           stripeState.initializing = false;
-          setLoading(false);
+          if (manageLoading) setLoading(false);
           stripeState.initializingPromise = null;
         }
       })();
@@ -331,22 +342,19 @@
 
       setLoading(true);
 
-      if (!stripeState.paymentElement || !stripeState.clientSecret) {
-        const initialized = await initializeStripeElements();
-        if (!initialized) {
-          setPaymentMessage('Unable to start payment. Please try again.', 'error');
-          setLoading(false);
-          return;
-        }
+      const initialized = await initializeStripeElements({ forceRefresh: true, manageLoading: false });
+      if (!initialized) {
+        setPaymentMessage('Unable to start payment. Please try again.', 'error');
+        setLoading(false);
+        return;
       }
 
-      if (!stripeState.stripe || !stripeState.elements || !stripeState.paymentElement || !stripeState.clientSecret || !stripeState.paymentElementMounted) {
+      if (!isStripeReady()) {
         setPaymentMessage('Payment setup incomplete. Refresh and try again.', 'error');
         setLoading(false);
         return;
       }
 
-      setLoading(true);
       setPaymentMessage('Processing payment… Stripe confirmation required');
       const customer = getFormData();
       const returnUrlBase = resolveReturnUrlBase();
