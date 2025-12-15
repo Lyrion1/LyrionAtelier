@@ -46,11 +46,11 @@
 
   <main id="main-content" class="section">
     <div class="container">
-      <div class="section-title">
-        <p class="pill">Secure checkout</p>
-        <h1>Ready to send to the stars</h1>
-        <p class="muted">Payment not connected yet - Stripe required to complete checkout.</p>
-      </div>
+        <div class="section-title">
+          <p class="pill">Secure checkout</p>
+          <h1>Ready to send to the stars</h1>
+          <p class="muted">Payments are securely processed by Stripe.</p>
+        </div>
 
       <div class="card two-column-grid">
         <form id="checkout-form" data-validate="true">
@@ -105,9 +105,10 @@
     const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
     const SHIPPING_THRESHOLD = (window.shippingConfig && window.shippingConfig.SHIPPING_THRESHOLD) || 50;
     const SHIPPING_COST = (window.shippingConfig && window.shippingConfig.SHIPPING_COST) || 5.99;
-    const PLACEHOLDER_MESSAGE = 'Payment not connected yet - Stripe required';
+    const PLACEHOLDER_MESSAGE = 'Secure checkout is handled by Stripe.';
     const STRIPE_CONFIRMED_NOTICE = `${PLACEHOLDER_MESSAGE}; order confirmation remains disabled until Stripe is connected.`;
     const STRIPE_JS_URL = 'https://js.stripe.com/v3/';
+    const PAYMENT_INTENT_ENDPOINT = '/.netlify/functions/create-payment-intent';
 
     function calculateTotals(cart) {
       const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -257,7 +258,7 @@
         setLoading(true);
         const urlClientSecret = getClientSecretFromUrl();
         try {
-          const response = await fetch('/.netlify/functions/create-payment-intent', {
+          const response = await fetch(PAYMENT_INTENT_ENDPOINT, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -268,11 +269,13 @@
             }),
           });
 
+          const data = await response.json().catch(() => null);
+
           if (!response.ok) {
-            throw new Error('Unable to start payment.');
+            const serverMessage = data && data.error ? data.error : 'Unable to start payment.';
+            throw new Error(serverMessage);
           }
 
-          const data = await response.json();
           const clientSecret = data.clientSecret || urlClientSecret;
           if (!data.publishableKey || !clientSecret) {
             throw new Error('Missing payment configuration.');

@@ -1,135 +1,112 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const { SHIPPING_THRESHOLD, SHIPPING_COST, ALLOWED_ORIGINS } = require('../../js/shipping-config');
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
 
-const MINIMUM_ORDER_AMOUNT_CENTS = 50;
+if (!stripeSecretKey) {
+  console.warn('STRIPE_SECRET_KEY is not set. Stripe payments will fail.');
+}
 
-const isAllowedOrigin = (origin = '') => {
-  if (!origin) return true;
-  if (ALLOWED_ORIGINS.includes(origin)) return true;
-  if (origin.endsWith('.netlify.app')) return true;
-  if (origin.startsWith('http://localhost:')) return true;
-  return false;
-};
+const stripe = stripeSecretKey ? require('stripe')(stripeSecretKey) : null;
 
-const buildCorsHeaders = (origin) => ({
-  'Access-Control-Allow-Origin': origin,
+const headers = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
-});
-
-const calculateTotals = (items = []) => {
-  const subtotal = items.reduce((sum, item) => {
-    const price = Number(item.price);
-    const quantity = Number(item.quantity || 1);
-    if (!Number.isFinite(price) || !Number.isFinite(quantity)) {
-      return sum;
-    }
-    return sum + price * quantity;
-  }, 0);
-
-  const shipping = subtotal > SHIPPING_THRESHOLD ? 0 : (items.length ? SHIPPING_COST : 0);
-  const total = subtotal + shipping;
-
-  return { subtotal, shipping, total };
 };
 
+function calculateTotals(items = []) {
+  const subtotal = items.reduce((sum, item) => {
+    const price = Number(item.price) || 0;
+    const quantity = Number(item.quantity) || 0;
+    return sum + price * quantity;
+  }, 0);
+  const shipping = subtotal > 50 ? 0 : (items.length ? 5.99 : 0);
+  const total = subtotal + shipping;
+  return { subtotal, shipping, total };
+}
+
+function extractPaymentIntentId(clientSecret = '') {
+  const secretParts = clientSecret.split('_secret');
+  return secretParts.length ? secretParts[0] : null;
+}
+
 exports.handler = async (event) => {
-  const originHeader = (event.headers && (event.headers.origin || event.headers.Origin)) || '';
-  const corsOrigin = isAllowedOrigin(originHeader)
-    ? (originHeader || ALLOWED_ORIGINS[0])
-    : ALLOWED_ORIGINS[0];
-  const corsHeaders = buildCorsHeaders(corsOrigin);
-
   if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers: corsHeaders, body: '' };
-  }
-
-  if (!isAllowedOrigin(originHeader) && originHeader) {
-    return {
-      statusCode: 403,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Origin not allowed' }),
-    };
+    return { statusCode: 200, headers, body: '' };
   }
 
   if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Method not allowed' }),
-    };
+    return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  if (!process.env.STRIPE_SECRET_KEY) {
+  if (!stripe || !publishableKey) {
     return {
       statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Payment configuration error' }),
-    };
-  }
-
-  const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
-  if (!publishableKey) {
-    return {
-      statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Payment configuration error' }),
+      headers,
+      body: JSON.stringify({ error: 'Stripe is not configured.' }),
     };
   }
 
   try {
     const payload = JSON.parse(event.body || '{}');
-    const existingClientSecret = typeof payload.clientSecret === 'string' && payload.clientSecret.startsWith('pi_')
-      ? payload.clientSecret
-      : null;
-
     const items = Array.isArray(payload.items) ? payload.items : [];
-    const currency = (payload.currency || 'usd').toLowerCase();
+    const currency = payload.currency || 'usd';
     const customer = payload.customer || {};
+    const clientSecret = payload.clientSecret;
+
+    if (!items.length) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Cart is empty.' }) };
+    }
 
     const { total } = calculateTotals(items);
-    const amountInCents = Math.round(total * 100);
-
-    if (!amountInCents || amountInCents < MINIMUM_ORDER_AMOUNT_CENTS) {
+    const amount = Math.round(total * 100);
+    if (!amount || amount < 50) {
       return {
         statusCode: 400,
-        headers: corsHeaders,
-        body: JSON.stringify({ error: 'Invalid order total' }),
+        headers,
+        body: JSON.stringify({ error: 'Invalid payment amount.' }),
       };
     }
 
-    const paymentIntent = existingClientSecret
-      ? await stripe.paymentIntents.retrieve(existingClientSecret.split('_secret')[0])
-      : await stripe.paymentIntents.create({
-          amount: amountInCents,
+    const paymentIntentId = clientSecret ? extractPaymentIntentId(clientSecret) : null;
+
+    const intent = paymentIntentId
+      ? await stripe.paymentIntents.update(paymentIntentId, {
+          amount,
           currency,
-          automatic_payment_methods: { enabled: true },
-          receipt_email: customer.email,
+          receipt_email: customer.email || undefined,
           metadata: {
             customer_name: customer.name || '',
             customer_email: customer.email || '',
-            shipping_address: customer.address || '',
-            source: 'payment_element_checkout',
+            customer_phone: customer.phone || '',
+          },
+        })
+      : await stripe.paymentIntents.create({
+          amount,
+          currency,
+          automatic_payment_methods: { enabled: true },
+          receipt_email: customer.email || undefined,
+          metadata: {
+            customer_name: customer.name || '',
+            customer_email: customer.email || '',
+            customer_phone: customer.phone || '',
           },
         });
 
     return {
       statusCode: 200,
-      headers: {
-        ...corsHeaders,
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({
-        clientSecret: paymentIntent.client_secret,
+        clientSecret: intent.client_secret,
         publishableKey,
       }),
     };
   } catch (error) {
-    console.error('Error creating PaymentIntent:', error);
+    console.error('Error creating payment intent:', error);
     return {
       statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Unable to create payment. Please try again.' }),
+      headers,
+      body: JSON.stringify({ error: 'Unable to start payment.' }),
     };
   }
 };
