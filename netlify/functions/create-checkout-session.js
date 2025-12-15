@@ -27,7 +27,7 @@ exports.handler = async (event) => {
         },
       ],
       mode: 'payment',
-      success_url: `${event.headers.origin || 'https://lyrionatelier.com'}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${event.headers.origin || 'https://lyrionatelier.com'}/checkout.html?stripe_session={CHECKOUT_SESSION_ID}`,
       cancel_url: `${event.headers.origin || 'https://lyrionatelier.com'}/oracle.html`,
       billing_address_collection: 'required',
       metadata: {
