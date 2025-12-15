@@ -11,6 +11,7 @@
   <title>Shop | Lyrīon Atelier</title>
   <link rel="icon" type="image/png" href="images/favicon/favicon.png">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/assets/layout-cards.css">
 </head>
 <body>
   <a class="skip-to-content" href="#main-content">Skip to main content</a>
@@ -74,7 +75,7 @@
         </div>
       </div>
 
-      <div id="products-grid-local" class="grid"></div>
+      <div id="products-grid-local" class="grid cards-grid"></div>
     </div>
   </main>
 
@@ -100,7 +101,7 @@
       <p>Summoning products from the cosmos...</p>
     </div>
     
-    <div id="products-grid" class="products-grid" style="display: none;"></div>
+    <div id="shopGrid" class="products-grid cards-grid" style="display: none;"></div>
     
     <div id="products-error" class="products-error" style="display: none;">
       <p>Unable to load products. Please refresh the page.</p>
@@ -155,6 +156,7 @@
   <script src="js/shop-page.js" defer></script>
   <script src="js/checkout-handler.js"></script>
   <script src="js/shop-checkout.js"></script>
+  <script defer src="/assets/shop-oracle.js"></script>
 
 </body>
 </html>
