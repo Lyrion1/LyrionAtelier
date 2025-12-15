@@ -105,8 +105,6 @@
     const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
     const SHIPPING_THRESHOLD = (window.shippingConfig && window.shippingConfig.SHIPPING_THRESHOLD) || 50;
     const SHIPPING_COST = (window.shippingConfig && window.shippingConfig.SHIPPING_COST) || 5.99;
-    const PLACEHOLDER_MESSAGE = 'Secure checkout is handled by Stripe.';
-    const STRIPE_CONFIRMED_NOTICE = `${PLACEHOLDER_MESSAGE}; order confirmation remains disabled until Stripe is connected.`;
     const STRIPE_JS_URL = 'https://js.stripe.com/v3/';
     const PAYMENT_INTENT_ENDPOINT = '/.netlify/functions/create-payment-intent';
 
@@ -151,7 +149,14 @@
       const messageEl = document.getElementById('payment-message');
       if (!messageEl) return;
       messageEl.textContent = message;
-      messageEl.className = type === 'error' ? 'payment-message error' : 'payment-message';
+      const baseClass = 'payment-message';
+      if (type === 'error') {
+        messageEl.className = `${baseClass} error`;
+      } else if (type === 'success') {
+        messageEl.className = `${baseClass} success`;
+      } else {
+        messageEl.className = baseClass;
+      }
     }
 
     function setLoading(isLoading) {
@@ -229,9 +234,9 @@
         const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
         if (!paymentIntent) return;
         if (paymentIntent.status === 'succeeded') {
-          setPaymentMessage('Payment confirmed. Your order is on the way.', 'info');
+          setPaymentMessage('Payment confirmed. Thank you for your order.', 'success');
         } else if (paymentIntent.status === 'processing') {
-          setPaymentMessage('Your payment is processing. We will update you once it completes.');
+          setPaymentMessage('Your payment is processing. You will be notified once it completes.');
         } else if (paymentIntent.status === 'requires_payment_method') {
           setPaymentMessage('Your payment was not successful, please try again.', 'error');
         }
@@ -304,7 +309,7 @@
           return true;
         } catch (error) {
           console.error('Payment initialization failed', error);
-          setPaymentMessage(error.message || PLACEHOLDER_MESSAGE, 'error');
+          setPaymentMessage(error.message || 'Unable to start payment. Please try again.', 'error');
           return false;
         } finally {
           stripeState.initializing = false;
@@ -329,14 +334,14 @@
       if (!stripeState.paymentElement || !stripeState.clientSecret) {
         const initialized = await initializeStripeElements();
         if (!initialized) {
-          setPaymentMessage(PLACEHOLDER_MESSAGE, 'error');
+          setPaymentMessage('Unable to start payment. Please try again.', 'error');
           setLoading(false);
           return;
         }
       }
 
       if (!stripeState.stripe || !stripeState.elements || !stripeState.paymentElement || !stripeState.clientSecret || !stripeState.paymentElementMounted) {
-        setPaymentMessage(PLACEHOLDER_MESSAGE, 'error');
+        setPaymentMessage('Payment setup incomplete. Refresh and try again.', 'error');
         setLoading(false);
         return;
       }
@@ -362,20 +367,19 @@
       });
 
       if (error) {
-        setPaymentMessage(PLACEHOLDER_MESSAGE, 'error');
+        setPaymentMessage(error.message || 'Unable to confirm payment. Please check your details and try again.', 'error');
         setLoading(false);
-        console.log('Stripe payment not confirmed');
         return;
       }
 
-      if (!paymentIntent || paymentIntent.status !== 'succeeded') {
-        setPaymentMessage(PLACEHOLDER_MESSAGE, 'error');
-        setLoading(false);
-        console.log('Stripe payment not confirmed');
-        return;
+      const status = paymentIntent && paymentIntent.status;
+      if (status === 'succeeded') {
+        setPaymentMessage('Payment successful! Thank you.', 'success');
+      } else if (status === 'processing') {
+        setPaymentMessage('Your payment is processing. You will be notified once it completes.', 'info');
+      } else {
+        setPaymentMessage('Payment was not completed. Please try again with a different payment method.', 'error');
       }
-
-      setPaymentMessage('Payment confirmed. Your order is on the way.', 'info');
       setLoading(false);
     };
 
@@ -383,7 +387,7 @@
     window.lyrionCheckout.processPayment = processStripePayment;
 
     document.addEventListener('DOMContentLoaded', () => {
-      setPaymentMessage(PLACEHOLDER_MESSAGE);
+      setPaymentMessage('Enter your payment details to complete checkout.');
       updateCartCount();
       refreshSummary();
       initializeStripeElements();

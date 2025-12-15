@@ -580,21 +580,37 @@ function displayProductDetails() {
   }
 }
 
-/**
- * Purchase Oracle Reading
- * Handles booking of oracle reading services
- * @param {string} readingId - ID of the oracle reading
- */
+const oracleBookingMap = {
+  'natal-chart': 105,
+  'solar-return': 106,
+  'life-path': 107,
+  'relationship': 103,
+  'career': 102,
+  'cosmic-blueprint': 108,
+  'past-life': 101,
+  'career-path': 102,
+  'love-relationships': 103,
+  'monthly-guidance': 104,
+};
+
 function purchaseReading(readingId) {
-  const reading = oracleReadings.find(r => r.id === readingId);
-  if (reading) {
+  addOracleReadingToCart(readingId);
+}
+
+function addOracleReadingToCart(readingKey) {
+  const resolvedKey = String(readingKey || '').toLowerCase();
+  const mappedId = oracleBookingMap[resolvedKey];
+  const fallbackId = Number.isFinite(Number(readingKey)) ? Number(readingKey) : null;
+  const targetId = mappedId || fallbackId;
+  const product = products.find(p => String(p.id) === String(targetId));
+  if (!product) {
     if (typeof showToast === 'function') {
-      showToast(`Booking ${reading.name} for $${reading.price}. You will be contacted shortly to schedule your reading.`, 'success');
-    } else {
-      alert(`Booking ${reading.name} for $${reading.price}. You will be contacted shortly to schedule your reading.`);
+      showToast('This reading is unavailable right now.', 'error');
     }
-    // In a real application, this would add to cart or redirect to booking form
+    return;
   }
+  addToCart(product.id, 1, 'Standard', product);
+  window.location.href = 'checkout.html';
 }
 
 /**
@@ -722,7 +738,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (sortSelect) {
     sortSelect.addEventListener('change', filterProducts);
   }
-  
+
   // Add event listeners for price inputs with debouncing
   const priceInputs = document.querySelectorAll('#min-price, #max-price');
   let priceTimeout;
@@ -730,6 +746,15 @@ document.addEventListener('DOMContentLoaded', function() {
     input.addEventListener('input', function() {
       clearTimeout(priceTimeout);
       priceTimeout = setTimeout(filterProducts, 500); // Debounce 500ms
+    });
+  });
+
+  const oracleBookButtons = document.querySelectorAll('.book-reading-btn');
+  oracleBookButtons.forEach(btn => {
+    btn.addEventListener('click', (event) => {
+      event.preventDefault();
+      const productKey = btn.getAttribute('data-product') || btn.dataset.product || btn.id;
+      addOracleReadingToCart(productKey);
     });
   });
 });
