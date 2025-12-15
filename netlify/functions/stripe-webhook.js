@@ -1,5 +1,6 @@
 const Stripe = require('stripe');
 const { Resend } = require('resend');
+const fetch = require('node-fetch');
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -10,6 +11,78 @@ const resend = resendApiKey ? new Resend(resendApiKey) : null;
 const zeroDecimalCurrencies = new Set([
   'BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'
 ]);
+
+async function createPrintfulOrder(session) {
+  const PRINTFUL_API_KEY = process.env.PRINTFUL_API_KEY;
+
+  // Extract product info from session metadata
+  const productType = session.metadata?.product_type;
+  const fallbackVariantId = session.metadata?.variant_id;
+
+  // Only create Printful orders for physical merchandise, not oracle readings
+  if (productType === 'oracle_reading') {
+    console.log('Oracle reading - no Printful order needed');
+    return;
+  }
+
+  try {
+    // Get line items from session
+    const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+    const items = lineItems.data.map(item => ({
+      sync_variant_id: item.price?.metadata?.variant_id || fallbackVariantId,
+      quantity: item.quantity,
+    }));
+
+    if (items.some(item => !item.sync_variant_id)) {
+      console.error('Printful order skipped: missing variant_id for one or more items');
+      return null;
+    }
+
+    const printfulOrder = {
+      recipient: {
+        name: session.customer_details.name,
+        email: session.customer_details.email,
+        address1: session.customer_details.address.line1,
+        address2: session.customer_details.address.line2 || '',
+        city: session.customer_details.address.city,
+        state_code: session.customer_details.address.state,
+        country_code: session.customer_details.address.country,
+        zip: session.customer_details.address.postal_code,
+      },
+      items,
+      retail_costs: {
+        currency: 'USD',
+        subtotal: (session.amount_subtotal / 100).toFixed(2),
+        shipping: (session.shipping_cost?.amount_total / 100 || 0).toFixed(2),
+        tax: (session.total_details?.amount_tax / 100 || 0).toFixed(2),
+        total: (session.amount_total / 100).toFixed(2),
+      },
+    };
+
+    const response = await fetch('https://api.printful.com/orders', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${PRINTFUL_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(printfulOrder),
+    });
+
+    const data = await response.json();
+
+    if (data.code === 200) {
+      console.log('Printful order created:', data.result.id);
+      return data.result;
+    } else {
+      console.error('Printful order failed:', data);
+      return null;
+    }
+
+  } catch (error) {
+    console.error('Printful order error:', error);
+    return null;
+  }
+}
 
 const escapeHtml = (value = '') =>
   String(value)
@@ -250,6 +323,11 @@ exports.handler = async (event) => {
         
       } catch (emailError) {
         console.error('Failed to send admin email:', emailError);
+      }
+
+      // Create Printful order if it's merchandise
+      if (session.metadata?.product_type === 'merchandise') {
+        await createPrintfulOrder(session);
       }
       
       break;

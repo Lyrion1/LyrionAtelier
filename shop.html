@@ -82,7 +82,7 @@
         </div>
       </div>
 
-      <div id="products-grid" class="grid"></div>
+      <div id="products-grid-local" class="grid"></div>
     </div>
   </main>
 
@@ -98,7 +98,7 @@
   <script src="js/main.js" defer></script>
   <script>
     function renderProducts() {
-      const grid = document.getElementById('products-grid');
+      const grid = document.getElementById('products-grid-local');
       if (!grid) return;
       const category = document.getElementById('filter-category').value;
       const zodiac = document.getElementById('filter-zodiac').value;
@@ -133,6 +133,102 @@
       document.getElementById('filter-zodiac').addEventListener('change', renderProducts);
       renderProducts();
     });
+  </script>
+
+  <section class="shop-products-section">
+    <div class="shop-header">
+      <h1>Celestial Fashion</h1>
+      <p>Astrology-inspired apparel and accessories</p>
+    </div>
+    
+    <div id="products-loading" class="products-loading">
+      <div class="loading-spinner"></div>
+      <p>Loading products from the cosmos...</p>
+    </div>
+    
+    <div id="products-grid" class="products-grid" style="display: none;"></div>
+    
+    <div id="products-error" class="products-error" style="display: none;">
+      <p>Unable to load products. Please refresh the page.</p>
+    </div>
+  </section>
+
+  <script>
+  const escapeHtml = (value = '') =>
+    String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+
+  async function loadPrintfulProducts() {
+    const loadingEl = document.getElementById('products-loading');
+    const gridEl = document.getElementById('products-grid');
+    const errorEl = document.getElementById('products-error');
+    
+    try {
+      const response = await fetch('/.netlify/functions/printful-sync');
+      const data = await response.json();
+      
+      if (data.products && data.products.length > 0) {
+        loadingEl.style.display = 'none';
+        gridEl.style.display = 'grid';
+        
+        gridEl.innerHTML = data.products.map(product => {
+        const name = escapeHtml(product.name);
+        const description = escapeHtml(product.description);
+        const priceRange = escapeHtml(product.priceRange);
+        const thumbnail = escapeHtml(product.thumbnail);
+        const productId = escapeHtml(product.id);
+
+        return `
+        <div class="product-card">
+          <div class="product-image">
+            <img src="${thumbnail}" alt="${name}" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3>${name}</h3>
+            <p>${description}</p>
+            <div class="product-price">${priceRange}</div>
+            <button onclick="viewProduct('${productId}')" class="product-btn">View Details</button>
+          </div>
+        </div>
+        `;
+        }).join('');
+        
+        // Store products globally for detail view
+        window.printfulProducts = data.products;
+      } else {
+        throw new Error('No products found');
+      }
+      
+    } catch (error) {
+      console.error('Error loading products:', error);
+      loadingEl.style.display = 'none';
+      errorEl.style.display = 'block';
+    }
+  }
+  
+  function viewProduct(productId) {
+    if (!window.printfulProducts || !Array.isArray(window.printfulProducts)) {
+      alert('Product details are unavailable right now.');
+      return;
+    }
+
+    // For now, just alert - you can build a modal or detail page later
+    const product = window.printfulProducts.find(p => p.id === productId);
+    if (!product) {
+      alert('Product not found. Please try again.');
+      return;
+    }
+
+    alert(`Product: ${product.name}\nPrice: ${product.priceRange}\n\nClick OK to add Stripe checkout!`);
+    // TODO: Implement Stripe checkout with variant selection
+  }
+  
+  // Load products on page load
+  document.addEventListener('DOMContentLoaded', loadPrintfulProducts);
   </script>
 </body>
 </html>
