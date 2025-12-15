@@ -185,17 +185,13 @@
         };
 
         if (existingScript) {
-          if (existingScript.dataset.stripeLoaded === 'true' && window.Stripe) {
+          if (window.Stripe || existingScript.dataset.stripeLoaded === 'true') {
             handleLoad();
             return;
           }
-          if (!window.Stripe) {
-            scriptEl = document.createElement('script');
-          } else {
-            existingScript.addEventListener('load', handleLoad, { once: true });
-            existingScript.addEventListener('error', () => reject(new Error('Stripe.js failed to load.')), { once: true });
-            return;
-          }
+          existingScript.addEventListener('load', handleLoad, { once: true });
+          existingScript.addEventListener('error', () => reject(new Error('Stripe.js failed to load.')), { once: true });
+          return;
         }
 
         scriptEl.src = STRIPE_JS_URL;
