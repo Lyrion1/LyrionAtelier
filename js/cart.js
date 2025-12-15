@@ -215,8 +215,11 @@ function proceedToCheckout() {
  */
 function handleCheckoutForm(event) {
   event.preventDefault();
-  if (typeof window.processStripePayment === 'function') {
-    window.processStripePayment(event);
+  const paymentHandler = (window.lyrionCheckout && typeof window.lyrionCheckout.processPayment === 'function')
+    ? window.lyrionCheckout.processPayment
+    : null;
+  if (paymentHandler) {
+    paymentHandler(event);
     return;
   }
   showToast('Payment is currently unavailable. Please try again in a moment.', 'error');

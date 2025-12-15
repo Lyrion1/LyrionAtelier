@@ -681,6 +681,19 @@ p {
   gap: 0.35rem;
 }
 
+.payment-helper-text {
+  margin-top: 0.5rem;
+}
+
+.payment-message {
+  min-height: 1.5rem;
+  color: var(--muted);
+}
+
+.payment-message.error {
+  color: var(--error);
+}
+
 label {
   font-weight: 600;
 }
