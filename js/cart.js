@@ -215,29 +215,14 @@ function proceedToCheckout() {
  */
 function handleCheckoutForm(event) {
   event.preventDefault();
-  
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  if (cart.length === 0) {
-    showToast('Your cart is empty!', 'error');
+  const paymentHandler = (window.lyrionCheckout && typeof window.lyrionCheckout.processPayment === 'function')
+    ? window.lyrionCheckout.processPayment
+    : null;
+  if (paymentHandler) {
+    paymentHandler(event);
     return;
   }
-  
-  const submitBtn = event.target.querySelector('button[type="submit"]');
-  showLoading(submitBtn);
-  
-  // Simulate payment processing
-  setTimeout(() => {
-    hideLoading(submitBtn);
-    showToast('Thank you for your order! Your cosmic package is on its way to you. 🌟', 'success');
-    
-    // Clear cart
-    localStorage.removeItem('cart');
-    
-    // Redirect to home page
-    setTimeout(() => {
-      window.location.href = 'index.html';
-    }, 2000);
-  }, 2000);
+  showToast('Payment is currently unavailable. Please try again in a moment.', 'error');
 }
 
 /**
@@ -319,9 +304,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Add event listener for checkout form
-  const checkoutForm = document.getElementById('checkout-form');
-  if (checkoutForm) {
-    checkoutForm.addEventListener('submit', handleCheckoutForm);
-  }
 });

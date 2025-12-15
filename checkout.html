@@ -70,7 +70,13 @@
             <label for="address">Shipping address</label>
             <textarea id="address" name="address" rows="3" required placeholder="123 Cosmic Way, Celestial City"></textarea>
           </div>
-          <button class="btn btn-primary" type="submit">Place order</button>
+          <div class="form-group">
+            <label for="payment-element">Payment</label>
+            <div id="payment-element" class="payment-element"></div>
+            <p class="muted payment-helper-text">Card details are securely encrypted by Stripe.</p>
+          </div>
+          <div id="payment-message" class="payment-message" role="alert" aria-live="polite"></div>
+          <button class="btn btn-primary" type="submit" id="pay-now-button">Pay now</button>
         </form>
 
         <div class="cart-summary">
@@ -94,24 +100,197 @@
   <script src="js/products.js" defer></script>
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
+  <script src="js/shipping-config.js"></script>
+  <script src="https://js.stripe.com/v3"></script>
   <script>
-    function refreshSummary() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
+    const SHIPPING_THRESHOLD = (window.shippingConfig && window.shippingConfig.SHIPPING_THRESHOLD) || 50;
+    const SHIPPING_COST = (window.shippingConfig && window.shippingConfig.SHIPPING_COST) || 5.99;
+
+    function calculateTotals(cart) {
       const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      const shipping = subtotal > 50 ? 0 : (cart.length ? 5.99 : 0);
+      const shipping = subtotal > SHIPPING_THRESHOLD ? 0 : (cart.length ? SHIPPING_COST : 0);
       const total = subtotal + shipping;
+      return { subtotal, shipping, total };
+    }
+
+    function refreshSummary() {
+      const cart = getCart();
+      const { subtotal, shipping, total } = calculateTotals(cart);
       document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
       document.getElementById('cart-shipping').textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
       document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+      return { cart, totals: { subtotal, shipping, total } };
     }
+
+    const stripeState = {
+      stripe: null,
+      elements: null,
+      paymentElement: null,
+      clientSecret: null,
+      initializing: false,
+      initializingPromise: null,
+    };
+
+    const allowedReturnOrigins = (window.shippingConfig && window.shippingConfig.ALLOWED_ORIGINS) || ['https://lyrionatelier.com', 'https://www.lyrionatelier.com'];
+
+    function resolveReturnUrlBase() {
+      const origin = window.location.origin || '';
+      if (allowedReturnOrigins.includes(origin)) return origin;
+      if (origin.endsWith('.netlify.app')) return origin;
+      if (origin.startsWith('http://localhost:')) return origin;
+      return allowedReturnOrigins[0];
+    }
+
+    function setPaymentMessage(message, type = 'info') {
+      const messageEl = document.getElementById('payment-message');
+      if (!messageEl) return;
+      messageEl.textContent = message;
+      messageEl.className = type === 'error' ? 'payment-message error' : 'payment-message';
+    }
+
+    function setLoading(isLoading) {
+      const payButton = document.getElementById('pay-now-button');
+      if (!payButton) return;
+      payButton.disabled = isLoading;
+      payButton.textContent = isLoading ? 'Processing...' : 'Pay now';
+    }
+
+    function unmountPaymentElement() {
+      if (stripeState.paymentElement) {
+        stripeState.paymentElement.unmount();
+        stripeState.paymentElement = null;
+      }
+    }
+
+    function getFormData() {
+      return {
+        name: document.getElementById('full-name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        address: document.getElementById('address').value.trim(),
+      };
+    }
+
+    async function initializeStripeElements() {
+      const cart = getCart();
+      if (!cart.length) {
+        setPaymentMessage('Your cart is empty.');
+        const payButton = document.getElementById('pay-now-button');
+        if (payButton) payButton.disabled = true;
+        return Promise.resolve(false);
+      }
+
+      if (stripeState.initializingPromise) {
+        return stripeState.initializingPromise;
+      }
+
+      stripeState.initializing = true;
+      stripeState.initializingPromise = (async () => {
+        setLoading(true);
+        try {
+          const response = await fetch('/.netlify/functions/create-payment-intent', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              items: cart,
+              currency: 'usd',
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error('Unable to start payment.');
+          }
+
+          const data = await response.json();
+
+          if (!stripeState.stripe) {
+            stripeState.stripe = Stripe(data.publishableKey);
+          }
+
+          unmountPaymentElement();
+
+          stripeState.clientSecret = data.clientSecret;
+          stripeState.elements = stripeState.stripe.elements({ clientSecret: data.clientSecret });
+          stripeState.paymentElement = stripeState.elements.create('payment');
+          stripeState.paymentElement.mount('#payment-element');
+          setPaymentMessage('');
+          return true;
+        } catch (error) {
+          console.error('Payment initialization failed', error);
+          setPaymentMessage('Payment setup failed. Please refresh and try again.', 'error');
+          return false;
+        } finally {
+          stripeState.initializing = false;
+          setLoading(false);
+          stripeState.initializingPromise = null;
+        }
+      })();
+
+      return stripeState.initializingPromise;
+    }
+
+    const processStripePayment = async (event) => {
+      event.preventDefault();
+      const cart = getCart();
+      if (!cart.length) {
+        setPaymentMessage('Your cart is empty.', 'error');
+        return;
+      }
+
+      setLoading(true);
+
+      if (!stripeState.paymentElement || !stripeState.clientSecret) {
+        const initialized = await initializeStripeElements();
+        if (!initialized) {
+          setPaymentMessage('Payment is not ready. Please try again.', 'error');
+          setLoading(false);
+          return;
+        }
+      }
+
+      if (!stripeState.stripe || !stripeState.elements || !stripeState.paymentElement || !stripeState.clientSecret) {
+        setPaymentMessage('Payment is not ready. Please try again.', 'error');
+        setLoading(false);
+        return;
+      }
+
+      setLoading(true);
+      setPaymentMessage('');
+      const customer = getFormData();
+      const returnUrlBase = resolveReturnUrlBase();
+
+      const { error } = await stripeState.stripe.confirmPayment({
+        elements: stripeState.elements,
+        confirmParams: {
+          return_url: `${returnUrlBase}/success.html`,
+          payment_method_data: {
+            billing_details: {
+              name: customer.name || undefined,
+              email: customer.email || undefined,
+              phone: customer.phone || undefined,
+            },
+          },
+        },
+      });
+
+      if (error) {
+        setPaymentMessage(error.message || 'Payment failed. Please try again.', 'error');
+        setLoading(false);
+      }
+    };
+
+    window.lyrionCheckout = window.lyrionCheckout || {};
+    window.lyrionCheckout.processPayment = processStripePayment;
 
     document.addEventListener('DOMContentLoaded', () => {
       updateCartCount();
       refreshSummary();
-      document.getElementById('checkout-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        showToast('Order received! (demo)', 'success');
-      });
+      initializeStripeElements();
+      const checkoutForm = document.getElementById('checkout-form');
+      if (checkoutForm) {
+        checkoutForm.addEventListener('submit', processStripePayment);
+      }
     });
   </script>
 </body>
