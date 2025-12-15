@@ -177,7 +177,6 @@
         let scriptElement = existingScript || document.createElement('script');
         const handleLoad = () => {
           if (window.Stripe) {
-            scriptElement.dataset.stripeLoaded = 'true';
             resolve(window.Stripe);
           } else {
             reject(new Error('Stripe.js failed to load.'));
@@ -189,9 +188,7 @@
             handleLoad();
             return;
           }
-          existingScript.addEventListener('load', handleLoad, { once: true });
-          existingScript.addEventListener('error', () => reject(new Error('Stripe.js failed to load.')), { once: true });
-          return;
+          scriptElement = document.createElement('script');
         }
 
         scriptElement.src = STRIPE_JS_URL;
