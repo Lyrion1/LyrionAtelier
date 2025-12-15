@@ -245,13 +245,17 @@
       }
     }
 
-    async function initializeStripeElements() {
+    async function initializeStripeElements(forceRefresh = false) {
       const cart = getCart();
       if (!cart.length) {
         setPaymentMessage('Your cart is empty.');
         const payButton = document.getElementById('pay-now-button');
         if (payButton) payButton.disabled = true;
         return Promise.resolve(false);
+      }
+
+      if (!forceRefresh && stripeState.stripe && stripeState.elements && stripeState.paymentElementMounted && stripeState.clientSecret) {
+        return true;
       }
 
       if (stripeState.initializingPromise) {
@@ -261,7 +265,6 @@
       stripeState.initializing = true;
       stripeState.initializingPromise = (async () => {
         setLoading(true);
-        const urlClientSecret = getClientSecretFromUrl();
         try {
           const response = await fetch(PAYMENT_INTENT_ENDPOINT, {
             method: 'POST',
@@ -270,21 +273,16 @@
               items: cart,
               currency: 'usd',
               customer: getFormData(),
-              clientSecret: urlClientSecret || undefined,
             }),
           });
 
           const data = await response.json().catch(() => null);
 
-          if (!response.ok || !data) {
+          if (!response.ok || !data || !data.clientSecret || !data.publishableKey) {
             const serverMessage = data && data.error ? data.error : 'Unable to start payment.';
             throw new Error(serverMessage);
           }
-
-          const clientSecret = data.clientSecret || urlClientSecret;
-          if (!data.publishableKey || !clientSecret) {
-            throw new Error('Missing payment configuration.');
-          }
+          const clientSecret = data.clientSecret;
 
           await ensureStripeJsLoaded();
           let stripeInstance;
@@ -303,8 +301,10 @@
           stripeState.paymentElement.mount('#payment-element');
           stripeState.paymentElementMounted = true;
           setPaymentMessage('Enter your payment details to complete checkout.');
-          if (clientSecret) {
-            updatePaymentStatus(stripeState.stripe, clientSecret);
+          const urlClientSecret = getClientSecretFromUrl();
+          const statusClientSecret = urlClientSecret || clientSecret;
+          if (statusClientSecret) {
+            updatePaymentStatus(stripeState.stripe, statusClientSecret);
           }
           return true;
         } catch (error) {
@@ -331,13 +331,11 @@
 
       setLoading(true);
 
-      if (!stripeState.paymentElement || !stripeState.clientSecret) {
-        const initialized = await initializeStripeElements();
-        if (!initialized) {
-          setPaymentMessage('Unable to start payment. Please try again.', 'error');
-          setLoading(false);
-          return;
-        }
+      const initialized = await initializeStripeElements(true);
+      if (!initialized) {
+        setPaymentMessage('Unable to start payment. Please try again.', 'error');
+        setLoading(false);
+        return;
       }
 
       if (!stripeState.stripe || !stripeState.elements || !stripeState.paymentElement || !stripeState.clientSecret || !stripeState.paymentElementMounted) {
