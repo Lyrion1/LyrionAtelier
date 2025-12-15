@@ -212,19 +212,41 @@
   
   function viewProduct(productId) {
     if (!window.printfulProducts || !Array.isArray(window.printfulProducts)) {
-      alert('Product details are unavailable right now.');
+      showToast('Product details are unavailable right now.', 'error');
       return;
     }
 
-    // For now, just alert - you can build a modal or detail page later
-    const product = window.printfulProducts.find(p => p.id === productId);
+    const product = window.printfulProducts.find(p => String(p.id) === String(productId));
     if (!product) {
-      alert('Product not found. Please try again.');
+      showToast('Product not found. Please try again.', 'error');
       return;
     }
 
-    alert(`Product: ${product.name}\nPrice: ${product.priceRange}\n\nClick OK to add Stripe checkout!`);
-    // TODO: Implement Stripe checkout with variant selection
+    const variant = (product.variants || [])[0];
+    const rawVariantId = variant ? variant.id : product.id;
+    const rawPrice = variant ? variant.price : product.lowestPrice;
+
+    if (rawVariantId === null || rawVariantId === undefined || rawPrice === null || rawPrice === undefined) {
+      showToast('Unable to add this item to cart right now.', 'error');
+      return;
+    }
+
+    const variantId = Number.parseInt(rawVariantId, 10);
+    const price = Number.parseFloat(rawPrice);
+    const sizeLabel = variant && variant.name ? variant.name : 'One Size';
+
+    if (!Number.isFinite(variantId) || !Number.isFinite(price)) {
+      showToast('Unable to add this item to cart right now.', 'error');
+      return;
+    }
+
+    addToCart(variantId, 1, sizeLabel, {
+      id: variantId,
+      name: product.name,
+      price,
+      image: (variant && variant.image) ? variant.image : product.thumbnail,
+      category: 'printful'
+    });
   }
   
   // Load products on page load

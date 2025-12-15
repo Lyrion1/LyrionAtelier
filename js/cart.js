@@ -6,36 +6,44 @@
  * @param {number} productId - The ID of the product to add
  * @param {number} quantity - The quantity to add (default: 1)
  */
-function addToCart(productId, quantity = 1) {
-  const product = products.find(p => p.id === productId);
+function addToCart(productId, quantity = 1, sizeOverride = null, customProduct = null) {
+  const product = customProduct || products.find(p => p.id === productId);
   if (!product) {
     showToast('Product not found', 'error');
+    return;
+  }
+
+  const targetId = product.id;
+  const targetIdStr = String(targetId);
+  const price = Number.parseFloat(product.price);
+  if (!Number.isFinite(price)) {
+    showToast('Invalid price for this item.', 'error');
     return;
   }
   
   // Get selected size if on product page
   const selectedSize = document.querySelector('.size-option.active');
-  const size = selectedSize ? selectedSize.textContent : 'M';
+  const size = sizeOverride || (selectedSize ? selectedSize.textContent : 'M');
   
   // Get cart from localStorage
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   
   // Check if product already exists in cart with same size
   const existingItemIndex = cart.findIndex(item => 
-    item.id === productId && item.size === size
+    String(item.id) === targetIdStr && item.size === size
   );
   
   if (existingItemIndex > -1) {
     cart[existingItemIndex].quantity += quantity;
   } else {
     cart.push({
-      id: productId,
+      id: targetId,
       name: product.name,
-      price: product.price,
+      price,
       size: size,
       quantity: quantity,
       image: product.image,
-      category: product.category
+      category: product.category || 'custom'
     });
   }
   
