@@ -7,6 +7,7 @@ const SHIPPING_THRESHOLD = 50;
 const SHIPPING_COST = 5.99;
 const MINIMUM_AMOUNT_CENTS = 50;
 const DEFAULT_ORIGIN = allowedOrigins[0] || 'https://lyrionatelier.com';
+const SUPPORTED_CURRENCIES = ['usd'];
 
 if (!stripeSecretKey) {
   console.warn('STRIPE_SECRET_KEY is not set. Stripe payments will fail.');
@@ -56,13 +57,6 @@ function calculateTotals(items = []) {
   return { subtotal, shipping, total };
 }
 
-function extractPaymentIntentId(clientSecret = '') {
-  const secretParts = clientSecret.split('_secret');
-  const intentId = secretParts.length > 1 ? secretParts[0] : null;
-  if (!intentId || !intentId.startsWith('pi_')) return null;
-  return intentId;
-}
-
 exports.handler = async (event) => {
   const requestOrigin = event.headers.origin || event.headers.Origin;
   const headers = buildHeaders(requestOrigin);
@@ -86,9 +80,8 @@ exports.handler = async (event) => {
   try {
     const payload = JSON.parse(event.body || '{}');
     const rawItems = Array.isArray(payload.items) ? payload.items : [];
-    const currency = payload.currency || 'usd';
+    const currency = SUPPORTED_CURRENCIES.includes((payload.currency || '').toLowerCase()) ? payload.currency.toLowerCase() : 'usd';
     const customer = payload.customer || {};
-    const clientSecret = payload.clientSecret;
 
     const items = sanitizeItems(rawItems);
 
@@ -108,39 +101,17 @@ exports.handler = async (event) => {
 
     const paymentIntentId = clientSecret ? extractPaymentIntentId(clientSecret) : null;
 
-    let intent = null;
-
-    if (paymentIntentId) {
-      try {
-        intent = await stripe.paymentIntents.update(paymentIntentId, {
-          amount,
-          currency,
-          receipt_email: customer.email || undefined,
-          metadata: {
-            customer_name: customer.name || '',
-            customer_email: customer.email || '',
-            customer_phone: customer.phone || '',
-          },
-        });
-      } catch (updateError) {
-        const logValue = updateError?.code || updateError?.message || 'unknown_error';
-        console.warn('Unable to update existing payment intent; creating a new one.', logValue);
-      }
-    }
-
-    if (!intent) {
-      intent = await stripe.paymentIntents.create({
-        amount,
-        currency,
-        automatic_payment_methods: { enabled: true },
-        receipt_email: customer.email || undefined,
-        metadata: {
-          customer_name: customer.name || '',
-          customer_email: customer.email || '',
-          customer_phone: customer.phone || '',
-        },
-      });
-    }
+    const intent = await stripe.paymentIntents.create({
+      amount,
+      currency,
+      automatic_payment_methods: { enabled: true },
+      receipt_email: customer.email || undefined,
+      metadata: {
+        customer_name: customer.name || '',
+        customer_email: customer.email || '',
+        customer_phone: customer.phone || '',
+      },
+    });
 
     return {
       statusCode: 200,
