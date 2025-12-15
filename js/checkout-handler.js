@@ -21,7 +21,7 @@ async function initiateCheckout(productData) {
       body: JSON.stringify({
         productName: name,
         productPrice: parseFloat(price),
-        productType: type || 'product',
+        productType: type || 'oracle_reading',
         variantId: variantId || null
       })
     });

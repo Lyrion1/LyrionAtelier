@@ -210,7 +210,7 @@ function updateVariant() {
   
   if (selectedVariant) {
     document.getElementById('modal-product-image').src = selectedVariant.image;
-    const priceValue = Number(selectedVariant.price);
+    const priceValue = parseFloat(selectedVariant.price);
     const formattedPrice = formatPrice(priceValue);
     if (!formattedPrice) {
       setVariantStatus('Pricing unavailable for this option', 'status-unavailable');
@@ -226,7 +226,7 @@ function updateVariant() {
       addBtn.textContent = `Buy Now - ${formattedPrice}`;
       addBtn.disabled = !selectedVariant.inStock;
       addBtn.setAttribute('data-name', productName);
-      addBtn.setAttribute('data-price', priceValue);
+      addBtn.setAttribute('data-price', priceValue.toFixed(2));
       if (variantId) {
         addBtn.setAttribute('data-variant-id', variantId);
       } else {
