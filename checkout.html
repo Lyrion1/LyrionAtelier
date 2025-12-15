@@ -173,7 +173,7 @@
       if (stripeState.stripeJsPromise) return stripeState.stripeJsPromise;
 
       stripeState.stripeJsPromise = new Promise((resolve, reject) => {
-        const existingScript = document.querySelector(`script[src="${STRIPE_JS_URL}"]`);
+        const existingScript = document.querySelector('script[src^="https://js.stripe.com/v3"]');
         const scriptEl = existingScript || document.createElement('script');
         const handleLoad = () => {
           if (window.Stripe) {
@@ -185,7 +185,7 @@
         };
 
         if (existingScript) {
-          if (existingScript.dataset.stripeLoaded === 'true' || window.Stripe) {
+          if (existingScript.dataset.stripeLoaded === 'true') {
             handleLoad();
             return;
           }
@@ -275,12 +275,11 @@
           }
 
           await ensureStripeJsLoaded();
-          if (!stripeState.stripe && window.Stripe) {
-            stripeState.stripe = window.Stripe(data.publishableKey);
-          }
-          if (!stripeState.stripe) {
+          const stripeInstance = stripeState.stripe || (window.Stripe ? window.Stripe(data.publishableKey) : null);
+          if (!stripeInstance) {
             throw new Error('Stripe.js not available.');
           }
+          stripeState.stripe = stripeInstance;
 
           unmountPaymentElement();
 
