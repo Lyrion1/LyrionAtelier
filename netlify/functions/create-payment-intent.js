@@ -27,7 +27,10 @@ function isOriginAllowed(origin) {
   if (!origin) return false;
   if (allowedOrigins.includes(origin)) return true;
   if (origin.endsWith('.netlify.app')) return true;
-  if (origin.startsWith('http://localhost')) return true;
+  if (origin.startsWith('http://localhost:')) {
+    const port = origin.split(':').pop();
+    return ['8888', '8000', '5173', '3000'].includes(port);
+  }
   return false;
 }
 
@@ -107,7 +110,6 @@ exports.handler = async (event) => {
 
     if (paymentIntentId) {
       try {
-        await stripe.paymentIntents.retrieve(paymentIntentId);
         intent = await stripe.paymentIntents.update(paymentIntentId, {
           amount,
           currency,
@@ -119,7 +121,7 @@ exports.handler = async (event) => {
           },
         });
       } catch (updateError) {
-        console.warn('Unable to update existing payment intent; creating a new one.', updateError);
+        console.warn('Unable to update existing payment intent; creating a new one.', updateError && updateError.code ? updateError.code : updateError);
       }
     }
 
