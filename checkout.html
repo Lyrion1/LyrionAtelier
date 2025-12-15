@@ -174,10 +174,10 @@
 
       stripeState.stripeJsPromise = new Promise((resolve, reject) => {
         const existingScript = document.querySelector(`script[src="${STRIPE_JS_URL}"]`);
-        let scriptEl = existingScript || document.createElement('script');
+        let scriptElement = existingScript || document.createElement('script');
         const handleLoad = () => {
           if (window.Stripe) {
-            scriptEl.dataset.stripeLoaded = 'true';
+            scriptElement.dataset.stripeLoaded = 'true';
             resolve(window.Stripe);
           } else {
             reject(new Error('Stripe.js failed to load.'));
@@ -185,7 +185,7 @@
         };
 
         if (existingScript) {
-          if (window.Stripe || existingScript.dataset.stripeLoaded === 'true') {
+          if (window.Stripe) {
             handleLoad();
             return;
           }
@@ -194,11 +194,11 @@
           return;
         }
 
-        scriptEl.src = STRIPE_JS_URL;
-        scriptEl.async = true;
-        scriptEl.addEventListener('load', handleLoad, { once: true });
-        scriptEl.addEventListener('error', () => reject(new Error('Stripe.js failed to load.')), { once: true });
-        document.head.appendChild(scriptEl);
+        scriptElement.src = STRIPE_JS_URL;
+        scriptElement.async = true;
+        scriptElement.addEventListener('load', handleLoad, { once: true });
+        scriptElement.addEventListener('error', () => reject(new Error('Stripe.js failed to load.')), { once: true });
+        document.head.appendChild(scriptElement);
       });
 
       return stripeState.stripeJsPromise;
@@ -277,7 +277,7 @@
           await ensureStripeJsLoaded();
           const stripeInstance = window.Stripe(data.publishableKey);
           if (!stripeInstance) {
-            throw new Error('Stripe.js not available.');
+            throw new Error('Stripe initialization failed.');
           }
           stripeState.stripe = stripeInstance;
 
