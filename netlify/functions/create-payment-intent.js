@@ -1,5 +1,9 @@
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'https://lyrionatelier.com,https://www.lyrionatelier.com,http://localhost:8888,http://localhost:8000,http://localhost:5173,http://localhost:3000').split(',').map(o => o.trim()).filter(Boolean);
+const SHIPPING_THRESHOLD = 50;
+const SHIPPING_COST = 5.99;
+const MINIMUM_AMOUNT_CENTS = 50;
 
 if (!stripeSecretKey) {
   console.warn('STRIPE_SECRET_KEY is not set. Stripe payments will fail.');
@@ -9,18 +13,18 @@ const stripe = stripeSecretKey ? require('stripe')(stripeSecretKey) : null;
 
 const headers = {
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': allowedOrigins[0] || '*',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
 function calculateTotals(items = []) {
   const subtotal = items.reduce((sum, item) => {
-    const price = Number(item.price) || 0;
-    const quantity = Number(item.quantity) || 0;
+    const price = Number(item.price ?? 0);
+    const quantity = Number(item.quantity ?? 0);
     return sum + price * quantity;
   }, 0);
-  const shipping = subtotal > 50 ? 0 : (items.length ? 5.99 : 0);
+  const shipping = subtotal > SHIPPING_THRESHOLD ? 0 : (items.length ? SHIPPING_COST : 0);
   const total = subtotal + shipping;
   return { subtotal, shipping, total };
 }
@@ -31,6 +35,11 @@ function extractPaymentIntentId(clientSecret = '') {
 }
 
 exports.handler = async (event) => {
+  const requestOrigin = event.headers.origin || event.headers.Origin;
+  if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
+    headers['Access-Control-Allow-Origin'] = requestOrigin;
+  }
+
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
   }
@@ -60,7 +69,7 @@ exports.handler = async (event) => {
 
     const { total } = calculateTotals(items);
     const amount = Math.round(total * 100);
-    if (!amount || amount < 50) {
+    if (!amount || amount < MINIMUM_AMOUNT_CENTS) {
       return {
         statusCode: 400,
         headers,
