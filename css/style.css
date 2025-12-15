@@ -1584,6 +1584,287 @@ textarea:focus {
 .oracle-reset:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
 @media (max-width: 768px) { .oracle-widget { bottom: 20px; right: 20px; } .oracle-widget-panel { width: calc(100vw - 40px); max-width: 380px; } }
 
+/* ==========================================
+CRYSTAL BALL ORACLE WIDGET
+========================================== */
+
+/* Main Container */
+.crystal-ball-container {
+position: fixed;
+bottom: 30px;
+right: 30px;
+z-index: 1000;
+cursor: pointer;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 12px;
+transition: transform 0.3s ease;
+filter: drop-shadow(0 8px 32px rgba(139, 92, 246, 0.6));
+}
+
+.crystal-ball-container:hover {
+transform: translateY(-5px);
+}
+
+/* Ball Assembly */
+.crystal-ball-assembly {
+position: relative;
+width: 120px;
+height: 120px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+/* Outer Glow Animation */
+.crystal-glow-outer {
+position: absolute;
+top: 10px;
+left: 10px;
+width: 100px;
+height: 100px;
+background: radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, rgba(139, 92, 246, 0) 70%);
+border-radius: 50%;
+animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+0%, 100% {
+transform: scale(1);
+opacity: 0.6;
+}
+50% {
+transform: scale(1.2);
+opacity: 0.9;
+}
+}
+
+/* Main Sphere */
+.crystal-sphere {
+position: relative;
+width: 90px;
+height: 90px;
+border-radius: 50%;
+background: linear-gradient(135deg,
+rgba(139, 92, 246, 0.95) 0%,
+rgba(99, 102, 241, 0.85) 50%,
+rgba(139, 92, 246, 0.95) 100%);
+box-shadow:
+inset 0 -10px 20px rgba(0, 0, 0, 0.3),
+inset 0 10px 20px rgba(255, 255, 255, 0.2),
+0 0 30px rgba(139, 92, 246, 0.7),
+0 8px 32px rgba(139, 92, 246, 0.6);
+overflow: hidden;
+z-index: 2;
+}
+
+/* Inner Light Effect */
+.crystal-inner-light {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 60%;
+height: 60%;
+background: radial-gradient(circle,
+rgba(255, 255, 255, 0.5) 0%,
+rgba(167, 139, 250, 0.3) 30%,
+transparent 70%);
+border-radius: 50%;
+animation: inner-pulse 3s ease-in-out infinite;
+}
+
+@keyframes inner-pulse {
+0%, 100% {
+opacity: 0.5;
+transform: translate(-50%, -50%) scale(1);
+}
+50% {
+opacity: 1;
+transform: translate(-50%, -50%) scale(1.1);
+}
+}
+
+/* Shine/Reflection */
+.crystal-shine {
+position: absolute;
+top: 15%;
+left: 25%;
+width: 30px;
+height: 30px;
+background: radial-gradient(circle,
+rgba(255, 255, 255, 0.8) 0%,
+rgba(255, 255, 255, 0) 70%);
+border-radius: 50%;
+}
+
+/* Mystical Particles */
+.mystical-particle {
+position: absolute;
+width: 3px;
+height: 3px;
+background: rgba(255, 255, 255, 0.9);
+border-radius: 50%;
+box-shadow: 0 0 6px rgba(167, 139, 250, 0.8);
+}
+
+.particle-1 {
+top: 20%;
+left: 30%;
+animation: float-particle 4s ease-in-out infinite;
+animation-delay: 0s;
+}
+
+.particle-2 {
+top: 60%;
+left: 70%;
+animation: float-particle 4s ease-in-out infinite;
+animation-delay: 1s;
+}
+
+.particle-3 {
+top: 80%;
+left: 20%;
+animation: float-particle 4s ease-in-out infinite;
+animation-delay: 2s;
+}
+
+.particle-4 {
+top: 40%;
+left: 80%;
+animation: float-particle 4s ease-in-out infinite;
+animation-delay: 3s;
+}
+
+@keyframes float-particle {
+0%, 100% {
+transform: translate(0, 0) scale(1);
+opacity: 0;
+}
+10%, 90% {
+opacity: 1;
+}
+50% {
+transform: translate(10px, -15px) scale(1.2);
+opacity: 1;
+}
+}
+
+/* Crystal Ball Stand */
+.crystal-stand {
+width: 70px;
+height: 15px;
+background: linear-gradient(180deg,
+rgba(139, 92, 246, 0.4) 0%,
+rgba(99, 102, 241, 0.6) 100%);
+border-radius: 50% 50% 0 0;
+box-shadow:
+inset 0 2px 4px rgba(255, 255, 255, 0.2),
+0 4px 8px rgba(0, 0, 0, 0.3);
+margin-top: -5px;
+position: relative;
+z-index: 1;
+}
+
+.crystal-stand::after {
+content: '';
+position: absolute;
+bottom: -8px;
+left: 50%;
+transform: translateX(-50%);
+width: 60px;
+height: 8px;
+background: linear-gradient(180deg,
+rgba(99, 102, 241, 0.6) 0%,
+rgba(99, 102, 241, 0.3) 100%);
+border-radius: 50%;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Text Label */
+.crystal-label {
+background: linear-gradient(135deg,
+rgba(139, 92, 246, 0.3),
+rgba(99, 102, 241, 0.2));
+border: 1.5px solid rgba(139, 92, 246, 0.5);
+border-radius: 20px;
+padding: 8px 20px;
+backdrop-filter: blur(10px);
+box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+}
+
+.crystal-text {
+color: #a78bfa;
+font-size: 14px;
+font-weight: 600;
+text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+white-space: nowrap;
+}
+
+/* Hover Effects */
+.crystal-ball-container:hover .crystal-glow-outer {
+animation: pulse-glow-fast 1s ease-in-out infinite;
+}
+
+@keyframes pulse-glow-fast {
+0%, 100% {
+transform: scale(1);
+}
+50% {
+transform: scale(1.3);
+}
+}
+
+.crystal-ball-container:hover .crystal-sphere {
+box-shadow:
+inset 0 -10px 20px rgba(0, 0, 0, 0.3),
+inset 0 10px 20px rgba(255, 255, 255, 0.2),
+0 0 50px rgba(139, 92, 246, 0.9),
+0 8px 40px rgba(139, 92, 246, 0.8);
+}
+
+.crystal-ball-container:hover .crystal-text {
+color: #ffffff;
+text-shadow: 0 0 20px rgba(167, 139, 250, 0.9);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+.crystal-ball-container {
+bottom: 20px;
+right: 20px;
+}
+
+.crystal-ball-assembly {
+width: 100px;
+height: 100px;
+}
+
+.crystal-sphere {
+width: 75px;
+height: 75px;
+}
+
+.crystal-glow-outer {
+width: 85px;
+height: 85px;
+}
+
+.crystal-stand {
+width: 60px;
+height: 12px;
+}
+
+.crystal-label {
+padding: 6px 16px;
+}
+
+.crystal-text {
+font-size: 12px;
+}
+}
+
 /* ========================================
 CODEX - TIERED EVENT LISTINGS
 ======================================== */
