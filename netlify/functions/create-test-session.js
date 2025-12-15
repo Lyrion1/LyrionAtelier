@@ -1,10 +1,21 @@
 // netlify/functions/create-test-session.js
+// Test checkout is disabled unless ENABLE_TEST_CHECKOUT === 'true'
+const ENABLED = process.env.ENABLE_TEST_CHECKOUT === 'true';
+
 // Prefer test key for the test endpoint; fall back to live if not set
 const stripe = require('stripe')(
 process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY
 );
 
 exports.handler = async (event) => {
+  if (!ENABLED) {
+    return {
+      statusCode: 403,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'Test checkout disabled (production mode).' })
+    };
+  }
+
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
