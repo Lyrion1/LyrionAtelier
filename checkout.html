@@ -276,6 +276,10 @@
             throw new Error(serverMessage);
           }
 
+          if (!data) {
+            throw new Error('Unable to start payment.');
+          }
+
           const clientSecret = data.clientSecret || urlClientSecret;
           if (!data.publishableKey || !clientSecret) {
             throw new Error('Missing payment configuration.');

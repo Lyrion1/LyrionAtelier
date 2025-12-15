@@ -1,6 +1,8 @@
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'https://lyrionatelier.com,https://www.lyrionatelier.com,http://localhost:8888,http://localhost:8000,http://localhost:5173,http://localhost:3000').split(',').map(o => o.trim()).filter(Boolean);
+const DEFAULT_ALLOWED_ORIGINS = 'https://lyrionatelier.com,https://www.lyrionatelier.com,http://localhost:8888,http://localhost:8000,http://localhost:5173,http://localhost:3000';
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || DEFAULT_ALLOWED_ORIGINS).split(',').map(o => o.trim()).filter(Boolean);
+const allowedLocalhostPorts = (process.env.ALLOWED_LOCALHOST_PORTS || '8888,8000,5173,3000').split(',').map(p => p.trim()).filter(Boolean);
 const SHIPPING_THRESHOLD = 50;
 const SHIPPING_COST = 5.99;
 const MINIMUM_AMOUNT_CENTS = 50;
@@ -29,17 +31,21 @@ function isOriginAllowed(origin) {
   if (origin.endsWith('.netlify.app')) return true;
   if (origin.startsWith('http://localhost:')) {
     const port = origin.split(':').pop();
-    return ['8888', '8000', '5173', '3000'].includes(port);
+    return allowedLocalhostPorts.includes(port);
   }
   return false;
 }
 
-function calculateTotals(items = []) {
-  const validItems = items.filter((item) => {
+function sanitizeItems(rawItems = []) {
+  return rawItems.filter((item) => {
     const price = Number(item.price);
     const quantity = Number(item.quantity);
     return Number.isFinite(price) && price > 0 && Number.isFinite(quantity) && quantity > 0;
   });
+}
+
+function calculateTotals(items = []) {
+  const validItems = sanitizeItems(items);
   const subtotal = validItems.reduce((sum, item) => {
     const price = Number(item.price);
     const quantity = Number(item.quantity);
@@ -84,11 +90,7 @@ exports.handler = async (event) => {
     const customer = payload.customer || {};
     const clientSecret = payload.clientSecret;
 
-    const items = rawItems.filter((item) => {
-      const price = Number(item.price);
-      const quantity = Number(item.quantity);
-      return Number.isFinite(price) && price > 0 && Number.isFinite(quantity) && quantity > 0;
-    });
+    const items = sanitizeItems(rawItems);
 
     if (!items.length) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Cart is empty.' }) };
@@ -121,7 +123,8 @@ exports.handler = async (event) => {
           },
         });
       } catch (updateError) {
-        console.warn('Unable to update existing payment intent; creating a new one.', updateError && updateError.code ? updateError.code : updateError);
+        const logValue = updateError && (updateError.code || updateError.message) ? (updateError.code || updateError.message) : 'unknown_error';
+        console.warn('Unable to update existing payment intent; creating a new one.', logValue);
       }
     }
 
