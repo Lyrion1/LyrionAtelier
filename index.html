@@ -104,11 +104,37 @@
   </footer>
 
   <div id="oracle-widget" class="oracle-widget">
-    <div class="oracle-widget-trigger">
-      <span class="oracle-icon"> </span>
-      <span class="oracle-text">Free Reading</span>
+    <!-- Crystal Ball Oracle Widget -->
+    <div id="crystal-ball-widget" class="crystal-ball-container" onclick="toggleOracleWidget()">
+      <div class="crystal-ball-assembly">
+        <!-- Outer Glow Effect -->
+        <div class="crystal-glow-outer"></div>
+
+        <!-- Main Crystal Ball Sphere -->
+        <div class="crystal-sphere">
+          <!-- Inner Light/Glow -->
+          <div class="crystal-inner-light"></div>
+
+          <!-- Shine/Reflection -->
+          <div class="crystal-shine"></div>
+
+          <!-- Floating Particles -->
+          <span class="mystical-particle particle-1"></span>
+          <span class="mystical-particle particle-2"></span>
+          <span class="mystical-particle particle-3"></span>
+          <span class="mystical-particle particle-4"></span>
+        </div>
+
+        <!-- Crystal Ball Stand/Base -->
+        <div class="crystal-stand"></div>
+      </div>
+
+      <!-- Text Label -->
+      <div class="crystal-label">
+        <span class="crystal-text">✨ Free Cosmic Reading</span>
+      </div>
     </div>
-    
+
     <div class="oracle-widget-panel" id="oracle-panel" style="display: none;">
       <div class="oracle-header">
         <h3> Your Cosmic Signature</h3>
