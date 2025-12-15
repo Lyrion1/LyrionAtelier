@@ -1,6 +1,4 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const ALLOWED_SHIPPING_COUNTRIES = ['US', 'CA', 'GB', 'AU', 'NZ', 'DE', 'FR', 'ES', 'IT', 'NL', 'BE'];
-
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
@@ -9,9 +7,13 @@ exports.handler = async (event) => {
   try {
     const { productName, productPrice, variantId, productType } = JSON.parse(event.body);
     const metadata = {
-      product_type: productType || 'merchandise',
+      product_type: productType || 'oracle_reading',
       product_name: productName,
     };
+
+    if (!productName || !productPrice) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Missing required fields' }) };
+    }
 
     if (variantId) {
       metadata.variant_id = String(variantId);
@@ -32,10 +34,7 @@ exports.handler = async (event) => {
       }],
       mode: 'payment',
       success_url: `${event.headers.origin || 'https://lyrionatelier.com'}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${event.headers.origin || 'https://lyrionatelier.com'}/shop.html`,
-      shipping_address_collection: productType === 'merchandise' ? {
-        allowed_countries: ALLOWED_SHIPPING_COUNTRIES,
-      } : undefined,
+      cancel_url: `${event.headers.origin || 'https://lyrionatelier.com'}/oracle.html`,
       billing_address_collection: 'required',
       metadata,
     });
