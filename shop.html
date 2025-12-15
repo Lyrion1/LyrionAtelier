@@ -11,14 +11,6 @@
   <title>Shop | Lyrīon Atelier</title>
   <link rel="icon" type="image/png" href="images/favicon/favicon.png">
   <link rel="stylesheet" href="css/style.css">
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-  </script>
 </head>
 <body>
   <a class="skip-to-content" href="#main-content">Skip to main content</a>
@@ -97,48 +89,6 @@
     </div>
   </footer>
 
-  <script src="js/products.js" defer></script>
-  <script src="js/cart.js" defer></script>
-  <script src="js/main.js" defer></script>
-  <script>
-    function renderProducts() {
-      const grid = document.getElementById('products-grid-local');
-      if (!grid) return;
-      const category = document.getElementById('filter-category').value;
-      const zodiac = document.getElementById('filter-zodiac').value;
-      grid.innerHTML = '';
-
-      products
-        .filter(p => (category === 'all' || p.category === category) && (zodiac === 'all' || p.zodiac === zodiac))
-        .forEach(product => {
-          const card = document.createElement('div');
-          card.className = 'product-card';
-          card.innerHTML = `
-            <div class="product-image">
-              ${product.image ? `<img src="${product.image}" alt="${product.name}" loading="lazy">` : `<div class="placeholder">✨</div>`}
-            </div>
-            <div>
-              <h3>${product.name}</h3>
-              <p class="muted">${product.description}</p>
-              <p class="price">$${product.price.toFixed(2)}</p>
-              <div class="button-row tight">
-                <a class="btn btn-outline" href="product.html?id=${product.id}">View</a>
-                <button class="btn btn-primary" type="button" onclick="addToCart(${product.id})">Add to cart</button>
-              </div>
-            </div>
-          `;
-          grid.appendChild(card);
-        });
-    }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    updateCartCount();
-    document.getElementById('filter-category').addEventListener('change', renderProducts);
-    document.getElementById('filter-zodiac').addEventListener('change', renderProducts);
-    renderProducts();
-  });
-  </script>
-
   <section class="shop-products-section">
     <div class="shop-header">
       <h1>Celestial Fashion</h1>
@@ -159,9 +109,9 @@
 
   <!-- Product Detail Modal -->
   <div id="product-modal" class="product-modal" style="display: none;">
-    <div class="modal-overlay" onclick="closeProductModal()"></div>
+    <div class="modal-overlay"></div>
     <div class="modal-content">
-      <button class="modal-close" onclick="closeProductModal()">×</button>
+      <button class="modal-close">×</button>
       
       <div class="modal-grid">
         <div class="modal-image">
@@ -176,14 +126,14 @@
           <div class="variant-selectors">
             <div class="selector-group">
               <label>Size</label>
-              <select id="size-selector" onchange="updateVariant()">
+              <select id="size-selector">
                 <option value="">Select size</option>
               </select>
             </div>
             
             <div class="selector-group">
               <label>Color</label>
-              <select id="color-selector" onchange="updateVariant()">
+              <select id="color-selector">
                 <option value="">Select color</option>
               </select>
             </div>
@@ -191,7 +141,7 @@
           
           <div id="variant-status" class="variant-status"></div>
           
-          <button id="add-to-cart-btn" class="add-to-cart-btn" onclick="proceedToCheckout()" disabled>
+          <button id="add-to-cart-btn" class="add-to-cart-btn" disabled>
             Add to Cart - <span id="variant-price">$0.00</span>
           </button>
         </div>
@@ -199,190 +149,12 @@
     </div>
   </div>
 
-  <script>
-  const escapeHtml = (value = '') =>
-    String(value)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
-
-  let currentProducts = [];
-  let currentProduct = null;
-  let selectedVariant = null;
-
-  // Load products from Printful
-  async function loadPrintfulProducts() {
-    const loadingEl = document.getElementById('products-loading');
-    const gridEl = document.getElementById('products-grid');
-    const errorEl = document.getElementById('products-error');
-    
-    try {
-      const response = await fetch('/.netlify/functions/printful-sync');
-      const data = await response.json();
-      
-      if (data.products && data.products.length > 0) {
-        currentProducts = data.products;
-        loadingEl.style.display = 'none';
-        gridEl.style.display = 'grid';
-        
-        gridEl.innerHTML = data.products.map(product => {
-        const safeProductId = escapeHtml(String(product.id || ''));
-        return `
-        <button class="product-card product-card-button" type="button" aria-label="View options for ${escapeHtml(product.name)}" onclick="openProductModal('${safeProductId}')">
-          <div class="product-image">
-            <img src="${escapeHtml(product.thumbnail)}" alt="${escapeHtml(product.name)}" loading="lazy">
-          </div>
-          <div class="product-info">
-            <h3>${escapeHtml(product.name)}</h3>
-            <p>${escapeHtml(product.description)}</p>
-            <div class="product-price">${escapeHtml(product.priceRange)}</div>
-            <button class="product-btn">View Options</button>
-          </div>
-        </button>
-        `;
-        }).join('');
-      } else {
-        throw new Error('No products found');
-      }
-      
-    } catch (error) {
-      console.error('Error loading products:', error);
-      loadingEl.style.display = 'none';
-      errorEl.style.display = 'block';
-    }
-  }
-
-  // Open product detail modal
-  function openProductModal(productId) {
-    currentProduct = currentProducts.find(p => String(p.id) === String(productId));
-    if (!currentProduct) return;
-    
-    document.getElementById('modal-product-name').textContent = currentProduct.name;
-    document.getElementById('modal-product-description').textContent = currentProduct.description;
-    document.getElementById('modal-product-price').textContent = currentProduct.priceRange;
-    document.getElementById('modal-product-image').src = currentProduct.thumbnail;
-    
-    // Populate size selector
-    const sizeSelector = document.getElementById('size-selector');
-    sizeSelector.innerHTML = '<option value="">Select size</option>' + 
-      currentProduct.sizes.map(size => {
-        const safeSize = escapeHtml(size);
-        return `<option value="${safeSize}">${safeSize}</option>`;
-      }).join('');
-    
-    // Populate color selector
-    const colorSelector = document.getElementById('color-selector');
-    colorSelector.innerHTML = '<option value="">Select color</option>' + 
-      currentProduct.colors.map(color => {
-        const safeColor = escapeHtml(color);
-        return `<option value="${safeColor}">${safeColor}</option>`;
-      }).join('');
-    
-    // Reset selections
-    selectedVariant = null;
-    document.getElementById('add-to-cart-btn').disabled = true;
-    document.getElementById('variant-status').textContent = '';
-    
-    // Show modal
-    document.getElementById('product-modal').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-
-  // Close modal
-  function closeProductModal() {
-    document.getElementById('product-modal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-    selectedVariant = null;
-  }
-
-  function setVariantStatus(message, statusClass) {
-    const statusEl = document.getElementById('variant-status');
-    statusEl.textContent = message;
-    statusEl.className = `variant-status ${statusClass}`;
-  }
-
-  function safeShowToast(message, type) {
-    if (typeof showToast === 'function') {
-      showToast(message, type);
-    } else {
-      alert(message);
-    }
-  }
-
-  function formatPrice(price) {
-    if (!Number.isFinite(price)) return null;
-    return `$${price.toFixed(2)}`;
-  }
-
-  // Update variant when size/color changes
-  function updateVariant() {
-    const selectedSize = document.getElementById('size-selector').value;
-    const selectedColor = document.getElementById('color-selector').value;
-    
-    if (!selectedSize || !selectedColor) {
-      selectedVariant = null;
-      document.getElementById('add-to-cart-btn').disabled = true;
-      setVariantStatus('', '');
-      return;
-    }
-    
-    // Find matching variant
-    selectedVariant = currentProduct.variants.find(v => 
-      v.size === selectedSize && v.color === selectedColor
-    );
-    
-    if (selectedVariant) {
-      document.getElementById('modal-product-image').src = selectedVariant.image;
-      const formattedPrice = formatPrice(selectedVariant.price);
-      if (!formattedPrice) {
-        setVariantStatus('Pricing unavailable for this option', 'status-unavailable');
-        document.getElementById('add-to-cart-btn').disabled = true;
-        return;
-      }
-      document.getElementById('variant-price').textContent = formattedPrice;
-      
-      if (selectedVariant.inStock) {
-        setVariantStatus('✓ In Stock', 'status-available');
-        document.getElementById('add-to-cart-btn').disabled = false;
-      } else {
-        setVariantStatus('Out of Stock', 'status-unavailable');
-        document.getElementById('add-to-cart-btn').disabled = true;
-      }
-    } else {
-      setVariantStatus('Combination not available', 'status-unavailable');
-      document.getElementById('add-to-cart-btn').disabled = true;
-    }
-  }
-
-  // Proceed to on-site checkout by adding the selected variant to the cart
-  function proceedToCheckout() {
-    if (!selectedVariant) return;
-    const btn = document.getElementById('add-to-cart-btn');
-    btn.textContent = 'Adding...';
-    btn.disabled = true;
-
-    const variantId = selectedVariant.id || selectedVariant.variant_id;
-    const productName = `${currentProduct.name} - ${selectedVariant.size}${selectedVariant.color ? ` / ${selectedVariant.color}` : ''}`;
-    const customProduct = {
-      id: variantId,
-      name: productName,
-      price: selectedVariant.price,
-      image: selectedVariant.image,
-      category: 'printful',
-      printfulVariantId: variantId,
-      variantId,
-    };
-
-    addToCart(variantId, 1, selectedVariant.size || 'One Size', customProduct);
-    safeShowToast(`${productName} added to cart. Redirecting to checkout…`, 'success');
-    window.location.href = 'checkout.html';
-  }
-
-  // Load products on page load
-  document.addEventListener('DOMContentLoaded', loadPrintfulProducts);
-  </script>
+  <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/shop-page.js" defer></script>
+  <script src="js/checkout-handler.js"></script>
+  <script src="js/shop-checkout.js"></script>
 
 </body>
 </html>
