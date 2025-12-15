@@ -49,7 +49,7 @@
       <div class="section-title">
         <p class="pill">Secure checkout</p>
         <h1>Ready to send to the stars</h1>
-        <p class="muted">Enter your details and we'll confirm your order.</p>
+        <p class="muted">Payment not connected yet - Stripe required to complete checkout.</p>
       </div>
 
       <div class="card two-column-grid">
@@ -106,6 +106,8 @@
     const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
     const SHIPPING_THRESHOLD = (window.shippingConfig && window.shippingConfig.SHIPPING_THRESHOLD) || 50;
     const SHIPPING_COST = (window.shippingConfig && window.shippingConfig.SHIPPING_COST) || 5.99;
+    const PLACEHOLDER_MESSAGE = 'Payment not connected yet - Stripe required';
+    const STRIPE_CONFIRMED_NOTICE = `${PLACEHOLDER_MESSAGE}; order confirmation remains disabled until Stripe is connected.`;
 
     function calculateTotals(cart) {
       const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -217,11 +219,11 @@
           stripeState.paymentElement = stripeState.elements.create('payment');
           stripeState.paymentElement.mount('#payment-element');
           stripeState.paymentElementMounted = true;
-          setPaymentMessage('');
+          setPaymentMessage(PLACEHOLDER_MESSAGE);
           return true;
         } catch (error) {
           console.error('Payment initialization failed', error);
-          setPaymentMessage('Payment setup failed. Please refresh and try again.', 'error');
+          setPaymentMessage(PLACEHOLDER_MESSAGE, 'error');
           return false;
         } finally {
           stripeState.initializing = false;
@@ -246,27 +248,27 @@
       if (!stripeState.paymentElement || !stripeState.clientSecret) {
         const initialized = await initializeStripeElements();
         if (!initialized) {
-          setPaymentMessage('Payment is not ready. Please try again.', 'error');
+          setPaymentMessage(PLACEHOLDER_MESSAGE, 'error');
           setLoading(false);
           return;
         }
       }
 
       if (!stripeState.stripe || !stripeState.elements || !stripeState.paymentElement || !stripeState.clientSecret || !stripeState.paymentElementMounted) {
-        setPaymentMessage('Payment is not ready. Please try again.', 'error');
+        setPaymentMessage(PLACEHOLDER_MESSAGE, 'error');
         setLoading(false);
         return;
       }
 
       setLoading(true);
-      setPaymentMessage('');
+      setPaymentMessage('Processing payment… Stripe confirmation required');
       const customer = getFormData();
       const returnUrlBase = resolveReturnUrlBase();
 
       const { error, paymentIntent } = await stripeState.stripe.confirmPayment({
         elements: stripeState.elements,
         confirmParams: {
-          return_url: `${returnUrlBase}/success.html`,
+          return_url: `${returnUrlBase}/checkout.html`,
           payment_method_data: {
             billing_details: {
               name: customer.name || undefined,
@@ -279,26 +281,28 @@
       });
 
       if (error) {
-        setPaymentMessage(error.message || 'Payment failed. Please try again.', 'error');
+        setPaymentMessage(PLACEHOLDER_MESSAGE, 'error');
         setLoading(false);
         console.log('Stripe payment not confirmed');
         return;
       }
 
       if (!paymentIntent || paymentIntent.status !== 'succeeded') {
-        setPaymentMessage('Payment could not be confirmed. Please try again.', 'error');
+        setPaymentMessage(PLACEHOLDER_MESSAGE, 'error');
         setLoading(false);
         console.log('Stripe payment not confirmed');
         return;
       }
 
-      window.location.href = `${returnUrlBase}/success.html`;
+      setPaymentMessage(STRIPE_CONFIRMED_NOTICE, 'info');
+      setLoading(false);
     };
 
     window.lyrionCheckout = window.lyrionCheckout || {};
     window.lyrionCheckout.processPayment = processStripePayment;
 
     document.addEventListener('DOMContentLoaded', () => {
+      setPaymentMessage(PLACEHOLDER_MESSAGE);
       updateCartCount();
       refreshSummary();
       initializeStripeElements();
