@@ -341,25 +341,6 @@ function displayFeaturedProducts() {
   displayProducts(featuredProducts);
 }
 
-// Display oracle readings
-function displayOracleReadings() {
-  const oracleGrid = document.getElementById('oracle-grid');
-  if (!oracleGrid) return;
-  
-  oracleReadings.forEach(reading => {
-    const oracleCard = document.createElement('div');
-    oracleCard.className = 'oracle-card';
-    oracleCard.innerHTML = `
-      <div class="oracle-icon">${reading.icon}</div>
-      <h3 class="oracle-title">${reading.name}</h3>
-      <p class="oracle-description">${reading.description}</p>
-      <div class="oracle-price">$${reading.price}</div>
-      <button class="btn btn-secondary" onclick="purchaseReading('${reading.id}')">Book Reading</button>
-    `;
-    oracleGrid.appendChild(oracleCard);
-  });
-}
-
 /**
  * Filter Products Based on User Selection
  * Applies filters for category, zodiac, and price range
