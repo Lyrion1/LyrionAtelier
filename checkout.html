@@ -173,7 +173,7 @@
       if (stripeState.stripeJsPromise) return stripeState.stripeJsPromise;
 
       stripeState.stripeJsPromise = new Promise((resolve, reject) => {
-        const existingScript = document.querySelector(`script[src="${STRIPE_JS_URL}"]`);
+        const existingScript = document.querySelector('script[src="https://js.stripe.com/v3/"]');
         let scriptElement = existingScript || document.createElement('script');
         const handleLoad = () => {
           if (window.Stripe) {
@@ -185,12 +185,10 @@
 
         if (existingScript) {
           if (window.Stripe) {
-            handleLoad();
+            resolve(window.Stripe);
             return;
           }
-          if (existingScript.parentNode) {
-            existingScript.parentNode.removeChild(existingScript);
-          }
+          existingScript.remove();
           scriptElement = document.createElement('script');
         }
 
