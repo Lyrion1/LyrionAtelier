@@ -1,5 +1,7 @@
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+const printfulApiKey = process.env.PRINTFUL_API_KEY;
+const fetch = require('node-fetch');
 const DEFAULT_ALLOWED_ORIGINS = 'https://lyrionatelier.com,https://www.lyrionatelier.com,http://localhost:8888,http://localhost:8000,http://localhost:5173,http://localhost:3000';
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || DEFAULT_ALLOWED_ORIGINS).split(',').map(o => o.trim()).filter(Boolean);
 const allowedLocalhostPorts = (process.env.ALLOWED_LOCALHOST_PORTS || '8888,8000,5173,3000').split(',').map(p => p.trim()).filter(Boolean);
@@ -8,6 +10,36 @@ const SHIPPING_COST = 5.99;
 const MINIMUM_AMOUNT_CENTS = 50;
 const DEFAULT_ORIGIN = allowedOrigins[0] || 'https://lyrionatelier.com';
 const SUPPORTED_CURRENCIES = ['usd'];
+const STATIC_PRICE_MAP = {
+  1: 34.99,
+  2: 59.99,
+  3: 44.99,
+  4: 34.99,
+  5: 59.99,
+  6: 44.99,
+  7: 34.99,
+  8: 59.99,
+  9: 44.99,
+  10: 34.99,
+  11: 59.99,
+  12: 44.99,
+  13: 32.99,
+  14: 62.99,
+  15: 47.99,
+  16: 36.99,
+  17: 64.99,
+  18: 46.99,
+  19: 35.99,
+  20: 61.99,
+  101: 65,
+  102: 55,
+  103: 52,
+  104: 60,
+  105: 70,
+  106: 58,
+  107: 50,
+  108: 75,
+};
 
 if (!stripeSecretKey) {
   console.warn('STRIPE_SECRET_KEY is not set. Stripe payments will fail.');
@@ -37,24 +69,62 @@ function isOriginAllowed(origin) {
   return false;
 }
 
-function sanitizeItems(rawItems = []) {
-  return rawItems.filter((item) => {
-    const price = Number(item.price);
-    const quantity = Number(item.quantity);
-    return Number.isFinite(price) && price > 0 && Number.isFinite(quantity) && quantity > 0;
-  });
+async function fetchPrintfulVariantPrice(variantId) {
+  if (!printfulApiKey || !variantId) return null;
+  try {
+    const response = await fetch(`https://api.printful.com/store/variants/${variantId}`, {
+      headers: {
+        Authorization: `Bearer ${printfulApiKey}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) return null;
+    const data = await response.json();
+    const price = Number(data?.result?.sync_variant?.retail_price);
+    return Number.isFinite(price) && price > 0 ? price : null;
+  } catch (error) {
+    console.error(`Unable to fetch Printful price for variant ${variantId}`, error);
+    return null;
+  }
 }
 
-function calculateTotals(items = []) {
-  const validItems = sanitizeItems(items);
-  const subtotal = validItems.reduce((sum, item) => {
-    const price = Number(item.price);
-    const quantity = Number(item.quantity);
-    return sum + price * quantity;
-  }, 0);
+async function normalizeItems(rawItems = []) {
+  const normalized = [];
+  for (const raw of rawItems) {
+    const quantity = Number(raw?.quantity);
+    if (!Number.isFinite(quantity) || quantity <= 0) continue;
+
+    const primaryId = raw?.id;
+    const variantId = raw?.printfulVariantId || raw?.variantId || raw?.variant_id || primaryId;
+    const numericId = Number(variantId);
+    let price = null;
+    let resolvedId = null;
+
+    if (Number.isFinite(numericId) && STATIC_PRICE_MAP[numericId]) {
+      price = STATIC_PRICE_MAP[numericId];
+      resolvedId = numericId;
+    } else if (Number.isFinite(numericId)) {
+      price = await fetchPrintfulVariantPrice(numericId);
+      resolvedId = numericId;
+    }
+
+    if (!price) continue;
+
+    normalized.push({
+      id: resolvedId,
+      quantity,
+      price,
+    });
+  }
+  return normalized;
+}
+
+async function calculateTotals(items = []) {
+  const validItems = await normalizeItems(items);
+  const subtotal = validItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const shipping = subtotal > SHIPPING_THRESHOLD ? 0 : (validItems.length ? SHIPPING_COST : 0);
   const total = subtotal + shipping;
-  return { subtotal, shipping, total };
+  return { subtotal, shipping, total, itemCount: validItems.length };
 }
 
 exports.handler = async (event) => {
@@ -83,13 +153,11 @@ exports.handler = async (event) => {
     const currency = SUPPORTED_CURRENCIES.includes((payload.currency || '').toLowerCase()) ? payload.currency.toLowerCase() : 'usd';
     const customer = payload.customer || {};
 
-    const items = sanitizeItems(rawItems);
+    const { total, itemCount } = await calculateTotals(rawItems);
 
-    if (!items.length) {
-      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Cart is empty.' }) };
+    if (!itemCount) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Cart is empty or invalid.' }) };
     }
-
-    const { total } = calculateTotals(items);
     const amount = Math.round(total * 100);
     if (!amount || amount < MINIMUM_AMOUNT_CENTS) {
       return {

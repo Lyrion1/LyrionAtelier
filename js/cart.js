@@ -35,6 +35,9 @@ function addToCart(productId, quantity = 1, sizeOverride = null, customProduct =
   
   if (existingItemIndex > -1) {
     cart[existingItemIndex].quantity += quantity;
+    if (product.printfulVariantId || product.variantId) {
+      cart[existingItemIndex].printfulVariantId = product.printfulVariantId || product.variantId;
+    }
   } else {
     cart.push({
       id: targetId,
@@ -43,7 +46,8 @@ function addToCart(productId, quantity = 1, sizeOverride = null, customProduct =
       size: size,
       quantity: quantity,
       image: product.image,
-      category: product.category || 'custom'
+      category: product.category || 'custom',
+      printfulVariantId: product.printfulVariantId || product.variantId || null
     });
   }
   
