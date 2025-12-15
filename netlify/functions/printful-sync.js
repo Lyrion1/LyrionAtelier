@@ -3,20 +3,13 @@ const fetch = require('node-fetch');
 const PRINTFUL_API_KEY = process.env.PRINTFUL_API_KEY;
 const PRINTFUL_API_URL = 'https://api.printful.com';
 
-async function printfulRequest(endpoint, method = 'GET', body = null) {
-  const options = {
-    method,
+async function printfulRequest(endpoint) {
+  const response = await fetch(`${PRINTFUL_API_URL}${endpoint}`, {
     headers: {
       'Authorization': `Bearer ${PRINTFUL_API_KEY}`,
       'Content-Type': 'application/json',
     },
-  };
-
-  if (body) {
-    options.body = JSON.stringify(body);
-  }
-
-  const response = await fetch(`${PRINTFUL_API_URL}${endpoint}`, options);
+  });
 
   if (!response.ok) {
     throw new Error(`Printful API error: ${response.status} ${response.statusText}`);
@@ -31,48 +24,56 @@ exports.handler = async (event) => {
   }
 
   try {
-    // Get all products from Printful store
+    // Get all store products
     const productsData = await printfulRequest('/store/products');
 
-    const products = productsData.result.map(product => ({
-      id: product.id,
-      name: product.name,
-      thumbnail: product.thumbnail_url,
-      variants: product.variants || [],
-    }));
-
-    // Get detailed info for each product including pricing
+    // Get detailed info for each product
     const detailedProducts = await Promise.all(
-      products.map(async (product) => {
+      productsData.result.map(async (product) => {
         try {
           const details = await printfulRequest(`/store/products/${product.id}`);
           const syncProduct = details.result.sync_product;
           const syncVariants = details.result.sync_variants;
 
-          // Get the lowest price variant for display
-          let lowestPrice = Infinity;
-          let highestPrice = 0;
+          // Group variants by size and color
+          const sizesSet = new Set();
+          const colorsSet = new Set();
 
           syncVariants.forEach(variant => {
-            const price = parseFloat(variant.retail_price);
-            if (price < lowestPrice) lowestPrice = price;
-            if (price > highestPrice) highestPrice = price;
+            if (variant.size) sizesSet.add(variant.size);
+            if (variant.color) colorsSet.add(variant.color);
           });
+
+          // Get price range
+          const prices = syncVariants.map(v => parseFloat(v.retail_price));
+          const minPrice = Math.min(...prices);
+          const maxPrice = Math.max(...prices);
+          const sizeOrder = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
+          const getSizeIndex = (size) => {
+            const idx = sizeOrder.indexOf(size);
+            return idx === -1 ? sizeOrder.length : idx;
+          };
 
           return {
             id: syncProduct.id,
             name: syncProduct.name,
             thumbnail: syncProduct.thumbnail_url,
             description: `Astrology-inspired ${syncProduct.name.toLowerCase()}`,
-            priceRange: lowestPrice === highestPrice
-              ? `$${lowestPrice.toFixed(2)}`
-              : `$${lowestPrice.toFixed(2)} - $${highestPrice.toFixed(2)}`,
-            lowestPrice: lowestPrice,
+            priceRange: minPrice === maxPrice
+              ? `$${minPrice.toFixed(2)}`
+              : `$${minPrice.toFixed(2)} - $${maxPrice.toFixed(2)}`,
+            sizes: Array.from(sizesSet).sort((a, b) => getSizeIndex(a) - getSizeIndex(b)),
+            colors: Array.from(colorsSet),
             variants: syncVariants.map(v => ({
               id: v.id,
+              variant_id: v.variant_id || null,
               name: v.name,
-              price: v.retail_price,
-              image: v.files?.[0]?.preview_url || syncProduct.thumbnail_url,
+              size: v.size || 'One Size',
+              color: v.color || 'Default',
+              price: parseFloat(v.retail_price),
+              // Prefer available preview files (mockups often appear later), fallback to product thumbnail
+              image: v.files?.[1]?.preview_url || v.files?.[0]?.preview_url || syncProduct.thumbnail_url,
+              inStock: v.availability_status !== 'out_of_stock',
             })),
           };
         } catch (error) {
@@ -82,7 +83,6 @@ exports.handler = async (event) => {
       })
     );
 
-    // Filter out any failed products
     const validProducts = detailedProducts.filter(p => p !== null);
 
     return {
@@ -90,7 +90,7 @@ exports.handler = async (event) => {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Cache-Control': 'public, max-age=300', // Cache for 5 minutes
+        'Cache-Control': 'public, max-age=600',
       },
       body: JSON.stringify({ products: validProducts }),
     };
@@ -99,7 +99,7 @@ exports.handler = async (event) => {
     console.error('Printful sync error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to sync products from Printful' }),
+      body: JSON.stringify({ error: 'Failed to sync products' }),
     };
   }
 };

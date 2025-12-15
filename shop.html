@@ -127,12 +127,12 @@
         });
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      updateCartCount();
-      document.getElementById('filter-category').addEventListener('change', renderProducts);
-      document.getElementById('filter-zodiac').addEventListener('change', renderProducts);
-      renderProducts();
-    });
+  document.addEventListener('DOMContentLoaded', () => {
+    updateCartCount();
+    document.getElementById('filter-category').addEventListener('change', renderProducts);
+    document.getElementById('filter-zodiac').addEventListener('change', renderProducts);
+    renderProducts();
+  });
   </script>
 
   <section class="shop-products-section">
@@ -143,7 +143,7 @@
     
     <div id="products-loading" class="products-loading">
       <div class="loading-spinner"></div>
-      <p>Loading products from the cosmos...</p>
+      <p>Summoning products from the cosmos...</p>
     </div>
     
     <div id="products-grid" class="products-grid" style="display: none;"></div>
@@ -152,6 +152,48 @@
       <p>Unable to load products. Please refresh the page.</p>
     </div>
   </section>
+
+  <!-- Product Detail Modal -->
+  <div id="product-modal" class="product-modal" style="display: none;">
+    <div class="modal-overlay" onclick="closeProductModal()"></div>
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeProductModal()">×</button>
+      
+      <div class="modal-grid">
+        <div class="modal-image">
+          <img id="modal-product-image" src="" alt="">
+        </div>
+        
+        <div class="modal-details">
+          <h2 id="modal-product-name"></h2>
+          <p id="modal-product-description"></p>
+          <div class="modal-price" id="modal-product-price"></div>
+          
+          <div class="variant-selectors">
+            <div class="selector-group">
+              <label>Size</label>
+              <select id="size-selector" onchange="updateVariant()">
+                <option value="">Select size</option>
+              </select>
+            </div>
+            
+            <div class="selector-group">
+              <label>Color</label>
+              <select id="color-selector" onchange="updateVariant()">
+                <option value="">Select color</option>
+              </select>
+            </div>
+          </div>
+          
+          <div id="variant-status" class="variant-status"></div>
+          
+          <button id="add-to-cart-btn" class="add-to-cart-btn" onclick="proceedToCheckout()" disabled>
+            Add to Cart - <span id="variant-price">$0.00</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
   const escapeHtml = (value = '') =>
@@ -162,6 +204,11 @@
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;');
 
+  let currentProducts = [];
+  let currentProduct = null;
+  let selectedVariant = null;
+
+  // Load products from Printful
   async function loadPrintfulProducts() {
     const loadingEl = document.getElementById('products-loading');
     const gridEl = document.getElementById('products-grid');
@@ -172,33 +219,26 @@
       const data = await response.json();
       
       if (data.products && data.products.length > 0) {
+        currentProducts = data.products;
         loadingEl.style.display = 'none';
         gridEl.style.display = 'grid';
         
         gridEl.innerHTML = data.products.map(product => {
-        const name = escapeHtml(product.name);
-        const description = escapeHtml(product.description);
-        const priceRange = escapeHtml(product.priceRange);
-        const thumbnail = escapeHtml(product.thumbnail);
-        const productId = escapeHtml(product.id);
-
+        const safeProductId = escapeHtml(String(product.id || ''));
         return `
-        <div class="product-card">
+        <button class="product-card product-card-button" type="button" aria-label="View options for ${escapeHtml(product.name)}" onclick="openProductModal('${safeProductId}')">
           <div class="product-image">
-            <img src="${thumbnail}" alt="${name}" loading="lazy">
+            <img src="${escapeHtml(product.thumbnail)}" alt="${escapeHtml(product.name)}" loading="lazy">
           </div>
           <div class="product-info">
-            <h3>${name}</h3>
-            <p>${description}</p>
-            <div class="product-price">${priceRange}</div>
-            <button onclick="viewProduct('${productId}')" class="product-btn">View Details</button>
+            <h3>${escapeHtml(product.name)}</h3>
+            <p>${escapeHtml(product.description)}</p>
+            <div class="product-price">${escapeHtml(product.priceRange)}</div>
+            <button class="product-btn">View Options</button>
           </div>
-        </div>
+        </button>
         `;
         }).join('');
-        
-        // Store products globally for detail view
-        window.printfulProducts = data.products;
       } else {
         throw new Error('No products found');
       }
@@ -209,46 +249,148 @@
       errorEl.style.display = 'block';
     }
   }
-  
-  function viewProduct(productId) {
-    if (!window.printfulProducts || !Array.isArray(window.printfulProducts)) {
-      showToast('Product details are unavailable right now.', 'error');
-      return;
-    }
 
-    const product = window.printfulProducts.find(p => String(p.id) === String(productId));
-    if (!product) {
-      showToast('Product not found. Please try again.', 'error');
-      return;
-    }
-
-    const variant = (product.variants || [])[0];
-    const rawVariantId = variant ? variant.id : product.id;
-    const rawPrice = variant ? variant.price : product.lowestPrice;
-
-    if (rawVariantId === null || rawVariantId === undefined || rawPrice === null || rawPrice === undefined) {
-      showToast('Unable to add this item to cart right now.', 'error');
-      return;
-    }
-
-    const variantId = Number.parseInt(rawVariantId, 10);
-    const price = Number.parseFloat(rawPrice);
-    const sizeLabel = variant && variant.name ? variant.name : 'One Size';
-
-    if (!Number.isFinite(variantId) || !Number.isFinite(price)) {
-      showToast('Unable to add this item to cart right now.', 'error');
-      return;
-    }
-
-    addToCart(variantId, 1, sizeLabel, {
-      id: variantId,
-      name: product.name,
-      price,
-      image: (variant && variant.image) ? variant.image : product.thumbnail,
-      category: 'printful'
-    });
+  // Open product detail modal
+  function openProductModal(productId) {
+    currentProduct = currentProducts.find(p => String(p.id) === String(productId));
+    if (!currentProduct) return;
+    
+    document.getElementById('modal-product-name').textContent = currentProduct.name;
+    document.getElementById('modal-product-description').textContent = currentProduct.description;
+    document.getElementById('modal-product-price').textContent = currentProduct.priceRange;
+    document.getElementById('modal-product-image').src = currentProduct.thumbnail;
+    
+    // Populate size selector
+    const sizeSelector = document.getElementById('size-selector');
+    sizeSelector.innerHTML = '<option value="">Select size</option>' + 
+      currentProduct.sizes.map(size => {
+        const safeSize = escapeHtml(size);
+        return `<option value="${safeSize}">${safeSize}</option>`;
+      }).join('');
+    
+    // Populate color selector
+    const colorSelector = document.getElementById('color-selector');
+    colorSelector.innerHTML = '<option value="">Select color</option>' + 
+      currentProduct.colors.map(color => {
+        const safeColor = escapeHtml(color);
+        return `<option value="${safeColor}">${safeColor}</option>`;
+      }).join('');
+    
+    // Reset selections
+    selectedVariant = null;
+    document.getElementById('add-to-cart-btn').disabled = true;
+    document.getElementById('variant-status').textContent = '';
+    
+    // Show modal
+    document.getElementById('product-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
   }
-  
+
+  // Close modal
+  function closeProductModal() {
+    document.getElementById('product-modal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+    selectedVariant = null;
+  }
+
+  function setVariantStatus(message, statusClass) {
+    const statusEl = document.getElementById('variant-status');
+    statusEl.textContent = message;
+    statusEl.className = `variant-status ${statusClass}`;
+  }
+
+  function safeShowToast(message, type) {
+    if (typeof showToast === 'function') {
+      showToast(message, type);
+    } else {
+      alert(message);
+    }
+  }
+
+  function formatPrice(price) {
+    if (!Number.isFinite(price)) return null;
+    return `$${price.toFixed(2)}`;
+  }
+
+  // Update variant when size/color changes
+  function updateVariant() {
+    const selectedSize = document.getElementById('size-selector').value;
+    const selectedColor = document.getElementById('color-selector').value;
+    
+    if (!selectedSize || !selectedColor) {
+      selectedVariant = null;
+      document.getElementById('add-to-cart-btn').disabled = true;
+      setVariantStatus('', '');
+      return;
+    }
+    
+    // Find matching variant
+    selectedVariant = currentProduct.variants.find(v => 
+      v.size === selectedSize && v.color === selectedColor
+    );
+    
+    if (selectedVariant) {
+      document.getElementById('modal-product-image').src = selectedVariant.image;
+      const formattedPrice = formatPrice(selectedVariant.price);
+      if (!formattedPrice) {
+        setVariantStatus('Pricing unavailable for this option', 'status-unavailable');
+        document.getElementById('add-to-cart-btn').disabled = true;
+        return;
+      }
+      document.getElementById('variant-price').textContent = formattedPrice;
+      
+      if (selectedVariant.inStock) {
+        setVariantStatus('✓ In Stock', 'status-available');
+        document.getElementById('add-to-cart-btn').disabled = false;
+      } else {
+        setVariantStatus('Out of Stock', 'status-unavailable');
+        document.getElementById('add-to-cart-btn').disabled = true;
+      }
+    } else {
+      setVariantStatus('Combination not available', 'status-unavailable');
+      document.getElementById('add-to-cart-btn').disabled = true;
+    }
+  }
+
+  // Proceed to Stripe checkout with variant_id
+  async function proceedToCheckout() {
+    if (!selectedVariant) return;
+    if (!selectedVariant.variant_id) {
+      safeShowToast('Variant unavailable. Please choose another option.', 'error');
+      return;
+    }
+    
+    const btn = document.getElementById('add-to-cart-btn');
+    btn.textContent = 'Processing...';
+    btn.disabled = true;
+    
+    try {
+      const response = await fetch('/.netlify/functions/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          productName: `${currentProduct.name} - ${selectedVariant.size} - ${selectedVariant.color}`,
+          productPrice: selectedVariant.price,
+          variantId: selectedVariant.variant_id,
+          productType: 'merchandise'
+        })
+      });
+      
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No checkout URL received');
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      safeShowToast('Unable to proceed to checkout. Please try again.', 'error');
+      const formattedPrice = formatPrice(selectedVariant.price) || '$0.00';
+      btn.textContent = `Add to Cart - ${formattedPrice}`;
+      btn.disabled = false;
+    }
+  }
+
   // Load products on page load
   document.addEventListener('DOMContentLoaded', loadPrintfulProducts);
   </script>
