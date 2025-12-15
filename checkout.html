@@ -101,13 +101,14 @@
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="js/shipping-config.js"></script>
-  <script src="https://js.stripe.com/v3"></script>
+  <script src="https://js.stripe.com/v3/"></script>
   <script>
     const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
     const SHIPPING_THRESHOLD = (window.shippingConfig && window.shippingConfig.SHIPPING_THRESHOLD) || 50;
     const SHIPPING_COST = (window.shippingConfig && window.shippingConfig.SHIPPING_COST) || 5.99;
     const PLACEHOLDER_MESSAGE = 'Payment not connected yet - Stripe required';
     const STRIPE_CONFIRMED_NOTICE = `${PLACEHOLDER_MESSAGE}; order confirmation remains disabled until Stripe is connected.`;
+    const STRIPE_JS_URL = 'https://js.stripe.com/v3/';
 
     function calculateTotals(cart) {
       const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -133,6 +134,8 @@
       initializing: false,
       initializingPromise: null,
       paymentElementMounted: false,
+      stripeJsPromise: null,
+      publishableKey: null,
     };
 
     const allowedReturnOrigins = (window.shippingConfig && window.shippingConfig.ALLOWED_ORIGINS) || ['https://lyrionatelier.com', 'https://www.lyrionatelier.com'];
@@ -165,6 +168,31 @@
         stripeState.paymentElement = null;
         stripeState.paymentElementMounted = false;
       }
+    }
+
+    function ensureStripeJsLoaded() {
+      if (window.Stripe) return Promise.resolve(window.Stripe);
+      if (stripeState.stripeJsPromise) return stripeState.stripeJsPromise;
+
+      stripeState.stripeJsPromise = new Promise((resolve, reject) => {
+        const existingScript = document.querySelector(`script[src="${STRIPE_JS_URL}"]`) || document.querySelector('script[src="https://js.stripe.com/v3"]');
+        const scriptEl = existingScript || document.createElement('script');
+
+        if (!existingScript) {
+          scriptEl.src = STRIPE_JS_URL;
+          scriptEl.async = true;
+          scriptEl.onload = () => resolve(window.Stripe);
+          scriptEl.onerror = () => reject(new Error('Stripe.js failed to load.'));
+          document.head.appendChild(scriptEl);
+        } else {
+          scriptEl.addEventListener('load', () => resolve(window.Stripe));
+          scriptEl.addEventListener('error', () => reject(new Error('Stripe.js failed to load.')));
+        }
+      }).finally(() => {
+        stripeState.stripeJsPromise = null;
+      });
+
+      return stripeState.stripeJsPromise;
     }
 
     function getFormData() {
@@ -237,8 +265,13 @@
             throw new Error('Missing payment configuration.');
           }
 
+          await ensureStripeJsLoaded();
+          stripeState.publishableKey = data.publishableKey;
+          if (!stripeState.stripe && window.Stripe) {
+            stripeState.stripe = window.Stripe(data.publishableKey);
+          }
           if (!stripeState.stripe) {
-            stripeState.stripe = Stripe(data.publishableKey);
+            throw new Error('Stripe.js not available.');
           }
 
           unmountPaymentElement();
