@@ -109,7 +109,7 @@
     const PLACEHOLDER_MESSAGE = 'Payment not connected yet - Stripe required';
     const STRIPE_CONFIRMED_NOTICE = `${PLACEHOLDER_MESSAGE}; order confirmation remains disabled until Stripe is connected.`;
     const STRIPE_JS_URL = 'https://js.stripe.com/v3/';
-    const STRIPE_JS_URL_NO_SLASH = STRIPE_JS_URL.replace(/\/$/, '');
+    const STRIPE_JS_URL_ALT = 'https://js.stripe.com/v3';
 
     function calculateTotals(cart) {
       const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -178,7 +178,7 @@
       stripeState.stripeJsPromise = new Promise((resolve, reject) => {
         const existingScript =
           document.querySelector(`script[src="${STRIPE_JS_URL}"]`) ||
-          document.querySelector(`script[src="${STRIPE_JS_URL_NO_SLASH}"]`);
+          document.querySelector(`script[src="${STRIPE_JS_URL_ALT}"]`);
         const scriptEl = existingScript || document.createElement('script');
         const handleLoad = () => {
           scriptEl.dataset.stripeLoaded = 'true';
@@ -186,7 +186,7 @@
         };
 
         if (existingScript) {
-          if (existingScript.dataset.stripeLoaded === 'true' || existingScript.readyState === 'complete') {
+          if (existingScript.dataset.stripeLoaded === 'true' || window.Stripe) {
             handleLoad();
             return;
           }
