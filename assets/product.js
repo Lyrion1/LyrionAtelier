@@ -4,6 +4,7 @@ gtag('js', new Date());
 gtag('config', 'G-XXXXXXXXXX');
 
 function loadProduct() {
+  if (typeof products === 'undefined') return;
   const params = new URLSearchParams(window.location.search);
   const id = parseInt(params.get('id'), 10);
   const product = products.find(p => p.id === id) || products[0];
@@ -39,7 +40,9 @@ function loadProduct() {
   }
 
   const addBtn = document.getElementById('add-to-cart-btn');
-  addBtn?.addEventListener('click', () => addToCart(product.id));
+  if (addBtn && typeof addToCart === 'function') {
+    addBtn.addEventListener('click', () => addToCart(product.id));
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
