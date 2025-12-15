@@ -10,12 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function bindCartActions() {
-  const checkoutButton = document.getElementById('checkout-button');
   const clearCartButton = document.getElementById('clear-cart-button');
-
-  checkoutButton?.addEventListener('click', () => {
-    window.location.href = 'checkout.html';
-  });
-
   clearCartButton?.addEventListener('click', clearCart);
 }
