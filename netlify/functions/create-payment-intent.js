@@ -1,135 +1,130 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const { SHIPPING_THRESHOLD, SHIPPING_COST, ALLOWED_ORIGINS } = require('../../js/shipping-config');
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+const DEFAULT_ALLOWED_ORIGINS = 'https://lyrionatelier.com,https://www.lyrionatelier.com,http://localhost:8888,http://localhost:8000,http://localhost:5173,http://localhost:3000';
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || DEFAULT_ALLOWED_ORIGINS).split(',').map(o => o.trim()).filter(Boolean);
+const allowedLocalhostPorts = (process.env.ALLOWED_LOCALHOST_PORTS || '8888,8000,5173,3000').split(',').map(p => p.trim()).filter(Boolean);
+const SHIPPING_THRESHOLD = 50;
+const SHIPPING_COST = 5.99;
+const MINIMUM_AMOUNT_CENTS = 50;
+const DEFAULT_ORIGIN = allowedOrigins[0] || 'https://lyrionatelier.com';
+const SUPPORTED_CURRENCIES = ['usd'];
 
-const MINIMUM_ORDER_AMOUNT_CENTS = 50;
+if (!stripeSecretKey) {
+  console.warn('STRIPE_SECRET_KEY is not set. Stripe payments will fail.');
+}
 
-const isAllowedOrigin = (origin = '') => {
-  if (!origin) return true;
-  if (ALLOWED_ORIGINS.includes(origin)) return true;
-  if (origin.endsWith('.netlify.app')) return true;
-  if (origin.startsWith('http://localhost:')) return true;
-  return false;
-};
+const stripe = stripeSecretKey ? require('stripe')(stripeSecretKey) : null;
 
-const buildCorsHeaders = (origin) => ({
-  'Access-Control-Allow-Origin': origin,
+const baseHeaders = {
+  'Content-Type': 'application/json',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
-});
-
-const calculateTotals = (items = []) => {
-  const subtotal = items.reduce((sum, item) => {
-    const price = Number(item.price);
-    const quantity = Number(item.quantity || 1);
-    if (!Number.isFinite(price) || !Number.isFinite(quantity)) {
-      return sum;
-    }
-    return sum + price * quantity;
-  }, 0);
-
-  const shipping = subtotal > SHIPPING_THRESHOLD ? 0 : (items.length ? SHIPPING_COST : 0);
-  const total = subtotal + shipping;
-
-  return { subtotal, shipping, total };
 };
 
+function buildHeaders(requestOrigin) {
+  const allowOrigin = isOriginAllowed(requestOrigin) ? requestOrigin : DEFAULT_ORIGIN;
+  return { ...baseHeaders, 'Access-Control-Allow-Origin': allowOrigin };
+}
+
+function isOriginAllowed(origin) {
+  if (!origin) return false;
+  if (allowedOrigins.includes(origin)) return true;
+  if (origin.endsWith('.netlify.app')) return true;
+  if (origin.startsWith('http://localhost:')) {
+    const port = origin.split(':').pop();
+    return allowedLocalhostPorts.includes(port);
+  }
+  return false;
+}
+
+function sanitizeItems(rawItems = []) {
+  return rawItems.filter((item) => {
+    const price = Number(item.price);
+    const quantity = Number(item.quantity);
+    return Number.isFinite(price) && price > 0 && Number.isFinite(quantity) && quantity > 0;
+  });
+}
+
+function calculateTotals(items = []) {
+  const validItems = sanitizeItems(items);
+  const subtotal = validItems.reduce((sum, item) => {
+    const price = Number(item.price);
+    const quantity = Number(item.quantity);
+    return sum + price * quantity;
+  }, 0);
+  const shipping = subtotal > SHIPPING_THRESHOLD ? 0 : (validItems.length ? SHIPPING_COST : 0);
+  const total = subtotal + shipping;
+  return { subtotal, shipping, total };
+}
+
 exports.handler = async (event) => {
-  const originHeader = (event.headers && (event.headers.origin || event.headers.Origin)) || '';
-  const corsOrigin = isAllowedOrigin(originHeader)
-    ? (originHeader || ALLOWED_ORIGINS[0])
-    : ALLOWED_ORIGINS[0];
-  const corsHeaders = buildCorsHeaders(corsOrigin);
+  const requestOrigin = event.headers.origin || event.headers.Origin;
+  const headers = buildHeaders(requestOrigin);
 
   if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers: corsHeaders, body: '' };
-  }
-
-  if (!isAllowedOrigin(originHeader) && originHeader) {
-    return {
-      statusCode: 403,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Origin not allowed' }),
-    };
+    return { statusCode: 200, headers, body: '' };
   }
 
   if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Method not allowed' }),
-    };
+    return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  if (!process.env.STRIPE_SECRET_KEY) {
+  if (!stripe || !publishableKey) {
     return {
       statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Payment configuration error' }),
-    };
-  }
-
-  const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
-  if (!publishableKey) {
-    return {
-      statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Payment configuration error' }),
+      headers,
+      body: JSON.stringify({ error: 'Stripe is not configured.' }),
     };
   }
 
   try {
     const payload = JSON.parse(event.body || '{}');
-    const existingClientSecret = typeof payload.clientSecret === 'string' && payload.clientSecret.startsWith('pi_')
-      ? payload.clientSecret
-      : null;
-
-    const items = Array.isArray(payload.items) ? payload.items : [];
-    const currency = (payload.currency || 'usd').toLowerCase();
+    const rawItems = Array.isArray(payload.items) ? payload.items : [];
+    const currency = SUPPORTED_CURRENCIES.includes((payload.currency || '').toLowerCase()) ? payload.currency.toLowerCase() : 'usd';
     const customer = payload.customer || {};
 
-    const { total } = calculateTotals(items);
-    const amountInCents = Math.round(total * 100);
+    const items = sanitizeItems(rawItems);
 
-    if (!amountInCents || amountInCents < MINIMUM_ORDER_AMOUNT_CENTS) {
+    if (!items.length) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Cart is empty.' }) };
+    }
+
+    const { total } = calculateTotals(items);
+    const amount = Math.round(total * 100);
+    if (!amount || amount < MINIMUM_AMOUNT_CENTS) {
       return {
         statusCode: 400,
-        headers: corsHeaders,
-        body: JSON.stringify({ error: 'Invalid order total' }),
+        headers,
+        body: JSON.stringify({ error: 'Invalid payment amount.' }),
       };
     }
 
-    const paymentIntent = existingClientSecret
-      ? await stripe.paymentIntents.retrieve(existingClientSecret.split('_secret')[0])
-      : await stripe.paymentIntents.create({
-          amount: amountInCents,
-          currency,
-          automatic_payment_methods: { enabled: true },
-          receipt_email: customer.email,
-          metadata: {
-            customer_name: customer.name || '',
-            customer_email: customer.email || '',
-            shipping_address: customer.address || '',
-            source: 'payment_element_checkout',
-          },
-        });
+    const intent = await stripe.paymentIntents.create({
+      amount,
+      currency,
+      automatic_payment_methods: { enabled: true },
+      receipt_email: customer.email || undefined,
+      metadata: {
+        customer_name: customer.name || '',
+        customer_email: customer.email || '',
+        customer_phone: customer.phone || '',
+      },
+    });
 
     return {
       statusCode: 200,
-      headers: {
-        ...corsHeaders,
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({
-        clientSecret: paymentIntent.client_secret,
+        clientSecret: intent.client_secret,
         publishableKey,
       }),
     };
   } catch (error) {
-    console.error('Error creating PaymentIntent:', error);
+    console.error('Error creating payment intent:', error);
     return {
       statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Unable to create payment. Please try again.' }),
+      headers,
+      body: JSON.stringify({ error: 'Unable to start payment.' }),
     };
   }
 };
