@@ -51,7 +51,7 @@ function calculateTotals(items = []) {
     const quantity = Number(item.quantity);
     return sum + price * quantity;
   }, 0);
-  const shipping = subtotal > SHIPPING_THRESHOLD ? 0 : (items.length ? SHIPPING_COST : 0);
+  const shipping = subtotal > SHIPPING_THRESHOLD ? 0 : (validItems.length ? SHIPPING_COST : 0);
   const total = subtotal + shipping;
   return { subtotal, shipping, total };
 }
@@ -123,7 +123,7 @@ exports.handler = async (event) => {
           },
         });
       } catch (updateError) {
-        const logValue = updateError && (updateError.code || updateError.message) ? (updateError.code || updateError.message) : 'unknown_error';
+        const logValue = updateError?.code || updateError?.message || 'unknown_error';
         console.warn('Unable to update existing payment intent; creating a new one.', logValue);
       }
     }
