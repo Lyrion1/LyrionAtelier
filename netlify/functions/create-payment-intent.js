@@ -4,7 +4,7 @@ const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'https://lyrionatelier.co
 const SHIPPING_THRESHOLD = 50;
 const SHIPPING_COST = 5.99;
 const MINIMUM_AMOUNT_CENTS = 50;
-const DEFAULT_ORIGIN = allowedOrigins[0] || '';
+const DEFAULT_ORIGIN = allowedOrigins[0] || 'https://lyrionatelier.com';
 
 if (!stripeSecretKey) {
   console.warn('STRIPE_SECRET_KEY is not set. Stripe payments will fail.');
@@ -19,14 +19,27 @@ const baseHeaders = {
 };
 
 function buildHeaders(requestOrigin) {
-  const allowOrigin = requestOrigin && allowedOrigins.includes(requestOrigin) ? requestOrigin : DEFAULT_ORIGIN;
+  const allowOrigin = isOriginAllowed(requestOrigin) ? requestOrigin : DEFAULT_ORIGIN;
   return { ...baseHeaders, 'Access-Control-Allow-Origin': allowOrigin };
 }
 
+function isOriginAllowed(origin) {
+  if (!origin) return false;
+  if (allowedOrigins.includes(origin)) return true;
+  if (origin.endsWith('.netlify.app')) return true;
+  if (origin.startsWith('http://localhost')) return true;
+  return false;
+}
+
 function calculateTotals(items = []) {
-  const subtotal = items.reduce((sum, item) => {
-    const price = Number(item.price ?? 0);
-    const quantity = Number(item.quantity ?? 0);
+  const validItems = items.filter((item) => {
+    const price = Number(item.price);
+    const quantity = Number(item.quantity);
+    return Number.isFinite(price) && price > 0 && Number.isFinite(quantity) && quantity > 0;
+  });
+  const subtotal = validItems.reduce((sum, item) => {
+    const price = Number(item.price);
+    const quantity = Number(item.quantity);
     return sum + price * quantity;
   }, 0);
   const shipping = subtotal > SHIPPING_THRESHOLD ? 0 : (items.length ? SHIPPING_COST : 0);
@@ -36,7 +49,9 @@ function calculateTotals(items = []) {
 
 function extractPaymentIntentId(clientSecret = '') {
   const secretParts = clientSecret.split('_secret');
-  return secretParts.length > 1 ? secretParts[0] : null;
+  const intentId = secretParts.length > 1 ? secretParts[0] : null;
+  if (!intentId || !intentId.startsWith('pi_')) return null;
+  return intentId;
 }
 
 exports.handler = async (event) => {
@@ -88,21 +103,14 @@ exports.handler = async (event) => {
 
     const paymentIntentId = clientSecret ? extractPaymentIntentId(clientSecret) : null;
 
-    const intent = paymentIntentId
-      ? await stripe.paymentIntents.update(paymentIntentId, {
+    let intent = null;
+
+    if (paymentIntentId) {
+      try {
+        await stripe.paymentIntents.retrieve(paymentIntentId);
+        intent = await stripe.paymentIntents.update(paymentIntentId, {
           amount,
           currency,
-          receipt_email: customer.email || undefined,
-          metadata: {
-            customer_name: customer.name || '',
-            customer_email: customer.email || '',
-            customer_phone: customer.phone || '',
-          },
-        })
-      : await stripe.paymentIntents.create({
-          amount,
-          currency,
-          automatic_payment_methods: { enabled: true },
           receipt_email: customer.email || undefined,
           metadata: {
             customer_name: customer.name || '',
@@ -110,6 +118,24 @@ exports.handler = async (event) => {
             customer_phone: customer.phone || '',
           },
         });
+      } catch (updateError) {
+        console.warn('Unable to update existing payment intent; creating a new one.', updateError);
+      }
+    }
+
+    if (!intent) {
+      intent = await stripe.paymentIntents.create({
+        amount,
+        currency,
+        automatic_payment_methods: { enabled: true },
+        receipt_email: customer.email || undefined,
+        metadata: {
+          customer_name: customer.name || '',
+          customer_email: customer.email || '',
+          customer_phone: customer.phone || '',
+        },
+      });
+    }
 
     return {
       statusCode: 200,
