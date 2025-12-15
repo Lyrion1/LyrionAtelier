@@ -79,6 +79,10 @@ exports.handler = async (event) => {
 
   try {
     const payload = JSON.parse(event.body || '{}');
+    const existingClientSecret = typeof payload.clientSecret === 'string' && payload.clientSecret.startsWith('pi_')
+      ? payload.clientSecret
+      : null;
+
     const items = Array.isArray(payload.items) ? payload.items : [];
     const currency = (payload.currency || 'usd').toLowerCase();
     const customer = payload.customer || {};
@@ -94,18 +98,20 @@ exports.handler = async (event) => {
       };
     }
 
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: amountInCents,
-      currency,
-      automatic_payment_methods: { enabled: true },
-      receipt_email: customer.email,
-      metadata: {
-        customer_name: customer.name || '',
-        customer_email: customer.email || '',
-        shipping_address: customer.address || '',
-        source: 'payment_element_checkout',
-      },
-    });
+    const paymentIntent = existingClientSecret
+      ? await stripe.paymentIntents.retrieve(existingClientSecret.split('_secret')[0])
+      : await stripe.paymentIntents.create({
+          amount: amountInCents,
+          currency,
+          automatic_payment_methods: { enabled: true },
+          receipt_email: customer.email,
+          metadata: {
+            customer_name: customer.name || '',
+            customer_email: customer.email || '',
+            shipping_address: customer.address || '',
+            source: 'payment_element_checkout',
+          },
+        });
 
     return {
       statusCode: 200,
