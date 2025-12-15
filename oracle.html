@@ -78,7 +78,6 @@
           </div>
         </div>
       </section>
-
       <!-- Oracle Products Grid -->
       <section class="oracle-products-section">
         <div class="oracle-products-grid">
@@ -94,7 +93,7 @@
               <p>Foundational chart read with practical activations.</p>
               <div class="oracle-price">$70.00</div>
               <div class="oracle-card-buttons">
-                <a href="#" class="ask-oracle-btn">Ask the oracle</a>
+                <a href="contact.html" class="ask-oracle-btn">Ask the oracle</a>
                 <button class="book-reading-btn" data-product="natal-chart">Book</button>
               </div>
             </div>
@@ -111,7 +110,7 @@
               <p>Birthday-year forecast covering themes and opportunities.</p>
               <div class="oracle-price">$58.00</div>
               <div class="oracle-card-buttons">
-                <a href="#" class="ask-oracle-btn">Ask the oracle</a>
+                <a href="contact.html" class="ask-oracle-btn">Ask the oracle</a>
                 <button class="book-reading-btn" data-product="solar-return">Book</button>
               </div>
             </div>
@@ -128,7 +127,7 @@
               <p>Identify your current chapter and its lessons.</p>
               <div class="oracle-price">$50.00</div>
               <div class="oracle-card-buttons">
-                <a href="#" class="ask-oracle-btn">Ask the oracle</a>
+                <a href="contact.html" class="ask-oracle-btn">Ask the oracle</a>
                 <button class="book-reading-btn" data-product="life-path">Book</button>
               </div>
             </div>
@@ -145,7 +144,7 @@
               <p>Compatibility and dynamics between two charts.</p>
               <div class="oracle-price">$88.00</div>
               <div class="oracle-card-buttons">
-                <a href="#" class="ask-oracle-btn">Ask the oracle</a>
+                <a href="contact.html" class="ask-oracle-btn">Ask the oracle</a>
                 <button class="book-reading-btn" data-product="relationship">Book</button>
               </div>
             </div>
@@ -162,7 +161,7 @@
               <p>Vocational guidance and life purpose insights.</p>
               <div class="oracle-price">$75.00</div>
               <div class="oracle-card-buttons">
-                <a href="#" class="ask-oracle-btn">Ask the oracle</a>
+                <a href="contact.html" class="ask-oracle-btn">Ask the oracle</a>
                 <button class="book-reading-btn" data-product="career">Book</button>
               </div>
             </div>
@@ -179,7 +178,7 @@
               <p>Comprehensive analysis combining all aspects.</p>
               <div class="oracle-price">$155.00</div>
               <div class="oracle-card-buttons">
-                <a href="#" class="ask-oracle-btn">Ask the oracle</a>
+                <a href="contact.html" class="ask-oracle-btn">Ask the oracle</a>
                 <button class="book-reading-btn" data-product="cosmic-blueprint">Book</button>
               </div>
             </div>
@@ -255,7 +254,6 @@
   document.querySelectorAll('[data-product]').forEach(btn => {
   btn.addEventListener('click', (e) => {
   e.preventDefault();
-  window.handleBookClick = handleBookClick;
   handleBookClick(btn.getAttribute('data-product'), e);
   });
   });
