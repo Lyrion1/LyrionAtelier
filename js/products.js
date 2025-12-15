@@ -315,9 +315,16 @@ function displayProducts(productsToShow = products) {
         <div class="product-info">
           <h3 class="product-title">${product.name}</h3>
           <p class="product-price">$${product.price.toFixed(2)}</p>
-          <button class="btn btn-primary" onclick="event.stopPropagation(); addToCart(${product.id})" aria-label="Add ${product.name} to cart">Add to Cart</button>
+          <button class="btn btn-primary add-to-cart" type="button" aria-label="Add ${product.name} to cart">Add to Cart</button>
         </div>
       `;
+      const addButton = productCard.querySelector('.add-to-cart');
+      if (addButton) {
+        addButton.addEventListener('click', (event) => {
+          event.stopPropagation();
+          addToCart(product.id);
+        });
+      }
       
       // Navigate to product page on card click (except button)
       productCard.addEventListener('click', function(e) {
