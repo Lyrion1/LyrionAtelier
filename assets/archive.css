@@ -1,0 +1,9 @@
+.vault-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.vault-card{border:1px solid rgba(255,255,255,.15);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.02)}
+.vault-card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover}
+.vault-meta{padding:12px;display:grid;gap:8px}
+.vault-title{font-weight:700}
+.vault-tag{font-size:.9rem;opacity:.8}
+.vault-card form{display:flex;gap:8px}
+.vault-card input[type="email"]{flex:1;padding:8px 10px;border:1px solid rgba(255,255,255,.2);border-radius:10px;background:transparent;color:inherit}
+.vault-card button{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.2)}
