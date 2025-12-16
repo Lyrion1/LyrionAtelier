@@ -165,7 +165,7 @@
     </div>
   </footer>
 
-  <div class="crystal-ball-container" id="crystal-ball-trigger" onclick="openOracleWidget()">
+  <div class="crystal-ball-container" id="crystal-ball-trigger">
    <div class="crystal-ball-assembly">
    <div class="crystal-glow-outer"></div>
    <div class="crystal-sphere">
@@ -186,14 +186,14 @@
   <div id="oracle-panel" class="oracle-widget-panel" style="display: none;">
    <div class="oracle-header">
    <h3> Your Cosmic Signature</h3>
-   <button class="oracle-close" onclick="closeOracleWidget()">×</button>
+   <button class="oracle-close" id="oracle-close-btn">×</button>
    </div>
    
    <div class="oracle-content">
    <div class="oracle-intro" id="oracle-intro">
    <p>The stars have a message for you. When were you born?</p>
    <input type="text" id="birth-date" class="oracle-input" placeholder="MM/DD/YYYY (e.g., 03/15/1990)" maxlength="10">
-   <button onclick="getOracleReading()" class="oracle-submit">Reveal My Reading</button>
+   <button id="oracle-submit-btn" class="oracle-submit">Reveal My Reading</button>
    </div>
    
    <div class="oracle-loading" id="oracle-loading" style="display: none;">
@@ -206,11 +206,11 @@
    <div class="oracle-reading-text" id="reading-text"></div>
    <div class="oracle-urgency-msg" id="urgency-message"></div>
    <div class="oracle-actions">
-   <button onclick="bookFullReading()" class="oracle-cta-btn">Get Full Reading</button>
-   <button onclick="shareReading()" class="oracle-share-btn">Share</button>
+   <button id="book-reading-btn" class="oracle-cta-btn">Get Full Reading</button>
+   <button id="share-reading-btn" class="oracle-share-btn">Share</button>
    </div>
-   <button onclick="resetOracleWidget()" class="oracle-reset-btn">Try Another Date</button>
-   <button onclick="closeOracleWidget()" class="oracle-close-bottom-btn">Close</button>
+   <button id="reset-oracle-btn" class="oracle-reset-btn">Try Another Date</button>
+   <button id="oracle-close-bottom-btn" class="oracle-close-bottom-btn">Close</button>
    </div>
    </div>
   </div>
