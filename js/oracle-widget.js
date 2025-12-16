@@ -98,15 +98,15 @@ async function getOracleReading() {
     const urgencyMsg = document.getElementById('urgency-message');
     
     if (signBadge) {
-      signBadge.innerHTML = '<span style="font-size: 48px;">' + (data.zodiacSign || ' ') + '</span>';
+      signBadge.textContent = data.zodiacSign || ' ';
     }
     
     if (readingText) {
-      readingText.innerHTML = '<p>' + data.reading + '</p>';
+      readingText.textContent = data.reading;
     }
     
     if (urgencyMsg && data.urgencyMessage) {
-      urgencyMsg.innerHTML = '<p>' + data.urgencyMessage + '</p>';
+      urgencyMsg.textContent = data.urgencyMessage;
       urgencyMsg.style.display = 'block';
     } else if (urgencyMsg) {
       urgencyMsg.style.display = 'none';
@@ -145,8 +145,10 @@ function shareReading() {
 }
 
 function resetOracleWidget() {
-  document.getElementById('oracle-result')?.style?.setProperty('display', 'none');
-  document.getElementById('oracle-intro')?.style?.setProperty('display', 'block');
+  const result = document.getElementById('oracle-result');
+  const intro = document.getElementById('oracle-intro');
+  if (result) result.style.display = 'none';
+  if (intro) intro.style.display = 'block';
   const input = document.getElementById('birth-date');
   if (input) input.value = '';
   window.currentReading = null;
