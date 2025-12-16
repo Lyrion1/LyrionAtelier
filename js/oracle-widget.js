@@ -63,6 +63,10 @@ async function getOracleReading() {
  }
  
  const parts = birthDate.split('/');
+ if (parts.length !== 3) {
+ alert('Please enter date in MM/DD/YYYY format (e.g., 03/15/1990)');
+ return;
+ }
  const isoDate = parts[2] + '-' + parts[0] + '-' + parts[1];
  
  const introEl = document.getElementById('oracle-intro');
@@ -101,7 +105,6 @@ async function getOracleReading() {
  
  if (signBadge) {
  signBadge.textContent = data.zodiacSign || ' ';
- signBadge.style.fontSize = '48px';
  }
  
  if (readingText) {
