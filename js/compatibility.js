@@ -95,6 +95,63 @@ async function generatePreview() {
 
 window.generatePreview = generatePreview;
 
+// Compatibility Checkout Function
+async function initiateCompatibilityCheckout(productName, price) {
+  console.log('Initiating compatibility checkout:', productName, price);
+  
+  const button = typeof event !== 'undefined' ? event.currentTarget || event.target : null;
+  const originalText = button ? button.textContent : null;
+  if (button) {
+    button.textContent = 'Processing...';
+    button.disabled = true;
+  }
+  
+  if (!window.initiateCheckout) {
+    console.error('Checkout handler not loaded');
+    alert('Checkout system unavailable. Please refresh the page.');
+    if (button) {
+      button.textContent = originalText;
+      button.disabled = false;
+    }
+    return;
+  }
+  
+  try {
+    const success = await window.initiateCheckout({
+      name: productName,
+      price: price,
+      type: 'compatibility_certificate'
+    });
+    if (!success && button) {
+      button.textContent = originalText;
+      button.disabled = false;
+    }
+  } catch (error) {
+    console.error('Compatibility checkout error:', error);
+    alert('Unable to start checkout. Please try again or contact support.');
+    if (button) {
+      button.textContent = originalText;
+      button.disabled = false;
+    }
+  }
+}
+
+// Mobile Navigation Function
+function toggleMobileNav() {
+  const navLinks = document.getElementById('nav-links');
+  const navToggle = document.querySelector('.nav-toggle');
+  if (navLinks) {
+    navLinks.classList.toggle('active');
+  }
+  if (navToggle) {
+    navToggle.classList.toggle('active');
+  }
+}
+
+// Make functions globally available
+window.initiateCompatibilityCheckout = initiateCompatibilityCheckout;
+window.toggleMobileNav = toggleMobileNav;
+
 document.addEventListener('DOMContentLoaded', function() {
   formatDateInput('date1');
   formatDateInput('date2');
