@@ -1,5 +1,7 @@
 import { isSellable } from '/lib/catalog.js';
 
+let __ITEMS = [];
+
 async function loadIndex() {
   try {
     const response = await fetch('/data/index.json', { cache: 'no-store' });
@@ -62,13 +64,23 @@ function card(product) {
   return anchor;
 }
 
+function render(list) {
+  const root = document.getElementById('shop-grid');
+  if (!root) return;
+  root.innerHTML = '';
+  root.classList.add('shop-grid');
+  list.forEach(p => root.appendChild(card(p)));
+}
+
 async function init() {
   const root = document.getElementById('shop-grid');
   if (!root) return;
   const slugs = await loadIndex();
-  const items = (await Promise.all(slugs.map(loadProd))).filter(Boolean).filter(isSellable);
-  root.classList.add('shop-grid');
-  items.forEach(p => root.appendChild(card(p)));
+  __ITEMS = (await Promise.all(slugs.map(loadProd))).filter(Boolean).filter(isSellable);
+  try { const m = await import('/assets/shop-filters.js'); m.mountFilters(__ITEMS); } catch (_) { }
+  const apply = (window.__LYRION_FILTERS && window.__LYRION_FILTERS.apply) || ((x) => x);
+  render(apply(__ITEMS));
+  document.addEventListener('filters:change', () => render(apply(__ITEMS)));
 }
 
 document.readyState !== 'loading' ? init() : document.addEventListener('DOMContentLoaded', init);
