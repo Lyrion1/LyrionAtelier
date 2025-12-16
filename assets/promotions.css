@@ -1,0 +1,3 @@
+.promobar {display:flex;gap:14px;align-items:center;justify-content:center;padding:10px 12px;margin:8px 0;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.04)}
+.promobar .pill {padding:6px 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;font-size:.9rem;white-space:nowrap}
+.promobar .lead {opacity:.9}
