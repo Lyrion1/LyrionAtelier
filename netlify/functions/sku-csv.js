@@ -8,9 +8,13 @@ function listProductsDir(root){
  const files = fs.readdirSync(root);
  for (const f of files){
  if (!/\.json$/i.test(f)) continue;
- try { const j = JSON.parse(fs.readFileSync(path.join(root,f),'utf8')); out.push(j); } catch (err) { console.error('parse error', f, err?.message); }
+ try {
+ const content = fs.readFileSync(path.join(root, f), 'utf8');
+ const j = JSON.parse(content);
+ out.push(j);
+ } catch (err) { console.error('parse error', f, err?.message); }
  }
- } catch {}
+ } catch (err) { console.error('list dir failed', root, err?.message); }
  return out;
 }
 function money(c){ return (Number(c||0)/100).toFixed(2); }
@@ -23,13 +27,13 @@ async function buildResponse(){
  try{
  const idxPath = 'data/index.json';
  let slugs = [];
- try { slugs = JSON.parse(fs.readFileSync(idxPath,'utf8')); } catch {}
+ try { slugs = JSON.parse(fs.readFileSync(idxPath,'utf8')); } catch (err) { console.error('index load failed', err?.message); }
  // Load by index if present, else glob the folder
  let prods = [];
  if (Array.isArray(slugs) && slugs.length){
  for (const slug of slugs){
  const f = path.join('data','products', slug + '.json');
- try { prods.push(JSON.parse(fs.readFileSync(f,'utf8'))); } catch {}
+ try { prods.push(JSON.parse(fs.readFileSync(f,'utf8'))); } catch (err) { console.error('product load failed', f, err?.message); }
  }
  } else {
  prods = listProductsDir(path.join('data','products'));

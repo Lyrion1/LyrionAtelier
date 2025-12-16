@@ -1,5 +1,21 @@
-async function loadIndex(){ try{ const r=await fetch('/data/index.json',{cache:'no-store'}); return await r.json(); } catch(err){ console.error('index load failed', err); return []; } }
-async function loadProd(slug){ try{ const r=await fetch('/data/products/'+slug+'.json',{cache:'no-store'}); return await r.json(); } catch(err){ console.error('product load failed', slug, err); return null; } }
+async function loadIndex(){
+ try{
+ const r = await fetch('/data/index.json',{cache:'no-store'});
+ return await r.json();
+ } catch(err){
+ console.error('index load failed', err);
+ return [];
+ }
+}
+async function loadProd(slug){
+ try{
+ const r = await fetch('/data/products/'+slug+'.json',{cache:'no-store'});
+ return await r.json();
+ } catch(err){
+ console.error('product load failed', slug, err);
+ return null;
+ }
+}
 function money(c){ return '$'+(Number(c||0)/100).toFixed(2); }
 
 function card(p){
