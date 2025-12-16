@@ -1,0 +1,27 @@
+name: Build Printful Packs
+on:
+  push: {}
+  schedule: [ { cron: "30 3 * * *" } ]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { token: ${{ secrets.GITHUB_TOKEN }} }
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - name: Install deps
+        run: |
+          npm init -y --silent || true
+          npm install sharp@0.33.2 fast-glob@3.3.2 archiver@6.0.1
+      - name: Build print packs
+        run: node scripts/build-printful-packs.mjs
+      - name: Commit packs
+        run: |
+          git config user.name "lyrion-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add printful-files/products || true
+          git diff --cached --quiet && echo "No changes" || (git commit -m "feat(printful): build per-product print packs" && git push)

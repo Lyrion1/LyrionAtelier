@@ -73,6 +73,48 @@ async function card(p){
  if (nameField) nameField.appendChild(copyBtn('Copy name', ()=> p.title));
  const descField = el.querySelector('.copyfield.copy-desc');
  if (descField) descField.appendChild(copyBtn('Copy description', ()=> p.copy?.notes || ''));
+ const slug = encodeURIComponent(p.slug);
+ const pack = '/printful-files/products/'+slug+'/pack.zip';
+ const base = '/printful-files/products/'+slug+'/';
+ // action row
+ const actions = document.createElement('div'); actions.className='pf-rows';
+ const renderLinks = (m)=>{
+  const front = m?.front?.file || 'front-3600px.png';
+  const sleeve = m?.sleeve_crest || 'sleeve-crest-1_2in.png';
+  const back = m?.backneck_sun || 'backneck-sun-1_25in.png';
+  actions.textContent = '';
+  const row = document.createElement('div');
+  const linkFront = document.createElement('a'); linkFront.href = base+front; linkFront.textContent = 'Front';
+  const linkSleeve = document.createElement('a'); linkSleeve.href = base+sleeve; linkSleeve.textContent = 'Sleeve crest';
+  const linkBack = document.createElement('a'); linkBack.href = base+back; linkBack.textContent = 'Back-neck';
+  row.appendChild(linkFront);
+  row.appendChild(document.createTextNode(' • '));
+  row.appendChild(linkSleeve);
+  row.appendChild(document.createTextNode(' • '));
+  row.appendChild(linkBack);
+  actions.appendChild(row);
+ };
+ (async ()=>{
+  try{
+   const head = await fetch(pack,{method:'HEAD'});
+   if(head.ok){
+    actions.textContent = '';
+    const row = document.createElement('div');
+    const link = document.createElement('a'); link.href = pack; link.textContent = 'Download pack (ZIP)';
+    row.appendChild(link);
+    actions.appendChild(row);
+    return;
+   }
+   const manifestResp = await fetch(base+'manifest.json',{cache:'no-store'});
+   const manifest = manifestResp.ok ? await manifestResp.json() : null;
+   renderLinks(manifest);
+  }catch(err){
+   console.warn('Pack links unavailable', err);
+   renderLinks(null);
+  }
+ })();
+ const meta = el.querySelector('.pf-meta');
+ if (meta) meta.appendChild(actions);
  return el;
 }
 
