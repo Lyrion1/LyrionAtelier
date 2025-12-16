@@ -286,13 +286,17 @@ img {
   position: sticky;
   top: 0;
   z-index: 1000;
-  padding: 16px 0;
+  width: 100%;
 }
 
 .nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .brand {
@@ -300,6 +304,7 @@ img {
   align-items: center;
   gap: 12px;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .navbar .brand-logo {
@@ -320,6 +325,7 @@ img {
   display: flex;
   gap: 32px;
   align-items: center;
+  margin-left: auto;
 }
 
 .nav-links a {
@@ -328,7 +334,7 @@ img {
   font-size: 16px;
   font-weight: 500;
   transition: color 0.3s ease;
-  position: relative;
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -337,6 +343,8 @@ img {
 
 .nav-links a.active {
   color: #fbbf24;
+  position: relative;
+  white-space: nowrap;
 }
 
 .nav-links a.active::after {
@@ -3808,4 +3816,19 @@ transition: all 0.3s ease;
 .cross-sell-btn:hover {
 transform: translateY(-3px);
 box-shadow: 0 8px 32px rgba(251, 191, 36, 0.5);
+}
+
+/* Layout safety for compatibility pages */
+body {
+ margin: 0;
+ padding: 0;
+ overflow-x: hidden;
+}
+
+.compatibility-products-section,
+.preview-generator,
+.how-it-works {
+ width: 100%;
+ max-width: 100vw;
+ overflow-x: hidden;
 }
