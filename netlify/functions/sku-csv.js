@@ -1,0 +1,98 @@
+// netlify/functions/sku-csv.js
+const fs = require('fs');
+const path = require('path');
+
+function listProductsDir(root){
+ const out = [];
+ try {
+ const files = fs.readdirSync(root);
+ for (const f of files){
+ if (!/\.json$/i.test(f)) continue;
+ try { const j = JSON.parse(fs.readFileSync(path.join(root,f),'utf8')); out.push(j); } catch {}
+ }
+ } catch {}
+ return out;
+}
+function money(c){ return (Number(c||0)/100).toFixed(2); }
+
+async function buildResponse(){
+ try{
+ const idxPath = 'data/index.json';
+ let slugs = [];
+ try { slugs = JSON.parse(fs.readFileSync(idxPath,'utf8')); } catch {}
+ // Load by index if present, else glob the folder
+ let prods = [];
+ if (Array.isArray(slugs) && slugs.length){
+ for (const slug of slugs){
+ const f = path.join('data','products', slug + '.json');
+ try { prods.push(JSON.parse(fs.readFileSync(f,'utf8'))); } catch {}
+ }
+ } else {
+ prods = listProductsDir(path.join('data','products'));
+ }
+
+ // Filter: only kind=product
+ prods = prods.filter(p => (p && p.kind === 'product'));
+
+ // CSV header
+ const cols = [
+ 'Title','Slug','Department','Subcategory','Collection','Edition',
+ 'Zodiac','Element','Palette',
+ 'VariantColor','VariantSize','SKU','PriceUSD',
+ 'PrintfulVariantId','BrandMark_Wrist','BackNeckSun','InsideLabel',
+ 'Front_Width_in','Sleeve_Crest_in','BackNeck_in','Notes','Image'
+ ];
+ const rows = [cols.join(',')];
+
+ for (const p of prods){
+ // Heuristic: suggest front width by subcategory
+ const sub = (p.subcategory||'').toLowerCase();
+ let frontW = 12; // tees default
+ if (sub.includes('crew')) frontW = 11.5;
+ if (sub.includes('hood')) frontW = 12; // full front by default
+ if (p.slug === 'aquarian-current-hoodie') frontW = 6; // chest crest hoodie (intentional)
+
+ const wrist = p.brand_marks?.wrist_logo || '';
+ const backNeck = p.brand_marks?.back_neck_favicon ? '1.25' : '';
+ const inside = p.brand_marks?.inside_label ? '3x4' : '';
+
+ for (const v of (p.variants||[])){
+ const row = [
+ `"${(p.title||'').replace(/"/g,'""')}"`,
+ p.slug || '',
+ p.department || '',
+ p.subcategory || '',
+ p.collection || '',
+ p.edition || '',
+ p.zodiac || '',
+ p.element || '',
+ p.palette || '',
+ v.options?.color || '',
+ v.options?.size || '',
+ v.sku || '',
+ money(v.price || 0),
+ v.printfulVariantId ?? '',
+ wrist,
+ backNeck,
+ inside,
+ frontW, '1.2','1.25',
+ `"${(p.copy?.notes||'').replace(/"/g,'""')}"`,
+ (p.images&&p.images[0]) || ''
+ ];
+ rows.push(row.join(','));
+ }
+ }
+
+ const csv = rows.join('\n');
+ return { statusCode: 200, headers: {'Content-Type':'text/csv','Content-Disposition':'attachment; filename="lyrion-printful-skus.csv"'}, body: csv };
+ } catch (e){
+ return { statusCode: 500, body: 'CSV error: ' + (e?.message||'unknown') };
+ }
+}
+
+exports.handler = async function(event){
+ if (event && event.httpMethod && event.httpMethod !== 'GET') {
+ return { statusCode: 405, body: 'Method Not Allowed' };
+ }
+ return buildResponse();
+};
