@@ -1,147 +1,123 @@
-function getZodiacSign(month, day) {
-  // Capricorn appears twice to simplify the wrap across new year
-  const signs = [
-    { name: 'Capricorn', emoji: '♑', end: [1, 19] },
-    { name: 'Aquarius', emoji: '♒', end: [2, 18] },
-    { name: 'Pisces', emoji: '♓', end: [3, 20] },
-    { name: 'Aries', emoji: '♈', end: [4, 19] },
-    { name: 'Taurus', emoji: '♉', end: [5, 20] },
-    { name: 'Gemini', emoji: '♊', end: [6, 20] },
-    { name: 'Cancer', emoji: '♋', end: [7, 22] },
-    { name: 'Leo', emoji: '♌', end: [8, 22] },
-    { name: 'Virgo', emoji: '♍', end: [9, 22] },
-    { name: 'Libra', emoji: '♎', end: [10, 22] },
-    { name: 'Scorpio', emoji: '♏', end: [11, 21] },
-    { name: 'Sagittarius', emoji: '♐', end: [12, 21] },
-    { name: 'Capricorn', emoji: '♑', end: [12, 31] }
-  ];
+console.log('Compatibility page loaded');
 
-  for (const sign of signs) {
-    const [signMonth, signDay] = sign.end;
-    if (month < signMonth || (month === signMonth && day <= signDay)) {
-      return sign;
+function formatDateInput(inputId) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  
+  input.addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    
+    if (value.length >= 2) {
+      value = value.slice(0, 2) + '/' + value.slice(2);
     }
-  }
-  return signs[0];
+    if (value.length >= 5) {
+      value = value.slice(0, 5) + '/' + value.slice(5, 9);
+    }
+    
+    e.target.value = value;
+  });
 }
 
-function isValidDate(month, day, year) {
-  const date = new Date(year, month - 1, day);
-  return date.getFullYear() === year && date.getMonth() + 1 === month && date.getDate() === day;
-}
-
-const NAME_WEIGHT_PRIMARY = 7;
-const NAME_WEIGHT_SECONDARY = 5;
-const MIN_COMPATIBILITY_SCORE = 60;
-const SCORE_RANGE = 41;
-// Accepts single or double digit month/day with 4-digit year
-const DATE_PATTERN = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
-
-const signTraits = {
-  Aries: 'bold, trailblazing passion',
-  Taurus: 'steady, sensual devotion',
-  Gemini: 'playful, curious connection',
-  Cancer: 'nurturing, heartfelt care',
-  Leo: 'radiant, generous warmth',
-  Virgo: 'thoughtful, grounded harmony',
-  Libra: 'graceful, balanced affection',
-  Scorpio: 'intense, transformative love',
-  Sagittarius: 'adventurous, truth-seeking spirit',
-  Capricorn: 'loyal, enduring commitment',
-  Aquarius: 'visionary, electric chemistry',
-  Pisces: 'dreamy, empathetic understanding'
-};
-
-function calculateScore(name1, date1, name2, date2) {
-  const seed =
-    name1.length * NAME_WEIGHT_PRIMARY + // slight emphasis on first entered name for variety
-    name2.length * NAME_WEIGHT_SECONDARY +
-    date1.reduce((a, b) => a + b, 0) +
-    date2.reduce((a, b) => a + b, 0);
-  return MIN_COMPATIBILITY_SCORE + (seed % SCORE_RANGE);
-}
-
-function generatePreview() {
-  const name1Input = document.getElementById('name1');
-  const name2Input = document.getElementById('name2');
-  const date1Input = document.getElementById('date1');
-  const date2Input = document.getElementById('date2');
-
-  const name1 = (name1Input?.value || '').trim();
-  const name2 = (name2Input?.value || '').trim();
-  const date1Raw = (date1Input?.value || '').trim();
-  const date2Raw = (date2Input?.value || '').trim();
-
-  if (!name1 || !name2 || !date1Raw || !date2Raw) {
-    alert('Please enter both names and birth dates to generate a preview.');
+async function generatePreview() {
+  const name1 = document.getElementById('name1').value.trim();
+  const date1 = document.getElementById('date1').value.trim();
+  const name2 = document.getElementById('name2').value.trim();
+  const date2 = document.getElementById('date2').value.trim();
+  
+  if (!name1 || !date1 || !name2 || !date2) {
+    alert('Please fill in all fields');
     return;
   }
-
-  const date1Match = date1Raw.match(DATE_PATTERN);
-  const date2Match = date2Raw.match(DATE_PATTERN);
-
-  if (!date1Match || !date2Match) {
-    alert('Please use MM/DD/YYYY format for both birth dates.');
+  
+  const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
+  if (!dateRegex.test(date1) || !dateRegex.test(date2)) {
+    alert('Please enter dates in MM/DD/YYYY format');
     return;
   }
-
-  const date1Parts = date1Match.slice(1).map(Number);
-  const date2Parts = date2Match.slice(1).map(Number);
-
-  const [month1, day1, year1] = date1Parts;
-  const [month2, day2, year2] = date2Parts;
-
-  if (!isValidDate(month1, day1, year1) || !isValidDate(month2, day2, year2)) {
-    alert('Please enter valid calendar dates in MM/DD/YYYY format.');
-    return;
+  
+  const [month1, day1, year1] = date1.split('/');
+  const [month2, day2, year2] = date2.split('/');
+  const isoDate1 = `${year1}-${month1}-${day1}`;
+  const isoDate2 = `${year2}-${month2}-${day2}`;
+  
+  document.getElementById('preview-result').style.display = 'none';
+  document.getElementById('preview-loading').style.display = 'block';
+  
+  try {
+    const response = await fetch('/.netlify/functions/cosmic-compatibility', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        person1Name: name1,
+        person1BirthDate: isoDate1,
+        person2Name: name2,
+        person2BirthDate: isoDate2
+      })
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to generate compatibility');
+    }
+    
+    const data = await response.json();
+    
+    document.getElementById('preview-loading').style.display = 'none';
+    document.getElementById('preview-result').style.display = 'block';
+    
+    document.getElementById('score-number').textContent = data.compatibilityScore;
+    
+    const signsHTML = `
+      <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+        <span style="font-size: 48px;">${data.person1.zodiacEmoji}</span>
+        <span style="color: #fbbf24; font-size: 24px;"> </span>
+        <span style="font-size: 48px;">${data.person2.zodiacEmoji}</span>
+      </div>
+      <p style="color: #a78bfa; font-size: 18px; margin-top: 16px;">
+        ${data.person1.name} (${data.person1.zodiacSign}) & ${data.person2.name} (${data.person2.zodiacSign})
+      </p>
+    `;
+    document.getElementById('signs-display').innerHTML = signsHTML;
+    
+    const narrativePreview = data.narrative.split('.').slice(0, 2).join('.') + '...';
+    document.getElementById('preview-narrative').innerHTML = `<p>${narrativePreview}</p><p style="font-style: italic; color: #fbbf24; margin-top: 16px;">Full reading included in your certificate!</p>`;
+    
+    window.scrollTo({ top: document.getElementById('preview-result').offsetTop - 100, behavior: 'smooth' });
+    
+  } catch (error) {
+    console.error('Preview error:', error);
+    document.getElementById('preview-loading').style.display = 'none';
+    alert('Unable to generate preview. Please try again.');
   }
-
-  const previewLoading = document.getElementById('preview-loading');
-  const previewResult = document.getElementById('preview-result');
-
-  previewResult.style.display = 'none';
-  previewLoading.style.display = 'block';
-
-  setTimeout(() => {
-    const score = calculateScore(name1, date1Parts, name2, date2Parts);
-    const sign1 = getZodiacSign(month1, day1);
-    const sign2 = getZodiacSign(month2, day2);
-    const trait1 = signTraits[sign1.name] || 'celestial energy';
-    const trait2 = signTraits[sign2.name] || 'cosmic grace';
-
-    const scoreNumber = document.getElementById('score-number');
-    const signsDisplay = document.getElementById('signs-display');
-    const previewNarrative = document.getElementById('preview-narrative');
-
-    if (scoreNumber) scoreNumber.textContent = score;
-    if (signsDisplay) {
-      signsDisplay.textContent = `${sign1.emoji} ${sign1.name} + ${sign2.emoji} ${sign2.name}`;
-    }
-    if (previewNarrative) {
-      previewNarrative.textContent = `${name1} and ${name2}, your bond resonates at ${score}% cosmic harmony. ${sign1.name} brings ${trait1}, while ${sign2.name} offers ${trait2}. Together you weave a love story that glows brighter than the constellations that guided your birth.`;
-    }
-
-    previewLoading.style.display = 'none';
-    previewResult.style.display = 'block';
-  }, 500);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const ctaButtons = document.querySelectorAll('.tier-cta');
-  ctaButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const { price, name, product } = btn.dataset;
-      if (typeof window.initiateCheckout === 'function') {
-        initiateCheckout({
-          name: name || 'Cosmic Compatibility Certificate',
-          price: price || '0',
-          type: product || 'compatibility_certificate'
-        });
-      } else {
-        alert('Checkout is currently unavailable. Please try again shortly.');
+window.generatePreview = generatePreview;
+
+document.addEventListener('DOMContentLoaded', function() {
+  formatDateInput('date1');
+  formatDateInput('date2');
+  
+  const tierButtons = document.querySelectorAll('.tier-cta');
+  tierButtons.forEach(button => {
+    button.addEventListener('click', async function() {
+      const productName = button.getAttribute('data-name');
+      const productPrice = button.getAttribute('data-price');
+      
+      const originalText = button.textContent;
+      button.textContent = 'Processing...';
+      button.disabled = true;
+      
+      const success = await window.initiateCheckout({
+        name: productName,
+        price: productPrice,
+        type: 'compatibility_certificate'
+      });
+      
+      if (!success) {
+        button.textContent = originalText;
+        button.disabled = false;
       }
     });
   });
-
-  window.generatePreview = generatePreview;
 });
