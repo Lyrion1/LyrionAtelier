@@ -100,15 +100,16 @@ async function getOracleReading() {
  const urgencyMsg = document.getElementById('urgency-message');
  
  if (signBadge) {
- signBadge.innerHTML = '<span style="font-size: 48px;">' + (data.zodiacSign || ' ') + '</span>';
+ signBadge.textContent = data.zodiacSign || ' ';
+ signBadge.style.fontSize = '48px';
  }
  
  if (readingText) {
- readingText.innerHTML = '<p>' + data.reading + '</p>';
+ readingText.textContent = data.reading;
  }
  
  if (urgencyMsg && data.urgencyMessage) {
- urgencyMsg.innerHTML = '<p>' + data.urgencyMessage + '</p>';
+ urgencyMsg.textContent = data.urgencyMessage;
  urgencyMsg.style.display = 'block';
  } else if (urgencyMsg) {
  urgencyMsg.style.display = 'none';
