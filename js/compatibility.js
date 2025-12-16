@@ -95,40 +95,51 @@ async function generatePreview() {
 
 window.generatePreview = generatePreview;
 
+// Compatibility Checkout Function
+async function initiateCompatibilityCheckout(productName, price, evt) {
+  console.log('Initiating compatibility checkout:', productName, price);
+  
+  const button = evt?.currentTarget || evt?.target || null;
+  const originalText = button ? button.textContent : null;
+  if (button) {
+    button.textContent = 'Processing...';
+    button.disabled = true;
+  }
+  
+  if (!window.initiateCheckout) {
+    console.error('Checkout handler not loaded');
+    alert('Checkout system unavailable. Please refresh the page.');
+    if (button) {
+      button.textContent = originalText;
+      button.disabled = false;
+    }
+    return;
+  }
+  
+  try {
+    const success = await window.initiateCheckout({
+      name: productName,
+      price: price,
+      type: 'compatibility_certificate'
+    });
+    if (!success && button) {
+      button.textContent = originalText;
+      button.disabled = false;
+    }
+  } catch (error) {
+    console.error('Compatibility checkout error:', error);
+    alert('Unable to start checkout. Please try again or contact support.');
+    if (button) {
+      button.textContent = originalText;
+      button.disabled = false;
+    }
+  }
+}
+
+// Make functions globally available
+window.initiateCompatibilityCheckout = initiateCompatibilityCheckout;
+
 document.addEventListener('DOMContentLoaded', function() {
   formatDateInput('date1');
   formatDateInput('date2');
-  
-  const tierButtons = document.querySelectorAll('.tier-cta');
-  tierButtons.forEach(button => {
-    button.addEventListener('click', async function() {
-      const productName = button.getAttribute('data-name');
-      const productPrice = button.getAttribute('data-price');
-
-      if (typeof window.initiateCheckout !== 'function') {
-        alert('Checkout is currently unavailable. Please try again shortly.');
-        return;
-      }
-      
-      const originalText = button.textContent;
-      button.textContent = 'Processing...';
-      button.disabled = true;
-      
-      let success = false;
-      try {
-        success = await window.initiateCheckout({
-          name: productName,
-          price: productPrice,
-          type: 'compatibility_certificate'
-        });
-      } catch (err) {
-        console.error('Checkout initiation failed:', err);
-      }
-      
-      if (!success) {
-        button.textContent = originalText;
-        button.disabled = false;
-      }
-    });
-  });
 });

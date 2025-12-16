@@ -11,125 +11,121 @@
 </head>
 <body>
 <nav class="navbar">
-<div class="nav-container container">
-<a href="index.html" class="brand">
-<img src="images/logo/logo.png" alt="Lyrion Atelier" class="brand-logo">
-<span class="brand-name">LYRION ATELIER</span>
-</a>
-<button class="nav-toggle" aria-label="Toggle navigation">
-<span class="hamburger"></span>
-</button>
-<div class="nav-links">
-<a href="index.html">Home</a>
-<a href="shop.html">Shop</a>
-<a href="oracle.html">Oracle</a>
-<a href="compatibility.html" class="active">Compatibility</a>
-<a href="codex.html">Codex</a>
-<a href="contact.html">Contact</a>
-</div>
-</div>
+ <div class="nav-container">
+ <a href="index.html" class="brand">
+ <img src="images/logo.png" alt="Lyrion Atelier" class="brand-logo" onerror="this.style.display='none'">
+ <span class="brand-name">LYRION ATELIER</span>
+ </a>
+ <button class="nav-toggle" aria-label="Toggle navigation">
+ <span class="hamburger"></span>
+ </button>
+ <div class="nav-links" id="nav-links">
+ <a href="index.html">Home</a>
+ <a href="shop.html">Shop</a>
+ <a href="oracle.html">Oracle</a>
+ <a href="compatibility.html" class="active">Compatibility</a>
+ <a href="codex.html">Codex</a>
+ <a href="contact.html">Contact</a>
+ </div>
+ </div>
 </nav>
 
 <section class="hero-compatibility">
-<div class="container">
-<div class="hero-content">
-<h1>Cosmic Compatibility Certificates</h1>
-<p class="hero-subtitle">Your love story, written in the stars</p>
-<p class="hero-description">Astrological analysis transformed into a beautiful keepsake that celebrates your cosmic connection</p>
-</div>
-</div>
+ <div class="hero-container">
+ <h1 class="hero-main-title">Cosmic Compatibility Certificates</h1>
+ <p class="hero-tagline">Your love story, written in the stars</p>
+ <p class="hero-text">Astrological analysis transformed into a beautiful keepsake celebrating your cosmic connection</p>
+ </div>
 </section>
 
-<section class="compatibility-products">
-<div class="container">
-<div class="products-container">
-
-<div class="compatibility-tier">
-<div class="tier-header">
-<h3>Digital Certificate</h3>
-<div class="tier-price">
-<span class="price-amount">$39</span>
-</div>
-</div>
-<ul class="tier-features">
-<li>✨ Personalized compatibility analysis</li>
-<li>💫 Personalized romantic narrative</li>
-<li>🌟 Cosmic compatibility score</li>
-<li>📜 Beautiful PDF certificate design</li>
-<li>⚡ Instant email delivery</li>
-<li>💝 Perfect digital gift</li>
-</ul>
-<button class="tier-cta" data-product="digital" data-price="39.00" data-name="Digital Cosmic Compatibility Certificate">
-Get Digital Certificate
-</button>
-</div>
-
-<div class="compatibility-tier featured-tier">
-<div class="featured-badge">MOST POPULAR</div>
-<div class="tier-header">
-<h3>Luxury Printed</h3>
-<div class="tier-price">
-<span class="price-amount">$149</span>
-</div>
-</div>
-<ul class="tier-features">
-<li>✨ Everything in Digital</li>
-<li>📜 Premium textured paper</li>
-<li>✨ Gold foil embossed names</li>
-<li>💌 Luxury envelope with wax seal</li>
-<li>📦 Protective shipping tube</li>
-<li>🎁 Gift-ready presentation</li>
-<li>⏱️ Ships within 5-7 business days</li>
-</ul>
-<button class="tier-cta featured-cta" data-product="printed" data-price="149.00" data-name="Luxury Printed Cosmic Compatibility Certificate">
-Get Luxury Print
-</button>
-</div>
-
-<div class="compatibility-tier">
-<div class="tier-header">
-<h3>Museum Framed</h3>
-<div class="tier-price">
-<span class="price-amount">$349</span>
-</div>
-</div>
-<ul class="tier-features">
-<li>✨ Everything in Luxury Print</li>
-<li>🖼️ Museum-quality frame</li>
-<li>🎨 Choice of black or gold frame</li>
-<li>🛡️ UV-protective glass</li>
-<li>🏠 Ready to hang</li>
-<li>🚚 White-glove shipping</li>
-<li>💎 Heirloom-quality keepsake</li>
-</ul>
-<button class="tier-cta" data-product="framed" data-price="349.00" data-name="Museum Framed Cosmic Compatibility Certificate">
-Get Framed Certificate
-</button>
-</div>
-
-<div class="compatibility-tier premium-tier">
-<div class="tier-header">
-<h3>Twin Flame Set</h3>
-<div class="tier-price">
-<span class="price-amount">$599</span>
-</div>
-</div>
-<ul class="tier-features">
-<li>✨ Everything in Museum Framed</li>
-<li>👫 Two matching framed certificates</li>
-<li>💞 His & Hers / Partner & Partner</li>
-<li>🎨 Coordinating frame designs</li>
-<li>🎁 Luxury gift box set</li>
-<li>🏠 Display together or separately</li>
-<li>💎 Ultimate romantic statement</li>
-</ul>
-<button class="tier-cta premium-cta" data-product="twin-set" data-price="599.00" data-name="Twin Flame Cosmic Compatibility Certificate Set">
-Get Twin Flame Set
-</button>
-</div>
-
-</div>
-</div>
+<section class="compatibility-products-section">
+ <div class="products-wrapper">
+ <h2 class="products-section-title">Choose Your Certificate</h2>
+ 
+ <div class="compatibility-products-grid">
+ 
+ <!-- Digital Certificate -->
+ <div class="compat-card">
+ <div class="card-header">
+ <h3 class="card-title">Digital Certificate</h3>
+ <div class="card-price">$39</div>
+ </div>
+ <ul class="card-features">
+ <li> Personalized compatibility analysis</li>
+ <li> Romantic narrative</li>
+ <li> Compatibility score</li>
+ <li> Beautiful PDF certificate</li>
+ <li> Instant delivery</li>
+ <li> Perfect digital gift</li>
+ </ul>
+ <button class="card-cta-btn" onclick="initiateCompatibilityCheckout('Digital Cosmic Compatibility Certificate', 39.00, event)">
+ Get Digital Certificate
+ </button>
+ </div>
+ 
+ <!-- Luxury Printed -->
+ <div class="compat-card featured-card">
+ <div class="featured-tag">MOST POPULAR</div>
+ <div class="card-header">
+ <h3 class="card-title">Luxury Printed</h3>
+ <div class="card-price">$149</div>
+ </div>
+ <ul class="card-features">
+ <li> Everything in Digital</li>
+ <li> Premium textured paper</li>
+ <li> Gold foil embossed names</li>
+ <li> Luxury envelope with wax seal</li>
+ <li> Protective shipping tube</li>
+ <li> Gift-ready presentation</li>
+ <li> Ships within 5-7 days</li>
+ </ul>
+ <button class="card-cta-btn featured-btn" onclick="initiateCompatibilityCheckout('Luxury Printed Cosmic Compatibility Certificate', 149.00, event)">
+ Get Luxury Print
+ </button>
+ </div>
+ 
+ <!-- Museum Framed -->
+ <div class="compat-card">
+ <div class="card-header">
+ <h3 class="card-title">Museum Framed</h3>
+ <div class="card-price">$349</div>
+ </div>
+ <ul class="card-features">
+ <li> Everything in Luxury Print</li>
+ <li> Museum-quality frame</li>
+ <li> Choice of black or gold frame</li>
+ <li> UV-protective glass</li>
+ <li> Ready to hang</li>
+ <li> White-glove shipping</li>
+ <li> Heirloom-quality keepsake</li>
+ </ul>
+ <button class="card-cta-btn" onclick="initiateCompatibilityCheckout('Museum Framed Cosmic Compatibility Certificate', 349.00, event)">
+ Get Framed Certificate
+ </button>
+ </div>
+ 
+ <!-- Twin Flame Set -->
+ <div class="compat-card premium-card">
+ <div class="card-header">
+ <h3 class="card-title">Twin Flame Set</h3>
+ <div class="card-price">$599</div>
+ </div>
+ <ul class="card-features">
+ <li> Everything in Museum Framed</li>
+ <li> Two matching framed certificates</li>
+ <li> His & Hers / Partner & Partner</li>
+ <li> Coordinating frame designs</li>
+ <li> Luxury gift box set</li>
+ <li> Display together or separately</li>
+ <li> Ultimate romantic statement</li>
+ </ul>
+ <button class="card-cta-btn premium-btn" onclick="initiateCompatibilityCheckout('Twin Flame Cosmic Compatibility Certificate Set', 599.00, event)">
+ Get Twin Flame Set
+ </button>
+ </div>
+ 
+ </div>
+ </div>
 </section>
 
 <section class="preview-generator" id="preview">
