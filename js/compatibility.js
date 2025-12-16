@@ -96,10 +96,10 @@ async function generatePreview() {
 window.generatePreview = generatePreview;
 
 // Compatibility Checkout Function
-async function initiateCompatibilityCheckout(productName, price) {
+async function initiateCompatibilityCheckout(productName, price, evt) {
   console.log('Initiating compatibility checkout:', productName, price);
   
-  const button = typeof event !== 'undefined' ? event.currentTarget || event.target : null;
+  const button = evt?.currentTarget || evt?.target || null;
   const originalText = button ? button.textContent : null;
   if (button) {
     button.textContent = 'Processing...';
