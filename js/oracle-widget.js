@@ -84,7 +84,7 @@ async function getOracleReading() {
  }
  
  const [month, day, year] = birthDate.split('/');
- const isoDate = year + '-' + month + '-' + day;
+ const isoDate = `${year}-${month}-${day}`;
  
  console.log('Converted to ISO date:', isoDate);
  
@@ -133,7 +133,6 @@ async function getOracleReading() {
  
  if (signBadge) {
  signBadge.textContent = data.zodiacSign || ' ';
- signBadge.style.fontSize = '48px';
  }
  
  if (readingText) {
@@ -151,7 +150,7 @@ async function getOracleReading() {
  
  } catch (error) {
  console.error('Oracle error:', error);
- alert('Unable to get your oracle reading. Please try again.\n\nError: ' + error.message);
+ alert('Unable to get your oracle reading. Please try again soon.');
  
  if (loadingEl) loadingEl.style.display = 'none';
  if (introEl) introEl.style.display = 'block';

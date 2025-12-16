@@ -1719,6 +1719,7 @@ textarea:focus {
 @keyframes spin { to { transform: rotate(360deg); } }
 .oracle-loading p { color: rgba(255,255,255,0.8); font-style: italic; }
 .oracle-sign { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(251,191,36,0.1)); border: 1px solid rgba(251,191,36,0.4); border-radius: 8px; padding: 10px; text-align: center; color: #fbbf24; font-weight: 600; margin-bottom: 16px; }
+.oracle-sign-badge { font-size: 48px; text-align: center; }
 .oracle-reading-text { color: rgba(255,255,255,0.9); line-height: 1.7; font-size: 15px; margin-bottom: 20px; }
 .oracle-urgency, .oracle-urgency-msg { background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(220,38,38,0.1)); border: 1px solid rgba(239,68,68,0.4); border-radius: 10px; padding: 14px; color: #fca5a5; font-size: 14px; margin-bottom: 20px; animation: glow 2s ease-in-out infinite; }
 @keyframes glow { 0%, 100% { box-shadow: 0 0 10px rgba(239,68,68,0.3); } 50% { box-shadow: 0 0 20px rgba(239,68,68,0.6); } }
