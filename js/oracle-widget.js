@@ -1,4 +1,25 @@
+console.log('=== ORACLE WIDGET DEBUG START ===');
+console.log('Script file loaded at:', new Date().toISOString());
+console.log('Window location:', window.location.href);
 console.log('Oracle widget script loaded');
+
+function testCrystalBall() {
+ console.log('=== CRYSTAL BALL TEST ===');
+ const trigger = document.getElementById('crystal-ball-trigger');
+ const panel = document.getElementById('oracle-panel');
+ const birthInput = document.getElementById('birth-date');
+ 
+ console.log('Crystal ball trigger found:', !!trigger);
+ console.log('Oracle panel found:', !!panel);
+ console.log('Birth date input found:', !!birthInput);
+ 
+ if (!trigger) console.error('CRITICAL: Crystal ball trigger not found in DOM');
+ if (!panel) console.error('CRITICAL: Oracle panel not found in DOM');
+ if (!birthInput) console.error('CRITICAL: Birth date input not found in DOM');
+ 
+ console.log('openOracleWidget function exists:', typeof window.openOracleWidget);
+ console.log('getOracleReading function exists:', typeof window.getOracleReading);
+}
 
 function openOracleWidget() {
  console.log('Opening oracle widget');
@@ -202,10 +223,14 @@ window.getOracleReading = getOracleReading;
 window.bookFullReading = bookFullReading;
 window.shareReading = shareReading;
 window.resetOracleWidget = resetOracleWidget;
+window.testCrystalBall = testCrystalBall;
 
 document.addEventListener('DOMContentLoaded', function() {
+ console.log('=== DOM LOADED ===');
+ testCrystalBall();
  console.log('Oracle widget DOM loaded');
  formatOracleDateInput();
 });
 
 console.log('Oracle widget functions registered');
+console.log('=== ORACLE WIDGET DEBUG END ===');
