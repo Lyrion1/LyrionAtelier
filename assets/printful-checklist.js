@@ -5,7 +5,10 @@ async function exists(url){
  try{ const r = await fetch(url, { method:'HEAD', cache:'no-store' }); return r.ok; } catch { return false; }
 }
 function money(c){ return '$'+(Number(c||0)/100).toFixed(2); }
-function esc(x){ return (x||'').replace(/"/g,'\\"'); }
+function esc(x){
+ const map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
+ return (x||'').replace(/[&<>"']/g, c=>map[c]);
+}
 function b(label, href){ const a=document.createElement('a'); a.textContent=label; a.href=href; a.target='_blank'; return a; }
 function copyBtn(label, getText){
  const btn=document.createElement('button'); btn.textContent=label;
@@ -33,13 +36,13 @@ async function card(p){
  el.innerHTML = `
  <div class="pf-img">${ img ? '<img alt="'+esc(p.title)+'" src="'+img+'">' : '<div style="padding:24px;color:#999">No art image</div>' }</div>
  <div class="pf-meta">
- <div class="pf-title">${p.title}</div>
- <div class="pf-sub">${(p.collection||'').replace(/-/g,' ')} • ${(p.subcategory||'')}</div>
+ <div class="pf-title">${esc(p.title)}</div>
+ <div class="pf-sub">${esc((p.collection||'').replace(/-/g,' '))} • ${esc(p.subcategory||'')}</div>
  <div class="pf-badges">
- ${ p.zodiac ? '<span class="pf-badge">'+p.zodiac+'</span>' : '' }
- ${ p.element ? '<span class="pf-badge">'+p.element+'</span>' : '' }
- ${ p.palette ? '<span class="pf-badge">'+p.palette+'</span>' : '' }
- <span class="pf-badge">${p.edition||''}</span>
+ ${ p.zodiac ? '<span class="pf-badge">'+esc(p.zodiac)+'</span>' : '' }
+ ${ p.element ? '<span class="pf-badge">'+esc(p.element)+'</span>' : '' }
+ ${ p.palette ? '<span class="pf-badge">'+esc(p.palette)+'</span>' : '' }
+ <span class="pf-badge">${esc(p.edition||'')}</span>
  <span class="pf-badge">${price}</span>
  </div>
  <div class="badges">
@@ -55,10 +58,10 @@ async function card(p){
  <a download href="/printful-files/brand/${needsYouth?'logo-youth-1_2in.png':'logo-adult-1_2in.png'}">Download wrist crest</a>
  </div>
  <div class="copyfield copy-name">
- <input readonly value="${p.title}">
+ <input readonly value="${esc(p.title)}">
  </div>
  <div class="copyfield copy-desc">
- <input readonly value="${p.copy?.notes||''}">
+ <input readonly value="${esc(p.copy?.notes||'')}">
  </div>
  <div class="row">
  ${ b('Open Printful → Add product','https://www.printful.com/dashboard/store').outerHTML }
