@@ -19,7 +19,6 @@ function listProductsDir(root){
 }
 function money(c){ return (Number(c||0)/100).toFixed(2); }
 
-const FRONT_WIDTH_MAP = { 'aquarian-current-hoodie': 6 };
 const FRONT_WIDTH_DEFAULT = 12;
 const FRONT_WIDTH_CREW = 11.5;
 const FRONT_WIDTH_HOOD = 12;
@@ -61,10 +60,9 @@ async function buildResponse(){
  let frontW = FRONT_WIDTH_DEFAULT;
  if (sub.includes('crew')) frontW = FRONT_WIDTH_CREW;
  if (sub.includes('hood')) frontW = FRONT_WIDTH_HOOD;
- if (FRONT_WIDTH_MAP[p.slug]) frontW = FRONT_WIDTH_MAP[p.slug];
 
  const wrist = p.brand_marks?.wrist_logo || '';
- const backNeck = p.brand_marks?.back_neck_favicon ? '1.25' : '';
+ const backNeck = p.brand_marks?.back_neck_favicon ? DIM_BACK_NECK_IN : '';
  const inside = p.brand_marks?.inside_label ? '3x4' : '';
 
  for (const v of (p.variants||[])){
