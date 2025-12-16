@@ -1689,27 +1689,63 @@ textarea:focus {
 .oracle-widget-panel { position: absolute; bottom: 80px; right: 0; width: 380px; background: linear-gradient(135deg, rgba(15,23,42,0.98), rgba(30,41,59,0.98)); border: 1px solid rgba(251,191,36,0.3); border-radius: 20px; box-shadow: 0 10px 50px rgba(0,0,0,0.5); overflow: hidden; backdrop-filter: blur(10px); }
 .oracle-header { background: linear-gradient(135deg, rgba(139,92,246,0.3), rgba(99,102,241,0.2)); padding: 20px; border-bottom: 1px solid rgba(251,191,36,0.2); display: flex; justify-content: space-between; align-items: center; }
 .oracle-header h3 { color: #fbbf24; margin: 0; font-size: 18px; font-family: 'Cinzel', serif; }
-.oracle-close { background: none; border: none; color: rgba(255,255,255,0.7); font-size: 28px; cursor: pointer; transition: color 0.3s; }
-.oracle-close:hover { color: #fbbf24; }
+.oracle-close {
+ background: none;
+ border: none;
+ color: rgba(255, 255, 255, 0.7);
+ font-size: 32px;
+ cursor: pointer;
+ line-height: 1;
+ padding: 0;
+ width: 32px;
+ height: 32px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ transition: color 0.3s ease;
+}
+
+.oracle-close:hover {
+ color: #fbbf24;
+}
 .oracle-content { padding: 24px; max-height: 480px; overflow-y: auto; }
 .oracle-intro p { color: rgba(255,255,255,0.9); font-size: 15px; margin-bottom: 20px; }
 .oracle-input { width: 100%; padding: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; color: white; font-size: 16px; margin-bottom: 16px; }
 .oracle-input:focus { outline: none; border-color: rgba(251,191,36,0.6); }
-.oracle-submit, .oracle-cta { width: 100%; padding: 14px; background: linear-gradient(135deg, rgba(139,92,246,0.4), rgba(139,92,246,0.3)); border: 1.5px solid rgba(139,92,246,0.6); border-radius: 10px; color: #a78bfa; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
-.oracle-submit:hover, .oracle-cta:hover { background: linear-gradient(135deg, rgba(139,92,246,0.5), rgba(139,92,246,0.4)); transform: translateY(-2px); }
+.oracle-submit, .oracle-cta, .oracle-cta-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, rgba(139,92,246,0.4), rgba(139,92,246,0.3)); border: 1.5px solid rgba(139,92,246,0.6); border-radius: 10px; color: #a78bfa; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+.oracle-submit:hover, .oracle-cta:hover, .oracle-cta-btn:hover { background: linear-gradient(135deg, rgba(139,92,246,0.5), rgba(139,92,246,0.4)); transform: translateY(-2px); }
 .oracle-loading { text-align: center; padding: 40px 20px; }
 .oracle-spinner { width: 50px; height: 50px; border: 4px solid rgba(251,191,36,0.2); border-top-color: #fbbf24; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .oracle-loading p { color: rgba(255,255,255,0.8); font-style: italic; }
 .oracle-sign { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(251,191,36,0.1)); border: 1px solid rgba(251,191,36,0.4); border-radius: 8px; padding: 10px; text-align: center; color: #fbbf24; font-weight: 600; margin-bottom: 16px; }
+.oracle-sign-badge { font-size: 48px; text-align: center; }
 .oracle-reading-text { color: rgba(255,255,255,0.9); line-height: 1.7; font-size: 15px; margin-bottom: 20px; }
-.oracle-urgency { background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(220,38,38,0.1)); border: 1px solid rgba(239,68,68,0.4); border-radius: 10px; padding: 14px; color: #fca5a5; font-size: 14px; margin-bottom: 20px; animation: glow 2s ease-in-out infinite; }
+.oracle-urgency, .oracle-urgency-msg { background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(220,38,38,0.1)); border: 1px solid rgba(239,68,68,0.4); border-radius: 10px; padding: 14px; color: #fca5a5; font-size: 14px; margin-bottom: 20px; animation: glow 2s ease-in-out infinite; }
 @keyframes glow { 0%, 100% { box-shadow: 0 0 10px rgba(239,68,68,0.3); } 50% { box-shadow: 0 0 20px rgba(239,68,68,0.6); } }
 .oracle-actions { display: flex; gap: 12px; margin-bottom: 16px; }
-.oracle-share { flex: 1; padding: 12px; background: rgba(251,191,36,0.1); border: 1.5px solid rgba(251,191,36,0.4); border-radius: 10px; color: #fbbf24; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
-.oracle-share:hover { background: rgba(251,191,36,0.2); }
-.oracle-reset { width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: rgba(255,255,255,0.6); font-size: 13px; cursor: pointer; }
-.oracle-reset:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+.oracle-share, .oracle-share-btn { flex: 1; padding: 12px; background: rgba(251,191,36,0.1); border: 1.5px solid rgba(251,191,36,0.4); border-radius: 10px; color: #fbbf24; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+.oracle-share:hover, .oracle-share-btn:hover { background: rgba(251,191,36,0.2); }
+.oracle-reset, .oracle-reset-btn { width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: rgba(255,255,255,0.6); font-size: 13px; cursor: pointer; }
+.oracle-reset:hover, .oracle-reset-btn:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+.oracle-close-bottom-btn {
+ width: 100%;
+ padding: 10px;
+ background: none;
+ border: 1px solid rgba(255, 255, 255, 0.2);
+ border-radius: 8px;
+ color: rgba(255, 255, 255, 0.6);
+ font-size: 14px;
+ cursor: pointer;
+ transition: all 0.3s ease;
+ margin-top: 12px;
+}
+
+.oracle-close-bottom-btn:hover {
+ border-color: rgba(255, 255, 255, 0.4);
+ color: rgba(255, 255, 255, 0.9);
+ background: rgba(255, 255, 255, 0.05);
+}
 @media (max-width: 768px) { .oracle-widget { bottom: 20px; right: 20px; } .oracle-widget-panel { width: calc(100vw - 40px); max-width: 380px; } }
 
 /* ==========================================

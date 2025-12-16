@@ -165,78 +165,60 @@
     </div>
   </footer>
 
-  <div id="oracle-widget" class="oracle-widget">
-    <!-- Crystal Ball Oracle Widget -->
-    <div id="crystal-ball-widget" class="crystal-ball-container" onclick="toggleOracleWidget()">
-      <div class="crystal-ball-assembly">
-        <!-- Outer Glow Effect -->
-        <div class="crystal-glow-outer"></div>
+  <div class="crystal-ball-container" id="crystal-ball-trigger" onclick="openOracleWidget()">
+   <div class="crystal-ball-assembly">
+   <div class="crystal-glow-outer"></div>
+   <div class="crystal-sphere">
+   <div class="crystal-inner-light"></div>
+   <div class="crystal-shine"></div>
+   <span class="mystical-particle particle-1"></span>
+   <span class="mystical-particle particle-2"></span>
+   <span class="mystical-particle particle-3"></span>
+   <span class="mystical-particle particle-4"></span>
+   </div>
+   <div class="crystal-stand"></div>
+   </div>
+   <div class="crystal-label">
+   <span class="crystal-text"> Free Cosmic Reading</span>
+   </div>
+  </div>
 
-        <!-- Main Crystal Ball Sphere -->
-        <div class="crystal-sphere">
-          <!-- Inner Light/Glow -->
-          <div class="crystal-inner-light"></div>
-
-          <!-- Shine/Reflection -->
-          <div class="crystal-shine"></div>
-
-          <!-- Floating Particles -->
-          <span class="mystical-particle particle-1"></span>
-          <span class="mystical-particle particle-2"></span>
-          <span class="mystical-particle particle-3"></span>
-          <span class="mystical-particle particle-4"></span>
-        </div>
-
-        <!-- Crystal Ball Stand/Base -->
-        <div class="crystal-stand"></div>
-      </div>
-
-      <!-- Text Label -->
-      <div class="crystal-label">
-        <span class="crystal-text">✨ Free Cosmic Reading</span>
-      </div>
-    </div>
-
-    <div class="oracle-widget-panel" id="oracle-panel" style="display: none;">
-      <div class="oracle-header">
-        <h3> Your Cosmic Signature</h3>
-        <button class="oracle-close">×</button>
-      </div>
-      
-      <div class="oracle-content">
-        <div class="oracle-intro" id="oracle-intro">
-          <p>The stars have a message for you. When were you born?</p>
-          <input type="text" 
-            id="birth-date" 
-            class="oracle-input" 
-            placeholder="MM/DD/YYYY (e.g., 03/15/1990)"
-            pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
-            maxlength="10">
-          <button onclick="getOracleReading()" class="oracle-submit">Reveal My Reading</button>
-        </div>
-        
-        <div class="oracle-loading" id="oracle-loading" style="display: none;">
-          <div class="oracle-spinner"></div>
-          <p>Consulting cosmos...</p>
-        </div>
-        
-        <div class="oracle-result" id="oracle-result" style="display: none;">
-          <div class="oracle-reading-text" id="reading-text"></div>
-          <div class="oracle-urgency" id="urgency-message"></div>
-          <div class="oracle-actions">
-            <button class="oracle-cta">Get Full Reading</button>
-            <button class="oracle-share">Share</button>
-          </div>
-          <button class="oracle-reset">Try Another</button>
-        </div>
-      </div>
-    </div>
+  <div id="oracle-panel" class="oracle-widget-panel" style="display: none;">
+   <div class="oracle-header">
+   <h3> Your Cosmic Signature</h3>
+   <button class="oracle-close" onclick="closeOracleWidget()">×</button>
+   </div>
+   
+   <div class="oracle-content">
+   <div class="oracle-intro" id="oracle-intro">
+   <p>The stars have a message for you. When were you born?</p>
+   <input type="text" id="birth-date" class="oracle-input" placeholder="MM/DD/YYYY (e.g., 03/15/1990)" maxlength="10">
+   <button onclick="getOracleReading()" class="oracle-submit">Reveal My Reading</button>
+   </div>
+   
+   <div class="oracle-loading" id="oracle-loading" style="display: none;">
+   <div class="oracle-spinner"></div>
+   <p>Consulting the cosmos...</p>
+   </div>
+   
+   <div class="oracle-result" id="oracle-result" style="display: none;">
+   <div class="oracle-sign-badge" id="sign-badge"></div>
+   <div class="oracle-reading-text" id="reading-text"></div>
+   <div class="oracle-urgency-msg" id="urgency-message"></div>
+   <div class="oracle-actions">
+   <button onclick="bookFullReading()" class="oracle-cta-btn">Get Full Reading</button>
+   <button onclick="shareReading()" class="oracle-share-btn">Share</button>
+   </div>
+   <button onclick="resetOracleWidget()" class="oracle-reset-btn">Try Another Date</button>
+   <button onclick="closeOracleWidget()" class="oracle-close-bottom-btn">Close</button>
+   </div>
+   </div>
   </div>
 
   <script src="js/products.js" defer></script>
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
-  <script src="js/oracle-widget.js" defer></script>
+  <script src="js/oracle-widget.js"></script>
   <script defer src="/assets/index.js"></script>
   <script defer src="/assets/crystal-fab-forwarder.js"></script>
 
