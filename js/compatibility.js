@@ -155,37 +155,4 @@ window.toggleMobileNav = toggleMobileNav;
 document.addEventListener('DOMContentLoaded', function() {
   formatDateInput('date1');
   formatDateInput('date2');
-  
-  const tierButtons = document.querySelectorAll('.tier-cta');
-  tierButtons.forEach(button => {
-    button.addEventListener('click', async function() {
-      const productName = button.getAttribute('data-name');
-      const productPrice = button.getAttribute('data-price');
-
-      if (typeof window.initiateCheckout !== 'function') {
-        alert('Checkout is currently unavailable. Please try again shortly.');
-        return;
-      }
-      
-      const originalText = button.textContent;
-      button.textContent = 'Processing...';
-      button.disabled = true;
-      
-      let success = false;
-      try {
-        success = await window.initiateCheckout({
-          name: productName,
-          price: productPrice,
-          type: 'compatibility_certificate'
-        });
-      } catch (err) {
-        console.error('Checkout initiation failed:', err);
-      }
-      
-      if (!success) {
-        button.textContent = originalText;
-        button.disabled = false;
-      }
-    });
-  });
 });
