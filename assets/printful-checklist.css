@@ -12,3 +12,13 @@
 .pf-badge{font-size:.8rem;border:1px solid rgba(0,0,0,.2);border-radius:999px;padding:4px 8px;background:#fafafa}
 .pf-rows{font-size:.9rem;opacity:.9}
 .pf-rows div{margin:2px 0}
+
+.pf-actions{display:grid;gap:8px;margin-top:8px}
+.pf-actions .row{display:flex;gap:8px;flex-wrap:wrap}
+.pf-actions button,.pf-actions a{padding:8px 10px;border:1px solid rgba(0,0,0,.2);border-radius:10px;background:#fff;color:#111;text-decoration:none;cursor:pointer}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.badge{font-size:.8rem;border:1px solid rgba(0,0,0,.2);border-radius:999px;padding:3px 8px;background:#fafafa}
+.badge.ok{border-color:#27ae60;background:#ecf9f1}
+.badge.miss{border-color:#c0392b;background:#fdecea}
+.copyfield{display:flex;gap:6px;align-items:center}
+.copyfield input{flex:1;padding:8px 10px;border:1px solid rgba(0,0,0,.2);border-radius:10px}
