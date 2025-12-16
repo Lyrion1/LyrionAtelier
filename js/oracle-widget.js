@@ -1,73 +1,34 @@
-console.log('=== ORACLE WIDGET DEBUG START ===');
-console.log('Script file loaded at:', new Date().toISOString());
-console.log('Window location:', window.location.href);
-console.log('Oracle widget script loaded');
-
-function testCrystalBall() {
- console.log('=== CRYSTAL BALL TEST ===');
- const trigger = document.getElementById('crystal-ball-trigger');
- const panel = document.getElementById('oracle-panel');
- const birthInput = document.getElementById('birth-date');
- 
- console.log('Crystal ball trigger found:', !!trigger);
- console.log('Oracle panel found:', !!panel);
- console.log('Birth date input found:', !!birthInput);
- 
- if (!trigger) console.error('CRITICAL: Crystal ball trigger not found in DOM');
- if (!panel) console.error('CRITICAL: Oracle panel not found in DOM');
- if (!birthInput) console.error('CRITICAL: Birth date input not found in DOM');
- 
- console.log('openOracleWidget function exists:', typeof window.openOracleWidget);
- console.log('getOracleReading function exists:', typeof window.getOracleReading);
-}
+console.log('Oracle widget loading...');
 
 function openOracleWidget() {
- console.log('Opening oracle widget');
+ console.log('Opening oracle panel');
  const panel = document.getElementById('oracle-panel');
  if (panel) {
  panel.style.display = 'block';
  resetOracleWidget();
- } else {
- console.error('Oracle panel not found');
  }
 }
 
 function closeOracleWidget() {
- console.log('Closing oracle widget');
+ console.log('Closing oracle panel');
  const panel = document.getElementById('oracle-panel');
  if (panel) {
  panel.style.display = 'none';
  }
 }
 
-function toggleOracleWidget() {
- const panel = document.getElementById('oracle-panel');
- if (panel) {
- if (panel.style.display === 'none') {
- openOracleWidget();
- } else {
- closeOracleWidget();
- }
- }
-}
-
 function formatOracleDateInput() {
  const input = document.getElementById('birth-date');
- if (!input) {
- console.error('Birth date input not found');
- return;
- }
+ if (!input) return;
  
  input.addEventListener('input', function(e) {
  let value = e.target.value.replace(/\D/g, '');
- 
  if (value.length >= 2) {
  value = value.slice(0, 2) + '/' + value.slice(2);
  }
  if (value.length >= 5) {
  value = value.slice(0, 5) + '/' + value.slice(5, 9);
  }
- 
  e.target.value = value;
  });
  
@@ -80,18 +41,15 @@ function formatOracleDateInput() {
 }
 
 async function getOracleReading() {
- console.log('getOracleReading called');
+ console.log('Getting oracle reading');
  
  const birthDateInput = document.getElementById('birth-date');
  if (!birthDateInput) {
- console.error('Birth date input not found');
- alert('Form error. Please refresh the page.');
+ alert('Form error. Please refresh.');
  return;
  }
  
  const birthDate = birthDateInput.value.trim();
- 
- console.log('Birth date value:', birthDate);
  
  if (!birthDate) {
  alert('Please enter your birth date in MM/DD/YYYY format');
@@ -104,10 +62,12 @@ async function getOracleReading() {
  return;
  }
  
- const [month, day, year] = birthDate.split('/');
- const isoDate = `${year}-${month}-${day}`;
- 
- console.log('Converted to ISO date:', isoDate);
+ const parts = birthDate.split('/');
+ if (parts.length !== 3) {
+ alert('Please enter date in MM/DD/YYYY format (e.g., 03/15/1990)');
+ return;
+ }
+ const isoDate = parts[2] + '-' + parts[0] + '-' + parts[1];
  
  const introEl = document.getElementById('oracle-intro');
  const loadingEl = document.getElementById('oracle-loading');
@@ -118,29 +78,20 @@ async function getOracleReading() {
  if (resultEl) resultEl.style.display = 'none';
  
  try {
- console.log('Calling oracle-ai function');
- 
  const response = await fetch('/.netlify/functions/oracle-ai', {
  method: 'POST',
- headers: {
- 'Content-Type': 'application/json',
- },
+ headers: { 'Content-Type': 'application/json' },
  body: JSON.stringify({ birthDate: isoDate })
  });
  
- console.log('Response status:', response.status);
- 
  if (!response.ok) {
- const errorText = await response.text();
- console.error('API error:', errorText);
- throw new Error('Failed to get reading: ' + response.status);
+ throw new Error('Failed to get reading');
  }
  
  const data = await response.json();
- console.log('Oracle data received:', data);
  
  if (!data || !data.reading) {
- throw new Error('Invalid response format');
+ throw new Error('Invalid response');
  }
  
  window.currentReading = data;
@@ -167,26 +118,21 @@ async function getOracleReading() {
  urgencyMsg.style.display = 'none';
  }
  
- console.log('Reading displayed successfully');
- 
  } catch (error) {
  console.error('Oracle error:', error);
- alert('Unable to get your oracle reading. Please try again soon.');
- 
+ alert('Unable to get reading. Please try again.');
  if (loadingEl) loadingEl.style.display = 'none';
  if (introEl) introEl.style.display = 'block';
  }
 }
 
 function bookFullReading() {
- console.log('Booking full reading');
  const recommended = window.currentReading?.recommendedReading || '';
  window.location.href = recommended ? 'oracle.html#' + recommended : 'oracle.html';
 }
 
 function shareReading() {
- console.log('Sharing reading');
- const shareText = window.currentReading?.shareText || 'I just got my free cosmic reading from Lyrion Atelier!';
+ const shareText = window.currentReading?.shareText || 'I got my cosmic reading!';
  
  if (navigator.share) {
  navigator.share({
@@ -196,13 +142,12 @@ function shareReading() {
  }).catch(err => console.log('Share failed:', err));
  } else {
  navigator.clipboard.writeText(shareText + ' ' + window.location.href)
- .then(() => alert('Reading copied! Share it on social media.'))
- .catch(() => alert('Share: ' + shareText));
+ .then(() => alert('Reading copied!'))
+ .catch(() => alert(shareText));
  }
 }
 
 function resetOracleWidget() {
- console.log('Resetting oracle widget');
  const introEl = document.getElementById('oracle-intro');
  const loadingEl = document.getElementById('oracle-loading');
  const resultEl = document.getElementById('oracle-result');
@@ -216,21 +161,37 @@ function resetOracleWidget() {
  window.currentReading = null;
 }
 
-window.openOracleWidget = openOracleWidget;
-window.closeOracleWidget = closeOracleWidget;
-window.toggleOracleWidget = toggleOracleWidget;
-window.getOracleReading = getOracleReading;
-window.bookFullReading = bookFullReading;
-window.shareReading = shareReading;
-window.resetOracleWidget = resetOracleWidget;
-window.testCrystalBall = testCrystalBall;
+function attachOracleEventListeners() {
+ console.log('Attaching event listeners');
+ 
+ const trigger = document.getElementById('crystal-ball-trigger');
+ const closeBtn = document.getElementById('oracle-close-btn');
+ const submitBtn = document.getElementById('oracle-submit-btn');
+ const bookBtn = document.getElementById('book-reading-btn');
+ const shareBtn = document.getElementById('share-reading-btn');
+ const resetBtn = document.getElementById('reset-oracle-btn');
+ const closeBottomBtn = document.getElementById('oracle-close-bottom-btn');
+ 
+ if (trigger) {
+ trigger.addEventListener('click', openOracleWidget);
+ console.log('Crystal ball click listener attached');
+ } else {
+ console.error('Crystal ball trigger not found');
+ }
+ 
+ if (closeBtn) closeBtn.addEventListener('click', closeOracleWidget);
+ if (submitBtn) submitBtn.addEventListener('click', getOracleReading);
+ if (bookBtn) bookBtn.addEventListener('click', bookFullReading);
+ if (shareBtn) shareBtn.addEventListener('click', shareReading);
+ if (resetBtn) resetBtn.addEventListener('click', resetOracleWidget);
+ if (closeBottomBtn) closeBottomBtn.addEventListener('click', closeOracleWidget);
+ 
+ formatOracleDateInput();
+}
 
 document.addEventListener('DOMContentLoaded', function() {
- console.log('=== DOM LOADED ===');
- testCrystalBall();
- console.log('Oracle widget DOM loaded');
- formatOracleDateInput();
+ console.log('Oracle widget DOM ready');
+ attachOracleEventListeners();
 });
 
-console.log('Oracle widget functions registered');
-console.log('=== ORACLE WIDGET DEBUG END ===');
+console.log('Oracle widget script loaded');
