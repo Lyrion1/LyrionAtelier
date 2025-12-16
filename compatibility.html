@@ -16,10 +16,7 @@
  <img src="images/logo.png" alt="Lyrion Atelier" class="brand-logo" onerror="this.style.display='none'">
  <span class="brand-name">LYRION ATELIER</span>
  </a>
- <button class="nav-toggle" aria-label="Toggle navigation">
- <span class="hamburger"></span>
- </button>
- <div class="nav-links" id="nav-links">
+ <div class="nav-links">
  <a href="index.html">Home</a>
  <a href="shop.html">Shop</a>
  <a href="oracle.html">Oracle</a>
@@ -58,7 +55,7 @@
  <li> Instant delivery</li>
  <li> Perfect digital gift</li>
  </ul>
- <button class="card-cta-btn" onclick="initiateCompatibilityCheckout('Digital Cosmic Compatibility Certificate', 39.00, event)">
+ <button class="card-cta-btn" onclick="buyCompatibilityCertificate('Digital Cosmic Compatibility Certificate', '39.00', event)">
  Get Digital Certificate
  </button>
  </div>
@@ -79,7 +76,7 @@
  <li> Gift-ready presentation</li>
  <li> Ships within 5-7 days</li>
  </ul>
- <button class="card-cta-btn featured-btn" onclick="initiateCompatibilityCheckout('Luxury Printed Cosmic Compatibility Certificate', 149.00, event)">
+ <button class="card-cta-btn featured-btn" onclick="buyCompatibilityCertificate('Luxury Printed Cosmic Compatibility Certificate', '149.00', event)">
  Get Luxury Print
  </button>
  </div>
@@ -99,7 +96,7 @@
  <li> White-glove shipping</li>
  <li> Heirloom-quality keepsake</li>
  </ul>
- <button class="card-cta-btn" onclick="initiateCompatibilityCheckout('Museum Framed Cosmic Compatibility Certificate', 349.00, event)">
+ <button class="card-cta-btn" onclick="buyCompatibilityCertificate('Museum Framed Cosmic Compatibility Certificate', '349.00', event)">
  Get Framed Certificate
  </button>
  </div>
@@ -119,7 +116,7 @@
  <li> Display together or separately</li>
  <li> Ultimate romantic statement</li>
  </ul>
- <button class="card-cta-btn premium-btn" onclick="initiateCompatibilityCheckout('Twin Flame Cosmic Compatibility Certificate Set', 599.00, event)">
+ <button class="card-cta-btn premium-btn" onclick="buyCompatibilityCertificate('Twin Flame Cosmic Compatibility Certificate Set', '599.00', event)">
  Get Twin Flame Set
  </button>
  </div>
@@ -157,7 +154,7 @@
 </div>
 </div>
 
-<button onclick="generatePreview()" class="generate-btn">
+<button class="generate-btn" onclick="generatePreview()">
 Generate Preview
 </button>
 </div>
@@ -227,7 +224,6 @@ Generate Preview
 </div>
 </footer>
 
-<script src="js/navigation.js"></script>
 <script src="js/checkout-handler.js"></script>
 <script src="js/compatibility.js"></script>
 </body>
