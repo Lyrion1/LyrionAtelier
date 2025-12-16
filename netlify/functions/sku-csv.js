@@ -20,6 +20,9 @@ function listProductsDir(root){
 function money(c){ return (Number(c||0)/100).toFixed(2); }
 
 const FRONT_WIDTH_MAP = { 'aquarian-current-hoodie': 6 };
+const FRONT_WIDTH_DEFAULT = 12;
+const FRONT_WIDTH_CREW = 11.5;
+const FRONT_WIDTH_HOOD = 12;
 const DIM_SLEEVE_CREST_IN = 1.2;
 const DIM_BACK_NECK_IN = 1.25;
 
@@ -55,9 +58,9 @@ async function buildResponse(){
  for (const p of prods){
  // Heuristic: suggest front width by subcategory
  const sub = (p.subcategory||'').toLowerCase();
- let frontW = 12; // tees default
- if (sub.includes('crew')) frontW = 11.5;
- if (sub.includes('hood')) frontW = 12; // full front by default
+ let frontW = FRONT_WIDTH_DEFAULT;
+ if (sub.includes('crew')) frontW = FRONT_WIDTH_CREW;
+ if (sub.includes('hood')) frontW = FRONT_WIDTH_HOOD;
  if (FRONT_WIDTH_MAP[p.slug]) frontW = FRONT_WIDTH_MAP[p.slug];
 
  const wrist = p.brand_marks?.wrist_logo || '';
