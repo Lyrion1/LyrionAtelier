@@ -2,13 +2,14 @@ import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 
-const WIDTH = 900, HEIGHT = 1200; // 3×4 in @300dpi
+const LABEL_WIDTH_PX = 900, LABEL_HEIGHT_PX = 1200; // 3×4 in @300dpi
+const SUN_SIZE_PX = 300;
 const OUT = path.join(process.cwd(), 'printful-files/brand/neck-label-3x4in.png');
 const SUN = path.join(process.cwd(), 'printful-files/brand/sun-1_25in.png');
 
 function svgText(){
  // Simple, elegant black text on white
- return `<svg xmlns='http://www.w3.org/2000/svg' width='${WIDTH}' height='${HEIGHT}'>
+ return `<svg xmlns='http://www.w3.org/2000/svg' width='${LABEL_WIDTH_PX}' height='${LABEL_HEIGHT_PX}'>
  <style>
  .t1{font:700 48px Georgia, 'Times New Roman', serif; fill:#000; letter-spacing:1px}
  .t2{font:400 24px -apple-system,system-ui,Arial,sans-serif; fill:#111}
@@ -32,14 +33,14 @@ function svgText(){
 
 async function run(){
  if (!fs.existsSync(SUN)) {
- console.error('Missing favicon:', SUN, '\nPlease add printful-files/brand/sun-1_25in.png first.'); 
- process.exit(0);
+ console.error('Missing sun artwork:', SUN, '\nPlease add this file first.'); 
+ process.exit(1);
  }
  // Base white PNG
- const base = sharp({ create: { width: WIDTH, height: HEIGHT, channels: 3, background: '#ffffff' } });
+ const base = sharp({ create: { width: LABEL_WIDTH_PX, height: LABEL_HEIGHT_PX, channels: 3, background: '#ffffff' } });
  // Sun centered near top (300×300)
- const sunBuf = await sharp(SUN).resize(300,300,{fit:'contain'}).png().toBuffer();
- const sunLeft = Math.round((WIDTH-300)/2), sunTop = 80;
+ const sunBuf = await sharp(SUN).resize(SUN_SIZE_PX, SUN_SIZE_PX, { fit: 'contain' }).png().toBuffer();
+ const sunLeft = Math.round((LABEL_WIDTH_PX-SUN_SIZE_PX)/2), sunTop = 80;
 
  // Text overlay via SVG render
  const textBuf = Buffer.from(svgText());

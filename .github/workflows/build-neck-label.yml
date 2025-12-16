@@ -29,8 +29,8 @@ jobs:
         run: node scripts/build-neck-label.mjs
       - name: Commit file
         run: |
-          git config user.name "lyrion-bot"
-          git config user.email "bot@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add printful-files/brand/neck-label-3x4in.png
-          git commit -m "feat(brand): generate inside label from favicon" || echo "No changes"
+          git commit -m "feat(brand): generate inside label from sun artwork" || echo "No changes"
           git push
