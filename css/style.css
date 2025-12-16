@@ -2870,6 +2870,16 @@ border-color: rgba(251, 191, 36, 0.8);
 box-shadow: 0 12px 40px rgba(251, 191, 36, 0.4);
 }
 
+.premium-tier {
+border-color: rgba(251, 191, 36, 0.5);
+background: linear-gradient(135deg, rgba(251, 191, 36, 0.14), rgba(251, 191, 36, 0.07));
+}
+
+.premium-tier:hover {
+border-color: rgba(251, 191, 36, 0.85);
+box-shadow: 0 12px 40px rgba(251, 191, 36, 0.45);
+}
+
 .featured-badge {
 position: absolute;
 top: -12px;
@@ -2949,6 +2959,16 @@ color: #fbbf24;
 
 .featured-cta:hover {
 background: linear-gradient(135deg, rgba(251, 191, 36, 0.5), rgba(251, 191, 36, 0.4));
+}
+
+.premium-cta {
+background: linear-gradient(135deg, rgba(251, 191, 36, 0.45), rgba(251, 191, 36, 0.35));
+border-color: rgba(251, 191, 36, 0.8);
+color: #fbbf24;
+}
+
+.premium-cta:hover {
+background: linear-gradient(135deg, rgba(251, 191, 36, 0.55), rgba(251, 191, 36, 0.45));
 }
 
 .preview-generator {
