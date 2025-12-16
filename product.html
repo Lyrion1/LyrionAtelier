@@ -7,12 +7,13 @@
   <meta property="og:description" content="Professional oracle readings and astrology-inspired fashion. Discover your cosmic signature.">
   <meta property="og:image" content="https://lyrionatelier.com/images/logo/logo.png">
   <meta property="og:url" content="https://lyrionatelier.com">
-  <meta name="twitter:card" content="summary_large_image">
-  <title>Product | Lyrīon Atelier</title>
-  <link rel="icon" type="image/png" href="images/favicon/favicon.png">
-  <link rel="stylesheet" href="css/style.css">
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+   <meta name="twitter:card" content="summary_large_image">
+   <title>Product | Lyrīon Atelier</title>
+   <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="/assets/product-selector.css">
+   <!-- Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 </head>
 <body>
   <a class="skip-to-content" href="#main-content">Skip to main content</a>
@@ -48,6 +49,7 @@
           <p id="product-description" class="muted"></p>
           <p class="price" id="product-price"></p>
           <div class="size-selector" id="size-selector"></div>
+          <div id="product-selector" data-slug=""></div>
           <div class="button-row mt-1">
             <button class="btn btn-primary" type="button" id="add-to-cart-btn">Add to cart</button>
             <a class="btn btn-outline" href="shop.html">Back to shop</a>
@@ -67,6 +69,15 @@
   <script src="js/products.js" defer></script>
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
+  <script>
+    (function(){
+      const el = document.getElementById('product-selector');
+      if (!el) return;
+      const slugParam = new URLSearchParams(window.location.search).get('slug');
+      if (slugParam) el.dataset.slug = slugParam;
+    })();
+  </script>
+  <script type="module" src="/assets/product-selector.js"></script>
   <script defer src="/assets/product.js"></script>
 </body>
 </html>
