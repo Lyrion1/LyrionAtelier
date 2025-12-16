@@ -136,21 +136,8 @@ async function initiateCompatibilityCheckout(productName, price, evt) {
   }
 }
 
-// Mobile Navigation Function
-function toggleMobileNav() {
-  const navLinks = document.getElementById('nav-links');
-  const navToggle = document.querySelector('.nav-toggle');
-  if (navLinks) {
-    navLinks.classList.toggle('active');
-  }
-  if (navToggle) {
-    navToggle.classList.toggle('active');
-  }
-}
-
 // Make functions globally available
 window.initiateCompatibilityCheckout = initiateCompatibilityCheckout;
-window.toggleMobileNav = toggleMobileNav;
 
 document.addEventListener('DOMContentLoaded', function() {
   formatDateInput('date1');
