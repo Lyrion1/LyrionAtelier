@@ -80,7 +80,8 @@ async function generatePreview() {
     `;
     document.getElementById('signs-display').innerHTML = signsHTML;
     
-    const narrativePreview = data.narrative.split('.').slice(0, 2).join('.') + '...';
+    const narrativeText = typeof data.narrative === 'string' ? data.narrative : '';
+    const narrativePreview = narrativeText ? narrativeText.split('.').slice(0, 2).join('.') + '...' : 'Your personalized cosmic narrative will appear here.';
     document.getElementById('preview-narrative').innerHTML = `<p>${narrativePreview}</p><p style="font-style: italic; color: #fbbf24; margin-top: 16px;">Full reading included in your certificate!</p>`;
     
     window.scrollTo({ top: document.getElementById('preview-result').offsetTop - 100, behavior: 'smooth' });
@@ -103,16 +104,26 @@ document.addEventListener('DOMContentLoaded', function() {
     button.addEventListener('click', async function() {
       const productName = button.getAttribute('data-name');
       const productPrice = button.getAttribute('data-price');
+
+      if (typeof window.initiateCheckout !== 'function') {
+        alert('Checkout is currently unavailable. Please try again shortly.');
+        return;
+      }
       
       const originalText = button.textContent;
       button.textContent = 'Processing...';
       button.disabled = true;
       
-      const success = await window.initiateCheckout({
-        name: productName,
-        price: productPrice,
-        type: 'compatibility_certificate'
-      });
+      let success = false;
+      try {
+        success = await window.initiateCheckout({
+          name: productName,
+          price: productPrice,
+          type: 'compatibility_certificate'
+        });
+      } catch (err) {
+        console.error('Checkout initiation failed:', err);
+      }
       
       if (!success) {
         button.textContent = originalText;
