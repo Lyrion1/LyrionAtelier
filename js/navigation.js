@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.querySelector('.nav-links');
   const navAnchors = document.querySelectorAll('.nav-links a');
 
-  if (navToggle && navLinks && !navToggle.hasAttribute('onclick')) {
+  if (navToggle && navLinks && navToggle.dataset.inlineNav !== 'true') {
     navToggle.addEventListener('click', function() {
       navLinks.classList.toggle('active');
       navToggle.classList.toggle('active');
