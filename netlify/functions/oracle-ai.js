@@ -4,104 +4,131 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
-function getZodiacSign(month, day) {
-  const signs = [
-    { sign: 'Capricorn', start: [12, 22], end: [1, 19] },
-    { sign: 'Aquarius', start: [1, 20], end: [2, 18] },
-    { sign: 'Pisces', start: [2, 19], end: [3, 20] },
-    { sign: 'Aries', start: [3, 21], end: [4, 19] },
-    { sign: 'Taurus', start: [4, 20], end: [5, 20] },
-    { sign: 'Gemini', start: [5, 21], end: [6, 20] },
-    { sign: 'Cancer', start: [6, 21], end: [7, 22] },
-    { sign: 'Leo', start: [7, 23], end: [8, 22] },
-    { sign: 'Virgo', start: [8, 23], end: [9, 22] },
-    { sign: 'Libra', start: [9, 23], end: [10, 22] },
-    { sign: 'Scorpio', start: [10, 23], end: [11, 21] },
-    { sign: 'Sagittarius', start: [11, 22], end: [12, 21] },
-  ];
-
-  for (const s of signs) {
-    if ((month === s.start[0] && day >= s.start[1]) ||
-        (month === s.end[0] && day <= s.end[1])) {
-      return s.sign;
-    }
-  }
-  return 'Capricorn';
-}
-
 exports.handler = async (event) => {
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Content-Type': 'application/json'
+  };
+
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers, body: '' };
+  }
+
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
+    return {
+      statusCode: 405,
+      headers,
+      body: JSON.stringify({ error: 'Method not allowed' })
+    };
   }
 
   try {
     const { birthDate } = JSON.parse(event.body);
 
-    const [year, month, day] = birthDate.split('-').map(Number);
-    const zodiacSign = getZodiacSign(month, day);
-    const currentYear = new Date().getFullYear();
-    const age = currentYear - year;
+    if (!birthDate) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Birth date required' })
+      };
+    }
 
-    const saturnReturn = (age >= 28 && age <= 30) || (age >= 57 && age <= 59);
+    console.log('Processing oracle reading for:', birthDate);
 
-    const prompt = `You are the Oracle of Lyrion Atelier, a mystical astrologer.
+    // Calculate zodiac sign
+    const date = new Date(birthDate);
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    
+    const zodiacSigns = [
+      { sign: ' Capricorn', start: [12, 22], end: [1, 19] },
+      { sign: ' Aquarius', start: [1, 20], end: [2, 18] },
+      { sign: ' Pisces', start: [2, 19], end: [3, 20] },
+      { sign: ' Aries', start: [3, 21], end: [4, 19] },
+      { sign: ' Taurus', start: [4, 20], end: [5, 20] },
+      { sign: ' Gemini', start: [5, 21], end: [6, 20] },
+      { sign: ' Cancer', start: [6, 21], end: [7, 22] },
+      { sign: ' Leo', start: [7, 23], end: [8, 22] },
+      { sign: ' Virgo', start: [8, 23], end: [9, 22] },
+      { sign: ' Libra', start: [9, 23], end: [10, 22] },
+      { sign: ' Scorpio', start: [10, 23], end: [11, 21] },
+      { sign: ' Sagittarius', start: [11, 22], end: [12, 21] },
+    ];
 
-Birth: ${zodiacSign}, Age ${age}, Saturn Return: ${saturnReturn ? 'YES - Critical transformation period' : 'No'}
+    let zodiacSign = ' ';
+    for (const z of zodiacSigns) {
+      const [startMonth, startDay] = z.start;
+      const [endMonth, endDay] = z.end;
+      
+      if ((month === startMonth && day >= startDay) || (month === endMonth && day <= endDay)) {
+        zodiacSign = z.sign;
+        break;
+      }
+    }
 
-Create a captivating 3-sentence reading that:
-1. Reveals profound truth about ${zodiacSign} energy
-2. ${saturnReturn ? 'Emphasizes URGENT Saturn Return transformation' : 'Highlights current themes'}
-3. Creates intrigue for deeper exploration
-4. Ends with mystical cliffhanger
+    // Calculate age
+    const today = new Date();
+    let age = today.getFullYear() - date.getFullYear();
+    const monthDiff = today.getMonth() - date.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < date.getDate())) {
+      age--;
+    }
 
-Tone: Mystical, poetic, eerily accurate. Make them think "How did they know?!"`;
+    // Check Saturn Return
+    const isSaturnReturn = (age >= 28 && age <= 30) || (age >= 57 && age <= 59);
 
+    // Call Anthropic API
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 200,
-      messages: [{ role: 'user', content: prompt }]
+      messages: [{
+        role: 'user',
+        content: `You are a mystical oracle. Give a brief, intriguing 2-3 sentence cosmic reading for someone born on ${birthDate}, zodiac sign ${zodiacSign}, currently age ${age}. Make it personal, mysterious, and encouraging. Focus on their current life phase and cosmic energies.`
+      }]
     });
 
     const reading = message.content[0].text;
 
-    let recommendedReading = 'natal-chart';
+    // Create urgency message
     let urgencyMessage = '';
-
-    if (saturnReturn) {
-      recommendedReading = 'career';
-      urgencyMessage = ' Your Saturn Return is NOW. This is your once-in-30-years transformation window.';
+    if (isSaturnReturn) {
+      urgencyMessage = ' You are in your Saturn Return - a powerful time of transformation and life restructuring. A full reading can guide you through this pivotal period.';
     } else if (age < 25) {
-      recommendedReading = 'life-path';
-      urgencyMessage = ' Pivotal discovery phase. Your Life Path Reading reveals your destiny.';
+      urgencyMessage = ' You are in a formative period of discovery. A deeper reading can illuminate your path forward.';
     } else if (age >= 40) {
-      recommendedReading = 'cosmic-blueprint';
-      urgencyMessage = ' Entering power years. Full Cosmic Blueprint shows how to claim them.';
-    } else {
-      urgencyMessage = ' The stars reveal your path. Discover your complete cosmic blueprint.';
+      urgencyMessage = ' You have accumulated wisdom and experience. A comprehensive reading can help you align with your highest purpose.';
     }
+
+    // Recommend product
+    const recommendedReading = isSaturnReturn ? 'cosmic-blueprint' : (age < 30 ? 'life-path' : 'natal-chart');
+
+    const response = {
+      zodiacSign: zodiacSign,
+      reading: reading,
+      urgencyMessage: urgencyMessage,
+      recommendedReading: recommendedReading,
+      shareText: `I just discovered my cosmic signature: ${zodiacSign}! Get your free reading at Lyrion Atelier.`
+    };
+
+    console.log('Oracle reading generated successfully');
 
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        reading,
-        zodiacSign,
-        age,
-        saturnReturn,
-        recommendedReading,
-        urgencyMessage,
-        shareText: `I just got my cosmic reading from Lyrion Atelier and it's eerily accurate! ${zodiacSign} - Try yours: https://lyrionatelier.com`
-      }),
+      headers,
+      body: JSON.stringify(response)
     };
 
   } catch (error) {
-    console.error('Oracle AI Error:', error);
+    console.error('Anthropic API error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'The stars are temporarily misaligned. Please try again.' }),
+      headers,
+      body: JSON.stringify({ 
+        error: 'Failed to generate reading',
+        message: error.message 
+      })
     };
   }
 };

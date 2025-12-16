@@ -46,7 +46,6 @@ function renderFeaturedProducts() {
   });
 }
 
-let currentReading = null;
 let lastOracleToggle = 0;
 const ORACLE_TOGGLE_DEBOUNCE_MS = 300;
 
@@ -60,7 +59,9 @@ function setupOracleWidget() {
 
   widgetTrigger?.addEventListener('click', toggleOracleWidget);
   closeButton?.addEventListener('click', toggleOracleWidget);
-  revealButton?.addEventListener('click', getReading);
+  if (revealButton && !revealButton.getAttribute('onclick')) {
+    revealButton.addEventListener('click', typeof getOracleReading === 'function' ? getOracleReading : getReading);
+  }
   bookButton?.addEventListener('click', bookReading);
   shareButton?.addEventListener('click', shareReading);
   resetButton?.addEventListener('click', resetWidget);
@@ -93,7 +94,7 @@ async function getReading() {
       body: JSON.stringify({ birthDate })
     });
     const data = await response.json();
-    currentReading = data;
+    window.currentReading = data;
 
     if (loading) loading.style.display = 'none';
     if (result) result.style.display = 'block';
@@ -110,19 +111,21 @@ async function getReading() {
 }
 
 function bookReading() {
-  window.location.href = currentReading ? `oracle.html#${currentReading.recommendedReading}` : 'oracle.html';
+  const reading = window.currentReading;
+  window.location.href = reading ? `oracle.html#${reading.recommendedReading}` : 'oracle.html';
 }
 
 function shareReading() {
-  if (currentReading?.shareText) {
+  const reading = window.currentReading;
+  if (reading?.shareText) {
     if (navigator.share) {
-      navigator.share({ title: 'Lyrion Atelier', text: currentReading.shareText, url: window.location.href })
+      navigator.share({ title: 'Lyrion Atelier', text: reading.shareText, url: window.location.href })
         .catch((error) => {
           console.error('Sharing failed.', error);
           alert('Sharing failed. Please try again later.');
         });
     } else {
-      navigator.clipboard.writeText(currentReading.shareText)
+      navigator.clipboard.writeText(reading.shareText)
         .then(() => alert('Copied! Share on social media.'))
         .catch((error) => {
           console.error('Copy to clipboard failed.', error);
@@ -139,5 +142,5 @@ function resetWidget() {
   if (result) result.style.display = 'none';
   if (intro) intro.style.display = 'block';
   if (birthDateInput) birthDateInput.value = '';
-  currentReading = null;
+  window.currentReading = null;
 }

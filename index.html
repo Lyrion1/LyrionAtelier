@@ -144,8 +144,13 @@
       <div class="oracle-content">
         <div class="oracle-intro" id="oracle-intro">
           <p>The stars have a message for you. When were you born?</p>
-          <input type="date" id="birth-date" class="oracle-input" max="2010-12-31">
-          <button class="oracle-submit">Reveal</button>
+          <input type="text" 
+            id="birth-date" 
+            class="oracle-input" 
+            placeholder="MM/DD/YYYY (e.g., 03/15/1990)"
+            pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
+            maxlength="10">
+          <button onclick="getOracleReading()" class="oracle-submit">Reveal My Reading</button>
         </div>
         
         <div class="oracle-loading" id="oracle-loading" style="display: none;">
@@ -169,6 +174,7 @@
   <script src="js/products.js" defer></script>
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
+  <script src="js/oracle-widget.js" defer></script>
   <script defer src="/assets/index.js"></script>
   <script defer src="/assets/crystal-fab-forwarder.js"></script>
 
