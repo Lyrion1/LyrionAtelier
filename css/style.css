@@ -137,7 +137,6 @@ img {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 40px;
-  width: 100%;
 }
 
 .skip-to-content {
@@ -291,9 +290,6 @@ img {
 }
 
 .nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -387,6 +383,18 @@ img {
 
 .hamburger::after {
   bottom: -8px;
+}
+
+.nav-toggle.active .hamburger {
+  background: transparent;
+}
+
+.nav-toggle.active .hamburger::before {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.active .hamburger::after {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 .hero {
