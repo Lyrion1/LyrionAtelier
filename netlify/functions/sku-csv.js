@@ -17,7 +17,8 @@ function listProductsDir(root){
  } catch (err) { console.error('list dir failed', root, err?.message); }
  return out;
 }
-function money(c){ return (Number(c||0)/100).toFixed(2); }
+const CENTS_PER_DOLLAR = 100;
+function money(c){ return (Number(c||0)/CENTS_PER_DOLLAR).toFixed(2); }
 
 const FRONT_WIDTH_DEFAULT = 12;
 const FRONT_WIDTH_CREW = 11.5;
@@ -80,7 +81,7 @@ async function buildResponse(){
  v.options?.size || '',
  v.sku || '',
  money(v.price || 0),
- v.printfulVariantId ?? '',
+ v.printfulVariantId || '',
  wrist,
  backNeck,
  inside,
