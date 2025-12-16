@@ -1,5 +1,16 @@
 // Lyrīon Atelier - Main JavaScript
 
+// Inject the shop auto-loader once globally (idempotent)
+(function injectShopAutoLoader() {
+  const src = '/assets/auto-mount-shop-grid.js';
+  const scripts = Array.from(document.getElementsByTagName('script'));
+  if (scripts.some(tag => tag.getAttribute('src') === src)) return;
+  const script = document.createElement('script');
+  script.type = 'module';
+  script.src = src;
+  document.head.appendChild(script);
+})();
+
 /**
  * Main initialization on DOM content loaded
  * Sets up all interactive features and event listeners
