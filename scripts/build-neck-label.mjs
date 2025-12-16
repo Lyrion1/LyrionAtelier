@@ -32,30 +32,39 @@ function svgText(){
 }
 
 async function run(){
- if (!fs.existsSync(SUN)) {
- console.error('Missing sun artwork:', SUN, '\nPlease add this file first.'); 
- process.exit(1);
- }
- // Base white PNG
- const base = sharp({ create: { width: LABEL_WIDTH_PX, height: LABEL_HEIGHT_PX, channels: 3, background: '#ffffff' } });
- // Sun centered near top (300×300)
- const sunBuf = await sharp(SUN).resize(SUN_SIZE_PX, SUN_SIZE_PX, { fit: 'contain' }).png().toBuffer();
- const sunLeft = Math.round((LABEL_WIDTH_PX-SUN_SIZE_PX)/2), sunTop = 80;
-
- // Text overlay via SVG render
- const textBuf = Buffer.from(svgText());
-
- const out = await base
- .composite([
- { input: sunBuf, left: sunLeft, top: sunTop },
- { input: textBuf, left: 0, top: 0 }
- ])
- .png({ compressionLevel: 9 })
- .toBuffer();
-
- await fs.promises.mkdir(path.dirname(OUT), { recursive: true });
- await fs.promises.writeFile(OUT, out);
- console.log('Wrote', OUT.replace(process.cwd(), ''));
+  if (!fs.existsSync(SUN)) {
+    console.error('Missing favicon:', SUN, '\nAdd printful-files/brand/sun-1_25in.png first.');
+    return;
+  }
+  // mtime check (skip if output exists and is newer or same as SUN)
+  try {
+    const sunStat = fs.statSync(SUN);
+    const outStat = fs.existsSync(OUT) ? fs.statSync(OUT) : null;
+    if (outStat && outStat.mtimeMs >= sunStat.mtimeMs) {
+      console.log('[neck-label] up-to-date (no rebuild).');
+      return;
+    }
+  } catch(_) { /* ignore stat errors; fall back to rebuild */ }
+  // Base white PNG
+  const base = sharp({ create: { width: LABEL_WIDTH_PX, height: LABEL_HEIGHT_PX, channels: 3, background: '#ffffff' } });
+  // Sun centered near top (300×300)
+  const sunBuf = await sharp(SUN).resize(SUN_SIZE_PX, SUN_SIZE_PX, { fit: 'contain' }).png().toBuffer();
+  const sunLeft = Math.round((LABEL_WIDTH_PX-SUN_SIZE_PX)/2), sunTop = 80;
+ 
+  // Text overlay via SVG render
+  const textBuf = Buffer.from(svgText());
+ 
+  const out = await base
+  .composite([
+  { input: sunBuf, left: sunLeft, top: sunTop },
+  { input: textBuf, left: 0, top: 0 }
+  ])
+  .png({ compressionLevel: 9 })
+  .toBuffer();
+ 
+  await fs.promises.mkdir(path.dirname(OUT), { recursive: true });
+  await fs.promises.writeFile(OUT, out);
+  console.log('Wrote', OUT.replace(process.cwd(), ''));
 }
 
 await run();

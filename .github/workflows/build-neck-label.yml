@@ -1,10 +1,10 @@
-name: Build Inside Label
+name: Build Inside Label (Auto)
 
 on:
+  push: {}
+  schedule:
+    - cron: '0 3 * * *' # daily at 03:00 UTC
   workflow_dispatch:
-  push:
-    paths:
-      - "printful-files/brand/sun-1_25in.png"
 
 permissions:
   contents: write
@@ -13,24 +13,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
       - name: Install deps
         run: |
           npm init -y --silent || true
           npm install sharp
-      - name: Generate neck label
+      - name: Generate neck label if needed
         run: node scripts/build-neck-label.mjs
-      - name: Commit file
+      - name: Commit file (if changed)
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add printful-files/brand/neck-label-3x4in.png
-          git commit -m "feat(brand): generate inside label from sun artwork" || echo "No changes"
-          git push
+          git config user.name "lyrion-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add printful-files/brand/neck-label-3x4in.png || true
+          git diff --cached --quiet && echo "No changes" || (git commit -m "feat(brand): auto-build inside label" && git push)
