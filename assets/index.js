@@ -6,7 +6,6 @@ gtag('config', 'G-XXXXXXXXXX');
 document.addEventListener('DOMContentLoaded', () => {
   updateCartCount();
   renderFeaturedProducts();
-  setupOracleWidget();
 });
 
 function renderFeaturedProducts() {
@@ -44,103 +43,4 @@ function renderFeaturedProducts() {
       addButton.addEventListener('click', () => addToCart(product.id));
     }
   });
-}
-
-let lastOracleToggle = 0;
-const ORACLE_TOGGLE_DEBOUNCE_MS = 300;
-
-function setupOracleWidget() {
-  const widgetTrigger = document.querySelector('#crystal-ball-widget');
-  const closeButton = document.querySelector('.oracle-close');
-  const revealButton = document.querySelector('.oracle-submit');
-  const bookButton = document.querySelector('.oracle-cta');
-  const shareButton = document.querySelector('.oracle-share');
-  const resetButton = document.querySelector('.oracle-reset');
-
-  widgetTrigger?.addEventListener('click', toggleOracleWidget);
-  closeButton?.addEventListener('click', toggleOracleWidget);
-  if (revealButton && !revealButton.getAttribute('onclick')) {
-    revealButton.addEventListener('click', typeof getOracleReading === 'function' ? getOracleReading : getReading);
-  }
-  bookButton?.addEventListener('click', bookReading);
-  shareButton?.addEventListener('click', shareReading);
-  resetButton?.addEventListener('click', resetWidget);
-}
-
-function toggleOracleWidget() {
-  const now = Date.now();
-  if (now - lastOracleToggle < ORACLE_TOGGLE_DEBOUNCE_MS) return;
-  lastOracleToggle = now;
-  const panel = document.getElementById('oracle-panel');
-  if (!panel) return;
-  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-}
-
-async function getReading() {
-  const birthDateInput = document.getElementById('birth-date');
-  const birthDate = birthDateInput?.value;
-  if (!birthDate) { alert('Please enter your birth date'); return; }
-  const intro = document.getElementById('oracle-intro');
-  const loading = document.getElementById('oracle-loading');
-  const result = document.getElementById('oracle-result');
-
-  if (intro) intro.style.display = 'none';
-  if (loading) loading.style.display = 'block';
-
-  try {
-    const response = await fetch('/.netlify/functions/oracle-ai', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ birthDate })
-    });
-    const data = await response.json();
-    window.currentReading = data;
-
-    if (loading) loading.style.display = 'none';
-    if (result) result.style.display = 'block';
-    const readingText = document.getElementById('reading-text');
-    const urgencyMessage = document.getElementById('urgency-message');
-    if (readingText) readingText.innerHTML = `<div class="oracle-sign">${data.zodiacSign}</div><p>${data.reading}</p>`;
-    if (urgencyMessage) urgencyMessage.innerHTML = data.urgencyMessage;
-  } catch (error) {
-    console.error('Error:', error);
-    if (loading) loading.style.display = 'none';
-    if (intro) intro.style.display = 'block';
-    alert('Please try again.');
-  }
-}
-
-function bookReading() {
-  const reading = window.currentReading;
-  window.location.href = reading ? `oracle.html#${reading.recommendedReading}` : 'oracle.html';
-}
-
-function shareReading() {
-  const reading = window.currentReading;
-  if (reading?.shareText) {
-    if (navigator.share) {
-      navigator.share({ title: 'Lyrion Atelier', text: reading.shareText, url: window.location.href })
-        .catch((error) => {
-          console.error('Sharing failed.', error);
-          alert('Sharing failed. Please try again later.');
-        });
-    } else {
-      navigator.clipboard.writeText(reading.shareText)
-        .then(() => alert('Copied! Share on social media.'))
-        .catch((error) => {
-          console.error('Copy to clipboard failed.', error);
-          alert('Unable to copy the reading right now.');
-        });
-    }
-  }
-}
-
-function resetWidget() {
-  const result = document.getElementById('oracle-result');
-  const intro = document.getElementById('oracle-intro');
-  const birthDateInput = document.getElementById('birth-date');
-  if (result) result.style.display = 'none';
-  if (intro) intro.style.display = 'block';
-  if (birthDateInput) birthDateInput.value = '';
-  window.currentReading = null;
 }
