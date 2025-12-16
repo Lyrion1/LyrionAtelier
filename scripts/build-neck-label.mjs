@@ -44,7 +44,7 @@ async function run(){
       console.log('[neck-label] up-to-date (no rebuild).');
       return;
     }
-  } catch(_) {}
+  } catch(_) { /* ignore stat errors; fall back to rebuild */ }
   // Base white PNG
   const base = sharp({ create: { width: LABEL_WIDTH_PX, height: LABEL_HEIGHT_PX, channels: 3, background: '#ffffff' } });
   // Sun centered near top (300×300)
