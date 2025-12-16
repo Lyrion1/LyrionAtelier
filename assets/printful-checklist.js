@@ -1,10 +1,10 @@
-async function loadIndex(){ try{ const r=await fetch('/data/index.json',{cache:'no-store'}); return await r.json(); } catch{ return []; } }
-async function loadProd(slug){ try{ const r=await fetch('/data/products/'+slug+'.json',{cache:'no-store'}); return await r.json(); } catch{ return null; } }
+async function loadIndex(){ try{ const r=await fetch('/data/index.json',{cache:'no-store'}); return await r.json(); } catch(err){ console.error('index load failed', err); return []; } }
+async function loadProd(slug){ try{ const r=await fetch('/data/products/'+slug+'.json',{cache:'no-store'}); return await r.json(); } catch(err){ console.error('product load failed', slug, err); return null; } }
 function money(c){ return '$'+(Number(c||0)/100).toFixed(2); }
 
 function card(p){
  const el = document.createElement('div'); el.className='pf-card';
- const img = (p.images||[])[0] || 'https://source.unsplash.com/600x600/?stars,night';
+ const img = (p.images||[])[0] || '/images/oracle/mini-birth-reading-cover.webp';
  const price = p.variants && p.variants[0] ? money(p.variants[0].price) : '$0.00';
  const wrist = p.brand_marks?.wrist_logo ? 'Wrist crest: ' + p.brand_marks.wrist_logo : 'Wrist crest: –';
  const back = p.brand_marks?.back_neck_favicon ? 'Back-neck sun: 1.25 in' : 'Back-neck sun: –';

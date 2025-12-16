@@ -8,12 +8,16 @@ function listProductsDir(root){
  const files = fs.readdirSync(root);
  for (const f of files){
  if (!/\.json$/i.test(f)) continue;
- try { const j = JSON.parse(fs.readFileSync(path.join(root,f),'utf8')); out.push(j); } catch {}
+ try { const j = JSON.parse(fs.readFileSync(path.join(root,f),'utf8')); out.push(j); } catch (err) { console.error('parse error', f, err?.message); }
  }
  } catch {}
  return out;
 }
 function money(c){ return (Number(c||0)/100).toFixed(2); }
+
+const FRONT_WIDTH_MAP = { 'aquarian-current-hoodie': 6 };
+const DIM_SLEEVE_CREST_IN = 1.2;
+const DIM_BACK_NECK_IN = 1.25;
 
 async function buildResponse(){
  try{
@@ -50,7 +54,7 @@ async function buildResponse(){
  let frontW = 12; // tees default
  if (sub.includes('crew')) frontW = 11.5;
  if (sub.includes('hood')) frontW = 12; // full front by default
- if (p.slug === 'aquarian-current-hoodie') frontW = 6; // chest crest hoodie (intentional)
+ if (FRONT_WIDTH_MAP[p.slug]) frontW = FRONT_WIDTH_MAP[p.slug];
 
  const wrist = p.brand_marks?.wrist_logo || '';
  const backNeck = p.brand_marks?.back_neck_favicon ? '1.25' : '';
@@ -75,7 +79,7 @@ async function buildResponse(){
  wrist,
  backNeck,
  inside,
- frontW, '1.2','1.25',
+ frontW, DIM_SLEEVE_CREST_IN, DIM_BACK_NECK_IN,
  `"${(p.copy?.notes||'').replace(/"/g,'""')}"`,
  (p.images&&p.images[0]) || ''
  ];
