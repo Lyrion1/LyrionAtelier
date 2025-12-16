@@ -37,7 +37,7 @@ function ready(fn){
 ready(async ()=>{
 ensureCSS('/assets/shop-grid.css');
 ensureContainer();
-try { await import('/assets/shop-grid.js'); } catch(e){ console.warn('[shop auto-loader] failed to load shop grid module (/assets/shop-grid.js):', e); }
+try { await import('/assets/shop-filters.js'); await import('/assets/shop-grid.js'); } catch(e){ console.warn('[shop auto-loader] failed to load shop grid module (/assets/shop-grid.js):', e); }
 window.__LYRION_SHOP_AUTOMOUNT = { active:true, mountedAt: new Date().toISOString() };
 });
 })();
