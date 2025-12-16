@@ -4,18 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cosmic Compatibility Certificate - Lyrion Atelier</title>
-<meta name="description" content="AI-powered astrological compatibility certificates for couples. Beautiful keepsakes celebrating your cosmic love story.">
+<meta name="description" content="Astrological compatibility certificates for couples. Beautiful keepsakes celebrating your cosmic love story.">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="images/favicon/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar">
-<div class="nav-container">
+<div class="nav-container container">
 <a href="index.html" class="brand">
 <img src="images/logo/logo.png" alt="Lyrion Atelier" class="brand-logo">
 <span class="brand-name">LYRION ATELIER</span>
 </a>
+<button class="nav-toggle" aria-label="Toggle navigation">
+<span class="hamburger"></span>
+</button>
 <div class="nav-links">
 <a href="index.html">Home</a>
 <a href="shop.html">Shop</a>
@@ -28,14 +31,17 @@
 </nav>
 
 <section class="hero-compatibility">
+<div class="container">
 <div class="hero-content">
 <h1>Cosmic Compatibility Certificates</h1>
 <p class="hero-subtitle">Your love story, written in the stars</p>
-<p class="hero-description">AI-powered astrological analysis transformed into a beautiful keepsake that celebrates your cosmic connection</p>
+<p class="hero-description">Astrological analysis transformed into a beautiful keepsake that celebrates your cosmic connection</p>
+</div>
 </div>
 </section>
 
 <section class="compatibility-products">
+<div class="container">
 <div class="products-container">
 
 <div class="compatibility-tier">
@@ -46,7 +52,7 @@
 </div>
 </div>
 <ul class="tier-features">
-<li>✨ AI-generated compatibility analysis</li>
+<li>✨ Personalized compatibility analysis</li>
 <li>💫 Personalized romantic narrative</li>
 <li>🌟 Cosmic compatibility score</li>
 <li>📜 Beautiful PDF certificate design</li>
@@ -123,12 +129,14 @@ Get Twin Flame Set
 </div>
 
 </div>
+</div>
 </section>
 
 <section class="preview-generator" id="preview">
+<div class="container">
 <div class="generator-container">
 <h2>Preview Your Cosmic Connection</h2>
-<p>Enter both birth dates to see your compatibility score (free preview)</p>
+<p>Enter both birth dates to discover your compatibility score (free preview)</p>
 
 <div class="generator-form">
 <div class="form-row">
@@ -174,10 +182,12 @@ Generate Preview
 <div class="preview-narrative" id="preview-narrative"></div>
 <p class="preview-cta-text">Want the full certificate? Choose your format above!</p>
 </div>
-</div>
+</div> <!-- /.generator-container -->
+</div> <!-- /.container -->
 </section>
 
 <section class="how-it-works">
+<div class="container">
 <div class="how-container">
 <h2>How It Works</h2>
 <div class="steps-grid">
@@ -193,8 +203,8 @@ Generate Preview
 </div>
 <div class="step">
 <div class="step-number">3</div>
-<h3>AI Generates Magic</h3>
-<p>Our cosmic AI analyzes your astrological compatibility</p>
+<h3>Cosmic Analysis</h3>
+<p>Our system analyzes your astrological compatibility using advanced calculations</p>
 </div>
 <div class="step">
 <div class="step-number">4</div>
@@ -202,7 +212,8 @@ Generate Preview
 <p>Digital instantly, physical formats ship within 5-7 days</p>
 </div>
 </div>
-</div>
+</div> <!-- /.how-container -->
+</div> <!-- /.container -->
 </section>
 
 <footer class="footer">
@@ -220,6 +231,7 @@ Generate Preview
 </div>
 </footer>
 
+<script src="js/navigation.js"></script>
 <script src="js/checkout-handler.js"></script>
 <script src="js/compatibility.js"></script>
 </body>
