@@ -1,6 +1,7 @@
 // assets/product-selector.js
 import { loadProduct, routeIsEventish } from '/lib/catalog.js';
 import { validateProduct } from '/lib/validateProduct.js';
+let resolvePrintfulIds; try { ({ resolvePrintfulIds } = await import('/lib/printfulMap.js')); } catch(_) {}
 
 function $(s,r=document){ return r.querySelector(s); }
 function $all(s,r=document){ return Array.from(r.querySelectorAll(s)); }
@@ -15,8 +16,9 @@ async function initSelector(){
  const slug = el.dataset.slug;
  if (!slug) return;
 
- const product = await loadProduct(slug);
+ let product = await loadProduct(slug);
  await validateProduct(product);
+ if (resolvePrintfulIds) product = await resolvePrintfulIds(product);
  el.dataset.initialized = 'true';
 
  const sizes = product.options?.size || [];
