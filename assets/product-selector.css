@@ -1,0 +1,8 @@
+.ps-wrap{display:grid;gap:12px}
+.ps-options{display:flex;flex-wrap:wrap;gap:8px}
+.ps-chip{padding:8px 12px;border:1px solid rgba(255,255,255,.2);border-radius:999px;cursor:pointer}
+.ps-chip[aria-pressed="true"]{outline:2px solid rgba(255,255,255,.4)}
+.ps-chip[disabled]{opacity:.45;cursor:not-allowed}
+.ps-price{font-weight:700}
+.ps-add{padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.2)}
+.ps-note{opacity:.85;font-size:.95rem}

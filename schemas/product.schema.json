@@ -1,0 +1,55 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "Lyrion Product",
+ "type": "object",
+ "required": ["slug","title","kind","department","collection","edition","images","options","variants"],
+ "properties": {
+ "slug": {"type":"string"},
+ "title":{"type":"string"},
+ "kind":{"type":"string","enum":["product","reading","digital","event"]},
+ "department":{"type":"string"},
+ "subcategory":{"type":["string","null"]},
+ "collection":{"type":"string"},
+ "zodiac":{"type":["string","null"]},
+ "element":{"type":["string","null"]},
+ "edition":{"type":"string","enum":["core","signature","limited","archive"]},
+ "palette":{"type":["string","null"]},
+ "images":{"type":"array","items":{"type":"string"}},
+ "brand_marks":{
+ "type":"object",
+ "properties":{
+ "back_neck_favicon":{"type":"boolean"},
+ "inside_label":{"type":"boolean"},
+ "wrist_logo":{"type":["string","null"],"enum":["adult","youth",null]}
+ },
+ "additionalProperties": true
+ },
+ "options":{
+ "type":"object",
+ "required":["size"],
+ "properties":{
+ "color":{"type":"array","items":{"type":"string"}},
+ "size":{"type":"array","items":{"type":"string"}}
+ }
+ },
+ "variants":{
+ "type":"array",
+ "items":{
+ "type":"object",
+ "required":["options","price","sku"],
+ "properties":{
+ "options":{"type":"object","properties":{"color":{"type":"string"},"size":{"type":"string"}}},
+ "price":{"type":"integer","minimum":0},
+ "compare_at_price":{"type":["integer","null"]},
+ "status":{"type":"string","enum":["active","archived","disabled"],"default":"active"},
+ "sku":{"type":"string"},
+ "printfulVariantId":{"type":["integer","null"]},
+ "variant":{"type":"object","properties":{"_id":{"type":["string","number","null"]}}}
+ }
+ }
+ },
+ "seo":{"type":"object","additionalProperties":true},
+ "copy":{"type":"object","additionalProperties":true}
+ },
+ "additionalProperties": true
+}
