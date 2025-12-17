@@ -1,0 +1,23 @@
+{
+  "updatedAt": "2025-12-17T00:00:00Z",
+  "products": [
+    {
+      "id": "cap-aries",
+      "title": "Celestial Cap — Aries",
+      "price": 34.99,
+      "currency": "USD",
+      "zodiac": "aries",
+      "category": "accessories",
+      "image": "/assets/brand/adult/aries-ram-color.png"
+    },
+    {
+      "id": "beanie-aries",
+      "title": "Stargazer Beanie — Aries",
+      "price": 29.99,
+      "currency": "USD",
+      "zodiac": "aries",
+      "category": "accessories",
+      "image": "/assets/brand/adult/aries-ram-color.png"
+    }
+  ]
+}
