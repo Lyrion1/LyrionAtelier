@@ -200,7 +200,7 @@ function applyFilters() {
     return [];
   }
   const products = Array.isArray(state.products) ? state.products : [];
-  const [minPrice = 0, maxPrice = Number.MAX_SAFE_INTEGER] = state.priceRange || [];
+  const [minPrice = 0, maxPrice = 10000] = state.priceRange || [];
 
   return products.filter(product => {
     const inCategory = state.category === 'all' || product.category === state.category;
@@ -215,9 +215,6 @@ export { applyFilters };
 
 export function mountFilters(items) {
   state.products = items || [];
-  const namespace = window.ShopFilters || (window.ShopFilters = {});
-  namespace.applyFilters = applyFilters;
-  namespace.getState = () => ({ ...state });
-  window.ShopFilters = namespace;
+  window.ShopFilters = { applyFilters, getState: () => ({ ...state }) };
   window.__LYRION_FILTERS.mount(items);
 }
