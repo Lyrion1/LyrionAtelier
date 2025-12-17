@@ -288,6 +288,11 @@ const products = [
   }
 ];
 
+// Expose products for shop page filtering logic
+if (typeof window !== 'undefined') {
+  window.products = products;
+}
+
 /**
  * Display Products on Shop Page
  * Renders product cards with smooth animations
