@@ -6,6 +6,7 @@ let state = {
   priceRange: [0, 1000],
   products: []
 };
+window.shopFiltersState = state;
 
 // Global filters helper
 window.__LYRION_FILTERS = window.__LYRION_FILTERS || {
@@ -211,4 +212,11 @@ function applyFilters() {
   });
 }
 
-export function mountFilters(items) { window.__LYRION_FILTERS.mount(items); }
+window.applyFilters = applyFilters;
+export { applyFilters };
+
+export function mountFilters(items) {
+  state.products = items || [];
+  window.shopFiltersState = state;
+  window.__LYRION_FILTERS.mount(items);
+}
