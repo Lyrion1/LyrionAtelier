@@ -1,9 +1,8 @@
 console.log('Universal checkout handler loaded');
 
-// TODO: Add Stripe publishable key from Stripe Dashboard
 const stripe = (typeof Stripe === 'function' && window?.STRIPE_PUBLISHABLE_KEY)
   ? Stripe(window.STRIPE_PUBLISHABLE_KEY)
-  : null; // Stripe('pk_test_...');
+  : null; // TODO: Add Stripe publishable key from Stripe Dashboard (e.g., Stripe('<publishable_key_here>'))
 if (!stripe) {
   console.warn('Stripe publishable key missing; skipping client initialization.');
 } else {

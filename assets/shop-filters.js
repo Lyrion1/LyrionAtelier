@@ -6,7 +6,6 @@ let state = {
   priceRange: [0, 1000],
   products: []
 };
-window.shopFiltersState = state;
 
 // Global filters helper
 window.__LYRION_FILTERS = window.__LYRION_FILTERS || {
