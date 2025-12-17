@@ -9,6 +9,10 @@
   "element": "earth",
   "edition": "archive",
   "palette": "White",
+  "state": {
+    "ready": true,
+    "published": true
+  },
   "images": [
     "/assets/artwork/adult/capricorn-green-relief.png"
   ],
@@ -41,6 +45,10 @@
       "printfulVariantId": null,
       "variant": {
         "_id": null
+      },
+      "state": {
+        "ready": true,
+        "published": true
       }
     },
     {
@@ -53,6 +61,10 @@
       "printfulVariantId": null,
       "variant": {
         "_id": null
+      },
+      "state": {
+        "ready": true,
+        "published": true
       }
     },
     {
@@ -65,6 +77,10 @@
       "printfulVariantId": null,
       "variant": {
         "_id": null
+      },
+      "state": {
+        "ready": true,
+        "published": true
       }
     },
     {
@@ -77,6 +93,10 @@
       "printfulVariantId": null,
       "variant": {
         "_id": null
+      },
+      "state": {
+        "ready": true,
+        "published": true
       }
     },
     {
@@ -89,6 +109,10 @@
       "printfulVariantId": null,
       "variant": {
         "_id": null
+      },
+      "state": {
+        "ready": true,
+        "published": true
       }
     },
     {
@@ -101,6 +125,10 @@
       "printfulVariantId": null,
       "variant": {
         "_id": null
+      },
+      "state": {
+        "ready": true,
+        "published": true
       }
     }
   ],
