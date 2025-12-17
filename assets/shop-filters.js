@@ -215,7 +215,7 @@ export { applyFilters };
 
 export function mountFilters(items) {
   state.products = items || [];
-  const namespace = window.ShopFilters || {};
+  const namespace = window.ShopFilters || (window.ShopFilters = {});
   namespace.applyFilters = applyFilters;
   namespace.getState = () => ({ ...state });
   window.ShopFilters = namespace;
