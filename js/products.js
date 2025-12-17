@@ -290,10 +290,10 @@ const products = [
 
 // Expose products for shop page filtering logic
 if (typeof window !== 'undefined') {
-  // Prefer existing catalog references (namespaced first, then legacy global) without duplicating data
-  // so both entry points stay in sync for filters and legacy consumers.
+  // Use this file's catalog as the source of truth and expose a shared reference
+  // for both the namespaced API and the legacy global accessor.
   window.LyrionAtelier = window.LyrionAtelier || {};
-  const sharedProducts = window.LyrionAtelier.products || window.products || products;
+  const sharedProducts = products;
   window.LyrionAtelier.products = sharedProducts;
   window.products = sharedProducts;
 }
