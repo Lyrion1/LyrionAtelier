@@ -1,7 +1,7 @@
 console.log('Oracle checkout script loaded');
 
-async function bookOracleReading(name, price) {
-  const evt = typeof event !== 'undefined' ? event : null;
+async function bookOracleReading(name, price, event = null) {
+  const evt = event || (typeof window !== 'undefined' ? window.event : null);
   const button = evt?.currentTarget || evt?.target || null;
   const originalText = button ? button.textContent : null;
 
@@ -13,7 +13,7 @@ async function bookOracleReading(name, price) {
 
   if (typeof window.initiateCheckout !== 'function') {
     console.error('Checkout handler missing');
-    alert('Checkout is unavailable right now. Please refresh and try again.');
+    alert('Payment system is temporarily unavailable. Please refresh and try again or contact admin@lyrionatelier.com.');
     if (button && originalText) {
       button.textContent = originalText;
       button.disabled = false;
