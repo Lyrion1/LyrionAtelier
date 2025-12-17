@@ -288,6 +288,14 @@ const products = [
   }
 ];
 
+// Expose products for shop page filtering logic
+if (typeof window !== 'undefined') {
+  // Use this file's catalog as the source of truth for both namespaced and legacy accessors.
+  window.LyrionAtelier = window.LyrionAtelier || {};
+  window.LyrionAtelier.products = products;
+  window.products = products;
+}
+
 /**
  * Display Products on Shop Page
  * Renders product cards with smooth animations
