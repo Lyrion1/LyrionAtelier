@@ -215,6 +215,9 @@ export { applyFilters };
 
 export function mountFilters(items) {
   state.products = items || [];
-  window.ShopFilters = { applyFilters, getState: () => ({ ...state }) };
+  const namespace = window.ShopFilters || {};
+  namespace.applyFilters = applyFilters;
+  namespace.getState = () => ({ ...state });
+  window.ShopFilters = namespace;
   window.__LYRION_FILTERS.mount(items);
 }

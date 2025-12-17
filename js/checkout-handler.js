@@ -2,7 +2,7 @@ console.log('Universal checkout handler loaded');
 
 const stripe = (typeof Stripe === 'function' && window?.STRIPE_PUBLISHABLE_KEY)
   ? Stripe(window.STRIPE_PUBLISHABLE_KEY)
-  : null; // TODO: Provide Stripe publishable key via window.STRIPE_PUBLISHABLE_KEY (set from site config or embed script)
+  : null; // TODO: Provide Stripe publishable key via window.STRIPE_PUBLISHABLE_KEY (inject from site config/template or embed script tag)
 if (!stripe) {
   console.warn('Stripe publishable key missing; skipping client initialization.');
 } else {
