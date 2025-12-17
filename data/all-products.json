@@ -1,0 +1,511 @@
+[
+  {
+    "slug": "aries-spark-youth-tee",
+    "title": "Aries Spark Tee (Youth)",
+    "kind": "product",
+    "department": "apparel",
+    "subcategory": "youth-tees",
+    "collection": "youth-fire-water",
+    "zodiac": "aries",
+    "element": "fire",
+    "edition": "core",
+    "palette": "Lunar Sand",
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "images": [
+      "/assets/artwork/youth/aries-embroidered-look.png"
+    ],
+    "brand_marks": {
+      "back_neck_favicon": true,
+      "inside_label": true,
+      "wrist_logo": "youth"
+    },
+    "options": {
+      "color": [
+        "Lunar Sand"
+      ],
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ]
+    },
+    "variants": [
+      {
+        "options": {
+          "color": "Lunar Sand",
+          "size": "S"
+        },
+        "price": 3499,
+        "sku": "LY-YF-ARI-TEE-SND-S",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "Lunar Sand",
+          "size": "M"
+        },
+        "price": 3499,
+        "sku": "LY-YF-ARI-TEE-SND-M",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "Lunar Sand",
+          "size": "L"
+        },
+        "price": 3499,
+        "sku": "LY-YF-ARI-TEE-SND-L",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "Lunar Sand",
+          "size": "XL"
+        },
+        "price": 3499,
+        "sku": "LY-YF-ARI-TEE-SND-XL",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      }
+    ],
+    "copy": {
+      "notes": "Ignition energy — playful courage for first steps.",
+      "materials": "100% Cotton",
+      "care": "Wash cold. Tumble dry low."
+    }
+  },
+  {
+    "slug": "capricorn-verdant-relief-tee",
+    "title": "Capricorn Verdant Relief Tee",
+    "kind": "product",
+    "department": "apparel",
+    "subcategory": "tees",
+    "collection": "eclipse-gilded",
+    "zodiac": "capricorn",
+    "element": "earth",
+    "edition": "archive",
+    "palette": "White",
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "images": [
+      "/assets/artwork/adult/capricorn-green-relief.png"
+    ],
+    "brand_marks": {
+      "back_neck_favicon": true,
+      "inside_label": true,
+      "wrist_logo": "adult"
+    },
+    "options": {
+      "color": [
+        "White"
+      ],
+      "size": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ]
+    },
+    "variants": [
+      {
+        "options": {
+          "color": "White",
+          "size": "XS"
+        },
+        "price": 5999,
+        "sku": "LY-EG-CAP-TEE-WHT-XS",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "White",
+          "size": "S"
+        },
+        "price": 5999,
+        "sku": "LY-EG-CAP-TEE-WHT-S",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "White",
+          "size": "M"
+        },
+        "price": 5999,
+        "sku": "LY-EG-CAP-TEE-WHT-M",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "White",
+          "size": "L"
+        },
+        "price": 5999,
+        "sku": "LY-EG-CAP-TEE-WHT-L",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "White",
+          "size": "XL"
+        },
+        "price": 5999,
+        "sku": "LY-EG-CAP-TEE-WHT-XL",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "White",
+          "size": "2XL"
+        },
+        "price": 5999,
+        "sku": "LY-EG-CAP-TEE-WHT-2XL",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      }
+    ],
+    "copy": {
+      "notes": "Stone-quiet strength; a study in relief and restraint.",
+      "materials": "100% Cotton",
+      "care": "Wash cold, inside out. Tumble dry low."
+    }
+  },
+  {
+    "slug": "piscean-twins-crewneck",
+    "title": "Piscean Twins Crewneck",
+    "kind": "product",
+    "department": "apparel",
+    "subcategory": "crewnecks",
+    "collection": "eclipse-gilded",
+    "zodiac": "pisces",
+    "element": "water",
+    "edition": "signature",
+    "palette": "Celestial Noir",
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "images": [
+      "/assets/artwork/adult/pisces-gold.png"
+    ],
+    "brand_marks": {
+      "back_neck_favicon": true,
+      "inside_label": true,
+      "wrist_logo": "adult"
+    },
+    "options": {
+      "color": [
+        "Celestial Noir"
+      ],
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ]
+    },
+    "variants": [
+      {
+        "options": {
+          "color": "Celestial Noir",
+          "size": "S"
+        },
+        "price": 6999,
+        "sku": "LY-EG-PIS-CRW-NOIR-S",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "Celestial Noir",
+          "size": "M"
+        },
+        "price": 6999,
+        "sku": "LY-EG-PIS-CRW-NOIR-M",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "Celestial Noir",
+          "size": "L"
+        },
+        "price": 6999,
+        "sku": "LY-EG-PIS-CRW-NOIR-L",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "Celestial Noir",
+          "size": "XL"
+        },
+        "price": 6999,
+        "sku": "LY-EG-PIS-CRW-NOIR-XL",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "Celestial Noir",
+          "size": "2XL"
+        },
+        "price": 6999,
+        "sku": "LY-EG-PIS-CRW-NOIR-2XL",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      }
+    ],
+    "copy": {
+      "notes": "Twin currents, gentle and inexhaustible. Mercy stitched into fleece.",
+      "materials": "80% Cotton / 20% Poly",
+      "care": "Wash cold. Tumble dry low. Do not iron print."
+    }
+  },
+  {
+    "slug": "scorpion-aegis-tee",
+    "title": "Scorpion Aegis Tee",
+    "kind": "product",
+    "department": "apparel",
+    "subcategory": "tees",
+    "collection": "eclipse-gilded",
+    "zodiac": "scorpio",
+    "element": "water",
+    "edition": "signature",
+    "palette": "Celestial Noir",
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "images": [
+      "/assets/artwork/adult/scorpio-gold.png"
+    ],
+    "brand_marks": {
+      "back_neck_favicon": true,
+      "inside_label": true,
+      "wrist_logo": "adult"
+    },
+    "options": {
+      "color": [
+        "Celestial Noir"
+      ],
+      "size": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ]
+    },
+    "variants": [
+      {
+        "options": {
+          "color": "Celestial Noir",
+          "size": "XS"
+        },
+        "price": 4499,
+        "sku": "LY-EG-SCO-TEE-NOIR-XS",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "Celestial Noir",
+          "size": "S"
+        },
+        "price": 4499,
+        "sku": "LY-EG-SCO-TEE-NOIR-S",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "Celestial Noir",
+          "size": "M"
+        },
+        "price": 4499,
+        "sku": "LY-EG-SCO-TEE-NOIR-M",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "Celestial Noir",
+          "size": "L"
+        },
+        "price": 4499,
+        "sku": "LY-EG-SCO-TEE-NOIR-L",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "Celestial Noir",
+          "size": "XL"
+        },
+        "price": 4499,
+        "sku": "LY-EG-SCO-TEE-NOIR-XL",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "options": {
+          "color": "Celestial Noir",
+          "size": "2XL"
+        },
+        "price": 4499,
+        "sku": "LY-EG-SCO-TEE-NOIR-2XL",
+        "printfulVariantId": null,
+        "variant": {
+          "_id": null
+        },
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      }
+    ],
+    "copy": {
+      "notes": "Fixed water held in gold—protective sight for night roads.",
+      "materials": "100% Cotton",
+      "care": "Machine wash cold, inside out. Tumble dry low. Do not iron print."
+    }
+  }
+]

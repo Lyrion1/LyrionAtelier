@@ -94,7 +94,7 @@ async function loadPrintfulProducts() {
     }
 
     const data = await response.json();
-    const products = data?.products || [];
+    const products = Array.isArray(data) ? data : (data?.products || []);
     
     if (products.length > 0) {
       currentProducts = products;
