@@ -1,19 +1,10 @@
+import { apply } from './shop-filters.js';
+import { loadCatalog } from './catalog.js';
+import { init as initShopGrid } from './shop-grid.js';
+
 console.log('Shop page script loaded');
 
-// Priority order: seeded catalog, namespaced globals, legacy globals
-const PRODUCT_SOURCE_RESOLVERS = [
-  () => window.catalog,
-  () => window?.LyrionAtelier?.products,
-  () => window?.products
-];
-
-function resolveProductCatalog() {
-  // Use the first available source in priority order
-  const validCatalog = PRODUCT_SOURCE_RESOLVERS.map(get => get()).find(Array.isArray);
-  return validCatalog || [];
-}
-const productsList = resolveProductCatalog();
-console.info('[shop] products available:', productsList.length);
+let productsList = [];
 
 const escapeHtml = (value = '') =>
   String(value)
@@ -288,9 +279,21 @@ function updateVariant() {
 
 document.addEventListener('DOMContentLoaded', () => {
   updateCartCount();
-  document.getElementById('filter-category')?.addEventListener('change', renderProducts);
-  document.getElementById('filter-zodiac')?.addEventListener('change', renderProducts);
-  renderProducts();
+  const rerenderLocalGrid = () => initShopGrid(productsList);
+  document.getElementById('filter-category')?.addEventListener('change', rerenderLocalGrid);
+  document.getElementById('filter-zodiac')?.addEventListener('change', rerenderLocalGrid);
+
+  (async () => {
+    try {
+      const catalog = await loadCatalog();
+      productsList = apply(catalog);
+      initShopGrid(productsList);
+      console.info('[shop] products available:', productsList.length);
+    } catch {
+      productsList = [];
+      initShopGrid(productsList);
+    }
+  })();
 
   loadPrintfulProducts();
 

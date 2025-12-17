@@ -2,7 +2,9 @@
   "name": "lyrion-atelier",
   "version": "1.0.0",
   "scripts": {
-    "brand:images": "node scripts/attach-images.mjs"
+    "brand:images": "node scripts/attach-images.mjs",
+    "build:images": "node scripts/build-images-map.mjs",
+    "build": "npm run build:images"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.30.0",
