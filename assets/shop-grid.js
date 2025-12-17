@@ -127,7 +127,7 @@ async function init() {
   const slugs = await loadIndex();
   __ITEMS = (await Promise.all(slugs.map(loadProd))).filter(Boolean).filter(isSellable);
   try { const m = await import('/assets/shop-filters.js'); m.mountFilters(__ITEMS); } catch (_) { }
-  const apply = (window.__LYRION_FILTERS && window.__LYRION_FILTERS.apply) || ((x) => x);
+  const apply = window.__LYRION_FILTERS?.apply?.bind(window.__LYRION_FILTERS) || ((x) => x);
   renderFiltered(safeApply(__ITEMS, apply));
   document.addEventListener('filters:change', () => {
     renderFiltered(safeApply(__ITEMS, apply));
