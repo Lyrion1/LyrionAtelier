@@ -4,7 +4,12 @@ const stripe = (typeof Stripe === 'function' && window?.STRIPE_PUBLISHABLE_KEY)
   ? Stripe(window.STRIPE_PUBLISHABLE_KEY)
   : null; // Expect Stripe publishable key provided via window.STRIPE_PUBLISHABLE_KEY
 if (!stripe) {
-  console.warn('Stripe publishable key missing; skipping client initialization.');
+  if (location.pathname.includes('/shop')) {
+    // Keep console clean on shop page when Stripe isn't needed.
+    // (Checkout page still initializes it.)
+  } else {
+    console.warn('Stripe publishable key missing; skipping client initialization.');
+  }
 } else {
   try {
     window.stripe = stripe;
