@@ -290,7 +290,9 @@ const products = [
 
 // Expose products for shop page filtering logic
 if (typeof window !== 'undefined') {
-  window.products = products;
+  window.LyrionAtelier = window.LyrionAtelier || {};
+  window.LyrionAtelier.products = window.LyrionAtelier.products || products;
+  window.products = window.products || window.LyrionAtelier.products;
 }
 
 /**
