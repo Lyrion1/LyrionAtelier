@@ -291,8 +291,9 @@ const products = [
 // Expose products for shop page filtering logic
 if (typeof window !== 'undefined') {
   window.LyrionAtelier = window.LyrionAtelier || {};
-  window.LyrionAtelier.products = window.LyrionAtelier.products || products;
-  window.products = window.products || window.LyrionAtelier.products;
+  const sharedProducts = window.LyrionAtelier.products || window.products || products;
+  window.LyrionAtelier.products = sharedProducts;
+  window.products = sharedProducts;
 }
 
 /**
