@@ -1,5 +1,12 @@
 import { routeIsEventish } from '/lib/catalog.js';
 
+let state = {
+  category: 'all',
+  zodiac: 'all',
+  priceRange: [0, 1000],
+  products: []
+};
+
 // Global filters helper
 window.__LYRION_FILTERS = window.__LYRION_FILTERS || {
   state: { sign: new Set(), element: new Set(), collection: new Set(), palette: new Set(), size: new Set(), price: new Set(), sort: 'featured' },
@@ -187,4 +194,27 @@ window.__LYRION_FILTERS = window.__LYRION_FILTERS || {
   notify() { document.dispatchEvent(new CustomEvent('filters:change')); }
 };
 
-export function mountFilters(items) { window.__LYRION_FILTERS.mount(items); }
+function applyFilters() {
+  if (!state || typeof state !== 'object') {
+    console.error('Filter state not initialized');
+    return [];
+  }
+  const products = Array.isArray(state.products) ? state.products : [];
+  const [minPrice = 0, maxPrice = 10000] = state.priceRange || [];
+
+  return products.filter(product => {
+    const inCategory = state.category === 'all' || product.category === state.category;
+    const inZodiac = state.zodiac === 'all' || product.zodiac === state.zodiac;
+    const price = typeof product.price === 'number' ? product.price : Number(product.price || 0);
+    const inPriceRange = price >= minPrice && price <= maxPrice;
+    return inCategory && inZodiac && inPriceRange;
+  });
+}
+
+export { applyFilters };
+
+export function mountFilters(items) {
+  state.products = items || [];
+  window.ShopFilters = { applyFilters, getState: () => ({ ...state }) };
+  window.__LYRION_FILTERS.mount(items);
+}

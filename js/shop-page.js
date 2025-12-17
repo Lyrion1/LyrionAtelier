@@ -80,49 +80,63 @@ async function loadPrintfulProducts() {
   const loadingEl = document.getElementById('products-loading');
   const gridEl = document.getElementById('shopGrid');
   const errorEl = document.getElementById('products-error');
+  const handleLoadFailure = () => {
+    if (loadingEl) loadingEl.style.display = 'none';
+    if (errorEl) errorEl.style.display = 'block';
+    return [];
+  };
   
   try {
     const response = await fetch('/.netlify/functions/printful-sync');
+    if (!response.ok) {
+      console.warn('Failed to load products. Using fallback.');
+      return handleLoadFailure();
+    }
+
     const data = await response.json();
+    const products = data?.products || [];
     
-    if (data.products && data.products.length > 0) {
-      currentProducts = data.products;
-      loadingEl.style.display = 'none';
-      gridEl.style.display = 'grid';
+    if (products.length > 0) {
+      currentProducts = products;
+      if (loadingEl) loadingEl.style.display = 'none';
+      if (gridEl) gridEl.style.display = 'grid';
       
-      gridEl.innerHTML = '';
-      data.products.forEach(product => {
-        const safeProductId = escapeHtml(String(product.id || ''));
-        const cardButton = document.createElement('button');
-        cardButton.type = 'button';
-        cardButton.className = 'card product-card product-card-button';
-        cardButton.setAttribute('aria-label', `View options for ${escapeHtml(product.name)}`);
-        cardButton.dataset.productId = safeProductId;
-        cardButton.dataset.kind = 'product';
-        cardButton.innerHTML = `
-          <div class="card__image">
-            <img src="${escapeHtml(product.thumbnail)}" alt="${escapeHtml(product.name)}" loading="lazy" decoding="async">
-          </div>
-          <div class="card__body">
-            <h3 class="card__title">${escapeHtml(product.name)}</h3>
-            <p class="card__desc">${escapeHtml(product.description)}</p>
-            <div class="card__price">${escapeHtml(product.priceRange)}</div>
-          </div>
-          <div class="card__actions">
-            <span class="product-btn btn btn-primary">View Options</span>
-          </div>
-        `;
-        cardButton.addEventListener('click', () => openProductModal(product.id));
-        gridEl.appendChild(cardButton);
-      });
+      if (gridEl) {
+        gridEl.innerHTML = '';
+        products.forEach(product => {
+          const safeProductId = escapeHtml(String(product.id || ''));
+          const cardButton = document.createElement('button');
+          cardButton.type = 'button';
+          cardButton.className = 'card product-card product-card-button';
+          cardButton.setAttribute('aria-label', `View options for ${escapeHtml(product.name)}`);
+          cardButton.dataset.productId = safeProductId;
+          cardButton.dataset.kind = 'product';
+          cardButton.innerHTML = `
+            <div class="card__image">
+              <img src="${escapeHtml(product.thumbnail)}" alt="${escapeHtml(product.name)}" loading="lazy" decoding="async">
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">${escapeHtml(product.name)}</h3>
+              <p class="card__desc">${escapeHtml(product.description)}</p>
+              <div class="card__price">${escapeHtml(product.priceRange)}</div>
+            </div>
+            <div class="card__actions">
+              <span class="product-btn btn btn-primary">View Options</span>
+            </div>
+          `;
+          cardButton.addEventListener('click', () => openProductModal(product.id));
+          gridEl.appendChild(cardButton);
+        });
+      }
+      return products;
     } else {
-      throw new Error('No products found');
+      console.warn('No products available. Using fallback.');
+      return handleLoadFailure();
     }
     
   } catch (error) {
-    console.error('Error loading products:', error);
-    if (loadingEl) loadingEl.style.display = 'none';
-    if (errorEl) errorEl.style.display = 'block';
+    console.warn('Failed to load products:', error);
+    return handleLoadFailure();
   }
 }
 
