@@ -211,7 +211,6 @@ function applyFilters() {
   });
 }
 
-window.ShopFilters = { applyFilters, state };
 export { applyFilters };
 
 export function mountFilters(items) {

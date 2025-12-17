@@ -80,14 +80,17 @@ async function loadPrintfulProducts() {
   const loadingEl = document.getElementById('products-loading');
   const gridEl = document.getElementById('shopGrid');
   const errorEl = document.getElementById('products-error');
+  const handleLoadFailure = () => {
+    if (loadingEl) loadingEl.style.display = 'none';
+    if (errorEl) errorEl.style.display = 'block';
+    return [];
+  };
   
   try {
     const response = await fetch('/.netlify/functions/printful-sync');
     if (!response.ok) {
       console.warn('Products not yet synced. Using fallback.');
-      if (loadingEl) loadingEl.style.display = 'none';
-      if (errorEl) errorEl.style.display = 'block';
-      return [];
+      return handleLoadFailure();
     }
 
     const data = await response.json();
@@ -128,14 +131,12 @@ async function loadPrintfulProducts() {
       return products;
     } else {
       console.warn('Products not yet synced. Using fallback.');
-      return [];
+      return handleLoadFailure();
     }
     
   } catch (error) {
     console.warn('Failed to load products:', error);
-    if (loadingEl) loadingEl.style.display = 'none';
-    if (errorEl) errorEl.style.display = 'block';
-    return [];
+    return handleLoadFailure();
   }
 }
 
