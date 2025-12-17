@@ -211,11 +211,11 @@ function applyFilters() {
   });
 }
 
-window.applyFilters = applyFilters;
+window.ShopFilters = { applyFilters, state };
 export { applyFilters };
 
 export function mountFilters(items) {
   state.products = items || [];
-  window.shopFiltersState = state;
+  window.ShopFilters = { applyFilters, state };
   window.__LYRION_FILTERS.mount(items);
 }
