@@ -7,36 +7,52 @@ import archiver from 'archiver';
 const ROOT = process.cwd();
 const PRODUCTS_DIR = path.join(ROOT, 'data', 'products');
 const INDEX_FILE = path.join(ROOT, 'data', 'index.json');
+const BRAND_CFG = path.join(ROOT, 'data', 'brand-designs.json');
+
 const OUT_BASE = path.join(ROOT, 'printful-files', 'products');
-const FRONT_DEFAULT_IN = 12;
-const FRONT_CREW_IN = 11.5;
-const FRONT_HOOD_IN = 12;
-const SPECIAL_FRONT_IN = { 'aquarian-current-hoodie': 6 }; // chest crest hoodie
 const BRAND = {
-  sun: path.join(ROOT, 'printful-files', 'brand', 'sun-1_25in.png'), // 375×375 px @300dpi
-  adult: path.join(ROOT, 'printful-files', 'brand', 'logo-adult-1_2in.png'), // 360×360 px
-  youth: path.join(ROOT, 'printful-files', 'brand', 'logo-youth-1_2in.png'), // 360×360 px
-  neck: path.join(ROOT, 'printful-files', 'brand', 'neck-label-3x4in.png') // 900×1200 px
+  sun: path.join(ROOT, 'printful-files', 'brand', 'sun-1_25in.png'), // 375 px
+  adult: path.join(ROOT, 'printful-files', 'brand', 'logo-adult-1_2in.png'), // 360 px
+  youth: path.join(ROOT, 'printful-files', 'brand', 'logo-youth-1_2in.png'), // 360 px
+  neck: path.join(ROOT, 'printful-files', 'brand', 'neck-label-3x4in.png') // 900x1200
 };
 
+function loadJSON(file, def = null) {
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch {
+    return def;
+  }
+}
 function loadSlugs() {
   try {
     const s = JSON.parse(fs.readFileSync(INDEX_FILE, 'utf8'));
     if (Array.isArray(s) && s.length) return s;
-  } catch {
-    // fall through to glob
-  }
+  } catch {}
   return fg.sync('*.json', { cwd: PRODUCTS_DIR }).map(f => f.replace(/\.json$/, ''));
 }
 function loadProduct(slug) {
-  try {
-    const file = path.join(PRODUCTS_DIR, slug + '.json');
-    return JSON.parse(fs.readFileSync(file, 'utf8'));
-  } catch {
-    return null;
-  }
+  return loadJSON(path.join(PRODUCTS_DIR, slug + '.json'));
 }
-function money(c) { return (Number(c || 0) / 100).toFixed(2); }
+function money(c) {
+  return (Number(c || 0) / 100).toFixed(2);
+}
+
+const DEFAULT_BRAND_CFG = {
+  backs: { adult: [], youth: [] },
+  fronts: { adult: [], youth: [] },
+  sizes: { back_in: 12, front_in: 12 }
+};
+const cfg = Object.assign({}, DEFAULT_BRAND_CFG, loadJSON(BRAND_CFG, {}));
+const backAdultSet = new Set(cfg.backs?.adult || []);
+const backYouthSet = new Set(cfg.backs?.youth || []);
+const frontAdultSet = new Set(cfg.fronts?.adult || []);
+const frontYouthSet = new Set(cfg.fronts?.youth || []);
+
+const isBackAdult = slug => backAdultSet.has(slug);
+const isBackYouth = slug => backYouthSet.has(slug);
+const isFrontAdult = slug => frontAdultSet.has(slug);
+const isFrontYouth = slug => frontYouthSet.has(slug);
 
 function dept(p) {
   const sub = (p.subcategory || '').toLowerCase();
@@ -45,21 +61,25 @@ function dept(p) {
   if (sub.includes('youth') || sub.includes('kid')) return 'youth';
   return 'adult';
 }
+
 function frontWidthIn(p) {
   const sub = (p.subcategory || '').toLowerCase();
-  let w = FRONT_DEFAULT_IN; // default tees
-  if (sub.includes('crew')) w = FRONT_CREW_IN;
-  if (sub.includes('hood')) w = FRONT_HOOD_IN; // full front unless overridden
-  if (p.slug && SPECIAL_FRONT_IN[p.slug]) w = SPECIAL_FRONT_IN[p.slug];
+  let w = 12;
+  if (sub.includes('crew')) w = 11.5;
+  if (sub.includes('hood')) w = 12;
+  if (p.slug === 'aquarian-current-hoodie') w = 6; // special crest hoodie
+  // allow override to pure brand-front
+  if (isFrontAdult(p.slug) || isFrontYouth(p.slug)) w = cfg.sizes.front_in || w;
   return w;
 }
+function backWidthIn(p) { return cfg.sizes.back_in || 12; }
+
 function firstImagePath(p) {
   const img = (p.images || [])[0] || '';
   if (img) return path.join(ROOT, img.replace(/^\//, ''));
   const guess = fg.sync('assets/artwork/**/*' + (p.slug || '') + '*.{png,jpg,jpeg,webp}', { cwd: ROOT, absolute: true })[0];
   return guess || null;
 }
-
 async function ensurePNGsrc(src) {
   if (!src) return null;
   const ext = path.extname(src).toLowerCase();
@@ -68,28 +88,52 @@ async function ensurePNGsrc(src) {
   await sharp(src).png().toFile(tmp);
   return { file: tmp, temp: true };
 }
-
-async function makeFrontPrint(p, outDir) {
-  const widthIn = frontWidthIn(p);
-  const px = Math.round(widthIn * 300); // 300 DPI
-  const src = firstImagePath(p);
-  if (!src) return null;
-  const srcPNG = await ensurePNGsrc(src);
-  const img = sharp(srcPNG.file).rotate();
-  const meta = await img.metadata();
-  const scale = px / (meta.width || px);
-  const h = Math.round((meta.height || px) * scale);
-
-  const canvas = sharp({
-    create: { width: px, height: h, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } }
-  });
-  const buf = await sharp(srcPNG.file).resize({ width: px, fit: 'contain' }).png().toBuffer();
-  const outFile = path.join(outDir, `front-${px}px.png`);
-  await canvas.composite([{ input: buf, left: 0, top: 0 }]).png({ compressionLevel: 7 }).toFile(outFile);
-  if (srcPNG.temp) { try { await fs.promises.unlink(srcPNG.file); } catch {} }
-  return { file: outFile, px };
+async function saveSquare(src, size, outPath) {
+  await fs.promises.mkdir(path.dirname(outPath), { recursive: true });
+  await sharp(src).resize(size, size, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).png({ compressionLevel: 9 }).toFile(outPath);
 }
-
+async function makeFront(p, outDir) {
+  // brand-front override?
+  const useBrandFront = isFrontAdult(p.slug) || isFrontYouth(p.slug);
+  const widthIn = frontWidthIn(p);
+  const px = Math.round(widthIn * 300);
+  let src = null;
+  if (useBrandFront) {
+    const useYouthBrand = isFrontYouth(p.slug) || dept(p) === 'youth';
+    src = useYouthBrand ? BRAND.youth : BRAND.adult;
+  } else {
+    src = firstImagePath(p);
+  }
+  if (!src) return null;
+  let srcPNG;
+  try {
+    srcPNG = await ensurePNGsrc(src);
+    const meta = await sharp(srcPNG.file).metadata();
+    const baseWidth = meta.width || px || 1;
+    const h = Math.round((meta.height || px) * (px / baseWidth));
+    const canvas = sharp({ create: { width: px, height: h, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } });
+    const buf = await sharp(srcPNG.file).resize({ width: px, fit: 'contain' }).png().toBuffer();
+    const out = path.join(outDir, `front-${px}px.png`);
+    await canvas.composite([{ input: buf, left: 0, top: 0 }]).png({ compressionLevel: 9 }).toFile(out);
+    return { file: out, px, width_in: widthIn, brand_front: useBrandFront };
+  } catch (err) {
+    console.error('[pack:front]', p.slug, err?.message || err);
+    return null;
+  } finally {
+    if (srcPNG?.temp) { try { await fs.promises.unlink(srcPNG.file); } catch {} }
+  }
+}
+async function makeBackLogo(p, outDir) {
+  const useAdult = isBackAdult(p.slug);
+  const useYouth = isBackYouth(p.slug);
+  if (!useAdult && !useYouth) return null;
+  const logo = useYouth ? BRAND.youth : BRAND.adult;
+  const widthIn = backWidthIn(p);
+  const px = Math.round(widthIn * 300);
+  const out = path.join(outDir, `back-${px}px.png`);
+  await saveSquare(logo, px, out);
+  return { file: out, px, width_in: widthIn, logo: useYouth ? 'youth' : 'adult' };
+}
 async function copyIfExists(src, dest) {
   try {
     await fs.promises.access(src, fs.constants.R_OK);
@@ -103,13 +147,17 @@ async function copyIfExists(src, dest) {
 
 async function zipDir(dir, zipPath) {
   await fs.promises.mkdir(path.dirname(zipPath), { recursive: true });
-  const tmpZip = path.join(path.dirname(zipPath), path.basename(zipPath) + '.tmp');
+  const tmpZip = zipPath + '.tmp';
   const out = fs.createWriteStream(tmpZip);
   const archive = archiver('zip', { zlib: { level: 9 } });
   return new Promise((resolve, reject) => {
     out.on('close', async () => {
-      try { await fs.promises.rename(tmpZip, zipPath); } catch (error) { return reject(error); }
-      resolve(zipPath);
+      try {
+        await fs.promises.rename(tmpZip, zipPath);
+        resolve(zipPath);
+      } catch (err) {
+        reject(err);
+      }
     });
     archive.on('error', reject);
     archive.pipe(out);
@@ -121,30 +169,34 @@ async function zipDir(dir, zipPath) {
 async function run() {
   const slugs = loadSlugs();
   for (const slug of slugs) {
-    const pth = path.join(OUT_BASE, slug);
     const p = loadProduct(slug);
     if (!p || p.kind !== 'product') continue;
-    await fs.promises.mkdir(pth, { recursive: true });
+    const dir = path.join(OUT_BASE, slug);
+    await fs.promises.mkdir(dir, { recursive: true });
 
-    const results = {};
-    results.front = await makeFrontPrint(p, pth);
-    const crestSrc = dept(p) === 'youth' ? BRAND.youth : BRAND.adult;
-    results.sleeve = await copyIfExists(crestSrc, path.join(pth, 'sleeve-crest-1_2in.png'));
-    results.back = await copyIfExists(BRAND.sun, path.join(pth, 'backneck-sun-1_25in.png'));
-    results.neck = await copyIfExists(BRAND.neck, path.join(pth, 'inside-label-3x4in.png'));
+    const deptName = dept(p);
+    const crestSrc = deptName === 'youth' ? BRAND.youth : BRAND.adult;
+
+    const front = await makeFront(p, dir);
+    const sleeve = await copyIfExists(crestSrc, path.join(dir, 'sleeve-crest-1_2in.png'));
+    const back = await makeBackLogo(p, dir);
+    const neck = await copyIfExists(BRAND.neck, path.join(dir, 'inside-label-3x4in.png'));
+    const bneck = await copyIfExists(BRAND.sun, path.join(dir, 'backneck-sun-1_25in.png'));
 
     const manifest = {
-      title: p.title, slug, department: p.department, subcategory: p.subcategory,
+      title: p.title,
+      slug,
+      department: p.department,
+      subcategory: p.subcategory,
       priceUSD: p.variants && p.variants[0] ? money(p.variants[0].price) : '0.00',
-      front: results.front ? { file: path.basename(results.front.file), width_px: results.front.px, width_in: frontWidthIn(p) } : null,
-      sleeve_crest: results.sleeve ? path.basename(results.sleeve) : null,
-      backneck_sun: results.back ? path.basename(results.back) : null,
-      inside_label: results.neck ? path.basename(results.neck) : null
+      front: front ? { file: path.basename(front.file), width_px: front.px, width_in: front.width_in, brand_front: !!front.brand_front } : null,
+      back_logo: back ? { file: path.basename(back.file), width_px: back.px, width_in: back.width_in, logo: back.logo } : null,
+      sleeve_crest: sleeve ? path.basename(sleeve) : null,
+      backneck_sun: bneck ? path.basename(bneck) : null,
+      inside_label: neck ? path.basename(neck) : null
     };
-    await fs.promises.writeFile(path.join(pth, 'manifest.json'), JSON.stringify(manifest, null, 2));
-
-    const zipPath = path.join(OUT_BASE, slug, 'pack.zip');
-    await zipDir(pth, zipPath);
+    await fs.promises.writeFile(path.join(dir, 'manifest.json'), JSON.stringify(manifest, null, 2));
+    await zipDir(dir, path.join(dir, 'pack.zip'));
     console.log('[pack]', slug);
   }
 }

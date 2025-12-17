@@ -1,0 +1,14 @@
+{
+  "backs": {
+    "adult": [],
+    "youth": []
+  },
+  "fronts": {
+    "adult": [],
+    "youth": []
+  },
+  "sizes": {
+    "back_in": 12,
+    "front_in": 12
+  }
+}
