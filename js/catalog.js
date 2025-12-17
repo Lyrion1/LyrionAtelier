@@ -1,3 +1,5 @@
+import { ZS } from '../shared/zodiac.mjs';
+
 export async function loadCatalog(){
   const sources = [];
   // a) Netlify function (preferred)
@@ -25,7 +27,6 @@ export async function loadCatalog(){
       if (r.ok) { imgMap = await r.json(); break; }
     } catch {}
   }
-  const ZS = ["aries","taurus","gemini","cancer","leo","virgo","libra","scorpio","sagittarius","capricorn","aquarius","pisces"];
   const zKey = (t='') => {
     const s = String(t).toLowerCase();
     return ZS.find(z => s.includes(z)) || null;

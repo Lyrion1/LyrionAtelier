@@ -1,5 +1,3 @@
-import { apply } from './shop-filters.js';
-
 const GRID_SELECTOR = '[data-shop-grid]';
 
 function normalize(product){
@@ -86,7 +84,7 @@ function renderEmpty(){
 
 export function init(products){
   const list = Array.isArray(products) ? products.filter(Boolean) : [];
-  const filtered = filterByControls(apply(list));
+  const filtered = filterByControls(list);
   if (!filtered.length) { return renderEmpty(); }
   renderGrid(filtered);
 }
