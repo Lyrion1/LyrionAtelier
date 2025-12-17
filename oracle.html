@@ -8,6 +8,15 @@
   <meta property="og:image" content="https://lyrionatelier.com/images/logo/logo.png">
   <meta property="og:url" content="https://lyrionatelier.com">
   <meta name="twitter:card" content="summary_large_image">
+  <meta http-equiv="Content-Security-Policy" content="
+default-src 'self';
+script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdn.jsdelivr.cloudflare.com https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com;
+style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.cloudflare.com https://cdnjs.cloudflare.com;
+connect-src 'self' https://api.stripe.com https://www.google-analytics.com https://ssl.google-analytics.com https://www.googletagmanager.com;
+frame-src 'self' https://js.stripe.com https://hooks.stripe.com;
+img-src 'self' data: https:;
+font-src 'self' data: https://cdn.jsdelivr.cloudflare.com https://cdnjs.cloudflare.com;
+">
   <title>Oracle Readings | Lyrīon Atelier</title>
   <link rel="icon" type="image/png" href="images/favicon/favicon.png">
   <link rel="stylesheet" href="css/style.css">
