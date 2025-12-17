@@ -1,5 +1,17 @@
 console.log('Universal checkout handler loaded');
 
+const publishableKey = window?.STRIPE_PUBLISHABLE_KEY;
+if (!publishableKey) {
+  console.warn('Stripe publishable key missing; skipping client initialization.');
+} else {
+  try {
+    window.stripe = Stripe(publishableKey);
+    console.log('Stripe initialized');
+  } catch (error) {
+    console.error('Stripe initialization failed:', error);
+  }
+}
+
 // Universal function to handle checkout for any product
 async function initiateCheckout(productData) {
   const { name, price, type, variantId } = productData;
