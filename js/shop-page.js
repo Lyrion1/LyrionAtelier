@@ -89,7 +89,7 @@ async function loadPrintfulProducts() {
   try {
     const response = await fetch('/.netlify/functions/printful-sync');
     if (!response.ok) {
-      console.warn('Products not yet synced. Using fallback.');
+      console.warn('Failed to load products. Using fallback.');
       return handleLoadFailure();
     }
 
@@ -130,7 +130,7 @@ async function loadPrintfulProducts() {
       }
       return products;
     } else {
-      console.warn('Products not yet synced. Using fallback.');
+      console.warn('No products available. Using fallback.');
       return handleLoadFailure();
     }
     

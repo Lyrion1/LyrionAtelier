@@ -1,4 +1,4 @@
-exports.handler = async function(_event, _context) {
+exports.handler = async function() {
   return {
     statusCode: 200,
     body: JSON.stringify({ products: [] })
