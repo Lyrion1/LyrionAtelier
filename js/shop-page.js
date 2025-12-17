@@ -1,19 +1,9 @@
+import { loadCatalog } from './catalog.js';
+import { init as initShopGrid } from './shop-grid.js';
+
 console.log('Shop page script loaded');
 
-// Priority order: seeded catalog, namespaced globals, legacy globals
-const PRODUCT_SOURCE_RESOLVERS = [
-  () => window.catalog,
-  () => window?.LyrionAtelier?.products,
-  () => window?.products
-];
-
-function resolveProductCatalog() {
-  // Use the first available source in priority order
-  const validCatalog = PRODUCT_SOURCE_RESOLVERS.map(get => get()).find(Array.isArray);
-  return validCatalog || [];
-}
-const productsList = resolveProductCatalog();
-console.info('[shop] products available:', productsList.length);
+let productsList = [];
 
 const escapeHtml = (value = '') =>
   String(value)
@@ -26,69 +16,6 @@ const escapeHtml = (value = '') =>
 let currentProducts = [];
 let currentProduct = null;
 let selectedVariant = null;
-
-function renderProducts() {
-  const grid = document.getElementById('products-grid-local');
-  if (!grid) return;
-  const category = document.getElementById('filter-category')?.value || 'all';
-  const zodiac = document.getElementById('filter-zodiac')?.value || 'all';
-  grid.innerHTML = '';
-
-  productsList
-    .filter(p => p.category !== 'oracle' && (category === 'all' || p.category === category) && (zodiac === 'all' || p.zodiac === zodiac))
-    .forEach(product => {
-      const card = document.createElement('div');
-      card.className = 'card product-card';
-      card.dataset.kind = 'product';
-
-      const imageWrapper = document.createElement('div');
-      imageWrapper.className = 'card__image';
-      if (product.image) {
-        const img = document.createElement('img');
-        img.src = product.image;
-        img.alt = product.name;
-        img.loading = 'lazy';
-        imageWrapper.appendChild(img);
-      } else {
-        const placeholder = document.createElement('div');
-        placeholder.className = 'placeholder';
-        placeholder.textContent = '✨';
-        imageWrapper.appendChild(placeholder);
-      }
-
-      const infoWrapper = document.createElement('div');
-      infoWrapper.className = 'card__body';
-      const title = document.createElement('h3');
-      title.className = 'card__title';
-      title.textContent = product.name;
-      const desc = document.createElement('p');
-      desc.className = 'card__desc muted';
-      desc.textContent = product.description;
-      const price = document.createElement('p');
-      price.className = 'card__price price';
-      price.textContent = `$${product.price.toFixed(2)}`;
-
-      const buttonRow = document.createElement('div');
-      buttonRow.className = 'card__actions button-row tight';
-
-      const viewLink = document.createElement('a');
-      viewLink.className = 'btn btn-outline';
-      viewLink.href = `product.html?id=${product.id}`;
-      viewLink.textContent = 'View';
-
-      const buyButton = document.createElement('button');
-      buyButton.className = 'btn btn-primary product-buy-btn';
-      buyButton.type = 'button';
-      buyButton.setAttribute('data-name', product.name);
-      buyButton.setAttribute('data-price', product.price.toFixed(2));
-      buyButton.textContent = 'Buy Now';
-
-      buttonRow.append(viewLink, buyButton);
-      infoWrapper.append(title, desc, price, buttonRow);
-      card.append(imageWrapper, infoWrapper);
-      grid.appendChild(card);
-    });
-}
 
 // Load products from Printful
 async function loadPrintfulProducts() {
@@ -288,9 +215,22 @@ function updateVariant() {
 
 document.addEventListener('DOMContentLoaded', () => {
   updateCartCount();
-  document.getElementById('filter-category')?.addEventListener('change', renderProducts);
-  document.getElementById('filter-zodiac')?.addEventListener('change', renderProducts);
-  renderProducts();
+  const rerenderLocalGrid = () => initShopGrid(productsList);
+  document.getElementById('filter-category')?.addEventListener('change', rerenderLocalGrid);
+  document.getElementById('filter-zodiac')?.addEventListener('change', rerenderLocalGrid);
+
+  (async () => {
+    try {
+      const catalog = await loadCatalog();
+      productsList = catalog;
+      initShopGrid(productsList);
+      console.info('[shop] products available:', productsList.length);
+    } catch (error) {
+      console.warn('Failed to load catalog:', error);
+      productsList = [];
+      initShopGrid(productsList);
+    }
+  })();
 
   loadPrintfulProducts();
 
