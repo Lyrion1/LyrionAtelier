@@ -16,6 +16,12 @@ const createResponse = products => ({
   body: JSON.stringify(products)
 });
 
+const createLegacyResponse = products => ({
+  statusCode: 200,
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ products })
+});
+
 const centsToDollars = value => {
   const cents = Number(value);
   return Number.isFinite(cents) ? cents / 100 : 0;
@@ -26,8 +32,8 @@ const uniqueValues = arr => [...new Set(arr.filter(Boolean))];
 const generateVariantId = (variant, prod, idx, vidx) =>
   variant.sku || variant.variant_id || `${prod.slug || 'product'}-${idx}-${vidx}`;
 
-const generateProductId = (prod, idx) =>
-  prod.slug || `product-${idx + 1}`;
+const generateProductId = (prod, file, idx) =>
+  prod.slug || file || `product-${idx + 1}`;
 
 const extractVariantOption = (variant, key, fallback) =>
   variant.options?.[key] || variant[key] || fallback;
@@ -79,7 +85,7 @@ const normalizeProduct = (prod = {}, idx) => {
   const image = Array.isArray(safeProd.images) && safeProd.images.length ? safeProd.images[0] : '';
 
   return {
-    id: generateProductId(safeProd, idx),
+    id: generateProductId(safeProd, safeProd.metadata?.source || safeProd.slug, idx),
     name: safeProd.title || safeProd.slug || 'Product',
     description: safeProd.copy?.notes || safeProd.description || '',
     priceRange,
@@ -91,7 +97,7 @@ const normalizeProduct = (prod = {}, idx) => {
   };
 };
 
-exports.handler = async () => {
+exports.handler = async event => {
   try {
     if (!fs.existsSync(DATA_FILE)) {
       return createResponse([]);
@@ -100,7 +106,9 @@ exports.handler = async () => {
     const items = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8') || '[]');
     const safeProducts = (Array.isArray(items) ? items : []).map((prod, idx) => normalizeProduct(prod, idx));
 
-    return createResponse(safeProducts);
+    const legacyRequested = event?.queryStringParameters?.legacy === '1';
+
+    return legacyRequested ? createLegacyResponse(safeProducts) : createResponse(safeProducts);
   } catch (e) {
     console.error(`printful-sync: failed to load products from ${DATA_FILE}: ${e?.message || e}`);
     return createResponse([]);
