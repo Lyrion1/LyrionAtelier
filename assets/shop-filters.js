@@ -1,5 +1,12 @@
 import { routeIsEventish } from '/lib/catalog.js';
 
+let state = {
+  category: 'all',
+  zodiac: 'all',
+  priceRange: [0, 1000],
+  products: []
+};
+
 // Global filters helper
 window.__LYRION_FILTERS = window.__LYRION_FILTERS || {
   state: { sign: new Set(), element: new Set(), collection: new Set(), palette: new Set(), size: new Set(), price: new Set(), sort: 'featured' },
@@ -186,5 +193,13 @@ window.__LYRION_FILTERS = window.__LYRION_FILTERS || {
   },
   notify() { document.dispatchEvent(new CustomEvent('filters:change')); }
 };
+
+function applyFilters() {
+  if (!state || typeof state !== 'object') {
+    console.error('Filter state not initialized');
+    return;
+  }
+  // existing filter logic
+}
 
 export function mountFilters(items) { window.__LYRION_FILTERS.mount(items); }
