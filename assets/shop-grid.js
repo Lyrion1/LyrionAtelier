@@ -5,7 +5,8 @@ let __ITEMS = [];
 async function loadIndex() {
   try {
     const response = await fetch('/data/index.json', { cache: 'no-store' });
-    return await response.json();
+    const data = await response.json();
+    return Array.isArray(data) ? data : [];
   } catch {
     return [];
   }
@@ -72,6 +73,54 @@ function render(list) {
   list.forEach(p => root.appendChild(card(p)));
 }
 
+function renderEmpty() {
+  const root = document.getElementById('shop-grid');
+  if (!root) return;
+  root.innerHTML = '';
+  const cardEl = document.createElement('div');
+  cardEl.className = 'shop-empty card';
+  const body = document.createElement('div');
+  body.className = 'card__body';
+  const title = document.createElement('h4');
+  title.textContent = 'We’re aligning the stars ✨';
+  const desc = document.createElement('p');
+  desc.textContent = 'Catalog is updating. Check back in a moment.';
+  body.appendChild(title);
+  body.appendChild(desc);
+  cardEl.appendChild(body);
+  root.appendChild(cardEl);
+}
+
+function renderFiltered(list) {
+  const isEmpty = !list.length;
+  if (isEmpty) {
+    renderEmpty();
+    return;
+  }
+  render(list);
+}
+
+/**
+ * Safely apply a filter/transform function to items.
+ * Ensures an array is returned and logs any errors or unexpected results.
+ * @param {Array} items - Source collection to transform.
+ * @param {(items: Array) => any} applyFn - Function to apply to items.
+ * @returns {Array} Filtered or transformed array (empty on failure).
+ */
+function safeApply(items, applyFn) {
+  try {
+    const res = applyFn(items);
+    if (!Array.isArray(res)) {
+      console.warn('[shop-grid] filter application returned non-array; defaulting to empty list.');
+      return [];
+    }
+    return res;
+  } catch (error) {
+    console.error('[shop-grid] filter application failed:', error);
+    return [];
+  }
+}
+
 async function init() {
   const root = document.getElementById('shop-grid');
   if (!root) return;
@@ -79,8 +128,10 @@ async function init() {
   __ITEMS = (await Promise.all(slugs.map(loadProd))).filter(Boolean).filter(isSellable);
   try { const m = await import('/assets/shop-filters.js'); m.mountFilters(__ITEMS); } catch (_) { }
   const apply = (window.__LYRION_FILTERS && window.__LYRION_FILTERS.apply) || ((x) => x);
-  render(apply(__ITEMS));
-  document.addEventListener('filters:change', () => render(apply(__ITEMS)));
+  renderFiltered(safeApply(__ITEMS, apply));
+  document.addEventListener('filters:change', () => {
+    renderFiltered(safeApply(__ITEMS, apply));
+  });
 }
 
 document.readyState !== 'loading' ? init() : document.addEventListener('DOMContentLoaded', init);

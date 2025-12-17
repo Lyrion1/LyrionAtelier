@@ -7,6 +7,16 @@ let state = {
   products: []
 };
 
+/**
+ * Determine if a product can be shown.
+ * @param {object} product - Product with optional state { published, ready } flags.
+ * @returns {boolean} True when both published and ready are truthy.
+ */
+const isAvailable = (product) => (product?.state?.published ?? false) && (product?.state?.ready ?? false);
+let cachedItems = null;
+let cachedAvailable = [];
+const EMPTY_ITEMS = [];
+
 // Global filters helper
 window.__LYRION_FILTERS = window.__LYRION_FILTERS || {
   state: { sign: new Set(), element: new Set(), collection: new Set(), palette: new Set(), size: new Set(), price: new Set(), sort: 'featured' },
@@ -158,7 +168,12 @@ window.__LYRION_FILTERS = window.__LYRION_FILTERS || {
     history.replaceState({}, '', url);
   },
   apply(items) {
-    let out = items.slice();
+    const safeItems = Array.isArray(items) ? items : EMPTY_ITEMS;
+    if (safeItems !== cachedItems) {
+      cachedItems = safeItems;
+      cachedAvailable = safeItems.filter(isAvailable);
+    }
+    let out = cachedAvailable.slice();
 
     const has = (k, val) => !this.state[k].size || this.state[k].has(val);
     const priceIn = (cents) => {

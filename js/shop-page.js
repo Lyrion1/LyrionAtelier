@@ -1,5 +1,20 @@
 console.log('Shop page script loaded');
 
+// Priority order: seeded catalog, namespaced globals, legacy globals
+const PRODUCT_SOURCE_RESOLVERS = [
+  () => window.catalog,
+  () => window?.LyrionAtelier?.products,
+  () => window?.products
+];
+
+function resolveProductCatalog() {
+  // Use the first available source in priority order
+  const validCatalog = PRODUCT_SOURCE_RESOLVERS.map(get => get()).find(Array.isArray);
+  return validCatalog || [];
+}
+const productsList = resolveProductCatalog();
+console.info('[shop] products available:', productsList.length);
+
 const escapeHtml = (value = '') =>
   String(value)
     .replace(/&/g, '&amp;')
@@ -14,12 +29,12 @@ let selectedVariant = null;
 
 function renderProducts() {
   const grid = document.getElementById('products-grid-local');
-  if (!grid || !Array.isArray(window.products)) return;
+  if (!grid) return;
   const category = document.getElementById('filter-category')?.value || 'all';
   const zodiac = document.getElementById('filter-zodiac')?.value || 'all';
   grid.innerHTML = '';
 
-  window.products
+  productsList
     .filter(p => p.category !== 'oracle' && (category === 'all' || p.category === category) && (zodiac === 'all' || p.zodiac === zodiac))
     .forEach(product => {
       const card = document.createElement('div');
