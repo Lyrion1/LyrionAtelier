@@ -290,12 +290,10 @@ const products = [
 
 // Expose products for shop page filtering logic
 if (typeof window !== 'undefined') {
-  // Use this file's catalog as the source of truth and expose a shared reference
-  // for both the namespaced API and the legacy global accessor.
+  // Use this file's catalog as the source of truth for both namespaced and legacy accessors.
   window.LyrionAtelier = window.LyrionAtelier || {};
-  const sharedProducts = products;
-  window.LyrionAtelier.products = sharedProducts;
-  window.products = sharedProducts;
+  window.LyrionAtelier.products = products;
+  window.products = products;
 }
 
 /**
