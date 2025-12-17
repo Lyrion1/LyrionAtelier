@@ -197,9 +197,18 @@ window.__LYRION_FILTERS = window.__LYRION_FILTERS || {
 function applyFilters() {
   if (!state || typeof state !== 'object') {
     console.error('Filter state not initialized');
-    return;
+    return [];
   }
-  // existing filter logic
+  const products = Array.isArray(state.products) ? state.products : [];
+  const [minPrice = 0, maxPrice = Infinity] = state.priceRange || [];
+
+  return products.filter(product => {
+    const inCategory = state.category === 'all' || product.category === state.category;
+    const inZodiac = state.zodiac === 'all' || product.zodiac === state.zodiac;
+    const price = typeof product.price === 'number' ? product.price : Number(product.price || 0);
+    const inPriceRange = price >= minPrice && price <= maxPrice;
+    return inCategory && inZodiac && inPriceRange;
+  });
 }
 
 export function mountFilters(items) { window.__LYRION_FILTERS.mount(items); }
