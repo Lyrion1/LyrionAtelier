@@ -288,12 +288,58 @@ const products = [
   }
 ];
 
-// Expose products for shop page filtering logic
+// Expose products for shop page, but normalize first so the UI never sees missing fields
 if (typeof window !== 'undefined') {
-  // Use this file's catalog as the source of truth for both namespaced and legacy accessors.
   window.LyrionAtelier = window.LyrionAtelier || {};
-  window.LyrionAtelier.products = products;
-  window.products = products;
+
+  // Helper: pick the best image URL from various Printful shapes (sync, mockups, files, etc.)
+  const bestImage = (p) => {
+    const f = (x) => (x && typeof x === 'string' ? x : null);
+    // Common candidates from Printful APIs and our prior sync:
+    return (
+      f(p.thumbnail_url) ||
+      f(p.preview_url) ||
+      f(p.mockup_url) ||
+      (Array.isArray(p.images) && f(p.images[0])) ||
+      (Array.isArray(p.files) && p.files.find(fi => fi && (fi.preview_url || fi.thumbnail_url))?.preview_url) ||
+      (Array.isArray(p.variants) && p.variants.find(v => v && (v.files || v.product))?.files?.find(fi => fi.preview_url)?.preview_url) ||
+      null
+    );
+  };
+
+  // Normalize every product to always have { id, sku, title, price, image, slug, tags, category, zodiac }
+  const normalized = (Array.isArray(products) ? products : []).map((p) => {
+    const title =
+      p.title || p.name || p.product_name || p.variant_name || p.variant?.name || '—';
+    // prefer retail/shop price we showed earlier; otherwise first variant price
+    const price =
+      p.price || p.retail_price || p.retail || p.amount || p.variants?.[0]?.price || p.variants?.[0]?.retail_price || null;
+    const image = bestImage(p);
+    const slug =
+      p.slug ||
+      (title && String(title)
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, ''));
+    return {
+      id: p.id || p.sync_product_id || p.external_id || slug,
+      sku: p.sku || p.external_sku || p.variants?.[0]?.sku || null,
+      title,
+      price,
+      image,
+      slug,
+      // pass through other fields for filters
+      zodiac: p.zodiac || p.attributes?.zodiac || p.tags?.find(t => /^zodiac:/i.test(t))?.split(':')[1] || 'all',
+      category: p.category || p.product_type || 'Apparel',
+      tags: p.tags || [],
+      raw: p
+    };
+  });
+
+  window.LyrionAtelier.products = normalized;
+  // legacy shim for any old code still reading window.products
+  window.products = normalized;
+  console.log('[shop] products available:', normalized.length);
 }
 
 /**
