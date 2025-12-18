@@ -1,20 +1,47 @@
 const GRID_SELECTOR = '[data-shop-grid]';
+const FALLBACK = '/assets/placeholder.webp';
+
+function pickImage(p = {}) {
+  const pick = (...items) => items.find((x) => typeof x === 'string' && x.trim());
+  return (
+    pick(
+      p.image,
+      p.images?.[0],
+      p.images?.[0]?.url,
+      p.images?.display,
+      p.thumbnail,
+      p.thumbnail_url,
+      p.preview_url,
+      p.mockup,
+      p.mockup?.url,
+      p.mockups?.[0],
+      p.mockups?.[0]?.url,
+      p.mockups?.[0]?.file_url,
+      p.mockups?.[0]?.preview_url,
+      p.assets?.[0]?.url,
+      p.files?.[0]?.preview_url,
+      p.files?.[0]?.thumbnail_url,
+      p.variants?.[0]?.files?.[0]?.preview_url,
+      p.variants?.[0]?.mockup_url
+    ) || FALLBACK
+  );
+}
 
 // Minimal, resilient product card. Never shows "Untitled" or a stuck "Image loading…"
 function renderCard(product) {
-  const FALLBACK_IMG = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600"><defs><radialGradient id="g"><stop offset="0" stop-color="%23a88cff"/><stop offset="1" stop-color="%23151a2b"/></radialGradient></defs><rect width="600" height="600" fill="url(%23g)"/><g fill="%23fff" opacity="0.85"><circle cx="100" cy="120" r="2"/><circle cx="220" cy="80" r="1.5"/><circle cx="540" cy="300" r="2"/><circle cx="320" cy="420" r="1.5"/><circle cx="460" cy="160" r="1.5"/></g></svg>';
   const title = product.title && product.title !== '—' ? product.title : 'Celestial Piece';
+  const altText = product.title || product.name || 'Lyrion piece';
   const price = (val => {
     const n = Number(val);
     return Number.isFinite(n) ? `USD ${n.toFixed(2)}` : '';
   })(product.price);
-  const imgSrc = product.image || FALLBACK_IMG;
+  const imgSrc = pickImage(product);
 
   const card = document.createElement('article');
   card.className = 'product-card';
   card.innerHTML = `
-    <div class="product-card__media">
-      <img loading="lazy" decoding="async" alt="${title.replace(/"/g, '&quot;')}" />
+    <div class="product-card__media media">
+      <img loading="lazy" decoding="async" alt="${altText.replace(/"/g, '&quot;')}" />
     </div>
     <div class="product-card__body">
       <h3 class="product-card__title">${title}</h3>
@@ -27,7 +54,7 @@ function renderCard(product) {
   `;
   const img = card.querySelector('img');
   img.src = imgSrc;
-  img.onerror = () => { img.src = FALLBACK_IMG; };
+  img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
   img.onload = () => { card.classList.add('media-ready'); };
   // wire buttons (existing handlers listen via delegation)
   card.dataset.id = product.id || product.slug;
@@ -53,7 +80,7 @@ function normalize(product){
   return {
     source: product,
     name: product?.name || product?.title || product?.slug || 'Untitled',
-    image: (Array.isArray(product?.images) && product.images[0]) || product?.image || product?.thumbnail || '',
+    image: pickImage(product),
     description: product?.description || product?.copy?.notes || '',
     price: Number.isFinite(priceNum) ? priceNum : null,
     zodiac: (product?.zodiac || product?.metadata?.zodiac || '').toLowerCase(),
@@ -81,18 +108,13 @@ function renderGrid(items){
 
     const imageWrapper = document.createElement('div');
     imageWrapper.className = 'card__image';
-    if (p.image) {
-      const img = document.createElement('img');
-      img.src = p.image;
-      img.alt = p.name;
-      img.loading = 'lazy';
-      imageWrapper.appendChild(img);
-    } else {
-      const placeholder = document.createElement('div');
-      placeholder.className = 'placeholder';
-      placeholder.textContent = '✨';
-      imageWrapper.appendChild(placeholder);
-    }
+    const img = document.createElement('img');
+    img.src = pickImage(p);
+    img.alt = p.name || 'Lyrion piece';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
+    imageWrapper.appendChild(img);
 
     const infoWrapper = document.createElement('div');
     infoWrapper.className = 'card__body';

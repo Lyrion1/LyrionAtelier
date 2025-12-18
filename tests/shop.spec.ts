@@ -102,6 +102,10 @@ test.describe('shop smoke test', () => {
 
     const cardCount = await cards.count();
     if (cardCount > 0) {
+      await page.waitForFunction(
+        () => document.querySelectorAll('.product-card img[src]').length >= 6,
+        { timeout: 5000 }
+      );
       expect(cardCount).toBeGreaterThanOrEqual(MIN_VISIBLE_PRODUCTS);
       await cards.first().scrollIntoViewIfNeeded();
       await page.waitForFunction(
@@ -113,7 +117,11 @@ test.describe('shop smoke test', () => {
       const widths = await cards.locator('img').evaluateAll((imgs) =>
         imgs.map((img) => (img as HTMLImageElement).naturalWidth)
       );
+      const srcs = await cards.locator('img').evaluateAll((imgs) =>
+        imgs.map((img) => (img as HTMLImageElement).getAttribute('src') || '')
+      );
       expect(Math.max(...widths)).toBeGreaterThan(50);
+      expect(srcs.every((src) => src && src !== 'Image loading…')).toBeTruthy();
     } else {
       await expect(notice).toBeVisible();
       const noticeText = await notice.textContent();

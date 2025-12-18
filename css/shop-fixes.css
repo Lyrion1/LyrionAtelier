@@ -1,8 +1,5 @@
 /* keep product cards tidy even if images 404 */
-.product-card img { display:block; width:100%; height:auto; }
-
-/* nuke any legacy stray thumbnail containers */
-.thumb-strip, .thumb, .stray-thumb { display:none !important; }
+.product-card img { display:block; width:100%; height:100%; object-fit:cover; }
 
 /* optional: center empty note */
 .shop-empty-note { color: #cfd8ff; text-align:center; }
