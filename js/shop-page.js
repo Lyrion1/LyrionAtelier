@@ -6,8 +6,7 @@
     document.getElementById('products-grid') ||
     document.getElementById('products-grid-local') ||
     document.getElementById('shopGrid');
-  const PLACEHOLDER = '/assets/placeholders/product.webp';
-  const LOCAL_IMAGE_PREFIX = '/data/images';
+  const FALLBACK = '/assets/placeholder.webp';
   const LOADER_TIMEOUT_MS = 1800;
   // Values above this threshold are treated as cents and converted to dollars.
   const PRICE_CENTS_THRESHOLD = 200;
@@ -15,22 +14,32 @@
   const safetyHide = setTimeout(hideLoader, LOADER_TIMEOUT_MS);
 
   const stripDebug = () => {
-    document.querySelectorAll('#asset-strip, .debug-thumbs, .thumb-strip, .stray-thumb').forEach(el => {
-      el.style.display = 'none';
-    });
+    document.querySelectorAll('#asset-strip, .debug-thumbs, .thumb-strip, .stray-thumb').forEach(el => el.remove());
   };
 
   const getImage = (p = {}) => {
-    const candidate =
-      p.images?.display ||
-      p.coverImage ||
-      p.files?.[0]?.preview_url ||
-      p.variants?.[0]?.files?.[0]?.preview_url ||
-      p.mockup?.url ||
-      p.image ||
-      '';
-    if (typeof candidate === 'string' && candidate.startsWith(LOCAL_IMAGE_PREFIX)) return PLACEHOLDER;
-    return candidate || PLACEHOLDER;
+    const pick = (...items) => items.find((x) => typeof x === 'string' && x.trim());
+    const candidate = pick(
+      p.image,
+      p.images?.[0],
+      p.images?.[0]?.url,
+      p.images?.display,
+      p.thumbnail,
+      p.thumbnail_url,
+      p.preview_url,
+      p.mockup,
+      p.mockup?.url,
+      p.mockups?.[0],
+      p.mockups?.[0]?.url,
+      p.mockups?.[0]?.file_url,
+      p.mockups?.[0]?.preview_url,
+      p.assets?.[0]?.url,
+      p.files?.[0]?.preview_url,
+      p.files?.[0]?.thumbnail_url,
+      p.variants?.[0]?.files?.[0]?.preview_url,
+      p.variants?.[0]?.mockup_url
+    );
+    return candidate || FALLBACK;
   };
 
   const normalizePrice = (p) => {
@@ -86,13 +95,14 @@
       card.className = 'product-card';
 
       const media = document.createElement('div');
-      media.className = 'product-card__media';
-      const img = document.createElement('img');
-      img.src = p.image;
-      img.alt = p.title;
-      img.loading = 'lazy';
-      img.onerror = () => { img.src = PLACEHOLDER; };
-      media.appendChild(img);
+       media.className = 'product-card__media media';
+       const img = document.createElement('img');
+       img.src = p.image || FALLBACK;
+       img.alt = p.title || 'Lyrion piece';
+       img.loading = 'lazy';
+       img.decoding = 'async';
+       img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
+       media.appendChild(img);
 
       const body = document.createElement('div');
       body.className = 'product-card__body';
