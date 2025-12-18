@@ -1,34 +1,57 @@
-export function apply(products, state) {
+const defaultState = {
+  category: 'all',
+  zodiac: 'all',
+  size: 'all',
+  price: 'all',
+  collection: 'all',
+  palette: 'all',
+  sort: 'featured'
+};
+
+export function apply(products, incomingState) {
   try {
     const list = Array.isArray(products) ? products : [];
-    const s = state && typeof state === 'object' ? state : {};
+    const savedState = typeof window !== 'undefined' ? window.LyrionAtelier?.shopState : undefined;
+    let state = { ...defaultState, ...(savedState || {}) };
+    if (incomingState && typeof incomingState === 'object') {
+      state = { ...state, ...incomingState };
+    }
     if (!list.length) return list;
 
-    // if specific filter buckets missing, treat as "no filters"
-    const emptyOrMissing = (v) => v == null || (Array.isArray(v) && v.length === 0);
+    const category = String(state.category || 'all').toLowerCase();
+    const zodiac = String(state.zodiac || 'all').toLowerCase();
+    const palette = String(state.palette || 'all').toLowerCase();
+    const collection = String(state.collection || 'all').toLowerCase();
+    const size = String(state.size || 'all').toLowerCase();
+    const sort = String(state.sort || 'featured').toLowerCase();
 
-    const cat = emptyOrMissing(s.category)
-      ? (window?.LyrionAtelier?.filterState?.category ?? 'all').toLowerCase()
-      : String(s.category).toLowerCase();
-    const zod = emptyOrMissing(s.zodiac)
-      ? (window?.LyrionAtelier?.filterState?.zodiac ?? 'all').toLowerCase()
-      : String(s.zodiac).toLowerCase();
-
-    return list.filter((p) => {
+    const filtered = list.filter((p = {}) => {
       const published = p?.state?.published ?? true;
       const ready = p?.state?.ready ?? true;
       if (!published || !ready) return false;
 
-      if (cat !== 'all') {
-        const pc = String(p?.category ?? '').toLowerCase();
-        if (pc !== cat) return false;
-      }
-      if (zod !== 'all') {
-        const pz = String(p?.zodiac ?? '').toLowerCase();
-        if (pz !== zod) return false;
-      }
+      const productCategory = String(p?.category || p?.metadata?.category || '').toLowerCase() || 'all';
+      const productZodiac = String(p?.zodiac || p?.metadata?.zodiac || '').toLowerCase() || 'all';
+      const productPalette = String(p?.palette || p?.metadata?.palette || '').toLowerCase() || 'all';
+      const productCollection = String(p?.collection || p?.metadata?.collection || '').toLowerCase() || 'all';
+      const productSizes = [
+        ...(Array.isArray(p?.sizes) ? p.sizes : []),
+        ...(Array.isArray(p?.options?.size) ? p.options.size : []),
+        ...(Array.isArray(p?.metadata?.size) ? p.metadata.size : [])
+      ].map(s => String(s || '').toLowerCase());
+
+      if (category !== 'all' && productCategory !== category) return false;
+      if (zodiac !== 'all' && productZodiac !== zodiac) return false;
+      if (palette !== 'all' && productPalette !== palette) return false;
+      if (collection !== 'all' && productCollection !== collection) return false;
+      if (size !== 'all' && !productSizes.includes(size)) return false;
       return true;
     });
+
+    if (sort === 'price') {
+      return filtered.sort((a, b) => (Number(a?.price) || 0) - (Number(b?.price) || 0));
+    }
+    return filtered;
   } catch (err) {
     console.warn('filters disabled (safe mode):', err?.message || err);
     return Array.isArray(products) ? products : [];

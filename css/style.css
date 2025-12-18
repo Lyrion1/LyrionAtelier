@@ -452,6 +452,35 @@ p {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.product-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card .title {
+  min-height: 2.4em;
+}
+
+#asset-strip,
+.debug-thumbs,
+.thumb-strip,
+.stray-thumb {
+  display: none !important;
+}
+
 .product-card,
 .oracle-card {
   box-shadow: var(--shadow);
