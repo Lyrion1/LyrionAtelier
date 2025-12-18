@@ -3,7 +3,11 @@ const path = (location.pathname||'').toLowerCase();
 const isEventish = path.startsWith('/codex') || path.startsWith('/events') || path.startsWith('/contact');
 if (isEventish) return;
 const isShop = path === '/shop' || path === '/shop/' || path.startsWith('/shop/index');
-if (!isShop) return;
+  if (!isShop) return;
+
+  // If the dedicated shop page already ships its own grid, skip auto-mounting
+  const nativeGrid = document.querySelector('[data-shop-grid], [data-grid="products"], #products-grid, #products-grid-local, #shopGrid');
+  if (nativeGrid) return;
 
 function ensureContainer(){
 let root = document.getElementById('shop-grid');
