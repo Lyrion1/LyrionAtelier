@@ -1,10 +1,20 @@
 const GRID_SELECTOR = '[data-shop-grid]';
-const FALLBACK = '/assets/placeholder.webp';
+const FALLBACK = '/assets/catalog/placeholder.webp';
+const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+let __IMAGE_MAP = {};
+let __MAP_PROMISE = null;
 
-function pickImage(p = {}) {
+async function loadImageMap(){
+  if (__MAP_PROMISE) return __MAP_PROMISE;
+  __MAP_PROMISE = fetch('/data/image-map.json', { cache: 'no-store' })
+    .then(res => res.ok ? res.json() : {})
+    .catch(() => ({}));
+  return __MAP_PROMISE;
+}
+
+function pickImage(p = {}, imageMap = {}) {
   const pick = (...items) => items.find((x) => typeof x === 'string' && x.trim());
-  return (
-    pick(
+  const fromRemote = pick(
       p.image,
       p.images?.[0],
       p.images?.[0]?.url,
@@ -23,8 +33,10 @@ function pickImage(p = {}) {
       p.files?.[0]?.thumbnail_url,
       p.variants?.[0]?.files?.[0]?.preview_url,
       p.variants?.[0]?.mockup_url
-    ) || FALLBACK
-  );
+    );
+  const key = slugify(p.slug || p.zodiac || p.title || p.name || '');
+  const fromMap = key ? imageMap[key] : null;
+  return fromRemote || fromMap || FALLBACK;
 }
 
 // Minimal, resilient product card. Never shows "Untitled" or a stuck "Image loading…"
@@ -35,7 +47,7 @@ function renderCard(product) {
     const n = Number(val);
     return Number.isFinite(n) ? `USD ${n.toFixed(2)}` : '';
   })(product.price);
-  const imgSrc = pickImage(product);
+  const imgSrc = pickImage(product, __IMAGE_MAP || {});
 
   const card = document.createElement('article');
   card.className = 'product-card';
@@ -80,7 +92,7 @@ function normalize(product){
   return {
     source: product,
     name: product?.name || product?.title || product?.slug || 'Untitled',
-    image: pickImage(product),
+    image: pickImage(product, __IMAGE_MAP || {}),
     description: product?.description || product?.copy?.notes || '',
     price: Number.isFinite(priceNum) ? priceNum : null,
     zodiac: (product?.zodiac || product?.metadata?.zodiac || '').toLowerCase(),
@@ -109,7 +121,7 @@ function renderGrid(items){
     const imageWrapper = document.createElement('div');
     imageWrapper.className = 'card__image';
     const img = document.createElement('img');
-    img.src = pickImage(p);
+    img.src = pickImage(p, __IMAGE_MAP || {});
     img.alt = p.name || 'Lyrion piece';
     img.loading = 'lazy';
     img.decoding = 'async';

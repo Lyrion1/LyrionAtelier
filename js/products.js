@@ -1,5 +1,22 @@
 // Lyrīon Atelier - Products Data and Management
 
+const PRODUCT_FALLBACK = '/assets/catalog/placeholder.webp';
+const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+function resolveProductImage(p = {}, imageMap = {}) {
+  const pick = (...items) => items.find((x) => typeof x === 'string' && x.trim());
+  const fromRemote = pick(
+    p.preview_url,
+    p.thumbnail_url,
+    p.mockup_url,
+    p.image,
+    Array.isArray(p.images) ? p.images[0] : null,
+    p.thumbnail
+  );
+  const key = slugify(p.slug || p.zodiac || p.title || p.name || '');
+  const fromMap = key ? imageMap[key] : null;
+  return fromRemote || fromMap || PRODUCT_FALLBACK;
+}
+
 /**
  * Products Array
  * Contains all available clothing products with detailed information
@@ -320,7 +337,7 @@ if (typeof window !== 'undefined') {
     // prefer retail/shop price we showed earlier; otherwise first variant price
     const price =
       p.price || p.retail_price || p.retail || p.amount || p.variants?.[0]?.price || p.variants?.[0]?.retail_price || null;
-    const image = bestImage(p);
+    const image = bestImage(p) || resolveProductImage(p);
     const slug =
       p.slug ||
       (title && String(title)
@@ -348,6 +365,7 @@ if (typeof window !== 'undefined') {
   // legacy shim for any old code still reading window.products
   window.products = window.LyrionAtelier.products;
   console.log('[shop] products available:', window.LyrionAtelier.products.length);
+  window.resolveProductImage = resolveProductImage;
 }
 
 /**

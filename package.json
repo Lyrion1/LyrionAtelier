@@ -4,7 +4,8 @@
   "scripts": {
     "brand:images": "node scripts/attach-images.mjs",
     "build:images": "node scripts/build-images-map.mjs",
-    "build": "npm run build:images",
+    "prepare:catalog": "node tools/prepare-catalog-images.mjs",
+    "build": "npm run prepare:catalog && npm run build:images",
     "test:shop": "playwright test tests/shop.spec.ts"
   },
   "dependencies": {
@@ -13,6 +14,7 @@
     "stripe": "^14.21.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.57.0"
+    "@playwright/test": "^1.57.0",
+    "sharp": "^0.33.5"
   }
 }

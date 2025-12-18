@@ -1,14 +1,14 @@
 {
-  "aries": "/assets/artwork/youth/aries-embroidered-look.png",
+  "aries": "/assets/raw-art/youth/aries-embroidered-look.png",
   "taurus": "/_incoming/Taurus Logo.png",
   "gemini": "/_incoming/Gemini kids.PNG",
   "cancer": "/_incoming/Cancer Logo.png",
   "leo": "/_incoming/Leo kids.PNG",
   "virgo": "/_incoming/Virgo V2a.png",
   "libra": "/_incoming/Libra kids.PNG",
-  "scorpio": "/assets/artwork/adult/scorpio-gold.webp",
+  "scorpio": "/assets/raw-art/adult/scorpio-gold.webp",
   "sagittarius": "/_incoming/Sagittarius.PNG",
-  "capricorn": "/assets/artwork/adult/capricorn-green-relief.png",
+  "capricorn": "/assets/raw-art/adult/capricorn-green-relief.png",
   "aquarius": "/_incoming/Aquarius kids.PNG",
-  "pisces": "/assets/artwork/adult/pisces-gold.png"
+  "pisces": "/assets/raw-art/adult/pisces-gold.png"
 }

@@ -5,6 +5,8 @@ on:
   push:
     paths:
       - "_incoming/**"
+      - "public/assets/raw-art/**"
+      - "tools/prepare-catalog-images.mjs"
 
 permissions:
   contents: write
@@ -26,6 +28,8 @@ jobs:
           npm install --no-save sharp fast-glob
       - name: Run ingest
         run: node scripts/ingest-images.mjs
+      - name: Prepare catalog image map
+        run: npm run prepare:catalog
       - name: Commit optimized assets
         run: |
           git config user.name "lyrion-bot"
