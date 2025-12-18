@@ -1,0 +1,75 @@
+name: Deploy to Netlify (Staging)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - staging
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: Staging
+    steps:
+      - name: Verify required secrets
+        run: |
+          missing=0
+          if [ -z "${{ secrets.NETLIFY_SITE_ID }}" ]; then
+            echo "Missing required secret: NETLIFY_SITE_ID"
+            missing=1
+          fi
+          if [ -z "${{ secrets.NETLIFY_AUTH_TOKEN }}" ]; then
+            echo "Missing required secret: NETLIFY_AUTH_TOKEN"
+            missing=1
+          fi
+          if [ -z "${{ secrets.PRINTFUL_API_KEY }}" ]; then
+            echo "Missing required secret: PRINTFUL_API_KEY"
+            missing=1
+          fi
+          if [ "$missing" -ne 0 ]; then
+            exit 1
+          fi
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci || npm i
+
+      - name: Build (if present)
+        run: npm run build --if-present
+
+      - name: Install Netlify CLI
+        run: npx netlify-cli --version
+
+      - name: Set Netlify environment variables
+        run: |
+          npx netlify env:set PRINTFUL_API_KEY "${{ secrets.PRINTFUL_API_KEY }}" \
+            --site "${{ secrets.NETLIFY_SITE_ID }}" \
+            --auth "${{ secrets.NETLIFY_AUTH_TOKEN }}" \
+            --silent
+
+      - name: Deploy to Netlify (Staging)
+        id: deploy
+        run: |
+          DEPLOY_DIR="dist"
+          if [ ! -d "$DEPLOY_DIR" ]; then
+            echo "dist/ not found; deploying project root."
+            DEPLOY_DIR="."
+          fi
+
+          DEPLOY_JSON=$(npx netlify deploy \
+            --site "${{ secrets.NETLIFY_SITE_ID }}" \
+            --auth "${{ secrets.NETLIFY_AUTH_TOKEN }}" \
+            --dir "$DEPLOY_DIR" \
+            --alias "staging" \
+            --message "Staging deploy from GitHub Actions" \
+            --json)
+
+          echo "$DEPLOY_JSON" | node -e "const fs=require('fs'); const data=JSON.parse(fs.readFileSync(0,'utf8')); const url=data.deploy_url||data.url; if(!url){console.error('Deploy URL not found in Netlify response'); process.exit(1);} console.log('Deploy URL:', url);"
