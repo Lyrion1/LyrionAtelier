@@ -1,6 +1,18 @@
 import { isSellable } from '/lib/catalog.js';
 
+const FALLBACK = '/assets/catalog/placeholder.webp';
+const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 let __ITEMS = [];
+let __IMAGE_MAP = {};
+let __MAP_PROMISE = null;
+
+async function loadImageMap(){
+  if (__MAP_PROMISE) return __MAP_PROMISE;
+  __MAP_PROMISE = fetch('/data/image-map.json', { cache: 'no-store' })
+    .then(res => res.ok ? res.json() : {})
+    .catch(() => ({}));
+  return __MAP_PROMISE;
+}
 
 async function loadIndex() {
   try {
@@ -25,12 +37,26 @@ function money(cents) {
   return '$' + (cents / 100).toFixed(2);
 }
 
+function resolveProductImage(p = {}, imageMap = {}) {
+  const pick = (...items) => items.find((x) => typeof x === 'string' && x.trim());
+  const fromRemote = pick(
+    p.preview_url,
+    p.thumbnail_url,
+    p.mockup_url,
+    (p.images || [])[0],
+    p.image
+  );
+  const key = slugify(p.slug || p.zodiac || p.title || p.name || '');
+  const fromMap = key ? imageMap[key] : null;
+  return fromRemote || fromMap || FALLBACK;
+}
+
 function card(product) {
   const anchor = document.createElement('a');
   anchor.className = 'shop-card';
   anchor.href = '/product/' + product.slug;
 
-  const imgSrc = (product.images || [])[0] || 'https://source.unsplash.com/600x600/?stars,night';
+  const imgSrc = resolveProductImage(product, __IMAGE_MAP || {});
   const imgWrapper = document.createElement('div');
   imgWrapper.className = 'shop-img';
   const img = document.createElement('img');
@@ -38,6 +64,7 @@ function card(product) {
   img.decoding = 'async';
   img.alt = product.title || '';
   img.src = imgSrc;
+  img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
   imgWrapper.appendChild(img);
 
   const meta = document.createElement('div');
@@ -124,6 +151,7 @@ function safeApply(items, applyFn) {
 async function init() {
   const root = document.getElementById('shop-grid');
   if (!root) return;
+  __IMAGE_MAP = await loadImageMap().catch(() => ({})) || {};
   const slugs = await loadIndex();
   __ITEMS = (await Promise.all(slugs.map(loadProd))).filter(Boolean).filter(isSellable);
   try { const m = await import('/assets/shop-filters.js'); m.mountFilters(__ITEMS); } catch (_) { }

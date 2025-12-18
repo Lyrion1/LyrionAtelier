@@ -3,6 +3,21 @@
 
 /* nuke any legacy stray thumbnail containers */
 .thumb-strip, .thumb, .stray-thumb { display:none !important; }
+#sign-gallery, .sign-strip { display:none !important; }
+
+.product-image,
+.product-card__media {
+  aspect-ratio: 1 / 1;
+  height: auto;
+  min-height: 0;
+}
+.shop-products-section .product-image {
+  aspect-ratio: 1 / 1;
+  height: auto;
+}
+.product-image img {
+  object-fit: cover;
+}
 
 /* optional: center empty note */
 .shop-empty-note { color: #cfd8ff; text-align:center; }

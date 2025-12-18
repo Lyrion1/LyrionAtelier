@@ -54,6 +54,7 @@ images/**/*-backup.*
 test/
 *.test.js
 coverage/
+test-results/
 
 # Netlify
 .netlify/

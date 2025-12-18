@@ -111,7 +111,14 @@ Plus 8 oracle reading services ($44 - $75) including:
 
 - The shop reads from the globally exposed `window.LyrionAtelier.products` catalog first (populated by the Printful sync pipeline).
 - If that catalog is missing or empty, the client fetches `/netlify/functions/printful-sync` and then `/api/printful-catalog` as a fallback to hydrate the grid with the latest Printful products and preview images.
-- Oracle or event items are excluded from `/shop` (they live on Oracle/Codex), and any missing product art falls back to `/assets/placeholders/product.webp`.
+- Oracle or event items are excluded from `/shop` (they live on Oracle/Codex), and any missing product art resolves via `/data/image-map.json` before falling back to `/assets/catalog/placeholder.webp`.
+
+## 🖼️ Catalog art & image map
+
+- Source artwork lives in `public/assets/raw-art/**` (zodiac, youth/adult, brand marks).
+- Run `npm run prepare:catalog` to export optimized 1200px WebP assets into `assets/catalog/` and rebuild `data/image-map.json`.
+- Netlify deploys and the `image-ingest` GitHub Action both run this step, so adding or updating art is idempotent—drop a new file into `public/assets/raw-art/` and the map will include both the full filename slug and its leading zodiac token.
+- The shared placeholder is served from `/assets/catalog/placeholder.webp`.
 
 ## 🛠️ Setup Instructions
 
