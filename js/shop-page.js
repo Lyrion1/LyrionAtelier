@@ -1,22 +1,145 @@
-// Load products from global and render; hide loader as soon as we have an answer
+// Load products from global or API and render; hide loader quickly even on empty
 (() => {
-  const loader = document.querySelector('[data-shop-loader]') || document.getElementById('shop-loader');
-  const show = (el, on) => { if (el) el.style.display = on ? '' : 'none'; };
-  const products = (window.LyrionAtelier && window.LyrionAtelier.products) || window.products || [];
-  console.log('[shop] using window.LyrionAtelier.products');
-  if (!Array.isArray(products) || products.length === 0) {
-    // if truly empty, show a light message; do NOT block UI forever
-    show(loader, false);
-    const grid = document.querySelector('[data-grid="products"]') || document.getElementById('products-grid');
-    if (grid) grid.innerHTML = "<div class=\"note subtle\">We're aligning the stars — catalog is updating, please check back shortly.</div>";
-    return;
+  const loader = document.querySelector('[data-shop-loader]') || document.getElementById('products-loading') || document.getElementById('shop-loader');
+  const grid =
+    document.querySelector('[data-grid="products"]') ||
+    document.getElementById('products-grid') ||
+    document.getElementById('products-grid-local') ||
+    document.getElementById('shopGrid');
+  const PLACEHOLDER = '/assets/placeholders/product.webp';
+  const LOCAL_IMAGE_PREFIX = '/data/images';
+  const LOADER_TIMEOUT_MS = 1800;
+  // Values above this threshold are treated as cents and converted to dollars.
+  const PRICE_CENTS_THRESHOLD = 200;
+  const hideLoader = () => { if (loader) loader.style.display = 'none'; };
+  const safetyHide = setTimeout(hideLoader, LOADER_TIMEOUT_MS);
+
+  const stripDebug = () => {
+    document.querySelectorAll('#asset-strip, .debug-thumbs, .thumb-strip, .stray-thumb').forEach(el => {
+      el.style.display = 'none';
+    });
+  };
+
+  const getImage = (p = {}) => {
+    const candidate =
+      p.images?.display ||
+      p.coverImage ||
+      p.files?.[0]?.preview_url ||
+      p.variants?.[0]?.files?.[0]?.preview_url ||
+      p.mockup?.url ||
+      p.image ||
+      '';
+    if (typeof candidate === 'string' && candidate.startsWith(LOCAL_IMAGE_PREFIX)) return PLACEHOLDER;
+    return candidate || PLACEHOLDER;
+  };
+
+  const normalizePrice = (p) => {
+    const base = p.price ?? p.priceUSD ?? p.variants?.[0]?.price ?? p.variants?.[0]?.retail_price;
+    const num = typeof base === 'number' ? base : Number(base);
+    return Number.isFinite(num) ? (num > PRICE_CENTS_THRESHOLD ? num / 100 : num) : null;
+  };
+
+  const normalize = (p = {}) => {
+    const title = p.title || p.name || p.product_name || p.slug || '—';
+    const slug =
+      p.slug ||
+      (title && String(title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''));
+    return {
+      ...p,
+      id: p.id || p.sync_product_id || slug,
+      slug,
+      title,
+      price: normalizePrice(p),
+      image: getImage(p),
+      category: p.category || p.product_type || p.department || '',
+      zodiac: p.zodiac || p.attributes?.zodiac || ''
+    };
+  };
+
+  async function getCatalog() {
+    let catalog = window.LyrionAtelier?.products;
+    if (!Array.isArray(catalog) || catalog.length === 0) {
+      let res = await fetch('/netlify/functions/printful-sync').catch(() => null);
+      if (!res?.ok) res = await fetch('/api/printful-catalog').catch(() => null);
+      if (res?.ok) {
+        const json = await res.json();
+        catalog = Array.isArray(json?.products) ? json.products : json;
+      }
+    }
+    return Array.isArray(catalog) ? catalog : [];
   }
-  show(loader, false);
-  // optional: sort featured first if tag "featured" exists
-  const featuredFirst = [...products].sort((a,b) => {
-    const af = (a.tags||[]).includes('featured') ? 0 : 1;
-    const bf = (b.tags||[]).includes('featured') ? 0 : 1;
-    return af - bf;
-  });
-  if (typeof mountGrid === 'function') mountGrid(featuredFirst);
+
+  const renderEmpty = () => {
+    if (!grid) return;
+    grid.innerHTML = '<div class="note subtle shop-empty-note">Catalog is updating, check back shortly.</div>';
+  };
+
+  const renderCards = (items) => {
+    if (typeof mountGrid === 'function') {
+      mountGrid(items);
+      return;
+    }
+    if (!grid) return;
+    grid.innerHTML = '';
+    items.forEach((p) => {
+      const card = document.createElement('article');
+      card.className = 'product-card';
+
+      const media = document.createElement('div');
+      media.className = 'product-card__media';
+      const img = document.createElement('img');
+      img.src = p.image;
+      img.alt = p.title;
+      img.loading = 'lazy';
+      img.onerror = () => { img.src = PLACEHOLDER; };
+      media.appendChild(img);
+
+      const body = document.createElement('div');
+      body.className = 'product-card__body';
+      const heading = document.createElement('h3');
+      heading.className = 'product-card__title';
+      heading.textContent = p.title;
+      const price = document.createElement('div');
+      price.className = 'product-card__price';
+      price.textContent = Number.isFinite(p.price) ? `USD ${p.price.toFixed(2)}` : '';
+      body.append(heading, price);
+
+      card.append(media, body);
+      grid.append(card);
+    });
+  };
+
+  const hydrateGlobal = (catalog) => {
+    window.LyrionAtelier = window.LyrionAtelier || {};
+    window.LyrionAtelier.shopState = window.LyrionAtelier.shopState || {};
+    if (!window.LyrionAtelier.products || catalog.length > (window.LyrionAtelier.products?.length || 0)) {
+      window.LyrionAtelier.products = catalog;
+    }
+  };
+
+  const loadAndRender = async () => {
+    stripDebug();
+    try {
+      const catalog = (await getCatalog()).filter(
+        (p = {}) =>
+          (String(p.category || '').toLowerCase() !== 'oracle') &&
+          (String(p.type || '').toLowerCase() !== 'event')
+      );
+      hydrateGlobal(catalog);
+      const normalized = catalog.map(normalize);
+      if (!normalized.length) {
+        renderEmpty();
+      } else {
+        renderCards(normalized);
+      }
+    } catch (err) {
+      console.warn('[shop] failed to render catalog', err);
+      renderEmpty();
+    } finally {
+      clearTimeout(safetyHide);
+      hideLoader();
+    }
+  };
+
+  document.readyState !== 'loading' ? loadAndRender() : document.addEventListener('DOMContentLoaded', loadAndRender);
 })();

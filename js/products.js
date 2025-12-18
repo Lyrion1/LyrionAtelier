@@ -291,6 +291,12 @@ const products = [
 // Expose products for shop page, but normalize first so the UI never sees missing fields
 if (typeof window !== 'undefined') {
   window.LyrionAtelier = window.LyrionAtelier || {};
+  if (!Array.isArray(window.LyrionAtelier.products)) {
+    window.LyrionAtelier.products = [];
+    try {
+      window.dispatchEvent(new CustomEvent('catalog:requested'));
+    } catch (_) {}
+  }
 
   // Helper: pick the best image URL from various Printful shapes (sync, mockups, files, etc.)
   const bestImage = (p) => {
@@ -336,10 +342,12 @@ if (typeof window !== 'undefined') {
     };
   });
 
-  window.LyrionAtelier.products = normalized;
+  if (!window.LyrionAtelier.products || normalized.length > (window.LyrionAtelier.products?.length || 0)) {
+    window.LyrionAtelier.products = normalized;
+  }
   // legacy shim for any old code still reading window.products
-  window.products = normalized;
-  console.log('[shop] products available:', normalized.length);
+  window.products = window.LyrionAtelier.products;
+  console.log('[shop] products available:', window.LyrionAtelier.products.length);
 }
 
 /**

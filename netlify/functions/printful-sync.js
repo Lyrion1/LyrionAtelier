@@ -4,6 +4,7 @@ const p = require('path');
 const DATA_FILE = p.join(process.cwd(), 'data', 'all-products.json');
 const DEFAULT_SIZE = 'M';
 const DEFAULT_COLOR = 'Black';
+const LOCAL_IMAGE_PREFIX = '/data/images';
 
 const formatPrice = num => {
   if (!Number.isFinite(num)) return '$0.00';
@@ -37,6 +38,34 @@ const generateProductId = (prod, file, idx) =>
 
 const extractVariantOption = (variant, key, fallback) =>
   variant.options?.[key] || variant[key] || fallback;
+
+const pickDisplayImage = (prod = {}, variants = []) => {
+  const candidate = (val) => {
+    if (!val || typeof val !== 'string') return null;
+    if (val.startsWith(LOCAL_IMAGE_PREFIX)) return null;
+    return val;
+  };
+  const variantWithFiles = variants.find(v => Array.isArray(v?.files) && v.files.length > 0);
+  const firstVariantFile = variantWithFiles?.files?.[0];
+  const fromVariants = variants.find(v => candidate(v?.image));
+  return (
+    candidate(prod.coverImage) ||
+    candidate(prod.files?.[0]?.preview_url) ||
+    candidate(prod.variants?.[0]?.files?.[0]?.preview_url) ||
+    candidate(firstVariantFile?.preview_url) ||
+    candidate(prod.mockup?.url) ||
+    candidate(prod.image) ||
+    candidate((Array.isArray(prod.images) && prod.images[0]) || null) ||
+    candidate(fromVariants?.image) ||
+    ''
+  );
+};
+
+const isOracleOrEvent = (prod = {}) => {
+  const category = String(prod.category || prod.kind || prod.type || '').toLowerCase();
+  const tags = (prod.tags || []).map(t => String(t || '').toLowerCase());
+  return category === 'oracle' || category === 'event' || tags.includes('oracle') || tags.includes('event');
+};
 
 const normalizeVariant = (variant, prod, idx, vidx) => {
   const safeVariant = variant || {};
@@ -83,15 +112,37 @@ const normalizeProduct = (prod = {}, idx) => {
     : 'Price unavailable';
 
   const image = Array.isArray(safeProd.images) && safeProd.images.length ? safeProd.images[0] : '';
+  const display = pickDisplayImage(safeProd, variants);
+  const slug = generateProductId(safeProd, safeProd.metadata?.source || safeProd.slug, idx);
+  const category = safeProd.category || safeProd.metadata?.category || safeProd.subcategory || safeProd.department || '';
+  const zodiac = safeProd.zodiac || safeProd.metadata?.zodiac || '';
+  const tags = uniqueValues([
+    ...(Array.isArray(safeProd.tags) ? safeProd.tags : []),
+    safeProd.palette,
+    safeProd.collection,
+    safeProd.options?.collection,
+    safeProd.options?.palette
+  ]);
 
   return {
-    id: generateProductId(safeProd, safeProd.metadata?.source || safeProd.slug, idx),
+    id: slug,
+    slug,
     name: safeProd.title || safeProd.slug || 'Product',
+    title: safeProd.title || safeProd.name || safeProd.slug || 'Product',
     description: safeProd.copy?.notes || safeProd.description || '',
     priceRange,
+    price: min,
     thumbnail: image,
+    image: display || image,
+    images: { display },
     sizes: uniqueValues(variants.map(v => v.size)),
     colors: uniqueValues(variants.map(v => v.color)),
+    category,
+    zodiac,
+    palette: safeProd.palette || safeProd.metadata?.palette,
+    collection: safeProd.collection || safeProd.metadata?.collection,
+    variantId: variants[0]?.variant_id || variants[0]?.id || null,
+    tags,
     variants,
     state: safeProd.state
   };
@@ -104,7 +155,9 @@ exports.handler = async event => {
     }
 
     const items = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8') || '[]');
-    const safeProducts = (Array.isArray(items) ? items : []).map((prod, idx) => normalizeProduct(prod, idx));
+    const safeProducts = (Array.isArray(items) ? items : [])
+      .filter(prod => !isOracleOrEvent(prod))
+      .map((prod, idx) => normalizeProduct(prod, idx));
 
     const legacyRequested = event?.queryStringParameters?.legacy === '1';
 

@@ -4,11 +4,15 @@
   "scripts": {
     "brand:images": "node scripts/attach-images.mjs",
     "build:images": "node scripts/build-images-map.mjs",
-    "build": "npm run build:images"
+    "build": "npm run build:images",
+    "test:shop": "playwright test tests/shop.spec.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.30.0",
-    "stripe": "^14.21.0",
-    "resend": "^3.2.0"
+    "resend": "^3.2.0",
+    "stripe": "^14.21.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0"
   }
 }

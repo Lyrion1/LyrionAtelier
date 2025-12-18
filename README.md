@@ -107,6 +107,12 @@ Plus 8 oracle reading services ($44 - $75) including:
 - Soul Mate Connection
 - Ancestral Wisdom Reading
 
+## 🛰️ Shop Data Flow
+
+- The shop reads from the globally exposed `window.LyrionAtelier.products` catalog first (populated by the Printful sync pipeline).
+- If that catalog is missing or empty, the client fetches `/netlify/functions/printful-sync` and then `/api/printful-catalog` as a fallback to hydrate the grid with the latest Printful products and preview images.
+- Oracle or event items are excluded from `/shop` (they live on Oracle/Codex), and any missing product art falls back to `/assets/placeholders/product.webp`.
+
 ## 🛠️ Setup Instructions
 
 ### Prerequisites
