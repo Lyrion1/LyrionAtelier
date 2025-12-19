@@ -12,7 +12,7 @@ import { apply as applyFilters } from './shop-filters.js';
   const LOADER_TIMEOUT_MS = 1800;
   // Values above this threshold are treated as cents and converted to dollars.
   const PRICE_CENTS_THRESHOLD = 200;
-  const ZODIAC_SIGNS = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
+  const ZODIAC_SIGNS = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'];
   const showLoader = (state) => { if (loader) loader.style.display = state ? '' : 'none'; };
   const hideLoader = () => showLoader(false);
   const safetyHide = setTimeout(hideLoader, LOADER_TIMEOUT_MS);
@@ -125,13 +125,14 @@ import { apply as applyFilters } from './shop-filters.js';
       p.slug ||
       slugify(title);
     const variant = pickVariant(p);
+    const price = normalizePrice(variant) ?? normalizePrice(p);
     return {
       ...p,
       id: p.id || p.sync_product_id || slug,
       slug,
       title,
       variants: Array.isArray(p.variants) ? p.variants : (variant ? [variant] : []),
-      price: normalizePrice(variant || p),
+      price,
       image: resolveProductImage({ ...p, slug, title }, imageMap, zodiacMap),
       category: p.category || p.product_type || p.department || '',
       zodiac: p.zodiac || p.attributes?.zodiac || ''
@@ -168,7 +169,7 @@ import { apply as applyFilters } from './shop-filters.js';
     const slug = p.slug || slugify(p.title || p.name || '');
     const viewUrl = `/product/${slug}`;
     const variant = pickVariant(p);
-    const price = normalizePrice(variant || p);
+    const price = normalizePrice(variant) ?? normalizePrice(p);
     const imgSrc = resolveProductImage(p, cachedImageMap, cachedZodiacMap);
 
     const card = document.createElement('article');
@@ -251,6 +252,7 @@ import { apply as applyFilters } from './shop-filters.js';
     if (zodiacMap) window.LyrionAtelier.zodiacImages = zodiacMap;
     if (typeof window !== 'undefined') {
       window.resolveProductImage = resolveProductImage;
+      window.pickVariant = pickVariant;
     }
   };
 

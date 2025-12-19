@@ -1,9 +1,10 @@
-// @ts-nocheck
 import { test, expect } from '@playwright/test';
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
 import url, { pathToFileURL } from 'url';
+
+type CatalogWindow = Window & { LyrionAtelier?: any; mountGrid?: (list: any[]) => void };
 
 const PORT = 4174;
 const ROOT = path.resolve(__dirname, '..');
@@ -119,13 +120,14 @@ test.describe('shop fallback art', () => {
 
     await page.goto(`http://localhost:${PORT}/shop`, { waitUntil: 'networkidle' });
     await page.waitForSelector('[data-shop-grid]');
-    await page.waitForFunction(() => (window as any).LyrionAtelier?.products?.length);
+    await page.waitForFunction(() => (window as CatalogWindow).LyrionAtelier?.products?.length);
     await page.evaluate((products) => {
-      window.LyrionAtelier = window.LyrionAtelier || {};
-      window.LyrionAtelier.products = products;
-      const originalMount = window.mountGrid;
+      const w = window as CatalogWindow;
+      w.LyrionAtelier = w.LyrionAtelier || {};
+      w.LyrionAtelier.products = products;
+      const originalMount = w.mountGrid;
       if (typeof originalMount === 'function') {
-        window.mountGrid = () => originalMount(products);
+        w.mountGrid = () => originalMount(products);
         originalMount(products);
       }
     }, SAMPLE_PRODUCTS);

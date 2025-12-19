@@ -1,5 +1,6 @@
 const GRID_SELECTOR = '[data-shop-grid]';
 const FALLBACK = '/assets/catalog/placeholder.webp';
+const PRICE_CENTS_THRESHOLD = 200;
 const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 let __IMAGE_MAP = {};
 let __MAP_PROMISE = null;
@@ -44,6 +45,9 @@ function pickImage(p = {}, imageMap = {}) {
 }
 
 function pickVariant(product = {}) {
+  if (typeof window !== 'undefined' && typeof window.pickVariant === 'function') {
+    return window.pickVariant(product);
+  }
   const variants = Array.isArray(product.variants) ? product.variants : [];
   if (!variants.length) return null;
   return variants.find((v) => (v?.inStock ?? true) && (v?.state?.published ?? true) && (v?.state?.ready ?? true)) || variants[0];
@@ -52,7 +56,7 @@ function pickVariant(product = {}) {
 function resolvePrice(p = {}) {
   const base = p.price ?? p.priceUSD ?? p.variants?.[0]?.price ?? p.variants?.[0]?.retail_price;
   const num = typeof base === 'number' ? base : Number(base);
-  return Number.isFinite(num) ? (num > 200 ? num / 100 : num) : null;
+  return Number.isFinite(num) ? (num > PRICE_CENTS_THRESHOLD ? num / 100 : num) : null;
 }
 
 // Minimal, resilient product card. Never shows "Untitled" or a stuck "Image loading…"
@@ -60,7 +64,7 @@ function renderCard(product) {
   const title = product.title && product.title !== '—' ? product.title : (product.name || 'Celestial Piece');
   const altText = product.title || product.name || 'Lyrion piece';
   const variant = pickVariant(product);
-  const priceNum = resolvePrice(variant || product);
+  const priceNum = resolvePrice(variant) ?? resolvePrice(product);
   const imgSrc = pickImage(product, __IMAGE_MAP || {});
   const slug = product.slug || slugify(product.title || product.name || '');
   const viewUrl = `/product/${slug}`;
