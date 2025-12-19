@@ -112,6 +112,6 @@
     "tags": ["brand", "logo", "sun-favicon", "premium"]
   },
   "external": {
-    "printfulUrl": "https://YOUR_PRINTFUL_PRODUCT_URL"
+    "printfulUrl": null
   }
 }
