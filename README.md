@@ -119,6 +119,7 @@ Plus 8 oracle reading services ($44 - $75) including:
 - Run `npm run prepare:catalog` to export optimized 1200px WebP assets into `assets/catalog/` and rebuild `data/image-map.json`.
 - Netlify deploys and the `image-ingest` GitHub Action both run this step, so adding or updating art is idempotent—drop a new file into `public/assets/raw-art/` and the map will include both the full filename slug and its leading zodiac token.
 - The shared placeholder is served from `/assets/catalog/placeholder.webp`.
+- Shop image resolution order: `product.images[0].src` → `product.images[0].thumbnail` → `product.mockup_url` → zodiac fallback art → `/assets/catalog/placeholder.webp`. Zodiac fallbacks are auto-discovered from filenames containing the sign name and can be placed at `/assets/catalog/zodiac/<sign>.webp|png`.
 
 ## 🛠️ Setup Instructions
 

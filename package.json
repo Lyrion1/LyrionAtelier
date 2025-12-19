@@ -6,7 +6,7 @@
     "build:images": "node scripts/build-images-map.mjs",
     "prepare:catalog": "node tools/prepare-catalog-images.mjs",
     "build": "npm run prepare:catalog && npm run build:images",
-    "test:shop": "playwright test tests/shop.spec.ts"
+    "test:shop": "playwright test tests"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.30.0",
