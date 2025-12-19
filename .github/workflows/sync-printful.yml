@@ -1,0 +1,43 @@
+name: Sync Printful Products
+
+# Run every day at 3 AM, or manually
+on:
+schedule:
+- cron: '0 3 * * *' # 3 AM daily
+workflow_dispatch: # Allows manual running
+
+jobs:
+sync-products:
+runs-on: ubuntu-latest
+
+steps:
+# Step 1: Checkout your repo
+- name: Checkout repository
+uses: actions/checkout@v4
+with:
+token: ${{ secrets.GITHUB_TOKEN }}
+
+# Step 2: Fetch products from Printful
+- name: Fetch Printful products
+run: |
+curl -X GET "https://api.printful.com/store/products" \
+-H "Authorization: Bearer ${{ secrets.PRINTFUL_API_KEY }}" \
+-H "Content-Type: application/json" \
+-o products.json
+
+# Step 3: Create data folder if it doesn't exist
+- name: Create data folder
+run: mkdir -p data
+
+# Step 4: Move products file to data folder
+- name: Move products file
+run: mv products.json data/products.json
+
+# Step 5: Commit and push changes
+- name: Commit products file
+run: |
+git config --local user.email "github-actions[bot]@users.noreply.github.com"
+git config --local user.name "github-actions[bot]"
+git add data/products.json
+git diff --quiet && git diff --staged --quiet || git commit -m "🔄 Auto-update Printful products"
+git push
