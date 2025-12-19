@@ -144,7 +144,7 @@ test.describe('shop fallback art', () => {
     expect(srcs[0]).toContain(`http://localhost:${PORT}`);
     expect(srcs[1]).toContain('/assets/catalog/placeholder.webp');
 
-    const buyButtons = page.locator('[data-shop-grid] .product-card .product-buy-btn', { hasText: /shop now/i });
+    const buyButtons = page.locator('[data-shop-grid] .product-card .product-buy-btn', { hasText: /buy now/i });
     await expect(buyButtons).toHaveCount(2);
   });
 });

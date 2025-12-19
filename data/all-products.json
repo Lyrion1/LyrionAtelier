@@ -100,7 +100,7 @@
       }
     ],
     "copy": {
-      "notes": "Ignition energy — playful courage for first steps.",
+      "notes": "Ignition energy \u2014 playful courage for first steps.",
       "materials": "100% Cotton",
       "care": "Wash cold. Tumble dry low."
     }
@@ -503,31 +503,31 @@
       }
     ],
     "copy": {
-      "notes": "Fixed water held in gold—protective sight for night roads.",
+      "notes": "Fixed water held in gold\u2014protective sight for night roads.",
       "materials": "100% Cotton",
       "care": "Machine wash cold, inside out. Tumble dry low. Do not iron print."
     }
   },
   {
-    "slug": "unisex-premium-sweatshirt",
-    "title": "Unisex Premium Sweatshirt",
+    "slug": "lyrion-premium-sweatshirt",
+    "title": "Unisex Premium Sweatshirt \u2014 Sun Crest",
     "kind": "product",
     "department": "apparel",
     "subcategory": "sweatshirts",
-    "category": "sweatshirt",
-    "collection": "lyrionatelier",
+    "category": "Sweatshirts",
+    "collection": [
+      "lyrion-atelier"
+    ],
     "zodiac": "all",
     "element": null,
     "edition": "core",
-    "palette": null,
+    "palette": "celestial-noir",
     "state": {
       "ready": true,
       "published": true
     },
     "images": [
-      "/assets/catalog/lyrionatelier/unisex-premium-sweatshirt/cover.png",
-      "/assets/catalog/lyrionatelier/unisex-premium-sweatshirt/back.png",
-      "/assets/catalog/lyrionatelier/unisex-premium-sweatshirt/detail-1.png"
+      "/assets/catalog/lyrion-premium-sweatshirt.webp"
     ],
     "brand_marks": {
       "back_neck_favicon": true,
@@ -549,7 +549,7 @@
         "options": {
           "size": "S"
         },
-        "price": 5999,
+        "price": 4999,
         "sku": "LA-SW-UNISEX-S",
         "printfulVariantId": null,
         "variant": {
@@ -564,7 +564,7 @@
         "options": {
           "size": "M"
         },
-        "price": 5999,
+        "price": 4999,
         "sku": "LA-SW-UNISEX-M",
         "printfulVariantId": null,
         "variant": {
@@ -579,7 +579,7 @@
         "options": {
           "size": "L"
         },
-        "price": 5999,
+        "price": 4999,
         "sku": "LA-SW-UNISEX-L",
         "printfulVariantId": null,
         "variant": {
@@ -594,7 +594,7 @@
         "options": {
           "size": "XL"
         },
-        "price": 5999,
+        "price": 4999,
         "sku": "LA-SW-UNISEX-XL",
         "printfulVariantId": null,
         "variant": {
@@ -609,7 +609,7 @@
         "options": {
           "size": "2XL"
         },
-        "price": 5999,
+        "price": 4999,
         "sku": "LA-SW-UNISEX-2XL",
         "printfulVariantId": null,
         "variant": {
@@ -634,6 +634,17 @@
     },
     "external": {
       "printfulUrl": null
+    },
+    "price": 49.99,
+    "currency": "USD",
+    "featured": true,
+    "metadata": {
+      "brand": "Lyrion Atelier",
+      "source": "manual",
+      "printful": {
+        "externalProductId": null,
+        "variantIds": []
+      }
     }
   }
 ]

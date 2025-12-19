@@ -226,6 +226,24 @@ const products = [
     sizes: ["S", "M", "L", "XL", "XXL"]
   },
   {
+    slug: "lyrion-premium-sweatshirt",
+    title: "Unisex Premium Sweatshirt — Sun Crest",
+    price: 49.99,
+    currency: "USD",
+    category: "Sweatshirts",
+    zodiac: "all",
+    sizes: ["S","M","L","XL","2XL"],
+    palette: "celestial-noir",
+    collection: ["lyrion-atelier"],
+    images: ["/assets/catalog/lyrion-premium-sweatshirt.webp"],
+    featured: true,
+    metadata: {
+      brand: "Lyrion Atelier",
+      source: "manual",
+      printful: { externalProductId: null, variantIds: [] }
+    }
+  },
+  {
     id: 101,
     name: "Past Life Reading",
     price: 65,

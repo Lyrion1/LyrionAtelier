@@ -5,10 +5,11 @@ document.addEventListener('click', async function(e) {
   if (!button) return;
 
   e.preventDefault();
-  
+
   const productName = button.getAttribute('data-name');
   const productPrice = button.getAttribute('data-price');
   const variantId = button.getAttribute('data-variant-id');
+  const productSlug = button.getAttribute('data-slug') || button.closest('[data-slug]')?.dataset.slug || '';
   
   console.log('Buy button clicked:', productName);
   
@@ -18,6 +19,12 @@ document.addEventListener('click', async function(e) {
   button.disabled = true;
   
   if (!variantId) {
+    const slugFragment = productSlug ? productSlug.replace(/^\/+/, '').replace(/^shop\//, '') : '';
+    const target = productSlug ? `/shop/${slugFragment}` : null;
+    if (target) {
+      window.location.href = target;
+      return;
+    }
     button.textContent = originalText;
     button.disabled = false;
     return;
