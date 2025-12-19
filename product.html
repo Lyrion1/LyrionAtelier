@@ -43,13 +43,21 @@
   <main id="main-content" class="section">
     <div class="container">
       <div class="card" id="product-wrapper">
-        <div class="product-image" id="product-image"></div>
+        <div class="product-image" id="product-image">
+          <div id="product-gallery" class="product-gallery"></div>
+        </div>
         <div>
           <p class="pill" id="product-pill"></p>
           <h1 id="product-name">Product</h1>
           <p id="product-description" class="muted"></p>
           <p class="price" id="product-price"></p>
-          <div class="size-selector" id="size-selector"></div>
+          <div class="form-group" id="color-options"></div>
+          <div class="size-selector" id="size-selector">
+            <label for="size-select" class="muted">Size</label>
+            <select id="size-select">
+              <option value="">Select size</option>
+            </select>
+          </div>
           <div id="product-selector" data-slug=""></div>
           <div class="button-row mt-1">
             <button class="btn btn-primary" type="button" id="add-to-cart-btn">Add to cart</button>
@@ -70,16 +78,7 @@
   <script src="js/products.js" defer></script>
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
-  <script>
-    (function(){
-      const el = document.getElementById('product-selector');
-      if (!el) return;
-      const slugParam = new URLSearchParams(window.location.search).get('slug');
-      if (slugParam) el.dataset.slug = slugParam;
-    })();
-  </script>
-  <script type="module" src="/assets/product-selector.js"></script>
-  <script defer src="/assets/product.js"></script>
+  <script type="module" src="/js/product-detail.js"></script>
   <script defer src="/assets/checkout-bridge.js"></script>
   <script defer src="/assets/promotions-ui.js"></script>
 </body>
