@@ -1,4 +1,5 @@
 const FALLBACK_IMAGE = '/assets/catalog/placeholder.webp';
+const CHECKOUT_ENDPOINT = '/.netlify/functions/create-checkout-session';
 
 const $ = (sel) => document.querySelector(sel);
 const formatPrice = (cents) => (Number.isFinite(cents) ? `$${(cents / 100).toFixed(2)}` : '—');
@@ -63,8 +64,8 @@ function showError(message) {
   wrap.innerHTML = `<div class="note error">${message}</div>`;
 }
 
-async function startCheckout(variant, product, selection) {
-  const btn = $('#add-to-cart-btn');
+async function startCheckout(variant, product, selection, btnEl = $('#add-to-cart-btn')) {
+  const btn = btnEl;
   if (!variant) {
     showError('This variant is unavailable.');
     return;
@@ -93,7 +94,7 @@ async function startCheckout(variant, product, selection) {
   ];
   btn && (btn.disabled = true);
   try {
-    const res = await fetch('/.netlify/functions/create-checkout-session', {
+    const res = await fetch(CHECKOUT_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -228,7 +229,7 @@ async function hydrateProductPage() {
   addBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     const selection = currentSelection();
-    startCheckout(activeVariant, product, selection);
+    startCheckout(activeVariant, product, selection, addBtn);
   });
 
   updateVariant();

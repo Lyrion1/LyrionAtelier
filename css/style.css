@@ -4190,6 +4190,20 @@ body {
   border-color: #0f172a;
 }
 
+.product-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.product-gallery img {
+  width: 100%;
+  max-width: 280px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  background: #fff;
+}
+
 @media (max-width: 768px) {
   .readings-grid {
     grid-template-columns: 1fr;
