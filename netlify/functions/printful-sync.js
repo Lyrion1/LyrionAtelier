@@ -4,6 +4,9 @@ const p = require('path');
 const DATA_FILE = p.join(process.cwd(), 'data', 'all-products.json');
 const DEFAULT_SIZE = 'M';
 const DEFAULT_COLOR = 'Black';
+// Treat whole-number values at or above this threshold as cents; Printful's retail prices arrive as
+// either cents (e.g., 3499) or dollar strings (e.g., "24.00"). Adjust if catalog ever includes $1000+ USD items.
+const PRICE_CENTS_THRESHOLD = 1000;
 const isHttp = url => typeof url === 'string' && /^https?:\/\//i.test(url.trim());
 
 const formatPrice = num => {
@@ -28,13 +31,22 @@ const centsToDollars = value => {
   return Number.isFinite(cents) ? cents / 100 : 0;
 };
 
+// Accepts integer cents or dollar values (number/string) and returns dollars.
+const normalizePriceValue = (value) => {
+  const num = Number(value);
+  if (!Number.isFinite(num)) return 0;
+  const isWholeNumber = num % 1 === 0;
+  const treatAsCents = isWholeNumber && num >= PRICE_CENTS_THRESHOLD;
+  return treatAsCents ? num / 100 : num;
+};
+
 const uniqueValues = arr => [...new Set(arr.filter(Boolean))];
 
 const generateVariantId = (variant, prod, idx, vidx) =>
-  variant.sku || variant.variant_id || `${prod.slug || 'product'}-${idx}-${vidx}`;
+  variant.sku || variant.variant_id || variant.id || prod.external_id || `${prod.slug || 'product'}-${idx}-${vidx}`;
 
 const generateProductId = (prod, file, idx) =>
-  prod.slug || file || `product-${idx + 1}`;
+  prod.slug || prod.external_id || prod.sync_product_id || file || `product-${idx + 1}`;
 
 const extractVariantOption = (variant, key, fallback) =>
   variant.options?.[key] || variant[key] || fallback;
@@ -42,6 +54,15 @@ const extractVariantOption = (variant, key, fallback) =>
 const pickPrintfulImage = (prod = {}, variants = []) => {
   const fromThumbnail = isHttp(prod.thumbnail_url) ? prod.thumbnail_url : null;
   if (fromThumbnail) return fromThumbnail;
+  const fromPreview = isHttp(prod.preview_url) ? prod.preview_url : null;
+  if (fromPreview) return fromPreview;
+
+  const fromProductFiles = Array.isArray(prod.files)
+    ? prod.files
+        .map((f) => f?.preview_url || f?.thumbnail_url || f?.url || null)
+        .find(isHttp)
+    : null;
+  if (fromProductFiles) return fromProductFiles;
 
   const variantsWithFiles = variants.filter(v => Array.isArray(v?.files) && v.files.length > 0);
   const previewFromVariant = variantsWithFiles.map(v => {
@@ -72,12 +93,19 @@ const normalizeVariant = (variant, prod, idx, vidx) => {
   safeVariant.state = Object.assign({ ready: true, published: true }, safeVariant.state || {});
   const size = extractVariantOption(safeVariant, 'size', DEFAULT_SIZE);
   const color = extractVariantOption(safeVariant, 'color', DEFAULT_COLOR);
-  const price = centsToDollars(safeVariant.price);
-  const image = safeVariant.image || (Array.isArray(prod.images) && prod.images.length ? prod.images[0] : '');
+  const price = normalizePriceValue(safeVariant.retail_price ?? safeVariant.price);
+  const image =
+    (Array.isArray(safeVariant.files)
+      ? safeVariant.files
+          .map((f) => f?.preview_url || f?.thumbnail_url || f?.url || null)
+          .find(isHttp)
+      : null) ||
+    safeVariant.image ||
+    (Array.isArray(prod.images) && prod.images.length ? prod.images[0] : '');
 
   return {
     id: generateVariantId(safeVariant, prod, idx, vidx),
-    variant_id: safeVariant.printfulVariantId || safeVariant.variant_id || null,
+    variant_id: safeVariant.printfulVariantId || safeVariant.variant_id || safeVariant.id || null,
     size,
     color,
     price,
@@ -91,7 +119,13 @@ const normalizeProduct = (prod = {}, idx) => {
   const safeProd = prod || {};
   safeProd.state = Object.assign({ ready: true, published: true }, safeProd.state || {});
 
-  const rawVariants = (safeProd.variants || []).filter(Boolean);
+  let variantSource = [];
+  if (Array.isArray(safeProd.variants) && safeProd.variants.length) {
+    variantSource = safeProd.variants;
+  } else if (Array.isArray(safeProd.sync_variants)) {
+    variantSource = safeProd.sync_variants;
+  }
+  const rawVariants = variantSource.filter(Boolean);
   const bestImage = pickPrintfulImage(safeProd, rawVariants);
   safeProd.image = bestImage || '';
   safeProd.images = bestImage ? [bestImage] : [];
@@ -131,7 +165,7 @@ const normalizeProduct = (prod = {}, idx) => {
   return {
     id: slug,
     slug,
-    name: safeProd.title || safeProd.slug || 'Product',
+    name: safeProd.title || safeProd.name || safeProd.slug || 'Product',
     title: safeProd.title || safeProd.name || safeProd.slug || 'Product',
     description: safeProd.copy?.notes || safeProd.description || '',
     priceRange,
@@ -139,6 +173,7 @@ const normalizeProduct = (prod = {}, idx) => {
     thumbnail: image,
     image,
     images: image ? [image] : [],
+    files: Array.isArray(safeProd.files) ? safeProd.files : [],
     sizes: uniqueValues(variants.map(v => v.size)),
     colors: uniqueValues(variants.map(v => v.color)),
     category,
@@ -148,6 +183,7 @@ const normalizeProduct = (prod = {}, idx) => {
     variantId: variants[0]?.variant_id || variants[0]?.id || null,
     tags,
     variants,
+    sync_variants: Array.isArray(safeProd.sync_variants) ? safeProd.sync_variants : variants,
     state: safeProd.state
   };
 };
