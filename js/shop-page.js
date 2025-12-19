@@ -231,12 +231,12 @@ import { apply as applyFilters } from './shop-filters.js';
     const priceValue = Number.isFinite(p.price)
       ? p.price
       : basePrice?.value ?? (Number.isFinite(priceCents) ? priceCents / 100 : null);
-    const priceDisplay =
-      Number.isFinite(priceCents)
-        ? `$${(priceCents / 100).toFixed(2)}`
-        : Number.isFinite(priceValue)
-          ? `$${priceValue.toFixed(2)}`
-          : p.priceLabel || basePrice?.label || PRICE_UNAVAILABLE_LABEL;
+    const priceDisplay = (() => {
+      if (Number.isFinite(priceCents)) return `$${(priceCents / 100).toFixed(2)}`;
+      if (Number.isFinite(priceValue)) return `$${priceValue.toFixed(2)}`;
+      const fallback = p.priceLabel || basePrice?.label;
+      return (typeof fallback === 'string' && fallback.trim()) ? fallback : PRICE_UNAVAILABLE_LABEL;
+    })();
     const imgSrc = resolveProductImage(p, cachedImageMap, cachedZodiacMap);
 
     const card = document.createElement('article');

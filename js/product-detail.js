@@ -69,11 +69,11 @@ async function startCheckout(variant, product, selection) {
     showError('This variant is unavailable.');
     return;
   }
-  const unitAmount = Number.isFinite(variant.price) ? variant.price : null;
-  if (!Number.isFinite(unitAmount)) {
+  if (!Number.isFinite(variant?.price)) {
     showError('Price unavailable for this variant.');
     return;
   }
+  const unitAmount = variant.price;
   const color = selection.color ? ` • ${selection.color}` : '';
   const size = selection.size ? ` • ${selection.size}` : '';
   const lineItems = [
@@ -164,6 +164,7 @@ async function hydrateProductPage() {
       opt.textContent = size;
       sizeSelect.appendChild(opt);
     });
+    if (sizes[0]) sizeSelect.value = sizes[0];
   }
 
   const colorWrap = $('#color-options');
@@ -200,7 +201,7 @@ async function hydrateProductPage() {
 
   renderImages(product.images || [], title);
 
-  let activeVariant = pickVariant(product, sizes[0], colors[0]);
+  let activeVariant = pickVariant(product, sizeSelect?.value || sizes[0], colors[0]);
 
   const priceEl = $('#product-price');
   const addBtn = $('#add-to-cart-btn');
