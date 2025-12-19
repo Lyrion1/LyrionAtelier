@@ -3,18 +3,20 @@
 const PRODUCT_FALLBACK = '/assets/catalog/placeholder.webp';
 const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 function resolveProductImage(p = {}, imageMap = {}) {
-  const pick = (...items) => items.find((x) => typeof x === 'string' && x.trim());
-  const fromRemote = pick(
-    p.preview_url,
-    p.thumbnail_url,
-    p.mockup_url,
-    p.image,
-    Array.isArray(p.images) ? p.images[0] : null,
-    p.thumbnail
-  );
-  const key = slugify(p.slug || p.zodiac || p.title || p.name || '');
-  const fromMap = key ? imageMap[key] : null;
-  return fromRemote || fromMap || PRODUCT_FALLBACK;
+  const asString = (img) => {
+    if (!img) return null;
+    if (typeof img === 'string') return img.trim() || null;
+    if (img && typeof img.url === 'string') return img.url;
+    if (img && typeof img.src === 'string') return img.src;
+    if (img && typeof img.preview_url === 'string') return img.preview_url;
+    if (img && typeof img.thumbnail_url === 'string') return img.thumbnail_url;
+    return null;
+  };
+  const isHttp = (val) => typeof val === 'string' && /^https?:\/\//i.test(val.trim());
+  const direct = isHttp(p.image) ? p.image.trim() : null;
+  if (direct) return direct;
+  const firstRemote = Array.isArray(p.images) ? p.images.map(asString).find(isHttp) : null;
+  return firstRemote || PRODUCT_FALLBACK;
 }
 
 /**
@@ -316,18 +318,27 @@ if (typeof window !== 'undefined') {
   }
 
   // Helper: pick the best image URL from various Printful shapes (sync, mockups, files, etc.)
-  const bestImage = (p) => {
-    const f = (x) => (x && typeof x === 'string' ? x : null);
-    // Common candidates from Printful APIs and our prior sync:
-    return (
-      f(p.thumbnail_url) ||
-      f(p.preview_url) ||
-      f(p.mockup_url) ||
-      (Array.isArray(p.images) && f(p.images[0])) ||
-      (Array.isArray(p.files) && p.files.find(fi => fi && (fi.preview_url || fi.thumbnail_url))?.preview_url) ||
-      (Array.isArray(p.variants) && p.variants.find(v => v && (v.files || v.product))?.files?.find(fi => fi.preview_url)?.preview_url) ||
-      null
-    );
+  const bestImage = (p = {}) => {
+    const isHttp = (val) => typeof val === 'string' && /^https?:\/\//i.test(val.trim());
+    const thumb = isHttp(p.thumbnail_url) ? p.thumbnail_url.trim() : null;
+    if (thumb) return thumb;
+    const variants = Array.isArray(p.variants) ? p.variants : [];
+    const variantPreview = variants
+      .map((v) => {
+        const files = Array.isArray(v?.files) ? v.files : [];
+        const preferred = files.find(
+          (fi) => fi && ['preview', 'default'].includes(String(fi?.type || '').toLowerCase()) && isHttp(fi?.preview_url)
+        );
+        if (preferred) return preferred.preview_url;
+        const firstPreview = files.find((fi) => isHttp(fi?.preview_url));
+        return firstPreview?.preview_url || null;
+      })
+      .find(Boolean);
+    if (variantPreview) return variantPreview;
+    const anyPreview = variants
+      .map((v) => (isHttp(v?.files?.[0]?.preview_url) ? v.files[0].preview_url : null))
+      .find(Boolean);
+    return anyPreview || '';
   };
 
   // Normalize every product to always have { id, sku, title, price, image, slug, tags, category, zodiac }
@@ -340,6 +351,7 @@ if (typeof window !== 'undefined') {
     const variants = Array.isArray(p.variants) ? p.variants : [];
     const defaultVariantId = p.defaultVariant?.id || variants[0]?.id || null;
     const image = bestImage(p) || resolveProductImage(p);
+    const images = image ? [image] : [];
     const slug =
       p.slug ||
       (title && String(title)
@@ -352,6 +364,7 @@ if (typeof window !== 'undefined') {
       title,
       price,
       image,
+      images,
       slug,
       variants,
       defaultVariantId,

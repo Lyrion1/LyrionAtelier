@@ -75,26 +75,21 @@ import { apply as applyFilters } from './shop-filters.js';
   };
 
   function resolveProductImage(p = {}, imageMap = {}, zodiacMap = cachedZodiacMap || {}) {
-    const extractImageUrl = (img) => {
+    const asString = (img) => {
       if (!img) return null;
-      if (typeof img === 'string') return String(img).trim() || null;
+      if (typeof img === 'string') return img.trim() || null;
       return pick(
-        typeof img.src === 'string' ? img.src : img.src ? String(img.src) : null,
-        typeof img.thumbnail === 'string' ? img.thumbnail : img.thumbnail ? String(img.thumbnail) : null,
-        typeof img.url === 'string' ? img.url : img.url ? String(img.url) : null,
-        typeof img.display === 'string' ? img.display : img.display ? String(img.display) : null
+        typeof img.src === 'string' ? img.src : null,
+        typeof img.url === 'string' ? img.url : null,
+        typeof img.preview_url === 'string' ? img.preview_url : null,
+        typeof img.thumbnail_url === 'string' ? img.thumbnail_url : null
       );
     };
-    const fromImages = Array.isArray(p.images) ? p.images.map(extractImageUrl).find(Boolean) : null;
-    const variantImage =
-      extractImageUrl(p.defaultVariant?.image) ||
-      (Array.isArray(p.variants) ? p.variants.map((v) => extractImageUrl(v?.image)).find(Boolean) : null) ||
-      extractImageUrl(p.variants?.[0]?.image);
-    const key = slugify(p.slug || p.zodiac || p.title || p.name || '');
-    const fromMap = key ? imageMap[key] : null;
-    const zodiacSlug = slugify(p.zodiac || '');
-    const zodiacFallback = zodiacSlug ? zodiacMap[zodiacSlug] : null;
-    return fromImages || variantImage || fromMap || zodiacFallback || FALLBACK;
+    const isHttp = (val) => typeof val === 'string' && /^https?:\/\//i.test(val.trim());
+    const image = isHttp(p.image) ? p.image.trim() : null;
+    if (image) return image;
+    const fromImages = Array.isArray(p.images) ? p.images.map(asString).find(isHttp) : null;
+    return fromImages || FALLBACK;
   }
 
   const normalizePrice = (p) => {
@@ -331,6 +326,14 @@ import { apply as applyFilters } from './shop-filters.js';
       const normalized = catalog.map((p) => normalize(p, imageMap || {}, zodiacMap));
       normalizedCatalog = normalized;
       hydrateGlobal(normalized, imageMap, zodiacMap);
+      const isHttp = (val) => /^https?:\/\//i.test(val || '');
+      const hasRemote = (item = {}) => {
+        const direct = typeof item.image === 'string' ? item.image : '';
+        const first = Array.isArray(item.images) ? item.images[0] : '';
+        return isHttp(direct) || isHttp(first || '');
+      };
+      const remoteCount = normalized.filter(hasRemote).length;
+      console.log(`[shop] products with remote images: ${remoteCount} / total: ${normalized.length}`);
       syncFilterInputs();
       bindFilters();
       if (!normalized.length) { renderEmpty(); }

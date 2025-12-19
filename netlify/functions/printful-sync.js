@@ -4,7 +4,7 @@ const p = require('path');
 const DATA_FILE = p.join(process.cwd(), 'data', 'all-products.json');
 const DEFAULT_SIZE = 'M';
 const DEFAULT_COLOR = 'Black';
-const LOCAL_IMAGE_PREFIX = '/data/images';
+const isHttp = url => typeof url === 'string' && /^https?:\/\//i.test(url.trim());
 
 const formatPrice = num => {
   if (!Number.isFinite(num)) return '$0.00';
@@ -39,26 +39,26 @@ const generateProductId = (prod, file, idx) =>
 const extractVariantOption = (variant, key, fallback) =>
   variant.options?.[key] || variant[key] || fallback;
 
-const pickDisplayImage = (prod = {}, variants = []) => {
-  const candidate = (val) => {
-    if (!val || typeof val !== 'string') return null;
-    if (val.startsWith(LOCAL_IMAGE_PREFIX)) return null;
-    return val;
-  };
-  const variantWithFiles = variants.find(v => Array.isArray(v?.files) && v.files.length > 0);
-  const firstVariantFile = variantWithFiles?.files?.[0];
-  const fromVariants = variants.find(v => candidate(v?.image));
-  return (
-    candidate(prod.coverImage) ||
-    candidate(prod.files?.[0]?.preview_url) ||
-    candidate(prod.variants?.[0]?.files?.[0]?.preview_url) ||
-    candidate(firstVariantFile?.preview_url) ||
-    candidate(prod.mockup?.url) ||
-    candidate(prod.image) ||
-    candidate((Array.isArray(prod.images) && prod.images[0]) || null) ||
-    candidate(fromVariants?.image) ||
-    ''
-  );
+const pickPrintfulImage = (prod = {}, variants = []) => {
+  const fromThumbnail = isHttp(prod.thumbnail_url) ? prod.thumbnail_url : null;
+  if (fromThumbnail) return fromThumbnail;
+
+  const variantsWithFiles = variants.filter(v => Array.isArray(v?.files) && v.files.length > 0);
+  const previewFromVariant = variantsWithFiles.map(v => {
+    const files = v.files || [];
+    const preferred = files.find(f => f && ['preview', 'default'].includes(String(f?.type || '').toLowerCase()) && isHttp(f?.preview_url));
+    if (preferred) return preferred.preview_url;
+    const firstPreview = files.find(f => isHttp(f?.preview_url));
+    return firstPreview?.preview_url || null;
+  }).find(Boolean);
+  if (previewFromVariant) return previewFromVariant;
+
+  const anyPreview = variantsWithFiles.map(v => {
+    const firstFile = v.files?.[0] || null;
+    return isHttp(firstFile?.preview_url) ? firstFile.preview_url : null;
+  }).find(Boolean);
+
+  return anyPreview || '';
 };
 
 const isOracleOrEvent = (prod = {}) => {
@@ -91,7 +91,12 @@ const normalizeProduct = (prod = {}, idx) => {
   const safeProd = prod || {};
   safeProd.state = Object.assign({ ready: true, published: true }, safeProd.state || {});
 
-  const variants = (safeProd.variants || []).filter(Boolean).map((variant, vidx) =>
+  const rawVariants = (safeProd.variants || []).filter(Boolean);
+  const bestImage = pickPrintfulImage(safeProd, rawVariants);
+  safeProd.image = bestImage || '';
+  safeProd.images = bestImage ? [bestImage] : [];
+
+  const variants = rawVariants.map((variant, vidx) =>
     normalizeVariant(variant, safeProd, idx, vidx)
   );
 
@@ -111,8 +116,7 @@ const normalizeProduct = (prod = {}, idx) => {
     ? (min === max ? formatPrice(min) : `${formatPrice(min)} - ${formatPrice(max)}`)
     : 'Price unavailable';
 
-  const image = Array.isArray(safeProd.images) && safeProd.images.length ? safeProd.images[0] : '';
-  const display = pickDisplayImage(safeProd, variants);
+  const image = bestImage || '';
   const slug = generateProductId(safeProd, safeProd.metadata?.source || safeProd.slug, idx);
   const category = safeProd.category || safeProd.metadata?.category || safeProd.subcategory || safeProd.department || '';
   const zodiac = safeProd.zodiac || safeProd.metadata?.zodiac || '';
@@ -133,8 +137,8 @@ const normalizeProduct = (prod = {}, idx) => {
     priceRange,
     price: min,
     thumbnail: image,
-    image: display || image,
-    images: { display },
+    image,
+    images: image ? [image] : [],
     sizes: uniqueValues(variants.map(v => v.size)),
     colors: uniqueValues(variants.map(v => v.color)),
     category,
