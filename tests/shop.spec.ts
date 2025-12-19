@@ -83,8 +83,11 @@ test.describe('shop smoke test', () => {
 
   test('shows products or updating notice without console errors', async ({ page }) => {
     const consoleErrors: string[] = [];
+    const consoleMessages: string[] = [];
     page.on('console', (msg) => {
-      if (msg.type() === 'error') consoleErrors.push(msg.text());
+      const text = msg.text();
+      consoleMessages.push(text);
+      if (msg.type() === 'error') consoleErrors.push(text);
     });
     page.on('pageerror', (err) => consoleErrors.push(err.message));
     await page.route('https://fonts.googleapis.com/**', (route) =>
@@ -114,6 +117,12 @@ test.describe('shop smoke test', () => {
         '.product-card img',
         { timeout: 5000 }
       );
+      const firstCard = cards.first();
+      await expect(firstCard.locator('img')).toBeVisible();
+      await expect(firstCard.locator('.product-card__title')).toBeVisible();
+      const buyButtons = firstCard.locator('button.product-buy-btn');
+      await expect(buyButtons).toHaveCount(1);
+      await expect(buyButtons.first()).toBeVisible();
       const widths = await cards.locator('img').evaluateAll((imgs) =>
         imgs.map((img) => (img as HTMLImageElement).naturalWidth)
       );
@@ -129,6 +138,8 @@ test.describe('shop smoke test', () => {
     }
 
     expect(consoleErrors).toEqual([]);
+    const hasPriceTypeError = consoleMessages.some((msg) => /typeerror/i.test(msg) && /price/i.test(msg));
+    expect(hasPriceTypeError).toBeFalsy();
     await page.screenshot({ path: 'shop-pass.png', fullPage: true });
   });
 });
