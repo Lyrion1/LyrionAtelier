@@ -1,8 +1,9 @@
+import { centsFrom, formatPrice } from './price-utils.js';
+
 const FALLBACK_IMAGE = '/assets/catalog/placeholder.webp';
 const CHECKOUT_ENDPOINT = '/.netlify/functions/create-checkout-session';
 
 const $ = (sel) => document.querySelector(sel);
-const formatPrice = (cents) => (Number.isFinite(cents) ? `$${(cents / 100).toFixed(2)}` : '—');
 
 function getSlug() {
   const parts = location.pathname.split('/').filter(Boolean);
@@ -70,11 +71,11 @@ async function startCheckout(variant, product, selection, btnEl = $('#add-to-car
     showError('This variant is unavailable.');
     return;
   }
-  if (!Number.isFinite(variant?.price)) {
+  const unitAmount = centsFrom(variant?.price);
+  if (!Number.isFinite(unitAmount)) {
     showError('Price unavailable for this variant.');
     return;
   }
-  const unitAmount = variant.price;
   const color = selection.color ? ` • ${selection.color}` : '';
   const size = selection.size ? ` • ${selection.size}` : '';
   const lineItems = [
@@ -217,11 +218,10 @@ async function hydrateProductPage() {
   function updateVariant() {
     const selection = currentSelection();
     activeVariant = pickVariant(product, selection.size, selection.color);
-    const cents = activeVariant?.price ?? null;
-    if (priceEl) priceEl.textContent = formatPrice(cents);
+    if (priceEl) priceEl.textContent = formatPrice(activeVariant?.price);
     if (addBtn) {
       addBtn.disabled = !activeVariant;
-      addBtn.textContent = activeVariant ? `Add to Cart — ${formatPrice(cents)}` : 'Unavailable';
+      addBtn.textContent = activeVariant ? `Add to Cart — ${formatPrice(activeVariant?.price)}` : 'Unavailable';
     }
   }
 

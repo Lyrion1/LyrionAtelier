@@ -1,4 +1,5 @@
 import { apply as applyFilters } from './shop-filters.js';
+import { formatPrice } from './price-utils.js';
 
 // Load products from global or API and render; hide loader quickly even on empty
 (() => {
@@ -231,12 +232,11 @@ import { apply as applyFilters } from './shop-filters.js';
     const priceValue = Number.isFinite(p.price)
       ? p.price
       : basePrice?.value ?? (Number.isFinite(priceCents) ? priceCents / 100 : null);
-    const priceDisplay = (() => {
-      if (Number.isFinite(priceCents)) return `$${(priceCents / 100).toFixed(2)}`;
-      if (Number.isFinite(priceValue)) return `$${priceValue.toFixed(2)}`;
-      const fallback = p.priceLabel || basePrice?.label;
-      return (typeof fallback === 'string' && fallback.trim()) ? fallback : PRICE_UNAVAILABLE_LABEL;
+    const fallbackLabel = (() => {
+      const fb = p.priceLabel || basePrice?.label;
+      return typeof fb === 'string' && fb.trim() ? fb : PRICE_UNAVAILABLE_LABEL;
     })();
+    const priceDisplay = formatPrice(Number.isFinite(priceCents) ? priceCents : priceValue, fallbackLabel);
     const imgSrc = resolveProductImage(p, cachedImageMap, cachedZodiacMap);
 
     const card = document.createElement('article');
