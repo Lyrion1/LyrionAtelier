@@ -6,6 +6,7 @@ import url from 'url';
 
 const PORT = 4175;
 const ROOT = path.resolve(__dirname, '..');
+const SUN_CREST_2XL = '69455454069045';
 
 const MIME: Record<string, string> = {
   '.html': 'text/html',
@@ -86,5 +87,35 @@ test.describe('product detail page', () => {
     expect(imgWidth).toBeGreaterThan(50);
 
     await page.screenshot({ path: 'product-detail-pass.png', fullPage: true });
+  });
+
+  test('Sun Crest PDP wires size selection to checkout payload', async ({ page }) => {
+    await page.route('https://fonts.googleapis.com/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'text/css', body: '' })
+    );
+    await page.route('https://fonts.gstatic.com/**', (route) =>
+      route.fulfill({ status: 200, body: '' })
+    );
+
+    let checkoutPayload: any = null;
+    await page.route('**/.netlify/functions/checkout', (route) => {
+      checkoutPayload = route.request().postDataJSON();
+      route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({}) });
+    });
+
+    await page.goto(`http://localhost:${PORT}/shop/lyrion-premium-sweatshirt`, { waitUntil: 'networkidle' });
+
+    const sizeButtons = page.locator('#product-sizes button');
+    await expect(sizeButtons).toHaveCount(5);
+    await expect(page.locator('#buy-now-btn')).toBeEnabled();
+
+    await sizeButtons.filter({ hasText: '2XL' }).click();
+    await page.click('#buy-now-btn');
+    await page.waitForTimeout(200);
+
+    expect(checkoutPayload?.items?.[0]?.sku).toBe(SUN_CREST_2XL);
+    expect(checkoutPayload?.items?.[0]?.qty || checkoutPayload?.items?.[0]?.quantity).toBe(1);
+
+    await page.screenshot({ path: 'shop-product-sun-crest.png', fullPage: true });
   });
 });

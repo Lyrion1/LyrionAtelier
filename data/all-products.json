@@ -515,7 +515,10 @@
     "department": "apparel",
     "subcategory": "sweatshirts",
     "category": "sweatshirts",
-    "collection": "lyrion-atelier",
+    "collection": [
+      "lyrionatelier",
+      "lyrion-atelier"
+    ],
     "pf_url": "https://www.printful.com/custom-products/unisex-premium-sweatshirt",
     "zodiac": "all",
     "element": null,
@@ -527,7 +530,8 @@
       "published": true
     },
     "images": [
-      "/assets/catalog/lyrion-premium-sweatshirt.webp"
+      "/assets/catalog/lyrion-premium-sweatshirt.webp",
+      "/assets/catalog/lyrion-premium-sweatshirt.png"
     ],
     "image": "lyrion-premium-sweatshirt.webp",
     "brand_marks": {
@@ -554,14 +558,15 @@
     ],
     "variants": [
       {
+        "id": "69455454068e06",
         "options": {
           "size": "S"
         },
         "price": 5999,
         "sku": "LA-SW-UNISEX-S",
-        "printfulVariantId": null,
+        "printfulVariantId": "69455454068e06",
         "variant": {
-          "_id": null
+          "_id": "69455454068e06"
         },
         "state": {
           "ready": true,
@@ -569,14 +574,15 @@
         }
       },
       {
+        "id": "69455454068eb6",
         "options": {
           "size": "M"
         },
         "price": 5999,
         "sku": "LA-SW-UNISEX-M",
-        "printfulVariantId": null,
+        "printfulVariantId": "69455454068eb6",
         "variant": {
-          "_id": null
+          "_id": "69455454068eb6"
         },
         "state": {
           "ready": true,
@@ -584,14 +590,15 @@
         }
       },
       {
+        "id": "69455454068f36",
         "options": {
           "size": "L"
         },
         "price": 5999,
         "sku": "LA-SW-UNISEX-L",
-        "printfulVariantId": null,
+        "printfulVariantId": "69455454068f36",
         "variant": {
-          "_id": null
+          "_id": "69455454068f36"
         },
         "state": {
           "ready": true,
@@ -599,14 +606,15 @@
         }
       },
       {
+        "id": "69455454068fb1",
         "options": {
           "size": "XL"
         },
         "price": 5999,
         "sku": "LA-SW-UNISEX-XL",
-        "printfulVariantId": null,
+        "printfulVariantId": "69455454068fb1",
         "variant": {
-          "_id": null
+          "_id": "69455454068fb1"
         },
         "state": {
           "ready": true,
@@ -614,14 +622,15 @@
         }
       },
       {
+        "id": "69455454069045",
         "options": {
           "size": "2XL"
         },
         "price": 5999,
         "sku": "LA-SW-UNISEX-2XL",
-        "printfulVariantId": null,
+        "printfulVariantId": "69455454069045",
         "variant": {
-          "_id": null
+          "_id": "69455454069045"
         },
         "state": {
           "ready": true,
@@ -630,7 +639,7 @@
       }
     ],
     "copy": {
-      "notes": "Signature Lyrion Atelier premium crew with sun favicon brand mark.",
+      "notes": "Signature Lyrion Atelier Sun Crest premium crew with celestial detailing.",
       "materials": "Premium blend fleece",
       "care": "Machine wash cold. Tumble dry low.",
       "tags": [
@@ -649,9 +658,19 @@
     "metadata": {
       "brand": "Lyrion Atelier",
       "source": "manual",
+      "collection": [
+        "lyrionatelier",
+        "lyrion-atelier"
+      ],
       "printful": {
         "externalProductId": null,
-        "variantIds": []
+        "variantIds": [
+          "69455454068e06",
+          "69455454068eb6",
+          "69455454068f36",
+          "69455454068fb1",
+          "69455454069045"
+        ]
       }
     }
   }

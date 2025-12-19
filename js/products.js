@@ -234,16 +234,27 @@ const products = [
     zodiac: "all",
     image: "lyrion-premium-sweatshirt.webp",
     sizes: ["S","M","L","XL","2XL"],
-    desc: "Signature Lyrion Atelier Sun Crest premium crew, finished with celestial detailing.",
+    desc: "Signature Lyrion Atelier Sun Crest premium crew with celestial detailing.",
     pf_url: "https://www.printful.com/custom-products/unisex-premium-sweatshirt",
     palette: "celestial-noir",
-    collection: "lyrion-atelier",
-    images: ["/assets/catalog/lyrion-premium-sweatshirt.webp"],
+    collection: ["lyrionatelier", "lyrion-atelier"],
+    images: ["/assets/catalog/lyrion-premium-sweatshirt.webp", "/assets/catalog/lyrion-premium-sweatshirt.png"],
     featured: true,
+    variants: [
+      { id: "69455454068e06", sku: "LA-SW-UNISEX-S", options: { size: "S" }, price: 5999 },
+      { id: "69455454068eb6", sku: "LA-SW-UNISEX-M", options: { size: "M" }, price: 5999 },
+      { id: "69455454068f36", sku: "LA-SW-UNISEX-L", options: { size: "L" }, price: 5999 },
+      { id: "69455454068fb1", sku: "LA-SW-UNISEX-XL", options: { size: "XL" }, price: 5999 },
+      { id: "69455454069045", sku: "LA-SW-UNISEX-2XL", options: { size: "2XL" }, price: 5999 }
+    ],
     metadata: {
       brand: "Lyrion Atelier",
       source: "manual",
-      printful: { externalProductId: null, variantIds: [] }
+      collection: ["lyrionatelier", "lyrion-atelier"],
+      printful: {
+        externalProductId: null,
+        variantIds: ["69455454068e06","69455454068eb6","69455454068f36","69455454068fb1","69455454069045"]
+      }
     }
   },
   {
