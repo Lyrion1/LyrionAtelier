@@ -158,7 +158,7 @@ function renderProduct(product) {
   if (buyUrl) {
     buy.textContent = 'Buy Now';
     buy.type = 'button';
-    buy.addEventListener('click', () => window.open(buyUrl, '_blank', 'noopener'));
+    buy.addEventListener('click', () => window.open(buyUrl, '_blank', 'noopener,noreferrer'));
   } else {
     buy.textContent = 'Buy Now';
     buy.disabled = true;
@@ -191,7 +191,14 @@ function renderProduct(product) {
     window.location.replace('/shop');
     return;
   }
-  const catalog = await productsReady;
+  let catalog = [];
+  try {
+    catalog = await productsReady;
+  } catch (err) {
+    console.warn('[pdp] failed to load catalog', err);
+    window.location.replace('/shop');
+    return;
+  }
   const product = findProduct(catalog || [], slug);
   if (!product) {
     window.location.replace('/shop');
