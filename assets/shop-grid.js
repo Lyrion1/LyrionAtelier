@@ -39,16 +39,13 @@ function money(cents) {
 
 function resolveProductImage(p = {}, imageMap = {}) {
   const pick = (...items) => items.find((x) => typeof x === 'string' && x.trim());
-  const fromRemote = pick(
-    p.preview_url,
-    p.thumbnail_url,
-    p.mockup_url,
-    (p.images || [])[0],
-    p.image
-  );
-  const key = slugify(p.slug || p.zodiac || p.title || p.name || '');
-  const fromMap = key ? imageMap[key] : null;
-  return fromRemote || fromMap || FALLBACK;
+  const isHttp = (val) => typeof val === 'string' && /^https?:\/\//i.test(val.trim());
+  const fromDirect = isHttp(p.image) ? p.image.trim() : null;
+  if (fromDirect) return fromDirect;
+  const fromImages = Array.isArray(p.images)
+    ? p.images.map((img) => (typeof img === 'string' ? img : pick(img?.url, img?.src, img?.preview_url, img?.thumbnail_url))).find(isHttp)
+    : null;
+  return fromImages || FALLBACK;
 }
 
 function card(product) {

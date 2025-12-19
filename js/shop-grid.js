@@ -19,29 +19,14 @@ function pickImage(p = {}, imageMap = {}) {
     const zodiacMap = window.LyrionAtelier?.zodiacImages || {};
     return window.resolveProductImage(p, imageMap, zodiacMap);
   }
-  const fromRemote = pick(
-      p.image,
-      p.images?.[0],
-      p.images?.[0]?.url,
-      p.images?.display,
-      p.thumbnail,
-      p.thumbnail_url,
-      p.preview_url,
-      p.mockup,
-      p.mockup?.url,
-      p.mockups?.[0],
-      p.mockups?.[0]?.url,
-      p.mockups?.[0]?.file_url,
-      p.mockups?.[0]?.preview_url,
-      p.assets?.[0]?.url,
-      p.files?.[0]?.preview_url,
-      p.files?.[0]?.thumbnail_url,
-      p.variants?.[0]?.files?.[0]?.preview_url,
-      p.variants?.[0]?.mockup_url
-    );
-  const key = slugify(p.slug || p.zodiac || p.title || p.name || '');
-  const fromMap = key ? imageMap[key] : null;
-  return fromRemote || fromMap || FALLBACK;
+  const isHttp = (val) => typeof val === 'string' && /^https?:\/\//i.test(val.trim());
+  if (isHttp(p.image)) return p.image.trim();
+  const fromImages = Array.isArray(p.images)
+    ? p.images
+        .map((img) => (typeof img === 'string' ? img : pick(img?.url, img?.src, img?.preview_url, img?.thumbnail_url)))
+        .find(isHttp)
+    : null;
+  return fromImages || FALLBACK;
 }
 
 function pickVariant(product = {}) {

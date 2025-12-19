@@ -8,6 +8,7 @@ type CatalogWindow = Window & { LyrionAtelier?: any; mountGrid?: (list: any[]) =
 
 const PORT = 4174;
 const ROOT = path.resolve(__dirname, '..');
+const MOCK_IMAGE = `http://localhost:${PORT}/assets/catalog/placeholder.webp`;
 
 const MIME: Record<string, string> = {
   '.html': 'text/html',
@@ -76,7 +77,8 @@ const SAMPLE_PRODUCTS = [
     slug: 'with-image',
     title: 'Has Image',
     price: 25,
-    images: [{ src: '/assets/catalog/logo.webp' }],
+    image: MOCK_IMAGE,
+    images: [MOCK_IMAGE],
     variants: [{ id: 'with-image-variant', price: 25, inStock: true }]
   },
   {
@@ -138,7 +140,8 @@ test.describe('shop fallback art', () => {
     );
     expect(srcs.length).toBeGreaterThanOrEqual(2);
     expect(srcs.every((src) => !!src)).toBeTruthy();
-    expect(srcs[1]).toMatch(/aries|catalog|placeholder/i);
+    expect(srcs[0]).toContain(`http://localhost:${PORT}`);
+    expect(srcs[1]).toContain('/assets/catalog/placeholder.webp');
 
     const buyButtons = page.locator('[data-shop-grid] .product-card button', { hasText: /buy now/i });
     await expect(buyButtons).toHaveCount(2);
