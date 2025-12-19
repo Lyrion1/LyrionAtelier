@@ -74,6 +74,23 @@ import { apply as applyFilters } from './shop-filters.js';
     return map;
   };
 
+  const isUsableImage = (val) => {
+    if (typeof val !== 'string') return false;
+    const trimmed = val.trim();
+    if (!trimmed) return false;
+    return /^https?:\/\//i.test(trimmed) || trimmed.startsWith('/');
+  };
+
+  const pickVariantPreview = (variants = []) => {
+    if (!Array.isArray(variants)) return null;
+    return variants
+      .map((v = {}) => {
+        const file = Array.isArray(v.files) ? v.files.find((f) => f?.preview_url || f?.thumbnail_url || f?.url) : null;
+        return file?.preview_url || file?.thumbnail_url || file?.url || null;
+      })
+      .find(isUsableImage);
+  };
+
   function resolveProductImage(p = {}, imageMap = {}, zodiacMap = cachedZodiacMap || {}) {
     const asString = (img) => {
       if (!img) return null;
@@ -85,11 +102,12 @@ import { apply as applyFilters } from './shop-filters.js';
         typeof img.thumbnail_url === 'string' ? img.thumbnail_url : null
       );
     };
-    const isHttp = (val) => typeof val === 'string' && /^https?:\/\//i.test(val.trim());
-    const image = isHttp(p.image) ? p.image.trim() : null;
+    const image = isUsableImage(p.image) ? p.image.trim() : null;
     if (image) return image;
-    const fromImages = Array.isArray(p.images) ? p.images.map(asString).find(isHttp) : null;
-    return fromImages || FALLBACK;
+    const fromImages = Array.isArray(p.images) ? p.images.map(asString).find(isUsableImage) : null;
+    if (fromImages) return fromImages;
+    const fromVariants = pickVariantPreview(p.variants);
+    return fromVariants || FALLBACK;
   }
 
   const normalizePrice = (p) => {
@@ -148,6 +166,36 @@ import { apply as applyFilters } from './shop-filters.js';
     };
   };
 
+  const coerceSyncVariant = (variant = {}) => {
+    const files = Array.isArray(variant.files) ? variant.files.filter(Boolean) : [];
+    const retail = variant.retail_price ?? variant.price ?? null;
+    const priceNum = Number(retail);
+    const resolved = variant.variant_id ?? variant.id ?? null;
+    return {
+      ...variant,
+      files,
+      retail_price: retail,
+      price: Number.isFinite(priceNum) ? priceNum : null,
+      id: resolved,
+      variant_id: resolved
+    };
+  };
+
+  const normalizeSyncProduct = (product = {}) => {
+    if (!Array.isArray(product.sync_variants)) return product;
+    const variants = product.sync_variants.map(coerceSyncVariant);
+    const firstFile = pickVariantPreview(variants);
+    const title = product.title ?? product.name ?? null;
+    const thumbnail = product.thumbnail_url || product.thumbnailUrl || null;
+    return {
+      ...product,
+      title,
+      name: product.name ?? product.title ?? title ?? null,
+      image: thumbnail || firstFile || product.image || null,
+      variants
+    };
+  };
+
   async function getCatalog() {
     let catalog = window.LyrionAtelier?.products;
     if (!Array.isArray(catalog) || catalog.length === 0) {
@@ -158,15 +206,8 @@ import { apply as applyFilters } from './shop-filters.js';
       const local = await fetch('/data/all-products.json', { cache: 'no-store' }).then((r) => (r.ok ? r.json() : [])).catch(() => []);
       if (Array.isArray(local) && local.length) catalog = local;
     }
-    if (!Array.isArray(catalog) || catalog.length === 0) {
-      let res = await fetch('/netlify/functions/printful-sync', withTimeout(8000)).catch(() => null);
-      if (!res?.ok) res = await fetch('/api/printful-catalog', withTimeout(8000)).catch(() => null);
-      if (res?.ok) {
-        const json = await res.json();
-        catalog = Array.isArray(json?.products) ? json.products : json;
-      }
-    }
-    return Array.isArray(catalog) ? catalog : [];
+    catalog = Array.isArray(catalog) ? catalog : [];
+    return catalog.map(normalizeSyncProduct);
   }
 
   const renderEmpty = () => {
