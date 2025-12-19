@@ -237,7 +237,8 @@ import { formatPrice } from './price-utils.js';
     })();
     const priceDisplay = formatPrice(Number.isFinite(priceCents) ? priceCents : priceValue, fallbackLabel);
     const primaryImage = Array.isArray(p.images) ? p.images[0] : null;
-    const imgSrc = isUsableImage(primaryImage) ? primaryImage : FALLBACK;
+    const resolvedImage = isUsableImage(primaryImage) ? primaryImage : resolveProductImage(p, cachedImageMap, cachedZodiacMap);
+    const imgSrc = isUsableImage(resolvedImage) ? resolvedImage : FALLBACK;
 
     const card = document.createElement('article');
     card.className = 'product-card';

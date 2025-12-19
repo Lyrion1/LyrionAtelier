@@ -19,7 +19,8 @@ document.addEventListener('click', async function(e) {
   button.disabled = true;
   
   if (!variantId) {
-    const target = productSlug ? (productSlug.startsWith('/shop/') ? productSlug : `/shop/${productSlug}`) : null;
+    const slugFragment = productSlug ? productSlug.replace(/^\/+/, '').replace(/^shop\//, '') : '';
+    const target = productSlug ? `/shop/${slugFragment}` : null;
     if (target) {
       window.location.href = target;
       return;
