@@ -144,4 +144,24 @@ test.describe('shop smoke test', () => {
     expect(hasPriceTypeError).toBeFalsy();
     await page.screenshot({ path: 'shop-pass.png', fullPage: true });
   });
+
+  test('filters Lyrion Atelier collection and shows Sun Crest sweatshirt', async ({ page }) => {
+    await page.route('https://fonts.googleapis.com/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'text/css', body: '' })
+    );
+    await page.route('https://fonts.gstatic.com/**', (route) =>
+      route.fulfill({ status: 200, body: '' })
+    );
+
+    await page.goto(`http://localhost:${PORT}/shop`, { waitUntil: 'networkidle' });
+    await page.waitForSelector('.product-card');
+    await page.selectOption('#filter-collection', 'lyrion-atelier');
+    await page.waitForFunction(() => {
+      const cards = Array.from(document.querySelectorAll('.product-card'));
+      return cards.length > 0 && cards.every((card) => card.dataset.slug === 'lyrion-premium-sweatshirt');
+    });
+
+    const titles = await page.locator('.product-card__title').allInnerTexts();
+    expect(titles.some((title) => /Sun Crest/i.test(title))).toBeTruthy();
+  });
 });

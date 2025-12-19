@@ -236,7 +236,8 @@ import { formatPrice } from './price-utils.js';
       return typeof fb === 'string' && fb.trim() ? fb : PRICE_UNAVAILABLE_LABEL;
     })();
     const priceDisplay = formatPrice(Number.isFinite(priceCents) ? priceCents : priceValue, fallbackLabel);
-    const imgSrc = resolveProductImage(p, cachedImageMap, cachedZodiacMap);
+    const primaryImage = Array.isArray(p.images) ? p.images[0] : null;
+    const imgSrc = isUsableImage(primaryImage) ? primaryImage : FALLBACK;
 
     const card = document.createElement('article');
     card.className = 'product-card';
@@ -265,14 +266,17 @@ import { formatPrice } from './price-utils.js';
 
     const actions = document.createElement('div');
     actions.className = 'product-card__actions';
-    const viewBtn = document.createElement('a');
-    viewBtn.className = 'btn btn-primary product-buy-btn';
-    viewBtn.href = viewUrl;
-    viewBtn.textContent = 'Shop Now';
-    viewBtn.setAttribute('data-action', 'view');
-    viewBtn.addEventListener('click', (e) => e.stopPropagation());
+    const buyBtn = document.createElement('button');
+    buyBtn.type = 'button';
+    buyBtn.className = 'btn btn-primary product-buy-btn';
+    buyBtn.textContent = 'Buy Now';
+    buyBtn.dataset.action = 'buy';
+    buyBtn.dataset.slug = slug;
+    buyBtn.dataset.name = p.title || p.name || 'Celestial Piece';
+    if (Number.isFinite(priceValue)) buyBtn.dataset.price = String(priceValue);
+    if (p.firstVariantId) buyBtn.dataset.variantId = p.firstVariantId;
 
-    actions.append(viewBtn);
+    actions.append(buyBtn);
     body.append(heading, priceEl, actions);
     card.append(media, body);
     card.addEventListener('click', (e) => {
@@ -311,13 +315,16 @@ import { formatPrice } from './price-utils.js';
     const state = window.LyrionAtelier?.shopState || {};
     const category = document.getElementById('filter-category');
     const zodiac = document.getElementById('filter-zodiac');
+    const collection = document.getElementById('filter-collection');
     if (category && state.category) category.value = state.category;
     if (zodiac && state.zodiac) zodiac.value = state.zodiac;
+    if (collection && state.collection) collection.value = state.collection;
   };
 
   const gatherFilterState = () => ({
     category: document.getElementById('filter-category')?.value || 'all',
-    zodiac: document.getElementById('filter-zodiac')?.value || 'all'
+    zodiac: document.getElementById('filter-zodiac')?.value || 'all',
+    collection: document.getElementById('filter-collection')?.value || 'all'
   });
 
   const applyAndRender = (incomingState = {}) => {
@@ -338,10 +345,12 @@ import { formatPrice } from './price-utils.js';
   const bindFilters = () => {
     const category = document.getElementById('filter-category');
     const zodiac = document.getElementById('filter-zodiac');
+    const collection = document.getElementById('filter-collection');
     const applyBtn = document.getElementById('filter-apply');
     const handler = () => applyAndRender();
     category?.addEventListener('change', handler);
     zodiac?.addEventListener('change', handler);
+    collection?.addEventListener('change', handler);
     applyBtn?.addEventListener('click', (e) => { e.preventDefault(); handler(); });
   };
 
