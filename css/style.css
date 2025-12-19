@@ -4164,6 +4164,32 @@ body {
   box-shadow: 0 4px 16px rgba(139, 92, 246, 0.6);
 }
 
+.chip-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.5rem 0;
+}
+
+.chip {
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip:hover {
+  border-color: #0f172a;
+}
+
+.chip.active {
+  background: #0f172a;
+  color: #fff;
+  border-color: #0f172a;
+}
+
 @media (max-width: 768px) {
   .readings-grid {
     grid-template-columns: 1fr;
