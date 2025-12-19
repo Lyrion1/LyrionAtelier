@@ -1,5 +1,6 @@
 const GRID_SELECTOR = '[data-shop-grid]';
 const FALLBACK = '/assets/catalog/placeholder.webp';
+const PRICE_CENTS_THRESHOLD = 200;
 const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 let __IMAGE_MAP = {};
 let __MAP_PROMISE = null;
@@ -13,7 +14,11 @@ async function loadImageMap(){
 }
 
 function pickImage(p = {}, imageMap = {}) {
-  const pick = (...items) => items.find((x) => typeof x === 'string' && x.trim());
+  const pick = (...items) => items.find((x) => typeof x === 'string' && String(x).trim());
+  if (typeof window !== 'undefined' && typeof window.resolveProductImage === 'function') {
+    const zodiacMap = window.LyrionAtelier?.zodiacImages || {};
+    return window.resolveProductImage(p, imageMap, zodiacMap);
+  }
   const fromRemote = pick(
       p.image,
       p.images?.[0],
@@ -39,41 +44,92 @@ function pickImage(p = {}, imageMap = {}) {
   return fromRemote || fromMap || FALLBACK;
 }
 
+function pickVariant(product = {}) {
+  if (typeof window !== 'undefined' && typeof window.pickVariant === 'function') {
+    return window.pickVariant(product);
+  }
+  const variants = Array.isArray(product.variants) ? product.variants : [];
+  if (!variants.length) return null;
+  return variants.find((v) => (v?.inStock ?? true) && (v?.state?.published ?? true) && (v?.state?.ready ?? true)) || variants[0];
+}
+
+function resolvePrice(p = {}) {
+  const base = p.price ?? p.priceUSD ?? p.variants?.[0]?.price ?? p.variants?.[0]?.retail_price;
+  const num = typeof base === 'number' ? base : Number(base);
+  return Number.isFinite(num) ? (num > PRICE_CENTS_THRESHOLD ? num / 100 : num) : null;
+}
+
 // Minimal, resilient product card. Never shows "Untitled" or a stuck "Image loading…"
 function renderCard(product) {
-  const title = product.title && product.title !== '—' ? product.title : 'Celestial Piece';
+  const title = product.title && product.title !== '—' ? product.title : (product.name || 'Celestial Piece');
   const altText = product.title || product.name || 'Lyrion piece';
-  const price = (val => {
-    const n = Number(val);
-    return Number.isFinite(n) ? `USD ${n.toFixed(2)}` : '';
-  })(product.price);
+  const variant = pickVariant(product);
+  const priceNum = resolvePrice(variant) ?? resolvePrice(product);
   const imgSrc = pickImage(product, __IMAGE_MAP || {});
+  const slug = product.slug || slugify(product.title || product.name || '');
+  const viewUrl = `/product/${slug}`;
 
   const card = document.createElement('article');
   card.className = 'product-card';
-  card.innerHTML = `
-    <div class="product-card__media media">
-      <img loading="lazy" decoding="async" alt="${altText.replace(/"/g, '&quot;')}" />
-    </div>
-    <div class="product-card__body">
-      <h3 class="product-card__title">${title}</h3>
-      <div class="product-card__price">${price}</div>
-      <div class="product-card__actions">
-        <button class="btn btn-ghost" data-action="view">View</button>
-        <button class="btn btn-primary" data-action="buy">Buy Now</button>
-      </div>
-    </div>
-  `;
-  const img = card.querySelector('img');
+  card.dataset.id = product.id || slug;
+  card.dataset.slug = slug;
+
+  const media = document.createElement('div');
+  media.className = 'product-card__media media';
+  const img = document.createElement('img');
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.alt = altText;
   img.src = imgSrc;
   img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
   img.onload = () => { card.classList.add('media-ready'); };
-  // wire buttons (existing handlers listen via delegation)
-  card.dataset.id = product.id || product.slug;
+  media.appendChild(img);
+
+  const body = document.createElement('div');
+  body.className = 'product-card__body';
+  const heading = document.createElement('h3');
+  heading.className = 'product-card__title';
+  heading.textContent = title;
+  const price = document.createElement('div');
+  price.className = 'product-card__price';
+  price.textContent = Number.isFinite(priceNum) ? `USD ${priceNum.toFixed(2)}` : '';
+
+  const actions = document.createElement('div');
+  actions.className = 'product-card__actions';
+  const view = document.createElement('a');
+  view.className = 'btn btn-ghost';
+  view.href = viewUrl;
+  view.textContent = 'View';
+  view.dataset.action = 'view';
+
+  const buy = document.createElement('button');
+  buy.type = 'button';
+  buy.className = 'btn btn-primary product-buy-btn';
+  buy.textContent = 'Buy Now';
+  buy.dataset.name = title;
+  if (Number.isFinite(priceNum)) buy.dataset.price = String(priceNum);
+  const variantId = variant?.variant_id || variant?.id || product.variantId;
+  if (variantId) buy.dataset.variantId = variantId;
+  const hasVariants = Array.isArray(product.variants) && product.variants.length > 0;
+  const inStock = hasVariants ? !!(variant && (variant.inStock ?? true) && (variant.state?.published ?? true) && (variant.state?.ready ?? true)) : true;
+  if (!inStock || !Number.isFinite(priceNum)) {
+    buy.disabled = true;
+    buy.title = 'Unavailable';
+  }
+  buy.addEventListener('click', (e) => e.stopPropagation());
+
+  actions.append(view, buy);
+  body.append(heading, price, actions);
+  card.append(media, body);
+  card.addEventListener('click', (e) => {
+    if (e.target.closest('.product-buy-btn')) return;
+    window.location.href = viewUrl;
+  });
   return card;
 }
 
 function mountGrid(list) {
+  __IMAGE_MAP = window.LyrionAtelier?.imageMap || __IMAGE_MAP || {};
   const grid =
     document.querySelector('[data-grid=\"products\"]') ||
     document.getElementById('products-grid') ||
@@ -81,6 +137,7 @@ function mountGrid(list) {
     document.querySelector(GRID_SELECTOR);
   if (!grid) return;
   grid.innerHTML = '';
+  grid.style.display = '';
   (list || []).forEach(p => grid.appendChild(renderCard(p)));
 }
 

@@ -1118,6 +1118,13 @@ textarea:focus {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   align-items: end;
 }
+.filters-actions {
+  display: flex;
+  align-items: flex-end;
+}
+.filters-actions .btn {
+  width: fit-content;
+}
 
 .two-column-grid {
   display: grid;
