@@ -200,17 +200,20 @@ import { apply as applyFilters } from './shop-filters.js';
   };
 
   async function getCatalog() {
-    let catalog = window.LyrionAtelier?.products;
-    if (!Array.isArray(catalog) || catalog.length === 0) {
-      await new Promise((resolve) => setTimeout(resolve, 10));
-      catalog = window.LyrionAtelier?.products;
+    try {
+      const local = await fetch('/data/all-products.json', { cache: 'no-store' })
+        .then((r) => (r.ok ? r.json() : []))
+        .catch(() => []);
+      if (Array.isArray(local) && local.length) {
+        window.LyrionAtelier = window.LyrionAtelier || {};
+        window.LyrionAtelier.products = local;
+        return local.map(normalizeSyncProduct);
+      }
+    } catch (err) {
+      console.warn('[shop] failed to load catalog from /data/all-products.json', err);
     }
-    if (!Array.isArray(catalog) || catalog.length === 0) {
-      const local = await fetch('/data/all-products.json', { cache: 'no-store' }).then((r) => (r.ok ? r.json() : [])).catch(() => []);
-      if (Array.isArray(local) && local.length) catalog = local;
-    }
-    catalog = Array.isArray(catalog) ? catalog : [];
-    return catalog.map(normalizeSyncProduct);
+    const fallback = Array.isArray(window.LyrionAtelier?.products) ? window.LyrionAtelier.products : [];
+    return fallback.map(normalizeSyncProduct);
   }
 
   const renderEmpty = () => {
@@ -220,7 +223,7 @@ import { apply as applyFilters } from './shop-filters.js';
 
   const createCard = (p) => {
     const slug = p.slug || slugify(p.title || p.name || '');
-    const viewUrl = `/product/${slug}`;
+    const viewUrl = `/shop/${slug}`;
     const variant = p.defaultVariant || pickVariant(p);
     const hasPriceData = Number.isFinite(p.price) || Number.isFinite(p.priceCents) || !!p.priceLabel;
     const basePrice = hasPriceData ? null : normalizePrice(p);
@@ -231,7 +234,9 @@ import { apply as applyFilters } from './shop-filters.js';
     const priceLabel =
       p.priceLabel ||
       basePrice?.label ||
-      (Number.isFinite(priceValue) ? `USD ${priceValue.toFixed(2)}` : PRICE_UNAVAILABLE_LABEL);
+      (Number.isFinite(priceValue) ? `$${priceValue.toFixed(2)}` : PRICE_UNAVAILABLE_LABEL);
+    const priceDisplay =
+      Number.isFinite(priceCents) ? `$${(priceCents / 100).toFixed(2)}` : priceLabel;
     const imgSrc = resolveProductImage(p, cachedImageMap, cachedZodiacMap);
 
     const card = document.createElement('article');
@@ -257,33 +262,18 @@ import { apply as applyFilters } from './shop-filters.js';
     heading.textContent = p.title || p.name || 'Celestial Piece';
     const priceEl = document.createElement('div');
     priceEl.className = 'product-card__price';
-    priceEl.textContent = priceLabel || '';
+    priceEl.textContent = priceDisplay || priceLabel || '';
 
     const actions = document.createElement('div');
     actions.className = 'product-card__actions';
     const viewBtn = document.createElement('a');
-    viewBtn.className = 'btn btn-ghost';
+    viewBtn.className = 'btn btn-primary product-buy-btn';
     viewBtn.href = viewUrl;
-    viewBtn.textContent = 'View';
+    viewBtn.textContent = 'Shop Now';
     viewBtn.setAttribute('data-action', 'view');
+    viewBtn.addEventListener('click', (e) => e.stopPropagation());
 
-    const buyBtn = document.createElement('button');
-    buyBtn.type = 'button';
-    buyBtn.className = 'btn btn-primary product-buy-btn';
-    buyBtn.textContent = 'Buy Now';
-    buyBtn.dataset.name = p.title || p.name || 'Product';
-    if (Number.isFinite(priceValue)) buyBtn.dataset.price = String(priceValue);
-    const variantId = p.firstVariantId ?? p.defaultVariantId ?? variant?.variant_id ?? variant?.id ?? p.variantId ?? null;
-    if (variantId) buyBtn.dataset.variantId = variantId;
-    const hasVariants = Array.isArray(p.variants) && p.variants.length > 0;
-    const inStock = hasVariants ? !!(variant && (variant.inStock ?? true) && (variant.state?.published ?? true) && (variant.state?.ready ?? true)) : true;
-    if (!inStock || !Number.isFinite(priceValue) || !p.canBuy || !variantId) {
-      buyBtn.disabled = true;
-      buyBtn.title = 'Unavailable';
-    }
-    buyBtn.addEventListener('click', (e) => e.stopPropagation());
-
-    actions.append(viewBtn, buyBtn);
+    actions.append(viewBtn);
     body.append(heading, priceEl, actions);
     card.append(media, body);
     card.addEventListener('click', (e) => {
