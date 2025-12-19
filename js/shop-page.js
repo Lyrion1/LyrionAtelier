@@ -231,12 +231,12 @@ import { apply as applyFilters } from './shop-filters.js';
     const priceValue = Number.isFinite(p.price)
       ? p.price
       : basePrice?.value ?? (Number.isFinite(priceCents) ? priceCents / 100 : null);
-    const priceLabel =
-      p.priceLabel ||
-      basePrice?.label ||
-      (Number.isFinite(priceValue) ? `$${priceValue.toFixed(2)}` : PRICE_UNAVAILABLE_LABEL);
     const priceDisplay =
-      Number.isFinite(priceCents) ? `$${(priceCents / 100).toFixed(2)}` : priceLabel;
+      Number.isFinite(priceCents)
+        ? `$${(priceCents / 100).toFixed(2)}`
+        : Number.isFinite(priceValue)
+          ? `$${priceValue.toFixed(2)}`
+          : p.priceLabel || basePrice?.label || PRICE_UNAVAILABLE_LABEL;
     const imgSrc = resolveProductImage(p, cachedImageMap, cachedZodiacMap);
 
     const card = document.createElement('article');
@@ -262,7 +262,7 @@ import { apply as applyFilters } from './shop-filters.js';
     heading.textContent = p.title || p.name || 'Celestial Piece';
     const priceEl = document.createElement('div');
     priceEl.className = 'product-card__price';
-    priceEl.textContent = priceDisplay || priceLabel || '';
+    priceEl.textContent = priceDisplay || PRICE_UNAVAILABLE_LABEL;
 
     const actions = document.createElement('div');
     actions.className = 'product-card__actions';

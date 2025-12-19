@@ -111,7 +111,7 @@ async function startCheckout(variant, product, selection) {
     throw new Error(data?.error || 'Could not start checkout.');
   } catch (err) {
     console.error('[checkout] failed', err);
-    alert(err.message || 'Unable to start checkout.');
+    showError(err.message || 'Unable to start checkout.');
   } finally {
     btn && (btn.disabled = false);
   }
