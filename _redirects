@@ -11,7 +11,7 @@
 /oracle/free-reading /oracle.html         200
 /codex              /codex.html           200
 /product            /product.html         200
-/shop/:slug         /product.html?slug=:slug 200
+/shop/:slug         /shop-product.html?slug=:slug 200
 
 # Redirect old URLs (if migrating from another platform)
 # /old-shop/*         /shop/:splat          301

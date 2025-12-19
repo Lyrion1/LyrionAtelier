@@ -514,14 +514,14 @@
     "kind": "product",
     "department": "apparel",
     "subcategory": "sweatshirts",
-    "category": "Sweatshirts",
-    "collection": [
-      "lyrion-atelier"
-    ],
+    "category": "sweatshirts",
+    "collection": "lyrion-atelier",
+    "pf_url": "https://www.printful.com/custom-products/unisex-premium-sweatshirt",
     "zodiac": "all",
     "element": null,
     "edition": "core",
     "palette": "celestial-noir",
+    "desc": "Signature Lyrion Atelier Sun Crest premium crew with celestial detailing.",
     "state": {
       "ready": true,
       "published": true
@@ -529,6 +529,7 @@
     "images": [
       "/assets/catalog/lyrion-premium-sweatshirt.webp"
     ],
+    "image": "lyrion-premium-sweatshirt.webp",
     "brand_marks": {
       "back_neck_favicon": true,
       "inside_label": true,
@@ -544,12 +545,19 @@
         "2XL"
       ]
     },
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
     "variants": [
       {
         "options": {
           "size": "S"
         },
-        "price": 4999,
+        "price": 5999,
         "sku": "LA-SW-UNISEX-S",
         "printfulVariantId": null,
         "variant": {
@@ -564,7 +572,7 @@
         "options": {
           "size": "M"
         },
-        "price": 4999,
+        "price": 5999,
         "sku": "LA-SW-UNISEX-M",
         "printfulVariantId": null,
         "variant": {
@@ -579,7 +587,7 @@
         "options": {
           "size": "L"
         },
-        "price": 4999,
+        "price": 5999,
         "sku": "LA-SW-UNISEX-L",
         "printfulVariantId": null,
         "variant": {
@@ -594,7 +602,7 @@
         "options": {
           "size": "XL"
         },
-        "price": 4999,
+        "price": 5999,
         "sku": "LA-SW-UNISEX-XL",
         "printfulVariantId": null,
         "variant": {
@@ -609,7 +617,7 @@
         "options": {
           "size": "2XL"
         },
-        "price": 4999,
+        "price": 5999,
         "sku": "LA-SW-UNISEX-2XL",
         "printfulVariantId": null,
         "variant": {
@@ -633,9 +641,9 @@
       ]
     },
     "external": {
-      "printfulUrl": null
+      "printfulUrl": "https://www.printful.com/custom-products/unisex-premium-sweatshirt"
     },
-    "price": 49.99,
+    "price": 59.99,
     "currency": "USD",
     "featured": true,
     "metadata": {
