@@ -52,7 +52,7 @@ function renderCard(product) {
   const priceNum = resolvePrice(variant) ?? resolvePrice(product);
   const imgSrc = pickImage(product, __IMAGE_MAP || {});
   const slug = product.slug || slugify(product.title || product.name || '');
-  const viewUrl = `/product/${slug}`;
+  const viewUrl = `/shop/${slug}`;
 
   const card = document.createElement('article');
   card.className = 'product-card';

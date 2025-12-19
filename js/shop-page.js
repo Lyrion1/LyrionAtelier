@@ -213,8 +213,7 @@ import { formatPrice } from './price-utils.js';
     } catch (err) {
       console.warn('[shop] failed to load catalog from /data/all-products.json', err);
     }
-    const fallback = Array.isArray(window.LyrionAtelier?.products) ? window.LyrionAtelier.products : [];
-    return fallback.map(normalizeSyncProduct);
+    return [];
   }
 
   const renderEmpty = () => {
