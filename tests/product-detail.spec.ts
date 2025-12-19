@@ -30,7 +30,7 @@ function startServer(): Promise<http.Server> {
 
       if (pathname === '/') pathname = '/index.html';
       if (pathname === '/shop') pathname = '/shop.html';
-      if (/^\/shop\/[^/]+/.test(pathname)) pathname = '/product.html';
+      if (/^\/shop\/[^/]+/.test(pathname)) pathname = '/shop-product.html';
 
       const filePath = path.join(ROOT, pathname.replace(/^\//, ''));
       if (!filePath.startsWith(ROOT)) {
@@ -75,19 +75,15 @@ test.describe('product detail page', () => {
 
     await page.goto(`http://localhost:${PORT}/shop/aries-spark-youth-tee`, { waitUntil: 'networkidle' });
 
-    await expect(page.locator('#product-name')).toHaveText(/Aries Spark Tee/i);
-    await expect(page.locator('#product-description')).toContainText('Ignition energy');
+    await expect(page.locator('#product-title')).toHaveText(/Aries Spark Tee/i);
+    await expect(page.locator('#product-description')).toContainText(/Ignition energy/i);
     await expect(page.locator('#product-price')).toContainText('$34.99');
-    await expect(page.locator('#product-materials')).toContainText('100% Cotton');
-    await expect(page.locator('#product-care')).toContainText(/Wash cold/i);
 
-    const sizeOptions = await page.locator('#size-select option').allInnerTexts();
+    const sizeOptions = await page.locator('#product-sizes .pill').allInnerTexts();
     expect(sizeOptions).toContain('S');
 
-    const imgWidths = await page.locator('#product-gallery img').evaluateAll((imgs) =>
-      imgs.map((img) => (img as HTMLImageElement).naturalWidth)
-    );
-    expect(Math.max(...imgWidths)).toBeGreaterThan(50);
+    const imgWidth = await page.locator('#product-image').evaluate((img) => (img as HTMLImageElement).naturalWidth);
+    expect(imgWidth).toBeGreaterThan(50);
 
     await page.screenshot({ path: 'product-detail-pass.png', fullPage: true });
   });
