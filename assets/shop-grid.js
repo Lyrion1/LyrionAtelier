@@ -51,7 +51,7 @@ function resolveProductImage(p = {}, imageMap = {}) {
 function card(product) {
   const anchor = document.createElement('a');
   anchor.className = 'shop-card';
-  anchor.href = '/product/' + product.slug;
+  anchor.href = '/shop/' + product.slug;
 
   const imgSrc = resolveProductImage(product, __IMAGE_MAP || {});
   const imgWrapper = document.createElement('div');

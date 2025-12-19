@@ -139,12 +139,18 @@ async function hydrateProductPage() {
     [product.collection, product.zodiac || product.palette || product.department].filter(Boolean).join(' • ') ||
     'Collection';
   const description = product.copy?.notes || product.description || '';
+  const materials = product.copy?.materials || product.materials || '';
+  const care = product.copy?.care || product.care || '';
   const nameEl = $('#product-name');
   const descEl = $('#product-description');
   const pillEl = $('#product-pill');
+  const materialsEl = $('#product-materials');
+  const careEl = $('#product-care');
   if (nameEl) nameEl.textContent = title;
   if (descEl) descEl.textContent = description;
   if (pillEl) pillEl.textContent = pillText;
+  if (materialsEl) materialsEl.textContent = materials;
+  if (careEl) careEl.textContent = care;
 
   const sizes = unique(
     (product.options?.size || []).concat(
@@ -201,7 +207,10 @@ async function hydrateProductPage() {
     }
   }
 
-  renderImages(product.images || [], title);
+  const galleryImages = Array.isArray(product.images) && product.images.length
+    ? product.images
+    : (product.image ? [product.image] : []);
+  renderImages(galleryImages, title);
 
   let activeVariant = pickVariant(product, sizeSelect?.value || sizes[0], colors[0]);
 

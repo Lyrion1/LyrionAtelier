@@ -33,6 +33,7 @@ function startServer(): Promise<http.Server> {
 
       if (pathname === '/') pathname = '/index.html';
       if (pathname === '/shop') pathname = '/shop.html';
+      if (/^\/shop\/[^/]+/.test(pathname)) pathname = '/product.html';
 
       if (pathname.startsWith('/netlify/functions/printful-sync')) {
         try {
