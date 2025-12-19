@@ -106,6 +106,8 @@ import { apply as applyFilters } from './shop-filters.js';
     if (image) return image;
     const fromImages = Array.isArray(p.images) ? p.images.map(asString).find(isUsableImage) : null;
     if (fromImages) return fromImages;
+    const fromFiles = Array.isArray(p.files) ? p.files.map(asString).find(isUsableImage) : null;
+    if (fromFiles) return fromFiles;
     const fromVariants = pickVariantPreview(p.variants);
     return fromVariants || FALLBACK;
   }
@@ -191,6 +193,7 @@ import { apply as applyFilters } from './shop-filters.js';
       ...product,
       title,
       name: product.name ?? product.title ?? title ?? null,
+      files: Array.isArray(product.files) ? product.files : [],
       image: thumbnail || firstFile || product.image || null,
       variants
     };
