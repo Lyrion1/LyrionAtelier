@@ -337,6 +337,8 @@ if (typeof window !== 'undefined') {
     // prefer retail/shop price we showed earlier; otherwise first variant price
     const price =
       p.price || p.retail_price || p.retail || p.amount || p.variants?.[0]?.price || p.variants?.[0]?.retail_price || null;
+    const variants = Array.isArray(p.variants) ? p.variants : [];
+    const defaultVariantId = p.defaultVariant?.id || variants[0]?.id || null;
     const image = bestImage(p) || resolveProductImage(p);
     const slug =
       p.slug ||
@@ -346,11 +348,13 @@ if (typeof window !== 'undefined') {
         .replace(/(^-|-$)/g, ''));
     return {
       id: p.id || p.sync_product_id || p.external_id || slug,
-      sku: p.sku || p.external_sku || p.variants?.[0]?.sku || null,
+      sku: p.sku || p.external_sku || variants?.[0]?.sku || null,
       title,
       price,
       image,
       slug,
+      variants,
+      defaultVariantId,
       // pass through other fields for filters
       zodiac: p.zodiac || p.attributes?.zodiac || p.tags?.find(t => /^zodiac:/i.test(t))?.split(':')[1] || 'all',
       category: p.category || p.product_type || 'Apparel',

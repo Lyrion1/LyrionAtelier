@@ -48,8 +48,15 @@ export function apply(products, incomingState) {
       return true;
     });
 
+    const NO_PRICE_SORT_WEIGHT = Number.MAX_SAFE_INTEGER;
+    const priceValue = (p) => {
+      if (Number.isFinite(p?.priceCents)) return Number(p.priceCents) / 100;
+      const num = Number(p?.price);
+      return Number.isFinite(num) ? num : NO_PRICE_SORT_WEIGHT;
+    };
+
     if (sort === 'price') {
-      return filtered.sort((a, b) => (Number(a?.price) || 0) - (Number(b?.price) || 0));
+      return filtered.sort((a, b) => priceValue(a) - priceValue(b));
     }
     return filtered;
   } catch (err) {

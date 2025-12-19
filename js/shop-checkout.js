@@ -17,6 +17,12 @@ document.addEventListener('click', async function(e) {
   button.textContent = 'Processing...';
   button.disabled = true;
   
+  if (!variantId) {
+    button.textContent = originalText;
+    button.disabled = false;
+    return;
+  }
+
   const success = await window.initiateCheckout({
     name: productName,
     price: productPrice,

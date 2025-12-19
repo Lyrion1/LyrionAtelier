@@ -9,6 +9,7 @@ import { apply as applyFilters } from './shop-filters.js';
     document.getElementById('products-grid-local') ||
     document.getElementById('shopGrid');
   const FALLBACK = '/assets/catalog/placeholder.webp';
+  const PRICE_UNAVAILABLE_LABEL = '—';
   const LOADER_TIMEOUT_MS = 1800;
   // Values above this threshold are treated as cents and converted to dollars.
   const PRICE_CENTS_THRESHOLD = 200;
@@ -74,43 +75,41 @@ import { apply as applyFilters } from './shop-filters.js';
   };
 
   function resolveProductImage(p = {}, imageMap = {}, zodiacMap = cachedZodiacMap || {}) {
-    const firstImage = Array.isArray(p.images) ? p.images[0] : null;
-    const fromImages = pick(
-      firstImage?.src,
-      firstImage?.thumbnail,
-      firstImage?.url,
-      typeof firstImage === 'string' ? firstImage : null,
-      p.preview_url,
-      p.thumbnail_url,
-      p.image,
-      p.images?.display,
-      p.thumbnail,
-      p.assets?.[0]?.url,
-      p.files?.[0]?.preview_url,
-      p.files?.[0]?.thumbnail_url,
-      p.variants?.[0]?.files?.[0]?.preview_url
-    );
+    const extractImageUrl = (img) => {
+      if (!img) return null;
+      if (typeof img === 'string') return String(img).trim() || null;
+      return pick(
+        typeof img.src === 'string' ? img.src : img.src ? String(img.src) : null,
+        typeof img.thumbnail === 'string' ? img.thumbnail : img.thumbnail ? String(img.thumbnail) : null,
+        typeof img.url === 'string' ? img.url : img.url ? String(img.url) : null,
+        typeof img.display === 'string' ? img.display : img.display ? String(img.display) : null
+      );
+    };
+    const fromImages = Array.isArray(p.images) ? p.images.map(extractImageUrl).find(Boolean) : null;
+    const variantImage =
+      extractImageUrl(p.defaultVariant?.image) ||
+      (Array.isArray(p.variants) ? p.variants.map((v) => extractImageUrl(v?.image)).find(Boolean) : null) ||
+      extractImageUrl(p.variants?.[0]?.image);
     const key = slugify(p.slug || p.zodiac || p.title || p.name || '');
     const fromMap = key ? imageMap[key] : null;
-    const mockup = pick(
-      p.mockup_url,
-      p.mockup,
-      p.mockup?.url,
-      p.mockups?.[0],
-      p.mockups?.[0]?.url,
-      p.mockups?.[0]?.file_url,
-      p.mockups?.[0]?.preview_url,
-      p.variants?.[0]?.mockup_url
-    );
     const zodiacSlug = slugify(p.zodiac || '');
     const zodiacFallback = zodiacSlug ? zodiacMap[zodiacSlug] : null;
-    return fromImages || mockup || fromMap || zodiacFallback || FALLBACK;
+    return fromImages || variantImage || fromMap || zodiacFallback || FALLBACK;
   }
 
   const normalizePrice = (p) => {
-    const base = p.price ?? p.priceUSD ?? p.variants?.[0]?.price ?? p.variants?.[0]?.retail_price;
+    const base =
+      p?.price ??
+      p?.priceUSD ??
+      p?.retail_price ??
+      p?.defaultVariant?.retail_price ??
+      p?.variants?.[0]?.retail_price ??
+      p?.variants?.[0]?.price;
     const num = typeof base === 'number' ? base : Number(base);
-    return Number.isFinite(num) ? (num > PRICE_CENTS_THRESHOLD ? num / 100 : num) : null;
+    if (!Number.isFinite(num)) return { cents: null, label: PRICE_UNAVAILABLE_LABEL, value: null };
+    const cents = num > PRICE_CENTS_THRESHOLD ? Math.round(num) : Math.round(num * 100);
+    const dollars = cents / 100;
+    return { cents, label: `USD ${dollars.toFixed(2)}`, value: dollars };
   };
 
   const pickVariant = (product = {}) => {
@@ -124,15 +123,30 @@ import { apply as applyFilters } from './shop-filters.js';
     const slug =
       p.slug ||
       slugify(title);
-    const variant = pickVariant(p);
-    const price = normalizePrice(variant) ?? normalizePrice(p);
+    const variant = p.defaultVariant || pickVariant(p);
+    const variantPrice = normalizePrice(variant);
+    const fallbackPrice = normalizePrice(p);
+    const price = variantPrice?.cents !== null ? variantPrice : fallbackPrice;
+    const firstVariantId =
+      p.defaultVariant?.id ||
+      p.defaultVariantId ||
+      variant?.variant_id ||
+      variant?.id ||
+      p.variants?.[0]?.id ||
+      null;
+    const canBuy = price?.cents !== null && !!firstVariantId;
     return {
       ...p,
       id: p.id || p.sync_product_id || slug,
       slug,
       title,
       variants: Array.isArray(p.variants) ? p.variants : (variant ? [variant] : []),
-      price,
+      defaultVariantId: p.defaultVariantId || p.defaultVariant?.id || p.variants?.[0]?.id || null,
+      price: price?.value ?? null,
+      priceCents: price?.cents ?? null,
+      priceLabel: price?.label || PRICE_UNAVAILABLE_LABEL,
+      canBuy,
+      firstVariantId,
       image: resolveProductImage({ ...p, slug, title }, imageMap, zodiacMap),
       category: p.category || p.product_type || p.department || '',
       zodiac: p.zodiac || p.attributes?.zodiac || ''
@@ -168,8 +182,17 @@ import { apply as applyFilters } from './shop-filters.js';
   const createCard = (p) => {
     const slug = p.slug || slugify(p.title || p.name || '');
     const viewUrl = `/product/${slug}`;
-    const variant = pickVariant(p);
-    const price = normalizePrice(variant) ?? normalizePrice(p);
+    const variant = p.defaultVariant || pickVariant(p);
+    const hasPriceData = Number.isFinite(p.price) || Number.isFinite(p.priceCents) || !!p.priceLabel;
+    const basePrice = hasPriceData ? null : normalizePrice(p);
+    const priceCents = Number.isFinite(p.priceCents) ? p.priceCents : basePrice?.cents ?? null;
+    const priceValue = Number.isFinite(p.price)
+      ? p.price
+      : basePrice?.value ?? (Number.isFinite(priceCents) ? priceCents / 100 : null);
+    const priceLabel =
+      p.priceLabel ||
+      basePrice?.label ||
+      (Number.isFinite(priceValue) ? `USD ${priceValue.toFixed(2)}` : PRICE_UNAVAILABLE_LABEL);
     const imgSrc = resolveProductImage(p, cachedImageMap, cachedZodiacMap);
 
     const card = document.createElement('article');
@@ -195,7 +218,7 @@ import { apply as applyFilters } from './shop-filters.js';
     heading.textContent = p.title || p.name || 'Celestial Piece';
     const priceEl = document.createElement('div');
     priceEl.className = 'product-card__price';
-    priceEl.textContent = Number.isFinite(price) ? `USD ${price.toFixed(2)}` : '';
+    priceEl.textContent = priceLabel || '';
 
     const actions = document.createElement('div');
     actions.className = 'product-card__actions';
@@ -210,12 +233,12 @@ import { apply as applyFilters } from './shop-filters.js';
     buyBtn.className = 'btn btn-primary product-buy-btn';
     buyBtn.textContent = 'Buy Now';
     buyBtn.dataset.name = p.title || p.name || 'Product';
-    if (Number.isFinite(price)) buyBtn.dataset.price = String(price);
-    const variantId = variant?.variant_id || variant?.id || p.variantId;
+    if (Number.isFinite(priceValue)) buyBtn.dataset.price = String(priceValue);
+    const variantId = p.firstVariantId ?? p.defaultVariantId ?? variant?.variant_id ?? variant?.id ?? p.variantId ?? null;
     if (variantId) buyBtn.dataset.variantId = variantId;
     const hasVariants = Array.isArray(p.variants) && p.variants.length > 0;
     const inStock = hasVariants ? !!(variant && (variant.inStock ?? true) && (variant.state?.published ?? true) && (variant.state?.ready ?? true)) : true;
-    if (!inStock || !Number.isFinite(price)) {
+    if (!inStock || !Number.isFinite(priceValue) || !p.canBuy || !variantId) {
       buyBtn.disabled = true;
       buyBtn.title = 'Unavailable';
     }
