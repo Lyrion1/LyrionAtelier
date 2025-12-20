@@ -140,8 +140,9 @@ test.describe('shop smoke test', () => {
       expect(noticeText || '').toMatch(PLACEHOLDER_NOTICE);
     }
 
-    await expect(page.locator('[data-slug="piscean-twins-crewneck"]')).toHaveCount(0);
-    await expect(page.locator('[data-slug="piscean-crewneck"]')).toHaveCount(0);
+    for (const slug of ['piscean-twins-crewneck', 'piscean-crewneck']) {
+      await expect(page.locator(`[data-slug="${slug}"]`)).toHaveCount(0);
+    }
 
     const scorpionPrice = page.locator('[data-slug="scorpion-aegis-tee"] .product-card__price');
     await expect(scorpionPrice).toHaveText(/\$44\.99/);
