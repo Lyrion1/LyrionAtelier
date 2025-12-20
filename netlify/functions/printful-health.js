@@ -9,22 +9,36 @@ export const handler = async () => {
   }
 
   // Helper to call Printful with a given Authorization header
+  const networkFailure = (err) => ({
+    res: { ok: false, status: 503, headers: { get: () => null } },
+    data: { error: err?.message || "Network error" }
+  });
+
   const call = async (path, authHeader) => {
-    const res = await fetch(`https://api.printful.com${path}`, {
-      headers: {
-        "Authorization": authHeader,
-        "Content-Type": "application/json",
-        "User-Agent": "LyrionAtelier/healthcheck"
+    try {
+      const res = await fetch(`https://api.printful.com${path}`, {
+        headers: {
+          "Authorization": authHeader,
+          "Content-Type": "application/json",
+          "User-Agent": "LyríonAtelier/healthcheck"
+        }
+      });
+      const text = await res.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (parseError) {
+        data = { raw: text };
       }
-    });
-    const text = await res.text();
-    let data; try { data = JSON.parse(text); } catch { data = { raw: text }; }
-    return { res, data };
+      return { res, data };
+    } catch (err) {
+      return networkFailure(err);
+    }
   };
 
   // Try Bearer first, then Basic (some keys are provisioned either way)
   const bearer = `Bearer ${KEY}`;
-  const basic = `Basic ${Buffer.from(KEY).toString("base64")}`;
+  const basic = `Basic ${Buffer.from(`${KEY}:`).toString("base64")}`;
   let authUsed = "Bearer";
 
   // 1) Store info
@@ -46,7 +60,8 @@ export const handler = async () => {
   }
 
   // 2) Grab 1 product to confirm catalog access (won't fail the check if none)
-  let p = await call("/store/products?limit=1", (authUsed === "Bearer" ? bearer : basic));
+  const productAuth = authUsed === "Bearer" ? bearer : basic;
+  let p = await call("/store/products?limit=1", productAuth);
   const sample = (p.res.ok && p.data?.result?.[0]) ? {
     id: p.data.result[0].id,
     name: p.data.result[0].name

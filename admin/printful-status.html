@@ -4,11 +4,26 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Printful Status • Lyríon Atelier</title>
   <style>
-    body{font-family:system-ui,-apple-system,Inter,Segoe UI,Roboto; background:#0b0f1f; color:#e8ebff; margin:0; padding:24px;}
-    .card{max-width:720px;margin:0 auto;background:#121735;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:18px 20px;}
-    .ok{color:#9cffc8}.bad{color:#ff9f9f}.muted{color:#a7b0d6}
-    code{background:rgba(255,255,255,.06); padding:2px 6px; border-radius:6px}
-    pre{background:rgba(255,255,255,.06); padding:12px; border-radius:8px; overflow:auto}
+    body {
+      font-family: system-ui, -apple-system, Inter, Segoe UI, Roboto;
+      background: #0b0f1f;
+      color: #e8ebff;
+      margin: 0;
+      padding: 24px;
+    }
+    .card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #121735;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .ok { color: #9cffc8 }
+    .bad { color: #ff9f9f }
+    .muted { color: #a7b0d6 }
+    code { background: rgba(255,255,255,.06); padding: 2px 6px; border-radius: 6px }
+    pre { background: rgba(255,255,255,.06); padding: 12px; border-radius: 8px; overflow: auto }
   </style>
 </head><body>
   <div class="card">
@@ -19,19 +34,32 @@
 <script>
 (async function(){
   const el = id => document.getElementById(id);
+  const statusEl = el('status');
+  const detailsEl = el('details');
+  const makeSpan = (cls, text) => { const s = document.createElement('span'); s.className = cls; s.textContent = text; return s; };
   try {
-    const r = await fetch('/.netlify/functions/printful-health',{cache:'no-store'});
-    const j = await r.json();
+    const r = await fetch('/.netlify/functions/printful-health', { cache: 'no-store' });
+    let j;
+    try { j = await r.json(); } catch (parseErr) { j = { ok:false, status:r.status, error:'Invalid JSON response' }; }
     if (j.ok) {
-      el('status').innerHTML =
-        `<span class="ok">Connected</span> · Store: <b>${j.store?.name||'?'}</b> (${j.store?.currency||'?'}) · Auth: ${j.authUsed}` +
-        (j.sampleProduct ? ` · Sample: ${j.sampleProduct.name}` : '');
+      statusEl.textContent = '';
+      statusEl.append(makeSpan('ok', 'Connected'));
+      statusEl.append(' · Store: ');
+      const storeName = document.createElement('b');
+      storeName.textContent = j.store?.name || '?';
+      statusEl.append(storeName);
+      statusEl.append(` (${j.store?.currency || '?'}) · Auth: ${j.authUsed}`);
+      if (j.sampleProduct) statusEl.append(` · Sample: ${j.sampleProduct.name}`);
     } else {
-      el('status').innerHTML = `<span class="bad">Not connected</span> · ${j.error||('HTTP '+(j.status||'?'))}`;
-      el('details').hidden = false; el('details').textContent = JSON.stringify(j,null,2);
+      statusEl.textContent = '';
+      statusEl.append(makeSpan('bad', 'Not connected'));
+      statusEl.append(` · ${j.error || ('HTTP ' + (j.status || '?'))}`);
+      detailsEl.hidden = false; detailsEl.textContent = JSON.stringify(j,null,2);
     }
   } catch (e) {
-    el('status').innerHTML = `<span class="bad">Error</span> · ${e && e.message ? e.message : e}`;
+    statusEl.textContent = '';
+    statusEl.append(makeSpan('bad', 'Error'));
+    statusEl.append(` · ${e && e.message ? e.message : e}`);
   }
 })();
 </script>
