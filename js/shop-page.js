@@ -25,7 +25,7 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       loaderVisible = true;
       if (loaderHideTimer) clearTimeout(loaderHideTimer);
       loader.style.display = '';
-      requestAnimationFrame(() => { loader.style.opacity = '1'; });
+      requestAnimationFrame(() => { if (loader) loader.style.opacity = '1'; });
     } else {
       if (!loaderVisible) return;
       loaderVisible = false;

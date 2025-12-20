@@ -35,6 +35,7 @@ const toCents = (val) => {
   return num > PRICE_CENTS_THRESHOLD ? Math.round(num) : Math.round(num * 100);
 };
 
+// Pricing precedence: explicit price → USD → GBP → numeric cents → retail fallback
 const priceNumber = (source = {}) =>
   Number(
     source?.price ??
