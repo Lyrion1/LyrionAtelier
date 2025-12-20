@@ -52,7 +52,7 @@ function renderCard(product) {
   const priceNum = resolvePrice(variant) ?? resolvePrice(product);
   const imgSrc = pickImage(product, __IMAGE_MAP || {});
   const slug = product.slug || slugify(product.title || product.name || '');
-  const viewUrl = `/shop/${slug}`;
+  const viewUrl = `/shop/${slug}.html`;
 
   const card = document.createElement('article');
   card.className = 'product-card';
@@ -87,20 +87,12 @@ function renderCard(product) {
   view.textContent = 'View';
   view.dataset.action = 'view';
 
-  const buy = document.createElement('button');
-  buy.type = 'button';
+  const buy = document.createElement('a');
   buy.className = 'btn btn-primary product-buy-btn';
-  buy.textContent = 'Buy Now';
+  buy.textContent = 'View Product';
+  buy.href = viewUrl;
   buy.dataset.name = title;
-  if (Number.isFinite(priceNum)) buy.dataset.price = String(priceNum);
-  const variantId = variant?.variant_id || variant?.id || product.variantId;
-  if (variantId) buy.dataset.variantId = variantId;
-  const hasVariants = Array.isArray(product.variants) && product.variants.length > 0;
-  const inStock = hasVariants ? !!(variant && (variant.inStock ?? true) && (variant.state?.published ?? true) && (variant.state?.ready ?? true)) : true;
-  if (!inStock || !Number.isFinite(priceNum)) {
-    buy.disabled = true;
-    buy.title = 'Unavailable';
-  }
+  buy.dataset.slug = slug;
   buy.addEventListener('click', (e) => e.stopPropagation());
 
   actions.append(view, buy);

@@ -6,7 +6,7 @@ import url from 'url';
 
 const PORT = 4175;
 const ROOT = path.resolve(__dirname, '..');
-const SUN_CREST_2XL = '69455454069045';
+const SWEATSHIRT_2XL_SKU = 'LA-SW-UNISEX-2XL';
 
 const MIME: Record<string, string> = {
   '.html': 'text/html',
@@ -31,7 +31,7 @@ function startServer(): Promise<http.Server> {
 
       if (pathname === '/') pathname = '/index.html';
       if (pathname === '/shop') pathname = '/shop.html';
-      if (/^\/shop\/[^/]+/.test(pathname)) pathname = '/shop-product.html';
+      if (/^\/shop\/[^/]+/.test(pathname)) pathname = '/product.html';
 
       const filePath = path.join(ROOT, pathname.replace(/^\//, ''));
       if (!filePath.startsWith(ROOT)) {
@@ -76,14 +76,15 @@ test.describe('product detail page', () => {
 
     await page.goto(`http://localhost:${PORT}/shop/aries-spark-youth-tee`, { waitUntil: 'networkidle' });
 
-    await expect(page.locator('#product-title')).toHaveText(/Aries Spark Tee/i);
+    await expect(page.locator('#product-name')).toHaveText(/Aries Spark Tee/i);
     await expect(page.locator('#product-description')).toContainText(/Ignition energy/i);
     await expect(page.locator('#product-price')).toContainText('$34.99');
 
-    const sizeOptions = await page.locator('#product-sizes .pill').allInnerTexts();
+    const sizeOptions = await page.locator('#size-select option').allInnerTexts();
     expect(sizeOptions).toContain('S');
 
-    const imgWidth = await page.locator('#product-image').evaluate((img) => (img as HTMLImageElement).naturalWidth);
+    await page.waitForSelector('#product-gallery img');
+    const imgWidth = await page.locator('#product-gallery img').first().evaluate((img) => (img as HTMLImageElement).naturalWidth);
     expect(imgWidth).toBeGreaterThan(50);
 
     await page.screenshot({ path: 'product-detail-pass.png', fullPage: true });
@@ -98,23 +99,29 @@ test.describe('product detail page', () => {
     );
 
     let checkoutPayload: any = null;
-    await page.route('**/.netlify/functions/checkout', (route) => {
+    await page.route('**/.netlify/functions/create-checkout-session', (route) => {
       checkoutPayload = route.request().postDataJSON();
-      route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({}) });
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ skipRedirect: true })
+      });
     });
 
     await page.goto(`http://localhost:${PORT}/shop/lyrion-premium-sweatshirt`, { waitUntil: 'networkidle' });
 
-    const sizeButtons = page.locator('#product-sizes button');
-    await expect(sizeButtons).toHaveCount(5);
-    await expect(page.locator('#buy-now-btn')).toBeEnabled();
+    const sizeSelect = page.locator('#size-select');
+    await expect(sizeSelect).toHaveCount(1);
 
-    await sizeButtons.filter({ hasText: '2XL' }).click();
-    await page.click('#buy-now-btn');
+    await sizeSelect.selectOption({ label: '2XL' });
+    await page.click('#add-to-cart-btn');
     await page.waitForTimeout(200);
 
-    expect(checkoutPayload?.items?.[0]?.sku).toBe(SUN_CREST_2XL);
-    expect(checkoutPayload?.items?.[0]?.qty || checkoutPayload?.items?.[0]?.quantity).toBe(1);
+    const lineItem = checkoutPayload?.lineItems?.[0];
+    const meta = lineItem?.price_data?.product_data?.metadata;
+    expect(meta?.sku).toBe(SWEATSHIRT_2XL_SKU);
+    expect(meta?.size).toBe('2XL');
+    expect(lineItem?.price_data?.unit_amount).toBe(5999);
 
     await page.screenshot({ path: 'shop-product-sun-crest.png', fullPage: true });
   });

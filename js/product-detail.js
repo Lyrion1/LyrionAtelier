@@ -6,10 +6,13 @@ const CHECKOUT_ENDPOINT = '/.netlify/functions/create-checkout-session';
 const $ = (sel) => document.querySelector(sel);
 
 function getSlug() {
-  const parts = location.pathname.split('/').filter(Boolean);
-  if (parts[0] === 'shop' && parts[1]) return decodeURIComponent(parts[1]);
+  const normalize = (val) => (val || '').replace(/\.html$/i, '');
   const params = new URLSearchParams(location.search);
-  return params.get('slug') || null;
+  const fromQuery = params.get('slug');
+  if (fromQuery) return normalize(fromQuery);
+  const parts = location.pathname.split('/').filter(Boolean);
+  if (parts[0] === 'shop' && parts[1]) return decodeURIComponent(normalize(parts[1]));
+  return null;
 }
 
 async function loadCatalog() {
@@ -78,6 +81,13 @@ async function startCheckout(variant, product, selection, btnEl = $('#add-to-car
   }
   const color = selection.color ? ` • ${selection.color}` : '';
   const size = selection.size ? ` • ${selection.size}` : '';
+  const metadata = {
+    sku: variant.sku || '',
+    size: selection.size || '',
+    color: selection.color || '',
+    product: product.title || ''
+  };
+  if (product.slug) metadata.slug = product.slug;
   const lineItems = [
     {
       quantity: 1,
@@ -86,9 +96,7 @@ async function startCheckout(variant, product, selection, btnEl = $('#add-to-car
         unit_amount: unitAmount,
         product_data: {
           name: `${product.title}${color}${size}`,
-          metadata: {
-            sku: variant.sku || ''
-          }
+          metadata
         }
       }
     }
@@ -106,6 +114,7 @@ async function startCheckout(variant, product, selection, btnEl = $('#add-to-car
       })
     });
     const data = await res.json();
+    if (data?.skipRedirect === true) return;
     if (data?.url) {
       location.href = data.url;
       return;

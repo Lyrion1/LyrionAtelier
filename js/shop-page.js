@@ -223,7 +223,7 @@ import { formatPrice } from './price-utils.js';
 
   const createCard = (p) => {
     const slug = p.slug || slugify(p.title || p.name || '');
-    const viewUrl = `/shop/${slug}`;
+    const viewUrl = `/shop/${slug}.html`;
     const variant = p.defaultVariant || pickVariant(p);
     const hasPriceData = Number.isFinite(p.price) || Number.isFinite(p.priceCents) || !!p.priceLabel;
     const basePrice = hasPriceData ? null : normalizePrice(p);
@@ -267,15 +267,13 @@ import { formatPrice } from './price-utils.js';
 
     const actions = document.createElement('div');
     actions.className = 'product-card__actions';
-    const buyBtn = document.createElement('button');
-    buyBtn.type = 'button';
+    const buyBtn = document.createElement('a');
     buyBtn.className = 'btn btn-primary product-buy-btn';
-    buyBtn.textContent = 'Buy Now';
-    buyBtn.dataset.action = 'buy';
+    buyBtn.textContent = 'View Product';
+    buyBtn.href = viewUrl;
+    buyBtn.dataset.action = 'view';
     buyBtn.dataset.slug = slug;
     buyBtn.dataset.name = p.title || p.name || 'Celestial Piece';
-    if (Number.isFinite(priceValue)) buyBtn.dataset.price = String(priceValue);
-    if (p.firstVariantId) buyBtn.dataset.variantId = p.firstVariantId;
 
     actions.append(buyBtn);
     body.append(heading, priceEl, actions);
