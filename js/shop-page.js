@@ -253,7 +253,11 @@ import { formatPrice } from './price-utils.js';
     img.loading = 'lazy';
     img.decoding = 'async';
     img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
-    img.onload = () => { card.classList.add('media-ready'); };
+    img.onload = () => {
+      img.classList.remove('placeholder', 'blur');
+      media.classList.remove('placeholder', 'blur');
+      card.classList.add('media-ready');
+    };
     media.appendChild(img);
 
     const body = document.createElement('div');
