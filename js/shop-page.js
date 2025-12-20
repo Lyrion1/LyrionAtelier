@@ -15,7 +15,18 @@ import { formatPrice, currencySymbol } from './price-utils.js';
   // Values above this threshold are treated as cents and converted to dollars.
   const PRICE_CENTS_THRESHOLD = 200;
   const ZODIAC_SIGNS = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'];
-  const showLoader = (state) => { if (loader) loader.style.display = state ? '' : 'none'; };
+  const fadeMs = 240;
+  if (loader && !loader.style.transition) loader.style.transition = `opacity ${fadeMs}ms ease`;
+  const showLoader = (state) => {
+    if (!loader) return;
+    if (state) {
+      loader.style.display = '';
+      requestAnimationFrame(() => { loader.style.opacity = '1'; });
+    } else {
+      loader.style.opacity = '0';
+      setTimeout(() => { loader.style.display = 'none'; }, fadeMs);
+    }
+  };
   const hideLoader = () => showLoader(false);
   const safetyHide = setTimeout(hideLoader, LOADER_TIMEOUT_MS);
   const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -139,6 +150,18 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     const slug =
       p.slug ||
       slugify(title);
+    const asImageString = (img) => {
+      if (!img) return null;
+      if (typeof img === 'string') return img.trim() || null;
+      return pick(
+        typeof img.url === 'string' ? img.url : null,
+        typeof img.src === 'string' ? img.src : null,
+        typeof img.preview_url === 'string' ? img.preview_url : null,
+        typeof img.thumbnail === 'string' ? img.thumbnail : null,
+        typeof img.thumbnail_url === 'string' ? img.thumbnail_url : null
+      );
+    };
+    const normalizedImages = (Array.isArray(p.images) ? p.images : []).map(asImageString).filter(isUsableImage);
     const variant = p.defaultVariant || pickVariant(p);
     const variantPrice = normalizePrice(variant);
     const fallbackPrice = normalizePrice(p);
@@ -151,11 +174,14 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       p.variants?.[0]?.id ||
       null;
     const canBuy = price?.cents !== null && !!firstVariantId;
+    const image = normalizedImages.find(isUsableImage) || resolveProductImage({ ...p, slug, title }, imageMap, zodiacMap);
+    const images = normalizedImages.length ? normalizedImages : (image ? [image] : []);
     return {
       ...p,
       id: p.id || p.sync_product_id || slug,
       slug,
       title,
+      images,
       variants: Array.isArray(p.variants) ? p.variants : (variant ? [variant] : []),
       defaultVariantId: p.defaultVariantId || p.defaultVariant?.id || p.variants?.[0]?.id || null,
       price: price?.value ?? null,
@@ -163,7 +189,7 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       priceLabel: price?.label || PRICE_UNAVAILABLE_LABEL,
       canBuy,
       firstVariantId,
-      image: resolveProductImage({ ...p, slug, title }, imageMap, zodiacMap),
+      image,
       category: p.category || p.product_type || p.department || '',
       zodiac: p.zodiac || p.attributes?.zodiac || ''
     };
@@ -268,6 +294,7 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       img.classList.remove('placeholder', 'blur');
       media.classList.remove('placeholder', 'blur');
       card.classList.add('media-ready');
+      hideLoader();
     };
     media.appendChild(img);
 

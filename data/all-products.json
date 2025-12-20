@@ -772,5 +772,35 @@
     },
     "badges": ["Lyrion Atelier", "Sun Crest"],
     "status": "active"
+  },
+  {
+    "slug": "premium-crewneck-sun-crest",
+    "title": "Unisex Premium Crewneck — Sun Crest",
+    "brand": "Lyrion Atelier",
+    "category": "sweatshirts",
+    "collection": ["lyrion-atelier", "sun-crest"],
+    "tags": ["unisex", "crewneck", "premium", "embroidered", "logo"],
+    "images": [
+      {
+        "url": "https://files.cdn.printful.com/files/273/273a521304983380ffe07e205bd95374_thumb.png",
+        "alt": "Unisex Premium Crewneck in navy with Sun Crest embroidery",
+        "source": "printful"
+      }
+    ],
+    "variants": [
+      { "id": "69463668ca43b9", "size": "S", "priceUSD": 59.99, "priceGBP": 47.99 },
+      { "id": "69463668ca4413", "size": "M", "priceUSD": 59.99, "priceGBP": 47.99 },
+      { "id": "69463668ca4471", "size": "L", "priceUSD": 59.99, "priceGBP": 47.99 },
+      { "id": "69463668ca44b1", "size": "XL", "priceUSD": 59.99, "priceGBP": 47.99 },
+      { "id": "69463668ca4506", "size": "2XL","priceUSD": 61.99, "priceGBP": 49.99 },
+      { "id": "69463668ca4543", "size": "3XL","priceUSD": 63.99, "priceGBP": 51.99 }
+    ],
+    "status": "active",
+    "availability": "made-to-order",
+    "printful": {
+      "product_type": "crewneck",
+      "sync_source": "manual",
+      "thumbnail": "https://files.cdn.printful.com/files/273/273a521304983380ffe07e205bd95374_thumb.png"
+    }
   }
 ]

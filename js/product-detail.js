@@ -15,7 +15,13 @@ const priceFrom = (value) => {
 };
 
 const derivePrice = (product = {}, size = null, variant = null) => {
-  const variantPrice = priceFrom(variant?.price ?? variant?.priceCents ?? variant?.retail_price);
+  const variantPrice = priceFrom(
+    variant?.price ??
+      variant?.priceUSD ??
+      variant?.priceGBP ??
+      variant?.priceCents ??
+      variant?.retail_price
+  );
   if (variantPrice !== null) return variantPrice;
   const price = product?.price;
   if (price && typeof price === 'object') {
@@ -26,7 +32,15 @@ const derivePrice = (product = {}, size = null, variant = null) => {
     if (min !== null) return min;
     if (max !== null) return max;
   }
-  const direct = priceFrom(product?.price ?? product?.priceCents ?? product?.raw?.price ?? product?.raw?.priceCents);
+  const direct = priceFrom(
+    product?.price ??
+      product?.priceUSD ??
+      product?.priceGBP ??
+      product?.priceCents ??
+      product?.raw?.price ??
+      product?.raw?.priceCents ??
+      product?.raw?.priceUSD
+  );
   if (direct !== null) return direct;
   return null;
 };
@@ -62,8 +76,10 @@ function pickVariant(product, size, color) {
   if (!variants.length) return null;
   return (
     variants.find((v) => {
-      const sizeOk = !size || v.options?.size === size;
-      const colorOk = !color || !v.options?.color || v.options.color === color;
+      const variantSize = v.options?.size || v.size;
+      const variantColor = v.options?.color || v.color;
+      const sizeOk = !size || variantSize === size;
+      const colorOk = !color || !variantColor || variantColor === color;
       return sizeOk && colorOk;
     }) || variants[0]
   );

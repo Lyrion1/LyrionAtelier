@@ -36,7 +36,13 @@ const toCents = (val) => {
 };
 
 const derivePrice = (product = {}, size = null, variant = null) => {
-  const variantPrice = toDollars(variant?.price ?? variant?.priceCents ?? variant?.retail_price);
+  const variantPrice = toDollars(
+    variant?.price ??
+      variant?.priceUSD ??
+      variant?.priceGBP ??
+      variant?.priceCents ??
+      variant?.retail_price
+  );
   if (variantPrice !== null) return variantPrice;
   const price = product?.price;
   if (price && typeof price === 'object') {
@@ -47,7 +53,16 @@ const derivePrice = (product = {}, size = null, variant = null) => {
     if (min !== null) return min;
     if (max !== null) return max;
   }
-  const directPrice = toDollars(product?.price ?? product?.priceCents ?? product?.raw?.price ?? product?.raw?.priceCents);
+  const directPrice = toDollars(
+    product?.price ??
+      product?.priceUSD ??
+      product?.priceGBP ??
+      product?.priceCents ??
+      product?.raw?.price ??
+      product?.raw?.priceUSD ??
+      product?.raw?.priceGBP ??
+      product?.raw?.priceCents
+  );
   if (directPrice !== null) return directPrice;
   return null;
 };
@@ -108,7 +123,7 @@ const normalizeVariants = (p = {}) => {
       const id = storeVariantId || v.printfulVariantId || v.variant_id || v.id || v.sku || null;
       const sku = v.sku || storeVariantId || id; // Prefer brand SKU, fall back to store or Printful ID
       const size = v.options?.size || v.size || null;
-      const rawPrice = Number(v.price ?? v.retail_price);
+      const rawPrice = Number(v.price ?? v.priceUSD ?? v.priceGBP ?? v.retail_price);
       const treatedAsCents = Number.isFinite(rawPrice) && rawPrice > PRICE_CENTS_THRESHOLD;
       const priceCents = Number.isFinite(rawPrice)
         ? Math.round(treatedAsCents ? rawPrice : rawPrice * 100)
@@ -228,7 +243,16 @@ function renderProduct(product) {
   const primarySize = visibleSizes[0] || sizes[0] || selectedVariant?.size || null;
   basePrice =
     priceForSize(primarySize) ??
-    toDollars(product.price ?? product.priceCents ?? product.raw?.price ?? product.raw?.priceCents);
+    toDollars(
+      product.price ??
+        product.priceUSD ??
+        product.priceGBP ??
+        product.priceCents ??
+        product.raw?.price ??
+        product.raw?.priceUSD ??
+        product.raw?.priceGBP ??
+        product.raw?.priceCents
+    );
 
   const currency = product.currency || product.raw?.currency || 'USD';
   const updatePrice = () => {
