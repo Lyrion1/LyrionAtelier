@@ -1,0 +1,37 @@
+[
+  {
+    "slug": "lyrion-premium-sweatshirt-sun-crest",
+    "title": "Unisex Premium Sweatshirt — Sun Crest",
+    "brand": "Lyrion Atelier",
+    "category": "lyrion",
+    "type": "sweatshirt",
+    "status": "active",
+    "zodiac": null,
+    "collection": "lyrion-line",
+    "tags": ["lyrion", "adult", "unisex", "embroidered", "sun-crest", "premium"],
+    "images": [
+      {
+        "src": "https://files.cdn.printful.com/files/819/81910094129d050dbf7b0ff7ddb0f663_thumb.png",
+        "alt": "Black premium crewneck with Sun Crest embroidery"
+      }
+    ],
+    "price": {
+      "USD": {
+        "S": 55.99,
+        "M": 55.99,
+        "L": 55.99,
+        "XL": 55.99,
+        "2XL": 57.99
+      }
+    },
+    "variants": [
+      { "size": "S", "store_variant_id": "6945ff79b9371" },
+      { "size": "M", "store_variant_id": "6945ff79b93e7" },
+      { "size": "L", "store_variant_id": "6945ff79b9443" },
+      { "size": "XL", "store_variant_id": "6945ff79b9484" },
+      { "size": "2XL", "store_variant_id": "6945ff79b94d6" }
+    ],
+    "shippingRegions": ["US"],
+    "summary": "Signature Lyrion Atelier Sun Crest premium crew with celestial detailing."
+  }
+]
