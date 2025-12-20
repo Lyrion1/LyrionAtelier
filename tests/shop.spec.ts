@@ -140,6 +140,7 @@ test.describe('shop smoke test', () => {
       expect(noticeText || '').toMatch(PLACEHOLDER_NOTICE);
     }
 
+    // Guard against any legacy Piscean crewneck slug variants resurfacing
     for (const slug of ['piscean-twins-crewneck', 'piscean-crewneck']) {
       await expect(page.locator(`[data-slug="${slug}"]`)).toHaveCount(0);
     }
