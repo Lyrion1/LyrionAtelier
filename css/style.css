@@ -465,6 +465,42 @@ p {
   display: block;
 }
 
+.catalog-card .image::after,
+.product-card .image::after,
+.product-card__media::after,
+.product-image::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+.catalog-card img,
+.product-card img,
+.product-card__media img,
+.product-image img {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+@media (prefers-contrast: no-preference) {
+  .catalog-card img,
+  .product-card img,
+  .product-card__media img,
+  .product-image img {
+    filter: contrast(1.06) saturate(1.06);
+  }
+}
+
+.catalog-card .image img,
+.product-card .image img,
+.product-card__media img,
+.product-image img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  image-rendering: auto;
+}
+
 .product-card,
 .oracle-card {
   box-shadow: var(--shadow);
