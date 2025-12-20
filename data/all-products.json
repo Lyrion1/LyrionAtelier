@@ -289,7 +289,7 @@
     "brand": "Lyrion Atelier",
     "active": true,
     "soldOut": false,
-    "price": { "USD": 44.99 },
+    "price": 44.99,
     "priceBySize": {
       "S": 44.99,
       "M": 44.99,
@@ -695,11 +695,7 @@
       "size": ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"]
     },
     "sizes": ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"],
-    "price": {
-      "min": 55,
-      "max": 67.99,
-      "currency": "USD"
-    },
+    "price": 55.99,
     "badges": ["Lyrion Atelier", "Sun Crest"],
     "status": "active"
   },
