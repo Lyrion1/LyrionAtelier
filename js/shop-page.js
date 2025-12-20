@@ -100,6 +100,12 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     return /^https?:\/\//i.test(trimmed) || trimmed.startsWith('/');
   };
 
+  const toDollars = (val) => {
+    const num = Number(val);
+    if (!Number.isFinite(num)) return null;
+    return num > PRICE_CENTS_THRESHOLD ? num / 100 : num;
+  };
+
   const pickVariantPreview = (variants = []) => {
     if (!Array.isArray(variants)) return null;
     return variants
@@ -142,17 +148,23 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       p?.variants?.[0]?.priceUSD ??
       p?.variants?.[0]?.priceGBP ??
       p?.variants?.[0]?.price;
-    const num = typeof base === 'number' ? base : Number(base);
+    const num = toDollars(base);
     if (!Number.isFinite(num)) return { cents: null, label: PRICE_UNAVAILABLE_LABEL, value: null };
-    const cents = num > PRICE_CENTS_THRESHOLD ? Math.round(num) : Math.round(num * 100);
+    const cents = Math.round(num * 100);
     const dollars = cents / 100;
     return { cents, label: `USD ${dollars.toFixed(2)}`, value: dollars };
   };
 
+  /**
+   * Resolve a numeric price from the product or its variants.
+   */
   function displayPrice(p) {
+    if (!p || typeof p !== 'object') return null;
     if (typeof p?.price === 'number') return p.price;
     if (Array.isArray(p?.variants) && p.variants.length) {
-      const vals = p.variants.map((v = {}) => v.price).filter((x) => typeof x === 'number');
+      const vals = p.variants
+        .map((v) => toDollars(v?.price))
+        .filter((x) => Number.isFinite(x));
       if (vals.length) return Math.min(...vals);
     }
     return null;
