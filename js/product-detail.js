@@ -1,8 +1,9 @@
-import { centsFrom, formatPrice } from './price-utils.js';
+import { centsFrom, currencySymbol, formatPriceWithCurrency } from './price-utils.js';
 
 const FALLBACK_IMAGE = '/assets/catalog/placeholder.webp';
 const CHECKOUT_ENDPOINT = '/.netlify/functions/create-checkout-session';
 const EXTENDED_SIZE = /^([2-9]?xl)$/i;
+const PRICE_FALLBACK = '—';
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -282,6 +283,7 @@ async function hydrateProductPage() {
 
   const priceEl = $('#product-price');
   const addBtn = $('#add-to-cart-btn');
+  const currency = product.currency || product.price?.currency || 'USD';
 
   function currentSelection() {
     const selectedSize = sizeSelect?.value || sizes[0] || null;
@@ -294,11 +296,11 @@ async function hydrateProductPage() {
     const selection = currentSelection();
     activeVariant = resolveVariant(product, selection.size, selection.color);
     const displayPrice = derivePrice(product, selection.size, activeVariant);
-    if (priceEl) priceEl.textContent = formatPrice(displayPrice ?? activeVariant?.price);
+    if (priceEl) priceEl.textContent = formatPriceWithCurrency(displayPrice ?? activeVariant?.price, currency);
     if (addBtn) {
       addBtn.disabled = !activeVariant;
       addBtn.textContent = activeVariant
-        ? `Add to Cart — ${formatPrice(displayPrice ?? activeVariant?.price)}`
+        ? `Add to Cart — ${formatPriceWithCurrency(displayPrice ?? activeVariant?.price, currency)}`
         : 'Unavailable';
     }
   }

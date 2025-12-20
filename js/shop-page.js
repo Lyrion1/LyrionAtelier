@@ -1,5 +1,5 @@
 import { apply as applyFilters } from './shop-filters.js';
-import { formatPrice } from './price-utils.js';
+import { formatPrice, currencySymbol } from './price-utils.js';
 
 // Load products from global or API and render; hide loader quickly even on empty
 (() => {
@@ -231,11 +231,22 @@ import { formatPrice } from './price-utils.js';
     const priceValue = Number.isFinite(p.price)
       ? p.price
       : basePrice?.value ?? (Number.isFinite(priceCents) ? priceCents / 100 : null);
+    const priceRange = (() => {
+      const currency = (p.price?.currency || p.currency || 'USD').toUpperCase();
+      const symbol = currencySymbol(currency);
+      const min = Number(p.price?.min);
+      const max = Number(p.price?.max);
+      if (Number.isFinite(min) && Number.isFinite(max) && max >= min) {
+        return max > min ? `${symbol}${min.toFixed(2)} – ${symbol}${max.toFixed(2)}` : `${symbol}${min.toFixed(2)}`;
+      }
+      if (Number.isFinite(min)) return `${symbol}${min.toFixed(2)}`;
+      return null;
+    })();
     const fallbackLabel = (() => {
-      const fb = p.priceLabel || basePrice?.label;
+      const fb = p.priceLabel || priceRange || basePrice?.label;
       return typeof fb === 'string' && fb.trim() ? fb : PRICE_UNAVAILABLE_LABEL;
     })();
-    const priceDisplay = formatPrice(Number.isFinite(priceCents) ? priceCents : priceValue, fallbackLabel);
+    const priceDisplay = priceRange || formatPrice(Number.isFinite(priceCents) ? priceCents : priceValue, fallbackLabel);
     const primaryImage = Array.isArray(p.images) ? p.images[0] : null;
     const resolvedImage = isUsableImage(primaryImage) ? primaryImage : resolveProductImage(p, cachedImageMap, cachedZodiacMap);
     const imgSrc = isUsableImage(resolvedImage) ? resolvedImage : FALLBACK;

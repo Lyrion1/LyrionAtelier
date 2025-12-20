@@ -1,4 +1,5 @@
 import { productsReady } from '/assets/js/products.js';
+import { currencySymbol } from '/js/price-utils.js';
 
 const FALLBACK_IMG = '/assets/catalog/placeholder.webp';
 const DEFAULT_DESC = 'A premium piece from Lyrion Atelier.';
@@ -13,11 +14,11 @@ const getSlug = () => {
   return parts[parts.length - 1] ? slugify(parts[parts.length - 1]) : null;
 };
 
-const asPrice = (val) => {
+const asPrice = (val, currency = 'USD') => {
   const num = Number(val);
   if (!Number.isFinite(num)) return '';
   const dollars = num > 1000 ? num / 100 : num;
-  return `$${dollars.toFixed(2)}`;
+  return `${currencySymbol(currency)}${dollars.toFixed(2)}`;
 };
 
 const toDollars = (val) => {
@@ -200,10 +201,11 @@ function renderProduct(product) {
     derivePrice(product, sizes[0] || selectedVariant?.size || null, selectedVariant) ??
     toDollars(product.price ?? product.priceCents ?? product.raw?.price ?? product.raw?.priceCents);
 
+  const currency = product.currency || product.raw?.currency || 'USD';
   const updatePrice = () => {
     const derived = derivePrice(product, state.selectedSize, selectedVariant);
     const displayPrice = derived ?? basePrice;
-    price.textContent = asPrice(displayPrice);
+    price.textContent = asPrice(displayPrice, currency);
   };
 
   let buy;
