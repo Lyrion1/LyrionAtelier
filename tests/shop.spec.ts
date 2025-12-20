@@ -141,6 +141,7 @@ test.describe('shop smoke test', () => {
     }
 
     await expect(page.locator('[data-slug="piscean-twins-crewneck"]')).toHaveCount(0);
+    await expect(page.locator('[data-slug="piscean-crewneck"]')).toHaveCount(0);
 
     const scorpionPrice = page.locator('[data-slug="scorpion-aegis-tee"] .product-card__price');
     await expect(scorpionPrice).toHaveText(/\$44\.99/);
