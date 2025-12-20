@@ -673,5 +673,48 @@
         ]
       }
     }
+  },
+  {
+    "slug": "unisex-hoodie-sun-crest",
+    "title": "Unisex Hoodie — Sun Crest",
+    "kind": "product",
+    "department": "apparel",
+    "subcategory": "hoodies",
+    "category": "hoodies",
+    "collection": "lyrion-atelier",
+    "palette": [
+      "Celestial Noir"
+    ],
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "images": [
+      "https://files.cdn.printful.com/files/759/759a238baf4fe146cf7c28689cc65ac7_thumb.png"
+    ],
+    "pf": {
+      "variants": {
+        "S": "6945f31137fd67",
+        "M": "6945f31137fdc1",
+        "L": "6945f31137fe19",
+        "XL": "6945f31137fe62",
+        "2XL": "6945f31137fea4",
+        "3XL": "6945f31137fef8",
+        "4XL": "6945f31137ff36",
+        "5XL": "6945f31137ff88"
+      }
+    },
+    "options": {
+      "sizes": ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"],
+      "size": ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"]
+    },
+    "sizes": ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"],
+    "price": {
+      "min": 55,
+      "max": 67.99,
+      "currency": "USD"
+    },
+    "badges": ["Lyrion Atelier", "Sun Crest"],
+    "status": "active"
   }
 ]

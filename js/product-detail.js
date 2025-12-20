@@ -2,8 +2,31 @@ import { centsFrom, formatPrice } from './price-utils.js';
 
 const FALLBACK_IMAGE = '/assets/catalog/placeholder.webp';
 const CHECKOUT_ENDPOINT = '/.netlify/functions/create-checkout-session';
+const EXTENDED_SIZE = /^([2-9]?xl)$/i;
 
 const $ = (sel) => document.querySelector(sel);
+
+const priceFrom = (value) => {
+  const cents = centsFrom(value);
+  return cents !== null ? cents / 100 : null;
+};
+
+const derivePrice = (product = {}, size = null, variant = null) => {
+  const variantPrice = priceFrom(variant?.price ?? variant?.priceCents ?? variant?.retail_price);
+  if (variantPrice !== null) return variantPrice;
+  const price = product?.price;
+  if (price && typeof price === 'object') {
+    const min = priceFrom(price.min);
+    const max = priceFrom(price.max);
+    const isExtended = typeof size === 'string' && EXTENDED_SIZE.test(size) && !/^xl$/i.test(size);
+    if (isExtended && max !== null) return max;
+    if (min !== null) return min;
+    if (max !== null) return max;
+  }
+  const direct = priceFrom(product?.price ?? product?.priceCents ?? product?.raw?.price ?? product?.raw?.priceCents);
+  if (direct !== null) return direct;
+  return null;
+};
 
 function getSlug() {
   const normalize = (val) => (val || '').replace(/\.html$/i, '');
@@ -43,6 +66,23 @@ function pickVariant(product, size, color) {
   );
 }
 
+function resolveVariant(product, size, color) {
+  const direct = pickVariant(product, size, color);
+  if (direct) return direct;
+  const pfId = product?.pf?.variants?.[size] || product?.raw?.pf?.variants?.[size] || null;
+  if (!pfId) return null;
+  const price = derivePrice(product, size, null);
+  return {
+    sku: pfId,
+    price,
+    priceCents: centsFrom(price),
+    options: { size, color },
+    printfulVariantId: pfId,
+    variant_id: pfId,
+    id: pfId
+  };
+}
+
 function renderImages(images = [], productTitle = 'Product') {
   const gallery = $('#product-gallery');
   if (!gallery) return;
@@ -55,8 +95,9 @@ function renderImages(images = [], productTitle = 'Product') {
     img.alt = `${productTitle} image ${idx + 1}`;
     img.loading = 'lazy';
     img.decoding = 'async';
+    const allowFallback = !/^https?:\/\//i.test(src || '');
     img.onerror = () => {
-      if (img.src !== FALLBACK_IMAGE) img.src = FALLBACK_IMAGE;
+      if (allowFallback && img.src !== FALLBACK_IMAGE) img.src = FALLBACK_IMAGE;
     };
     gallery.appendChild(img);
   });
@@ -74,7 +115,14 @@ async function startCheckout(variant, product, selection, btnEl = $('#add-to-car
     showError('This variant is unavailable.');
     return;
   }
-  const unitAmount = centsFrom(variant?.price);
+  const resolvedPrice = derivePrice(product, selection.size, variant);
+  const variantId =
+    variant?.printfulVariantId ||
+    variant?.variant_id ||
+    variant?.id ||
+    product?.pf?.variants?.[selection.size] ||
+    null;
+  const unitAmount = centsFrom(variant?.price ?? variant?.priceCents ?? resolvedPrice);
   if (!Number.isFinite(unitAmount)) {
     showError('Price unavailable for this variant.');
     return;
@@ -82,11 +130,12 @@ async function startCheckout(variant, product, selection, btnEl = $('#add-to-car
   const color = selection.color ? ` • ${selection.color}` : '';
   const size = selection.size ? ` • ${selection.size}` : '';
   const metadata = {
-    sku: variant.sku || '',
+    sku: variant.sku || variantId || '',
     size: selection.size || '',
     color: selection.color || '',
     product: product.title || ''
   };
+  if (variantId) metadata.pf_variant_id = variantId;
   if (product.slug) metadata.slug = product.slug;
   const lineItems = [
     {
@@ -162,9 +211,10 @@ async function hydrateProductPage() {
   if (careEl) careEl.textContent = care;
 
   const sizes = unique(
-    (product.options?.size || []).concat(
-      (product.variants || []).map((v) => v.options?.size)
-    )
+    (product.options?.sizes || [])
+      .concat(product.options?.size || [])
+      .concat(product.sizes || [])
+      .concat((product.variants || []).map((v) => v.options?.size))
   );
   const colors = unique(
     (product.options?.color || []).concat(
@@ -221,7 +271,7 @@ async function hydrateProductPage() {
     : (product.image ? [product.image] : []);
   renderImages(galleryImages, title);
 
-  let activeVariant = pickVariant(product, sizeSelect?.value || sizes[0], colors[0]);
+  let activeVariant = resolveVariant(product, sizeSelect?.value || sizes[0], colors[0]);
 
   const priceEl = $('#product-price');
   const addBtn = $('#add-to-cart-btn');
@@ -235,11 +285,14 @@ async function hydrateProductPage() {
 
   function updateVariant() {
     const selection = currentSelection();
-    activeVariant = pickVariant(product, selection.size, selection.color);
-    if (priceEl) priceEl.textContent = formatPrice(activeVariant?.price);
+    activeVariant = resolveVariant(product, selection.size, selection.color);
+    const displayPrice = derivePrice(product, selection.size, activeVariant);
+    if (priceEl) priceEl.textContent = formatPrice(displayPrice ?? activeVariant?.price);
     if (addBtn) {
       addBtn.disabled = !activeVariant;
-      addBtn.textContent = activeVariant ? `Add to Cart — ${formatPrice(activeVariant?.price)}` : 'Unavailable';
+      addBtn.textContent = activeVariant
+        ? `Add to Cart — ${formatPrice(displayPrice ?? activeVariant?.price)}`
+        : 'Unavailable';
     }
   }
 
