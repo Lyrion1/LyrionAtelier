@@ -7,6 +7,17 @@ export function currencySymbol(code = 'USD') {
   return '$';
 }
 
+export function priceNumber(source = {}) {
+  const num = Number(
+    source?.price ??
+      source?.priceUSD ??
+      source?.priceGBP ??
+      source?.priceCents ??
+      source?.retail_price
+  );
+  return Number.isFinite(num) ? num : null;
+}
+
 export function centsFrom(value) {
   const num = Number(value);
   if (!Number.isFinite(num) || num <= 0) return null;

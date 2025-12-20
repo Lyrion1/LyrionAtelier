@@ -1,5 +1,5 @@
 import { productsReady } from '/assets/js/products.js';
-import { currencySymbol } from '/js/price-utils.js';
+import { currencySymbol, priceNumber } from '/js/price-utils.js';
 
 const FALLBACK_IMG = '/assets/catalog/placeholder.webp';
 const DEFAULT_DESC = 'A premium piece from Lyrion Atelier.';
@@ -36,7 +36,7 @@ const toCents = (val) => {
 };
 
 const derivePrice = (product = {}, size = null, variant = null) => {
-  const variantPrice = toDollars(variant?.price ?? variant?.priceCents ?? variant?.retail_price);
+  const variantPrice = toDollars(priceNumber(variant));
   if (variantPrice !== null) return variantPrice;
   const price = product?.price;
   if (price && typeof price === 'object') {
@@ -47,8 +47,10 @@ const derivePrice = (product = {}, size = null, variant = null) => {
     if (min !== null) return min;
     if (max !== null) return max;
   }
-  const directPrice = toDollars(product?.price ?? product?.priceCents ?? product?.raw?.price ?? product?.raw?.priceCents);
+  const directPrice = toDollars(priceNumber(product));
   if (directPrice !== null) return directPrice;
+  const rawDirect = toDollars(priceNumber(product?.raw || {}));
+  if (rawDirect !== null) return rawDirect;
   return null;
 };
 
@@ -108,10 +110,10 @@ const normalizeVariants = (p = {}) => {
       const id = storeVariantId || v.printfulVariantId || v.variant_id || v.id || v.sku || null;
       const sku = v.sku || storeVariantId || id; // Prefer brand SKU, fall back to store or Printful ID
       const size = v.options?.size || v.size || null;
-      const rawPrice = Number(v.price ?? v.retail_price);
-      const treatedAsCents = Number.isFinite(rawPrice) && rawPrice > PRICE_CENTS_THRESHOLD;
-      const priceCents = Number.isFinite(rawPrice)
-        ? Math.round(treatedAsCents ? rawPrice : rawPrice * 100)
+      const normalizedPrice = priceNumber(v);
+      const treatedAsCents = Number.isFinite(normalizedPrice) && normalizedPrice > PRICE_CENTS_THRESHOLD;
+      const priceCents = Number.isFinite(normalizedPrice)
+        ? Math.round(treatedAsCents ? normalizedPrice : normalizedPrice * 100)
         : null;
       const price = Number.isFinite(priceCents) ? priceCents / 100 : null;
       return id && size ? { id, sku, size, priceCents, price, storeVariantId, raw: v } : null;
@@ -228,7 +230,8 @@ function renderProduct(product) {
   const primarySize = visibleSizes[0] || sizes[0] || selectedVariant?.size || null;
   basePrice =
     priceForSize(primarySize) ??
-    toDollars(product.price ?? product.priceCents ?? product.raw?.price ?? product.raw?.priceCents);
+    toDollars(priceNumber(product)) ??
+    toDollars(priceNumber(product.raw || {}));
 
   const currency = product.currency || product.raw?.currency || 'USD';
   const updatePrice = () => {
