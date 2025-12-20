@@ -42,36 +42,45 @@
 
   <main id="main-content" class="section">
     <div class="container">
-      <div class="card" id="product-wrapper">
-        <div class="product-image" id="product-image">
-          <div id="product-gallery" class="product-gallery"></div>
-        </div>
-        <div>
-          <p class="pill" id="product-pill"></p>
-          <h1 id="product-name">Product</h1>
-          <p id="product-description" class="muted"></p>
-          <p class="price" id="product-price"></p>
-          <div class="form-group" id="color-options"></div>
-          <div class="size-selector" id="size-selector">
-            <label for="size-select" class="muted">Size</label>
-            <select id="size-select">
-              <option value="">Select size</option>
-            </select>
-          </div>
-          <div class="product-copy">
-            <div class="product-copy__section">
-              <h3 class="muted">Materials</h3>
-              <p id="product-materials" class="muted"></p>
-            </div>
-            <div class="product-copy__section">
-              <h3 class="muted">Care</h3>
-              <p id="product-care" class="muted"></p>
+      <div class="card product-detail-card" id="product-wrapper">
+        <div class="product-detail">
+          <div class="product-detail__media">
+            <div class="product-media-frame">
+              <div id="product-gallery" class="product-gallery"></div>
             </div>
           </div>
-          <div id="product-selector" data-slug=""></div>
-          <div class="button-row mt-1">
-            <button class="btn btn-primary" type="button" id="add-to-cart-btn">Add to cart</button>
-            <a class="btn btn-outline" href="shop.html">Back to shop</a>
+          <div class="product-detail__info">
+            <p class="pill" id="product-pill"></p>
+            <h1 id="product-name" class="product-title">Product</h1>
+            <p id="product-description" class="muted product-description"></p>
+            <p class="price product-price" id="product-price"></p>
+
+            <div class="form-group" id="color-options"></div>
+
+            <div class="size-selector" id="size-selector">
+              <label for="size-select" class="muted">Size</label>
+              <select id="size-select" class="input-select">
+                <option value="">Select size</option>
+              </select>
+            </div>
+
+            <div class="product-meta">
+              <div class="product-meta__section">
+                <h3>Materials</h3>
+                <p id="product-materials" class="muted"></p>
+              </div>
+              <div class="product-meta__section">
+                <h3>Care</h3>
+                <p id="product-care" class="muted"></p>
+              </div>
+            </div>
+
+            <div id="product-selector" data-slug=""></div>
+
+            <div class="product-actions">
+              <button class="btn btn-primary btn-full" type="button" id="add-to-cart-btn">Add to cart</button>
+              <a class="btn btn-outline" href="shop.html">Back to shop</a>
+            </div>
           </div>
         </div>
       </div>
