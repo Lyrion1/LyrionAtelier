@@ -158,7 +158,7 @@ test.describe('shop smoke test', () => {
     await page.goto(`http://localhost:${PORT}/shop`, { waitUntil: 'networkidle' });
     await page.waitForSelector('.product-card');
     await page.selectOption('#filter-collection', 'lyrion-atelier');
-    const allowedSlugs = ['lyrion-premium-sweatshirt', 'unisex-hoodie-sun-crest'];
+    const allowedSlugs = ['lyrion-premium-sweatshirt', 'unisex-hoodie-sun-crest', 'unisex-tee-sun-crest'];
     await page.waitForFunction(
       (slugs) => {
         const cards = Array.from(document.querySelectorAll('.product-card'));

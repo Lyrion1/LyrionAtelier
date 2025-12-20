@@ -6,8 +6,6 @@ import url from 'url';
 
 const PORT = 4175;
 const ROOT = path.resolve(__dirname, '..');
-const SWEATSHIRT_2XL_SKU = 'LA-SW-UNISEX-2XL';
-
 const MIME: Record<string, string> = {
   '.html': 'text/html',
   '.js': 'application/javascript',
@@ -74,14 +72,17 @@ test.describe('product detail page', () => {
       route.fulfill({ status: 200, body: '' })
     );
 
-    await page.goto(`http://localhost:${PORT}/shop/aries-spark-youth-tee`, { waitUntil: 'networkidle' });
+    await page.goto(`http://localhost:${PORT}/shop/aries-spark-tee-youth`, { waitUntil: 'networkidle' });
 
     await expect(page.locator('#product-name')).toHaveText(/Aries Spark Tee/i);
     await expect(page.locator('#product-description')).toContainText(/Ignition energy/i);
     await expect(page.locator('#product-price')).toContainText('$34.99');
 
-    const sizeOptions = await page.locator('#size-select option').allInnerTexts();
-    expect(sizeOptions).toContain('S');
+    const sizeButtons = page.locator('.size-chip');
+    await expect(sizeButtons).toHaveCount(5);
+    const sizes = await sizeButtons.allInnerTexts();
+    expect(sizes).toContain('XS');
+    expect(sizes).toContain('XL');
 
     await page.waitForSelector('#product-gallery img');
     const imgWidth = await page.locator('#product-gallery img').first().evaluate((img) => (img as HTMLImageElement).naturalWidth);
@@ -90,7 +91,7 @@ test.describe('product detail page', () => {
     await page.screenshot({ path: 'product-detail-pass.png', fullPage: true });
   });
 
-  test('Sun Crest PDP wires size selection to checkout payload', async ({ page }) => {
+  test('Aries youth PDP wires size selection to checkout payload', async ({ page }) => {
     await page.route('https://fonts.googleapis.com/**', (route) =>
       route.fulfill({ status: 200, contentType: 'text/css', body: '' })
     );
@@ -108,21 +109,20 @@ test.describe('product detail page', () => {
       });
     });
 
-    await page.goto(`http://localhost:${PORT}/shop/lyrion-premium-sweatshirt`, { waitUntil: 'networkidle' });
+    await page.goto(`http://localhost:${PORT}/shop/aries-spark-tee-youth`, { waitUntil: 'networkidle' });
 
-    const sizeSelect = page.locator('#size-select');
-    await expect(sizeSelect).toHaveCount(1);
-
-    await sizeSelect.selectOption({ label: '2XL' });
+    const xlButton = page.locator('.size-chip', { hasText: 'XL' });
+    await xlButton.click();
+    await expect(xlButton).toHaveAttribute('aria-pressed', 'true');
     await page.click('#add-to-cart-btn');
     await page.waitForTimeout(200);
 
     const lineItem = checkoutPayload?.lineItems?.[0];
     const meta = lineItem?.price_data?.product_data?.metadata;
-    expect(meta?.sku).toBe(SWEATSHIRT_2XL_SKU);
-    expect(meta?.size).toBe('2XL');
-    expect(lineItem?.price_data?.unit_amount).toBe(5999);
+    expect(meta?.pf_variant_id).toBe('694615f9707eb6');
+    expect(meta?.size).toBe('XL');
+    expect(lineItem?.price_data?.unit_amount).toBe(3499);
 
-    await page.screenshot({ path: 'shop-product-sun-crest.png', fullPage: true });
+    await page.screenshot({ path: 'shop-product-aries-youth.png', fullPage: true });
   });
 });
