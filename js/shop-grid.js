@@ -69,6 +69,7 @@ function renderCard(product) {
   img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
   img.onload = () => {
     img.classList.remove('placeholder', 'blur');
+    media.classList.remove('placeholder', 'blur');
     card.classList.add('media-ready');
   };
   media.appendChild(img);
