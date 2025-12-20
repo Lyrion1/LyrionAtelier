@@ -110,10 +110,10 @@ const normalizeVariants = (p = {}) => {
       const id = storeVariantId || v.printfulVariantId || v.variant_id || v.id || v.sku || null;
       const sku = v.sku || storeVariantId || id; // Prefer brand SKU, fall back to store or Printful ID
       const size = v.options?.size || v.size || null;
-      const rawPrice = priceNumber(v);
-      const treatedAsCents = Number.isFinite(rawPrice) && rawPrice > PRICE_CENTS_THRESHOLD;
-      const priceCents = Number.isFinite(rawPrice)
-        ? Math.round(treatedAsCents ? rawPrice : rawPrice * 100)
+      const normalizedPrice = priceNumber(v);
+      const treatedAsCents = Number.isFinite(normalizedPrice) && normalizedPrice > PRICE_CENTS_THRESHOLD;
+      const priceCents = Number.isFinite(normalizedPrice)
+        ? Math.round(treatedAsCents ? normalizedPrice : normalizedPrice * 100)
         : null;
       const price = Number.isFinite(priceCents) ? priceCents / 100 : null;
       return id && size ? { id, sku, size, priceCents, price, storeVariantId, raw: v } : null;

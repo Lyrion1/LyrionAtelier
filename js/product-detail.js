@@ -14,6 +14,8 @@ const priceFrom = (value) => {
   return cents !== null ? cents / 100 : null;
 };
 
+const variantValue = (variant = {}, key) => variant?.options?.[key] ?? variant?.[key] ?? null;
+
 const derivePrice = (product = {}, size = null, variant = null) => {
   const variantPrice = priceFrom(priceNumber(variant));
   if (variantPrice !== null) return variantPrice;
@@ -64,8 +66,8 @@ function pickVariant(product, size, color) {
   if (!variants.length) return null;
   return (
     variants.find((v) => {
-      const variantSize = v.options?.size || v.size;
-      const variantColor = v.options?.color || v.color;
+      const variantSize = variantValue(v, 'size');
+      const variantColor = variantValue(v, 'color');
       const sizeOk = !size || variantSize === size;
       const colorOk = !color || !variantColor || variantColor === color;
       return sizeOk && colorOk;

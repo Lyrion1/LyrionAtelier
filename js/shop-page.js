@@ -18,14 +18,14 @@ import { formatPrice, currencySymbol } from './price-utils.js';
   const fadeMs = 240;
   let loaderHideTimer = null;
   let loaderVisible = !!loader;
-  if (loader && !loader.style.transition) loader.style.transition = `opacity ${fadeMs}ms ease`;
   const showLoader = (state) => {
     if (!loader) return;
+    if (!loader.style.transition) loader.style.transition = `opacity ${fadeMs}ms ease`;
     if (state) {
       loaderVisible = true;
       if (loaderHideTimer) clearTimeout(loaderHideTimer);
       loader.style.display = '';
-      requestAnimationFrame(() => { if (loader) loader.style.opacity = '1'; });
+      requestAnimationFrame(() => { if (loader && loaderVisible) loader.style.opacity = '1'; });
     } else {
       if (!loaderVisible) return;
       loaderVisible = false;
