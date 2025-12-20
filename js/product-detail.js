@@ -1,4 +1,4 @@
-import { centsFrom, currencySymbol, formatPriceWithCurrency } from './price-utils.js';
+import { centsFrom, currencySymbol, formatPriceWithCurrency, priceNumber } from './price-utils.js';
 
 const FALLBACK_IMAGE = '/assets/catalog/placeholder.webp';
 const CHECKOUT_ENDPOINT = '/.netlify/functions/create-checkout-session';
@@ -15,13 +15,7 @@ const priceFrom = (value) => {
 };
 
 const derivePrice = (product = {}, size = null, variant = null) => {
-  const variantPrice = priceFrom(
-    variant?.price ??
-      variant?.priceUSD ??
-      variant?.priceGBP ??
-      variant?.priceCents ??
-      variant?.retail_price
-  );
+  const variantPrice = priceFrom(priceNumber(variant));
   if (variantPrice !== null) return variantPrice;
   const price = product?.price;
   if (price && typeof price === 'object') {
@@ -32,16 +26,10 @@ const derivePrice = (product = {}, size = null, variant = null) => {
     if (min !== null) return min;
     if (max !== null) return max;
   }
-  const direct = priceFrom(
-    product?.price ??
-      product?.priceUSD ??
-      product?.priceGBP ??
-      product?.priceCents ??
-      product?.raw?.price ??
-      product?.raw?.priceCents ??
-      product?.raw?.priceUSD
-  );
+  const direct = priceFrom(priceNumber(product));
   if (direct !== null) return direct;
+  const rawDirect = priceFrom(priceNumber(product?.raw || {}));
+  if (rawDirect !== null) return rawDirect;
   return null;
 };
 

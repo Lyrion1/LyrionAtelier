@@ -1,5 +1,5 @@
 import { productsReady } from '/assets/js/products.js';
-import { currencySymbol } from '/js/price-utils.js';
+import { currencySymbol, priceNumber } from '/js/price-utils.js';
 
 const FALLBACK_IMG = '/assets/catalog/placeholder.webp';
 const DEFAULT_DESC = 'A premium piece from Lyrion Atelier.';
@@ -34,16 +34,6 @@ const toCents = (val) => {
   if (!Number.isFinite(num)) return null;
   return num > PRICE_CENTS_THRESHOLD ? Math.round(num) : Math.round(num * 100);
 };
-
-// Pricing precedence: explicit price → USD → GBP → numeric cents → retail fallback
-const priceNumber = (source = {}) =>
-  Number(
-    source?.price ??
-      source?.priceUSD ??
-      source?.priceGBP ??
-      source?.priceCents ??
-      source?.retail_price
-  );
 
 const derivePrice = (product = {}, size = null, variant = null) => {
   const variantPrice = toDollars(priceNumber(variant));
