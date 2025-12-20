@@ -95,12 +95,15 @@ const pickSizes = (p = {}) => {
 const pickBuyUrl = (p = {}) =>
   p.pf_url || p.raw?.pf_url || p.external?.printfulUrl || p.raw?.external?.printfulUrl || null;
 
+const getStoreVariantId = (variant = {}) => variant.store_variant_id || variant.storeVariantId || null;
+
 const normalizeVariants = (p = {}) => {
   const list = Array.isArray(p.variants) ? p.variants : [];
   return list
     .map((v) => {
-      const id = v.printfulVariantId || v.variant_id || v.id || v.sku || null;
-      const sku = v.sku || id; // Prefer brand SKU, fall back to Printful ID
+      const storeVariantId = getStoreVariantId(v);
+      const id = storeVariantId || v.printfulVariantId || v.variant_id || v.id || v.sku || null;
+      const sku = v.sku || storeVariantId || id; // Prefer brand SKU, fall back to store or Printful ID
       const size = v.options?.size || v.size || null;
       const rawPrice = Number(v.price ?? v.retail_price);
       const treatedAsCents = Number.isFinite(rawPrice) && rawPrice > PRICE_CENTS_THRESHOLD;
@@ -108,7 +111,7 @@ const normalizeVariants = (p = {}) => {
         ? Math.round(treatedAsCents ? rawPrice : rawPrice * 100)
         : null;
       const price = Number.isFinite(priceCents) ? priceCents / 100 : null;
-      return id && size ? { id, sku, size, priceCents, price, raw: v } : null;
+      return id && size ? { id, sku, size, priceCents, price, storeVariantId, raw: v } : null;
     })
     .filter(Boolean);
 };
@@ -185,7 +188,11 @@ function renderProduct(product) {
 
   const variants = normalizeVariants(product);
   const state = { selectedSize: null, selectedVariantId: null };
-  const variantIdForSize = (size) => product.pf?.variants?.[size] || product.raw?.pf?.variants?.[size] || null;
+  const variantIdForSize = (size) => {
+    const match = variants.find((v) => v.size === size);
+    if (match?.id) return match.id;
+    return product.pf?.variants?.[size] || product.raw?.pf?.variants?.[size] || null;
+  };
   let selectedVariant = variants[0] || null;
 
   const sizes = variants.length ? variants.map((v) => v.size) : pickSizes(product);
@@ -212,7 +219,8 @@ function renderProduct(product) {
     chips.className = 'button-row';
     const setSelected = (size) => {
       const variant = variants.find((v) => v.size === size) || null;
-      const pfId = variant?.id || variantIdForSize(size);
+      const storeId = getStoreVariantId(variant);
+      const pfId = variant?.id || storeId || variantIdForSize(size);
       selectedVariant = variant || (pfId ? { id: pfId, size } : null);
       state.selectedSize = size;
       state.selectedVariantId = pfId || null;
@@ -253,7 +261,8 @@ function renderProduct(product) {
   buy.disabled = !(state.selectedVariantId || selectedVariant);
   buy.addEventListener('click', async () => {
     const variant = selectedVariant || variants.find((v) => v.size === state.selectedSize) || variants[0] || null;
-    const variantId = state.selectedVariantId || variant?.id || variant?.sku || null;
+    const storeVariantId = getStoreVariantId(variant) || getStoreVariantId(variant?.raw || {});
+    const variantId = state.selectedVariantId || storeVariantId || variant?.id || variant?.sku || null;
     if (!variantId) return;
     const priceValue = derivePrice(product, state.selectedSize, variant);
     const priceCents = toCents(priceValue ?? basePrice);
@@ -264,6 +273,7 @@ function renderProduct(product) {
       slug: product.slug || slugify(product.title || product.name || ''),
       sku: variant.sku || variantId,
       pf_variant_id: variantId,
+      store_variant_id: storeVariantId || null,
       size: state.selectedSize || variant?.size || null,
       quantity,
       qty: quantity, // legacy alias for handlers expecting { sku, qty }

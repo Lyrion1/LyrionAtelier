@@ -6,6 +6,8 @@ const EXTENDED_SIZE = /^([2-9]?xl)$/i;
 
 const $ = (sel) => document.querySelector(sel);
 
+const getStoreVariantId = (variant = {}) => variant?.store_variant_id || variant?.storeVariantId || null;
+
 const priceFrom = (value) => {
   const cents = centsFrom(value);
   return cents !== null ? cents / 100 : null;
@@ -116,7 +118,9 @@ async function startCheckout(variant, product, selection, btnEl = $('#add-to-car
     return;
   }
   const resolvedPrice = derivePrice(product, selection.size, variant);
+  const storeVariantId = getStoreVariantId(variant);
   const variantId =
+    storeVariantId ||
     variant?.printfulVariantId ||
     variant?.variant_id ||
     variant?.id ||
@@ -136,6 +140,9 @@ async function startCheckout(variant, product, selection, btnEl = $('#add-to-car
     product: product.title || ''
   };
   if (variantId) metadata.pf_variant_id = variantId;
+  if (storeVariantId) {
+    metadata.store_variant_id = storeVariantId;
+  }
   if (product.slug) metadata.slug = product.slug;
   const lineItems = [
     {
