@@ -2,6 +2,7 @@ import { productsReady } from '/assets/js/products.js';
 
 const FALLBACK_IMG = '/assets/catalog/placeholder.webp';
 const DEFAULT_DESC = 'A premium piece from Lyrion Atelier.';
+const PRICE_CENTS_THRESHOLD = 200; // values above this are treated as integer cents
 
 const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
@@ -36,6 +37,11 @@ const pickImage = (p = {}) => {
   );
 };
 
+const warnMissingImage = (p = {}, reason = 'catalog image missing') => {
+  const id = p.slug || p.title || p.name || 'product';
+  console.warn(`[pdp] ${reason} for ${id}`);
+};
+
 const pickDesc = (p = {}) =>
   p.desc ||
   p.description ||
@@ -57,6 +63,24 @@ const pickSizes = (p = {}) => {
 
 const pickBuyUrl = (p = {}) =>
   p.pf_url || p.raw?.pf_url || p.external?.printfulUrl || p.raw?.external?.printfulUrl || null;
+
+const normalizeVariants = (p = {}) => {
+  const list = Array.isArray(p.variants) ? p.variants : [];
+  return list
+    .map((v) => {
+      const id = v.printfulVariantId || v.variant_id || v.id || v.sku || null;
+      const sku = v.sku || id; // Prefer brand SKU, fall back to Printful ID
+      const size = v.options?.size || v.size || null;
+      const rawPrice = Number(v.price ?? v.retail_price);
+      const treatedAsCents = Number.isFinite(rawPrice) && rawPrice > PRICE_CENTS_THRESHOLD;
+      const priceCents = Number.isFinite(rawPrice)
+        ? Math.round(treatedAsCents ? rawPrice : rawPrice * 100)
+        : null;
+      const price = Number.isFinite(priceCents) ? priceCents / 100 : null;
+      return id && size ? { id, sku, size, priceCents, price, raw: v } : null;
+    })
+    .filter(Boolean);
+};
 
 const findProduct = (list = [], slug = '') => {
   const target = slugify(slug);
@@ -96,10 +120,17 @@ function renderProduct(product) {
   img.loading = 'lazy';
   img.decoding = 'async';
   img.alt = product.title || product.name || '';
-  img.src = pickImage(product);
+  const imageSrc = pickImage(product);
+  img.src = imageSrc;
   img.onerror = () => {
-    if (img.src !== FALLBACK_IMG) img.src = FALLBACK_IMG;
+    if (img.src !== FALLBACK_IMG) {
+      warnMissingImage(product, 'missing image');
+      img.src = FALLBACK_IMG;
+    }
   };
+  if (imageSrc === FALLBACK_IMG) {
+    warnMissingImage(product);
+  }
   media.appendChild(img);
 
   const body = document.createElement('div');
@@ -128,7 +159,22 @@ function renderProduct(product) {
   desc.className = 'muted';
   desc.textContent = pickDesc(product);
 
-  const sizes = pickSizes(product);
+  const variants = normalizeVariants(product);
+  let selectedVariant = variants[0] || null;
+
+  const updatePrice = () => {
+    const variantPrice = Number.isFinite(selectedVariant?.price)
+      ? selectedVariant.price
+      : Number.isFinite(selectedVariant?.priceCents)
+        ? selectedVariant.priceCents / 100
+        : null;
+    const fallback = Number.isFinite(basePrice) ? Number(basePrice) : null;
+    const displayPrice = variantPrice ?? fallback;
+    price.textContent = asPrice(displayPrice);
+  };
+
+  let buy;
+  const sizes = variants.length ? variants.map((v) => v.size) : pickSizes(product);
   if (sizes.length) {
     const sizeWrap = document.createElement('div');
     sizeWrap.id = 'product-sizes';
@@ -139,32 +185,86 @@ function renderProduct(product) {
     sizeWrap.appendChild(label);
     const chips = document.createElement('div');
     chips.className = 'button-row';
+    const setSelected = (size) => {
+      const variant = variants.find((v) => v.size === size) || null;
+      selectedVariant = variant;
+      chips.querySelectorAll('button').forEach((btn) => {
+        const active = btn.dataset.size === size;
+        btn.classList.toggle('pill--active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      if (buy) buy.disabled = !selectedVariant;
+      updatePrice();
+    };
     sizes.forEach((size) => {
-      const chip = document.createElement('span');
+      const chip = document.createElement('button');
+      chip.type = 'button';
       chip.className = 'pill';
       chip.textContent = size;
+      chip.dataset.size = size;
+      chip.dataset.variantId = variants.find((v) => v.size === size)?.id || '';
+      chip.setAttribute('aria-pressed', 'false');
+      chip.addEventListener('click', () => setSelected(size));
       chips.appendChild(chip);
     });
     sizeWrap.appendChild(chips);
     body.appendChild(sizeWrap);
+    const initialSize = selectedVariant?.size || sizes[0];
+    if (initialSize) setSelected(initialSize);
   }
 
   const actions = document.createElement('div');
   actions.className = 'button-row';
-  const buy = document.createElement('button');
+  buy = document.createElement('button');
   buy.id = 'buy-now-btn';
   buy.className = 'btn btn-primary';
   const buyUrl = pickBuyUrl(product);
-  if (buyUrl) {
-    buy.textContent = 'Buy Now';
-    buy.type = 'button';
-    buy.addEventListener('click', () => window.open(buyUrl, '_blank', 'noopener,noreferrer'));
-  } else {
-    buy.textContent = 'Buy Now';
-    buy.disabled = true;
-    buy.classList.add('btn-outline');
-    buy.setAttribute('aria-disabled', 'true');
-  }
+  buy.textContent = 'Buy Now';
+  buy.type = 'button';
+  buy.disabled = !selectedVariant;
+  buy.addEventListener('click', async () => {
+    const variant = selectedVariant || variants[0] || null;
+    if (!variant) return;
+    const priceCents =
+      variant.priceCents ??
+      (Number.isFinite(basePrice) ? Math.round(Number(basePrice) * 100) : null);
+    const quantity = 1;
+    const payload = {
+      title: product.title || product.name || 'Product',
+      sku: variant.id,
+      quantity,
+      qty: quantity, // legacy alias for handlers expecting { sku, qty }
+      price: priceCents,
+      image: imageSrc
+    };
+    try {
+      document.dispatchEvent(new CustomEvent('cart:checkout', { detail: { items: [payload] } }));
+    } catch (_) {}
+    if (typeof window.initiateCheckout === 'function') {
+      await window.initiateCheckout({
+        name: payload.title,
+        price: priceCents ? priceCents / 100 : basePrice,
+        type: 'merchandise',
+        variantId: variant.id
+      });
+    } else {
+      try {
+        const res = await fetch('/.netlify/functions/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ origin: window.location.origin, items: [payload] })
+        });
+        const data = await res.json();
+        if (data?.url) {
+          window.location.href = data.url;
+          return;
+        }
+      } catch (_) {}
+      if (buyUrl) {
+        window.open(buyUrl, '_blank', 'noopener,noreferrer');
+      }
+    }
+  });
   const back = document.createElement('a');
   back.href = '/shop';
   back.className = 'btn btn-outline';
@@ -176,6 +276,7 @@ function renderProduct(product) {
   body.appendChild(price);
   body.appendChild(desc);
   body.appendChild(actions);
+  updatePrice();
 
   card.appendChild(media);
   card.appendChild(body);
