@@ -32,7 +32,7 @@ function startServer(): Promise<http.Server> {
 
       if (pathname === '/') pathname = '/index.html';
       if (pathname === '/shop') pathname = '/shop.html';
-      if (/^\/shop\/[^/]+/.test(pathname)) pathname = '/shop-product.html';
+      if (/^\/shop\/[^/]+/.test(pathname)) pathname = '/product.html';
 
       if (pathname.startsWith('/netlify/functions/printful-sync')) {
         try {
@@ -124,7 +124,8 @@ test.describe('shop smoke test', () => {
       await expect(firstCard.locator('.product-card__title')).toBeVisible();
       const buyButtons = firstCard.locator('.product-buy-btn');
       await expect(buyButtons).toHaveCount(1);
-      await expect(buyButtons.first()).toBeVisible();
+      await expect(buyButtons.first()).toHaveText(/view product/i);
+      await expect(buyButtons.first()).toHaveAttribute('href', /shop\/.+\.html$/);
       const widths = await cards.locator('img').evaluateAll((imgs) =>
         imgs.map((img) => (img as HTMLImageElement).naturalWidth)
       );

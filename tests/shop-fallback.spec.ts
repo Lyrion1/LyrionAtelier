@@ -33,7 +33,7 @@ function startServer(): Promise<http.Server> {
 
       if (pathname === '/') pathname = '/index.html';
       if (pathname === '/shop') pathname = '/shop.html';
-      if (/^\/shop\/[^/]+/.test(pathname)) pathname = '/shop-product.html';
+      if (/^\/shop\/[^/]+/.test(pathname)) pathname = '/product.html';
 
       if (pathname.startsWith('/netlify/functions/printful-sync')) {
         try {
@@ -144,7 +144,7 @@ test.describe('shop fallback art', () => {
     expect(srcs[0]).toContain(`http://localhost:${PORT}`);
     expect(srcs[1]).toContain('/assets/catalog/placeholder.webp');
 
-    const buyButtons = page.locator('[data-shop-grid] .product-card .product-buy-btn', { hasText: /buy now/i });
+    const buyButtons = page.locator('[data-shop-grid] .product-card .product-buy-btn', { hasText: /view product/i });
     await expect(buyButtons).toHaveCount(2);
   });
 });

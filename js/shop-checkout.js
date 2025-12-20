@@ -1,7 +1,22 @@
 console.log('Shop checkout script loaded');
 
 document.addEventListener('click', async function(e) {
-  const button = e.target.closest('.product-buy-btn, .add-to-cart-btn');
+  const buyLink = e.target.closest('.product-buy-btn');
+  if (buyLink) {
+    const cleanSlug = (raw = '') =>
+      raw
+        .replace(/^\/+/, '')
+        .replace(/^shop\//, '')
+        .replace(/\.html$/, '');
+    const href = buyLink.getAttribute('href');
+    const productSlug = buyLink.getAttribute('data-slug') || buyLink.closest('[data-slug]')?.dataset.slug || '';
+    const slugFragment = cleanSlug(productSlug);
+    const target = href || (slugFragment ? `/shop/${slugFragment}.html` : null);
+    if (target) window.location.href = target;
+    return;
+  }
+
+  const button = e.target.closest('.add-to-cart-btn');
   if (!button) return;
 
   e.preventDefault();
@@ -9,9 +24,8 @@ document.addEventListener('click', async function(e) {
   const productName = button.getAttribute('data-name');
   const productPrice = button.getAttribute('data-price');
   const variantId = button.getAttribute('data-variant-id');
-  const productSlug = button.getAttribute('data-slug') || button.closest('[data-slug]')?.dataset.slug || '';
   
-  console.log('Buy button clicked:', productName);
+  console.log('Add to cart clicked:', productName);
   
   // Show loading state
   const originalText = button.textContent;
@@ -19,12 +33,6 @@ document.addEventListener('click', async function(e) {
   button.disabled = true;
   
   if (!variantId) {
-    const slugFragment = productSlug ? productSlug.replace(/^\/+/, '').replace(/^shop\//, '') : '';
-    const target = productSlug ? `/shop/${slugFragment}` : null;
-    if (target) {
-      window.location.href = target;
-      return;
-    }
     button.textContent = originalText;
     button.disabled = false;
     return;
