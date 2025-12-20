@@ -1,0 +1,38 @@
+<!doctype html>
+<html><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Printful Status • Lyríon Atelier</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Inter,Segoe UI,Roboto; background:#0b0f1f; color:#e8ebff; margin:0; padding:24px;}
+    .card{max-width:720px;margin:0 auto;background:#121735;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:18px 20px;}
+    .ok{color:#9cffc8}.bad{color:#ff9f9f}.muted{color:#a7b0d6}
+    code{background:rgba(255,255,255,.06); padding:2px 6px; border-radius:6px}
+    pre{background:rgba(255,255,255,.06); padding:12px; border-radius:8px; overflow:auto}
+  </style>
+</head><body>
+  <div class="card">
+    <h2>Printful API Status</h2>
+    <div id="status" class="muted">Checking…</div>
+    <pre id="details" hidden></pre>
+  </div>
+<script>
+(async function(){
+  const el = id => document.getElementById(id);
+  try {
+    const r = await fetch('/.netlify/functions/printful-health',{cache:'no-store'});
+    const j = await r.json();
+    if (j.ok) {
+      el('status').innerHTML =
+        `<span class="ok">Connected</span> · Store: <b>${j.store?.name||'?'}</b> (${j.store?.currency||'?'}) · Auth: ${j.authUsed}` +
+        (j.sampleProduct ? ` · Sample: ${j.sampleProduct.name}` : '');
+    } else {
+      el('status').innerHTML = `<span class="bad">Not connected</span> · ${j.error||('HTTP '+(j.status||'?'))}`;
+      el('details').hidden = false; el('details').textContent = JSON.stringify(j,null,2);
+    }
+  } catch (e) {
+    el('status').innerHTML = `<span class="bad">Error</span> · ${e && e.message ? e.message : e}`;
+  }
+})();
+</script>
+</body></html>
