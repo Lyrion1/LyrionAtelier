@@ -128,9 +128,12 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     const base =
       p?.price ??
       p?.priceUSD ??
+      p?.priceGBP ??
       p?.retail_price ??
       p?.defaultVariant?.retail_price ??
       p?.variants?.[0]?.retail_price ??
+      p?.variants?.[0]?.priceUSD ??
+      p?.variants?.[0]?.priceGBP ??
       p?.variants?.[0]?.price;
     const num = typeof base === 'number' ? base : Number(base);
     if (!Number.isFinite(num)) return { cents: null, label: PRICE_UNAVAILABLE_LABEL, value: null };

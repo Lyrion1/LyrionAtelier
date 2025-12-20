@@ -18,8 +18,8 @@
       { "id": "69463668ca4413", "size": "M", "priceUSD": 59.99, "priceGBP": 47.99 },
       { "id": "69463668ca4471", "size": "L", "priceUSD": 59.99, "priceGBP": 47.99 },
       { "id": "69463668ca44b1", "size": "XL", "priceUSD": 59.99, "priceGBP": 47.99 },
-      { "id": "69463668ca4506", "size": "2XL","priceUSD": 61.99, "priceGBP": 49.99 },
-      { "id": "69463668ca4543", "size": "3XL","priceUSD": 63.99, "priceGBP": 51.99 }
+      { "id": "69463668ca4506", "size": "2XL", "priceUSD": 61.99, "priceGBP": 49.99 },
+      { "id": "69463668ca4543", "size": "3XL", "priceUSD": 63.99, "priceGBP": 51.99 }
     ],
     "status": "active",
     "availability": "made-to-order",
