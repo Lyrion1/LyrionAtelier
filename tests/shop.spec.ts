@@ -140,6 +140,11 @@ test.describe('shop smoke test', () => {
       expect(noticeText || '').toMatch(PLACEHOLDER_NOTICE);
     }
 
+    // Guard against any legacy Piscean crewneck slug variants resurfacing
+    for (const slug of ['piscean-twins-crewneck', 'piscean-crewneck']) {
+      await expect(page.locator(`[data-slug="${slug}"]`)).toHaveCount(0);
+    }
+
     const scorpionPrice = page.locator('[data-slug="scorpion-aegis-tee"] .product-card__price');
     await expect(scorpionPrice).toHaveText(/\$44\.99/);
     const hoodiePrice = page.locator('[data-slug="unisex-hoodie-sun-crest"] .product-card__price');
