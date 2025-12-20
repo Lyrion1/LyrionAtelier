@@ -4,6 +4,8 @@ import { currencySymbol } from '/js/price-utils.js';
 const FALLBACK_IMG = '/assets/catalog/placeholder.webp';
 const DEFAULT_DESC = 'A premium piece from Lyrion Atelier.';
 const PRICE_CENTS_THRESHOLD = 200; // values above this are treated as integer cents
+const SIZE_ORDER = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
+const hasOwn = (obj, key) => Object.prototype.hasOwnProperty.call(obj || {}, key);
 
 const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
@@ -157,12 +159,11 @@ function renderProduct(product) {
   img.alt = product.title || product.name || '';
   const imageSrc = pickImage(product);
   img.src = imageSrc;
-  const allowFallback = !/^https?:\/\//i.test(imageSrc || '');
   img.onerror = () => {
-    if (allowFallback && img.src !== FALLBACK_IMG) {
-      warnMissingImage(product, 'missing image');
-      img.src = FALLBACK_IMG;
-    }
+    if (img.dataset.fallbackApplied) return;
+    img.dataset.fallbackApplied = 'true';
+    warnMissingImage(product, 'missing image');
+    img.src = FALLBACK_IMG;
   };
   if (imageSrc === FALLBACK_IMG) {
     warnMissingImage(product);
@@ -187,29 +188,57 @@ function renderProduct(product) {
   desc.className = 'muted';
   desc.textContent = pickDesc(product);
 
+  const variantPrices = product.variant_prices || product.raw?.variant_prices || null;
+  const pfSizeMap =
+    product.printful?.size_map ||
+    product.raw?.printful?.size_map ||
+    product.pf?.variants ||
+    product.raw?.pf?.variants ||
+    null;
   const variants = normalizeVariants(product);
   const state = { selectedSize: null, selectedVariantId: null };
   const variantIdForSize = (size) => {
     const match = variants.find((v) => v.size === size);
     if (match?.id) return match.id;
+    const pfId = pfSizeMap && pfSizeMap[size];
+    if (pfId) return pfId;
     return product.pf?.variants?.[size] || product.raw?.pf?.variants?.[size] || null;
   };
   let selectedVariant = variants[0] || null;
 
-  const sizes = variants.length ? variants.map((v) => v.size) : pickSizes(product);
+  const priceSized = variantPrices
+    ? SIZE_ORDER.filter((size) => hasOwn(variantPrices, size))
+    : [];
+  const sizes = priceSized.length ? priceSized : (variants.length ? variants.map((v) => v.size) : pickSizes(product));
+  const hiddenSizes = [];
+  const visibleSizes = sizes.filter((size) => {
+    const shouldHide = pfSizeMap && hasOwn(pfSizeMap, size) && !pfSizeMap[size];
+    if (shouldHide) hiddenSizes.push(size);
+    return !shouldHide;
+  });
+
+  const priceForSize = (size) => {
+    if (variantPrices && hasOwn(variantPrices, size)) {
+      const dollars = toDollars(variantPrices[size]);
+      if (dollars !== null) return dollars;
+    }
+    return derivePrice(product, size, selectedVariant);
+  };
+
+  const primarySize = visibleSizes[0] || sizes[0] || selectedVariant?.size || null;
   basePrice =
-    derivePrice(product, sizes[0] || selectedVariant?.size || null, selectedVariant) ??
+    priceForSize(primarySize) ??
     toDollars(product.price ?? product.priceCents ?? product.raw?.price ?? product.raw?.priceCents);
 
   const currency = product.currency || product.raw?.currency || 'USD';
   const updatePrice = () => {
-    const derived = derivePrice(product, state.selectedSize, selectedVariant);
+    const derived = priceForSize(state.selectedSize);
     const displayPrice = derived ?? basePrice;
     price.textContent = asPrice(displayPrice, currency);
   };
 
   let buy;
-  if (sizes.length) {
+  if (visibleSizes.length) {
     const sizeWrap = document.createElement('div');
     sizeWrap.id = 'product-sizes';
     sizeWrap.className = 'size-row';
@@ -222,7 +251,7 @@ function renderProduct(product) {
     const setSelected = (size) => {
       const variant = variants.find((v) => v.size === size) || null;
       const storeId = getStoreVariantId(variant);
-      const pfId = variant?.id || storeId || variantIdForSize(size);
+      const pfId = variantIdForSize(size) || storeId || null;
       selectedVariant = variant || (pfId ? { id: pfId, size } : null);
       state.selectedSize = size;
       state.selectedVariantId = pfId || null;
@@ -231,11 +260,11 @@ function renderProduct(product) {
         btn.classList.toggle('pill--active', active);
         btn.setAttribute('aria-pressed', active ? 'true' : 'false');
       });
-      const canBuy = !!state.selectedVariantId && derivePrice(product, size, selectedVariant) !== null;
+      const canBuy = !!state.selectedVariantId && priceForSize(size) !== null;
       if (buy) buy.disabled = !canBuy;
       updatePrice();
     };
-    sizes.forEach((size) => {
+    visibleSizes.forEach((size) => {
       const chip = document.createElement('button');
       chip.type = 'button';
       chip.className = 'pill';
@@ -248,7 +277,10 @@ function renderProduct(product) {
     });
     sizeWrap.appendChild(chips);
     body.appendChild(sizeWrap);
-    const initialSize = selectedVariant?.size || sizes[0];
+    if (hiddenSizes.length) {
+      console.warn(`[pdp] hiding sizes without variant id: ${hiddenSizes.join(', ')}`);
+    }
+    const initialSize = selectedVariant?.size || visibleSizes[0];
     if (initialSize) setSelected(initialSize);
   }
 
@@ -260,13 +292,18 @@ function renderProduct(product) {
   const buyUrl = pickBuyUrl(product);
   buy.textContent = 'Buy Now';
   buy.type = 'button';
-  buy.disabled = !(state.selectedVariantId || selectedVariant);
+  const initialSize = state.selectedSize || primarySize;
+  const initialVariantId = state.selectedVariantId || (initialSize ? variantIdForSize(initialSize) : null);
+  if (!state.selectedVariantId && initialVariantId) state.selectedVariantId = initialVariantId;
+  if (!state.selectedSize && initialSize) state.selectedSize = initialSize;
+  const canBuyInitial = !!initialVariantId && priceForSize(initialSize) !== null;
+  buy.disabled = !canBuyInitial;
   buy.addEventListener('click', async () => {
     const variant = selectedVariant || variants.find((v) => v.size === state.selectedSize) || variants[0] || null;
     const storeVariantId = getStoreVariantId(variant) || getStoreVariantId(variant?.raw || {});
     const variantId = state.selectedVariantId || storeVariantId || variant?.id || variant?.sku || null;
     if (!variantId) return;
-    const priceValue = derivePrice(product, state.selectedSize, variant);
+    const priceValue = priceForSize(state.selectedSize);
     const priceCents = toCents(priceValue ?? basePrice);
     if (!Number.isFinite(priceCents)) return;
     const quantity = 1;
@@ -290,7 +327,8 @@ function renderProduct(product) {
         name: payload.title,
         price: priceCents ? priceCents / 100 : basePrice,
         type: 'merchandise',
-        variantId
+        variantId,
+        quantity
       });
     } else {
       try {
