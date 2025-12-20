@@ -140,6 +140,11 @@ test.describe('shop smoke test', () => {
       expect(noticeText || '').toMatch(PLACEHOLDER_NOTICE);
     }
 
+    const scorpionPrice = page.locator('[data-slug="scorpion-aegis-tee"] .product-card__price');
+    await expect(scorpionPrice).toHaveText(/\$44\.99/);
+    const hoodiePrice = page.locator('[data-slug="unisex-hoodie-sun-crest"] .product-card__price');
+    await expect(hoodiePrice).toHaveText(/\$55\.99/);
+
     const relevantErrors = consoleErrors.filter((msg) => !/ERR_NAME_NOT_RESOLVED/i.test(msg));
     expect(relevantErrors).toEqual([]);
     const hasPriceTypeError = consoleMessages.some((msg) => /typeerror/i.test(msg) && /price/i.test(msg));

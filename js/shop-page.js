@@ -149,6 +149,15 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     return { cents, label: `USD ${dollars.toFixed(2)}`, value: dollars };
   };
 
+  function displayPrice(p) {
+    if (typeof p?.price === 'number') return p.price;
+    if (Array.isArray(p?.variants) && p.variants.length) {
+      const vals = p.variants.map((v = {}) => v.price).filter((x) => typeof x === 'number');
+      if (vals.length) return Math.min(...vals);
+    }
+    return null;
+  }
+
   const pickVariant = (product = {}) => {
     const variants = Array.isArray(product.variants) ? product.variants : [];
     if (!variants.length) return null;
@@ -263,10 +272,17 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     const variant = p.defaultVariant || pickVariant(p);
     const hasPriceData = Number.isFinite(p.price) || Number.isFinite(p.priceCents) || !!p.priceLabel;
     const basePrice = hasPriceData ? null : normalizePrice(p);
-    const priceCents = Number.isFinite(p.priceCents) ? p.priceCents : basePrice?.cents ?? null;
+    const fallbackPriceValue = displayPrice(p);
+    const priceCents = Number.isFinite(p.priceCents)
+      ? p.priceCents
+      : Number.isFinite(fallbackPriceValue)
+        ? Math.round(fallbackPriceValue * 100)
+        : basePrice?.cents ?? null;
     const priceValue = Number.isFinite(p.price)
       ? p.price
-      : basePrice?.value ?? (Number.isFinite(priceCents) ? priceCents / 100 : null);
+      : Number.isFinite(fallbackPriceValue)
+        ? fallbackPriceValue
+        : basePrice?.value ?? (Number.isFinite(priceCents) ? priceCents / 100 : null);
     const priceRange = (() => {
       const currency = (p.price?.currency || p.currency || 'USD').toUpperCase();
       const symbol = currencySymbol(currency);
