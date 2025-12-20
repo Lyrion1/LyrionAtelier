@@ -98,9 +98,10 @@ function renderImages(images = [], productTitle = 'Product') {
     img.alt = `${productTitle} image ${idx + 1}`;
     img.loading = 'lazy';
     img.decoding = 'async';
-    const allowFallback = !/^https?:\/\//i.test(src || '');
     img.onerror = () => {
-      if (allowFallback && img.src !== FALLBACK_IMAGE) img.src = FALLBACK_IMAGE;
+      if (img.dataset.fallbackApplied === '1') return;
+      img.dataset.fallbackApplied = '1';
+      img.src = FALLBACK_IMAGE;
     };
     gallery.appendChild(img);
   });
@@ -231,6 +232,15 @@ async function hydrateProductPage() {
   );
 
   const sizeSelect = $('#size-select');
+  const sizeContainer = $('#size-selector');
+  const sizeButtonsWrap = document.createElement('div');
+  sizeButtonsWrap.className = 'chip-row size-chip-row';
+  sizeButtonsWrap.id = 'size-buttons';
+  sizeButtonsWrap.setAttribute('role', 'group');
+  sizeButtonsWrap.setAttribute('aria-label', 'Select size');
+  if (sizeContainer) {
+    sizeContainer.appendChild(sizeButtonsWrap);
+  }
   if (sizeSelect) {
     sizeSelect.innerHTML = '<option value="">Select size</option>';
     sizes.forEach((size) => {
@@ -240,6 +250,19 @@ async function hydrateProductPage() {
       sizeSelect.appendChild(opt);
     });
     if (sizes[0]) sizeSelect.value = sizes[0];
+  }
+  if (sizeButtonsWrap && sizes.length) {
+    sizeButtonsWrap.innerHTML = '';
+    sizes.forEach((size, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'chip size-chip';
+      btn.textContent = size;
+      btn.dataset.size = size;
+      btn.setAttribute('aria-pressed', idx === 0 ? 'true' : 'false');
+      if (idx === 0) btn.classList.add('active');
+      sizeButtonsWrap.appendChild(btn);
+    });
   }
 
   const colorWrap = $('#color-options');
@@ -286,7 +309,8 @@ async function hydrateProductPage() {
   const currency = product.currency || product.price?.currency || 'USD';
 
   function currentSelection() {
-    const selectedSize = sizeSelect?.value || sizes[0] || null;
+    const selectedButton = sizeButtonsWrap?.querySelector('.size-chip.active');
+    const selectedSize = selectedButton?.dataset.size || sizeSelect?.value || sizes[0] || null;
     const selectedColor =
       colorWrap?.querySelector('.chip.active')?.dataset.value || colors[0] || null;
     return { size: selectedSize, color: selectedColor };
@@ -296,15 +320,43 @@ async function hydrateProductPage() {
     const selection = currentSelection();
     activeVariant = resolveVariant(product, selection.size, selection.color);
     const displayPrice = derivePrice(product, selection.size, activeVariant);
+    const variantId =
+      getStoreVariantId(activeVariant) ||
+      activeVariant?.printfulVariantId ||
+      activeVariant?.variant_id ||
+      activeVariant?.id ||
+      product?.pf?.variants?.[selection.size] ||
+      null;
+    if (sizeButtonsWrap) {
+      sizeButtonsWrap.querySelectorAll('.size-chip').forEach((btn) => {
+        const isActive = btn.dataset.size === selection.size;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        if (isActive) btn.dataset.variant = variantId || '';
+      });
+    }
     if (priceEl) priceEl.textContent = formatPriceWithCurrency(displayPrice ?? activeVariant?.price, currency);
     if (addBtn) {
       addBtn.disabled = !activeVariant;
+      addBtn.dataset.variant = variantId || '';
       addBtn.textContent = activeVariant
         ? `Add to Cart — ${formatPriceWithCurrency(displayPrice ?? activeVariant?.price, currency)}`
         : 'Unavailable';
     }
   }
 
+  sizeButtonsWrap?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.size-chip');
+    if (!btn) return;
+    sizeButtonsWrap.querySelectorAll('.size-chip').forEach((b) => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
+    if (sizeSelect) sizeSelect.value = btn.dataset.size || '';
+    updateVariant();
+  });
   sizeSelect?.addEventListener('change', updateVariant);
   addBtn?.addEventListener('click', (e) => {
     e.preventDefault();
