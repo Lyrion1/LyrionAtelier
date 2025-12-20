@@ -16,15 +16,22 @@ import { formatPrice, currencySymbol } from './price-utils.js';
   const PRICE_CENTS_THRESHOLD = 200;
   const ZODIAC_SIGNS = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'];
   const fadeMs = 240;
+  let loaderHideTimer = null;
+  let loaderVisible = !!loader;
   if (loader && !loader.style.transition) loader.style.transition = `opacity ${fadeMs}ms ease`;
   const showLoader = (state) => {
     if (!loader) return;
     if (state) {
+      loaderVisible = true;
+      if (loaderHideTimer) clearTimeout(loaderHideTimer);
       loader.style.display = '';
       requestAnimationFrame(() => { loader.style.opacity = '1'; });
     } else {
+      if (!loaderVisible) return;
+      loaderVisible = false;
+      if (loaderHideTimer) clearTimeout(loaderHideTimer);
       loader.style.opacity = '0';
-      setTimeout(() => { loader.style.display = 'none'; }, fadeMs);
+      loaderHideTimer = setTimeout(() => { loader.style.display = 'none'; }, fadeMs);
     }
   };
   const hideLoader = () => showLoader(false);
