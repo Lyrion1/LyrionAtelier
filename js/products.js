@@ -258,35 +258,6 @@ const products = [
     }
   },
   {
-    "slug": "piscean-crewneck",
-    "title": "Piscean Twins Crewneck — Unisex",
-    "zodiac": "pisces",
-    "category": "sweatshirt",
-    "collection": ["zodiac"],
-    "currency": "USD",
-    "price": 44.99,
-    "sizePriceOverrides": { "2XL": 46.99, "3XL": 48.99, "4XL": 50.99, "5XL": 52.99 },
-    "description": "Soft unisex crewneck with Piscean twin symbolism and celestial detailing.",
-    "images": [
-      {
-        "src": "https://files.cdn.printful.com/files/fc5/fc592618221909ffa9df4ba9cb14e1d1_thumb.png",
-        "alt": "Pisces twins embroidered crewneck",
-        "source": "remote"
-      }
-    ],
-    "variants": [
-      { "size": "S", "printfulVariantId": "6946f144f0c8d1" },
-      { "size": "M", "printfulVariantId": "6946f144f0c958" },
-      { "size": "L", "printfulVariantId": "6946f144f0c9a5" },
-      { "size": "XL", "printfulVariantId": "6946f144f0c9f8" },
-      { "size": "2XL", "printfulVariantId": "6946f144f0ca47" },
-      { "size": "3XL", "printfulVariantId": "6946f144f0ca94" },
-      { "size": "4XL", "printfulVariantId": "6946f144f0caf8" },
-      { "size": "5XL", "printfulVariantId": "6946f144f0cb49" }
-    ],
-    "status": "active"
-  },
-  {
     slug: "unisex-tee-sun-crest",
     title: "Unisex Garment-dyed Tee — Sun Crest",
     vendor: "Printful",
