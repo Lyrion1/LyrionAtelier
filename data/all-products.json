@@ -662,17 +662,161 @@
         "lyrionatelier",
         "lyrion-atelier"
       ],
-      "printful": {
-        "externalProductId": null,
-        "variantIds": [
-          "69455454068e06",
-          "69455454068eb6",
-          "69455454068f36",
-          "69455454068fb1",
-          "69455454069045"
-        ]
+        "printful": {
+          "externalProductId": null,
+          "variantIds": [
+            "69455454068e06",
+            "69455454068eb6",
+            "69455454068f36",
+            "69455454068fb1",
+            "69455454069045"
+          ]
+        }
       }
-    }
+  },
+  {
+    "slug": "unisex-tee-sun-crest",
+    "title": "Unisex Garment-dyed Tee \u2014 Sun Crest",
+    "kind": "product",
+    "department": "apparel",
+    "subcategory": "tees",
+    "category": "t-shirts",
+    "collection": [
+      "lyrionatelier",
+      "lyrion-atelier"
+    ],
+    "palette": [
+      "Celestial Noir"
+    ],
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "images": [
+      "/assets/catalog/unisex-tee-sun-crest.webp"
+    ],
+    "tags": [
+      "unisex",
+      "tee",
+      "comfort-colors",
+      "sun-crest",
+      "brand-mark"
+    ],
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL",
+        "4XL"
+      ]
+    },
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "price": {
+      "min": 33.99,
+      "max": 47.99,
+      "currency": "GBP"
+    },
+    "description": "Premium garment-dyed heavyweight tee (Comfort Colors 1717) with the Lyrion sun crest embroidery.",
+    "variants": [
+      {
+        "id": "6946125c2990a1",
+        "options": {
+          "size": "S"
+        },
+        "price": 33.99,
+        "printfulVariantId": "6946125c2990a1",
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "id": "6946125c299108",
+        "options": {
+          "size": "M"
+        },
+        "price": 33.99,
+        "printfulVariantId": "6946125c299108",
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "id": "6946125c299168",
+        "options": {
+          "size": "L"
+        },
+        "price": 33.99,
+        "printfulVariantId": "6946125c299168",
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "id": "6946125c2991b5",
+        "options": {
+          "size": "XL"
+        },
+        "price": 41.99,
+        "printfulVariantId": "6946125c2991b5",
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "id": "6946125c2991f1",
+        "options": {
+          "size": "2XL"
+        },
+        "price": 43.99,
+        "printfulVariantId": "6946125c2991f1",
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "id": "6946125c299248",
+        "options": {
+          "size": "3XL"
+        },
+        "price": 45.99,
+        "printfulVariantId": "6946125c299248",
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "id": "6946125c299282",
+        "options": {
+          "size": "4XL"
+        },
+        "price": 47.99,
+        "printfulVariantId": "6946125c299282",
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      }
+    ],
+    "defaultVariantId": "6946125c2990a1",
+    "currency": "GBP",
+    "vendor": "Printful"
   },
   {
     "slug": "unisex-hoodie-sun-crest",

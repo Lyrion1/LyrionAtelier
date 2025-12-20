@@ -258,6 +258,30 @@ const products = [
     }
   },
   {
+    slug: "unisex-tee-sun-crest",
+    title: "Unisex Garment-dyed Tee — Sun Crest",
+    vendor: "Printful",
+    collection: ["Lyrion Atelier"],
+    category: "T-shirts",
+    tags: ["unisex","tee","comfort-colors","sun-crest","brand-mark"],
+    palette: "Celestial Noir",
+    images: ["/assets/catalog/unisex-tee-sun-crest.webp"],
+    description: "Premium garment-dyed heavyweight tee (Comfort Colors 1717) with the Lyrion sun crest embroidery.",
+    variants: [
+      { size: "S", printfulVariantId: "6946125c2990a1", price: 33.99 },
+      { size: "M", printfulVariantId: "6946125c299108", price: 33.99 },
+      { size: "L", printfulVariantId: "6946125c299168", price: 33.99 },
+      { size: "XL", printfulVariantId: "6946125c2991b5", price: 41.99 },
+      { size: "2XL", printfulVariantId: "6946125c2991f1", price: 43.99 },
+      { size: "3XL", printfulVariantId: "6946125c299248", price: 45.99 },
+      { size: "4XL", printfulVariantId: "6946125c299282", price: 47.99 }
+    ],
+    defaultVariantIndex: 0,
+    currency: "GBP",
+    price: { min: 33.99, max: 47.99, currency: "GBP" },
+    sizes: ["S","M","L","XL","2XL","3XL","4XL"]
+  },
+  {
     id: 101,
     name: "Past Life Reading",
     price: 65,
