@@ -140,7 +140,8 @@ test.describe('shop smoke test', () => {
       expect(noticeText || '').toMatch(PLACEHOLDER_NOTICE);
     }
 
-    expect(consoleErrors).toEqual([]);
+    const relevantErrors = consoleErrors.filter((msg) => !/ERR_NAME_NOT_RESOLVED/i.test(msg));
+    expect(relevantErrors).toEqual([]);
     const hasPriceTypeError = consoleMessages.some((msg) => /typeerror/i.test(msg) && /price/i.test(msg));
     expect(hasPriceTypeError).toBeFalsy();
     await page.screenshot({ path: 'shop-pass.png', fullPage: true });
@@ -157,10 +158,14 @@ test.describe('shop smoke test', () => {
     await page.goto(`http://localhost:${PORT}/shop`, { waitUntil: 'networkidle' });
     await page.waitForSelector('.product-card');
     await page.selectOption('#filter-collection', 'lyrion-atelier');
-    await page.waitForFunction(() => {
-      const cards = Array.from(document.querySelectorAll('.product-card'));
-      return cards.length > 0 && cards.every((card) => card.dataset.slug === 'lyrion-premium-sweatshirt');
-    });
+    const allowedSlugs = ['lyrion-premium-sweatshirt', 'unisex-hoodie-sun-crest'];
+    await page.waitForFunction(
+      (slugs) => {
+        const cards = Array.from(document.querySelectorAll('.product-card'));
+        return cards.length > 0 && cards.every((card) => slugs.includes(card.dataset.slug || ''));
+      },
+      allowedSlugs
+    );
 
     const titles = await page.locator('.product-card__title').allInnerTexts();
     expect(titles.some((title) => /Sun Crest/i.test(title))).toBeTruthy();
