@@ -2265,7 +2265,7 @@ PREMIUM TIER CARDS ($350)
 
 .event-banner {
   width: 100%;
-  height: 400px;
+  height: 300px;
   position: relative;
   overflow: hidden;
 }
@@ -2300,7 +2300,7 @@ PREMIUM TIER CARDS ($350)
 }
 
 .premium-card .event-content {
-  padding: 40px;
+  padding: 32px;
 }
 
 .event-header {
@@ -2408,7 +2408,7 @@ FEATURED TIER CARDS ($200)
 
 .featured-events-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: 32px;
 }
 
@@ -2428,7 +2428,7 @@ FEATURED TIER CARDS ($200)
 
 .event-image {
   width: 100%;
-  height: 250px;
+  height: 200px;
   position: relative;
   overflow: hidden;
 }
@@ -2558,7 +2558,7 @@ STANDARD TIER CARDS ($75)
   background: rgba(15, 23, 42, 0.6);
   border: 1px solid rgba(99, 102, 241, 0.2);
   border-radius: 12px;
-  padding: 24px;
+  padding: 20px;
   transition: all 0.3s ease;
 }
 
@@ -2573,6 +2573,23 @@ STANDARD TIER CARDS ($75)
   gap: 16px;
   margin-bottom: 16px;
   align-items: flex-start;
+}
+
+.event-thumb {
+  width: 100%;
+  height: 160px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  margin: 0 0 14px 0;
+}
+
+.event-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .event-date-badge.mini {
@@ -2617,6 +2634,30 @@ STANDARD TIER CARDS ($75)
 
 .event-meta-compact span {
   padding: 4px 0;
+}
+
+.price-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  background: rgba(251, 191, 36, 0.14);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  color: #fbbf24;
+}
+
+.price-pill.featured {
+  background: rgba(139, 92, 246, 0.16);
+  border-color: rgba(139, 92, 246, 0.4);
+  color: #e9d5ff;
+}
+
+.price-pill.standard {
+  background: rgba(99, 102, 241, 0.16);
+  border-color: rgba(99, 102, 241, 0.4);
+  color: #c7d2fe;
 }
 
 .description-compact {
@@ -4037,19 +4078,22 @@ body {
 
 .readings-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .reading-card {
   background: rgba(15, 23, 42, 0.7);
   border: 2px solid rgba(139, 92, 246, 0.3);
   border-radius: 16px;
-  padding: 30px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
   position: relative;
+  overflow: hidden;
 }
 
 .reading-card:hover {
@@ -4060,8 +4104,9 @@ body {
 
 .reading-image {
   position: relative;
-  margin: -30px -30px 20px;
-  height: 200px;
+  margin: -24px -24px 16px;
+  height: clamp(220px, 32vw, 260px);
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px 12px 0 0;
