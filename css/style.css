@@ -4280,6 +4280,7 @@ body {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.85);
+  background-color: #0a0a14;
   backdrop-filter: blur(10px);
   animation: fadeIn 0.3s ease;
 }
@@ -4324,6 +4325,70 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+.modal-title {
+  color: #fbbf24;
+  font-size: 32px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.modal-subtitle {
+  color: #c4b5fd;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.cosmic-input {
+  width: 100%;
+  padding: 16px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(139,92,246,0.3);
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.modal-primary-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.oracle-studio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.gateway-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10000;
+  background: rgba(30, 27, 75, 0.92);
+  color: #fbbf24;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  backdrop-filter: blur(12px);
+}
+
+.gateway-toast.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Responsive */

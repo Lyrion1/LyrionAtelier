@@ -72,17 +72,16 @@
   <div id="freeReadingModal" class="cosmic-modal">
     <div class="modal-content">
       <button class="modal-close" onclick="closeModal('freeReadingModal')">×</button>
-      <h2 style="color: #fbbf24; font-size: 32px; margin-bottom: 15px; text-align: center;">Your Cosmic Signature</h2>
-      <p style="color: #c4b5fd; text-align: center; margin-bottom: 30px;">The stars have a message for you. When were you born?</p>
+      <h2 class="modal-title">Your Cosmic Signature</h2>
+      <p class="modal-subtitle">The stars have a message for you. When were you born?</p>
 
       <form id="birthDateForm">
         <input type="text"
           id="birthDateInput"
           placeholder="MM/DD/YYYY (e.g., 03/15/1990)"
-          style="width: 100%; padding: 16px; background: rgba(255,255,255,0.1); border: 2px solid rgba(139,92,246,0.3); border-radius: 10px; color: white; font-size: 16px; margin-bottom: 20px;"
+          class="cosmic-input"
           required>
-        <button type="submit"
-          style="width: 100%; padding: 16px; background: linear-gradient(135deg, #8b5cf6, #6366f1); color: white; border: none; border-radius: 50px; font-size: 18px; font-weight: 600; cursor: pointer;">
+        <button type="submit" class="modal-primary-btn">
           Reveal My Reading
         </button>
       </form>
@@ -93,10 +92,10 @@
   <div id="oracleStudioModal" class="cosmic-modal">
     <div class="modal-content large">
       <button class="modal-close" onclick="closeModal('oracleStudioModal')">×</button>
-      <h2 style="color: #fbbf24; font-size: 32px; margin-bottom: 15px; text-align: center;">Choose Your Oracle Reading</h2>
-      <p style="color: #c4b5fd; text-align: center; margin-bottom: 40px;">Personalized cosmic guidance delivered within 48 hours</p>
+      <h2 class="modal-title">Choose Your Oracle Reading</h2>
+      <p class="modal-subtitle">Personalized cosmic guidance delivered within 48 hours</p>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+      <div class="oracle-studio-grid">
         <div class="reading-card">
           <div class="reading-image">
             <img src="images/oracle/life-path-reading-cover.webp" alt="Celestial illustration for the Life Path Reading" loading="lazy" decoding="async">

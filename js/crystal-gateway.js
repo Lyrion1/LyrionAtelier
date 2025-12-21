@@ -15,6 +15,26 @@
     if (modal) modal.classList.remove('active');
   }
 
+  function showGatewayMessage(message) {
+    const existing = document.getElementById('gateway-toast');
+    if (existing) existing.remove();
+    const toast = document.createElement('div');
+    toast.id = 'gateway-toast';
+    toast.className = 'gateway-toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add('visible'));
+    setTimeout(() => toast.classList.remove('visible'), 3200);
+    setTimeout(() => toast.remove(), 3600);
+  }
+
+  if (typeof window.bookOracleReading !== 'function') {
+    window.bookOracleReading = function(event = null) {
+      event?.preventDefault?.();
+      showGatewayMessage('Payment system is temporarily unavailable. Please try again soon.');
+    };
+  }
+
   window.openFreeReading = openFreeReading;
   window.openOracleStudio = openOracleStudio;
   window.closeModal = closeModal;
@@ -33,21 +53,41 @@
       birthDateForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const birthDate = document.getElementById('birthDateInput')?.value?.trim();
-        if (!birthDate) return;
-
-        if (typeof openOracleWidget === 'function') {
-          openOracleWidget();
+        const dateRegex = /^(0[1-9]|1[0-2])\/([0-2][0-9]|3[01])\/\d{4}$/;
+        if (!birthDate || !dateRegex.test(birthDate)) {
+          showGatewayMessage('Enter birth date as MM/DD/YYYY (e.g., 03/15/1990)');
+          return;
+        }
+        const [month, day, year] = birthDate.split('/').map(Number);
+        const parsed = new Date(`${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`);
+        const isValidDate = !Number.isNaN(parsed.getTime()) &&
+          parsed.getUTCFullYear() === year &&
+          parsed.getUTCMonth() + 1 === month &&
+          parsed.getUTCDate() === day;
+        if (!isValidDate) {
+          showGatewayMessage('Please enter a valid calendar date (MM/DD/YYYY).');
+          return;
         }
 
-        const widgetInput = document.getElementById('birth-date');
-        if (widgetInput) {
-          widgetInput.value = birthDate;
-        }
+        try {
+          if (typeof openOracleWidget === 'function') {
+            openOracleWidget();
+          }
 
-        closeModal('freeReadingModal');
+          const widgetInput = document.getElementById('birth-date');
+          if (widgetInput) {
+            widgetInput.value = birthDate;
+          }
 
-        if (typeof getOracleReading === 'function') {
-          await getOracleReading();
+          closeModal('freeReadingModal');
+
+          if (typeof getOracleReading === 'function') {
+            await new Promise(resolve => requestAnimationFrame(resolve));
+            await getOracleReading();
+          }
+        } catch (err) {
+          console.error('Gateway reading error', err);
+          showGatewayMessage('Unable to start your reading. Please try again.');
         }
       });
     }
