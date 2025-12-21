@@ -15,6 +15,9 @@ import { formatPrice, currencySymbol } from './price-utils.js';
   // Values above this threshold are treated as cents and converted to dollars.
   const PRICE_CENTS_THRESHOLD = 200;
   const ZODIAC_SIGNS = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'];
+  const ZODIAC_ORDER = ZODIAC_SIGNS.map((z) => z.charAt(0).toUpperCase() + z.slice(1));
+  const CATEGORY_ORDER = ['Men', 'Women', 'Unisex', 'Youth', 'Accessories', 'Rituals'];
+  const COLLECTION_ORDER = ['Zodiac', 'Lyrion Atelier Core'];
   const fadeMs = 240;
   let loaderHideTimer = null;
   let loaderVisible = !!loader;
@@ -54,6 +57,12 @@ import { formatPrice, currencySymbol } from './price-utils.js';
 
   const stripDebug = () => {
     document.querySelectorAll('#asset-strip, .debug-thumbs, .thumb-strip, .stray-thumb, #sign-gallery, .sign-strip').forEach(el => el.remove());
+  };
+
+  const toList = (value) => {
+    if (Array.isArray(value)) return value;
+    if (value === null || typeof value === 'undefined') return [];
+    return [value];
   };
 
   async function getImageMap(){
@@ -197,6 +206,17 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     const variantPrice = normalizePrice(variant);
     const fallbackPrice = normalizePrice(p);
     const price = variantPrice?.cents !== null ? variantPrice : fallbackPrice;
+    const firstValue = (val) => {
+      if (Array.isArray(val)) return val[0];
+      return val;
+    };
+    const resolveCollection = () => firstValue(p?.meta?.collection) || firstValue(p.collection) || '';
+    const meta = {
+      category: p?.meta?.category || p.category || p.product_type || p.department || '',
+      collection: resolveCollection(),
+      zodiac: p?.meta?.zodiac || p.zodiac || p.attributes?.zodiac || '',
+      soldOut: p?.meta?.soldOut ?? p.soldOut ?? false
+    };
     const firstVariantId =
       p.defaultVariant?.id ||
       p.defaultVariantId ||
@@ -221,8 +241,10 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       canBuy,
       firstVariantId,
       image,
-      category: p.category || p.product_type || p.department || '',
-      zodiac: p.zodiac || p.attributes?.zodiac || ''
+      category: meta.category,
+      zodiac: meta.zodiac,
+      meta,
+      soldOut: meta.soldOut
     };
   };
 
@@ -314,11 +336,16 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     const primaryImage = Array.isArray(p.images) ? p.images[0] : null;
     const resolvedImage = isUsableImage(primaryImage) ? primaryImage : resolveProductImage(p, cachedImageMap, cachedZodiacMap);
     const imgSrc = isUsableImage(resolvedImage) ? resolvedImage : FALLBACK;
+    const soldOut = (p?.meta?.soldOut ?? p?.soldOut) === true;
 
     const card = document.createElement('article');
     card.className = 'product-card';
     card.dataset.id = p.id || slug;
     card.dataset.slug = slug;
+    if (soldOut) {
+      card.classList.add('product-card--sold-out');
+      card.dataset.soldOut = 'true';
+    }
 
     const media = document.createElement('div');
     media.className = 'product-card__media media';
@@ -354,12 +381,25 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     buyBtn.dataset.action = 'view';
     buyBtn.dataset.slug = slug;
     buyBtn.dataset.name = p.title || p.name || 'Celestial Piece';
+    if (soldOut) {
+      buyBtn.classList.add('is-disabled');
+      buyBtn.setAttribute('aria-disabled', 'true');
+      buyBtn.href = '#';
+      buyBtn.addEventListener('click', (e) => e.preventDefault());
+    }
 
     actions.append(buyBtn);
     body.append(heading, priceEl, actions);
+    if (soldOut) {
+      const ribbon = document.createElement('span');
+      ribbon.className = 'product-card__ribbon product-card__ribbon--sold-out';
+      ribbon.textContent = 'Sold out';
+      card.append(ribbon);
+    }
     card.append(media, body);
     card.addEventListener('click', (e) => {
       if (e.target.closest('.product-buy-btn')) return;
+      if (soldOut) return;
       window.location.href = viewUrl;
     });
     return card;
@@ -388,6 +428,61 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       window.resolveProductImage = resolveProductImage;
       window.pickVariant = pickVariant;
     }
+  };
+
+  const normalizeLabel = (val) => {
+    if (typeof val === 'string') return val.trim();
+    return String(val || '').trim();
+  };
+  const dedupeOrdered = (preferred = [], values = []) => {
+    const seen = new Set();
+    const result = [];
+    const add = (val) => {
+      const label = normalizeLabel(val);
+      if (!label) return;
+      const key = label.toLowerCase();
+      if (seen.has(key)) return;
+      seen.add(key);
+      result.push(label);
+    };
+    preferred.forEach(add);
+    values.forEach(add);
+    return result;
+  };
+  const setOptions = (select, values, allLabel = 'All', allValue = 'all') => {
+    if (!select) return;
+    const previous = select.value || allValue;
+    select.innerHTML = '';
+    const addOpt = (value, label) => {
+      const opt = document.createElement('option');
+      opt.value = value;
+      opt.textContent = label;
+      select.appendChild(opt);
+    };
+    addOpt(allValue, allLabel);
+    values.forEach((val) => addOpt(val, val));
+    const match = values.find((val) => val.toLowerCase() === (previous || '').toLowerCase());
+    select.value = match || allValue;
+  };
+
+  const populateFilterOptions = (catalog = []) => {
+    const categoryValues = dedupeOrdered(
+      CATEGORY_ORDER,
+      catalog.map((p = {}) => p?.meta?.category || p?.category).filter(Boolean)
+    );
+    const collectionValues = dedupeOrdered(
+      COLLECTION_ORDER,
+      catalog.flatMap((p = {}) => toList(p?.meta?.collection || p?.collection)).filter(Boolean)
+    );
+    const zodiacValues = dedupeOrdered(
+      ZODIAC_ORDER,
+      catalog
+        .map((p = {}) => p?.meta?.zodiac || p?.zodiac)
+        .filter((z) => z && z.toLowerCase() !== 'none')
+    );
+    setOptions(document.getElementById('filter-category'), categoryValues, 'All');
+    setOptions(document.getElementById('filter-collection'), collectionValues, 'All');
+    setOptions(document.getElementById('filter-zodiac'), zodiacValues, 'All signs');
   };
 
   const syncFilterInputs = () => {
@@ -455,6 +550,7 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       };
       const remoteCount = normalized.filter(hasRemote).length;
       console.log(`[shop] products with remote images: ${remoteCount} / total: ${normalized.length}`);
+      populateFilterOptions(normalized);
       syncFilterInputs();
       bindFilters();
       if (!normalized.length) { renderEmpty(); }

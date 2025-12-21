@@ -3,3 +3,19 @@
 
 /* optional: center empty note */
 .shop-empty-note { color: #cfd8ff; text-align:center; }
+
+.product-card { position: relative; }
+.product-card__ribbon {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #e4e4e4;
+  color: #4f4f4f;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.product-card--sold-out .product-card__media img { opacity: 0.85; filter: grayscale(0.1); }
+.product-card--sold-out .product-buy-btn.is-disabled { pointer-events: none; background: #b8b8b8; border-color: #b8b8b8; color: #2f2f2f; }

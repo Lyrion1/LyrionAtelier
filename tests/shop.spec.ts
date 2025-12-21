@@ -149,6 +149,8 @@ test.describe('shop smoke test', () => {
     await expect(scorpionPrice).toHaveText(/\$44\.99/);
     const hoodiePrice = page.locator('[data-slug="unisex-hoodie-sun-crest"] .product-card__price');
     await expect(hoodiePrice).toHaveText(/\$55\.99/);
+    const soldOutBadges = page.locator('.product-card--sold-out .product-card__ribbon', { hasText: /sold out/i });
+    await expect(soldOutBadges.first()).toBeVisible();
 
     const relevantErrors = consoleErrors.filter((msg) => !/ERR_NAME_NOT_RESOLVED/i.test(msg));
     expect(relevantErrors).toEqual([]);
@@ -167,8 +169,15 @@ test.describe('shop smoke test', () => {
 
     await page.goto(`http://localhost:${PORT}/shop`, { waitUntil: 'networkidle' });
     await page.waitForSelector('.product-card');
-    await page.selectOption('#filter-collection', 'lyrion-atelier');
-    const allowedSlugs = ['lyrion-premium-sweatshirt', 'unisex-hoodie-sun-crest', 'unisex-tee-sun-crest', 'premium-crewneck-sun-crest'];
+    await page.selectOption('#filter-collection', 'Lyrion Atelier Core');
+    const allowedSlugs = [
+      'lyrion-premium-sweatshirt',
+      'unisex-hoodie-sun-crest',
+      'unisex-tee-sun-crest',
+      'premium-crewneck-sun-crest',
+      'corduroy-cap-sun-crest',
+      'travel-altar-kit-rituals'
+    ];
     await page.waitForFunction(
       (slugs) => {
         const cards = Array.from(document.querySelectorAll('.product-card'));

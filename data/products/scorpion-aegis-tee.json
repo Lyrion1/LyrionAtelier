@@ -7,6 +7,7 @@
   "brand": "Lyrion Atelier",
   "active": true,
   "soldOut": false,
+  "meta": { "category": "Unisex", "collection": "Zodiac", "zodiac": "Scorpio" },
   "price": 44.99,
   "priceBySize": {
     "S": 44.99,

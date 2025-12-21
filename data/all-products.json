@@ -10,6 +10,11 @@
     "element": "fire",
     "edition": "core",
     "palette": "Lunar Sand",
+    "meta": {
+      "category": "Youth",
+      "collection": "Zodiac",
+      "zodiac": "Aries"
+    },
     "state": {
       "ready": true,
       "published": true
@@ -132,6 +137,11 @@
     "gender": "men",
     "collection": "eclipse-gilded",
     "palette": "Celestial Noir",
+    "meta": {
+      "category": "Men",
+      "collection": "Zodiac",
+      "zodiac": "Capricorn"
+    },
     "price": 73.5,
     "images": [
       "https://files.cdn.printful.com/files/000/00026420c67f2af4c4021ce3d829c0f7_thumb.png"
@@ -166,6 +176,11 @@
     "brand": "Lyrion Atelier",
     "active": true,
     "soldOut": false,
+    "meta": {
+      "category": "Unisex",
+      "collection": "Zodiac",
+      "zodiac": "Scorpio"
+    },
     "price": 44.99,
     "priceBySize": {
       "S": 44.99,
@@ -210,10 +225,15 @@
       "lyrion-atelier"
     ],
     "pf_url": "https://www.printful.com/custom-products/unisex-premium-sweatshirt",
-    "zodiac": "all",
+    "zodiac": "None",
     "element": null,
     "edition": "core",
     "palette": "celestial-noir",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Lyrion Atelier Core",
+      "zodiac": "None"
+    },
     "desc": "Signature Lyrion Atelier Sun Crest premium crew with celestial detailing.",
     "state": {
       "ready": true,
@@ -375,6 +395,12 @@
       "lyrionatelier",
       "lyrion-atelier"
     ],
+    "zodiac": "None",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Lyrion Atelier Core",
+      "zodiac": "None"
+    },
     "palette": [
       "Celestial Noir"
     ],
@@ -553,6 +579,12 @@
     "brand": "Lyrion Atelier",
     "category": "sweatshirts",
     "collection": ["lyrion-atelier", "sun-crest"],
+    "zodiac": "None",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Lyrion Atelier Core",
+      "zodiac": "None"
+    },
     "tags": ["unisex", "crewneck", "premium", "embroidered", "logo"],
     "images": [
       {
@@ -576,5 +608,37 @@
       "sync_source": "manual",
       "thumbnail": "https://files.cdn.printful.com/files/273/273a521304983380ffe07e205bd95374_thumb.png"
     }
+  },
+  {
+    "slug": "corduroy-cap-sun-crest",
+    "title": "Corduroy Cap — Sun Crest",
+    "category": "Accessories",
+    "collection": "Lyrion Atelier Core",
+    "zodiac": "None",
+    "soldOut": true,
+    "meta": {
+      "category": "Accessories",
+      "collection": "Lyrion Atelier Core",
+      "zodiac": "None",
+      "soldOut": true
+    },
+    "price": null,
+    "image": "/assets/placeholders/product.webp"
+  },
+  {
+    "slug": "travel-altar-kit-rituals",
+    "title": "Travel Altar Kit (Rituals)",
+    "category": "Rituals",
+    "collection": "Lyrion Atelier Core",
+    "zodiac": "None",
+    "soldOut": true,
+    "meta": {
+      "category": "Rituals",
+      "collection": "Lyrion Atelier Core",
+      "zodiac": "None",
+      "soldOut": true
+    },
+    "price": null,
+    "image": "/assets/placeholders/product.webp"
   }
 ]
