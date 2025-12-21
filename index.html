@@ -42,32 +42,6 @@
     </div>
   </header>
 
-  <section class="crystal-gateway">
-    <div class="gateway-grid">
-      <!-- Left Crystal Ball: Free Reading -->
-      <div class="crystal-ball-container" onclick="openFreeReading()">
-        <div class="crystal-ball">
-          <div class="crystal-core"></div>
-          <div class="sparkles"></div>
-        </div>
-        <h3 class="ball-label">Free Cosmic Reading</h3>
-        <p class="ball-description">Discover your celestial blueprint and receive personalized guidance from the Oracle</p>
-        <button class="ball-cta">Begin Journey</button>
-      </div>
-
-      <!-- Right Crystal Ball: Oracle Studio -->
-      <div class="crystal-ball-container" onclick="openOracleStudio()">
-        <div class="crystal-ball gold">
-          <div class="crystal-core gold"></div>
-          <div class="sparkles"></div>
-        </div>
-        <h3 class="ball-label">Oracle Studio</h3>
-        <p class="ball-description">Deep cosmic analysis channeled by the Oracle. Professional readings delivered in 48 hours</p>
-        <button class="ball-cta gold">Book Reading</button>
-      </div>
-    </div>
-  </section>
-
   <!-- Free Reading Modal -->
   <div id="freeReadingModal" class="cosmic-modal">
     <div class="modal-content">
@@ -159,8 +133,6 @@
 
   <main id="main-content">
     <section class="hero">
-      <div class="hero-orb hero-orb--left" aria-hidden="true"></div>
-      <div class="hero-orb hero-orb--right" aria-hidden="true"></div>
       <div class="container hero-content">
         <div>
           <p class="eyebrow">Celestial couture</p>
@@ -180,6 +152,14 @@
             <li>🚚 Free cosmic delivery over $50 & fully accessible journeys</li>
           </ul>
         </div>
+      </div>
+      <div class="conversion-orbs" aria-label="Oracle experiences">
+        <button class="conversion-orb conversion-orb--left" type="button" onclick="openFreeReading()" aria-label="Start a free cosmic reading">
+          <span class="conversion-orb__label">Free Cosmic Reading</span>
+        </button>
+        <button class="conversion-orb conversion-orb--right" type="button" onclick="openOracleStudio()" aria-label="Book an oracle studio reading">
+          <span class="conversion-orb__label">Oracle Studio</span>
+        </button>
       </div>
     </section>
 
