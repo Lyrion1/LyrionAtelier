@@ -452,7 +452,7 @@ img {
   right: 0;
   bottom: 2.5rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   padding: 0 4vw;
   gap: clamp(1.35rem, 5vw, 2.75rem);
@@ -489,12 +489,11 @@ img {
 
 .conversion-orb::before,
 .conversion-orb::after {
-  content: none;
+  content: "";
+  display: none;
 }
 
 .conversion-orb__glyph {
-  position: static;
-  inset: auto;
   display: inline-flex;
   place-items: center;
   font-size: 1.35rem;
@@ -507,8 +506,6 @@ img {
 }
 
 .conversion-orb__label {
-  position: static;
-  z-index: 2;
   font-weight: 700;
   font-size: 1.05rem;
   text-align: center;
