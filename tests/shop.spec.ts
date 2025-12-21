@@ -8,6 +8,7 @@ const PORT = 4173;
 const ROOT = path.resolve(__dirname, '..');
 const PLACEHOLDER_NOTICE = /Catalog is updating/i;
 const MIN_VISIBLE_PRODUCTS = 4; // shop grid should show at least four items when catalog data is available
+const OVERFLOW_TOLERANCE_PX = 1;
 
 const MIME: Record<string, string> = {
   '.html': 'text/html',
@@ -157,6 +158,38 @@ test.describe('shop smoke test', () => {
     const hasPriceTypeError = consoleMessages.some((msg) => /typeerror/i.test(msg) && /price/i.test(msg));
     expect(hasPriceTypeError).toBeFalsy();
     await page.screenshot({ path: 'shop-pass.png', fullPage: true });
+  });
+
+  test('home hero declutters on mobile', async ({ page }) => {
+    await page.route('https://fonts.googleapis.com/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'text/css', body: '' })
+    );
+    await page.route('https://fonts.gstatic.com/**', (route) =>
+      route.fulfill({ status: 200, body: '' })
+    );
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
+    await expect(page.locator('.hero')).toBeVisible();
+    await expect(page.locator('.conversion-orbs')).toBeVisible();
+
+    const orbPosition = await page.locator('.conversion-orbs').evaluate((node) => getComputedStyle(node).position);
+    expect(orbPosition).toBe('static');
+
+    const beforeDisplay = await page.evaluate(
+      () => getComputedStyle(document.body, '::before').getPropertyValue('display')
+    );
+    const afterDisplay = await page.evaluate(
+      () => getComputedStyle(document.body, '::after').getPropertyValue('display')
+    );
+    expect(beforeDisplay.trim()).toBe('none');
+    expect(afterDisplay.trim()).toBe('none');
+
+    const hasHorizontalOverflow = await page.evaluate(
+      (tolerance) => document.documentElement.scrollWidth > document.documentElement.clientWidth + tolerance,
+      OVERFLOW_TOLERANCE_PX
+    );
+    expect(hasHorizontalOverflow).toBeFalsy();
   });
 
   test('filters Lyrion Atelier collection and shows Sun Crest sweatshirt', async ({ page }) => {
