@@ -452,7 +452,7 @@ img {
   right: 0;
   bottom: 2.5rem;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   padding: 0 4vw;
   gap: clamp(1.35rem, 5vw, 2.75rem);
@@ -479,18 +479,11 @@ img {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  animation: none;
   backdrop-filter: blur(6px) saturate(1.08);
   -webkit-backdrop-filter: blur(6px) saturate(1.08);
   transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
   will-change: transform, filter;
   transform: translateZ(0);
-}
-
-.conversion-orb::before,
-.conversion-orb::after {
-  content: "";
-  display: none;
 }
 
 .conversion-orb__glyph {
