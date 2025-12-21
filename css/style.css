@@ -4102,6 +4102,243 @@ body {
   box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
 }
 
+/* Crystal Gateway */
+.crystal-gateway {
+  background: linear-gradient(180deg, #1a1a2e 0%, #0f0f23 100%);
+  padding: 120px 20px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.crystal-gateway::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1), transparent 70%);
+  pointer-events: none;
+}
+
+.crystal-gateway .gateway-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 100px;
+  align-items: center;
+}
+
+.crystal-gateway .crystal-ball-container {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.crystal-gateway .crystal-ball-container:hover {
+  transform: translateY(-10px);
+}
+
+.crystal-gateway .crystal-ball {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto 30px;
+  border-radius: 50%;
+  position: relative;
+  background: radial-gradient(circle at 35% 35%,
+    rgba(255, 255, 255, 0.8),
+    rgba(236, 72, 153, 0.6) 30%,
+    rgba(139, 92, 246, 0.4) 60%,
+    rgba(67, 56, 202, 0.2) 100%
+  );
+  box-shadow:
+    0 30px 80px rgba(139, 92, 246, 0.6),
+    0 15px 40px rgba(236, 72, 153, 0.4),
+    inset 0 0 60px rgba(255, 255, 255, 0.3);
+  animation: crystal-float 8s ease-in-out infinite;
+  backdrop-filter: blur(10px);
+}
+
+.crystal-gateway .crystal-ball.gold {
+  background: radial-gradient(circle at 35% 35%,
+    rgba(255, 255, 255, 0.9),
+    rgba(251, 191, 36, 0.7) 30%,
+    rgba(245, 158, 11, 0.5) 60%,
+    rgba(217, 119, 6, 0.3) 100%
+  );
+  box-shadow:
+    0 30px 80px rgba(251, 191, 36, 0.6),
+    0 15px 40px rgba(245, 158, 11, 0.4),
+    inset 0 0 60px rgba(255, 255, 255, 0.4);
+}
+
+.crystal-gateway .crystal-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(255, 255, 255, 1),
+    rgba(236, 72, 153, 0.8) 40%,
+    transparent 70%
+  );
+  animation: crystal-pulse 3s ease-in-out infinite;
+  filter: blur(5px);
+}
+
+.crystal-gateway .crystal-core.gold {
+  background: radial-gradient(circle,
+    rgba(255, 255, 255, 1),
+    rgba(251, 191, 36, 0.9) 40%,
+    transparent 70%
+  );
+}
+
+.crystal-gateway .sparkles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image:
+    radial-gradient(2px 2px at 25% 30%, white, transparent),
+    radial-gradient(3px 3px at 70% 60%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(2px 2px at 50% 80%, white, transparent),
+    radial-gradient(2px 2px at 80% 25%, rgba(255, 255, 255, 0.9), transparent);
+  animation: crystal-twinkle 4s ease-in-out infinite;
+}
+
+@keyframes crystal-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-25px); }
+}
+
+@keyframes crystal-pulse {
+  0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+}
+
+@keyframes crystal-twinkle {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.crystal-gateway .ball-label {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fbbf24;
+  margin-bottom: 12px;
+  font-family: Georgia, serif;
+  text-shadow: 0 2px 20px rgba(251, 191, 36, 0.5);
+}
+
+.crystal-gateway .ball-description {
+  font-size: 16px;
+  color: #c4b5fd;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.crystal-gateway .ball-cta {
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.crystal-gateway .ball-cta.gold {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1f2937;
+  box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
+}
+
+.crystal-gateway .ball-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(139, 92, 246, 0.6);
+}
+
+.crystal-gateway .ball-cta.gold:hover {
+  box-shadow: 0 15px 40px rgba(251, 191, 36, 0.6);
+}
+
+/* Modal Styles */
+.cosmic-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.3s ease;
+}
+
+.cosmic-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.95), rgba(31, 41, 55, 0.95));
+  padding: 50px;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 90%;
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.modal-content.large {
+  max-width: 1000px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 32px;
+  color: #9ca3af;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: color 0.3s;
+}
+
+.modal-close:hover {
+  color: white;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .crystal-gateway .gateway-grid {
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
+
+  .crystal-gateway .crystal-ball {
+    width: 250px;
+    height: 250px;
+  }
+}
+
 .reading-image {
   position: relative;
   margin: -24px -24px 16px;

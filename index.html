@@ -42,6 +42,122 @@
     </div>
   </header>
 
+  <section class="crystal-gateway">
+    <div class="gateway-grid">
+      <!-- Left Crystal Ball: Free Reading -->
+      <div class="crystal-ball-container" onclick="openFreeReading()">
+        <div class="crystal-ball">
+          <div class="crystal-core"></div>
+          <div class="sparkles"></div>
+        </div>
+        <h3 class="ball-label">Free Cosmic Reading</h3>
+        <p class="ball-description">Discover your celestial blueprint and receive personalized guidance from the Oracle</p>
+        <button class="ball-cta">Begin Journey</button>
+      </div>
+
+      <!-- Right Crystal Ball: Oracle Studio -->
+      <div class="crystal-ball-container" onclick="openOracleStudio()">
+        <div class="crystal-ball gold">
+          <div class="crystal-core gold"></div>
+          <div class="sparkles"></div>
+        </div>
+        <h3 class="ball-label">Oracle Studio</h3>
+        <p class="ball-description">Deep cosmic analysis channeled by the Oracle. Professional readings delivered in 48 hours</p>
+        <button class="ball-cta gold">Book Reading</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Free Reading Modal -->
+  <div id="freeReadingModal" class="cosmic-modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('freeReadingModal')">×</button>
+      <h2 style="color: #fbbf24; font-size: 32px; margin-bottom: 15px; text-align: center;">Your Cosmic Signature</h2>
+      <p style="color: #c4b5fd; text-align: center; margin-bottom: 30px;">The stars have a message for you. When were you born?</p>
+
+      <form id="birthDateForm">
+        <input type="text"
+          id="birthDateInput"
+          placeholder="MM/DD/YYYY (e.g., 03/15/1990)"
+          style="width: 100%; padding: 16px; background: rgba(255,255,255,0.1); border: 2px solid rgba(139,92,246,0.3); border-radius: 10px; color: white; font-size: 16px; margin-bottom: 20px;"
+          required>
+        <button type="submit"
+          style="width: 100%; padding: 16px; background: linear-gradient(135deg, #8b5cf6, #6366f1); color: white; border: none; border-radius: 50px; font-size: 18px; font-weight: 600; cursor: pointer;">
+          Reveal My Reading
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Oracle Studio Modal -->
+  <div id="oracleStudioModal" class="cosmic-modal">
+    <div class="modal-content large">
+      <button class="modal-close" onclick="closeModal('oracleStudioModal')">×</button>
+      <h2 style="color: #fbbf24; font-size: 32px; margin-bottom: 15px; text-align: center;">Choose Your Oracle Reading</h2>
+      <p style="color: #c4b5fd; text-align: center; margin-bottom: 40px;">Personalized cosmic guidance delivered within 48 hours</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+        <div class="reading-card">
+          <div class="reading-image">
+            <img src="images/oracle/life-path-reading-cover.webp" alt="Celestial illustration for the Life Path Reading" loading="lazy" decoding="async">
+          </div>
+          <div class="card-header">
+            <h3 class="reading-title">Life Path Reading</h3>
+            <div class="reading-price">$50</div>
+          </div>
+          <p class="reading-description">
+            Discover your soul's purpose and the cosmic blueprint guiding your journey.
+          </p>
+          <button class="book-reading-btn"
+            data-name="Life Path Reading - Oracle Reading"
+            data-price="50.00"
+            onclick="bookOracleReading(event)">
+            Book Reading
+          </button>
+        </div>
+
+        <div class="reading-card featured-reading">
+          <div class="reading-image">
+            <img src="images/oracle/natal-chart-blueprint-cover.webp" alt="Star map art for the Natal Chart Blueprint" loading="lazy" decoding="async">
+          </div>
+          <div class="featured-badge">MOST POPULAR</div>
+          <div class="card-header">
+            <h3 class="reading-title">Natal Chart Blueprint</h3>
+            <div class="reading-price">$70</div>
+          </div>
+          <p class="reading-description">
+            A comprehensive analysis of your birth chart revealing your personality and life patterns.
+          </p>
+          <button class="book-reading-btn featured-btn"
+            data-name="Natal Chart Blueprint - Oracle Reading"
+            data-price="70.00"
+            onclick="bookOracleReading(event)">
+            Book Reading
+          </button>
+        </div>
+
+        <div class="reading-card">
+          <div class="reading-image">
+            <img src="images/oracle/solar-return-reading-cover.webp" alt="Cosmic artwork for the Solar Return Reading" loading="lazy" decoding="async">
+          </div>
+          <div class="card-header">
+            <h3 class="reading-title">Solar Return Reading</h3>
+            <div class="reading-price">$58</div>
+          </div>
+          <p class="reading-description">
+            Your cosmic forecast for the year ahead based on your solar return chart.
+          </p>
+          <button class="book-reading-btn"
+            data-name="Solar Return Reading - Oracle Reading"
+            data-price="58.00"
+            onclick="bookOracleReading(event)">
+            Book Reading
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <main id="main-content">
     <section class="hero">
       <div class="container hero-content">
@@ -236,7 +352,9 @@
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="js/checkout-handler.js"></script>
+  <script src="js/oracle-checkout.js"></script>
   <script src="js/oracle-widget.js"></script>
+  <script src="js/crystal-gateway.js" defer></script>
   <script defer src="/assets/index.js"></script>
   <script defer src="/assets/crystal-fab-forwarder.js"></script>
 
