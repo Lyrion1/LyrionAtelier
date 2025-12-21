@@ -55,6 +55,9 @@ test/
 *.test.js
 coverage/
 test-results/
+product-detail-pass.png
+shop-pass.png
+shop-product-aries-youth.png
 
 # Netlify
 .netlify/
