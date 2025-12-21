@@ -8,6 +8,7 @@ const PORT = 4173;
 const ROOT = path.resolve(__dirname, '..');
 const PLACEHOLDER_NOTICE = /Catalog is updating/i;
 const MIN_VISIBLE_PRODUCTS = 4; // shop grid should show at least four items when catalog data is available
+const OVERFLOW_TOLERANCE_PX = 1;
 
 const MIME: Record<string, string> = {
   '.html': 'text/html',
@@ -185,7 +186,8 @@ test.describe('shop smoke test', () => {
     expect(afterDisplay.trim()).toBe('none');
 
     const hasHorizontalOverflow = await page.evaluate(
-      () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1
+      (tolerance) => document.documentElement.scrollWidth > document.documentElement.clientWidth + tolerance,
+      OVERFLOW_TOLERANCE_PX
     );
     expect(hasHorizontalOverflow).toBeFalsy();
   });
