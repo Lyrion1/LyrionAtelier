@@ -2,6 +2,7 @@
  "slug":"aries-spark-tee-youth","title":"Aries Spark Tee (Youth)",
 "kind":"product","department":"apparel","subcategory":"youth-tees",
 "collection":"youth-fire-water","zodiac":"aries","element":"fire",
+"meta":{"category":"Youth","collection":"Zodiac","zodiac":"Aries"},
 "edition":"core","palette":"Lunar Sand","state":{"ready":true,"published":true},"price":34.99,
 "images":["https://files.cdn.printful.com/files/583/58331fbbeafbd953134461ddf1742cc4_thumb.png"],
 "brand_marks":{"back_neck_favicon":true,"inside_label":true,"wrist_logo":"youth"},

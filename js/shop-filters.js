@@ -1,3 +1,11 @@
+/**
+ * @typedef {"Men" | "Women" | "Unisex" | "Youth"} Audience
+ * @typedef {Audience | "Accessories" | "Rituals"} Category
+ * @typedef {"Zodiac" | "Lyrion Atelier Core"} Collection
+ * @typedef {"Aries" | "Taurus" | "Gemini" | "Cancer" | "Leo" | "Virgo" | "Libra" | "Scorpio" | "Sagittarius" | "Capricorn" | "Aquarius" | "Pisces" | "None"} Zodiac
+ * @typedef {{ category: Category, collection: Collection, zodiac: Zodiac, soldOut?: boolean }} ProductMeta
+ */
+
 const defaultState = {
   category: 'all',
   zodiac: 'all',
@@ -11,12 +19,15 @@ const defaultState = {
 export function apply(products, incomingState) {
   try {
     const list = Array.isArray(products) ? products : [];
+    const isSoldOut = (p = {}) => (p?.meta?.soldOut ?? p?.soldOut) === true;
     const savedState = typeof window !== 'undefined' ? window.LyrionAtelier?.shopState : undefined;
     let state = { ...defaultState, ...(savedState || {}) };
     if (incomingState && typeof incomingState === 'object') {
       state = { ...state, ...incomingState };
     }
-    if (!list.length) return list;
+    const includeSoldOut = state.includeSoldOut ?? list.some(isSoldOut);
+    const baseList = includeSoldOut ? list : list.filter((p = {}) => !isSoldOut(p));
+    if (!baseList.length) return baseList;
 
     const category = String(state.category || 'all').toLowerCase();
     const zodiac = String(state.zodiac || 'all').toLowerCase();
@@ -32,20 +43,21 @@ export function apply(products, incomingState) {
       return String(value).split(',').map((v) => v.trim()).filter(Boolean);
     };
 
-    const filtered = list.filter((p = {}) => {
+    const filtered = baseList.filter((p = {}) => {
       const published = p?.state?.published ?? true;
       const ready = p?.state?.ready ?? true;
       if (!published || !ready) return false;
 
-      const productCategories = toList(p?.category || p?.metadata?.category).map(normalize);
+      const meta = p?.meta || {};
+      const productCategories = toList(meta.category || p?.category || p?.metadata?.category).map(normalize);
       const categoryMatch =
         category === 'all' ||
         productCategories.includes(category) ||
         productCategories.map((c) => (c.endsWith('s') ? c.slice(0, -1) : c)).includes(category);
-      const productZodiac = normalize(p?.zodiac || p?.metadata?.zodiac || 'all') || 'all';
+      const productZodiac = normalize(meta.zodiac || p?.zodiac || p?.metadata?.zodiac || 'all') || 'all';
       const productPalettes = toList(p?.palette || p?.metadata?.palette).map(normalize);
       const productCollections = [
-        ...toList(p?.collection),
+        ...toList(meta.collection || p?.collection),
         ...toList(p?.metadata?.collection)
       ].map(normalize);
       const productSizes = [

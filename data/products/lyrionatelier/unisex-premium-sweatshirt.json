@@ -6,10 +6,10 @@
   "subcategory": "sweatshirts",
   "category": "sweatshirt",
   "collection": ["lyrionatelier", "lyrion-atelier"],
-  "zodiac": "all",
   "element": null,
   "edition": "core",
   "palette": "celestial-noir",
+  "meta": { "category": "Unisex", "collection": "Lyrion Atelier Core", "zodiac": "None" },
   "state": {
     "ready": true,
     "published": true
