@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Printful Products | Lyrion Atelier Admin</title>
+  <link rel="icon" type="image/png" href="../images/favicon/favicon.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body { background: var(--bg); color: var(--text); }
+    .admin-shell { display: flex; justify-content: center; padding: 2rem 1rem; }
+    .admin-card { width: min(960px, 100%); margin: 0 auto; }
+    .admin-header { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem; }
+    .status { color: var(--muted); font-size: 0.95rem; }
+    .status.error { color: #fca5a5; }
+    .table-wrapper { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 0.85rem 1rem; text-align: left; color: #e2e8f0; }
+    th { font-size: 0.95rem; letter-spacing: 0.02em; background: rgba(255,255,255,0.03); }
+    tr:nth-child(odd) td { background: rgba(255,255,255,0.02); }
+    tr:nth-child(even) td { background: rgba(255,255,255,0.01); }
+  </style>
+</head>
+<body>
+  <main class="admin-shell">
+    <section class="card admin-card">
+      <div class="admin-header">
+        <div>
+          <p class="pill" aria-hidden="true">Admin</p>
+          <h1 style="margin: 0;">Printful Products</h1>
+          <p class="muted" style="margin: 0;">Latest 5 synced products from Printful</p>
+        </div>
+        <div class="status" id="status">Loading…</div>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="products-table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Variants</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="2">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const statusEl = document.getElementById('status');
+    const tableBody = document.querySelector('#products-table tbody');
+
+    async function loadProducts() {
+      try {
+        const res = await fetch('/.netlify/functions/printful-products');
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok || !data.ok) {
+          throw new Error(data?.error || `Request failed (${res.status})`);
+        }
+
+        statusEl.textContent = data.store?.name ? `Store: ${data.store.name}` : 'Loaded';
+        tableBody.innerHTML = '';
+
+        const items = Array.isArray(data.items) ? data.items : [];
+        if (!items.length) {
+          tableBody.innerHTML = '<tr><td colspan="2">No products returned.</td></tr>';
+          return;
+        }
+
+        for (const item of items) {
+          const row = document.createElement('tr');
+          const nameCell = document.createElement('td');
+          nameCell.textContent = item?.name || `Product ${item?.id || ''}`;
+          const variantsCell = document.createElement('td');
+          const variantsValue = Array.isArray(item?.variants)
+            ? item.variants.length
+            : (Number.isFinite(item?.variants) ? item.variants : '—');
+          variantsCell.textContent = variantsValue;
+          row.appendChild(nameCell);
+          row.appendChild(variantsCell);
+          tableBody.appendChild(row);
+        }
+      } catch (error) {
+        statusEl.textContent = error.message || 'Unable to load products';
+        statusEl.classList.add('error');
+        tableBody.innerHTML = '<tr><td colspan="2">Unable to load products.</td></tr>';
+      }
+    }
+
+    loadProducts();
+  </script>
+</body>
+</html>
