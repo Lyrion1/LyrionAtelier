@@ -25,8 +25,8 @@
   --section-space-mobile: 3rem;
   --gutter: 2rem;
   --gutter-mobile: 1rem;
-  --hero-min-height: 55vh;
-  --hero-max-height: 70vh;
+  --hero-min-height: 48vh;
+  --hero-max-height: 62vh;
   --orb-glyph-size: 112px;
 }
 
@@ -3561,12 +3561,15 @@ margin: 0;
  ========================================== */
 
 .compatibility-promo-section {
-  padding: calc(var(--section-space) / 2) var(--gutter);
-background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(99, 102, 241, 0.1));
-border-top: 1px solid rgba(139, 92, 246, 0.3);
-border-bottom: 1px solid rgba(139, 92, 246, 0.3);
-overflow: hidden;
-position: relative;
+  padding: calc(var(--section-space) / 3) var(--gutter);
+  background:
+    radial-gradient(circle at 18% 22%, rgba(var(--accent-rgb), 0.1), transparent 32%),
+    linear-gradient(135deg, rgba(10, 15, 29, 0.92), rgba(19, 28, 49, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
 }
 
 .compatibility-promo-section::before {
@@ -3585,7 +3588,13 @@ max-width: 1400px;
 margin: 0 auto;
 display: grid;
 grid-template-columns: 1fr 1fr;
- gap: 48px;
+ gap: 32px;
+ padding: 2.5rem;
+ background: rgba(255, 255, 255, 0.03);
+ border: 1px solid var(--border);
+ border-radius: 18px;
+ box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+ backdrop-filter: blur(10px);
 align-items: center;
 position: relative;
 z-index: 1;
@@ -3611,7 +3620,7 @@ box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
 
 .promo-content h2 {
  color: var(--accent-2);
- font-size: 48px;
+ font-size: clamp(32px, 4vw, 44px);
  font-family: 'Cinzel', serif;
  margin: 0 0 16px 0;
  line-height: 1.2;
@@ -3619,22 +3628,25 @@ box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
 
 .promo-subtitle {
 color: #a78bfa;
-font-size: 24px;
+font-size: 20px;
 font-style: italic;
 margin: 0 0 24px 0;
 }
 
 .promo-description {
 color: rgba(255, 255, 255, 0.9);
-font-size: 17px;
-line-height: 1.7;
-margin: 0 0 32px 0;
+font-size: 16px;
+line-height: 1.6;
+max-width: 640px;
+margin: 0 auto 28px;
 }
 
 .promo-features {
  display: flex;
- gap: 32px;
- margin-bottom: 40px;
+ gap: 20px;
+ margin-bottom: 28px;
+ flex-wrap: wrap;
+ padding: 8px 0;
  justify-content: center;
 }
 
@@ -3719,12 +3731,12 @@ animation: float-mockup 6s ease-in-out infinite;
 }
 
 .mockup-frame {
-width: 400px;
-height: 500px;
+width: 320px;
+height: 420px;
 background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
 border: 3px solid rgba(251, 191, 36, 0.6);
 border-radius: 20px;
-padding: 40px;
+padding: 32px;
 position: relative;
 box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 backdrop-filter: blur(10px);
