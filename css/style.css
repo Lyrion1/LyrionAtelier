@@ -25,6 +25,9 @@
   --section-space-mobile: 3rem;
   --gutter: 2rem;
   --gutter-mobile: 1rem;
+  --hero-min-height: 55vh;
+  --hero-max-height: 70vh;
+  --orb-glyph-size: 112px;
 }
 
 * {
@@ -430,8 +433,8 @@ img {
   padding: calc(var(--section-space) + 0.5rem) 0 calc(var(--section-space) / 1.2);
   position: relative;
   overflow: hidden;
-  min-height: 55vh;
-  max-height: 70vh;
+  min-height: var(--hero-min-height);
+  max-height: var(--hero-max-height);
 }
 
 .hero-content {
@@ -525,7 +528,7 @@ img {
   inset: 0;
   display: grid;
   place-items: center;
-  font-size: 112px;
+  font-size: var(--orb-glyph-size);
   color: rgba(255, 255, 255, 0.68);
   filter: drop-shadow(0 0 18px rgba(144, 214, 255, 0.45));
   mix-blend-mode: screen;
