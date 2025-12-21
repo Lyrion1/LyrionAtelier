@@ -4582,3 +4582,38 @@ user-select: none;
 0%, 100% { transform: translateY(0px); }
 50% { transform: translateY(-20px); }
 }
+/* CRYSTAL BALL ORBS - MANUAL FIX */
+.crystal-ball,
+.orb {
+backdrop-filter: none !important;
+border: none !important;
+user-select: none;
+-webkit-user-drag: none;
+}
+
+.crystal-ball .orb-label,
+.orb .orb-label,
+.crystal-ball-text,
+.orb-text {
+color: #FFFFFF !important;
+font-weight: 700;
+text-shadow:
+0 0 20px rgba(139, 92, 246, 0.9),
+0 0 40px rgba(139, 92, 246, 0.6);
+pointer-events: auto;
+}
+
+.hero-section {
+min-height: 65vh !important;
+}
+
+section {
+margin-bottom: 2rem !important;
+padding: 2rem 0 !important;
+}
+
+.cosmic-community,
+.email-signup,
+section:has(input[type="email"]) {
+display: none !important;
+}
