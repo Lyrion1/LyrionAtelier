@@ -4504,17 +4504,29 @@ body {
 .card--empty { background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.08); padding: 2rem; text-align:center; border-radius: 12px; }
 
 .hero-section {
-  min-height: 70vh;
-  padding: 2rem 0;
+  min-height: 65vh;
+  padding: 1.5rem 0;
 }
 
 section {
-  margin-bottom: 2rem;
-  padding: 2rem 0;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem 0;
+}
+
+.crystal-ball,
+.orb {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border: none !important;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 .crystal-ball-text,
-.orb-text {
+.orb-text,
+.crystal-ball-text button,
+.orb-text button {
   color: #FFFFFF !important;
   font-weight: 700;
   font-size: 0.875rem;
@@ -4522,6 +4534,7 @@ section {
   letter-spacing: 0.05em;
   text-shadow: 0 0 20px rgba(139, 92, 246, 0.9),
     0 0 40px rgba(139, 92, 246, 0.6);
+  pointer-events: auto;
   z-index: 10;
   position: relative;
 }
@@ -4536,4 +4549,21 @@ section {
 .customer-favorites {
   margin-top: 2rem;
   padding-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .crystal-ball,
+  .orb {
+    width: 150px;
+    height: 150px;
+    display: block;
+    opacity: 1;
+    margin: 2rem auto;
+  }
+}
+
+.cosmic-community,
+.email-signup,
+section input[type="email"] {
+  display: none !important;
 }
