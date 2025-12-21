@@ -1,0 +1,206 @@
+<div class="oracle-chat-overlay" data-oracle-chat-modal hidden>
+  <div class="oracle-chat-backdrop" data-oracle-chat-close></div>
+  <div class="oracle-chat-panel" role="dialog" aria-modal="true" aria-labelledby="oracle-chat-title">
+    <button class="oracle-chat-close" type="button" aria-label="Close conversation" data-oracle-chat-close>×</button>
+    <div class="oracle-chat-header">
+      <p class="pill">Or Ask the Oracle Directly</p>
+      <h3 id="oracle-chat-title">Cosmic Conversation</h3>
+      <p class="muted">The Oracle channels messages from the velvet night. Ask, listen, and follow where the celestial current guides.</p>
+    </div>
+
+    <div class="oracle-chat-body">
+      <div class="oracle-chat-messages" data-oracle-chat-messages aria-live="polite"></div>
+
+      <div class="oracle-chat-upgrade" data-oracle-chat-upgrade hidden>
+        <div>
+          <p class="pill">Free questions fulfilled</p>
+          <h4>Continue your dialogue</h4>
+          <p>The Oracle has gifted your three complimentary insights. Choose a path to keep the channel open.</p>
+        </div>
+        <div class="oracle-chat-upgrade-actions">
+          <button type="button" class="oracle-tier-btn" data-subscription-tier="cosmic">Cosmic Insight — $9.99/mo</button>
+          <button type="button" class="oracle-tier-btn" data-subscription-tier="mastery">Astral Mastery — $99.99/mo</button>
+        </div>
+      </div>
+    </div>
+
+    <form class="oracle-chat-form" data-oracle-chat-form>
+      <div class="oracle-chat-inputs">
+        <input type="text" name="name" placeholder="Name (optional)" autocomplete="name" data-oracle-chat-name>
+        <input type="email" name="email" placeholder="Email for follow-ups" autocomplete="email" data-oracle-chat-email>
+      </div>
+      <textarea data-oracle-chat-input name="question" rows="3" placeholder="Ask your question..." required></textarea>
+      <div class="oracle-chat-footer">
+        <div class="oracle-chat-counter" data-oracle-chat-counter>3 free questions remaining</div>
+        <div class="oracle-chat-actions">
+          <button type="button" class="oracle-upgrade-inline" data-subscription-tier="cosmic">Unlock Unlimited ($9.99/mo)</button>
+          <button type="submit" class="oracle-chat-send">Send to the Oracle</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .oracle-chat-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(4, 7, 26, 0.82);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    padding: 1rem;
+  }
+  .oracle-chat-overlay[hidden] {
+    display: none;
+  }
+  .oracle-chat-backdrop {
+    position: absolute;
+    inset: 0;
+  }
+  .oracle-chat-panel {
+    position: relative;
+    max-width: 720px;
+    width: 100%;
+    background: radial-gradient(circle at 20% 20%, rgba(147, 197, 253, 0.12), transparent 35%), #0b1024;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    box-shadow: 0 30px 120px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(99, 102, 241, 0.25);
+    color: #fff;
+    padding: 1.5rem;
+    overflow: hidden;
+  }
+  .oracle-chat-header h3 {
+    margin: 0.25rem 0;
+  }
+  .oracle-chat-close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+  .oracle-chat-body {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: 1rem;
+    margin: 1rem 0;
+    max-height: 320px;
+    overflow: auto;
+  }
+  .oracle-chat-messages {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .oracle-bubble {
+    padding: 0.85rem 1rem;
+    border-radius: 14px;
+    line-height: 1.4;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+  .oracle-bubble.user {
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    justify-self: end;
+    max-width: 80%;
+  }
+  .oracle-bubble.oracle {
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    justify-self: start;
+    max-width: 90%;
+  }
+  .oracle-chat-form {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .oracle-chat-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.5rem;
+  }
+  .oracle-chat-form input,
+  .oracle-chat-form textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 0.75rem;
+    color: #fff;
+    font-size: 0.95rem;
+  }
+  .oracle-chat-form textarea {
+    resize: vertical;
+    min-height: 90px;
+  }
+  .oracle-chat-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .oracle-chat-counter {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .oracle-chat-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .oracle-chat-send,
+  .oracle-tier-btn,
+  .oracle-upgrade-inline {
+    border: none;
+    cursor: pointer;
+    border-radius: 999px;
+    padding: 0.65rem 1.25rem;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .oracle-chat-send {
+    background: linear-gradient(120deg, #6366f1, #a855f7);
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.35);
+  }
+  .oracle-upgrade-inline,
+  .oracle-tier-btn {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .oracle-chat-upgrade {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: rgba(250, 204, 21, 0.08);
+    border: 1px solid rgba(250, 204, 21, 0.4);
+    display: grid;
+    gap: 0.75rem;
+  }
+  .oracle-chat-upgrade-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 640px) {
+    .oracle-chat-panel {
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .oracle-chat-actions {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
+</style>
