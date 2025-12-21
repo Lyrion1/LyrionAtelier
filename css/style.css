@@ -21,8 +21,8 @@
   --product-card-media-height: 260px;
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
   --gradient: radial-gradient(circle at 16% 18%, rgba(109, 132, 255, 0.18), transparent 28%), linear-gradient(145deg, #040712 0%, #0a1026 48%, #050816 100%);
-  --section-space: 6rem;
-  --section-space-mobile: 4rem;
+  --section-space: 3rem;
+  --section-space-mobile: 3rem;
   --gutter: 2rem;
   --gutter-mobile: 1rem;
 }
@@ -427,10 +427,11 @@ img {
 }
 
 .hero {
-  padding: var(--section-space) 0 calc(var(--section-space) / 2 + 1rem);
+  padding: calc(var(--section-space) + 0.5rem) 0 calc(var(--section-space) / 1.2);
   position: relative;
   overflow: hidden;
-  min-height: 70vh;
+  min-height: 55vh;
+  max-height: 70vh;
 }
 
 .hero-content {
@@ -446,26 +447,27 @@ img {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 8%;
+  bottom: 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 6vw;
-  gap: clamp(1.5rem, 6vw, 4rem);
+  padding: 0 4vw;
+  gap: clamp(1.25rem, 5vw, 3rem);
   z-index: 5;
 }
 
 .conversion-orb {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.22);
   padding: 0;
   background:
     radial-gradient(circle at 26% 22%, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.18) 26%, rgba(255, 255, 255, 0) 46%),
+    conic-gradient(from 210deg at 50% 50%, rgba(132, 206, 235, 0.16), rgba(64, 16, 144, 0.22), rgba(16, 4, 48, 0.08), rgba(132, 206, 235, 0.16)),
     radial-gradient(120% 140% at 50% 70%, rgba(32, 12, 84, 0.96), rgba(12, 6, 34, 0.98)),
     radial-gradient(circle at 50% 55%, rgba(116, 92, 255, 0.9), rgba(43, 16, 114, 0.98));
-  background-blend-mode: screen, normal, normal;
+  background-blend-mode: screen, screen, normal, normal;
   background-size: 120% 120%;
   box-shadow:
     0 28px 60px rgba(18, 10, 64, 0.6),
@@ -492,8 +494,10 @@ img {
   position: absolute;
   inset: -30px;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 55%, rgba(120, 72, 255, 0.35), rgba(49, 22, 120, 0) 60%);
-  filter: blur(16px);
+  background:
+    radial-gradient(circle at 50% 55%, rgba(120, 72, 255, 0.32), rgba(49, 22, 120, 0) 60%),
+    conic-gradient(from 140deg at 50% 50%, rgba(148, 222, 255, 0.2), rgba(84, 32, 174, 0.16), rgba(148, 222, 255, 0.2));
+  filter: blur(14px);
   z-index: 1;
   pointer-events: none;
   opacity: 0.9;
@@ -507,11 +511,26 @@ img {
   border-radius: 50%;
   background:
     radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 48%),
-    radial-gradient(80% 60% at 50% 80%, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0));
+    conic-gradient(from 220deg at 50% 50%, rgba(176, 234, 255, 0.18), rgba(58, 27, 134, 0.22), rgba(176, 234, 255, 0.18)),
+    radial-gradient(80% 60% at 50% 80%, rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0));
   mix-blend-mode: screen;
   opacity: 0.92;
   z-index: 1;
   animation: orb-shimmer 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.conversion-orb__glyph {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 112px;
+  color: rgba(255, 255, 255, 0.68);
+  filter: drop-shadow(0 0 18px rgba(144, 214, 255, 0.45));
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -1191,7 +1210,7 @@ p {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
-  padding: 3rem;
+  padding: 2.25rem;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(16px);
 }
@@ -1199,7 +1218,7 @@ p {
 .free-oracle-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
+  gap: 1.5rem;
   align-items: center;
 }
 
@@ -3273,22 +3292,22 @@ RESPONSIVE DESIGN
  font-size: 15px;
  }
  
-.hero {
+ .hero {
  padding: var(--section-space-mobile) 0 calc(var(--section-space-mobile) / 2 + 1rem);
  min-height: auto;
  }
  
  .conversion-orbs {
  position: static;
- margin-top: 2rem;
+ margin-top: 1.5rem;
  flex-direction: column;
  gap: 1.5rem;
  align-items: center;
  }
  
  .conversion-orb {
- width: 200px;
- height: 200px;
+ width: 180px;
+ height: 180px;
  }
  
  .compatibility-products-grid {
@@ -3626,7 +3645,7 @@ max-width: 1400px;
 margin: 0 auto;
 display: grid;
 grid-template-columns: 1fr 1fr;
-gap: 80px;
+ gap: 48px;
 align-items: center;
 position: relative;
 z-index: 1;
