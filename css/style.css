@@ -491,7 +491,7 @@ img {
 .conversion-orb__glyph {
   display: inline-flex;
   place-items: center;
-  font-size: 2rem;
+  font-size: clamp(2.4rem, 3vw, 3rem);
   color: var(--accent-2);
   filter: drop-shadow(0 0 12px rgba(var(--accent-2-rgb), 0.55));
   mix-blend-mode: normal;
