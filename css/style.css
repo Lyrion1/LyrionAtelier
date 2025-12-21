@@ -449,16 +449,15 @@ img {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 0;
-  background: radial-gradient(circle at 30% 30%,
-    #FBBF24 0%,
-    #EC4899 55%,
-    #8B5CF6 95%);
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.05) 35%),
+    radial-gradient(circle at 50% 60%, #9c4dff, #5b2acc 60%, #2c1a72 100%);
   box-shadow:
-    0 18px 45px rgba(139, 92, 246, 0.45),
-    0 12px 32px rgba(236, 72, 153, 0.35),
-    0 0 38px rgba(251, 191, 36, 0.28);
+    0 16px 36px rgba(92, 52, 191, 0.35),
+    0 0 0 2px rgba(255, 255, 255, 0.08) inset,
+    0 12px 32px rgba(42, 10, 122, 0.45);
   color: #f8fafc;
   display: grid;
   place-items: center;
@@ -474,15 +473,13 @@ img {
 .conversion-orb::before {
   content: "";
   position: absolute;
-  inset: -16px;
+  inset: -18px;
   border-radius: 50%;
-  background: radial-gradient(circle,
-    rgba(251, 191, 36, 0.18) 0%,
-    rgba(236, 72, 153, 0.14) 45%,
-    rgba(139, 92, 246, 0.12) 70%,
-    transparent 80%);
+  background: radial-gradient(circle, rgba(160, 108, 255, 0.33), transparent 60%);
+  filter: blur(12px);
   z-index: 1;
   pointer-events: none;
+  animation: conversion-orb-pulse 2.6s ease-in-out infinite;
 }
 
 .conversion-orb__label {
@@ -502,11 +499,11 @@ img {
 }
 
 .conversion-orb:hover {
-  transform: translate3d(0, -6px, 0) scale(1.1);
+  transform: translate3d(0, -6px, 0) scale(1.06);
   box-shadow:
-    0 24px 60px rgba(139, 92, 246, 0.6),
-    0 16px 42px rgba(236, 72, 153, 0.45),
-    0 0 50px rgba(251, 191, 36, 0.35);
+    0 20px 44px rgba(92, 52, 191, 0.48),
+    0 0 0 2px rgba(255, 255, 255, 0.12) inset,
+    0 16px 42px rgba(42, 10, 122, 0.5);
   animation-play-state: paused;
 }
 
@@ -521,6 +518,11 @@ img {
 @keyframes conversion-orb-float {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
   50% { transform: translate3d(0, -14px, 0) scale(1.04); }
+}
+
+@keyframes conversion-orb-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.08); opacity: 1; }
 }
 
 .eyebrow {
