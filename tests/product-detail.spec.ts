@@ -74,6 +74,11 @@ test.describe('product detail page', () => {
 
     await page.goto(`http://localhost:${PORT}/shop/aries-spark-tee-youth`, { waitUntil: 'networkidle' });
 
+    const stylesheetHrefs = await page.locator('link[rel="stylesheet"]').evaluateAll((links) =>
+      links.map((link) => (link as HTMLLinkElement).href)
+    );
+    expect(stylesheetHrefs.some((href) => href.endsWith('/css/style.css'))).toBeTruthy();
+
     await expect(page.locator('#product-name')).toHaveText(/Aries Spark Tee/i);
     await expect(page.locator('#product-description')).toContainText(/Ignition energy/i);
     await expect(page.locator('#product-price')).toContainText('$34.99');
