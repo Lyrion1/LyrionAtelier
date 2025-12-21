@@ -4502,3 +4502,38 @@ body {
 }
 
 .card--empty { background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.08); padding: 2rem; text-align:center; border-radius: 12px; }
+
+.hero-section {
+  min-height: 70vh;
+  padding: 2rem 0;
+}
+
+section {
+  margin-bottom: 2rem;
+  padding: 2rem 0;
+}
+
+.crystal-ball-text,
+.orb-text {
+  color: #FFFFFF !important;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.9),
+    0 0 40px rgba(139, 92, 246, 0.6);
+  z-index: 10;
+  position: relative;
+}
+
+.crystal-ball::before,
+.orb::before {
+  backdrop-filter: none !important;
+  background: none !important;
+  border: none !important;
+}
+
+.customer-favorites {
+  margin-top: 2rem;
+  padding-top: 2rem;
+}
