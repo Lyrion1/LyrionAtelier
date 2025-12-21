@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Printful Status</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+    }
+    main {
+      padding: 32px;
+      max-width: 640px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0 0 16px;
+      font-size: 28px;
+      letter-spacing: 0.01em;
+    }
+    .status {
+      font-size: 72px;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .message {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    .details {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+    .error {
+      color: #ff6b6b;
+    }
+    .ok {
+      color: #7ee081;
+    }
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 32px 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="card">
+      <h1>Printful Connection</h1>
+      <div id="status" class="status">⏳</div>
+      <div id="message" class="message">Checking status…</div>
+      <div id="details" class="details"></div>
+    </div>
+  </main>
+  <script>
+    const statusEl = document.getElementById('status');
+    const messageEl = document.getElementById('message');
+    const detailsEl = document.getElementById('details');
+
+    const setState = ({ ok, store, error, status }) => {
+      if (ok) {
+        statusEl.textContent = '✅';
+        statusEl.classList.add('ok');
+        messageEl.textContent = `Connected${store ? ` to ${store}` : ''}`;
+        messageEl.classList.remove('error');
+        messageEl.classList.add('ok');
+        detailsEl.textContent = status ? `Status ${status}` : '';
+      } else {
+        statusEl.textContent = '❌';
+        statusEl.classList.remove('ok');
+        messageEl.textContent = 'Not connected';
+        messageEl.classList.add('error');
+        const parts = [];
+        if (status) parts.push(`Status ${status}`);
+        if (error) parts.push(error);
+        detailsEl.textContent = parts.join(' · ');
+      }
+    };
+
+    const loadStatus = async () => {
+      try {
+        const res = await fetch('/.netlify/functions/printful-ok', { cache: 'no-cache' });
+        const json = await res.json();
+        setState(json);
+      } catch (err) {
+        setState({ ok: false, error: err?.message || 'Unable to reach status', status: 0 });
+      }
+    };
+
+    loadStatus();
+  </script>
+</body>
+</html>
