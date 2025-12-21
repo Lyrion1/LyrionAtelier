@@ -91,7 +91,7 @@
 
     const loadStatus = async () => {
       try {
-        const res = await fetch('/.netlify/functions/printful-ok', { cache: 'no-cache' });
+        const res = await fetch('/.netlify/functions/printful-health', { cache: 'no-cache' });
         const json = await res.json();
         setState(json);
       } catch (err) {
