@@ -20,7 +20,7 @@
   --radius: 14px;
   --product-card-media-height: 260px;
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-  --gradient: radial-gradient(circle at 16% 18%, rgba(109, 132, 255, 0.18), transparent 28%), radial-gradient(circle at 84% 12%, rgba(167, 139, 250, 0.18), transparent 26%), linear-gradient(145deg, #040712 0%, #0a1026 48%, #050816 100%);
+  --gradient: radial-gradient(circle at 16% 18%, rgba(109, 132, 255, 0.18), transparent 28%), linear-gradient(145deg, #040712 0%, #0a1026 48%, #050816 100%);
 }
 
 * {
@@ -418,6 +418,8 @@ img {
 
 .hero {
   padding: 4rem 0 3rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-content {
@@ -425,6 +427,61 @@ img {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
   align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.hero-orb {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%,
+    rgba(251, 191, 36, 0.92) 0%,
+    rgba(236, 72, 153, 0.65) 32%,
+    rgba(139, 92, 246, 0.5) 65%,
+    rgba(67, 56, 202, 0.25) 100%);
+  box-shadow:
+    0 30px 90px rgba(139, 92, 246, 0.55),
+    0 18px 60px rgba(236, 72, 153, 0.45),
+    0 12px 48px rgba(251, 191, 36, 0.35),
+    inset 0 0 60px rgba(255, 255, 255, 0.32);
+  filter: blur(0px);
+  opacity: 0.9;
+  animation: hero-orb-float 11s ease-in-out infinite;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+.hero-orb::after {
+  content: "";
+  position: absolute;
+  inset: -28px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(251, 191, 36, 0.28) 0%,
+    rgba(236, 72, 153, 0.22) 35%,
+    rgba(139, 92, 246, 0.18) 70%,
+    transparent 100%);
+  filter: blur(26px);
+  opacity: 0.8;
+  transform: translateZ(0);
+}
+
+.hero-orb--right {
+  right: -80px;
+  top: -40px;
+}
+
+.hero-orb--left {
+  left: -90px;
+  top: 120px;
+  animation-delay: 3s;
+}
+
+@keyframes hero-orb-float {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -18px, 0) scale(1.02); }
 }
 
 .eyebrow {
@@ -3364,6 +3421,22 @@ RESPONSIVE DESIGN
  .hero-text {
  font-size: 15px;
  }
+
+ .hero-orb {
+ width: 260px;
+ height: 260px;
+ opacity: 0.75;
+ }
+
+ .hero-orb--right {
+ right: -140px;
+ top: -60px;
+ }
+
+ .hero-orb--left {
+ left: -160px;
+ top: 140px;
+ }
  
  .compatibility-products-grid {
  grid-template-columns: 1fr;
@@ -4132,6 +4205,7 @@ body {
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s ease;
+  position: relative;
 }
 
 .crystal-gateway .crystal-ball-container:hover {
@@ -4145,30 +4219,35 @@ body {
   border-radius: 50%;
   position: relative;
   background: radial-gradient(circle at 35% 35%,
-    rgba(255, 255, 255, 0.8),
-    rgba(236, 72, 153, 0.6) 30%,
-    rgba(139, 92, 246, 0.4) 60%,
-    rgba(67, 56, 202, 0.2) 100%
+    rgba(251, 191, 36, 0.92) 0%,
+    rgba(236, 72, 153, 0.65) 32%,
+    rgba(139, 92, 246, 0.5) 65%,
+    rgba(67, 56, 202, 0.25) 100%
   );
   box-shadow:
-    0 30px 80px rgba(139, 92, 246, 0.6),
-    0 15px 40px rgba(236, 72, 153, 0.4),
-    inset 0 0 60px rgba(255, 255, 255, 0.3);
+    0 30px 90px rgba(139, 92, 246, 0.55),
+    0 18px 60px rgba(236, 72, 153, 0.45),
+    0 12px 48px rgba(251, 191, 36, 0.35),
+    inset 0 0 60px rgba(255, 255, 255, 0.32);
   animation: crystal-float 8s ease-in-out infinite;
   backdrop-filter: blur(10px);
+  z-index: 1;
+  overflow: hidden;
 }
 
-.crystal-gateway .crystal-ball.gold {
-  background: radial-gradient(circle at 35% 35%,
-    rgba(255, 255, 255, 0.9),
-    rgba(251, 191, 36, 0.7) 30%,
-    rgba(245, 158, 11, 0.5) 60%,
-    rgba(217, 119, 6, 0.3) 100%
-  );
-  box-shadow:
-    0 30px 80px rgba(251, 191, 36, 0.6),
-    0 15px 40px rgba(245, 158, 11, 0.4),
-    inset 0 0 60px rgba(255, 255, 255, 0.4);
+.crystal-gateway .crystal-ball::after {
+  content: "";
+  position: absolute;
+  inset: -30px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(251, 191, 36, 0.28) 0%,
+    rgba(236, 72, 153, 0.22) 35%,
+    rgba(139, 92, 246, 0.18) 70%,
+    transparent 100%);
+  filter: blur(26px);
+  opacity: 0.8;
+  transform: translateZ(0);
 }
 
 .crystal-gateway .crystal-core {
@@ -4180,20 +4259,14 @@ body {
   height: 150px;
   border-radius: 50%;
   background: radial-gradient(circle,
-    rgba(255, 255, 255, 1),
-    rgba(236, 72, 153, 0.8) 40%,
-    transparent 70%
+    rgba(255, 255, 255, 1) 0%,
+    rgba(251, 191, 36, 0.9) 22%,
+    rgba(236, 72, 153, 0.75) 46%,
+    rgba(139, 92, 246, 0.3) 70%,
+    transparent 78%
   );
   animation: crystal-pulse 3s ease-in-out infinite;
   filter: blur(5px);
-}
-
-.crystal-gateway .crystal-core.gold {
-  background: radial-gradient(circle,
-    rgba(255, 255, 255, 1),
-    rgba(251, 191, 36, 0.9) 40%,
-    transparent 70%
-  );
 }
 
 .crystal-gateway .sparkles {
@@ -4231,6 +4304,8 @@ body {
   margin-bottom: 12px;
   font-family: Georgia, serif;
   text-shadow: 0 2px 20px rgba(251, 191, 36, 0.5);
+  position: relative;
+  z-index: 10;
 }
 
 .crystal-gateway .ball-description {
@@ -4238,6 +4313,8 @@ body {
   color: #c4b5fd;
   margin-bottom: 25px;
   line-height: 1.6;
+  position: relative;
+  z-index: 10;
 }
 
 .crystal-gateway .ball-cta {
@@ -4253,6 +4330,8 @@ body {
   box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
   text-transform: uppercase;
   letter-spacing: 1px;
+  position: relative;
+  z-index: 10;
 }
 
 .crystal-gateway .ball-cta.gold {
