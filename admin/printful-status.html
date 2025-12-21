@@ -39,6 +39,7 @@
     .details {
       font-size: 14px;
       opacity: 0.8;
+      white-space: pre-wrap;
     }
     .error {
       color: #ff6b6b;
@@ -69,23 +70,24 @@
     const messageEl = document.getElementById('message');
     const detailsEl = document.getElementById('details');
 
-    const setState = ({ ok, store, error, status }) => {
+    const setState = (payload = {}) => {
+      const { ok, body, error, status, message } = payload;
+      const errorText = message || error?.message || (typeof error === 'string' ? error : (error ? JSON.stringify(error) : ''));
+      const details = JSON.stringify({ ok, status, body, message: message || errorText }, null, 2);
+
       if (ok) {
         statusEl.textContent = '✅';
         statusEl.classList.add('ok');
-        messageEl.textContent = `Connected${store ? ` to ${store}` : ''}`;
+        messageEl.textContent = status ? `Connected (status ${status})` : 'Connected';
         messageEl.classList.remove('error');
         messageEl.classList.add('ok');
-        detailsEl.textContent = status ? `Status ${status}` : '';
+        detailsEl.textContent = details;
       } else {
         statusEl.textContent = '❌';
         statusEl.classList.remove('ok');
-        messageEl.textContent = 'Not connected';
+        messageEl.textContent = errorText || 'Not connected';
         messageEl.classList.add('error');
-        const parts = [];
-        if (status) parts.push(`Status ${status}`);
-        if (error) parts.push(error);
-        detailsEl.textContent = parts.join(' · ');
+        detailsEl.textContent = details;
       }
     };
 
@@ -95,7 +97,7 @@
         const json = await res.json();
         setState(json);
       } catch (err) {
-        setState({ ok: false, error: err?.message || 'Unable to reach status', status: 0 });
+        setState({ ok: false, error: err, status: 0 });
       }
     };
 
