@@ -342,7 +342,11 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     else if (basePrice && Number.isFinite(basePrice.value)) priceValue = basePrice.value;
     else if (Number.isFinite(priceCents)) priceValue = priceCents / 100;
     const priceRange = (() => {
-      const priceSource = typeof p.price === 'object' && p.price !== null ? p.price : (typeof p.price_range === 'object' && p.price_range !== null ? p.price_range : null);
+      const priceSource = (() => {
+        if (p && typeof p.price === 'object' && p.price !== null) return p.price;
+        if (p && typeof p.price_range === 'object' && p.price_range !== null) return p.price_range;
+        return null;
+      })();
       const currency = ((priceSource && priceSource.currency) || p.currency || 'USD').toUpperCase();
       const symbol = currencySymbol(currency);
       const min = Number(priceSource?.min);
