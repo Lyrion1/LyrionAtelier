@@ -331,16 +331,16 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     const hasPriceData = Number.isFinite(p.price) || Number.isFinite(p.priceCents) || !!p.priceLabel;
     const basePrice = hasPriceData ? null : normalizePrice(p);
     const fallbackPriceValue = displayPrice(p);
-    const priceCents = Number.isFinite(p.priceCents)
-      ? p.priceCents
-      : Number.isFinite(fallbackPriceValue)
-        ? Math.round(fallbackPriceValue * 100)
-        : basePrice?.cents ?? null;
-    const priceValue = Number.isFinite(p.price)
-      ? p.price
-      : Number.isFinite(fallbackPriceValue)
-        ? fallbackPriceValue
-        : basePrice?.value ?? (Number.isFinite(priceCents) ? priceCents / 100 : null);
+    let priceCents = null;
+    if (Number.isFinite(p.priceCents)) priceCents = p.priceCents;
+    else if (Number.isFinite(fallbackPriceValue)) priceCents = Math.round(fallbackPriceValue * 100);
+    else if (basePrice && Number.isFinite(basePrice.cents)) priceCents = basePrice.cents;
+
+    let priceValue = null;
+    if (Number.isFinite(p.price)) priceValue = p.price;
+    else if (Number.isFinite(fallbackPriceValue)) priceValue = fallbackPriceValue;
+    else if (basePrice && Number.isFinite(basePrice.value)) priceValue = basePrice.value;
+    else if (Number.isFinite(priceCents)) priceValue = priceCents / 100;
     const priceRange = (() => {
       const priceSource = typeof p.price === 'object' && p.price !== null ? p.price : (typeof p.price_range === 'object' && p.price_range !== null ? p.price_range : null);
       const currency = ((priceSource && priceSource.currency) || p.currency || 'USD').toUpperCase();

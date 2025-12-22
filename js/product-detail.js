@@ -20,7 +20,7 @@ const variantValue = (variant = {}, key) => variant?.options?.[key] ?? variant?.
 const derivePrice = (product = {}, size = null, variant = null) => {
   const variantPrice = priceFrom(priceNumber(variant));
   if (variantPrice !== null) return variantPrice;
-  const priceRange = product?.price_range || product?.priceRange;
+  const priceRange = product?.price_range;
   if (priceRange && typeof priceRange === 'object') {
     const min = priceFrom(priceRange.min);
     const max = priceFrom(priceRange.max);

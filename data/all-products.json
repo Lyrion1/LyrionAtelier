@@ -659,10 +659,10 @@
       { "size": "3XL", "price": 64, "printful_variant_id": "69489d9f668b49" }
     ],
     "images": {
-      "card": "https://files.cdn.printful.com/files/REPLACE_WITH_FULL_RES.png",
+      "card": "/assets/catalog/logo.webp",
       "gallery": [
-        "https://files.cdn.printful.com/files/REPLACE_WITH_FULL_RES.png",
-        "https://files.cdn.printful.com/files/OPTIONAL_2ND_FULL_RES.png"
+        "/assets/catalog/logo.webp",
+        "/assets/catalog/lyrion-premium-sweatshirt.webp"
       ]
     },
     "filters": {
