@@ -4,6 +4,7 @@ const FALLBACK_IMAGE = '/assets/catalog/placeholder.webp';
 const CHECKOUT_ENDPOINT = '/.netlify/functions/create-checkout-session';
 const EXTENDED_SIZE = /^([2-9]?xl)$/i;
 const PRICE_FALLBACK = '—';
+const fullRes = (u) => (u || '').replace('_thumb', '');
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -19,6 +20,15 @@ const variantValue = (variant = {}, key) => variant?.options?.[key] ?? variant?.
 const derivePrice = (product = {}, size = null, variant = null) => {
   const variantPrice = priceFrom(priceNumber(variant));
   if (variantPrice !== null) return variantPrice;
+  const priceRange = product?.price_range;
+  if (priceRange && typeof priceRange === 'object') {
+    const min = priceFrom(priceRange.min);
+    const max = priceFrom(priceRange.max);
+    const isExtended = typeof size === 'string' && EXTENDED_SIZE.test(size) && !/^xl$/i.test(size);
+    if (isExtended && max !== null) return max;
+    if (min !== null) return min;
+    if (max !== null) return max;
+  }
   const price = product?.price;
   if (price && typeof price === 'object') {
     const min = priceFrom(price.min);
@@ -96,7 +106,7 @@ function renderImages(images = [], productTitle = 'Product') {
   const gallery = $('#product-gallery');
   if (!gallery) return;
   gallery.innerHTML = '';
-  const sources = Array.isArray(images) && images.length ? images : [FALLBACK_IMAGE];
+  const sources = (Array.isArray(images) && images.length ? images : [FALLBACK_IMAGE]).map(fullRes);
   sources.forEach((src, idx) => {
     if (!src) return;
     const img = document.createElement('img');
@@ -130,6 +140,7 @@ async function startCheckout(variant, product, selection, btnEl = $('#add-to-car
   const variantId =
     storeVariantId ||
     variant?.printfulVariantId ||
+    variant?.printful_variant_id ||
     variant?.variant_id ||
     variant?.id ||
     product?.pf?.variants?.[selection.size] ||
@@ -229,11 +240,11 @@ async function hydrateProductPage() {
     (product.options?.sizes || [])
       .concat(product.options?.size || [])
       .concat(product.sizes || [])
-      .concat((product.variants || []).map((v) => v.options?.size))
+      .concat((product.variants || []).map((v) => variantValue(v, 'size')))
   );
   const colors = unique(
     (product.options?.color || []).concat(
-      (product.variants || []).map((v) => v.options?.color)
+      (product.variants || []).map((v) => variantValue(v, 'color'))
     )
   );
 
@@ -303,9 +314,16 @@ async function hydrateProductPage() {
     }
   }
 
-  const galleryImages = Array.isArray(product.images) && product.images.length
-    ? product.images
-    : (product.image ? [product.image] : []);
+  const galleryImages = (() => {
+    const imgs = [];
+    if (product.image) imgs.push(product.image);
+    if (Array.isArray(product.images)) imgs.push(...product.images);
+    else if (product.images && typeof product.images === 'object') {
+      if (product.images.card) imgs.push(product.images.card);
+      if (Array.isArray(product.images.gallery)) imgs.push(...product.images.gallery);
+    }
+    return imgs.filter(Boolean).map(fullRes);
+  })();
   renderImages(galleryImages, title);
 
   let activeVariant = resolveVariant(product, sizeSelect?.value || sizes[0], colors[0]);
@@ -329,6 +347,7 @@ async function hydrateProductPage() {
     const variantId =
       getStoreVariantId(activeVariant) ||
       activeVariant?.printfulVariantId ||
+      activeVariant?.printful_variant_id ||
       activeVariant?.variant_id ||
       activeVariant?.id ||
       product?.pf?.variants?.[selection.size] ||
