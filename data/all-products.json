@@ -640,5 +640,56 @@
     },
     "price": null,
     "image": "/assets/placeholders/product.webp"
+  },
+  {
+    "handle": "oversized-garment-dyed-tee-lyrion-logo",
+    "slug": "oversized-garment-dyed-tee-lyrion-logo",
+    "title": "Lyrīon Oversized Garment-Dyed Tee",
+    "subtitle": "Unisex • Left-chest crest",
+    "vendor": "Bella+Canvas 4810",
+    "status": "active",
+    "currency": "USD",
+    "price_range": { "min": 54, "max": 64 },
+    "variants": [
+      { "size": "S", "price": 54, "printful_variant_id": "69489d9f6689a1" },
+      { "size": "M", "price": 54, "printful_variant_id": "69489d9f668a15" },
+      { "size": "L", "price": 54, "printful_variant_id": "69489d9f668a69" },
+      { "size": "XL", "price": 58, "printful_variant_id": "69489d9f668ab1" },
+      { "size": "2XL", "price": 60, "printful_variant_id": "69489d9f668b07" },
+      { "size": "3XL", "price": 64, "printful_variant_id": "69489d9f668b49" }
+    ],
+    "images": {
+      "card": "https://files.cdn.printful.com/files/REPLACE_WITH_FULL_RES.png",
+      "gallery": [
+        "https://files.cdn.printful.com/files/REPLACE_WITH_FULL_RES.png",
+        "https://files.cdn.printful.com/files/OPTIONAL_2ND_FULL_RES.png"
+      ]
+    },
+    "filters": {
+      "category": "Tops",
+      "collection": "Lyrion Logo",
+      "zodiac": "All signs",
+      "audience": "Unisex",
+      "market": "US"
+    },
+    "meta": {
+      "category": "Tops",
+      "collection": "Lyrion Logo",
+      "zodiac": "All signs"
+    },
+    "category": "Tops",
+    "collection": "Lyrion Logo",
+    "zodiac": "All signs",
+    "audience": "Unisex",
+    "market": "US",
+    "options": {
+      "size": ["S", "M", "L", "XL", "2XL", "3XL"]
+    },
+    "sizes": ["S", "M", "L", "XL", "2XL", "3XL"],
+    "placement": "left-front",
+    "color": "Khaki",
+    "shipping_region": "US",
+    "inventory_policy": "printful",
+    "description": "A relaxed, garment-dyed staple bearing the Lyrīon crest—quiet luxury with celestial intent."
   }
 ]

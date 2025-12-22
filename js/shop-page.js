@@ -41,6 +41,17 @@ import { formatPrice, currencySymbol } from './price-utils.js';
   const safetyHide = setTimeout(hideLoader, LOADER_TIMEOUT_MS);
   const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   const pick = (...items) => items.find((x) => typeof x === 'string' && String(x).trim());
+  const fullRes = (u) => (u || '').replace('_thumb', '');
+  const imageCandidates = (p = {}) => {
+    if (Array.isArray(p.images)) return p.images;
+    if (p.images && typeof p.images === 'object') {
+      const list = [];
+      if (p.images.card) list.push(p.images.card);
+      if (Array.isArray(p.images.gallery)) list.push(...p.images.gallery);
+      return list;
+    }
+    return [];
+  };
   let imageMapPromise = null;
   let cachedImageMap = {};
   let cachedZodiacMap = {};
@@ -137,13 +148,13 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       );
     };
     const image = isUsableImage(p.image) ? p.image.trim() : null;
-    if (image) return image;
-    const fromImages = Array.isArray(p.images) ? p.images.map(asString).find(isUsableImage) : null;
-    if (fromImages) return fromImages;
+    if (image) return fullRes(image);
+    const fromImages = imageCandidates(p).map(asString).find(isUsableImage);
+    if (fromImages) return fullRes(fromImages);
     const fromFiles = Array.isArray(p.files) ? p.files.map(asString).find(isUsableImage) : null;
-    if (fromFiles) return fromFiles;
+    if (fromFiles) return fullRes(fromFiles);
     const fromVariants = pickVariantPreview(p.variants);
-    return fromVariants || FALLBACK;
+    return fromVariants ? fullRes(fromVariants) : FALLBACK;
   }
 
   const normalizePrice = (p) => {
@@ -201,7 +212,10 @@ import { formatPrice, currencySymbol } from './price-utils.js';
         typeof img.thumbnail_url === 'string' ? img.thumbnail_url : null
       );
     };
-    const normalizedImages = (Array.isArray(p.images) ? p.images : []).map(asImageString).filter(isUsableImage);
+    const normalizedImages = ([...(p.image ? [p.image] : []), ...imageCandidates(p)])
+      .map(asImageString)
+      .filter(isUsableImage)
+      .map(fullRes);
     const variant = p.defaultVariant || pickVariant(p);
     const variantPrice = normalizePrice(variant);
     const fallbackPrice = normalizePrice(p);
@@ -222,7 +236,11 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       p.defaultVariantId ||
       variant?.variant_id ||
       variant?.id ||
+      variant?.printfulVariantId ||
+      variant?.printful_variant_id ||
       p.variants?.[0]?.id ||
+      p.variants?.[0]?.printfulVariantId ||
+      p.variants?.[0]?.printful_variant_id ||
       null;
     const canBuy = price?.cents !== null && !!firstVariantId;
     const image = normalizedImages.find(isUsableImage) || resolveProductImage({ ...p, slug, title }, imageMap, zodiacMap);
@@ -234,7 +252,13 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       title,
       images,
       variants: Array.isArray(p.variants) ? p.variants : (variant ? [variant] : []),
-      defaultVariantId: p.defaultVariantId || p.defaultVariant?.id || p.variants?.[0]?.id || null,
+      defaultVariantId:
+        p.defaultVariantId ||
+        p.defaultVariant?.id ||
+        p.variants?.[0]?.id ||
+        p.variants?.[0]?.printfulVariantId ||
+        p.variants?.[0]?.printful_variant_id ||
+        null,
       price: price?.value ?? null,
       priceCents: price?.cents ?? null,
       priceLabel: price?.label || PRICE_UNAVAILABLE_LABEL,
@@ -318,10 +342,11 @@ import { formatPrice, currencySymbol } from './price-utils.js';
         ? fallbackPriceValue
         : basePrice?.value ?? (Number.isFinite(priceCents) ? priceCents / 100 : null);
     const priceRange = (() => {
-      const currency = (p.price?.currency || p.currency || 'USD').toUpperCase();
+      const priceSource = typeof p.price === 'object' && p.price !== null ? p.price : (typeof p.price_range === 'object' && p.price_range !== null ? p.price_range : null);
+      const currency = ((priceSource && priceSource.currency) || p.currency || 'USD').toUpperCase();
       const symbol = currencySymbol(currency);
-      const min = Number(p.price?.min);
-      const max = Number(p.price?.max);
+      const min = Number(priceSource?.min);
+      const max = Number(priceSource?.max);
       if (Number.isFinite(min) && Number.isFinite(max) && max >= min) {
         return max > min ? `${symbol}${min.toFixed(2)} – ${symbol}${max.toFixed(2)}` : `${symbol}${min.toFixed(2)}`;
       }
@@ -335,7 +360,7 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     const priceDisplay = priceRange || formatPrice(Number.isFinite(priceCents) ? priceCents : priceValue, fallbackLabel);
     const primaryImage = Array.isArray(p.images) ? p.images[0] : null;
     const resolvedImage = isUsableImage(primaryImage) ? primaryImage : resolveProductImage(p, cachedImageMap, cachedZodiacMap);
-    const imgSrc = isUsableImage(resolvedImage) ? resolvedImage : FALLBACK;
+    const imgSrc = fullRes(isUsableImage(resolvedImage) ? resolvedImage : FALLBACK);
     const soldOut = (p?.meta?.soldOut ?? p?.soldOut) === true;
 
     const card = document.createElement('article');
