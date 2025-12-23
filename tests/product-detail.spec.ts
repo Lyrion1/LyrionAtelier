@@ -72,15 +72,15 @@ test.describe('product detail page', () => {
       route.fulfill({ status: 200, body: '' })
     );
 
-    await page.goto(`http://localhost:${PORT}/shop/aries-spark-tee-youth`, { waitUntil: 'networkidle' });
+    await page.goto(`http://localhost:${PORT}/shop/youth-aries-fire-tee`, { waitUntil: 'networkidle' });
 
     const stylesheetHrefs = await page.locator('link[rel="stylesheet"]').evaluateAll((links) =>
       links.map((link) => (link as HTMLLinkElement).href)
     );
     expect(stylesheetHrefs.some((href) => href.endsWith('/css/style.css'))).toBeTruthy();
 
-    await expect(page.locator('#product-name')).toHaveText(/Aries Spark Tee/i);
-    await expect(page.locator('#product-description')).toContainText(/Ignition energy/i);
+    await expect(page.locator('#product-name')).toHaveText(/Aries Fire Tee/i);
+    await expect(page.locator('#product-description')).toContainText(/celestial flame/i);
     await expect(page.locator('#product-price')).toContainText('$34.99');
 
     const sizeButtons = page.locator('.size-chip');
@@ -114,7 +114,7 @@ test.describe('product detail page', () => {
       });
     });
 
-    await page.goto(`http://localhost:${PORT}/shop/aries-spark-tee-youth`, { waitUntil: 'networkidle' });
+    await page.goto(`http://localhost:${PORT}/shop/youth-aries-fire-tee`, { waitUntil: 'networkidle' });
 
     const xlButton = page.locator('.size-chip', { hasText: 'XL' });
     await xlButton.click();
@@ -126,7 +126,7 @@ test.describe('product detail page', () => {
     const meta = lineItem?.price_data?.product_data?.metadata;
     expect(meta?.pf_variant_id).toBe('694615f9707eb6');
     expect(meta?.size).toBe('XL');
-    expect(lineItem?.price_data?.unit_amount).toBe(3499);
+    expect(lineItem?.price_data?.unit_amount).toBe(3899);
 
     await page.screenshot({ path: 'shop-product-aries-youth.png', fullPage: true });
   });
