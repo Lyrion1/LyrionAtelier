@@ -27,13 +27,13 @@ function resolveProductImage(p = {}, imageMap = {}) {
 const products = [
   {
     id: 1,
-    name: "Aries Fire Tee",
+    name: "Aries Fire Tee (Youth)",
     price: 34.99,
-    category: "tshirt",
+    category: "youth",
     zodiac: "aries",
-    image: null, // Placeholder - replace with actual image path
-    description: "Premium cotton tee featuring the bold Aries constellation design with fiery ram symbolism. Perfect for the passionate and adventurous soul.",
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"]
+    image: "/youth-aries-fire-tee/youth-aries-fire-tee-lifestyle.jpg",
+    description: "Empower young Aries with celestial fire symbolism. Premium unisex tee for fearless trailblazers.",
+    sizes: ["XS", "S", "M", "L", "XL"]
   },
   {
     id: 2,
