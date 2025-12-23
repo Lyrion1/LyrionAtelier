@@ -22,6 +22,11 @@
       "published": true
     },
     "price": 34.99,
+    "price_range": {
+      "min": 34.99,
+      "max": 38.99,
+      "currency": "USD"
+    },
     "currency": "USD",
     "images": [
       "/youth-aries-fire-tee/youth-aries-fire-tee-lifestyle.jpg",
