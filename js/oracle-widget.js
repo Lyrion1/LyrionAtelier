@@ -94,7 +94,16 @@ async function getOracleReading() {
  throw new Error('Invalid response');
  }
  
- window.currentReading = data;
+  window.currentReading = data;
+  const zodiacSign = (data.zodiacSign || '').toLowerCase();
+  if (zodiacSign) {
+    window.oracleReading = { sunSign: zodiacSign };
+    try {
+      localStorage.setItem('userSunSign', zodiacSign);
+    } catch (err) {
+      console.warn('Unable to persist sun sign', err);
+    }
+  }
  
  if (loadingEl) loadingEl.style.display = 'none';
  if (resultEl) resultEl.style.display = 'block';
