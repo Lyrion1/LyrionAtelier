@@ -691,5 +691,78 @@
     "shipping_region": "US",
     "inventory_policy": "printful",
     "description": "A relaxed, garment-dyed staple bearing the Lyrīon crest—quiet luxury with celestial intent."
+  },
+  {
+    "id": "pisces-hoodie-black",
+    "slug": "pisces-hoodie-black",
+    "title": "Pisces Oversized Black Hoodie",
+    "category": "hoodies",
+    "collection": "zodiac-collection",
+    "zodiac": "pisces",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Zodiac",
+      "zodiac": "Pisces"
+    },
+    "description": "Premium oversized hoodie with Lyrīon Pisces crest on left chest and upper left sleeve. Heavyweight comfort, luxury astrology.",
+    "images": [
+      "/images/products/pisces-hoodie/pisces-hoodie-black-front.jpg",
+      "/images/products/pisces-hoodie/pisces-hoodie-black-back.jpg",
+      "/images/products/pisces-hoodie/pisces-hoodie-black-lifestyle.jpg"
+    ],
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "694ab7d2e5aae1",
+        "price": 64.99,
+        "currency": "GBP",
+        "inStock": true
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "694ab7d2e5ab58",
+        "price": 64.99,
+        "currency": "GBP",
+        "inStock": true
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "694ab7d2e5abb8",
+        "price": 64.99,
+        "currency": "GBP",
+        "inStock": true
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "694ab7d2e5abf3",
+        "price": 66.99,
+        "currency": "GBP",
+        "inStock": true
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "694ab7d2e5ac45",
+        "price": 66.99,
+        "currency": "GBP",
+        "inStock": true
+      },
+      {
+        "size": "3XL",
+        "printfulVariantId": "694ab7d2e5ac97",
+        "price": 70.00,
+        "currency": "GBP",
+        "inStock": true
+      }
+    ],
+    "price": { "min": 64.99, "max": 70.00, "currency": "GBP" },
+    "price_range": { "min": 64.99, "max": 70.00, "currency": "GBP" },
+    "currency": "GBP",
+    "options": {
+      "size": ["S", "M", "L", "XL", "2XL", "3XL"]
+    },
+    "sizes": ["S", "M", "L", "XL", "2XL", "3XL"],
+    "defaultVariantId": "694ab7d2e5aae1",
+    "printfulProduct": "Urban Hoodie",
+    "sku": "LYR-PISC-HOOD-BLK"
   }
 ]

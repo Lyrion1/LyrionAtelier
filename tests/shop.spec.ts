@@ -135,6 +135,9 @@ test.describe('shop smoke test', () => {
       );
       expect(Math.max(...widths)).toBeGreaterThan(50);
       expect(srcs.every((src) => src && src !== 'Image loading…')).toBeTruthy();
+      const pisces = page.locator('[data-slug="pisces-hoodie-black"]');
+      expect(await pisces.count()).toBeGreaterThanOrEqual(1);
+      await expect(pisces.first().locator('.product-card__price')).toContainText(/£64\.99/);
     } else {
       await expect(notice).toBeVisible();
       const noticeText = await notice.textContent();
