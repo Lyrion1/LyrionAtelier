@@ -1,18 +1,20 @@
 [
   {
-    "slug": "aries-spark-tee-youth",
-    "title": "Aries Spark Tee (Youth)",
+    "slug": "youth-aries-fire-tee",
+    "title": "Aries Fire Tee (Youth)",
     "kind": "product",
     "department": "apparel",
     "subcategory": "youth-tees",
-    "collection": "youth-fire-water",
+    "collection": "Youth Spark",
+    "category": "youth",
     "zodiac": "aries",
     "element": "fire",
+    "gender": "unisex",
     "edition": "core",
     "palette": "Lunar Sand",
     "meta": {
       "category": "Youth",
-      "collection": "Zodiac",
+      "collection": "Youth Spark",
       "zodiac": "Aries"
     },
     "state": {
@@ -22,8 +24,11 @@
     "price": 34.99,
     "currency": "USD",
     "images": [
-      "https://files.cdn.printful.com/files/583/58331fbbeafbd953134461ddf1742cc4_thumb.png"
+      "/youth-aries-fire-tee/youth-aries-fire-tee-lifestyle.jpg",
+      "/youth-aries-fire-tee/youth-aries-fire-tee-boy.jpg",
+      "/youth-aries-fire-tee/youth-aries-fire-tee-girl.jpg"
     ],
+    "mainImage": "/youth-aries-fire-tee/youth-aries-fire-tee-lifestyle.jpg",
     "brand_marks": {
       "back_neck_favicon": true,
       "inside_label": true,
@@ -48,7 +53,8 @@
           "size": "XS"
         },
         "price": 3499,
-        "sku": "LY-YF-ARI-TEE-SND-XS",
+        "currency": "USD",
+        "sku": "LYR-YTH-ARIES-FIRE-XS",
         "printfulVariantId": "694615f9707d64",
         "variant": {
           "_id": "694615f9707d64"
@@ -64,7 +70,8 @@
           "size": "S"
         },
         "price": 3499,
-        "sku": "LY-YF-ARI-TEE-SND-S",
+        "currency": "USD",
+        "sku": "LYR-YTH-ARIES-FIRE-S",
         "printfulVariantId": "694615f9707dd3",
         "variant": {
           "_id": "694615f9707dd3"
@@ -80,7 +87,8 @@
           "size": "M"
         },
         "price": 3499,
-        "sku": "LY-YF-ARI-TEE-SND-M",
+        "currency": "USD",
+        "sku": "LYR-YTH-ARIES-FIRE-M",
         "printfulVariantId": "694615f9707e25",
         "variant": {
           "_id": "694615f9707e25"
@@ -95,8 +103,9 @@
           "color": "Lunar Sand",
           "size": "L"
         },
-        "price": 3499,
-        "sku": "LY-YF-ARI-TEE-SND-L",
+        "price": 3699,
+        "currency": "USD",
+        "sku": "LYR-YTH-ARIES-FIRE-L",
         "printfulVariantId": "694615f9707e72",
         "variant": {
           "_id": "694615f9707e72"
@@ -111,8 +120,9 @@
           "color": "Lunar Sand",
           "size": "XL"
         },
-        "price": 3499,
-        "sku": "LY-YF-ARI-TEE-SND-XL",
+        "price": 3899,
+        "currency": "USD",
+        "sku": "LYR-YTH-ARIES-FIRE-XL",
         "printfulVariantId": "694615f9707eb6",
         "variant": {
           "_id": "694615f9707eb6"
@@ -123,10 +133,43 @@
         }
       }
     ],
+    "printfulProduct": "Youth Classic Tee",
+    "features": [
+      "Premium cotton blend for all-day comfort",
+      "Celestial Aries fire insignia centered on chest",
+      "Unisex sizing for fearless young souls",
+      "Sacred symbols that grow with them",
+      "Made for warriors, dreamers, and leaders-in-training"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. The fire within never fades.",
+    "tags": [
+      "youth",
+      "aries",
+      "fire-sign",
+      "unisex",
+      "cardinal",
+      "courage",
+      "leadership",
+      "mars-ruled"
+    ],
+    "chartResonance": [
+      "aries-sun",
+      "aries-moon",
+      "mars-dominant",
+      "1st-house-emphasis",
+      "fire-dominant",
+      "young-souls"
+    ],
+    "seoTitle": "Aries Fire Youth Tee | Celestial Kids Clothing | Lyrīon Atelier",
+    "seoDescription": "Empower young Aries with celestial fire symbolism. Premium unisex youth tee for fearless trailblazers born under the first fire sign.",
+    "launchDate": "2025-01-15",
+    "isBestseller": true,
+    "showOnHomepage": true,
     "copy": {
-      "notes": "Ignition energy \u2014 playful courage for first steps.",
-      "materials": "100% Cotton",
-      "care": "Wash cold. Tumble dry low."
+      "notes": "A celestial flame awakens. Born under the first fire sign, young Aries carry the spark of creation itself—bold, fearless, and unstoppable. This tee channels raw cosmic courage through sacred fire symbolism, empowering the next generation of trailblazers to burn bright and lead fearlessly into the unknown.",
+      "materials": "Premium cotton blend for all-day comfort",
+      "care": "Machine wash cold, tumble dry low. The fire within never fades.",
+      "mysticalCopy": "For young warriors who were born to ignite revolutions, not follow them."
     }
   },
   {
