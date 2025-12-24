@@ -110,11 +110,11 @@ test.describe('homepage featured products', () => {
 
   test('opens Cosmic Crewneck details from homepage view action', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
-    const thirdCard = page.locator('#featured-grid .product-card').nth(2);
-    const viewLink = thirdCard.getByRole('link', { name: 'View' });
+    const cosmicCard = page.locator('#featured-grid .product-card', { hasText: 'Cosmic Crewneck - Pisces' }).first();
+    const viewLink = cosmicCard.getByRole('link', { name: 'View' });
 
     await Promise.all([
-      page.waitForNavigation({ waitUntil: 'networkidle' }),
+      page.waitForURL(/product\.html.*cosmic-crewneck-pisces/),
       viewLink.click()
     ]);
 

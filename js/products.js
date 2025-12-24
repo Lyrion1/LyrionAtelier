@@ -2,6 +2,9 @@
 
 const PRODUCT_FALLBACK = '/assets/catalog/placeholder.webp';
 const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+if (typeof window !== 'undefined') {
+  window.slugify = window.slugify || slugify;
+}
 function resolveProductImage(p = {}, imageMap = {}) {
   const asString = (img) => {
     if (!img) return null;

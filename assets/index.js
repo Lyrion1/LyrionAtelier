@@ -14,21 +14,56 @@ function renderFeaturedProducts() {
   const curated = catalog.filter((p) => p.showOnHomepage);
   const bestsellers = catalog.filter((p) => p.isBestseller);
   const primary = curated.length ? curated : (bestsellers.length ? bestsellers : catalog);
-  const slugify = (value = '') => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-  const productSlug = (product) => product?.slug || (product?.title ? slugify(product.title) : product?.name ? slugify(product.name) : null);
+  const slugifyFn = typeof slugify === 'function' ? slugify : null;
+  /**
+   * Resolve a stable slug for a product using existing slug, title, or name.
+   * @param {any} product - product candidate
+   * @returns {string|null} normalized slug or null when unavailable
+   */
+  const productSlug = (product) => {
+    if (product?.slug) return product.slug;
+    if (slugifyFn && product?.title) return slugifyFn(product.title);
+    if (slugifyFn && product?.name) return slugifyFn(product.name);
+    return null;
+  };
   const detailUrl = (product) => {
     const slug = productSlug(product);
     if (slug) return `/product.html?slug=${encodeURIComponent(slug)}`;
     if (product?.id != null) return `/product.html?id=${encodeURIComponent(product.id)}`;
     return '/shop.html';
   };
+  /**
+   * Normalize a product price value from diverse product shapes.
+   * @param {any} product - product candidate
+   * @returns {number} numeric price (defaults to 0 when unavailable)
+   */
+  const extractPrice = (product) => {
+    if (typeof product?.price === 'number') return product.price;
+    const min = product?.price?.min ?? product?.price?.amount ?? null;
+    if (typeof min === 'number') return min;
+    return 0;
+  };
   const pickFeatured = (pool) => {
-    const selections = pool.filter((p) => productSlug(p)).slice(0, 4);
+    const withSlugs = pool.reduce((list, product) => {
+      const slug = productSlug(product);
+      if (slug) list.push({ product, slug });
+      return list;
+    }, []);
+    const selections = withSlugs.slice(0, 4);
     if (selections.length < 4) {
-      const seen = new Set(selections.map((p) => productSlug(p)));
-      selections.push(...catalog.filter((p) => productSlug(p) && !seen.has(productSlug(p))).slice(0, 4 - selections.length));
+      const seen = new Set(selections.map((item) => item.slug));
+      const needed = 4 - selections.length;
+      const extras = [];
+      for (const product of catalog) {
+        if (extras.length >= needed) break;
+        const slug = productSlug(product);
+        if (slug && !seen.has(slug)) {
+          extras.push({ product, slug });
+        }
+      }
+      selections.push(...extras);
     }
-    return selections;
+    return selections.map((item) => item.product);
   };
   const featured = pickFeatured(primary);
   const grid = document.getElementById('featured-grid');
@@ -42,11 +77,9 @@ function renderFeaturedProducts() {
   featured.forEach(product => {
     const title = product.name || product.title || product.slug || 'Product';
     const description = product.description || product.desc || '';
-    const priceValue = typeof product.price === 'number'
-      ? product.price
-      : Number(product.price?.min ?? product.price?.amount ?? 0);
-    const displayPrice = Number.isFinite(priceValue) ? priceValue : 0;
+    const displayPrice = extractPrice(product);
     const imageSrc = product.image || (Array.isArray(product.images) ? product.images[0] : null);
+    const canAddProduct = canAddToCart && product?.id != null && Number.isFinite(displayPrice);
     const card = document.createElement('div');
     card.className = 'product-card';
     card.innerHTML = `
@@ -60,13 +93,13 @@ function renderFeaturedProducts() {
       </div>
       <div class="button-row tight">
         <a class="btn btn-outline" href="${detailUrl(product)}">View</a>
-        <button class="btn btn-primary add-to-cart-btn" type="button">Add to cart</button>
+        <button class="btn btn-primary add-to-cart-btn" type="button" ${canAddProduct ? '' : 'disabled'}>Add to cart</button>
       </div>
     `;
     grid.appendChild(card);
 
     const addButton = card.querySelector('.add-to-cart-btn');
-    if (addButton && canAddToCart) {
+    if (addButton && canAddProduct) {
       addButton.addEventListener('click', () => addToCart(product.id));
     }
   });
