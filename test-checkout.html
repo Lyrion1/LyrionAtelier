@@ -90,26 +90,32 @@
  </div>
 
  <script>
- // Initialize Stripe with TEST publishable key
- const stripe = Stripe('pk_test_51SdgNsE6FRwoxLBfQWo2lNL3ms5sF7AO8rl6RqxUvaXXAxCYFNRNytvrZxO8TTMgZEKhC3BFnplppfCnIaeiEnbN006iAdb0zD'); // Replace with actual pk_test_...
-
  const checkoutButton = document.getElementById('checkout-button');
- 
+
  checkoutButton.addEventListener('click', async () => {
  checkoutButton.textContent = 'Loading...';
  checkoutButton.disabled = true;
 
  try {
- const { error } = await stripe.redirectToCheckout({
- lineItems: [{
- price: 'price_1ShjdBE6FRwoxLBfyUvK1ark',
+ // Call your backend to create checkout session
+ const response = await fetch('/.netlify/functions/create-checkout', {
+ method: 'POST',
+ headers: {
+ 'Content-Type': 'application/json',
+ },
+ body: JSON.stringify({
+ priceId: 'price_1ShjdBE6FRwoxLBfyUvK1ark',
  quantity: 1
- }],
- mode: 'payment',
- successUrl: window.location.origin + '/thank-you.html',
- cancelUrl: window.location.origin + '/test-checkout.html',
- customerEmail: 'test@lyrionatelier.com' // Optional: pre-fill test email
+ })
  });
+
+ const { sessionId } = await response.json();
+
+ // Initialize Stripe
+ const stripe = Stripe('pk_test_51SdgNsE6FRwoxLBfQWo2lNL3ms5sF7AO8rl6RqxUvaXXAxCYFNRNytvrZxO8TTMgZEKhC3BFnplppfCnIaeiEnbN006iAdb0zD'); // Your test key
+
+ // Redirect to checkout
+ const { error } = await stripe.redirectToCheckout({ sessionId });
 
  if (error) {
  alert('Error: ' + error.message);
