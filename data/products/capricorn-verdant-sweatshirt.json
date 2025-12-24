@@ -1,0 +1,120 @@
+{
+  "id": "capricorn-verdant-sweatshirt",
+  "slug": "capricorn-verdant-sweatshirt",
+  "name": "Capricorn Verdant Relief Sweatshirt",
+  "collection": "Zodiac Relief",
+  "category": "zodiac-relief",
+  "zodiacSign": "capricorn",
+  "element": "earth",
+  "gender": "unisex",
+  "description": "The mountain climber. Capricorns are architects of destiny\u2014patient, disciplined, and built to endure what breaks lesser souls. Born under Saturn's ancient wisdom, they understand that true power is earned through steady ascent, not shortcuts. This premium sweatshirt channels earthbound ambition through sacred Capricorn verdant symbolism, wrapping strategic minds in cosmic comfort designed for the long game.",
+  "mysticalCopy": "For those who build empires brick by brick while others chase mirages.",
+  "images": [
+    "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-ghost.jpg",
+    "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-girl-front.jpg",
+    "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-girl-back.jpg",
+    "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-boy-sitting.jpg"
+  ],
+  "mainImage": "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-boy-sitting.jpg",
+  "variants": [
+    {
+      "size": "S",
+      "printfulVariantId": "694c1247f214e9",
+      "price": 48.0,
+      "currency": "USD",
+      "inStock": true,
+      "sku": "LYR-CAP-SWEAT-S"
+    },
+    {
+      "size": "M",
+      "printfulVariantId": "694c1247f21558",
+      "price": 48.0,
+      "currency": "USD",
+      "inStock": true,
+      "sku": "LYR-CAP-SWEAT-M"
+    },
+    {
+      "size": "L",
+      "printfulVariantId": "694c1247f215a7",
+      "price": 48.0,
+      "currency": "USD",
+      "inStock": true,
+      "sku": "LYR-CAP-SWEAT-L"
+    },
+    {
+      "size": "XL",
+      "printfulVariantId": "694c1247f215f5",
+      "price": 48.0,
+      "currency": "USD",
+      "inStock": true,
+      "sku": "LYR-CAP-SWEAT-XL"
+    },
+    {
+      "size": "2XL",
+      "printfulVariantId": "694c1247f21649",
+      "price": 52.99,
+      "currency": "USD",
+      "inStock": true,
+      "sku": "LYR-CAP-SWEAT-2XL"
+    },
+    {
+      "size": "3XL",
+      "printfulVariantId": "694c1247f21691",
+      "price": 52.99,
+      "currency": "USD",
+      "inStock": true,
+      "sku": "LYR-CAP-SWEAT-3XL"
+    },
+    {
+      "size": "4XL",
+      "printfulVariantId": "694c1247f216d4",
+      "price": 53.99,
+      "currency": "USD",
+      "inStock": true,
+      "sku": "LYR-CAP-SWEAT-4XL"
+    },
+    {
+      "size": "5XL",
+      "printfulVariantId": "694c1247f21712",
+      "price": 55.0,
+      "currency": "USD",
+      "inStock": true,
+      "sku": "LYR-CAP-SWEAT-5XL"
+    }
+  ],
+  "printfulProduct": "Unisex Sweatshirt",
+  "features": [
+    "Premium mid-weight fleece for year-round comfort",
+    "Celestial Capricorn verdant relief design centered on chest",
+    "Unisex classic fit for timeless wearability",
+    "Ribbed cuffs and hem for structured durability",
+    "Earth-conscious construction honoring Capricorn values",
+    "Built to last\u2014like everything Capricorns create"
+  ],
+  "careInstructions": "Machine wash cold, tumble dry low. Your resilience endures.",
+  "tags": [
+    "capricorn",
+    "earth-sign",
+    "zodiac",
+    "sweatshirt",
+    "unisex",
+    "cardinal",
+    "saturn-ruled",
+    "ambition",
+    "discipline",
+    "mastery"
+  ],
+  "chartResonance": [
+    "capricorn-sun",
+    "capricorn-moon",
+    "capricorn-rising",
+    "saturn-dominant",
+    "10th-house-emphasis",
+    "earth-dominant"
+  ],
+  "seoTitle": "Capricorn Verdant Relief Sweatshirt | Earth Sign Apparel | Lyr\u012bon Atelier",
+  "seoDescription": "Embrace Capricorn discipline with the Verdant Relief Sweatshirt. Premium unisex design for ambitious souls ruled by Saturn's ancient mastery.",
+  "launchDate": "2025-01-15",
+  "isBestseller": false,
+  "showOnHomepage": false
+}

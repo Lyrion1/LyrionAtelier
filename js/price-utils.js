@@ -2,7 +2,6 @@ export const PRICE_FALLBACK = '—';
 
 export function currencySymbol(code = 'USD') {
   const upper = String(code || 'USD').toUpperCase();
-  if (upper === 'GBP') return '£';
   if (upper === 'EUR') return '€';
   return '$';
 }
@@ -11,7 +10,6 @@ export function priceNumber(source = {}) {
   const num = Number(
     source?.price ??
       source?.priceUSD ??
-      source?.priceGBP ??
       source?.priceCents ??
       source?.retail_price
   );
