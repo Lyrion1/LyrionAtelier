@@ -21,24 +21,24 @@
   --product-card-media-height: 200px;
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
   --gradient: radial-gradient(circle at 16% 18%, rgba(109, 132, 255, 0.18), transparent 28%), linear-gradient(145deg, #040712 0%, #0a1026 48%, #050816 100%);
-  --section-space: 3rem;
-  --section-space-mobile: 3rem;
+  --section-space: 1.875rem;
+  --section-space-mobile: 1.875rem;
   --gutter: 2rem;
   --gutter-mobile: 1rem;
-  --hero-min-height: 48vh;
-  --hero-max-height: 62vh;
+  --hero-min-height: 450px;
+  --hero-max-height: 450px;
   --orb-glyph-size: 112px;
 }
 
 @media (max-width: 1024px) {
   :root {
-    --hero-min-height: 56vh;
+    --hero-min-height: 450px;
   }
 }
 
 @media (max-width: 768px) {
   :root {
-    --hero-min-height: 64vh;
+    --hero-min-height: 450px;
   }
 }
 
@@ -442,11 +442,12 @@ img {
 }
 
 .hero {
-  padding: 40px 0 40px;
+  padding: 20px 0 20px;
   position: relative;
   overflow: visible;
-  min-height: var(--hero-min-height);
-  max-height: 500px;
+  min-height: 450px;
+  max-height: 450px;
+  height: 450px;
 }
 
 .hero-content {
@@ -468,7 +469,8 @@ img {
   align-items: center;
   padding: 0 4vw;
   gap: clamp(1.75rem, 6vw, 3.25rem);
-  z-index: 5;
+  z-index: 10;
+  margin-bottom: 20px;
 }
 
 .conversion-orb {
@@ -497,6 +499,7 @@ img {
   will-change: transform, filter;
   transform: translateZ(0);
   text-align: center;
+  z-index: 10;
 }
 
 .conversion-orb__glyph {
@@ -778,21 +781,21 @@ p {
 }
 
 .section {
-  padding: calc(var(--section-space) / 2) 0;
+  padding: 30px 0;
 }
 
 main > .section:first-of-type {
-  margin-top: 60px;
+  margin-top: 40px;
   padding-top: 0;
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: calc(var(--section-space-mobile) / 2) 0;
+    padding: 30px 0;
   }
 
   main > .section:first-of-type {
-    margin-top: 60px;
+    margin-top: 40px;
     padding-top: 0;
   }
 }
@@ -1118,7 +1121,7 @@ main > .section:first-of-type {
 
 .newsletter-section {
   background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.12), rgba(var(--indigo-rgb), 0.08));
-  padding: calc(var(--section-space) / 2) var(--gutter);
+  padding: 30px var(--gutter);
   text-align: center;
   border-top: 1px solid rgba(var(--accent-2-rgb), 0.18);
 }
@@ -1199,7 +1202,7 @@ main > .section:first-of-type {
 
 @media (max-width: 768px) {
   .newsletter-section {
-    padding: calc(var(--section-space-mobile) / 2) var(--gutter-mobile);
+    padding: 30px var(--gutter-mobile);
   }
 
   .newsletter-container h2 {
@@ -1216,7 +1219,7 @@ main > .section:first-of-type {
 }
 
 .free-oracle-entry {
-  padding: calc(var(--section-space) / 2) 0;
+  padding: 30px 0;
 }
 
 .free-oracle-card {
@@ -1388,7 +1391,7 @@ textarea:focus {
 }
 
 .section-title {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
@@ -1482,7 +1485,7 @@ textarea:focus {
   }
 
   .hero {
-    padding: var(--section-space-mobile) 0;
+    padding: 20px 0;
     max-height: none;
   }
 
@@ -1493,6 +1496,7 @@ textarea:focus {
     gap: 1rem;
     padding: 0;
     margin-top: 1.25rem;
+    margin-bottom: 20px;
   }
 
   .conversion-orb {
@@ -3096,8 +3100,8 @@ RESPONSIVE DESIGN
 .footer {
   background: rgba(15, 23, 42, 0.9);
   border-top: 1px solid rgba(var(--accent-2-rgb), 0.25);
-  padding: 2.5rem var(--gutter) 2rem;
-  margin-top: calc(var(--section-space) / 2);
+  padding: 30px var(--gutter) 30px;
+  margin-top: 30px;
 }
 
 .footer-content {
@@ -3360,13 +3364,14 @@ RESPONSIVE DESIGN
  }
  
   .hero {
-  padding: var(--section-space-mobile) 0 calc(var(--section-space-mobile) / 2 + 1rem);
-  min-height: var(--hero-min-height);
+  padding: 20px 0 20px;
+  min-height: 450px;
   }
  
   .conversion-orbs {
    position: static;
-   margin-top: 2rem;
+   margin-top: 1rem;
+   margin-bottom: 20px;
    flex-direction: column;
    gap: 1.5rem;
   align-items: center;
@@ -3688,7 +3693,7 @@ margin: 0;
  ========================================== */
 
 .compatibility-promo-section {
-  padding: calc(var(--section-space) / 3) var(--gutter);
+  padding: 30px var(--gutter);
   background:
     radial-gradient(circle at 18% 22%, rgba(var(--accent-rgb), 0.1), transparent 32%),
     linear-gradient(135deg, rgba(10, 15, 29, 0.92), rgba(19, 28, 49, 0.9));
@@ -3716,7 +3721,7 @@ margin: 0 auto;
 display: grid;
 grid-template-columns: 1fr 1fr;
  gap: 32px;
- padding: 2.5rem;
+ padding: 1.5rem;
  background: rgba(255, 255, 255, 0.03);
  border: 1px solid var(--border);
  border-radius: 18px;
