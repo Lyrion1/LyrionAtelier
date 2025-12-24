@@ -1,5 +1,8 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+console.log('Stripe key exists?', !!process.env.STRIPE_SECRET_KEY);
+console.log('Key starts with:', process.env.STRIPE_SECRET_KEY?.substring(0, 7));
+
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
