@@ -55,6 +55,19 @@ function getSlug() {
   return null;
 }
 
+const slugify = (value = '') =>
+  String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+const titleForSlug = (product = {}) => product.title || product.name || product.id || '';
+const slugCandidates = (product = {}) => {
+  const titleSlug = slugify(titleForSlug(product));
+  const idSlug = slugify(product.id || '');
+  const primary = product.slug || titleSlug || idSlug;
+  return Array.from(new Set([primary, titleSlug, idSlug].filter(Boolean)));
+};
+
 async function loadCatalog() {
   try {
     const res = await fetch('/data/all-products.json', { cache: 'no-store' });
@@ -211,10 +224,20 @@ async function hydrateProductPage() {
   }
 
   const catalog = await loadCatalog();
-  const product = catalog.find((p) => p.slug === slug);
+  const slugIndex = new Map();
+  catalog.forEach((p) => {
+    slugCandidates(p).forEach((candidate) => {
+      if (!slugIndex.has(candidate)) slugIndex.set(candidate, p);
+    });
+  });
+  let product = slugIndex.get(slug) || null;
   if (!product) {
     showError('Product not found.');
     return;
+  }
+  if (!product.slug) {
+    const [primarySlug] = slugCandidates(product);
+    product = { ...product, slug: primarySlug || slug };
   }
 
   const title = product.title || product.name || 'Product';

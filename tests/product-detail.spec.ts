@@ -96,6 +96,26 @@ test.describe('product detail page', () => {
     await page.screenshot({ path: 'product-detail-pass.png', fullPage: true });
   });
 
+  test('Capricorn Verdant Relief sweatshirt resolves slugless catalog entry', async ({ page }) => {
+    await page.route('https://fonts.googleapis.com/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'text/css', body: '' })
+    );
+    await page.route('https://fonts.gstatic.com/**', (route) =>
+      route.fulfill({ status: 200, body: '' })
+    );
+
+    await page.goto(`http://localhost:${PORT}/shop/capricorn-verdant-relief-sweatshirt`, {
+      waitUntil: 'networkidle'
+    });
+
+    await expect(page.locator('#product-name')).toHaveText(/Capricorn Verdant Relief Sweatshirt/i);
+    await expect(page.locator('#product-price')).toContainText('$48.00');
+    const capricornImages = await page.locator('#product-gallery img').count();
+    expect(capricornImages).toBeGreaterThan(0);
+
+    await page.screenshot({ path: 'product-detail-capricorn.png', fullPage: true });
+  });
+
   test('Aries youth PDP wires size selection to checkout payload', async ({ page }) => {
     await page.route('https://fonts.googleapis.com/**', (route) =>
       route.fulfill({ status: 200, contentType: 'text/css', body: '' })
