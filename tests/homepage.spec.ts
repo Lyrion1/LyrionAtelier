@@ -107,4 +107,19 @@ test.describe('homepage featured products', () => {
     const featuredCards = page.locator('#featured-grid .product-card');
     await expect(featuredCards).toHaveCount(4);
   });
+
+  test('opens Cosmic Crewneck details from homepage view action', async ({ page }) => {
+    await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
+    const thirdCard = page.locator('#featured-grid .product-card').nth(2);
+    const viewLink = thirdCard.getByRole('link', { name: 'View' });
+
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: 'networkidle' }),
+      viewLink.click()
+    ]);
+
+    await expect(page).toHaveURL(/product\.html.*cosmic-crewneck-pisces/);
+    await expect(page.locator('#product-name')).toContainText('Cosmic Crewneck - Pisces');
+    await expect(page.locator('#size-select')).toBeVisible();
+  });
 });
