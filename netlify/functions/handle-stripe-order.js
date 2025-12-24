@@ -112,7 +112,7 @@ exports.handler = async (event) => {
     .map((item) => {
       const product = item.price?.product;
       const variantIdRaw = product?.metadata?.printfulVariantId;
-      const variantId = typeof variantIdRaw === 'string' ? variantIdRaw.trim() : '';
+      const variantId = variantIdRaw != null ? String(variantIdRaw).trim() : '';
 
       if (!variantId) {
         console.error(
@@ -159,12 +159,13 @@ exports.handler = async (event) => {
 
     // Printful returns a numeric `code` field even on success (200).
     const printfulCode = typeof data?.code === 'number' ? data.code : null;
-    if (!response.ok || (printfulCode !== null && printfulCode !== 200)) {
+    const printfulOk = printfulCode === null || (printfulCode >= 200 && printfulCode < 300);
+    if (!response.ok || !printfulOk) {
       console.error('Printful order failed', { status: response.status, data });
       return jsonResponse(500, 'Failed to create Printful order');
     }
 
-    const orderId = data?.result?.id || data?.result?.order?.id;
+    const orderId = data?.result?.id || null;
     console.log('Printful order created:', orderId || 'unknown');
 
     return jsonResponse(200, { received: true, printfulOrderId: orderId });
