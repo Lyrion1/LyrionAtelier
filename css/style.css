@@ -442,11 +442,11 @@ img {
 }
 
 .hero {
-  padding: calc(var(--section-space) * 0.85) 0 calc(var(--section-space) / 1.6);
+  padding: 40px 0 40px;
   position: relative;
   overflow: visible;
   min-height: var(--hero-min-height);
-  max-height: var(--hero-max-height);
+  max-height: 500px;
 }
 
 .hero-content {
@@ -472,20 +472,19 @@ img {
 }
 
 .conversion-orb {
-  width: clamp(12rem, 24vw, 16.5rem);
-  aspect-ratio: 1;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  border: 1.5px solid rgba(var(--accent-2-rgb), 0.55);
-  padding: 1.65rem;
-  background: linear-gradient(135deg, rgba(var(--accent-2-rgb), 0.18), rgba(var(--accent-2-rgb), 0.08));
-  background-blend-mode: normal;
-  background-size: 120% 120%;
+  border: 2px solid #d4af37;
+  padding: 20px;
+  background: transparent;
   box-shadow:
     0 16px 38px rgba(var(--accent-2-rgb), 0.3),
     0 0 22px rgba(var(--accent-2-rgb), 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
   color: var(--accent-2);
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
@@ -497,29 +496,33 @@ img {
   transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
   will-change: transform, filter;
   transform: translateZ(0);
-  flex-direction: column;
   text-align: center;
 }
 
 .conversion-orb__glyph {
   display: inline-flex;
   place-items: center;
-  font-size: clamp(2.75rem, 3.4vw, 3.6rem);
-  color: var(--accent-2);
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+  color: #d4af37;
   filter: drop-shadow(0 0 16px rgba(var(--accent-2-rgb), 0.62));
   mix-blend-mode: normal;
   opacity: 1;
   z-index: 1;
   pointer-events: none;
+  margin-bottom: 10px;
 }
 
 .conversion-orb__label {
-  font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 14px;
+  line-height: 1.3;
   text-align: center;
+  max-width: 140px;
+  color: #d4af37;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--accent-2);
+  letter-spacing: 1px;
   text-shadow:
     0 4px 18px rgba(var(--accent-2-rgb), 0.35),
     0 0 8px rgba(255, 255, 255, 0.18);
@@ -779,7 +782,8 @@ p {
 }
 
 main > .section:first-of-type {
-  padding-top: calc(var(--section-space) / 3);
+  margin-top: 60px;
+  padding-top: 0;
 }
 
 @media (max-width: 768px) {
@@ -1491,9 +1495,8 @@ textarea:focus {
   }
 
   .conversion-orb {
-    width: 100%;
-    max-width: 420px;
-    aspect-ratio: auto;
+    width: 180px;
+    height: 180px;
     margin: 0 auto;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -3369,8 +3372,8 @@ RESPONSIVE DESIGN
   }
 
    .conversion-orb {
-   width: min(270px, 82vw);
-   aspect-ratio: 1;
+   width: 180px;
+   height: 180px;
    }
  
  .compatibility-products-grid {
