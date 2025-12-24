@@ -97,4 +97,17 @@ test.describe('homepage featured products', () => {
     const image = featuredCard.locator('img');
     await expect(image).toHaveAttribute('src', /leo-zodiac-hoodie/i);
   });
+
+  test('shows four featured products on homepage', async ({ page }) => {
+    await page.route('https://fonts.googleapis.com/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'text/css', body: '' })
+    );
+    await page.route('https://fonts.gstatic.com/**', (route) =>
+      route.fulfill({ status: 200, body: '' })
+    );
+
+    await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
+    const featuredCards = page.locator('#featured-grid .product-card');
+    await expect(featuredCards).toHaveCount(4);
+  });
 });

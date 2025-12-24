@@ -10,8 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderFeaturedProducts() {
   if (typeof products === 'undefined') return;
-  const bestsellers = Array.isArray(products) ? products.filter((p) => p.isBestseller) : [];
-  const featured = (bestsellers.length ? bestsellers : products).slice(0, 4);
+  const catalog = Array.isArray(products) ? products : [];
+  const curated = catalog.filter((p) => p.showOnHomepage);
+  const bestsellers = catalog.filter((p) => p.isBestseller);
+  const primary = curated.length ? curated : (bestsellers.length ? bestsellers : catalog);
+  const featured = primary.slice(0, 4);
+  if (featured.length < 4) {
+    featured.push(...catalog.filter((p) => !featured.includes(p)).slice(0, 4 - featured.length));
+  }
   const grid = document.getElementById('featured-grid');
   if (!grid) return;
   const canAddToCart = typeof addToCart === 'function';
