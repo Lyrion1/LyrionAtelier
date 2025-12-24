@@ -477,7 +477,7 @@
     },
     "price": 73.5,
     "images": [
-      "https://files.cdn.printful.com/files/000/00026420c67f2af4c4021ce3d829c0f7_thumb.png"
+      "https://files.cdn.printful.com/files/000/00026420c67f2af4c4021ce3d829c0f7.png"
     ],
     "printful": {
       "product_name": "Oversized faded t-shirt (AS Colour 5082)",
@@ -525,7 +525,7 @@
     },
     "images": [
       {
-        "src": "https://files.cdn.printful.com/files/0b6/0b60f76c5edfac7542d6a60cc9b64ff9_thumb.png",
+        "src": "https://files.cdn.printful.com/files/0b6/0b60f76c5edfac7542d6a60cc9b64ff9.png",
         "alt": "Scorpion Aegis Tee — oversized unisex tee with gilded scorpion crest"
       }
     ],
@@ -883,7 +883,7 @@
       "published": true
     },
     "images": [
-      "https://files.cdn.printful.com/files/759/759a238baf4fe146cf7c28689cc65ac7_thumb.png"
+      "https://files.cdn.printful.com/files/759/759a238baf4fe146cf7c28689cc65ac7.png"
     ],
     "pf": {
       "variants": {
@@ -921,7 +921,7 @@
     "tags": ["unisex", "crewneck", "premium", "embroidered", "logo"],
     "images": [
       {
-        "url": "https://files.cdn.printful.com/files/273/273a521304983380ffe07e205bd95374_thumb.png",
+        "url": "https://files.cdn.printful.com/files/273/273a521304983380ffe07e205bd95374.png",
         "alt": "Unisex Premium Crewneck in navy with Sun Crest embroidery",
         "source": "printful"
       }
@@ -939,7 +939,7 @@
     "printful": {
       "product_type": "crewneck",
       "sync_source": "manual",
-      "thumbnail": "https://files.cdn.printful.com/files/273/273a521304983380ffe07e205bd95374_thumb.png"
+      "thumbnail": "https://files.cdn.printful.com/files/273/273a521304983380ffe07e205bd95374.png"
     }
   },
   {
