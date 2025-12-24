@@ -479,10 +479,10 @@ img {
   padding: 20px;
   background: transparent;
   box-shadow:
-    0 16px 38px rgba(var(--accent-2-rgb), 0.3),
-    0 0 22px rgba(var(--accent-2-rgb), 0.16),
+    0 16px 38px rgba(212, 175, 55, 0.3),
+    0 0 22px rgba(212, 175, 55, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  color: var(--accent-2);
+  color: #d4af37;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -506,7 +506,7 @@ img {
   height: 40px;
   font-size: 40px;
   color: #d4af37;
-  filter: drop-shadow(0 0 16px rgba(var(--accent-2-rgb), 0.62));
+  filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.62));
   mix-blend-mode: normal;
   opacity: 1;
   z-index: 1;
@@ -524,23 +524,23 @@ img {
   text-transform: uppercase;
   letter-spacing: 1px;
   text-shadow:
-    0 4px 18px rgba(var(--accent-2-rgb), 0.35),
+    0 4px 18px rgba(212, 175, 55, 0.35),
     0 0 8px rgba(255, 255, 255, 0.18);
   padding-bottom: 0;
   border-bottom: none;
 }
 
 .conversion-orb:focus-visible {
-  outline: 2px solid rgba(var(--accent-2-rgb), 0.9);
+  outline: 2px solid rgba(212, 175, 55, 0.9);
   outline-offset: 6px;
 }
 
 .conversion-orb:hover {
   transform: translate3d(0, -4px, 0);
   box-shadow:
-    0 16px 34px rgba(var(--accent-2-rgb), 0.3),
+    0 16px 34px rgba(212, 175, 55, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  filter: drop-shadow(0 0 18px rgba(var(--accent-2-rgb), 0.35));
+  filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.35));
 }
 
 .eyebrow {
@@ -792,7 +792,8 @@ main > .section:first-of-type {
   }
 
   main > .section:first-of-type {
-    padding-top: calc(var(--section-space-mobile) / 3);
+    margin-top: 60px;
+    padding-top: 0;
   }
 }
 
