@@ -81,4 +81,20 @@ test.describe('homepage featured products', () => {
     const image = featuredCard.locator('img');
     await expect(image).toHaveAttribute('src', /youth-aries-fire-tee/i);
   });
+
+  test('surfaces Leo Zodiac Hoodie in featured/bestseller grid', async ({ page }) => {
+    await page.route('https://fonts.googleapis.com/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'text/css', body: '' })
+    );
+    await page.route('https://fonts.gstatic.com/**', (route) =>
+      route.fulfill({ status: 200, body: '' })
+    );
+
+    await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
+    const featuredCard = page.locator('#featured-grid .product-card', { hasText: 'Leo Zodiac Hoodie' });
+    await expect(featuredCard).toBeVisible();
+    await expect(featuredCard.locator('.price')).toContainText('$59.99');
+    const image = featuredCard.locator('img');
+    await expect(image).toHaveAttribute('src', /leo-zodiac-hoodie/i);
+  });
 });

@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderFeaturedProducts() {
   if (typeof products === 'undefined') return;
-  const featured = products.slice(0, 4);
+  const bestsellers = Array.isArray(products) ? products.filter((p) => p.isBestseller) : [];
+  const featured = (bestsellers.length ? bestsellers : products).slice(0, 4);
   const grid = document.getElementById('featured-grid');
   if (!grid) return;
   const canAddToCart = typeof addToCart === 'function';

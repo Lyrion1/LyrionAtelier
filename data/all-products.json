@@ -170,11 +170,157 @@
     "launchDate": "2025-01-15",
     "isBestseller": true,
     "showOnHomepage": true,
+  "copy": {
+    "notes": "A celestial flame awakens. Born under the first fire sign, young Aries carry the spark of creation itself—bold, fearless, and unstoppable. This tee channels raw cosmic courage through sacred fire symbolism, empowering the next generation of trailblazers to burn bright and lead fearlessly into the unknown.",
+    "materials": "Premium cotton blend for all-day comfort",
+    "care": "Machine wash cold, tumble dry low. The fire within never fades.",
+    "mysticalCopy": "For young warriors who were born to ignite revolutions, not follow them."
+  }
+  },
+  {
+    "slug": "leo-zodiac-hoodie",
+    "title": "Leo Zodiac Hoodie",
+    "collection": "Zodiac Hero",
+    "category": "zodiac-hero",
+    "zodiac": "leo",
+    "element": "fire",
+    "gender": "unisex",
+    "description": "The sovereign flame. Leos are celestial royalty—born with the Sun's radiance coursing through their spirit, commanding attention without uttering a word. This hoodie channels divine confidence through sacred lion symbolism, wrapping natural-born leaders in cosmic armor that declares: 'I was made to shine, and the universe bows to my light.'",
+    "mysticalCopy": "For kings and queens who don't wear crowns—they ARE the crown.",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Zodiac Hero",
+      "zodiac": "Leo"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 59.99,
+    "price_range": {
+      "min": 59.99,
+      "max": 63.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/leo-zodiac-hoodie/leo-zodiac-hoodie-lifestyle.jpg",
+      "/leo-zodiac-hoodie/leo-zodiac-hoodie-flat.jpg",
+      "/leo-zodiac-hoodie/leo-zodiac-hoodie-boy.jpg",
+      "/leo-zodiac-hoodie/leo-zodiac-hoodie-girl.jpg"
+    ],
+    "mainImage": "/leo-zodiac-hoodie/leo-zodiac-hoodie-lifestyle.jpg",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ]
+    },
+    "variants": [
+      {
+        "options": {
+          "size": "S"
+        },
+        "price": 59.99,
+        "currency": "USD",
+        "sku": "LYR-LEO-HOOD-S",
+        "printfulVariantId": "694b0b7b4276f7",
+        "inStock": true
+      },
+      {
+        "options": {
+          "size": "M"
+        },
+        "price": 59.99,
+        "currency": "USD",
+        "sku": "LYR-LEO-HOOD-M",
+        "printfulVariantId": "694b0b7b427766",
+        "inStock": true
+      },
+      {
+        "options": {
+          "size": "L"
+        },
+        "price": 59.99,
+        "currency": "USD",
+        "sku": "LYR-LEO-HOOD-L",
+        "printfulVariantId": "694b0b7b4277b7",
+        "inStock": true
+      },
+      {
+        "options": {
+          "size": "XL"
+        },
+        "price": 61.99,
+        "currency": "USD",
+        "sku": "LYR-LEO-HOOD-XL",
+        "printfulVariantId": "694b0b7b427801",
+        "inStock": true
+      },
+      {
+        "options": {
+          "size": "2XL"
+        },
+        "price": 61.99,
+        "currency": "USD",
+        "sku": "LYR-LEO-HOOD-2XL",
+        "printfulVariantId": "694b0b7b427857",
+        "inStock": true
+      },
+      {
+        "options": {
+          "size": "3XL"
+        },
+        "price": 63.99,
+        "currency": "USD",
+        "sku": "LYR-LEO-HOOD-3XL",
+        "printfulVariantId": "694b0b7b4278a6",
+        "inStock": true
+      }
+    ],
+    "printfulProduct": "Urban Hoodie",
+    "features": [
+      "Premium heavyweight fleece for sovereign comfort",
+      "Celestial Leo lion insignia commanding center placement",
+      "Unisex oversized fit for bold self-expression",
+      "Cosmic fire energy woven into every thread",
+      "For those who lead with heart and rule with light"
+    ],
+    "careInstructions": "Machine wash cold inside out, tumble dry low. Your radiance never dims.",
+    "tags": [
+      "leo",
+      "fire-sign",
+      "zodiac",
+      "hoodie",
+      "unisex",
+      "fixed",
+      "sun-ruled",
+      "confidence",
+      "leadership",
+      "royalty"
+    ],
+    "chartResonance": [
+      "leo-sun",
+      "leo-moon",
+      "leo-rising",
+      "sun-dominant",
+      "5th-house-emphasis",
+      "fire-dominant"
+    ],
+    "seoTitle": "Leo Zodiac Hoodie | Celestial Fire Sign Apparel | Lyrīon Atelier",
+    "seoDescription": "Channel your inner sovereign with the Leo Zodiac Hoodie. Premium unisex design for natural-born leaders ruled by the Sun's eternal flame.",
+    "launchDate": "2025-01-15",
+    "isBestseller": true,
+    "showOnHomepage": true,
     "copy": {
-      "notes": "A celestial flame awakens. Born under the first fire sign, young Aries carry the spark of creation itself—bold, fearless, and unstoppable. This tee channels raw cosmic courage through sacred fire symbolism, empowering the next generation of trailblazers to burn bright and lead fearlessly into the unknown.",
-      "materials": "Premium cotton blend for all-day comfort",
-      "care": "Machine wash cold, tumble dry low. The fire within never fades.",
-      "mysticalCopy": "For young warriors who were born to ignite revolutions, not follow them."
+      "notes": "The sovereign flame. Leos are celestial royalty—born with the Sun's radiance coursing through their spirit, commanding attention without uttering a word. This hoodie channels divine confidence through sacred lion symbolism, wrapping natural-born leaders in cosmic armor that declares: 'I was made to shine, and the universe bows to my light.'",
+      "materials": "Premium heavyweight fleece for sovereign comfort",
+      "care": "Machine wash cold inside out, tumble dry low. Your radiance never dims.",
+      "mysticalCopy": "For kings and queens who don't wear crowns—they ARE the crown."
     }
   },
   {

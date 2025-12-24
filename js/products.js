@@ -33,17 +33,22 @@ const products = [
     zodiac: "aries",
     image: "/youth-aries-fire-tee/youth-aries-fire-tee-lifestyle.jpg",
     description: "Empower young Aries with celestial fire symbolism. Premium unisex tee for fearless trailblazers.",
-    sizes: ["XS", "S", "M", "L", "XL"]
+    sizes: ["XS", "S", "M", "L", "XL"],
+    isBestseller: true,
+    showOnHomepage: true
   },
   {
     id: 2,
-    name: "Zodiac Hoodie - Leo",
+    slug: "leo-zodiac-hoodie",
+    name: "Leo Zodiac Hoodie",
     price: 59.99,
     category: "hoodie",
     zodiac: "leo",
-    image: null,
-    description: "Cozy hoodie with Leo constellation embroidery and regal lion imagery. Designed for those who shine bright and lead with confidence.",
-    sizes: ["S", "M", "L", "XL", "XXL"]
+    image: "/leo-zodiac-hoodie/leo-zodiac-hoodie-lifestyle.jpg",
+    description: "The sovereign flame—cosmic lion insignia that wraps natural-born leaders in celestial armor.",
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
+    isBestseller: true,
+    showOnHomepage: true
   },
   {
     id: 3,
