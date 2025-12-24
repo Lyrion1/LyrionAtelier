@@ -93,6 +93,15 @@ test.describe('homepage featured products', () => {
     await expect(image).toHaveAttribute('src', /leo-zodiac-hoodie/i);
   });
 
+  test('promotes Cosmic Crewneck - Pisces as the third featured card', async ({ page }) => {
+    await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
+    const thirdCard = page.locator('#featured-grid .product-card').nth(2);
+    await expect(thirdCard).toContainText('Cosmic Crewneck - Pisces');
+    await expect(thirdCard.locator('.price')).toContainText('$55.99');
+    const image = thirdCard.locator('img');
+    await expect(image).toHaveAttribute('src', /cosmic-crewneck-pisces/i);
+  });
+
   test('shows four featured products on homepage', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
     const featuredCards = page.locator('#featured-grid .product-card');
