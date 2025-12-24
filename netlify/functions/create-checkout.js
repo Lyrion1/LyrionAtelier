@@ -1,11 +1,18 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
-console.log('Stripe key exists?', !!process.env.STRIPE_SECRET_KEY);
-console.log('Key starts with:', process.env.STRIPE_SECRET_KEY?.substring(0, 7));
+const secretKey = process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY;
+const stripe = secretKey ? require('stripe')(secretKey) : null;
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
+  }
+
+  if (!stripe) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: 'Stripe secret key missing. Set STRIPE_SECRET_KEY_TEST for test mode or STRIPE_SECRET_KEY for live.'
+      })
+    };
   }
 
   try {
