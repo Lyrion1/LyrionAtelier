@@ -1,11 +1,12 @@
 const Stripe = require('stripe');
+const fetch = require('node-fetch');
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const printfulApiKey = process.env.PRINTFUL_API_KEY;
-// Netlify functions run on Node 18+, which provides a global fetch implementation.
-const fetchApi =
-  typeof globalThis.fetch === 'function' ? globalThis.fetch.bind(globalThis) : null;
+const zeroDecimalCurrencies = new Set([
+  'BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'
+]);
 
 const stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
 
@@ -22,9 +23,18 @@ const getBody = (event) =>
     ? Buffer.from(event.body || '', 'base64')
     : event.body || '';
 
+const formatRetailAmount = (amount, currency) => {
+  const normalizedCurrency = (currency || 'USD').toUpperCase();
+  const divisor = zeroDecimalCurrencies.has(normalizedCurrency) ? 1 : 100;
+  const fractionDigits = zeroDecimalCurrencies.has(normalizedCurrency) ? 0 : 2;
+  return (Number(amount || 0) / divisor).toFixed(fractionDigits);
+};
+
 const buildPrintfulOrder = (session, items) => {
   const customerDetails = session.customer_details || {};
   const address = customerDetails.address || {};
+  const currency = (session.currency || 'USD').toUpperCase();
+  const toAmount = (value) => formatRetailAmount(value, currency);
 
   return {
     recipient: {
@@ -40,11 +50,11 @@ const buildPrintfulOrder = (session, items) => {
     },
     items,
     retail_costs: {
-      currency: (session.currency || 'USD').toUpperCase(),
-      subtotal: ((session.amount_subtotal || 0) / 100).toFixed(2),
-      shipping: ((session.shipping_cost?.amount_total || 0) / 100).toFixed(2),
-      tax: ((session.total_details?.amount_tax || 0) / 100).toFixed(2),
-      total: ((session.amount_total || 0) / 100).toFixed(2),
+      currency,
+      subtotal: toAmount(session.amount_subtotal),
+      shipping: toAmount(session.shipping_cost?.amount_total),
+      tax: toAmount(session.total_details?.amount_tax),
+      total: toAmount(session.amount_total),
     },
   };
 };
@@ -130,12 +140,7 @@ exports.handler = async (event) => {
   const printfulOrder = buildPrintfulOrder(session, items);
 
   try {
-    if (!fetchApi) {
-      console.error('Fetch API unavailable in this runtime.');
-      return jsonResponse(500, 'Server configuration error');
-    }
-
-    const response = await fetchApi('https://api.printful.com/orders', {
+    const response = await fetch('https://api.printful.com/orders', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${printfulApiKey}`,
