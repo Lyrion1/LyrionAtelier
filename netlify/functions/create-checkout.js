@@ -1,12 +1,14 @@
 const Stripe = require('stripe');
+// Prefer the test key for this dedicated test endpoint; fall back to live if only that is set.
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY;
+const stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  if (!stripeSecretKey) {
+  if (!stripe) {
     return {
       statusCode: 500,
       body: JSON.stringify({
@@ -16,7 +18,6 @@ exports.handler = async (event) => {
   }
 
   try {
-    const stripe = Stripe(stripeSecretKey);
     const { priceId, quantity } = JSON.parse(event.body);
 
     const session = await stripe.checkout.sessions.create({
