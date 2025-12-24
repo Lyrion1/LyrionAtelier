@@ -462,7 +462,7 @@ img {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -3.25rem;
+  bottom: -4.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -599,12 +599,19 @@ p {
 }
 
 #featured-grid .product-image {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1;
 }
 
 #featured-grid .product-image img {
   height: 100%;
   object-fit: cover;
+}
+
+#featured-grid .product-card .muted {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 #featured-grid .button-row {
