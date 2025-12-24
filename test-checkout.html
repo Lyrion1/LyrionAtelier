@@ -1,14 +1,127 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
- <head>
- <meta charset="utf-8"/>
- <meta name="viewport" content="width=device-width, initial-scale=1"/>
- <title>Test Checkout</title>
- </head>
- <body>
- <h1>Stripe Test Checkout</h1>
- <p>This charges <strong>$1.00</strong> in Stripe <em>TEST mode</em>.</p>
- <button id="testCheckoutBtn">Run test checkout ($1.00)</button>
- <script defer src="/assets/test-checkout.js"></script>
- </body>
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>TEST - Stripe Checkout Test</title>
+ <script src="https://js.stripe.com/v3/"></script>
+ <style>
+ body {
+ font-family: Arial, sans-serif;
+ max-width: 600px;
+ margin: 100px auto;
+ padding: 40px;
+ background: #f5f5f5;
+ }
+ .test-banner {
+ background: #ff0000;
+ color: white;
+ padding: 20px;
+ text-align: center;
+ font-weight: bold;
+ font-size: 1.2rem;
+ margin-bottom: 30px;
+ border-radius: 8px;
+ }
+ .product-card {
+ background: white;
+ padding: 40px;
+ border-radius: 12px;
+ box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+ }
+ h1 {
+ color: #1a1a1a;
+ margin-bottom: 10px;
+ }
+ .price {
+ font-size: 2rem;
+ color: #28a745;
+ margin: 20px 0;
+ }
+ button {
+ width: 100%;
+ padding: 16px;
+ background: #1a1a1a;
+ color: white;
+ border: none;
+ border-radius: 8px;
+ font-size: 1.1rem;
+ font-weight: 600;
+ cursor: pointer;
+ transition: background 0.3s;
+ }
+ button:hover {
+ background: #000;
+ }
+ .test-card-info {
+ margin-top: 30px;
+ padding: 20px;
+ background: #fff3cd;
+ border-radius: 8px;
+ border-left: 4px solid #ffc107;
+ }
+ .test-card-info h3 {
+ margin-top: 0;
+ color: #856404;
+ }
+ .test-card-info p {
+ margin: 5px 0;
+ color: #856404;
+ }
+ </style>
+</head>
+<body>
+ <div class="test-banner">
+ TEST MODE ONLY - DO NOT USE FOR REAL PURCHASES 
+ </div>
+
+ <div class="product-card">
+ <h1>Lyrion Billionaire Bag</h1>
+ <p class="price">£1.00</p>
+ <button id="checkout-button">Test Checkout</button>
+
+ <div class="test-card-info">
+ <h3>Test Card Details:</h3>
+ <p><strong>Card:</strong> 4242 4242 4242 4242</p>
+ <p><strong>Expiry:</strong> 12/25</p>
+ <p><strong>CVC:</strong> 123</p>
+ <p><strong>ZIP:</strong> 12345</p>
+ </div>
+ </div>
+
+ <script>
+ // Initialize Stripe with TEST publishable key
+ const stripe = Stripe('pk_test_51SdgNsE6FRwoxLBfQWo2lNL3ms5sF7AO8rl6RqxUvaXXAxCYFNRNytvrZxO8TTMgZEKhC3BFnplppfCnIaeiEnbN006iAdb0zD'); // Replace with actual pk_test_...
+
+ const checkoutButton = document.getElementById('checkout-button');
+ 
+ checkoutButton.addEventListener('click', async () => {
+ checkoutButton.textContent = 'Loading...';
+ checkoutButton.disabled = true;
+
+ try {
+ const { error } = await stripe.redirectToCheckout({
+ lineItems: [{
+ price: 'price_1ShjdBE6FRwoxLBfyUvK1ark',
+ quantity: 1
+ }],
+ mode: 'payment',
+ successUrl: window.location.origin + '/thank-you.html',
+ cancelUrl: window.location.origin + '/test-checkout.html',
+ customerEmail: 'test@lyrionatelier.com' // Optional: pre-fill test email
+ });
+
+ if (error) {
+ alert('Error: ' + error.message);
+ checkoutButton.textContent = 'Test Checkout';
+ checkoutButton.disabled = false;
+ }
+ } catch (e) {
+ alert('Error: ' + e.message);
+ checkoutButton.textContent = 'Test Checkout';
+ checkoutButton.disabled = false;
+ }
+ });
+ </script>
+</body>
 </html>
