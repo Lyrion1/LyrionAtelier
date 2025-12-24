@@ -564,6 +564,29 @@ p {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+#featured-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  align-items: stretch;
+}
+
+#featured-grid .product-card {
+  height: 100%;
+}
+
+#featured-grid .product-image {
+  aspect-ratio: 4 / 5;
+}
+
+#featured-grid .product-image img {
+  height: 100%;
+  object-fit: cover;
+}
+
+#featured-grid .button-row {
+  margin-top: auto;
+  width: 100%;
+}
+
 .product-grid {
   display: grid;
   gap: 1.25rem;

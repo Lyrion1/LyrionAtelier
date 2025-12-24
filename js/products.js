@@ -2,6 +2,9 @@
 
 const PRODUCT_FALLBACK = '/assets/catalog/placeholder.webp';
 const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+if (typeof window !== 'undefined') {
+  window.slugify = window.slugify || slugify;
+}
 function resolveProductImage(p = {}, imageMap = {}) {
   const asString = (img) => {
     if (!img) return null;
@@ -27,6 +30,7 @@ function resolveProductImage(p = {}, imageMap = {}) {
 const products = [
   {
     id: 1,
+    slug: "youth-aries-fire-tee",
     name: "Aries Fire Tee (Youth)",
     price: 34.99,
     category: "youth",
@@ -252,19 +256,21 @@ const products = [
     sizes: ["S", "M", "L", "XL", "XXL"]
   },
   {
+    id: 255,
     slug: "lyrion-premium-sweatshirt",
     title: "Unisex Premium Sweatshirt — Sun Crest",
     price: 59.99,
     currency: "USD",
     category: "sweatshirts",
     zodiac: "all",
-    image: "lyrion-premium-sweatshirt.webp",
+    image: "/assets/catalog/lyrion-premium-sweatshirt.webp",
     sizes: ["S","M","L","XL","2XL"],
     desc: "Signature Lyrion Atelier Sun Crest premium crew with celestial detailing.",
     pf_url: "https://www.printful.com/custom-products/unisex-premium-sweatshirt",
     palette: "celestial-noir",
     collection: ["lyrionatelier", "lyrion-atelier"],
     images: ["/assets/catalog/lyrion-premium-sweatshirt.webp", "/assets/catalog/lyrion-premium-sweatshirt.png"],
+    showOnHomepage: true,
     featured: true,
     variants: [
       { id: "69455454068e06", sku: "LA-SW-UNISEX-S", options: { size: "S" }, price: 5999 },
@@ -284,6 +290,7 @@ const products = [
     }
   },
   {
+    id: 256,
     slug: "unisex-tee-sun-crest",
     title: "Unisex Garment-dyed Tee — Sun Crest",
     vendor: "Printful",
