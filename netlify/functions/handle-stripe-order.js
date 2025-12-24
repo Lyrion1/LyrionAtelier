@@ -1,9 +1,11 @@
 const Stripe = require('stripe');
-const fetch = require('node-fetch');
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const printfulApiKey = process.env.PRINTFUL_API_KEY;
+// Netlify functions run on Node 18+, which provides a global fetch implementation.
+const fetchApi =
+  typeof globalThis.fetch === 'function' ? globalThis.fetch.bind(globalThis) : null;
 
 const stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
 
@@ -99,11 +101,12 @@ exports.handler = async (event) => {
   const items = lineItems
     .map((item) => {
       const product = item.price?.product;
-      const variantId = product?.metadata?.printfulVariantId;
+      const variantIdRaw = product?.metadata?.printfulVariantId;
+      const variantId = typeof variantIdRaw === 'string' ? variantIdRaw.trim() : '';
 
       if (!variantId) {
         console.error(
-          'Missing printfulVariantId for product',
+          'Missing or invalid printfulVariantId for product',
           product?.id || item.description
         );
         return null;
@@ -127,7 +130,12 @@ exports.handler = async (event) => {
   const printfulOrder = buildPrintfulOrder(session, items);
 
   try {
-    const response = await fetch('https://api.printful.com/orders', {
+    if (!fetchApi) {
+      console.error('Fetch API unavailable in this runtime.');
+      return jsonResponse(500, 'Server configuration error');
+    }
+
+    const response = await fetchApi('https://api.printful.com/orders', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${printfulApiKey}`,
@@ -141,6 +149,7 @@ exports.handler = async (event) => {
       data = await response.json();
     } catch (jsonError) {
       console.error('Failed to parse Printful response JSON', jsonError);
+      return jsonResponse(500, 'Invalid response from Printful');
     }
 
     // Printful returns a numeric `code` field even on success (200).
