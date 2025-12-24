@@ -608,10 +608,15 @@ p {
 }
 
 #featured-grid .product-card .muted {
+  --featured-max-lines: 3;
+  --featured-line-height: 1.5;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--featured-max-lines);
+  line-height: var(--featured-line-height);
+  max-height: calc(var(--featured-line-height) * var(--featured-max-lines) * 1em);
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #featured-grid .button-row {
