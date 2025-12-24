@@ -1,9 +1,9 @@
 const Stripe = require('stripe');
+const fetch = require('node-fetch');
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const printfulApiKey = process.env.PRINTFUL_API_KEY;
-const fetchApi = globalThis.fetch;
 
 const stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
 
@@ -127,12 +127,7 @@ exports.handler = async (event) => {
   const printfulOrder = buildPrintfulOrder(session, items);
 
   try {
-    if (!fetchApi) {
-      console.error('Fetch API not available in runtime.');
-      return jsonResponse(500, 'Server configuration error');
-    }
-
-    const response = await fetchApi('https://api.printful.com/orders', {
+    const response = await fetch('https://api.printful.com/orders', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${printfulApiKey}`,
@@ -150,7 +145,7 @@ exports.handler = async (event) => {
 
     // Printful returns a numeric `code` field even on success (200).
     const printfulCode = typeof data?.code === 'number' ? data.code : null;
-    if (!response.ok || (printfulCode && printfulCode >= 400)) {
+    if (!response.ok || (printfulCode !== null && printfulCode !== 200)) {
       console.error('Printful order failed', { status: response.status, data });
       return jsonResponse(500, 'Failed to create Printful order');
     }
