@@ -4,6 +4,7 @@ const fetch = require('node-fetch');
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const printfulApiKey = process.env.PRINTFUL_API_KEY;
+const PRINTFUL_ORDERS_URL = 'https://api.printful.com/orders';
 const zeroDecimalCurrencies = new Set([
   'BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'
 ]);
@@ -112,7 +113,10 @@ exports.handler = async (event) => {
     .map((item) => {
       const product = item.price?.product;
       const variantIdRaw = product?.metadata?.printfulVariantId;
-      const variantId = variantIdRaw != null ? String(variantIdRaw).trim() : '';
+      const variantId =
+        variantIdRaw !== null && variantIdRaw !== undefined
+          ? String(variantIdRaw).trim()
+          : '';
 
       if (!variantId) {
         console.error(
@@ -140,7 +144,7 @@ exports.handler = async (event) => {
   const printfulOrder = buildPrintfulOrder(session, items);
 
   try {
-    const response = await fetch('https://api.printful.com/orders', {
+    const response = await fetch(PRINTFUL_ORDERS_URL, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${printfulApiKey}`,
@@ -158,9 +162,13 @@ exports.handler = async (event) => {
     }
 
     // Printful returns a numeric `code` field even on success (200).
-    const printfulCode = typeof data?.code === 'number' ? data.code : null;
-    const printfulOk = printfulCode === null || (printfulCode >= 200 && printfulCode < 300);
-    if (!response.ok || !printfulOk) {
+    const isPrintfulSuccess = () => {
+      const code = typeof data?.code === 'number' ? data.code : null;
+      if (code !== null) return code >= 200 && code < 300;
+      return response.ok;
+    };
+
+    if (!response.ok || !isPrintfulSuccess()) {
       console.error('Printful order failed', { status: response.status, data });
       return jsonResponse(500, 'Failed to create Printful order');
     }
