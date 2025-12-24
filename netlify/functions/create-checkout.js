@@ -1,12 +1,12 @@
-const secretKey = process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY;
-const stripe = secretKey ? require('stripe')(secretKey) : null;
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY;
+const stripe = require('stripe')(stripeSecretKey || '');
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  if (!stripe) {
+  if (!stripeSecretKey) {
     return {
       statusCode: 500,
       body: JSON.stringify({
