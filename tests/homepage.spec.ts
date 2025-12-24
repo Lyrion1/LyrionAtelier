@@ -65,14 +65,16 @@ test.describe('homepage featured products', () => {
     await new Promise((resolve) => server.close(resolve));
   });
 
-  test('shows Aries Fire Tee (Youth) in featured grid', async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     await page.route('https://fonts.googleapis.com/**', (route) =>
       route.fulfill({ status: 200, contentType: 'text/css', body: '' })
     );
     await page.route('https://fonts.gstatic.com/**', (route) =>
       route.fulfill({ status: 200, body: '' })
     );
+  });
 
+  test('shows Aries Fire Tee (Youth) in featured grid', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
     const featuredCard = page.locator('#featured-grid .product-card', { hasText: 'Aries Fire Tee (Youth)' });
     await expect(featuredCard).toBeVisible();
@@ -83,18 +85,17 @@ test.describe('homepage featured products', () => {
   });
 
   test('surfaces Leo Zodiac Hoodie in featured/bestseller grid', async ({ page }) => {
-    await page.route('https://fonts.googleapis.com/**', (route) =>
-      route.fulfill({ status: 200, contentType: 'text/css', body: '' })
-    );
-    await page.route('https://fonts.gstatic.com/**', (route) =>
-      route.fulfill({ status: 200, body: '' })
-    );
-
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
     const featuredCard = page.locator('#featured-grid .product-card', { hasText: 'Leo Zodiac Hoodie' });
     await expect(featuredCard).toBeVisible();
     await expect(featuredCard.locator('.price')).toContainText('$59.99');
     const image = featuredCard.locator('img');
     await expect(image).toHaveAttribute('src', /leo-zodiac-hoodie/i);
+  });
+
+  test('shows four featured products on homepage', async ({ page }) => {
+    await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
+    const featuredCards = page.locator('#featured-grid .product-card');
+    await expect(featuredCards).toHaveCount(4);
   });
 });
