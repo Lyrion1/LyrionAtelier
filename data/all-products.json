@@ -324,6 +324,145 @@
     }
   },
   {
+    "id": "cosmic-crewneck-pisces",
+    "slug": "cosmic-crewneck-pisces",
+    "title": "Cosmic Crewneck - Pisces",
+    "collection": "Zodiac Hero",
+    "category": "zodiac-hero",
+    "zodiac": "pisces",
+    "zodiacSign": "pisces",
+    "element": "water",
+    "gender": "unisex",
+    "description": "The mystic ocean. Pisces swim between worlds—one foot in reality, the other in dreams too vast for words. Born under Neptune's ethereal reign, they are the poets, the healers, the souls who feel everything the universe whispers. This organic raglan crewneck channels limitless empathy through sacred fish symbolism, wrapping sensitive spirits in cosmic comfort that honors their gift: to dissolve boundaries and unite all that exists.",
+    "mysticalCopy": "For dreamers who see what others cannot, and feel what the world pretends isn't there.",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Zodiac Hero",
+      "zodiac": "Pisces"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 55.99,
+    "price_range": {
+      "min": 55.99,
+      "max": 59.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-ghost.jpg",
+      "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-girl-front.jpg",
+      "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-girl-back.jpg",
+      "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-guy-side.jpg",
+      "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-guy-back.jpg"
+    ],
+    "mainImage": "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-ghost.jpg",
+    "options": {
+      "size": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ]
+    },
+    "variants": [
+      {
+        "size": "XS",
+        "printfulVariantId": "694b39d6493ff5",
+        "price": 55.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-CREW-XS"
+      },
+      {
+        "size": "S",
+        "printfulVariantId": "694b39d6494068",
+        "price": 55.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-CREW-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "694b39d64940c4",
+        "price": 55.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-CREW-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "694b39d6494116",
+        "price": 55.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-CREW-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "694b39d6494168",
+        "price": 57.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-CREW-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "694b39d64941a6",
+        "price": 59.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-CREW-2XL"
+      }
+    ],
+    "printfulProduct": "Unisex Organic Raglan Sweatshirt",
+    "features": [
+      "100% organic cotton for gentle, Earth-conscious comfort",
+      "Celestial Pisces dual fish insignia centered on chest",
+      "Raglan sleeves for fluid, unrestricted movement",
+      "Unisex relaxed fit honoring all forms of expression",
+      "Soft brushed interior—sanctuary for sensitive souls",
+      "Eco-friendly production aligned with Piscean values"
+    ],
+    "careInstructions": "Machine wash cold with like colors, tumble dry low. Your oceanic spirit remains eternal.",
+    "tags": [
+      "pisces",
+      "water-sign",
+      "zodiac",
+      "crewneck",
+      "unisex",
+      "mutable",
+      "neptune-ruled",
+      "empathy",
+      "intuition",
+      "mysticism",
+      "organic"
+    ],
+    "chartResonance": [
+      "pisces-sun",
+      "pisces-moon",
+      "pisces-rising",
+      "neptune-dominant",
+      "12th-house-emphasis",
+      "water-dominant"
+    ],
+    "seoTitle": "Cosmic Crewneck - Pisces | Organic Zodiac Apparel | Lyrīon Atelier",
+    "seoDescription": "Embrace your Piscean depths with the Cosmic Crewneck. Organic unisex design for empaths, dreamers, and mystics ruled by Neptune's infinite ocean.",
+    "launchDate": "2025-01-15",
+    "isBestseller": true,
+    "showOnHomepage": true,
+    "copy": {
+      "notes": "The mystic ocean. Pisces swim between worlds—one foot in reality, the other in dreams too vast for words. Born under Neptune's ethereal reign, they are the poets, the healers, the souls who feel everything the universe whispers. This organic raglan crewneck channels limitless empathy through sacred fish symbolism, wrapping sensitive spirits in cosmic comfort that honors their gift: to dissolve boundaries and unite all that exists.",
+      "materials": "100% organic cotton for gentle, Earth-conscious comfort",
+      "care": "Machine wash cold with like colors, tumble dry low. Your oceanic spirit remains eternal.",
+      "mysticalCopy": "For dreamers who see what others cannot, and feel what the world pretends isn't there."
+    }
+  },
+  {
     "slug": "capricorn-verdant-relief-tee",
     "title": "Capricorn Verdant Relief Tee",
     "category": "tshirts",

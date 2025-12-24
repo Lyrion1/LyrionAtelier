@@ -52,13 +52,34 @@ const products = [
   },
   {
     id: 3,
+    slug: "cosmic-crewneck-pisces",
     name: "Cosmic Crewneck - Pisces",
-    price: 44.99,
+    price: 55.99,
     category: "sweatshirt",
     zodiac: "pisces",
-    image: null,
-    description: "Soft crewneck sweatshirt with dreamy Pisces artwork featuring mystical fish symbolism. For the intuitive and compassionate spirit.",
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"]
+    element: "water",
+    gender: "unisex",
+    collection: "Zodiac Hero",
+    image: "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-ghost.jpg",
+    images: [
+      "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-ghost.jpg",
+      "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-girl-front.jpg",
+      "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-girl-back.jpg",
+      "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-guy-side.jpg",
+      "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-guy-back.jpg"
+    ],
+    description: "The mystic ocean. Pisces swim between worlds—one foot in reality, the other in dreams too vast for words. Born under Neptune's ethereal reign, they are the poets, the healers, the souls who feel everything the universe whispers. This organic raglan crewneck channels limitless empathy through sacred fish symbolism, wrapping sensitive spirits in cosmic comfort that honors their gift: to dissolve boundaries and unite all that exists.",
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
+    isBestseller: true,
+    showOnHomepage: true,
+    variants: [
+      { size: "XS", printfulVariantId: "694b39d6493ff5", price: 55.99, currency: "USD", inStock: true, sku: "LYR-PISC-CREW-XS" },
+      { size: "S", printfulVariantId: "694b39d6494068", price: 55.99, currency: "USD", inStock: true, sku: "LYR-PISC-CREW-S" },
+      { size: "M", printfulVariantId: "694b39d64940c4", price: 55.99, currency: "USD", inStock: true, sku: "LYR-PISC-CREW-M" },
+      { size: "L", printfulVariantId: "694b39d6494116", price: 55.99, currency: "USD", inStock: true, sku: "LYR-PISC-CREW-L" },
+      { size: "XL", printfulVariantId: "694b39d6494168", price: 57.99, currency: "USD", inStock: true, sku: "LYR-PISC-CREW-XL" },
+      { size: "2XL", printfulVariantId: "694b39d64941a6", price: 59.99, currency: "USD", inStock: true, sku: "LYR-PISC-CREW-2XL" }
+    ]
   },
   {
     id: 4,
