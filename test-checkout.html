@@ -90,44 +90,57 @@
  </div>
 
  <script>
- const checkoutButton = document.getElementById('checkout-button');
+   const checkoutButton = document.getElementById('checkout-button');
+   
+   checkoutButton.addEventListener('click', async () => {
+     checkoutButton.textContent = 'Loading...';
+     checkoutButton.disabled = true;
 
- checkoutButton.addEventListener('click', async () => {
- checkoutButton.textContent = 'Loading...';
- checkoutButton.disabled = true;
+     try {
+       // Call backend to create checkout session
+       const response = await fetch('/.netlify/functions/create-checkout', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({
+           priceId: 'price_1ShjdBE6FRwoxLBfyUvK1ark',
+           quantity: 1
+         })
+       });
 
- try {
- // Call your backend to create checkout session
- const response = await fetch('/.netlify/functions/create-checkout', {
- method: 'POST',
- headers: {
- 'Content-Type': 'application/json',
- },
- body: JSON.stringify({
- priceId: 'price_1ShjdBE6FRwoxLBfyUvK1ark',
- quantity: 1
- })
- });
+       // Check if response is ok
+       if (!response.ok) {
+         const errorText = await response.text();
+         throw new Error('Backend error: ' + errorText);
+       }
 
- const { sessionId } = await response.json();
+       const data = await response.json();
+       console.log('Backend response:', data); // Debug log
 
- // Initialize Stripe
- const stripe = Stripe('pk_test_51SdgNsE6FRwoxLBfQWo2lNL3ms5sF7AO8rl6RqxUvaXXAxCYFNRNytvrZxO8TTMgZEKhC3BFnplppfCnIaeiEnbN006iAdb0zD'); // Your test key
+       // Check if sessionId exists
+       if (!data.sessionId) {
+         throw new Error('No sessionId received from backend');
+       }
 
- // Redirect to checkout
- const { error } = await stripe.redirectToCheckout({ sessionId });
+       // Initialize Stripe with your actual test key
+       const stripe = Stripe('pk_test_51QTfpGE6FRwoxLBfmjKFgxWK2pPj3yhrwS8v7WV4u8vX0h3iOzGpShp7EwkIk2cZH03bMDdOX1i2aKwP0okCPUhf00zbfiYCfD');
+       
+       // Redirect to checkout
+       const { error } = await stripe.redirectToCheckout({ 
+         sessionId: data.sessionId 
+       });
 
- if (error) {
- alert('Error: ' + error.message);
- checkoutButton.textContent = 'Test Checkout';
- checkoutButton.disabled = false;
- }
- } catch (e) {
- alert('Error: ' + e.message);
- checkoutButton.textContent = 'Test Checkout';
- checkoutButton.disabled = false;
- }
- });
+       if (error) {
+         throw new Error(error.message);
+       }
+     } catch (e) {
+       console.error('Checkout error:', e); // Debug log
+       alert('Error: ' + e.message);
+       checkoutButton.textContent = 'Test Checkout';
+       checkoutButton.disabled = false;
+     }
+   });
  </script>
 </body>
 </html>
