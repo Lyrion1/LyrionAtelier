@@ -1,5 +1,4 @@
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY;
-const stripe = require('stripe')(stripeSecretKey || '');
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -16,6 +15,7 @@ exports.handler = async (event) => {
   }
 
   try {
+    const stripe = require('stripe')(stripeSecretKey);
     const { priceId, quantity } = JSON.parse(event.body);
 
     const session = await stripe.checkout.sessions.create({
