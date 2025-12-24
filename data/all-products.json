@@ -178,6 +178,125 @@
   }
   },
   {
+    "id": "capricorn-verdant-sweatshirt",
+    "name": "Capricorn Verdant Relief Sweatshirt",
+    "collection": "Zodiac Relief",
+    "category": "zodiac-relief",
+    "zodiacSign": "capricorn",
+    "element": "earth",
+    "gender": "unisex",
+    "description": "The mountain climber. Capricorns are architects of destiny\u2014patient, disciplined, and built to endure what breaks lesser souls. Born under Saturn's ancient wisdom, they understand that true power is earned through steady ascent, not shortcuts. This premium sweatshirt channels earthbound ambition through sacred Capricorn verdant symbolism, wrapping strategic minds in cosmic comfort designed for the long game.",
+    "mysticalCopy": "For those who build empires brick by brick while others chase mirages.",
+    "images": [
+      "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-ghost.jpg",
+      "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-girl-front.jpg",
+      "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-girl-back.jpg",
+      "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-boy-sitting.jpg"
+    ],
+    "mainImage": "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-boy-sitting.jpg",
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "694c1247f214e9",
+        "price": 48.0,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-CAP-SWEAT-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "694c1247f21558",
+        "price": 48.0,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-CAP-SWEAT-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "694c1247f215a7",
+        "price": 48.0,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-CAP-SWEAT-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "694c1247f215f5",
+        "price": 48.0,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-CAP-SWEAT-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "694c1247f21649",
+        "price": 52.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-CAP-SWEAT-2XL"
+      },
+      {
+        "size": "3XL",
+        "printfulVariantId": "694c1247f21691",
+        "price": 52.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-CAP-SWEAT-3XL"
+      },
+      {
+        "size": "4XL",
+        "printfulVariantId": "694c1247f216d4",
+        "price": 53.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-CAP-SWEAT-4XL"
+      },
+      {
+        "size": "5XL",
+        "printfulVariantId": "694c1247f21712",
+        "price": 55.0,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-CAP-SWEAT-5XL"
+      }
+    ],
+    "printfulProduct": "Unisex Sweatshirt",
+    "features": [
+      "Premium mid-weight fleece for year-round comfort",
+      "Celestial Capricorn verdant relief design centered on chest",
+      "Unisex classic fit for timeless wearability",
+      "Ribbed cuffs and hem for structured durability",
+      "Earth-conscious construction honoring Capricorn values",
+      "Built to last\u2014like everything Capricorns create"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. Your resilience endures.",
+    "tags": [
+      "capricorn",
+      "earth-sign",
+      "zodiac",
+      "sweatshirt",
+      "unisex",
+      "cardinal",
+      "saturn-ruled",
+      "ambition",
+      "discipline",
+      "mastery"
+    ],
+    "chartResonance": [
+      "capricorn-sun",
+      "capricorn-moon",
+      "capricorn-rising",
+      "saturn-dominant",
+      "10th-house-emphasis",
+      "earth-dominant"
+    ],
+    "seoTitle": "Capricorn Verdant Relief Sweatshirt | Earth Sign Apparel | Lyr\u012bon Atelier",
+    "seoDescription": "Embrace Capricorn discipline with the Verdant Relief Sweatshirt. Premium unisex design for ambitious souls ruled by Saturn's ancient mastery.",
+    "launchDate": "2025-01-15",
+    "isBestseller": false,
+    "showOnHomepage": false
+  },
+  {
     "slug": "leo-zodiac-hoodie",
     "title": "Leo Zodiac Hoodie",
     "collection": "Zodiac Hero",
@@ -775,7 +894,7 @@
     "price": {
       "min": 33.99,
       "max": 47.99,
-      "currency": "GBP"
+      "currency": "USD"
     },
     "description": "Premium garment-dyed heavyweight tee (Comfort Colors 1717) with the Lyrion sun crest embroidery.",
     "variants": [
@@ -865,7 +984,7 @@
       }
     ],
     "defaultVariantId": "6946125c2990a1",
-    "currency": "GBP",
+    "currency": "USD",
     "vendor": "Printful"
   },
   {
@@ -928,12 +1047,12 @@
       }
     ],
     "variants": [
-      { "id": "69463668ca43b9", "size": "S", "priceUSD": 59.99, "priceGBP": 47.99 },
-      { "id": "69463668ca4413", "size": "M", "priceUSD": 59.99, "priceGBP": 47.99 },
-      { "id": "69463668ca4471", "size": "L", "priceUSD": 59.99, "priceGBP": 47.99 },
-      { "id": "69463668ca44b1", "size": "XL", "priceUSD": 59.99, "priceGBP": 47.99 },
-      { "id": "69463668ca4506", "size": "2XL", "priceUSD": 61.99, "priceGBP": 49.99 },
-      { "id": "69463668ca4543", "size": "3XL", "priceUSD": 63.99, "priceGBP": 51.99 }
+      { "id": "69463668ca43b9", "size": "S", "priceUSD": 59.99 },
+      { "id": "69463668ca4413", "size": "M", "priceUSD": 59.99 },
+      { "id": "69463668ca4471", "size": "L", "priceUSD": 59.99 },
+      { "id": "69463668ca44b1", "size": "XL", "priceUSD": 59.99 },
+      { "id": "69463668ca4506", "size": "2XL", "priceUSD": 61.99 },
+      { "id": "69463668ca4543", "size": "3XL", "priceUSD": 63.99 }
     ],
     "status": "active",
     "availability": "made-to-order",
@@ -1049,48 +1168,48 @@
         "size": "S",
         "printfulVariantId": "694ab7d2e5aae1",
         "price": 64.99,
-        "currency": "GBP",
+        "currency": "USD",
         "inStock": true
       },
       {
         "size": "M",
         "printfulVariantId": "694ab7d2e5ab58",
         "price": 64.99,
-        "currency": "GBP",
+        "currency": "USD",
         "inStock": true
       },
       {
         "size": "L",
         "printfulVariantId": "694ab7d2e5abb8",
         "price": 64.99,
-        "currency": "GBP",
+        "currency": "USD",
         "inStock": true
       },
       {
         "size": "XL",
         "printfulVariantId": "694ab7d2e5abf3",
         "price": 66.99,
-        "currency": "GBP",
+        "currency": "USD",
         "inStock": true
       },
       {
         "size": "2XL",
         "printfulVariantId": "694ab7d2e5ac45",
         "price": 66.99,
-        "currency": "GBP",
+        "currency": "USD",
         "inStock": true
       },
       {
         "size": "3XL",
         "printfulVariantId": "694ab7d2e5ac97",
         "price": 70.00,
-        "currency": "GBP",
+        "currency": "USD",
         "inStock": true
       }
     ],
-    "price": { "min": 64.99, "max": 70.00, "currency": "GBP" },
-    "price_range": { "min": 64.99, "max": 70.00, "currency": "GBP" },
-    "currency": "GBP",
+    "price": { "min": 64.99, "max": 70.00, "currency": "USD" },
+    "price_range": { "min": 64.99, "max": 70.00, "currency": "USD" },
+    "currency": "USD",
     "options": {
       "size": ["S", "M", "L", "XL", "2XL", "3XL"]
     },

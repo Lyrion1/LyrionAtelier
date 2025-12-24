@@ -310,8 +310,8 @@ const products = [
       { size: "4XL", printfulVariantId: "6946125c299282", price: 47.99 }
     ],
     defaultVariantIndex: 0,
-    currency: "GBP",
-    price: { min: 33.99, max: 47.99, currency: "GBP" },
+    currency: "USD",
+    price: { min: 33.99, max: 47.99, currency: "USD" },
     sizes: ["S","M","L","XL","2XL","3XL","4XL"]
   },
   {
