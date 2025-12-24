@@ -188,10 +188,10 @@
     "description": "The mountain climber. Capricorns are architects of destiny\u2014patient, disciplined, and built to endure what breaks lesser souls. Born under Saturn's ancient wisdom, they understand that true power is earned through steady ascent, not shortcuts. This premium sweatshirt channels earthbound ambition through sacred Capricorn verdant symbolism, wrapping strategic minds in cosmic comfort designed for the long game.",
     "mysticalCopy": "For those who build empires brick by brick while others chase mirages.",
     "images": [
+      "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-boy-sitting.jpg",
       "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-ghost.jpg",
       "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-girl-front.jpg",
-      "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-girl-back.jpg",
-      "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-boy-sitting.jpg"
+      "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-girl-back.jpg"
     ],
     "mainImage": "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-boy-sitting.jpg",
     "variants": [
@@ -594,6 +594,10 @@
       "category": "Men",
       "collection": "Zodiac",
       "zodiac": "Capricorn"
+    },
+    "state": {
+      "ready": false,
+      "published": false
     },
     "price": 73.5,
     "images": [
