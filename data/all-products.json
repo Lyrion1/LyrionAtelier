@@ -827,172 +827,120 @@
     }
   },
   {
-    "slug": "lyrion-premium-sweatshirt",
-    "title": "Unisex Premium Sweatshirt — Sun Crest",
+    "id": "fisherman-beanie",
+    "slug": "fisherman-beanie",
+    "name": "Lyrīon Fisherman Beanie",
+    "title": "Lyrīon Fisherman Beanie",
     "kind": "product",
     "department": "apparel",
-    "subcategory": "sweatshirts",
-    "category": "sweatshirts",
-    "collection": [
-      "lyrionatelier",
-      "lyrion-atelier"
-    ],
-    "pf_url": "https://www.printful.com/custom-products/unisex-premium-sweatshirt",
+    "subcategory": "headwear",
+    "category": "logo-line",
+    "collection": "Logo Line",
+    "gender": "unisex",
     "zodiac": "None",
     "element": null,
     "edition": "core",
-    "palette": "celestial-noir",
+    "palette": "winter-souls",
     "meta": {
-      "category": "Unisex",
-      "collection": "Lyrion Atelier Core",
+      "category": "Accessories",
+      "collection": "Logo Line",
       "zodiac": "None"
     },
-    "desc": "Signature Lyrion Atelier Sun Crest premium crew with celestial detailing.",
+    "description": "Crown your third eye. This classic fisherman beanie carries the sacred Tree of Life embroidered on the fold—a subtle reminder that wisdom grows from roots you cannot see. Heavyweight ribbed knit built for winter's harsh truths and life's coldest seasons. For those who understand that warmth isn't just physical—it's knowing who you are when the world goes dark and cold. Wear it low, wear it loose, wear it like the quiet confidence of someone who's survived their own winter.",
+    "mysticalCopy": "The coldest nights reveal who you really are. This keeps you warm through both.",
     "state": {
       "ready": true,
       "published": true
     },
     "images": [
-      "/assets/catalog/lyrion-premium-sweatshirt.webp",
-      "/assets/catalog/lyrion-premium-sweatshirt.png"
+      "/fisherman-beanie/fisherman-beanie-front.jpg",
+      "/fisherman-beanie/fisherman-beanie-ghost.jpg",
+      "/fisherman-beanie/fisherman-beanie-male-model.jpg",
+      "/fisherman-beanie/fisherman-beanie-female-model.jpg"
     ],
-    "image": "lyrion-premium-sweatshirt.webp",
+    "image": "/fisherman-beanie/fisherman-beanie-front.jpg",
+    "mainImage": "/fisherman-beanie/fisherman-beanie-front.jpg",
     "brand_marks": {
-      "back_neck_favicon": true,
-      "inside_label": true,
+      "back_neck_favicon": false,
+      "inside_label": false,
       "wrist_logo": null
     },
     "options": {
       "color": [],
       "size": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "2XL"
+        "One Size"
       ]
     },
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
+      "One Size"
     ],
     "variants": [
       {
-        "id": "69455454068e06",
-        "options": {
-          "size": "S"
-        },
-        "price": 5999,
-        "sku": "LA-SW-UNISEX-S",
-        "printfulVariantId": "69455454068e06",
-        "variant": {
-          "_id": "69455454068e06"
-        },
-        "state": {
-          "ready": true,
-          "published": true
-        }
-      },
-      {
-        "id": "69455454068eb6",
-        "options": {
-          "size": "M"
-        },
-        "price": 5999,
-        "sku": "LA-SW-UNISEX-M",
-        "printfulVariantId": "69455454068eb6",
-        "variant": {
-          "_id": "69455454068eb6"
-        },
-        "state": {
-          "ready": true,
-          "published": true
-        }
-      },
-      {
-        "id": "69455454068f36",
-        "options": {
-          "size": "L"
-        },
-        "price": 5999,
-        "sku": "LA-SW-UNISEX-L",
-        "printfulVariantId": "69455454068f36",
-        "variant": {
-          "_id": "69455454068f36"
-        },
-        "state": {
-          "ready": true,
-          "published": true
-        }
-      },
-      {
-        "id": "69455454068fb1",
-        "options": {
-          "size": "XL"
-        },
-        "price": 5999,
-        "sku": "LA-SW-UNISEX-XL",
-        "printfulVariantId": "69455454068fb1",
-        "variant": {
-          "_id": "69455454068fb1"
-        },
-        "state": {
-          "ready": true,
-          "published": true
-        }
-      },
-      {
-        "id": "69455454069045",
-        "options": {
-          "size": "2XL"
-        },
-        "price": 5999,
-        "sku": "LA-SW-UNISEX-2XL",
-        "printfulVariantId": "69455454069045",
-        "variant": {
-          "_id": "69455454069045"
-        },
+        "size": "One Size",
+        "printfulVariantId": "6948ab6e63d308",
+        "id": "6948ab6e63d308",
+        "price": 30.00,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-BEANIE-FISH-TREE",
         "state": {
           "ready": true,
           "published": true
         }
       }
     ],
-    "copy": {
-      "notes": "Signature Lyrion Atelier Sun Crest premium crew with celestial detailing.",
-      "materials": "Premium blend fleece",
-      "care": "Machine wash cold. Tumble dry low.",
-      "tags": [
-        "brand",
-        "logo",
-        "sun-favicon",
-        "premium"
-      ]
-    },
-    "external": {
-      "printfulUrl": "https://www.printful.com/custom-products/unisex-premium-sweatshirt"
-    },
-    "price": 59.99,
+    "printfulProduct": "Fisherman Beanie",
+    "features": [
+      "Premium heavyweight ribbed knit construction",
+      "Tree of Life embroidered on cuff fold",
+      "Classic fisherman beanie silhouette",
+      "Snug, comfortable fit for all-day wear",
+      "Unisex design—equally powerful on everyone",
+      "Durable enough for actual winters, styled for urban mysticism",
+      "Pairs with everything, anchors any outfit"
+    ],
+    "careInstructions": "Hand wash cold, lay flat to dry. Like you, built to endure.",
+    "tags": [
+      "logo-line",
+      "beanie",
+      "unisex",
+      "fisherman-beanie",
+      "tree-of-life",
+      "winter",
+      "headwear",
+      "streetwear",
+      "cold-weather"
+    ],
+    "chartResonance": [
+      "capricorn-emphasis",
+      "saturn-dominant",
+      "winter-souls",
+      "earth-signs",
+      "all-charts"
+    ],
+    "seoTitle": "Lyrīon Fisherman Beanie | Tree of Life | Premium Winter Headwear",
+    "seoDescription": "Classic fisherman beanie with Tree of Life embroidery. Premium heavyweight ribbed knit for winter warmth and quiet confidence. Unisex design.",
+    "launchDate": "2025-01-15",
+    "isBestseller": false,
+    "showOnHomepage": false,
+    "price": 30.00,
     "currency": "USD",
-    "featured": true,
+    "featured": false,
+    "copy": {
+      "notes": "Crown your third eye with the Tree of Life fisherman beanie.",
+      "materials": "Premium heavyweight ribbed knit",
+      "care": "Hand wash cold, lay flat to dry.",
+      "manifestationText": "Rooted in wisdom, crowned in warmth",
+      "manifestationPlacement": "inner-label"
+    },
     "metadata": {
       "brand": "Lyrion Atelier",
       "source": "manual",
-      "collection": [
-        "lyrionatelier",
-        "lyrion-atelier"
-      ],
+      "collection": "Logo Line",
       "printful": {
         "externalProductId": null,
         "variantIds": [
-          "69455454068e06",
-          "69455454068eb6",
-          "69455454068f36",
-          "69455454068fb1",
-          "69455454069045"
+          "6948ab6e63d308"
         ]
       }
     }
