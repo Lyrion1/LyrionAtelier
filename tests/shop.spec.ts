@@ -149,10 +149,9 @@ test.describe('shop smoke test', () => {
       await expect(page.locator(`[data-slug="${slug}"]`)).toHaveCount(0);
     }
 
-    const scorpionPrice = page.locator('[data-slug="scorpion-aegis-tee"] .product-card__price');
-    await expect(scorpionPrice).toHaveText(/\$44\.99/);
-    const hoodiePrice = page.locator('[data-slug="unisex-hoodie-sun-crest"] .product-card__price');
-    await expect(hoodiePrice).toHaveText(/\$55\.99/);
+    // Verify Pisces Hoodie is present with correct price
+    const piscesHoodiePrice = page.locator('[data-slug="pisces-hoodie"] .product-card__price');
+    await expect(piscesHoodiePrice).toHaveText(/\$54\.99/);
     const soldOutBadges = page.locator('.product-card--sold-out .product-card__ribbon', { hasText: /sold out/i });
     await expect(soldOutBadges.first()).toBeVisible();
 

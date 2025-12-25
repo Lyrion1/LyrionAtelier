@@ -947,14 +947,26 @@
   },
   {
     "id": "pisces-hoodie",
+    "slug": "pisces-hoodie",
     "name": "Pisces Hoodie",
+    "title": "Pisces Hoodie",
     "collection": "Zodiac Hero",
     "category": "zodiac-hero",
+    "zodiac": "pisces",
     "zodiacSign": "pisces",
     "element": "water",
     "gender": "unisex",
     "description": "Swim between worlds. Pisces exists in the liminal space where dreams meet reality, where feeling becomes knowing, where souls recognize each other without words. Born under Neptune's oceanic depths, they are the mystics, the artists, the healers who understand that the invisible is more real than what we touch. This premium hoodie channels Piscean fluidity through sacred dual fish symbolism, wrapping sensitive souls in comfort designed for those who feel everything—and transform it into beauty.",
     "mysticalCopy": "You don't escape reality. You show others there are infinite realities beyond what they can see.",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Zodiac Hero",
+      "zodiac": "Pisces"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
     "images": [
       "/pisces-hoodie/pisces-hoodie-ghost.jpg",
       "/pisces-hoodie/pisces-hoodie-male.jpg",
@@ -962,6 +974,25 @@
       "/pisces-hoodie/pisces-hoodie-couple.jpg"
     ],
     "mainImage": "/pisces-hoodie/pisces-hoodie-ghost.jpg",
+    "price": 54.99,
+    "price_range": {
+      "min": 54.99,
+      "max": 62.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL",
+        "4XL",
+        "5XL"
+      ]
+    },
     "variants": [
       {
         "size": "S",
