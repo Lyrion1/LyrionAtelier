@@ -1080,73 +1080,203 @@
     "showOnHomepage": false
   },
   {
-    "slug": "premium-crewneck-sun-crest",
-    "title": "Unisex Premium Crewneck — Sun Crest",
-    "brand": "Lyrion Atelier",
-    "category": "sweatshirts",
-    "collection": [
-      "lyrion-atelier",
-      "sun-crest"
-    ],
+    "id": "lyrion-pique-polo",
+    "slug": "lyrion-pique-polo",
+    "name": "Lyrīon Pique Polo Shirt",
+    "title": "Lyrīon Pique Polo Shirt",
+    "collection": "Logo Line",
+    "category": "logo-line",
+    "gender": "unisex",
     "zodiac": "None",
+    "description": "Refined rebellion. This isn't your corporate polo—it's the Tree of Life embroidered on premium pique cotton, a subtle declaration that even classic style can carry cosmic weight. Structured enough for the world's expectations, elevated enough for your own standards. Available in timeless navy and crisp white, this polo speaks to those who understand that true luxury whispers. Wear it to the places that demand polish but deserve your authentic self underneath.",
+    "mysticalCopy": "Classic never means conventional. Carry your truth in every thread.",
     "meta": {
       "category": "Unisex",
-      "collection": "Lyrion Atelier Core",
+      "collection": "Logo Line",
       "zodiac": "None"
     },
-    "tags": [
-      "unisex",
-      "crewneck",
-      "premium",
-      "embroidered",
-      "logo"
-    ],
+    "state": {
+      "ready": true,
+      "published": true
+    },
     "images": [
-      {
-        "url": "https://files.cdn.printful.com/files/273/273a521304983380ffe07e205bd95374.png",
-        "alt": "Unisex Premium Crewneck in navy with Sun Crest embroidery",
-        "source": "printful"
-      }
+      "/lyrion-pique-polo/lyrion-pique-polo-girl-front.jpg",
+      "/lyrion-pique-polo/lyrion-pique-polo-boy-front.jpg",
+      "/lyrion-pique-polo/lyrion-pique-polo-boy-back.jpg",
+      "/lyrion-pique-polo/lyrion-pique-polo-front-flat.jpg",
+      "/lyrion-pique-polo/lyrion-pique-polo-back-flat.jpg"
     ],
+    "mainImage": "/lyrion-pique-polo/lyrion-pique-polo-girl-front.jpg",
+    "price": 44.99,
+    "price_range": {
+      "min": 44.99,
+      "max": 50.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
     "variants": [
       {
-        "id": "69463668ca43b9",
         "size": "S",
-        "priceUSD": 59.99
+        "color": "Navy",
+        "printfulVariantId": "694dba199bfc65",
+        "price": 44.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-NAVY-S"
       },
       {
-        "id": "69463668ca4413",
         "size": "M",
-        "priceUSD": 59.99
+        "color": "Navy",
+        "printfulVariantId": "694dba199bfcc2",
+        "price": 44.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-NAVY-M"
       },
       {
-        "id": "69463668ca4471",
         "size": "L",
-        "priceUSD": 59.99
+        "color": "Navy",
+        "printfulVariantId": "694dba199bfd21",
+        "price": 44.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-NAVY-L"
       },
       {
-        "id": "69463668ca44b1",
         "size": "XL",
-        "priceUSD": 59.99
+        "color": "Navy",
+        "printfulVariantId": "694dba199bfd71",
+        "price": 44.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-NAVY-XL"
       },
       {
-        "id": "69463668ca4506",
         "size": "2XL",
-        "priceUSD": 61.99
+        "color": "Navy",
+        "printfulVariantId": "694dba199bfdb3",
+        "price": 46.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-NAVY-2XL"
       },
       {
-        "id": "69463668ca4543",
         "size": "3XL",
-        "priceUSD": 63.99
+        "color": "Navy",
+        "printfulVariantId": "694dba199bfe02",
+        "price": 48.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-NAVY-3XL"
+      },
+      {
+        "size": "4XL",
+        "color": "Navy",
+        "printfulVariantId": "694dba199bfe43",
+        "price": 50.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-NAVY-4XL"
+      },
+      {
+        "size": "S",
+        "color": "White",
+        "printfulVariantId": "694dba199bfe93",
+        "price": 44.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-WHITE-S"
+      },
+      {
+        "size": "M",
+        "color": "White",
+        "printfulVariantId": "694dba199bfed9",
+        "price": 44.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-WHITE-M"
+      },
+      {
+        "size": "L",
+        "color": "White",
+        "printfulVariantId": "694dba199bff26",
+        "price": 44.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-WHITE-L"
+      },
+      {
+        "size": "XL",
+        "color": "White",
+        "printfulVariantId": "694dba199bff64",
+        "price": 44.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-WHITE-XL"
+      },
+      {
+        "size": "2XL",
+        "color": "White",
+        "printfulVariantId": "694dba199bffb3",
+        "price": 46.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-WHITE-2XL"
+      },
+      {
+        "size": "3XL",
+        "color": "White",
+        "printfulVariantId": "694dba199bfff2",
+        "price": 48.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-WHITE-3XL"
+      },
+      {
+        "size": "4XL",
+        "color": "White",
+        "printfulVariantId": "694dba199c0035",
+        "price": 50.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-WHITE-4XL"
       }
     ],
-    "status": "active",
-    "availability": "made-to-order",
-    "printful": {
-      "product_type": "crewneck",
-      "sync_source": "manual",
-      "thumbnail": "https://files.cdn.printful.com/files/273/273a521304983380ffe07e205bd95374.png"
-    }
+    "printfulProduct": "Unisex Pique Polo Shirt",
+    "features": [
+      "Premium pique cotton for breathable comfort",
+      "Tree of Life embroidered on left chest",
+      "Classic three-button placket",
+      "Ribbed collar and sleeve cuffs for structure",
+      "Available in Navy and White colorways",
+      "Unisex fit—refined on every body",
+      "Side vents for movement and flow",
+      "Elevated basics that earn respect"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. Elegance endures.",
+    "tags": [
+      "logo-line",
+      "polo",
+      "unisex",
+      "pique",
+      "tree-of-life",
+      "navy",
+      "white",
+      "classic",
+      "refined"
+    ],
+    "chartResonance": [
+      "libra-emphasis",
+      "venus-dominant",
+      "air-signs",
+      "all-charts",
+      "professional-mystics"
+    ],
+    "seoTitle": "Lyrīon Pique Polo Shirt | Tree of Life | Premium Unisex Polo",
+    "seoDescription": "Refined rebellion. Premium pique polo with Tree of Life embroidery. Available in Navy and White. Unisex classic style meets cosmic significance.",
+    "launchDate": "2025-01-15",
+    "isBestseller": false,
+    "showOnHomepage": false
   },
   {
     "id": "corduroy-cap-sun-crest",
