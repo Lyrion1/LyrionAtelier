@@ -443,9 +443,9 @@ img {
 
 /* SECTION 1: Hero */
 .hero {
-  height: 400px;
-  max-height: 400px;
-  padding: 60px 40px;
+  height: 380px;
+  max-height: 380px;
+  padding: 50px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -466,8 +466,8 @@ img {
 
 /* SECTION 2: Orbs */
 .conversion-orbs {
-  height: 280px;
-  padding: 40px;
+  height: 240px;
+  padding: 30px 40px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -762,14 +762,14 @@ p {
 
 /* SECTION 3: Products */
 .section {
-  padding: 60px 40px;
+  padding: 40px 40px;
   background: linear-gradient(180deg, #0a0820, #0f0c29);
   margin-top: 0;
 }
 
 main > .section:first-of-type {
   margin-top: 0;
-  padding-top: 60px;
+  padding-top: 40px;
 }
 
 @media (max-width: 768px) {
@@ -1374,7 +1374,7 @@ textarea:focus {
 }
 
 .section-title {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   text-align: center;
 }
 
