@@ -301,7 +301,7 @@ const products = [
         size: "One Size",
         printfulVariantId: "6948ab6e63d308",
         id: "6948ab6e63d308",
-        price: 3000,
+        price: 30.00,
         currency: "USD",
         inStock: true,
         sku: "LYR-BEANIE-FISH-TREE"
