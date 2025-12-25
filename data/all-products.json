@@ -946,156 +946,6 @@
     }
   },
   {
-    "slug": "unisex-tee-sun-crest",
-    "title": "Unisex Garment-dyed Tee — Sun Crest",
-    "kind": "product",
-    "department": "apparel",
-    "subcategory": "tees",
-    "category": "t-shirts",
-    "collection": [
-      "lyrionatelier",
-      "lyrion-atelier"
-    ],
-    "zodiac": "None",
-    "meta": {
-      "category": "Unisex",
-      "collection": "Lyrion Atelier Core",
-      "zodiac": "None"
-    },
-    "palette": [
-      "Celestial Noir"
-    ],
-    "state": {
-      "ready": true,
-      "published": true
-    },
-    "images": [
-      "/assets/catalog/unisex-tee-sun-crest.webp"
-    ],
-    "tags": [
-      "unisex",
-      "tee",
-      "comfort-colors",
-      "sun-crest",
-      "brand-mark"
-    ],
-    "options": {
-      "size": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "2XL",
-        "3XL",
-        "4XL"
-      ]
-    },
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL"
-    ],
-    "price": {
-      "min": 33.99,
-      "max": 47.99,
-      "currency": "USD"
-    },
-    "description": "Premium garment-dyed heavyweight tee (Comfort Colors 1717) with the Lyrion sun crest embroidery.",
-    "variants": [
-      {
-        "id": "6946125c2990a1",
-        "options": {
-          "size": "S"
-        },
-        "price": 33.99,
-        "printfulVariantId": "6946125c2990a1",
-        "state": {
-          "ready": true,
-          "published": true
-        }
-      },
-      {
-        "id": "6946125c299108",
-        "options": {
-          "size": "M"
-        },
-        "price": 33.99,
-        "printfulVariantId": "6946125c299108",
-        "state": {
-          "ready": true,
-          "published": true
-        }
-      },
-      {
-        "id": "6946125c299168",
-        "options": {
-          "size": "L"
-        },
-        "price": 33.99,
-        "printfulVariantId": "6946125c299168",
-        "state": {
-          "ready": true,
-          "published": true
-        }
-      },
-      {
-        "id": "6946125c2991b5",
-        "options": {
-          "size": "XL"
-        },
-        "price": 41.99,
-        "printfulVariantId": "6946125c2991b5",
-        "state": {
-          "ready": true,
-          "published": true
-        }
-      },
-      {
-        "id": "6946125c2991f1",
-        "options": {
-          "size": "2XL"
-        },
-        "price": 43.99,
-        "printfulVariantId": "6946125c2991f1",
-        "state": {
-          "ready": true,
-          "published": true
-        }
-      },
-      {
-        "id": "6946125c299248",
-        "options": {
-          "size": "3XL"
-        },
-        "price": 45.99,
-        "printfulVariantId": "6946125c299248",
-        "state": {
-          "ready": true,
-          "published": true
-        }
-      },
-      {
-        "id": "6946125c299282",
-        "options": {
-          "size": "4XL"
-        },
-        "price": 47.99,
-        "printfulVariantId": "6946125c299282",
-        "state": {
-          "ready": true,
-          "published": true
-        }
-      }
-    ],
-    "defaultVariantId": "6946125c2990a1",
-    "currency": "USD",
-    "vendor": "Printful"
-  },
-  {
     "slug": "unisex-hoodie-sun-crest",
     "title": "Unisex Hoodie — Sun Crest",
     "kind": "product",
@@ -1500,5 +1350,221 @@
     "defaultVariantId": "694ab7d2e5aae1",
     "printfulProduct": "Urban Hoodie",
     "sku": "LYR-PISC-HOOD-BLK"
+  },
+  {
+    "id": "pisces-intuition-hoodie",
+    "slug": "pisces-intuition-hoodie",
+    "title": "Pisces Intuition Hoodie",
+    "name": "Pisces Intuition Hoodie",
+    "kind": "product",
+    "department": "apparel",
+    "subcategory": "hoodies",
+    "category": "hoodies",
+    "collection": "Intuition Line",
+    "zodiac": "pisces",
+    "element": "water",
+    "gender": "unisex",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Intuition Line",
+      "zodiac": "Pisces"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "description": "Trust what you feel before you think. Pisces doesn't navigate by maps—they swim by currents only their soul can sense. Born under Neptune's mystical depths, they know the truth before it speaks, feel the shift before it happens, see the invisible threads connecting all things. This heavyweight hoodie channels Piscean knowing through sacred fish symbolism and the single most powerful word for water signs: INTUITION. Wear this when the world demands logic but your gut whispers louder.",
+    "mysticalCopy": "Your intuition isn't a guess. It's your soul remembering what your mind forgot.",
+    "manifestationText": "Intuition",
+    "manifestationPlacement": "chest-or-sleeve",
+    "images": [
+      "/pisces-intuition-hoodie/pisces-intuition-hoodie-front.jpg",
+      "/pisces-intuition-hoodie/pisces-intuition-hoodie-back.jpg",
+      "/pisces-intuition-hoodie/pisces-intuition-hoodie-ghost.jpg",
+      "/pisces-intuition-hoodie/pisces-intuition-hoodie-lifestyle.jpg"
+    ],
+    "mainImage": "/pisces-intuition-hoodie/pisces-intuition-hoodie-front.jpg",
+    "price": {
+      "min": 55.99,
+      "max": 60.00,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "variants": [
+      {
+        "id": "694d5eae116cb7",
+        "options": {
+          "size": "S"
+        },
+        "price": 55.99,
+        "printfulVariantId": "694d5eae116cb7",
+        "sku": "LYR-PISC-INTUIT-S",
+        "inStock": true,
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "id": "694d5eae116d62",
+        "options": {
+          "size": "M"
+        },
+        "price": 55.99,
+        "printfulVariantId": "694d5eae116d62",
+        "sku": "LYR-PISC-INTUIT-M",
+        "inStock": true,
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "id": "694d5eae116de7",
+        "options": {
+          "size": "L"
+        },
+        "price": 55.99,
+        "printfulVariantId": "694d5eae116de7",
+        "sku": "LYR-PISC-INTUIT-L",
+        "inStock": true,
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "id": "694d5eae116e72",
+        "options": {
+          "size": "XL"
+        },
+        "price": 55.99,
+        "printfulVariantId": "694d5eae116e72",
+        "sku": "LYR-PISC-INTUIT-XL",
+        "inStock": true,
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "id": "694d5eae116f01",
+        "options": {
+          "size": "2XL"
+        },
+        "price": 57.99,
+        "printfulVariantId": "694d5eae116f01",
+        "sku": "LYR-PISC-INTUIT-2XL",
+        "inStock": true,
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "id": "694d5eae116f86",
+        "options": {
+          "size": "3XL"
+        },
+        "price": 57.99,
+        "printfulVariantId": "694d5eae116f86",
+        "sku": "LYR-PISC-INTUIT-3XL",
+        "inStock": true,
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "id": "694d5eae117019",
+        "options": {
+          "size": "4XL"
+        },
+        "price": 58.99,
+        "printfulVariantId": "694d5eae117019",
+        "sku": "LYR-PISC-INTUIT-4XL",
+        "inStock": true,
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      },
+      {
+        "id": "694d5eae117098",
+        "options": {
+          "size": "5XL"
+        },
+        "price": 60.00,
+        "printfulVariantId": "694d5eae117098",
+        "sku": "LYR-PISC-INTUIT-5XL",
+        "inStock": true,
+        "state": {
+          "ready": true,
+          "published": true
+        }
+      }
+    ],
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL",
+        "4XL",
+        "5XL"
+      ]
+    },
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL"
+    ],
+    "defaultVariantId": "694d5eae116cb7",
+    "printfulProduct": "Unisex Hoodie",
+    "features": [
+      "Premium heavyweight fleece for deep comfort",
+      "Pisces dual fish insignia with 'INTUITION' declaration",
+      "Spacious kangaroo pocket for sacred treasures",
+      "Drawstring hood to retreat from the noise",
+      "Unisex relaxed fit—sanctuary for all bodies",
+      "Soft brushed interior feels like a cosmic hug",
+      "Ribbed cuffs and hem for grounded structure",
+      "Designed for empaths, dreamers, and deep feelers"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. Your knowing never fades.",
+    "tags": [
+      "pisces",
+      "water-sign",
+      "zodiac",
+      "hoodie",
+      "unisex",
+      "intuition-line",
+      "mutable",
+      "neptune-ruled",
+      "empathy",
+      "psychic",
+      "mysticism"
+    ],
+    "chartResonance": [
+      "pisces-sun",
+      "pisces-moon",
+      "pisces-rising",
+      "neptune-dominant",
+      "12th-house-emphasis",
+      "water-dominant",
+      "intuitive-souls"
+    ],
+    "seoTitle": "Pisces Intuition Hoodie | Trust Your Gut | Lyrīon Atelier",
+    "seoDescription": "Channel Piscean knowing with the Intuition Hoodie. Premium unisex design for empaths and mystics who trust what they feel before they think.",
+    "launchDate": "2025-01-15",
+    "isBestseller": false,
+    "showOnHomepage": false
   }
 ]
