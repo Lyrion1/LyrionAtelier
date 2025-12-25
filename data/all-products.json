@@ -968,12 +968,12 @@
       "published": true
     },
     "images": [
-      "/pisces-hoodie/pisces-hoodie-new-ghost.png",
-      "/pisces-hoodie/pisces-hoodie-new-male.png",
-      "/pisces-hoodie/pisces-hoodie-new-female.png",
-      "/pisces-hoodie/pisces-hoodie-new-couple.png"
+      "/pisces-intuition-hoodie/pisces-intuition-hoodie-ghost.jpg",
+      "/pisces-intuition-hoodie/pisces-intuition-hoodie-front.jpg",
+      "/pisces-intuition-hoodie/pisces-intuition-hoodie-back.jpg",
+      "/pisces-intuition-hoodie/pisces-intuition-hoodie-lifestyle.jpg"
     ],
-    "mainImage": "/pisces-hoodie/pisces-hoodie-new-ghost.png",
+    "mainImage": "/pisces-intuition-hoodie/pisces-intuition-hoodie-ghost.jpg",
     "price": 54.99,
     "price_range": {
       "min": 54.99,
