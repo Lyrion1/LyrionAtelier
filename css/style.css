@@ -443,9 +443,10 @@ img {
 
 /* SECTION 1: Hero */
 .hero {
-  height: 380px;
-  max-height: 380px;
-  padding: 50px 40px;
+  height: 350px;
+  max-height: 350px;
+  padding: 40px;
+  margin-bottom: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -464,35 +465,43 @@ img {
   z-index: 10;
 }
 
-/* SECTION 2: Orbs */
-.conversion-orbs {
-  height: 240px;
-  padding: 30px 40px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  background: linear-gradient(135deg, #1a1645, #332d5f);
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-  margin: 0;
-  z-index: 10;
-}
-
-.conversion-orb {
-  width: 180px;
-  height: 180px;
+/* SECTION 2: Orbs - NOW POSITIONED AS OVERLAYS ON PRODUCTS SECTION */
+.cosmic-orb-left,
+.cosmic-orb-right {
+  position: absolute;
+  top: -80px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   border: 2px solid #d4af37;
+  background: rgba(15, 12, 41, 0.95);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: transparent;
+  z-index: 100;
   cursor: pointer;
   transition: transform 0.3s ease;
-  position: relative;
-  text-align: center;
+}
+
+.cosmic-orb-left {
+  left: 10%;
+}
+
+.cosmic-orb-right {
+  right: 10%;
+}
+
+.cosmic-orb-left:hover,
+.cosmic-orb-right:hover {
+  transform: scale(1.05);
+}
+
+.cosmic-orb-left:focus-visible,
+.cosmic-orb-right:focus-visible {
+  outline: 2px solid rgba(212, 175, 55, 0.9);
+  outline-offset: 6px;
 }
 
 .conversion-orb__glyph {
@@ -513,14 +522,7 @@ img {
   line-height: 1.3;
 }
 
-.conversion-orb:hover {
-  transform: scale(1.05);
-}
 
-.conversion-orb:focus-visible {
-  outline: 2px solid rgba(212, 175, 55, 0.9);
-  outline-offset: 6px;
-}
 
 .eyebrow {
   text-transform: uppercase;
@@ -762,6 +764,18 @@ p {
   padding: 40px 40px;
   background: linear-gradient(180deg, #0a0820, #0f0c29);
   margin-top: 0;
+}
+
+.products-section {
+  position: relative;
+  padding: 100px 40px 60px;
+  margin-top: 0;
+}
+
+.products-section .section-title h2 {
+  position: relative;
+  z-index: 1;
+  margin-top: 40px;
 }
 
 main > .section:first-of-type {
@@ -1485,16 +1499,17 @@ textarea:focus {
     padding: 40px 20px;
   }
   
-  .conversion-orbs {
-    height: auto;
-    flex-direction: column;
-    gap: 40px;
-    padding: 60px 20px;
+  .cosmic-orb-left,
+  .cosmic-orb-right {
+    position: relative;
+    top: 0;
+    left: auto;
+    right: auto;
+    margin: 20px auto;
   }
-
-  .conversion-orb {
-    width: 180px;
-    height: 180px;
+  
+  .products-section {
+    padding-top: 40px;
   }
   
   #featured-grid {
@@ -3362,19 +3377,14 @@ RESPONSIVE DESIGN
   min-height: 350px;
   }
  
-  .conversion-orbs {
-   position: static;
-   margin-top: 0.5rem;
-   margin-bottom: 10px;
-   flex-direction: column;
-   gap: 1.5rem;
-  align-items: center;
+  .cosmic-orb-left,
+  .cosmic-orb-right {
+   position: relative;
+   top: 0;
+   left: auto;
+   right: auto;
+   margin: 20px auto;
   }
-
-   .conversion-orb {
-   width: 160px;
-   height: 160px;
-   }
  
  .compatibility-products-grid {
  grid-template-columns: 1fr;
