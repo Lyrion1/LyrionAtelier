@@ -1,0 +1,193 @@
+{
+  "slug": "aquarius-crop-hoodie",
+  "title": "Aquarius Crop Hoodie",
+  "collection": "Zodiac Hero",
+  "category": "zodiac-hero",
+  "zodiac": "aquarius",
+  "element": "air",
+  "gender": "women",
+  "description": "The water bearer flows through you. Aquarius doesn't carry water—they ARE the water, the life force, the current that nourishes all of humanity. Born under Uranus' revolutionary reign, they understand that true change flows like a river: persistent, unstoppable, reshaping everything it touches. This cropped hoodie channels Aquarian defiance through sacred water symbolism, wrapping visionary souls in comfort designed for those who refuse to follow the current—they create it.",
+  "mysticalCopy": "Water is life. I am water. I flow where others fear to tread.",
+  "meta": {
+    "category": "Women",
+    "collection": "Zodiac Hero",
+    "zodiac": "Aquarius"
+  },
+  "state": {
+    "ready": true,
+    "published": true
+  },
+  "price": 64.99,
+  "price_range": {
+    "min": 64.99,
+    "max": 67.99,
+    "currency": "USD"
+  },
+  "currency": "USD",
+  "images": [
+    "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+    "/aquarius-crop-hoodie/aquarius-crop-hoodie-front2.jpg",
+    "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
+    "/aquarius-crop-hoodie/aquarius-crop-hoodie-side.jpg"
+  ],
+  "mainImage": "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+  "options": {
+    "color": ["Military Green", "Storm"],
+    "size": ["S", "M", "L", "XL", "2XL"]
+  },
+  "variants": [
+    {
+      "options": {
+        "size": "S",
+        "color": "Military Green"
+      },
+      "price": 64.99,
+      "currency": "USD",
+      "sku": "LYR-AQU-CROP-MG-S",
+      "printfulVariantId": "694c9c3fbcb066",
+      "inStock": true
+    },
+    {
+      "options": {
+        "size": "M",
+        "color": "Military Green"
+      },
+      "price": 64.99,
+      "currency": "USD",
+      "sku": "LYR-AQU-CROP-MG-M",
+      "printfulVariantId": "694c9c3fbcb105",
+      "inStock": true
+    },
+    {
+      "options": {
+        "size": "L",
+        "color": "Military Green"
+      },
+      "price": 64.99,
+      "currency": "USD",
+      "sku": "LYR-AQU-CROP-MG-L",
+      "printfulVariantId": "694c9c3fbcb198",
+      "inStock": true
+    },
+    {
+      "options": {
+        "size": "XL",
+        "color": "Military Green"
+      },
+      "price": 64.99,
+      "currency": "USD",
+      "sku": "LYR-AQU-CROP-MG-XL",
+      "printfulVariantId": "694c9c3fbcb21e",
+      "inStock": true
+    },
+    {
+      "options": {
+        "size": "2XL",
+        "color": "Military Green"
+      },
+      "price": 67.99,
+      "currency": "USD",
+      "sku": "LYR-AQU-CROP-MG-2XL",
+      "printfulVariantId": "694c9c3fbcb2a3",
+      "inStock": true
+    },
+    {
+      "options": {
+        "size": "S",
+        "color": "Storm"
+      },
+      "price": 64.99,
+      "currency": "USD",
+      "sku": "LYR-AQU-CROP-ST-S",
+      "printfulVariantId": "694c9c3fbcb325",
+      "inStock": true
+    },
+    {
+      "options": {
+        "size": "M",
+        "color": "Storm"
+      },
+      "price": 64.99,
+      "currency": "USD",
+      "sku": "LYR-AQU-CROP-ST-M",
+      "printfulVariantId": "694c9c3fbcb3a5",
+      "inStock": true
+    },
+    {
+      "options": {
+        "size": "L",
+        "color": "Storm"
+      },
+      "price": 64.99,
+      "currency": "USD",
+      "sku": "LYR-AQU-CROP-ST-L",
+      "printfulVariantId": "694c9c3fbcb428",
+      "inStock": true
+    },
+    {
+      "options": {
+        "size": "XL",
+        "color": "Storm"
+      },
+      "price": 64.99,
+      "currency": "USD",
+      "sku": "LYR-AQU-CROP-ST-XL",
+      "printfulVariantId": "694c9c3fbcb4a5",
+      "inStock": true
+    },
+    {
+      "options": {
+        "size": "2XL",
+        "color": "Storm"
+      },
+      "price": 67.99,
+      "currency": "USD",
+      "sku": "LYR-AQU-CROP-ST-2XL",
+      "printfulVariantId": "694c9c3fbcb529",
+      "inStock": true
+    }
+  ],
+  "printfulProduct": "Crop Hoodie",
+  "features": [
+    "Premium cropped fit for modern style",
+    "Aquarius water bearer insignia centered on chest",
+    "'Water is life, I am water' manifestation text (hidden inner detail)",
+    "Drawstring hood for versatile styling",
+    "Soft fleece interior for all-day comfort",
+    "Available in Military Green and Storm colorways",
+    "Ribbed cuffs and hem for structured fit",
+    "Designed for rebels, visionaries, and future-builders"
+  ],
+  "careInstructions": "Machine wash cold, tumble dry low. Your revolutionary spirit never fades.",
+  "tags": [
+    "aquarius",
+    "air-sign",
+    "zodiac",
+    "crop-hoodie",
+    "women",
+    "fixed",
+    "uranus-ruled",
+    "water-bearer",
+    "visionary",
+    "revolutionary"
+  ],
+  "chartResonance": [
+    "aquarius-sun",
+    "aquarius-moon",
+    "aquarius-rising",
+    "uranus-dominant",
+    "11th-house-emphasis",
+    "air-dominant"
+  ],
+  "seoTitle": "Aquarius Crop Hoodie | Water Bearer Design | Lyrīon Atelier",
+  "seoDescription": "Channel Aquarian flow with the Crop Hoodie. Premium design for visionaries and revolutionaries ruled by Uranus. Water is life, I am water.",
+  "launchDate": "2025-01-15",
+  "isBestseller": false,
+  "showOnHomepage": true,
+  "copy": {
+    "notes": "The water bearer flows through you. Aquarius doesn't carry water—they ARE the water, the life force, the current that nourishes all of humanity.",
+    "manifestationText": "Water is life, I am water",
+    "manifestationPlacement": "inner-hem",
+    "mysticalCopy": "Water is life. I am water. I flow where others fear to tread."
+  }
+}
