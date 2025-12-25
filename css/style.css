@@ -21,24 +21,24 @@
   --product-card-media-height: 200px;
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
   --gradient: radial-gradient(circle at 16% 18%, rgba(109, 132, 255, 0.18), transparent 28%), linear-gradient(145deg, #040712 0%, #0a1026 48%, #050816 100%);
-  --section-space: 3rem;
-  --section-space-mobile: 3rem;
+  --section-space: 1.875rem;
+  --section-space-mobile: 1.875rem;
   --gutter: 2rem;
   --gutter-mobile: 1rem;
-  --hero-min-height: 48vh;
-  --hero-max-height: 62vh;
+  --hero-min-height: 350px;
+  --hero-max-height: 350px;
   --orb-glyph-size: 112px;
 }
 
 @media (max-width: 1024px) {
   :root {
-    --hero-min-height: 56vh;
+    --hero-min-height: 350px;
   }
 }
 
 @media (max-width: 768px) {
   :root {
-    --hero-min-height: 64vh;
+    --hero-min-height: 350px;
   }
 }
 
@@ -442,11 +442,12 @@ img {
 }
 
 .hero {
-  padding: 40px 0 40px;
+  padding: 10px 0 10px;
   position: relative;
   overflow: visible;
-  min-height: var(--hero-min-height);
-  max-height: 500px;
+  min-height: 350px;
+  max-height: 350px;
+  height: 350px;
 }
 
 .hero-content {
@@ -462,21 +463,22 @@ img {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -4.25rem;
+  bottom: -3.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 4vw;
   gap: clamp(1.75rem, 6vw, 3.25rem);
-  z-index: 5;
+  z-index: 10;
+  margin-bottom: 10px;
 }
 
 .conversion-orb {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   border: 2px solid #d4af37;
-  padding: 20px;
+  padding: 16px;
   background: transparent;
   box-shadow:
     0 16px 38px rgba(212, 175, 55, 0.3),
@@ -487,7 +489,7 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -497,32 +499,33 @@ img {
   will-change: transform, filter;
   transform: translateZ(0);
   text-align: center;
+  z-index: 10;
 }
 
 .conversion-orb__glyph {
   display: inline-flex;
   place-items: center;
-  width: 40px;
-  height: 40px;
-  font-size: 40px;
+  width: 36px;
+  height: 36px;
+  font-size: 36px;
   color: #d4af37;
   filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.62));
   mix-blend-mode: normal;
   opacity: 1;
   z-index: 1;
   pointer-events: none;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .conversion-orb__label {
-  font-size: 14px;
-  line-height: 1.3;
+  font-size: 13px;
+  line-height: 1.2;
   text-align: center;
-  max-width: 140px;
+  max-width: 130px;
   color: #d4af37;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   text-shadow:
     0 4px 18px rgba(212, 175, 55, 0.35),
     0 0 8px rgba(255, 255, 255, 0.18);
@@ -552,7 +555,7 @@ img {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 0 0 0.75rem 0;
+  margin: 0 0 0.5rem 0;
   color: var(--accent-2);
   font-family: 'Cormorant Garamond', 'Cinzel', serif;
   letter-spacing: 0.04em;
@@ -561,7 +564,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.75rem 0;
   color: var(--text);
   text-shadow: var(--text-glow);
 }
@@ -778,21 +781,21 @@ p {
 }
 
 .section {
-  padding: calc(var(--section-space) / 2) 0;
+  padding: 5px 0;
 }
 
 main > .section:first-of-type {
-  margin-top: 60px;
+  margin-top: 10px;
   padding-top: 0;
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: calc(var(--section-space-mobile) / 2) 0;
+    padding: 5px 0;
   }
 
   main > .section:first-of-type {
-    margin-top: 60px;
+    margin-top: 10px;
     padding-top: 0;
   }
 }
@@ -1118,7 +1121,7 @@ main > .section:first-of-type {
 
 .newsletter-section {
   background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.12), rgba(var(--indigo-rgb), 0.08));
-  padding: calc(var(--section-space) / 2) var(--gutter);
+  padding: 30px var(--gutter);
   text-align: center;
   border-top: 1px solid rgba(var(--accent-2-rgb), 0.18);
 }
@@ -1199,7 +1202,7 @@ main > .section:first-of-type {
 
 @media (max-width: 768px) {
   .newsletter-section {
-    padding: calc(var(--section-space-mobile) / 2) var(--gutter-mobile);
+    padding: 30px var(--gutter-mobile);
   }
 
   .newsletter-container h2 {
@@ -1216,7 +1219,7 @@ main > .section:first-of-type {
 }
 
 .free-oracle-entry {
-  padding: calc(var(--section-space) / 2) 0;
+  padding: 30px 0;
 }
 
 .free-oracle-card {
@@ -1388,8 +1391,20 @@ textarea:focus {
 }
 
 .section-title {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.25rem;
   text-align: center;
+}
+
+.section-title .pill {
+  margin-bottom: 0.25rem;
+}
+
+.section-title h2 {
+  margin-bottom: 0rem;
+}
+
+.section-title .muted {
+  margin-bottom: 0.25rem;
 }
 
 .muted {
@@ -1482,7 +1497,7 @@ textarea:focus {
   }
 
   .hero {
-    padding: var(--section-space-mobile) 0;
+    padding: 10px 0;
     max-height: none;
   }
 
@@ -1492,12 +1507,13 @@ textarea:focus {
     align-items: stretch;
     gap: 1rem;
     padding: 0;
-    margin-top: 1.25rem;
+    margin-top: 0.75rem;
+    margin-bottom: 10px;
   }
 
   .conversion-orb {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
     margin: 0 auto;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -3096,8 +3112,8 @@ RESPONSIVE DESIGN
 .footer {
   background: rgba(15, 23, 42, 0.9);
   border-top: 1px solid rgba(var(--accent-2-rgb), 0.25);
-  padding: 2.5rem var(--gutter) 2rem;
-  margin-top: calc(var(--section-space) / 2);
+  padding: 30px var(--gutter) 30px;
+  margin-top: 30px;
 }
 
 .footer-content {
@@ -3360,21 +3376,22 @@ RESPONSIVE DESIGN
  }
  
   .hero {
-  padding: var(--section-space-mobile) 0 calc(var(--section-space-mobile) / 2 + 1rem);
-  min-height: var(--hero-min-height);
+  padding: 10px 0 10px;
+  min-height: 350px;
   }
  
   .conversion-orbs {
    position: static;
-   margin-top: 2rem;
+   margin-top: 0.5rem;
+   margin-bottom: 10px;
    flex-direction: column;
    gap: 1.5rem;
   align-items: center;
   }
 
    .conversion-orb {
-   width: 180px;
-   height: 180px;
+   width: 160px;
+   height: 160px;
    }
  
  .compatibility-products-grid {
@@ -3688,7 +3705,7 @@ margin: 0;
  ========================================== */
 
 .compatibility-promo-section {
-  padding: calc(var(--section-space) / 3) var(--gutter);
+  padding: 30px var(--gutter);
   background:
     radial-gradient(circle at 18% 22%, rgba(var(--accent-rgb), 0.1), transparent 32%),
     linear-gradient(135deg, rgba(10, 15, 29, 0.92), rgba(19, 28, 49, 0.9));
@@ -3716,7 +3733,7 @@ margin: 0 auto;
 display: grid;
 grid-template-columns: 1fr 1fr;
  gap: 32px;
- padding: 2.5rem;
+ padding: 1.5rem;
  background: rgba(255, 255, 255, 0.03);
  border: 1px solid var(--border);
  border-radius: 18px;
