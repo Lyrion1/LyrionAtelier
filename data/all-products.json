@@ -946,46 +946,42 @@
     }
   },
   {
-    "slug": "unisex-hoodie-sun-crest",
-    "title": "Unisex Hoodie — Sun Crest",
-    "kind": "product",
-    "department": "apparel",
-    "subcategory": "hoodies",
-    "category": "hoodies",
-    "collection": "lyrion-atelier",
-    "palette": [
-      "Celestial Noir"
-    ],
+    "id": "pisces-hoodie",
+    "slug": "pisces-hoodie",
+    "name": "Pisces Hoodie",
+    "title": "Pisces Hoodie",
+    "collection": "Zodiac Hero",
+    "category": "zodiac-hero",
+    "zodiac": "pisces",
+    "zodiacSign": "pisces",
+    "element": "water",
+    "gender": "unisex",
+    "description": "Swim between worlds. Pisces exists in the liminal space where dreams meet reality, where feeling becomes knowing, where souls recognize each other without words. Born under Neptune's oceanic depths, they are the mystics, the artists, the healers who understand that the invisible is more real than what we touch. This premium hoodie channels Piscean fluidity through sacred dual fish symbolism, wrapping sensitive souls in comfort designed for those who feel everything—and transform it into beauty.",
+    "mysticalCopy": "You don't escape reality. You show others there are infinite realities beyond what they can see.",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Zodiac Hero",
+      "zodiac": "Pisces"
+    },
     "state": {
       "ready": true,
       "published": true
     },
     "images": [
-      "https://files.cdn.printful.com/files/759/759a238baf4fe146cf7c28689cc65ac7.png"
+      "/pisces-hoodie/pisces-hoodie-ghost.jpg",
+      "/pisces-hoodie/pisces-hoodie-male.jpg",
+      "/pisces-hoodie/pisces-hoodie-female.jpg",
+      "/pisces-hoodie/pisces-hoodie-couple.jpg"
     ],
-    "pf": {
-      "variants": {
-        "S": "6945f31137fd67",
-        "M": "6945f31137fdc1",
-        "L": "6945f31137fe19",
-        "XL": "6945f31137fe62",
-        "2XL": "6945f31137fea4",
-        "3XL": "6945f31137fef8",
-        "4XL": "6945f31137ff36",
-        "5XL": "6945f31137ff88"
-      }
+    "mainImage": "/pisces-hoodie/pisces-hoodie-ghost.jpg",
+    "price": 54.99,
+    "price_range": {
+      "min": 54.99,
+      "max": 62.99,
+      "currency": "USD"
     },
+    "currency": "USD",
     "options": {
-      "sizes": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "2XL",
-        "3XL",
-        "4XL",
-        "5XL"
-      ],
       "size": [
         "S",
         "M",
@@ -997,22 +993,91 @@
         "5XL"
       ]
     },
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL",
-      "5XL"
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "694da2910d2079",
+        "price": 54.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-HOOD-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "694da2910d20e9",
+        "price": 54.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-HOOD-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "694da2910d2134",
+        "price": 54.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-HOOD-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "694da2910d2187",
+        "price": 54.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-HOOD-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "694da2910d21d6",
+        "price": 56.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-HOOD-2XL"
+      },
+      {
+        "size": "3XL",
+        "printfulVariantId": "694da2910d2222",
+        "price": 58.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-HOOD-3XL"
+      },
+      {
+        "size": "4XL",
+        "printfulVariantId": "694da2910d2273",
+        "price": 60.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-HOOD-4XL"
+      },
+      {
+        "size": "5XL",
+        "printfulVariantId": "694da2910d22c1",
+        "price": 62.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-HOOD-5XL"
+      }
     ],
-    "price": 55.99,
-    "badges": [
-      "Lyrion Atelier",
-      "Sun Crest"
+    "printfulProduct": "Unisex Hoodie",
+    "features": [
+      "Premium heavyweight fleece for sanctuary-level comfort",
+      "Pisces dual fish insignia centered on chest",
+      "Spacious kangaroo pocket for mystical essentials",
+      "Drawstring hood for retreating from the noise",
+      "Unisex relaxed fit—flows on all bodies",
+      "Soft brushed interior feels like an embrace",
+      "Ribbed cuffs and hem for grounded structure",
+      "Designed for empaths, dreamers, and cosmic swimmers"
     ],
-    "status": "active"
+    "careInstructions": "Machine wash cold, tumble dry low. Your depth never fades.",
+    "tags": ["pisces", "water-sign", "zodiac", "hoodie", "unisex", "mutable", "neptune-ruled", "empathy", "mysticism", "dual-fish"],
+    "chartResonance": ["pisces-sun", "pisces-moon", "pisces-rising", "neptune-dominant", "12th-house-emphasis", "water-dominant"],
+    "seoTitle": "Pisces Hoodie | Dual Fish Design | Unisex Zodiac Apparel | Lyrīon Atelier",
+    "seoDescription": "Embrace Piscean depths with the Pisces Hoodie. Premium unisex design for mystics and empaths ruled by Neptune's oceanic flow.",
+    "launchDate": "2025-01-15",
+    "isBestseller": false,
+    "showOnHomepage": false
   },
   {
     "slug": "premium-crewneck-sun-crest",
