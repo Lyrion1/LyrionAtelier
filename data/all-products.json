@@ -1067,20 +1067,52 @@
     }
   },
   {
+    "id": "corduroy-cap-sun-crest",
     "slug": "corduroy-cap-sun-crest",
-    "title": "Corduroy Cap — Sun Crest",
-    "category": "Accessories",
-    "collection": "Lyrion Atelier Core",
-    "zodiac": "None",
-    "soldOut": true,
-    "meta": {
-      "category": "Accessories",
-      "collection": "Lyrion Atelier Core",
-      "zodiac": "None",
-      "soldOut": true
-    },
-    "price": null,
-    "image": "/assets/placeholders/product.webp"
+    "name": "Lyrīon Corduroy Cap",
+    "title": "Lyrīon Corduroy Cap",
+    "collection": "Logo Line",
+    "category": "logo-line",
+    "gender": "unisex",
+    "description": "Crown your consciousness. This premium unstructured corduroy cap carries the sacred Sun Crest embroidered on front—a symbol of divine alignment—while 'FAITH' whispers along the side as your quiet declaration. Faith isn't blind belief; it's walking forward when the path ahead is dark, trusting the stars know what you cannot yet see. For those who lead with conviction and wear their truth close to their crown chakra.",
+    "mysticalCopy": "Faith is moving forward in the dark. The universe rewards those who believe before they see.",
+    "manifestationText": "Faith",
+    "manifestationPlacement": "side-embroidery",
+    "images": [
+      "/corduroy-cap-sun-crest/corduroy-cap-sun-crest-front.jpg",
+      "/corduroy-cap-sun-crest/corduroy-cap-sun-crest-model-front.jpg",
+      "/corduroy-cap-sun-crest/corduroy-cap-sun-crest-side.jpg",
+      "/corduroy-cap-sun-crest/corduroy-cap-sun-crest-back.jpg"
+    ],
+    "mainImage": "/corduroy-cap-sun-crest/corduroy-cap-sun-crest-front.jpg",
+    "variants": [
+      {
+        "size": "One Size",
+        "printfulVariantId": "6948a81b91a8b1",
+        "price": 44.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-CAP-CORD-SUNCREST"
+      }
+    ],
+    "printfulProduct": "Corduroy Cap",
+    "features": [
+      "Premium unstructured corduroy for relaxed fit",
+      "Embroidered Sun Crest on front panel",
+      "'FAITH' embroidered along left side—your personal mantra",
+      "Adjustable brass buckle closure",
+      "Unisex design for universal appeal",
+      "Soft, vintage-inspired texture",
+      "Crown chakra protection meets street style"
+    ],
+    "careInstructions": "Spot clean only. Your faith remains unshaken.",
+    "tags": ["logo-line", "cap", "unisex", "corduroy", "sun-crest", "faith", "manifestation", "crown-chakra", "headwear"],
+    "chartResonance": ["leo-emphasis", "sun-dominant", "1st-house", "5th-house", "fire-dominant", "all-signs"],
+    "seoTitle": "Lyrīon Corduroy Cap | Sun Crest & Faith | Luxury Headwear | Lyrīon Atelier",
+    "seoDescription": "Crown your consciousness with the Lyrīon Corduroy Cap. Premium unstructured design featuring embroidered Sun Crest and 'FAITH' manifestation text. Unisex luxury headwear.",
+    "launchDate": "2025-01-15",
+    "isBestseller": false,
+    "showOnHomepage": false
   },
   {
     "slug": "travel-altar-kit-rituals",
