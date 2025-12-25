@@ -205,25 +205,6 @@ test.describe('shop smoke test', () => {
 
     await page.goto(`http://localhost:${PORT}/shop`, { waitUntil: 'networkidle' });
     await page.waitForSelector('.product-card');
-    // Note: The dropdown only has 'lyrion-atelier' as value, not 'Lyrion Atelier Core'
-    // This test will check for products shown without filtering, as the beanie is in Logo Line collection
-    const allowedSlugs = [
-      'fisherman-beanie',
-      'unisex-hoodie-sun-crest',
-      'unisex-tee-sun-crest',
-      'premium-crewneck-sun-crest',
-      'corduroy-cap-sun-crest',
-      'travel-altar-kit-rituals',
-      // Also include zodiac products that may be shown
-      'youth-aries-fire-tee',
-      'leo-zodiac-hoodie',
-      'cosmic-crewneck-pisces',
-      'pisces-hoodie-black',
-      'capricorn-verdant-sweatshirt',
-      'aquarius-crop-hoodie',
-      'capricorn-verdant-relief-tee',
-      'scorpion-aegis-tee'
-    ];
     
     // Wait for products to load
     await page.waitForFunction(
