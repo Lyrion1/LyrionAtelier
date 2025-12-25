@@ -195,7 +195,7 @@ test.describe('shop smoke test', () => {
     expect(hasHorizontalOverflow).toBeFalsy();
   });
 
-  test('filters Lyrion Atelier collection and shows Sun Crest sweatshirt', async ({ page }) => {
+  test('filters Lyrion Atelier collection and shows Logo Line products', async ({ page }) => {
     await page.route('https://fonts.googleapis.com/**', (route) =>
       route.fulfill({ status: 200, contentType: 'text/css', body: '' })
     );
@@ -207,7 +207,7 @@ test.describe('shop smoke test', () => {
     await page.waitForSelector('.product-card');
     await page.selectOption('#filter-collection', 'Lyrion Atelier Core');
     const allowedSlugs = [
-      'lyrion-premium-sweatshirt',
+      'fisherman-beanie',
       'unisex-hoodie-sun-crest',
       'unisex-tee-sun-crest',
       'premium-crewneck-sun-crest',
@@ -223,6 +223,6 @@ test.describe('shop smoke test', () => {
     );
 
     const titles = await page.locator('.product-card__title').allInnerTexts();
-    expect(titles.some((title) => /Sun Crest/i.test(title))).toBeTruthy();
+    expect(titles.some((title) => /Fisherman Beanie|Sun Crest/i.test(title))).toBeTruthy();
   });
 });

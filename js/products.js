@@ -257,35 +257,63 @@ const products = [
   },
   {
     id: 255,
-    slug: "lyrion-premium-sweatshirt",
-    title: "Unisex Premium Sweatshirt — Sun Crest",
-    price: 59.99,
+    slug: "fisherman-beanie",
+    name: "Lyrīon Fisherman Beanie",
+    title: "Lyrīon Fisherman Beanie",
+    price: 30.00,
     currency: "USD",
-    category: "sweatshirts",
+    category: "accessories",
     zodiac: "all",
-    image: "/assets/catalog/lyrion-premium-sweatshirt.webp",
-    sizes: ["S","M","L","XL","2XL"],
-    desc: "Signature Lyrion Atelier Sun Crest premium crew with celestial detailing.",
-    pf_url: "https://www.printful.com/custom-products/unisex-premium-sweatshirt",
-    palette: "celestial-noir",
-    collection: ["lyrionatelier", "lyrion-atelier"],
-    images: ["/assets/catalog/lyrion-premium-sweatshirt.webp", "/assets/catalog/lyrion-premium-sweatshirt.png"],
-    showOnHomepage: true,
-    featured: true,
+    gender: "unisex",
+    collection: "Logo Line",
+    image: "/fisherman-beanie/fisherman-beanie-front.jpg",
+    images: [
+      "/fisherman-beanie/fisherman-beanie-front.jpg",
+      "/fisherman-beanie/fisherman-beanie-ghost.jpg",
+      "/fisherman-beanie/fisherman-beanie-male-model.jpg",
+      "/fisherman-beanie/fisherman-beanie-female-model.jpg"
+    ],
+    mainImage: "/fisherman-beanie/fisherman-beanie-front.jpg",
+    description: "Crown your third eye. This classic fisherman beanie carries the sacred Tree of Life embroidered on the fold—a subtle reminder that wisdom grows from roots you cannot see. Heavyweight ribbed knit built for winter's harsh truths and life's coldest seasons. For those who understand that warmth isn't just physical—it's knowing who you are when the world goes dark and cold. Wear it low, wear it loose, wear it like the quiet confidence of someone who's survived their own winter.",
+    mysticalCopy: "The coldest nights reveal who you really are. This keeps you warm through both.",
+    sizes: ["One Size"],
+    printfulProduct: "Fisherman Beanie",
+    features: [
+      "Premium heavyweight ribbed knit construction",
+      "Tree of Life embroidered on cuff fold",
+      "Classic fisherman beanie silhouette",
+      "Snug, comfortable fit for all-day wear",
+      "Unisex design—equally powerful on everyone",
+      "Durable enough for actual winters, styled for urban mysticism",
+      "Pairs with everything, anchors any outfit"
+    ],
+    careInstructions: "Hand wash cold, lay flat to dry. Like you, built to endure.",
+    tags: ["logo-line", "beanie", "unisex", "fisherman-beanie", "tree-of-life", "winter", "headwear", "streetwear", "cold-weather"],
+    chartResonance: ["capricorn-emphasis", "saturn-dominant", "winter-souls", "earth-signs", "all-charts"],
+    seoTitle: "Lyrīon Fisherman Beanie | Tree of Life | Premium Winter Headwear",
+    seoDescription: "Classic fisherman beanie with Tree of Life embroidery. Premium heavyweight ribbed knit for winter warmth and quiet confidence. Unisex design.",
+    launchDate: "2025-01-15",
+    isBestseller: false,
+    showOnHomepage: false,
+    featured: false,
     variants: [
-      { id: "69455454068e06", sku: "LA-SW-UNISEX-S", options: { size: "S" }, price: 5999 },
-      { id: "69455454068eb6", sku: "LA-SW-UNISEX-M", options: { size: "M" }, price: 5999 },
-      { id: "69455454068f36", sku: "LA-SW-UNISEX-L", options: { size: "L" }, price: 5999 },
-      { id: "69455454068fb1", sku: "LA-SW-UNISEX-XL", options: { size: "XL" }, price: 5999 },
-      { id: "69455454069045", sku: "LA-SW-UNISEX-2XL", options: { size: "2XL" }, price: 5999 }
+      {
+        size: "One Size",
+        printfulVariantId: "6948ab6e63d308",
+        id: "6948ab6e63d308",
+        price: 3000,
+        currency: "USD",
+        inStock: true,
+        sku: "LYR-BEANIE-FISH-TREE"
+      }
     ],
     metadata: {
       brand: "Lyrion Atelier",
       source: "manual",
-      collection: ["lyrionatelier", "lyrion-atelier"],
+      collection: "Logo Line",
       printful: {
         externalProductId: null,
-        variantIds: ["69455454068e06","69455454068eb6","69455454068f36","69455454068fb1","69455454069045"]
+        variantIds: ["6948ab6e63d308"]
       }
     }
   },
