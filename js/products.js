@@ -323,7 +323,7 @@ const products = [
     name: "Pisces Intuition Hoodie",
     title: "Pisces Intuition Hoodie",
     vendor: "Printful",
-    collection: ["Intuition Line"],
+    collection: "Intuition Line",
     category: "hoodie",
     zodiac: "pisces",
     element: "water",
