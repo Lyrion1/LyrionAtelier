@@ -4,7 +4,7 @@ const { applyPromotions } = require('./lib/promotions');
 const secretKey = process.env.STRIPE_SECRET_KEY_TEST;
 
 if (!secretKey) {
-  throw new Error('Stripe secret key is not configured.');
+  throw new Error('Stripe test secret key is not configured.');
 }
 
 const stripe = new Stripe(secretKey);
