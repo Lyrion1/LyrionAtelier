@@ -394,6 +394,93 @@ const products = [
     showOnHomepage: false
   },
   {
+    id: 257,
+    slug: "lyrion-pique-polo",
+    name: "Lyrīon Piqué Polo Shirt",
+    title: "Lyrīon Piqué Polo Shirt",
+    vendor: "Printful",
+    collection: "Logo Line",
+    category: "polo",
+    zodiac: "all",
+    gender: "unisex",
+    tags: ["logo-line","polo","unisex","pique","youth","casual","premium"],
+    image: "/lyrion-pique-polo/lyrion-pique-polo-front-flat.jpg",
+    images: [
+      "/lyrion-pique-polo/lyrion-pique-polo-front-flat.jpg",
+      "/lyrion-pique-polo/lyrion-pique-polo-back-flat.jpg",
+      "/lyrion-pique-polo/lyrion-pique-polo-boy-front.jpg",
+      "/lyrion-pique-polo/lyrion-pique-polo-boy-back.jpg",
+      "/lyrion-pique-polo/lyrion-pique-polo-girl-front.jpg"
+    ],
+    mainImage: "/lyrion-pique-polo/lyrion-pique-polo-front-flat.jpg",
+    description: "Elevated casual style meets cosmic elegance. The Lyrīon Piqué Polo combines classic sophistication with modern comfort. Crafted from premium piqué fabric with a timeless collar design, this polo shirt features subtle Lyrīon branding for those who appreciate understated luxury. Perfect for young souls navigating between casual and refined, this versatile piece transitions effortlessly from school to special occasions.",
+    mysticalCopy: "Elegance doesn't shout. It whispers confidence.",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    price: 42.99,
+    currency: "USD",
+    printfulProduct: "Youth Piqué Polo Shirt",
+    features: [
+      "Premium piqué knit fabric for breathability",
+      "Classic polo collar with button placket",
+      "Subtle Lyrīon branding for understated style",
+      "Comfortable fit for all-day wear",
+      "Versatile design for any occasion",
+      "Durable construction that maintains shape",
+      "Perfect for youth and young adults"
+    ],
+    careInstructions: "Machine wash cold, hang dry. Quality that lasts.",
+    isBestseller: false,
+    showOnHomepage: true,
+    featured: true,
+    variants: [
+      {
+        size: "XS",
+        id: "lyrion-pique-polo-xs",
+        price: 42.99,
+        currency: "USD",
+        inStock: true,
+        sku: "LYR-POLO-PIQUE-XS"
+      },
+      {
+        size: "S",
+        id: "lyrion-pique-polo-s",
+        price: 42.99,
+        currency: "USD",
+        inStock: true,
+        sku: "LYR-POLO-PIQUE-S"
+      },
+      {
+        size: "M",
+        id: "lyrion-pique-polo-m",
+        price: 42.99,
+        currency: "USD",
+        inStock: true,
+        sku: "LYR-POLO-PIQUE-M"
+      },
+      {
+        size: "L",
+        id: "lyrion-pique-polo-l",
+        price: 42.99,
+        currency: "USD",
+        inStock: true,
+        sku: "LYR-POLO-PIQUE-L"
+      },
+      {
+        size: "XL",
+        id: "lyrion-pique-polo-xl",
+        price: 42.99,
+        currency: "USD",
+        inStock: true,
+        sku: "LYR-POLO-PIQUE-XL"
+      }
+    ],
+    metadata: {
+      brand: "Lyrion Atelier",
+      source: "manual",
+      collection: "Logo Line"
+    }
+  },
+  {
     id: 101,
     name: "Past Life Reading",
     price: 65,
