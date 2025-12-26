@@ -28,6 +28,7 @@
   --hero-min-height: 350px;
   --hero-max-height: 350px;
   --orb-glyph-size: 112px;
+  --reading-card-padding: 16px;
 }
 
 @media (max-width: 1024px) {
@@ -4114,17 +4115,19 @@ body {
 
 .readings-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
+  align-items: start;
 }
 
 .reading-card {
   background: rgba(15, 23, 42, 0.7);
   border: 2px solid rgba(139, 92, 246, 0.3);
   border-radius: 16px;
-  padding: 24px;
+  padding: 0;
+  max-height: 450px;
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
@@ -4261,20 +4264,19 @@ body {
 
 .reading-image {
   position: relative;
-  margin: -24px -24px 16px;
-  height: clamp(220px, 32vw, 260px);
-  aspect-ratio: 4 / 5;
+  width: 100%;
+  height: 250px;
   overflow: hidden;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px 12px 0 0;
+  border-radius: 8px 8px 0 0;
 }
 
 .reading-image img {
   width: 100%;
-  height: 100%;
+  height: 250px;
   object-fit: cover;
+  object-position: center;
   display: block;
-  filter: saturate(1.05);
+  border-radius: 8px 8px 0 0;
 }
 
 .featured-reading {
@@ -4323,15 +4325,16 @@ body {
 
 .card-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
+  padding: 20px var(--reading-card-padding) 0;
 }
 
 .reading-title {
   color: #a78bfa;
-  font-size: 24px;
+  font-size: 1.3rem;
   font-family: 'Cinzel', serif;
   font-weight: 600;
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
 }
 
 .featured-reading .reading-title {
@@ -4344,30 +4347,37 @@ body {
 
 .reading-price {
   color: #fbbf24;
-  font-size: 36px;
+  font-size: 1.8rem;
   font-weight: 700;
   font-family: 'Cinzel', serif;
+  margin: 12px 0;
 }
 
 .reading-description {
   color: rgba(255, 255, 255, 0.85);
-  font-size: 15px;
-  line-height: 1.6;
-  margin: 0 0 20px 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+  padding: 0 var(--reading-card-padding);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .reading-features {
   list-style: none;
-  padding: 0;
-  margin: 0 0 25px 0;
-  flex-grow: 1;
+  padding: 0 var(--reading-card-padding);
+  margin: 0 0 16px 0;
+  flex: 1;
 }
 
 .reading-features li {
   color: rgba(255, 255, 255, 0.9);
-  font-size: 14px;
-  line-height: 1.6;
-  padding: 8px 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  padding: 6px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -4376,7 +4386,8 @@ body {
 }
 
 .book-reading-btn {
-  width: 100%;
+  width: calc(100% - (var(--reading-card-padding) * 2));
+  margin: 0 var(--reading-card-padding) var(--reading-card-padding);
   padding: 14px 20px;
   background: linear-gradient(135deg, rgba(var(--accent-2-rgb), 0.24), rgba(var(--accent-2-rgb), 0.14));
   border: 1.5px solid rgba(var(--accent-2-rgb), 0.6);
@@ -4576,7 +4587,13 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+  .readings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
   .readings-grid {
     grid-template-columns: 1fr;
   }
