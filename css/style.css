@@ -28,6 +28,7 @@
   --hero-min-height: 350px;
   --hero-max-height: 350px;
   --orb-glyph-size: 112px;
+  --reading-card-padding: 16px;
 }
 
 @media (max-width: 1024px) {
@@ -4326,7 +4327,7 @@ body {
 .card-header {
   text-align: center;
   margin-bottom: 12px;
-  padding: 20px 16px 0;
+  padding: 20px var(--reading-card-padding) 0;
 }
 
 .reading-title {
@@ -4358,14 +4359,17 @@ body {
   font-size: 0.95rem;
   line-height: 1.5;
   margin: 0 0 16px 0;
-  padding: 0 16px;
-  max-height: 60px;
+  padding: 0 var(--reading-card-padding);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .reading-features {
   list-style: none;
-  padding: 0 16px;
+  padding: 0 var(--reading-card-padding);
   margin: 0 0 16px 0;
   flex: 1;
 }
@@ -4383,8 +4387,8 @@ body {
 }
 
 .book-reading-btn {
-  width: calc(100% - 32px);
-  margin: 0 16px 16px;
+  width: calc(100% - calc(var(--reading-card-padding) * 2));
+  margin: 0 var(--reading-card-padding) var(--reading-card-padding);
   padding: 14px 20px;
   background: linear-gradient(135deg, rgba(var(--accent-2-rgb), 0.24), rgba(var(--accent-2-rgb), 0.14));
   border: 1.5px solid rgba(var(--accent-2-rgb), 0.6);
@@ -4581,6 +4585,12 @@ body {
   .product-detail__media {
     order: -1;
     min-height: 360px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .readings-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
