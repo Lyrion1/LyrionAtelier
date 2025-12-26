@@ -1380,7 +1380,6 @@
       {
         "size": "S/M",
         "printfulVariantId": "694dd3418487b8",
-        "printful_variant_id": "694dd3418487b8",
         "price": 34.00,
         "currency": "USD",
         "inStock": true,
@@ -1389,7 +1388,6 @@
       {
         "size": "L/XL",
         "printfulVariantId": "694dd341848814",
-        "printful_variant_id": "694dd341848814",
         "price": 34.00,
         "currency": "USD",
         "inStock": true,
