@@ -1,6 +1,6 @@
 const Stripe = require('stripe');
 
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY_TEST;
 const siteUrl = process.env.SITE_URL || process.env.URL || 'https://lyrionatelier.com';
 const stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
 

@@ -1,11 +1,12 @@
 console.log('Universal checkout handler loaded');
 
-const stripe = (typeof Stripe === 'function' && window?.STRIPE_PUBLISHABLE_KEY)
-  ? Stripe(window.STRIPE_PUBLISHABLE_KEY)
-  : null; // Expect Stripe publishable key provided via window.STRIPE_PUBLISHABLE_KEY
+let stripePublishableKey = window?.STRIPE_PUBLISHABLE_KEY_TEST;
+let stripe = (typeof Stripe === 'function' && stripePublishableKey)
+  ? Stripe(stripePublishableKey)
+  : null; // Expect Stripe publishable key provided via test environment when available
 if (!stripe) {
   if (!location.pathname.startsWith('/shop')) {
-    console.warn('Stripe publishable key missing; skipping client initialization.');
+    console.warn('Stripe test publishable key missing; skipping client initialization.');
   }
 } else {
   try {
@@ -55,6 +56,13 @@ async function initiateCheckout(productData) {
     
     if (data.error) {
       throw new Error(data.error);
+    }
+    
+    if (!stripe && typeof Stripe === 'function' && data.publishableKey) {
+      stripePublishableKey = data.publishableKey;
+      stripe = Stripe(stripePublishableKey);
+      window.stripe = stripe;
+      console.log('Stripe initialized from server response');
     }
     
     if (!data.url) {

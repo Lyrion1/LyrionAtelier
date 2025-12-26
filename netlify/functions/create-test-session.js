@@ -2,10 +2,9 @@
 // Test checkout is disabled unless ENABLE_TEST_CHECKOUT === 'true'
 const ENABLED = process.env.ENABLE_TEST_CHECKOUT === 'true';
 
-// Prefer test key for the test endpoint; fall back to live if not set
-const stripe = require('stripe')(
-process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY
-);
+// Use the Stripe test key for this endpoint
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY_TEST;
+const stripe = stripeSecretKey ? require('stripe')(stripeSecretKey) : null;
 
 exports.handler = async (event) => {
   if (!ENABLED) {
@@ -18,6 +17,13 @@ exports.handler = async (event) => {
 
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
+  }
+  if (!stripe) {
+    return {
+      statusCode: 500,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'Stripe is not configured.' })
+    };
   }
 
   try {
