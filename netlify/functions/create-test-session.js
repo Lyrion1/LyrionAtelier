@@ -2,9 +2,9 @@
 // Test checkout is disabled unless ENABLE_TEST_CHECKOUT === 'true'
 const ENABLED = process.env.ENABLE_TEST_CHECKOUT === 'true';
 
-// Prefer test key for the test endpoint; fall back to live if not set
+// Use the Stripe test key for this endpoint
 const stripe = require('stripe')(
-process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY
+process.env.STRIPE_SECRET_KEY_TEST
 );
 
 exports.handler = async (event) => {

@@ -1,11 +1,12 @@
 console.log('Universal checkout handler loaded');
 
-const stripe = (typeof Stripe === 'function' && window?.STRIPE_PUBLISHABLE_KEY)
-  ? Stripe(window.STRIPE_PUBLISHABLE_KEY)
-  : null; // Expect Stripe publishable key provided via window.STRIPE_PUBLISHABLE_KEY
+const stripePublishableKey = window?.STRIPE_PUBLISHABLE_KEY_TEST;
+const stripe = (typeof Stripe === 'function' && stripePublishableKey)
+  ? Stripe(stripePublishableKey)
+  : null; // Expect Stripe publishable key provided via window.STRIPE_PUBLISHABLE_KEY_TEST
 if (!stripe) {
   if (!location.pathname.startsWith('/shop')) {
-    console.warn('Stripe publishable key missing; skipping client initialization.');
+    console.warn('Stripe test publishable key missing; skipping client initialization.');
   }
 } else {
   try {

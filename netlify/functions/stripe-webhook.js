@@ -2,7 +2,7 @@ const Stripe = require('stripe');
 const { Resend } = require('resend');
 const fetch = require('node-fetch');
 
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY_TEST;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const resendApiKey = process.env.RESEND_API_KEY;
 

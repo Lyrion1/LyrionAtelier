@@ -1,7 +1,7 @@
 const Stripe = require('stripe');
 const { Resend } = require('resend');
 
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY_TEST;
 const webhookSecret = process.env.STRIPE_CERT_WEBHOOK_SECRET || process.env.STRIPE_WEBHOOK_SECRET;
 const resendApiKey = process.env.RESEND_API_KEY;
 const conversationWebhook = process.env.CONVERSATION_USERS_WEBHOOK;

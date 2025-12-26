@@ -326,8 +326,8 @@ app.listen(3000);
 3. **Set Environment Variables**
    - Go to Site settings > Environment variables
    - Add your Stripe keys:
-     - `STRIPE_PUBLISHABLE_KEY`
-     - `STRIPE_SECRET_KEY`
+     - `STRIPE_PUBLISHABLE_KEY_TEST`
+     - `STRIPE_SECRET_KEY_TEST`
 
 4. **Configure Domain**
    - Go to Domain settings
