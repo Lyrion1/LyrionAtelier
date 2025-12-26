@@ -812,176 +812,118 @@ main > .section:first-of-type {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
-/* Oracle Products Grid - FIXED */
-.oracle-products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 32px;
-  max-width: 1400px;
-  margin: 60px auto;
-  padding: 0 40px;
-}
+/* ═══════════════════════════════════════════════════════════
+   ORACLE CARD CSS - PROFESSIONAL FIX
+   ═══════════════════════════════════════════════════════════ */
 
-/* Oracle Card - FIXED */
 .oracle-card {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(251, 191, 36, 0.2);
-  border-radius: 16px;
+  background: rgba(10, 8, 32, 0.8);
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
   overflow: hidden;
-  transition: all 0.3s ease;
+  height: 500px;
   display: flex;
   flex-direction: column;
-  height: 100%;
-}
-
-.oracle-card:hover {
-  border-color: rgba(251, 191, 36, 0.5);
-  transform: translateY(-5px);
-  box-shadow: 0 8px 32px rgba(251, 191, 36, 0.2);
-}
-
-/* Card Image Container - FIXED */
-.oracle-card-image {
-  width: 100%;
-  height: 280px;
-  overflow: hidden;
-  position: relative;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(99, 102, 241, 0.1));
-}
-
-.oracle-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
   transition: transform 0.3s ease;
 }
 
-.oracle-card:hover .oracle-card-image img {
-  transform: scale(1.05);
+.oracle-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(212, 175, 55, 0.6);
 }
 
-/* FIX Life Path Card White Background */
-.life-path-card .oracle-card-image {
-  background: linear-gradient(135deg, #1e3a8a, #312e81);
+.oracle-card-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
-.life-path-card .oracle-card-image img {
-  mix-blend-mode: normal;
-  opacity: 1;
-}
-
-/* Card Badge */
-.oracle-badge {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  background: rgba(139, 92, 246, 0.9);
-  color: white;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  z-index: 2;
-}
-
-/* Card Content */
 .oracle-card-content {
-  padding: 24px;
+  padding: 24px 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-.oracle-card-content h3 {
-  color: #fff;
-  font-size: 22px;
+.oracle-card-title {
+  font-size: 1.4rem;
+  color: #d4af37;
+  margin-bottom: 12px;
   font-weight: 600;
-  margin: 0 0 12px 0;
-  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.oracle-card-content p {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 15px;
-  line-height: 1.6;
-  margin: 0 0 auto 0;
-  flex: 1;
-}
-
-/* Price */
-.oracle-price {
-  color: #fbbf24;
-  font-size: 28px;
+.oracle-card-price {
+  font-size: 2rem;
+  color: #d4af37;
   font-weight: 700;
-  margin: 20px 0;
-  font-family: 'Cinzel', serif;
+  margin-bottom: 16px;
 }
 
-/* Card Buttons */
-.oracle-card-buttons {
-  display: flex;
-  gap: 12px;
-  margin-top: auto;
+.oracle-card-description {
+  font-size: 0.95rem;
+  color: #ffffff;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  opacity: 0.9;
 }
 
-.ask-oracle-btn {
-  flex: 1;
-  padding: 12px 20px;
-  background: rgba(var(--accent-2-rgb), 0.1);
-  border: 1.5px solid rgba(var(--accent-2-rgb), 0.4);
-  border-radius: 10px;
-  color: var(--accent-2);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+.oracle-card-description ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.ask-oracle-btn:hover {
-  background: rgba(var(--accent-2-rgb), 0.2);
-  border-color: rgba(var(--accent-2-rgb), 0.6);
-  box-shadow: 0 4px 16px rgba(var(--accent-2-rgb), 0.3);
+.oracle-card-description li {
+  margin-bottom: 8px;
+  padding-left: 0;
 }
 
-.book-reading-btn {
-  flex: 1;
-  display: inline-block;
+.oracle-card-button {
+  background: #d4af37;
+  color: #0a0820;
   padding: 12px 24px;
-  background: linear-gradient(135deg, rgba(var(--accent-2-rgb), 0.2), rgba(var(--accent-2-rgb), 0.12));
-  border: 1.5px solid rgba(var(--accent-2-rgb), 0.5);
-  border-radius: 10px;
-  color: var(--accent-2);
-  font-size: 15px;
+  border: none;
+  border-radius: 8px;
   font-weight: 600;
-  text-align: center;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
+  transition: background 0.3s ease;
+  text-align: center;
+  display: block;
+  width: 100%;
 }
 
-.book-reading-btn:hover {
-  background: linear-gradient(135deg, rgba(var(--accent-2-rgb), 0.3), rgba(var(--accent-2-rgb), 0.18));
-  border-color: rgba(var(--accent-2-rgb), 0.7);
-  box-shadow: 0 4px 16px rgba(var(--accent-2-rgb), 0.35);
-  transform: translateY(-2px);
+.oracle-card-button:hover {
+  background: #f0c659;
 }
 
-/* Mobile Responsive */
+/* ═══════════════════════════════════════════════════════════
+   GRID LAYOUT
+   ═══════════════════════════════════════════════════════════ */
+
+.oracle-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin: 60px auto;
+  max-width: 1200px;
+  padding: 0 40px;
+}
+
+@media (max-width: 1024px) {
+  .oracle-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .oracle-products-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 0 20px;
-  }
-
-  .oracle-card-image {
-    height: 240px;
   }
 }
 
