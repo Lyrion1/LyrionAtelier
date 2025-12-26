@@ -840,6 +840,13 @@ main > .section:first-of-type {
   display: block;
 }
 
+/* Fix for Life Path and Chiron images with white borders */
+.oracle-card[data-product="life-path-reading"] .oracle-card-image,
+.oracle-card[data-product="chiron-wound-healing"] .oracle-card-image {
+  transform: scale(1.15);
+  object-fit: cover;
+}
+
 .oracle-card-content {
   padding: 24px 20px;
   flex: 1;
