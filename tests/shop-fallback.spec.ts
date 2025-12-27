@@ -140,7 +140,7 @@ test.describe('shop fallback art', () => {
     const imageCounts = await cards.evaluateAll((els) =>
       els.map((card) => card.querySelectorAll('img').length)
     );
-    expect(imageCounts.every((count) => count >= 4)).toBeTruthy();
+    expect(imageCounts.every((count) => count === 1)).toBeTruthy();
     const srcs = await page.locator('[data-shop-grid] .product-card img').evaluateAll((imgs) =>
       imgs.map((img) => (img as HTMLImageElement).getAttribute('src') || '')
     );

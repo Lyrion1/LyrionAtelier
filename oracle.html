@@ -476,8 +476,68 @@
 
     <script src="/js/oracle-products-data.js"></script>
     <script>
+      const WARDROBE_FALLBACK_IMAGE = '/assets/catalog/placeholder.webp';
+      const slugify = (value = '') => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      const moneyValue = (val) => {
+        const num = Number(val);
+        if (!Number.isFinite(num)) return null;
+        return num > 200 ? num / 100 : num;
+      };
+      const resolvePriceValue = (product = {}) => {
+        if (typeof product.price === 'number') return moneyValue(product.price);
+        if (product.price && typeof product.price === 'object') {
+          const min = moneyValue(product.price.min ?? product.price.amount ?? null);
+          if (min !== null) return min;
+        }
+        if (product.price_range && typeof product.price_range === 'object') {
+          const min = moneyValue(product.price_range.min ?? null);
+          if (min !== null) return min;
+        }
+        const firstVariant = Array.isArray(product.variants) ? product.variants[0] : null;
+        if (firstVariant) {
+          const variantPrice = moneyValue(firstVariant.price ?? firstVariant.retail_price);
+          if (variantPrice !== null) return variantPrice;
+        }
+        return null;
+      };
+      const pickImage = (product = {}) => {
+        const sources = [];
+        if (product.image) sources.push(product.image);
+        if (Array.isArray(product.images)) sources.push(...product.images);
+        const found = sources.find((src) => typeof src === 'string' && src.trim());
+        return found || WARDROBE_FALLBACK_IMAGE;
+      };
+      const normalizeProduct = (product = {}) => {
+        const slug = product.slug || slugify(product.title || product.name || product.id || '');
+        const priceValue = resolvePriceValue(product);
+        const zodiac = (product?.meta?.zodiac || product?.zodiac || '').toLowerCase();
+        return {
+          slug,
+          title: product.title || product.name || slug || 'Celestial piece',
+          priceLabel: priceValue !== null ? `$${priceValue.toFixed(2)}` : 'Price unavailable',
+          image: pickImage(product),
+          mysticalCopy: product.mysticalCopy || product.description || product.seoDescription || '',
+          zodiac
+        };
+      };
+      const selectRecommendations = (catalog = [], sunSign = '') => {
+        const normalized = (sunSign || '').toLowerCase();
+        const bySign = catalog.filter((p) => p.zodiac === normalized);
+        const pool = bySign.length ? bySign : catalog;
+        const seen = new Set();
+        const picks = [];
+        pool.forEach((p) => {
+          const key = p.slug || p.title;
+          if (key && !seen.has(key) && p.slug) {
+            seen.add(key);
+            picks.push(p);
+          }
+        });
+        return picks.slice(0, 4);
+      };
+
       // RENDER CELESTIAL WARDROBE PRODUCTS
-      (function() {
+      (async function() {
         const sunSign = getUserSunSign();
         const normalized = (sunSign || 'leo').toLowerCase();
         const displayValue = normalized.charAt(0).toUpperCase() + normalized.slice(1);
@@ -485,24 +545,59 @@
         const displayEl = document.getElementById('userSunSignDisplay');
         if (displayEl) displayEl.textContent = displayValue;
 
-        const recommendations = getOracleRecommendations(normalized);
         const grid = document.getElementById('celestialProductsGrid');
-        if (!grid || !recommendations?.length) return;
+        if (!grid) return;
+
+        const loadCatalog = async () => {
+          try {
+            const res = await fetch('/data/all-products.json', { cache: 'no-store' });
+            if (res.ok) {
+              const data = await res.json();
+              if (Array.isArray(data)) return data;
+            }
+          } catch (err) {
+            console.warn('[oracle] failed to load catalog', err);
+          }
+          if (Array.isArray(window.LyrionAtelier?.products)) return window.LyrionAtelier.products;
+          if (Array.isArray(window.products)) return window.products;
+          return [];
+        };
+
+        const catalogRaw = await loadCatalog();
+        const normalizedCatalog = catalogRaw.map(normalizeProduct).filter((p) => p.slug);
+        const recommendations = selectRecommendations(normalizedCatalog, normalized);
+
+        grid.innerHTML = '';
+        if (!recommendations.length) {
+          grid.innerHTML = '<div class="wardrobe-mystical-copy">No aligned pieces are available right now.</div>';
+          return;
+        }
 
         recommendations.forEach((product) => {
-          const card = document.createElement('div');
+          const href = product.slug ? `/shop.html?highlight=${encodeURIComponent(product.slug)}` : '/shop.html';
+          const card = document.createElement('a');
           card.className = 'wardrobe-product-card';
-          card.onclick = () => (window.location.href = `/shop/${product.id}`);
+          card.href = href;
+          card.setAttribute('data-product', product.slug);
 
           card.innerHTML = `
-<img src="${product.image}" alt="${product.name}" class="wardrobe-product-image">
+<img src="${product.image}" alt="${product.title}" class="wardrobe-product-image">
 <div class="wardrobe-product-info">
-<h3 class="wardrobe-product-name">${product.name}</h3>
-<p class="wardrobe-mystical-copy">${product.mysticalCopy}</p>
-<p class="wardrobe-product-price">$${product.price.toFixed(2)}</p>
-<button class="wardrobe-shop-button">Claim This Piece</button>
+<h3 class="wardrobe-product-name">${product.title}</h3>
+<p class="wardrobe-mystical-copy">${product.mysticalCopy || ''}</p>
+<p class="wardrobe-product-price">${product.priceLabel}</p>
+<span class="wardrobe-shop-button">View in Shop</span>
 </div>
 `;
+
+          const imgEl = card.querySelector('img');
+          imgEl.loading = 'lazy';
+          imgEl.decoding = 'async';
+          imgEl.onerror = () => {
+            if (imgEl.src !== WARDROBE_FALLBACK_IMAGE) {
+              imgEl.src = WARDROBE_FALLBACK_IMAGE;
+            }
+          };
 
           grid.appendChild(card);
         });

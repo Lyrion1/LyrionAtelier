@@ -81,7 +81,7 @@ test.describe('homepage featured products', () => {
     await expect(featuredCard.locator('.price')).toContainText('$34.99');
 
     const images = featuredCard.locator('img');
-    expect(await images.count()).toBeGreaterThanOrEqual(4);
+    await expect(images).toHaveCount(1);
     await expect(images.first()).toHaveAttribute('src', /youth-aries-fire-tee/i);
   });
 
@@ -91,7 +91,7 @@ test.describe('homepage featured products', () => {
     await expect(featuredCard).toBeVisible();
     await expect(featuredCard.locator('.price')).toContainText('$59.99');
     const images = featuredCard.locator('img');
-    expect(await images.count()).toBeGreaterThanOrEqual(4);
+    await expect(images).toHaveCount(1);
     await expect(images.first()).toHaveAttribute('src', /leo-zodiac-hoodie/i);
   });
 
@@ -101,7 +101,7 @@ test.describe('homepage featured products', () => {
     await expect(thirdCard).toContainText('Cosmic Crewneck - Pisces');
     await expect(thirdCard.locator('.price')).toContainText('$55.99');
     const images = thirdCard.locator('img');
-    expect(await images.count()).toBeGreaterThanOrEqual(4);
+    await expect(images).toHaveCount(1);
     await expect(images.first()).toHaveAttribute('src', /cosmic-crewneck-pisces/i);
   });
 
@@ -112,7 +112,7 @@ test.describe('homepage featured products', () => {
     const imageCounts = await featuredCards.evaluateAll((cards) =>
       cards.map((card) => card.querySelectorAll('img').length)
     );
-    expect(imageCounts.every((count) => count >= 4)).toBeTruthy();
+    expect(imageCounts.every((count) => count === 1)).toBeTruthy();
   });
 
   test('opens Cosmic Crewneck details from homepage view action', async ({ page }) => {
