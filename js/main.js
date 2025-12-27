@@ -148,11 +148,6 @@ function buildSiteHeader() {
   return header;
 }
 
-function isContactPage() {
-  const path = (window.location.pathname || '').toLowerCase();
-  return path.endsWith('/contact.html') || path === '/contact' || path.endsWith('/contact');
-}
-
 function buildSiteFooter() {
   const footer = document.createElement('footer');
   footer.className = 'footer';
