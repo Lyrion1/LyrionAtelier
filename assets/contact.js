@@ -5,9 +5,26 @@ gtag('config', 'G-XXXXXXXXXX');
 
 function setStatus(statusEl, type, message) {
   if (!statusEl) return;
-  statusEl.textContent = message || '';
-  statusEl.classList.remove('status-success', 'status-error');
+  statusEl.innerHTML = message || '';
+  statusEl.classList.remove('status-success', 'status-error', 'is-visible');
+  if (message) statusEl.classList.add('is-visible');
   if (type) statusEl.classList.add(type === 'success' ? 'status-success' : 'status-error');
+}
+
+function setButtonLoading(button, isLoading) {
+  if (!button) return;
+  if (isLoading) {
+    if (!button.dataset.originalText) {
+      button.dataset.originalText = button.textContent;
+    }
+    button.disabled = true;
+    button.textContent = 'Sending...';
+    button.classList.add('is-loading');
+  } else {
+    button.disabled = false;
+    button.textContent = button.dataset.originalText || 'Send message';
+    button.classList.remove('is-loading');
+  }
 }
 
 function validateFormFields(form) {
@@ -43,33 +60,38 @@ async function handleSubmit(event) {
     return;
   }
 
+  setButtonLoading(submitBtn, true);
   const formData = new FormData(form);
   formData.set('form-name', form.getAttribute('name') || 'contact');
   formData.set('pageUrl', window.location.href);
   formData.set('userAgent', navigator.userAgent);
 
-  if (submitBtn) {
-    submitBtn.disabled = true;
-    submitBtn.dataset.originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Sending...';
-  }
-
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
   try {
     const response = await fetch(form.getAttribute('action') || '/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encodeFormData(formData)
+      body: encodeFormData(formData),
+      signal: controller.signal
     });
-    if (!response.ok) throw new Error('Network error');
-    setStatus(statusEl, 'success', 'Message sent. We’ll reply to admin@lyrionatelier.com');
-    form.classList.add('form-sent');
+    if (!response.ok) throw new Error('Network response was not ok');
+    setStatus(
+      statusEl,
+      'success',
+      'Message sent. We’ll reply from admin@lyrionatelier.com.<div class="status-subline">Check your inbox (and spam) for our reply.</div>'
+    );
     form.reset();
   } catch (err) {
-    setStatus(statusEl, 'error', 'Something cosmic went awry. Please try again.');
-    if (submitBtn) {
-      submitBtn.disabled = false;
-      submitBtn.textContent = submitBtn.dataset.originalText || 'Send message';
-    }
+    const timedOut = err.name === 'AbortError';
+    setStatus(
+      statusEl,
+      'error',
+      timedOut ? 'The request timed out. Please try again.' : 'Something cosmic went awry. Please try again.'
+    );
+  } finally {
+    clearTimeout(timeoutId);
+    setButtonLoading(submitBtn, false);
   }
 }
 
