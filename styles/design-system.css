@@ -1,0 +1,240 @@
+/* ═══════════════════════════════════════════════════════════
+ LYRĪON ATELIER - MASTER DESIGN SYSTEM
+ DO NOT MODIFY WITHOUT EXPLICIT PERMISSION
+ ═══════════════════════════════════════════════════════════ */
+
+:root {
+ /* OFFICIAL BRAND COLORS - NEVER CHANGE */
+ --gold-primary: #d4af37;
+ --gold-light: #f0c659;
+ --gold-dark: #b8941f;
+ 
+ --purple-deep: #302b63;
+ --purple-dark: #24243e;
+ --navy-darkest: #0f0c29;
+ --navy-dark: #0a0820;
+ 
+ --white: #ffffff;
+ --white-80: rgba(255, 255, 255, 0.8);
+ --white-60: rgba(255, 255, 255, 0.6);
+ 
+ /* FORBIDDEN COLORS - NEVER USE */
+ --forbidden-blue: #4169E1; /* BANNED */
+ --forbidden-orange: #FF8C00; /* BANNED */
+}
+
+/* ═══════════════════════════════════════════════════════════
+ PRODUCT CARDS - UNIVERSAL STYLING
+ ═══════════════════════════════════════════════════════════ */
+
+.product-card {
+ background: rgba(10, 8, 32, 0.8) !important;
+ border: 2px solid rgba(212, 175, 55, 0.3) !important;
+ border-radius: 12px !important;
+ overflow: hidden !important;
+ display: flex !important;
+ flex-direction: column !important;
+ height: 100% !important;
+ transition: all 0.3s ease !important;
+}
+
+.product-card:hover {
+ transform: translateY(-8px) !important;
+ border-color: var(--gold-primary) !important;
+ box-shadow: 0 15px 50px rgba(212, 175, 55, 0.4) !important;
+}
+
+.product-card-image {
+ width: 100% !important;
+ height: 280px !important;
+ object-fit: cover !important;
+ object-position: center !important;
+ display: block !important;
+}
+
+.product-card-content {
+ padding: 20px !important;
+ flex: 1 !important;
+ display: flex !important;
+ flex-direction: column !important;
+}
+
+.product-card-title {
+ font-size: 1.2rem !important;
+ color: var(--gold-primary) !important;
+ margin-bottom: 10px !important;
+ font-weight: 600 !important;
+ min-height: 50px !important;
+}
+
+.product-card-description {
+ font-size: 0.9rem !important;
+ color: var(--white-80) !important;
+ line-height: 1.5 !important;
+ margin-bottom: 15px !important;
+ flex: 1 !important;
+}
+
+.product-card-price {
+ font-size: 1.3rem !important;
+ color: var(--gold-primary) !important;
+ font-weight: 700 !important;
+ margin-bottom: 20px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+ BUTTONS - TWO TYPES ONLY
+ ═══════════════════════════════════════════════════════════ */
+
+.product-card-buttons {
+ display: flex !important;
+ flex-direction: column !important;
+ gap: 10px !important;
+ margin-top: auto !important;
+}
+
+/* VIEW PRODUCT BUTTON - OUTLINE GOLD */
+.view-product-button,
+.view-button,
+button[class*="view"],
+a[class*="view"] {
+ width: 100% !important;
+ padding: 12px 20px !important;
+ background: transparent !important;
+ border: 2px solid var(--gold-primary) !important;
+ color: var(--gold-primary) !important;
+ border-radius: 8px !important;
+ font-weight: 600 !important;
+ font-size: 1rem !important;
+ cursor: pointer !important;
+ transition: all 0.3s ease !important;
+ text-align: center !important;
+ text-decoration: none !important;
+ display: block !important;
+}
+
+.view-product-button:hover,
+.view-button:hover {
+ background: var(--gold-primary) !important;
+ color: var(--navy-darkest) !important;
+ transform: translateY(-2px) !important;
+}
+
+/* ADD TO CART BUTTON - SOLID GOLD */
+.add-to-cart-button,
+.add-cart-button,
+button[class*="add-to-cart"],
+button[class*="add-cart"] {
+ width: 100% !important;
+ padding: 12px 20px !important;
+ background: var(--gold-primary) !important;
+ border: 2px solid var(--gold-primary) !important;
+ color: var(--navy-darkest) !important;
+ border-radius: 8px !important;
+ font-weight: 700 !important;
+ font-size: 1rem !important;
+ cursor: pointer !important;
+ transition: all 0.3s ease !important;
+ text-align: center !important;
+ text-decoration: none !important;
+ display: block !important;
+}
+
+.add-to-cart-button:hover,
+.add-cart-button:hover {
+ background: var(--gold-light) !important;
+ transform: translateY(-2px) !important;
+ box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4) !important;
+}
+
+/* KILL ALL BLUE AND ORANGE BUTTONS */
+button[style*="4169E1"],
+button[style*="blue"],
+.btn-primary,
+.button-primary {
+ background: var(--gold-primary) !important;
+ border-color: var(--gold-primary) !important;
+ color: var(--navy-darkest) !important;
+}
+
+button[style*="FF8C00"],
+button[style*="orange"],
+.btn-warning {
+ background: transparent !important;
+ border: 2px solid var(--gold-primary) !important;
+ color: var(--gold-primary) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+ PRODUCT GRID - PERFECT ALIGNMENT
+ ═══════════════════════════════════════════════════════════ */
+
+.product-grid,
+.products-grid,
+[class*="product-grid"] {
+ display: grid !important;
+ grid-template-columns: repeat(4, 1fr) !important;
+ gap: 30px !important;
+ align-items: stretch !important;
+ max-width: 1400px !important;
+ margin: 0 auto !important;
+ padding: 40px 20px !important;
+}
+
+@media (max-width: 1200px) {
+ .product-grid,
+ .products-grid {
+ grid-template-columns: repeat(3, 1fr) !important;
+ }
+}
+
+@media (max-width: 900px) {
+ .product-grid,
+ .products-grid {
+ grid-template-columns: repeat(2, 1fr) !important;
+ }
+}
+
+@media (max-width: 600px) {
+ .product-grid,
+ .products-grid {
+ grid-template-columns: 1fr !important;
+ }
+}
+
+/* ═══════════════════════════════════════════════════════════
+ HOMEPAGE CUSTOMER FAVOURITES
+ ═══════════════════════════════════════════════════════════ */
+
+.customer-favourites,
+.featured-products,
+[class*="favourites"],
+[class*="featured"] {
+ padding: 80px 40px !important;
+ background: linear-gradient(180deg, var(--navy-dark), var(--navy-darkest)) !important;
+}
+
+.customer-favourites h2,
+.featured-products h2 {
+ font-size: 2.5rem !important;
+ color: var(--gold-primary) !important;
+ text-align: center !important;
+ margin-bottom: 50px !important;
+ letter-spacing: 2px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+ OVERRIDE ALL INLINE STYLES
+ ═══════════════════════════════════════════════════════════ */
+
+button[style],
+a[style],
+.btn[style] {
+ background: var(--gold-primary) !important;
+ color: var(--navy-darkest) !important;
+ border: 2px solid var(--gold-primary) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+ END OF DESIGN SYSTEM
+ ═══════════════════════════════════════════════════════════ */

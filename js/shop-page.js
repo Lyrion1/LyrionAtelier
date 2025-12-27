@@ -379,7 +379,7 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     })();
     const soldOut = (p?.meta?.soldOut ?? p?.soldOut) === true;
 
-    const card = document.createElement('article');
+    const card = document.createElement('div');
     card.className = 'product-card';
     card.dataset.id = p.id || slug;
     card.dataset.slug = slug;
@@ -388,70 +388,71 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       card.dataset.soldOut = 'true';
     }
 
-    const media = document.createElement('div');
-    media.className = 'product-card__media media';
-    const grid = document.createElement('div');
-    grid.className = 'product-card__media-grid product-card__media-grid--single';
-    let ready = false;
-    const markReady = () => {
-      if (ready) return;
-      ready = true;
-      grid.classList.remove('placeholder', 'blur');
-      media.classList.remove('placeholder', 'blur');
-      card.classList.add('media-ready');
-      hideLoader();
-    };
     const coverImage = galleryImages.find(isUsableImage) || resolvedImage || FALLBACK;
     const img = document.createElement('img');
     img.src = coverImage || FALLBACK;
     img.alt = `${p.title || p.name || 'Product image'}`;
     img.loading = 'lazy';
     img.decoding = 'async';
+    img.className = 'product-card-image';
     img.onerror = () => {
       if (img.src !== FALLBACK) {
         img.src = FALLBACK;
-      } else {
-        markReady();
       }
+      hideLoader();
     };
-    img.onload = markReady;
-    grid.appendChild(img);
-    media.appendChild(grid);
+    img.onload = hideLoader;
 
     const body = document.createElement('div');
-    body.className = 'product-card__body';
+    body.className = 'product-card-content product-card__body';
     const heading = document.createElement('h3');
-    heading.className = 'product-card__title';
+    heading.className = 'product-card-title product-card__title';
     heading.textContent = p.title || p.name || 'Celestial Piece';
-    const priceEl = document.createElement('div');
-    priceEl.className = 'product-card__price';
+    const desc = document.createElement('p');
+    desc.className = 'product-card-description';
+    desc.textContent = p.description || p.desc || '';
+    const priceEl = document.createElement('p');
+    priceEl.className = 'product-card-price product-card__price price';
     priceEl.textContent = priceDisplay || PRICE_UNAVAILABLE_LABEL;
 
     const actions = document.createElement('div');
-    actions.className = 'product-card__actions';
+    actions.className = 'product-card-buttons product-card__actions';
     const buyBtn = document.createElement('a');
-    buyBtn.className = 'btn btn-primary product-buy-btn';
+    buyBtn.className = 'view-product-button view-button product-buy-btn';
     buyBtn.textContent = 'View Product';
     buyBtn.href = viewUrl;
     buyBtn.dataset.action = 'view';
     buyBtn.dataset.slug = slug;
     buyBtn.dataset.name = p.title || p.name || 'Celestial Piece';
+    buyBtn.setAttribute('aria-label', 'View');
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'add-to-cart-button add-to-cart-btn';
+    addBtn.textContent = 'Add to Cart';
+    addBtn.dataset.name = p.title || p.name || 'Celestial Piece';
+    addBtn.dataset.price = priceDisplay || '';
+    addBtn.dataset.variantId = p.firstVariantId || '';
+    addBtn.dataset.productId = p.id || slug;
+    if (soldOut || !p.firstVariantId) {
+      addBtn.disabled = true;
+      addBtn.setAttribute('aria-disabled', 'true');
+    }
     if (soldOut) {
       buyBtn.classList.add('is-disabled');
       buyBtn.setAttribute('aria-disabled', 'true');
     }
 
-    actions.append(buyBtn);
-    body.append(heading, priceEl, actions);
+    actions.append(buyBtn, addBtn);
+    body.append(heading, desc, priceEl, actions);
     if (soldOut) {
       const ribbon = document.createElement('span');
       ribbon.className = 'product-card__ribbon product-card__ribbon--sold-out';
       ribbon.textContent = 'Sold out';
       card.append(ribbon);
     }
-    card.append(media, body);
+    card.append(img, body);
     card.addEventListener('click', (e) => {
-      if (e.target.closest('.product-buy-btn')) return;
+      if (e.target.closest('.product-buy-btn, .add-to-cart-btn')) return;
       if (soldOut) return;
       window.location.href = viewUrl;
     });
