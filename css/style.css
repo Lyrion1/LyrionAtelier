@@ -1515,6 +1515,12 @@ textarea:focus {
   border: 0;
 }
 
+.hidden {
+  position: absolute;
+  left: -9999px;
+  opacity: 0.001;
+}
+
 .contact-form-section {
   display: block !important;
   margin: 64px auto;
@@ -1759,6 +1765,41 @@ textarea:focus {
   font-family: 'Cinzel', serif;
   font-size: clamp(26px, 3vw, 34px);
   margin: 6px 0;
+}
+
+.social-icon-row {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.social-icon-link {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  background: radial-gradient(circle at 30% 30%, rgba(251, 191, 36, 0.18), rgba(14, 20, 34, 0.92));
+  display: grid;
+  place-items: center;
+  color: #fbbf24;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.social-icon-link:hover,
+.social-icon-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(251, 191, 36, 0.7);
+  box-shadow: 0 18px 40px rgba(251, 191, 36, 0.28);
+  outline: none;
+}
+
+.social-icon-link svg {
+  width: 32px;
+  height: 32px;
+  fill: currentColor;
 }
 
 .follow-grid {

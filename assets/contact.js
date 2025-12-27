@@ -3,8 +3,6 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-XXXXXXXXXX');
 
-const CONTACT_ENDPOINT = '/.netlify/functions/contact';
-
 function setStatus(statusEl, type, message) {
   if (!statusEl) return;
   statusEl.textContent = message || '';
@@ -24,6 +22,14 @@ function validateFormFields(form) {
   return { ok: true };
 }
 
+function encodeFormData(formData) {
+  const params = new URLSearchParams();
+  formData.forEach((value, key) => {
+    params.append(key, value);
+  });
+  return params.toString();
+}
+
 async function handleSubmit(event) {
   event.preventDefault();
   const form = event.target;
@@ -37,17 +43,10 @@ async function handleSubmit(event) {
     return;
   }
 
-  const botField = form['bot-field']?.value || '';
-  const payload = {
-    name: form.name.value.trim(),
-    email: form.email.value.trim(),
-    subject: form.subject.value.trim(),
-    reason: form.reason.value,
-    message: form.message.value.trim(),
-    'bot-field': botField,
-    pageUrl: window.location.href,
-    userAgent: navigator.userAgent
-  };
+  const formData = new FormData(form);
+  formData.set('form-name', form.getAttribute('name') || 'contact');
+  formData.set('pageUrl', window.location.href);
+  formData.set('userAgent', navigator.userAgent);
 
   if (submitBtn) {
     submitBtn.disabled = true;
@@ -56,26 +55,17 @@ async function handleSubmit(event) {
   }
 
   try {
-    const response = await fetch(CONTACT_ENDPOINT, {
+    const response = await fetch(form.getAttribute('action') || '/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encodeFormData(formData)
     });
-    const data = await response.json().catch(() => ({}));
-    if (response.ok && data.ok) {
-      setStatus(statusEl, 'success', 'Message received. We’ll be in touch shortly.');
-      form.classList.add('form-sent');
-      form.reset();
-    } else {
-      const errorMessage = data.error || 'Something cosmic went awry. Please try again.';
-      setStatus(statusEl, 'error', errorMessage);
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = submitBtn.dataset.originalText || 'Send message';
-      }
-    }
+    if (!response.ok) throw new Error('Network error');
+    setStatus(statusEl, 'success', 'Message sent. We’ll reply to admin@lyrionatelier.com');
+    form.classList.add('form-sent');
+    form.reset();
   } catch (err) {
-    setStatus(statusEl, 'error', 'Network stardust scattered. Please retry.');
+    setStatus(statusEl, 'error', 'Something cosmic went awry. Please try again.');
     if (submitBtn) {
       submitBtn.disabled = false;
       submitBtn.textContent = submitBtn.dataset.originalText || 'Send message';
@@ -87,42 +77,6 @@ function initContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
   form.addEventListener('submit', handleSubmit);
-}
-
-function initEmbeds() {
-  const cards = document.querySelectorAll('[data-embed]');
-  cards.forEach((card) => {
-    const iframe = card.querySelector('.social-embed');
-    const fallback = card.querySelector('.embed-fallback');
-    let loaded = false;
-
-    if (fallback) {
-      fallback.removeAttribute('hidden');
-    }
-
-    if (!iframe) {
-      if (fallback) fallback.removeAttribute('hidden');
-      return;
-    }
-
-    iframe.addEventListener('load', () => {
-      loaded = true;
-      card.classList.add('embed-loaded');
-      if (fallback) fallback.setAttribute('hidden', '');
-    });
-
-    iframe.addEventListener('error', () => {
-      loaded = false;
-      card.classList.remove('embed-loaded');
-      if (fallback) fallback.removeAttribute('hidden');
-    });
-
-    setTimeout(() => {
-      if (!loaded && fallback) {
-        fallback.removeAttribute('hidden');
-      }
-    }, 2400);
-  });
 }
 
 function animateEntrances() {
@@ -138,5 +92,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   animateEntrances();
   initContactForm();
-  initEmbeds();
 });
