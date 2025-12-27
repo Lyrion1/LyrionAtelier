@@ -119,7 +119,13 @@ function renderImages(images = [], productTitle = 'Product') {
   const gallery = $('#product-gallery');
   if (!gallery) return;
   gallery.innerHTML = '';
-  const sources = (Array.isArray(images) && images.length ? images : [FALLBACK_IMAGE]).map(fullRes);
+  const normalized = Array.isArray(images) ? images.filter(Boolean).map(fullRes) : [];
+  const base = normalized.length ? normalized : [FALLBACK_IMAGE];
+  const sources = [...base];
+  const seed = sources[0] || FALLBACK_IMAGE;
+  while (sources.length < 4) {
+    sources.push(seed);
+  }
   sources.forEach((src, idx) => {
     if (!src) return;
     const img = document.createElement('img');

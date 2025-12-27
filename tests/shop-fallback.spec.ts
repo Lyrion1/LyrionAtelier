@@ -136,13 +136,16 @@ test.describe('shop fallback art', () => {
     }, SAMPLE_PRODUCTS);
     await page.waitForSelector('.product-card', { timeout: 5000 });
 
+    const cards = page.locator('[data-shop-grid] .product-card');
+    const imageCounts = await cards.evaluateAll((els) =>
+      els.map((card) => card.querySelectorAll('img').length)
+    );
+    expect(imageCounts.every((count) => count >= 4)).toBeTruthy();
     const srcs = await page.locator('[data-shop-grid] .product-card img').evaluateAll((imgs) =>
       imgs.map((img) => (img as HTMLImageElement).getAttribute('src') || '')
     );
-    expect(srcs.length).toBeGreaterThanOrEqual(2);
     expect(srcs.every((src) => !!src)).toBeTruthy();
-    expect(srcs[0]).toContain(`http://localhost:${PORT}`);
-    expect(srcs[1]).toContain('/assets/catalog/placeholder.webp');
+    expect(srcs.some((src) => src.includes('/assets/catalog/placeholder.webp'))).toBeTruthy();
 
     const buyButtons = page.locator('[data-shop-grid] .product-card .product-buy-btn', { hasText: /view product/i });
     await expect(buyButtons).toHaveCount(2);

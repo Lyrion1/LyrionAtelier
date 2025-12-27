@@ -74,33 +74,88 @@ function renderFeaturedProducts() {
     return;
   }
 
+  const pickGallery = (product) => {
+    const seeds = [];
+    if (product.image) seeds.push(product.image);
+    if (Array.isArray(product.images)) seeds.push(...product.images);
+    else if (product.images && typeof product.images === 'object') {
+      if (product.images.card) seeds.push(product.images.card);
+      if (Array.isArray(product.images.gallery)) seeds.push(...product.images.gallery);
+    }
+    const normalized = seeds.filter(Boolean).map((src) => String(src).replace('_thumb', ''));
+    if (!normalized.length) normalized.push('/assets/catalog/placeholder.webp');
+    const seed = normalized[0] || '/assets/catalog/placeholder.webp';
+    while (normalized.length < 4) normalized.push(seed);
+    return normalized.slice(0, 4);
+  };
+
   featured.forEach(product => {
     const title = product.name || product.title || product.slug || 'Product';
     const description = product.description || product.desc || '';
     const displayPrice = extractPrice(product);
-    const imageSrc = product.image || (Array.isArray(product.images) ? product.images[0] : null);
     const canAddProduct = canAddToCart && product?.id != null && Number.isFinite(displayPrice);
-    const card = document.createElement('div');
+    const images = pickGallery(product);
+    const card = document.createElement('article');
     card.className = 'product-card';
-    card.innerHTML = `
-      <div class="product-image">
-        ${imageSrc ? `<img src="${imageSrc}" alt="${title}" loading="lazy">` : `<div class="placeholder">✨</div>`}
-      </div>
-      <div>
-        <h3>${title}</h3>
-        <p class="muted">${description}</p>
-        <p class="price">$${displayPrice.toFixed(2)}</p>
-      </div>
-      <div class="button-row tight">
-        <a class="btn btn-outline" href="${detailUrl(product)}">View</a>
-        <button class="btn btn-primary add-to-cart-btn" type="button" ${canAddProduct ? '' : 'disabled'}>Add to cart</button>
-      </div>
-    `;
+    const media = document.createElement('div');
+    media.className = 'product-card__media media';
+    const gridEl = document.createElement('div');
+    gridEl.className = 'product-card__media-grid';
+    let mediaReady = false;
+    const markReady = () => {
+      if (mediaReady) return;
+      mediaReady = true;
+      card.classList.add('media-ready');
+    };
+    images.forEach((src, idx) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `${title} image ${idx + 1}`;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.onerror = () => { if (img.src !== '/assets/catalog/placeholder.webp') img.src = '/assets/catalog/placeholder.webp'; };
+      img.onload = markReady;
+      gridEl.appendChild(img);
+    });
+    media.appendChild(gridEl);
+
+    const body = document.createElement('div');
+    body.className = 'product-card__body';
+    const heading = document.createElement('h3');
+    heading.textContent = title;
+    const desc = document.createElement('p');
+    desc.className = 'muted';
+    desc.textContent = description;
+    const price = document.createElement('p');
+    price.className = 'price product-card__price';
+    price.textContent = Number.isFinite(displayPrice) ? `$${displayPrice.toFixed(2)}` : 'Price unavailable';
+
+    const actions = document.createElement('div');
+    actions.className = 'product-card__actions button-row tight';
+    const viewLink = document.createElement('a');
+    viewLink.className = 'btn btn-outline';
+    viewLink.href = detailUrl(product);
+    viewLink.textContent = 'View';
+    const addButton = document.createElement('button');
+    addButton.className = 'btn btn-primary add-to-cart-btn';
+    addButton.type = 'button';
+    addButton.textContent = 'Add to cart';
+    if (!canAddProduct) addButton.disabled = true;
+
+    actions.append(viewLink, addButton);
+    body.append(heading, desc, price, actions);
+    card.append(media, body);
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('button, a')) return;
+      window.location.href = detailUrl(product);
+    });
     grid.appendChild(card);
 
-    const addButton = card.querySelector('.add-to-cart-btn');
     if (addButton && canAddProduct) {
-      addButton.addEventListener('click', () => addToCart(product.id));
+      addButton.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        addToCart(product.id);
+      });
     }
   });
 }

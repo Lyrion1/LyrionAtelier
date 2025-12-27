@@ -82,6 +82,8 @@ test.describe('product detail page', () => {
     await expect(page.locator('#product-name')).toHaveText(/Aries Fire Tee/i);
     await expect(page.locator('#product-description')).toContainText(/celestial flame/i);
     await expect(page.locator('#product-price')).toContainText('$34.99');
+    const galleryImages = page.locator('#product-gallery img');
+    expect(await galleryImages.count()).toBeGreaterThanOrEqual(4);
 
     const sizeButtons = page.locator('.size-chip');
     await expect(sizeButtons).toHaveCount(5);

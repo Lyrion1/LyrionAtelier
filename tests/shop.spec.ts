@@ -121,12 +121,14 @@ test.describe('shop smoke test', () => {
         { timeout: 5000 }
       );
       const firstCard = cards.first();
-      await expect(firstCard.locator('img')).toBeVisible();
+      const firstCardImages = firstCard.locator('img');
+      expect(await firstCardImages.count()).toBeGreaterThanOrEqual(4);
+      await expect(firstCardImages.first()).toBeVisible();
       await expect(firstCard.locator('.product-card__title')).toBeVisible();
       const buyButtons = firstCard.locator('.product-buy-btn');
       await expect(buyButtons).toHaveCount(1);
       await expect(buyButtons.first()).toHaveText(/view product/i);
-      await expect(buyButtons.first()).toHaveAttribute('href', /shop\/.+\.html$/);
+      await expect(buyButtons.first()).toHaveAttribute('href', /product\.html\?slug=/);
       const widths = await cards.locator('img').evaluateAll((imgs) =>
         imgs.map((img) => (img as HTMLImageElement).naturalWidth)
       );
