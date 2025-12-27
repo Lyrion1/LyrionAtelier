@@ -12,6 +12,12 @@
  box-sizing: border-box;
  }
 
+html {
+ overflow: auto !important;
+ overflow-y: auto !important;
+ scroll-behavior: smooth;
+}
+
 body {
  font-family: Georgia, serif;
  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
@@ -19,7 +25,10 @@ body {
  color: #ffffff;
  padding: 20px;
  position: relative;
- overflow: hidden;
+ overflow: auto !important;
+ overflow-y: auto !important;
+ height: auto !important;
+ pointer-events: auto !important;
 }
 
 body.success-page {
@@ -73,6 +82,10 @@ body.success-page #main-content {
  z-index: 10;
  backdrop-filter: blur(10px);
  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+ pointer-events: auto !important;
+ margin: 50px auto;
+ max-height: none !important;
+ overflow: visible !important;
  }
 
  .cosmic-icon {
@@ -135,17 +148,22 @@ body.success-page #main-content {
  }
 
  .cta-button {
- display: inline-block;
- background: linear-gradient(135deg, #d4af37, #f0c659);
+ display: inline-block !important;
+ visibility: visible !important;
+ pointer-events: auto !important;
+ position: relative;
+ z-index: 1000;
+ background: #d4af37;
  color: #0f0c29;
  padding: 16px 40px;
  border-radius: 8px;
  text-decoration: none;
  font-weight: 600;
  font-size: 1.1rem;
- margin-top: 20px;
+ margin-top: 30px;
  transition: all 0.3s ease;
  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+ cursor: pointer !important;
  }
 
  .cta-button:hover {
@@ -161,10 +179,29 @@ body.success-page #main-content {
  font-size: 0.95rem;
  border-bottom: 1px solid transparent;
  transition: border-color 0.3s ease;
+ pointer-events: auto !important;
+ position: relative;
+ z-index: 100;
  }
 
  .oracle-link:hover {
  border-bottom-color: #d4af37;
+ }
+
+ /* Remove any blocking overlays */
+ .overlay,
+ .modal-backdrop,
+ [class*="overlay"],
+ [class*="backdrop"] {
+ display: none !important;
+ }
+
+ /* Ensure interactive elements remain clickable */
+ a[href] {
+ pointer-events: auto !important;
+ cursor: pointer !important;
+ position: relative;
+ z-index: 100;
  }
 
  /* Mobile responsive */
@@ -227,16 +264,32 @@ body.success-page #main-content {
 
  <script src="js/main.js" defer></script>
  <script>
- // Create animated stars
- const starsContainer = document.getElementById('stars');
- for (let i = 0; i < 100; i++) {
- const star = document.createElement('div');
- star.className = 'star';
- star.style.left = Math.random() * 100 + '%';
- star.style.top = Math.random() * 100 + '%';
- star.style.animationDelay = Math.random() * 3 + 's';
- starsContainer.appendChild(star);
- }
- </script>
+  try {
+  // Create animated stars
+  const starsContainer = document.getElementById('stars');
+  if (starsContainer) {
+  for (let i = 0; i < 100; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.top = Math.random() * 100 + '%';
+  star.style.animationDelay = Math.random() * 3 + 's';
+  starsContainer.appendChild(star);
+  }
+  }
+
+  // Ensure page remains scrollable and interactive
+  document.body.style.overflow = 'auto';
+  document.documentElement.style.overflow = 'auto';
+
+  // Remove any blocking overlays
+  const overlays = document.querySelectorAll('.overlay, .modal-backdrop, [class*=\"overlay\"], [class*=\"backdrop\"]');
+  overlays.forEach(el => el.remove());
+  } catch (error) {
+  console.error('Success page error:', error);
+  document.body.style.overflow = 'auto';
+  document.documentElement.style.overflow = 'auto';
+  }
+  </script>
 </body>
 </html>
