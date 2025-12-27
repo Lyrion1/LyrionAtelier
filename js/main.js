@@ -491,19 +491,40 @@ function createLoadingOverlay() {
 }
 
 function formatListingFeeValue(value) {
-  if (!value) return 'Free';
+  if (value === undefined || value === null) return 'Free';
   const normalized = value.toString().trim().replace(/^Listing Fee:\s*/i, '');
-  if (/^free$/i.test(normalized) || normalized === '$0' || normalized === '0') return 'Free';
+  if (!normalized) return 'Free';
+  const numericValue = Number(normalized.replace(/[^0-9.-]/g, ''));
+  if (/^free$/i.test(normalized) || numericValue === 0) return 'Free';
   return normalized.startsWith('$') ? normalized : `$${normalized}`;
 }
 
+function getPriceLabel(event) {
+  const priceSource = event?.listingFee ?? event?.price;
+  const raw = (priceSource ?? '').toString().trim();
+  const numericValue = Number(raw.replace(/[^0-9.-]/g, ''));
+  if (!raw || /^free$/i.test(raw) || numericValue === 0) return 'Free';
+
+  const locationText = (event?.location || '').toLowerCase();
+  const combinedText = `${event?.title || ''} ${event?.description || ''}`.toLowerCase();
+  const ritualKeywords = ['ritual', 'ceremony', 'manifestation', 'meditation', 'circle', 'healing', 'zoom', 'online'];
+  const isOnline = locationText.includes('online') || locationText.includes('zoom');
+  const hasKeyword = ritualKeywords.some(keyword => combinedText.includes(keyword));
+  if (isOnline || hasKeyword) return 'Participation';
+
+  return 'Ticket';
+}
+
+function getPriceDisplay(event) {
+  const label = getPriceLabel(event);
+  if (label === 'Free') return 'Free';
+  const amount = formatListingFeeValue(event?.listingFee || event?.price);
+  return `${label}: ${amount}`;
+}
+
 function resolveEventUrl(event) {
-  const directUrl = event?.url;
-  if (directUrl) return directUrl;
-  const title = event?.title || 'Lyrion Atelier Event';
-  const host = event?.host || 'Lyrion Atelier';
-  const query = encodeURIComponent(`${title} ${host} event`);
-  return `https://www.google.com/search?q=${query}`;
+  const directUrl = (event?.url || '').trim();
+  return directUrl || null;
 }
 
 // Load and display sample events
@@ -516,9 +537,11 @@ function loadEvents() {
   }
 
   const eventsHTML = sampleEvents.map(event => {
-    const listingFee = formatListingFeeValue(event.listingFee || event.price);
+    const priceDisplay = getPriceDisplay(event);
+    const priceText = priceDisplay === 'Free' ? 'Free' : `💰 ${priceDisplay}`;
     const eventUrl = resolveEventUrl(event);
-    const ctaLabel = event.ctaLabel || 'Learn More';
+    const hasEventUrl = Boolean(eventUrl);
+    const ctaLabel = 'Learn More & Register';
     return `
     <div class="event-card ${event.featured ? 'featured-event' : ''}">
       ${event.featured ? '<span class="featured-badge">Featured</span>' : ''}
@@ -533,10 +556,10 @@ function loadEvents() {
         <p class="event-details">
           📍 ${event.location}<br>
           🕐 ${event.time}<br>
-          💰 Listing Fee: ${listingFee}
+          ${priceText}
         </p>
         <p class="event-description">${event.description}</p>
-        <a href="${eventUrl}" class="event-btn" target="_blank" rel="noopener noreferrer">${ctaLabel}</a>
+        <a href="${hasEventUrl ? eventUrl : '#'}" class="event-btn${hasEventUrl ? '' : ' cta-disabled'}"${hasEventUrl ? ' target="_blank" rel="noopener noreferrer"' : ' aria-disabled="true" tabindex="-1" style="pointer-events: none; opacity: 0.75;"'}>${ctaLabel}</a>
       </div>
     </div>
   `;
@@ -557,20 +580,30 @@ function hydrateCodexCards() {
 
     const pricePill = card.querySelector('.price-pill');
     if (pricePill) {
-      pricePill.textContent = `Listing Fee: ${formatListingFeeValue(event.listingFee || event.price)}`;
+      const priceDisplay = getPriceDisplay(event);
+      pricePill.textContent = priceDisplay === 'Free' ? 'Free' : `💰 ${priceDisplay}`;
     }
 
     const cta = card.querySelector('.event-cta, .event-btn');
     if (cta) {
       const url = resolveEventUrl(event);
-      cta.href = url;
-      cta.target = '_blank';
-      cta.rel = 'noopener noreferrer';
-      cta.style.pointerEvents = 'auto';
-      cta.style.position = 'relative';
-      cta.style.zIndex = '2';
-      if (event.ctaLabel) {
-        cta.textContent = event.ctaLabel;
+      cta.textContent = 'Learn More & Register';
+      if (url) {
+        cta.href = url;
+        cta.target = '_blank';
+        cta.rel = 'noopener noreferrer';
+        cta.removeAttribute('aria-disabled');
+        cta.style.pointerEvents = 'auto';
+        cta.style.position = 'relative';
+        cta.style.zIndex = '2';
+      } else {
+        cta.href = '#';
+        cta.removeAttribute('target');
+        cta.removeAttribute('rel');
+        cta.setAttribute('aria-disabled', 'true');
+        cta.setAttribute('tabindex', '-1');
+        cta.style.pointerEvents = 'none';
+        cta.style.opacity = '0.75';
       }
     }
   });
