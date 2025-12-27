@@ -55,6 +55,48 @@ exports.handler = async (event) => {
         const customerEmail =
           session.customer_details?.email || session.customer_email || null;
         const customerEmailDisplay = customerEmail || "N/A";
+        const productType = session.metadata?.product_type || "merchandise";
+        const readingId =
+          session.metadata?.reading_id || session.metadata?.product_id || null;
+        const certificateTier = session.metadata?.certificate_tier || null;
+        const isService =
+          productType === "oracle_reading" ||
+          productType === "compatibility_certificate";
+        const deliveryLookup = {
+          "life-path": "Delivered within 48 hours.",
+          "solar-return": "Delivered within 48 hours.",
+          "natal-chart-blueprint": "Delivered within 72 hours.",
+          "chiron-wound-healing": "Delivered within 48 hours.",
+          "full-cosmic-synthesis": "Delivered within 5 business days.",
+          "career-purpose-reading": "Delivered within 72 hours.",
+          "relationship-synastry": "Delivered within 72 hours.",
+          "transit-forecast": "Delivered within 48 hours.",
+          "lunar-nodes-reading": "Delivered within 72 hours.",
+          "digital-certificate": "Digital delivery to your inbox.",
+          "luxury-print": "Ships within 5-7 business days.",
+          "museum-framed": "Ships within 5-7 business days with white-glove handling.",
+          "twin-flames": "Ships within 5-7 business days with white-glove handling."
+        };
+        const deliveryEstimate =
+          (readingId && deliveryLookup[readingId]) ||
+          (certificateTier && deliveryLookup[certificateTier]) ||
+          null;
+        const serviceInstructions = isService
+          ? `
+            <div style="background: rgba(212, 175, 55, 0.08); border-left: 4px solid #d4af37; padding: 16px; margin: 18px 0;">
+              <h3 style="margin: 0 0 10px; color: #d4af37;">Next Steps</h3>
+              <p style="margin: 6px 0;">Reply to this email with ${productType === "compatibility_certificate"
+                ? "both partners’ full names, birth dates, birth times (if known), and birth locations"
+                : "your full name, birth date, birth time (if known), and birth location"
+              } so we can begin your reading.</p>
+              ${deliveryEstimate ? `<p style="margin: 6px 0;"><strong>Delivery window:</strong> ${deliveryEstimate}</p>` : ""}
+              <p style="margin: 6px 0;">We will confirm once your reading is complete and ready.</p>
+            </div>
+          `
+          : "";
+        const shippingNote = isService
+          ? ""
+          : `<p>We’re weaving celestial threads just for you. Expect another note when it ships.</p>`;
 
         const result = await resend.emails.send({
           from,
@@ -66,6 +108,8 @@ exports.handler = async (event) => {
 <p><strong>Order ID:</strong> ${session.id}</p>
 <p><strong>Customer Email:</strong> ${customerEmailDisplay}</p>
 <p><strong>Amount:</strong> ${amount} ${currency}</p>
+${readingId ? `<p><strong>Offering:</strong> ${readingId}</p>` : ""}
+${certificateTier ? `<p><strong>Certificate Tier:</strong> ${certificateTier}</p>` : ""}
 `,
         });
 
@@ -86,7 +130,8 @@ exports.handler = async (event) => {
 <h2>Thank you for your order 🌙</h2>
 <p>Your order <strong>${session.id}</strong> has landed.</p>
 <p><strong>Amount:</strong> ${amount} ${currency}</p>
-<p>We’re weaving celestial threads just for you. Expect another note when it ships.</p>
+${serviceInstructions}
+${shippingNote}
 <p>If you didn’t place this order, reply to this email.</p>
 `,
             });

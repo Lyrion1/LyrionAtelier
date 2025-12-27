@@ -38,6 +38,9 @@ exports.handler = async (event) => {
   const productName = parsedBody.productName;
   const productPrice = parsedBody.productPrice;
   const variantId = parsedBody.variantId;
+  const productId = parsedBody.productId || null;
+  const readingId = parsedBody.readingId || null;
+  const certificateTier = parsedBody.certificateTier || null;
   const bundle = parsedBody.bundle && typeof parsedBody.bundle === 'object' ? parsedBody.bundle : null;
   const bundleSavingsCentsInput = Math.max(0, Math.round(Number(bundle?.savingsCents || 0)));
   const bundleLabel = bundle?.label || bundle?.id || 'Bundle Savings';
@@ -114,8 +117,18 @@ exports.handler = async (event) => {
     }
   } else if (productType === 'compatibility_certificate') {
     sessionConfig.metadata.certificate_type = 'compatibility';
+    if (certificateTier) {
+      sessionConfig.metadata.certificate_tier = String(certificateTier);
+    }
   } else if (productType === 'oracle_reading') {
     sessionConfig.metadata.reading_type = 'oracle';
+    if (readingId) {
+      sessionConfig.metadata.reading_id = String(readingId);
+    }
+  }
+
+  if (productId) {
+    sessionConfig.metadata.product_id = String(productId);
   }
 
   try {

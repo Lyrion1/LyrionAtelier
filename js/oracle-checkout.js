@@ -5,6 +5,7 @@ async function bookOracleReading(event = null) {
   const button = evt?.currentTarget || evt?.target || null;
   const readingName = button?.dataset?.name || '';
   const readingPrice = button?.dataset?.price || '';
+  const readingId = button?.dataset?.readingId || null;
   const originalText = button ? button.textContent : null;
 
   if (button) {
@@ -36,7 +37,9 @@ async function bookOracleReading(event = null) {
   const success = await window.initiateCheckout({
     name: readingName,
     price: readingPrice,
-    type: 'oracle_reading'
+    type: 'oracle_reading',
+    readingId,
+    productId: readingId
   });
 
   if (!success && button && originalText) {
