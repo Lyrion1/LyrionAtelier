@@ -16,6 +16,8 @@
  * Sets up all interactive features and event listeners
  */
 document.addEventListener('DOMContentLoaded', function() {
+  applySharedLayout();
+  
   // Initialize mobile menu
   initMobileMenu();
   
@@ -55,6 +57,114 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize navigation loading overlay
   initNavigationLoading();
 });
+
+function applySharedLayout() {
+  const body = document.body;
+  if (!body || body.dataset.layoutApplied === 'true') return;
+
+  const skipLink = ensureSkipToContent();
+  const existingHeader = document.querySelector('header.site-header');
+  const existingFooter = document.querySelector('footer.footer');
+  const existingMain = document.querySelector('main');
+
+  const header = buildSiteHeader();
+  if (existingHeader) {
+    existingHeader.replaceWith(header);
+  } else if (skipLink && skipLink.parentElement === body) {
+    skipLink.insertAdjacentElement('afterend', header);
+  } else {
+    body.insertBefore(header, body.firstChild);
+  }
+
+  let main = existingMain;
+  if (!main) {
+    main = document.createElement('main');
+    main.id = 'main-content';
+    const movableNodes = Array.from(body.children).filter(node => {
+      if (!(node instanceof HTMLElement)) return false;
+      if (node === header || node === existingHeader || node === skipLink || node.tagName === 'SCRIPT' || node.matches('footer.footer')) return false;
+      return true;
+    });
+    movableNodes.forEach(node => main.appendChild(node));
+  } else if (!main.id) {
+    main.id = 'main-content';
+  }
+
+  if (!main.parentElement) {
+    body.appendChild(main);
+  }
+
+  const footer = buildSiteFooter();
+  if (existingFooter) {
+    existingFooter.replaceWith(footer);
+  } else {
+    const firstScript = body.querySelector('script');
+    if (firstScript) {
+      body.insertBefore(footer, firstScript);
+    } else {
+      body.appendChild(footer);
+    }
+  }
+
+  if (footer.parentElement && footer.previousElementSibling !== main) {
+    footer.parentElement.insertBefore(main, footer);
+  }
+
+  body.dataset.layoutApplied = 'true';
+}
+
+function ensureSkipToContent() {
+  initSkipToContent();
+  return document.querySelector('.skip-to-content');
+}
+
+function buildSiteHeader() {
+  const header = document.createElement('header');
+  header.className = 'site-header header';
+  header.innerHTML = `
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img class="brand-logo" src="images/logo/GOD.PNG" alt="Lyrīon Atelier logo">
+        <span class="brand-name">Lyrīon Atelier</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="oracle.html">Oracle</a></li>
+          <li><a href="compatibility.html">Compatibility</a></li>
+          <li><a href="codex.html">Codex</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="cart-icon" href="cart.html" aria-label="Shopping cart">
+          🛒 <span class="cart-count">0</span>
+        </a>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
+    </div>`;
+  return header;
+}
+
+function buildSiteFooter() {
+  const footer = document.createElement('footer');
+  footer.className = 'footer';
+  footer.innerHTML = `
+    <div class="footer-content">
+      <p>&copy; 2024 Lyrion Atelier. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="shop.html">Shop</a>
+        <a href="oracle.html">Oracle Readings</a>
+        <a href="compatibility.html">Compatibility Certificates</a>
+        <a href="codex.html">Codex</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="refund-policy.html">Refund Policy</a>
+      </div>
+    </div>`;
+  return footer;
+}
 
 /**
  * Mobile Menu Toggle with Enhancements
