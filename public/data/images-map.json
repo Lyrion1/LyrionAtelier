@@ -1,5 +1,5 @@
 {
-  "aries": "/youth-aries-fire-tee/youth-aries-fire-tee-lifestyle.jpg",
+  "aries": "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-05-lifestyle.jpg",
   "taurus": "/_incoming/Taurus Logo.png",
   "gemini": "/gemini-starlight-tee/gemini-starlight-tee-model-front.jpg",
   "cancer": "/_incoming/Cancer Logo.png",
@@ -8,7 +8,7 @@
   "libra": "/_incoming/Libra kids.PNG",
   "scorpio": "/assets/raw-art/adult/scorpio-gold.webp",
   "sagittarius": "/_incoming/Sagittarius.PNG",
-  "capricorn": "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-boy-sitting.jpg",
+  "capricorn": "/images/:capricorn-verdant-sweatshirt:capricorn-verdant-sweatshirt-boy-sitting.jpg.jpg",
   "aquarius": "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
-  "pisces": "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-girl-front.jpg"
+  "pisces": "/images/cosmic-crewneck-pisces:cosmic-crewneck-pisces-girl-front.jpg.jpg"
 }
