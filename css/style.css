@@ -1303,6 +1303,17 @@ main > .section:first-of-type {
   background: rgba(255, 255, 255, 0.03);
 }
 
+.continue-shopping-button {
+  background: transparent !important;
+  border: 2px solid #d4af37 !important;
+  color: #d4af37 !important;
+}
+
+.continue-shopping-button:hover {
+  background: #d4af37 !important;
+  color: #0f0c29 !important;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;

@@ -345,6 +345,16 @@
     </section>
 
     <style>
+      .modal,
+      .overlay,
+      .popup,
+      [class*="modal"],
+      [class*="overlay"] {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
       /* CELESTIAL WARDROBE STYLES */
       .celestial-wardrobe-section {
         background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
