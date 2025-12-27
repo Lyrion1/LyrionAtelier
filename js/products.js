@@ -1094,7 +1094,11 @@ function displayOracleReadings() {
  */
 document.addEventListener('DOMContentLoaded', function() {
   // Load filters from URL if on shop page
-  if (window.location.pathname === '/shop' || window.location.pathname.startsWith('/shop/')) {
+  if (
+    window.location.pathname === '/shop' ||
+    window.location.pathname === '/shop/' ||
+    window.location.pathname.startsWith('/shop/')
+  ) {
     loadFiltersFromURL();
   }
   
