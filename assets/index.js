@@ -95,61 +95,52 @@ function renderFeaturedProducts() {
     const displayPrice = extractPrice(product);
     const canAddProduct = canAddToCart && product?.id != null && Number.isFinite(displayPrice);
     const images = pickGallery(product);
-    const card = document.createElement('article');
+    const card = document.createElement('div');
     card.className = 'product-card';
-    const media = document.createElement('div');
-    media.className = 'product-card__media media';
-    const gridEl = document.createElement('div');
-    gridEl.className = 'product-card__media-grid product-card__media-grid--single';
-    let mediaReady = false;
-    const markReady = () => {
-      if (mediaReady) return;
-      mediaReady = true;
-      card.classList.add('media-ready');
-    };
+    card.dataset.productId = product.id || productSlug(product) || '';
     const coverImage = images.find(Boolean) || '/assets/catalog/placeholder.webp';
     const img = document.createElement('img');
     img.src = coverImage;
     img.alt = `${title} image`;
     img.loading = 'lazy';
     img.decoding = 'async';
+    img.className = 'product-card-image';
     img.onerror = () => {
       if (img.src !== '/assets/catalog/placeholder.webp') {
         img.src = '/assets/catalog/placeholder.webp';
-      } else {
-        markReady();
       }
     };
-    img.onload = markReady;
-    gridEl.appendChild(img);
-    media.appendChild(gridEl);
 
     const body = document.createElement('div');
-    body.className = 'product-card__body product-card-content';
+    body.className = 'product-card-content';
     const heading = document.createElement('h3');
+    heading.className = 'product-card-title product-card__title';
     heading.textContent = title;
     const desc = document.createElement('p');
-    desc.className = 'muted';
+    desc.className = 'product-card-description';
     desc.textContent = description;
     const price = document.createElement('p');
-    price.className = 'price product-card__price';
+    price.className = 'product-card-price product-card__price price';
     price.textContent = Number.isFinite(displayPrice) ? `$${displayPrice.toFixed(2)}` : 'Price unavailable';
 
     const actions = document.createElement('div');
-    actions.className = 'product-card__actions button-row tight product-card-buttons';
+    actions.className = 'product-card-buttons';
     const viewLink = document.createElement('a');
-    viewLink.className = 'btn btn-outline view-button';
+    viewLink.className = 'view-product-button view-button product-buy-btn';
     viewLink.href = detailUrl(product);
-    viewLink.textContent = 'View';
+    viewLink.textContent = 'View Product';
+    viewLink.setAttribute('aria-label', 'View');
+    viewLink.dataset.slug = productSlug(product) || '';
     const addButton = document.createElement('button');
-    addButton.className = 'btn btn-primary add-to-cart-btn add-to-cart-button';
+    addButton.className = 'add-to-cart-button add-to-cart-btn';
     addButton.type = 'button';
-    addButton.textContent = 'Add to cart';
+    addButton.textContent = 'Add to Cart';
+    addButton.dataset.productId = product.id ?? '';
     if (!canAddProduct) addButton.disabled = true;
 
     actions.append(viewLink, addButton);
     body.append(heading, desc, price, actions);
-    card.append(media, body);
+    card.append(img, body);
     card.addEventListener('click', (e) => {
       if (e.target.closest('button, a')) return;
       window.location.href = detailUrl(product);

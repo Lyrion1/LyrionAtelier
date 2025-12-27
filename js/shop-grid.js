@@ -65,23 +65,11 @@ function renderCard(product) {
     return normalized.slice(0, 4);
   })();
 
-  const card = document.createElement('article');
+  const card = document.createElement('div');
   card.className = 'product-card';
   card.dataset.id = product.id || slug;
   card.dataset.slug = slug;
 
-  const media = document.createElement('div');
-  media.className = 'product-card__media media';
-  const grid = document.createElement('div');
-  grid.className = 'product-card__media-grid product-card__media-grid--single';
-  let ready = false;
-  const markReady = () => {
-    if (ready) return;
-    ready = true;
-    grid.classList.remove('placeholder', 'blur');
-    media.classList.remove('placeholder', 'blur');
-    card.classList.add('media-ready');
-  };
   const coverImage = galleryImages.find((src) => !!src) || FALLBACK;
   const img = document.createElement('img');
   img.loading = 'lazy';
@@ -91,44 +79,53 @@ function renderCard(product) {
   img.onerror = () => {
     if (img.src !== FALLBACK) {
       img.src = FALLBACK;
-    } else {
-      markReady();
     }
   };
-  img.onload = markReady;
-  grid.appendChild(img);
-  media.appendChild(grid);
+  img.onload = () => {};
+  img.className = 'product-card-image';
 
   const body = document.createElement('div');
-  body.className = 'product-card__body';
+  body.className = 'product-card-content product-card__body';
   const heading = document.createElement('h3');
-  heading.className = 'product-card__title';
+  heading.className = 'product-card-title product-card__title';
   heading.textContent = title;
-  const price = document.createElement('div');
-  price.className = 'product-card__price';
-  price.textContent = Number.isFinite(priceNum) ? `USD ${priceNum.toFixed(2)}` : '';
+  const desc = document.createElement('p');
+  desc.className = 'product-card-description';
+  desc.textContent = product.description || product.desc || product?.copy?.notes || '';
+  const price = document.createElement('p');
+  price.className = 'product-card-price product-card__price price';
+  price.textContent = Number.isFinite(priceNum) ? `$${priceNum.toFixed(2)}` : 'Price unavailable';
 
   const actions = document.createElement('div');
-  actions.className = 'product-card__actions';
+  actions.className = 'product-card-buttons product-card__actions';
   const view = document.createElement('a');
-  view.className = 'btn btn-ghost';
+  view.className = 'view-product-button view-button product-buy-btn';
   view.href = viewUrl;
-  view.textContent = 'View';
+  view.textContent = 'View Product';
   view.dataset.action = 'view';
+  view.dataset.slug = slug;
+  view.setAttribute('aria-label', 'View');
 
-  const buy = document.createElement('a');
-  buy.className = 'btn btn-primary product-buy-btn';
-  buy.textContent = 'View Product';
-  buy.href = viewUrl;
+  const buy = document.createElement('button');
+  buy.type = 'button';
+  buy.className = 'add-to-cart-button add-to-cart-btn';
+  buy.textContent = 'Add to Cart';
   buy.dataset.name = title;
   buy.dataset.slug = slug;
+  buy.dataset.variantId = variant?.id || '';
+  buy.dataset.price = Number.isFinite(priceNum) ? `$${priceNum.toFixed(2)}` : '';
+  buy.dataset.productId = product.id || slug;
+  if (!variant?.id) {
+    buy.setAttribute('aria-disabled', 'true');
+    buy.classList.add('is-disabled');
+  }
   buy.addEventListener('click', (e) => e.stopPropagation());
 
   actions.append(view, buy);
-  body.append(heading, price, actions);
-  card.append(media, body);
+  body.append(heading, desc, price, actions);
+  card.append(img, body);
   card.addEventListener('click', (e) => {
-    if (e.target.closest('.product-buy-btn')) return;
+    if (e.target.closest('.product-buy-btn, .add-to-cart-btn')) return;
     window.location.href = viewUrl;
   });
   return card;
