@@ -209,19 +209,22 @@ function buildSiteFooter() {
   return footer;
 }
 
+const TIKTOK_EMBED_SRC = 'https://www.tiktok.com/embed.js';
+const YT_PLATFORM_SRC = 'https://apis.google.com/js/platform.js';
+
 function ensureSocialEmbeds() {
   const head = document.head;
-  if (head && !head.querySelector('script[src="https://www.tiktok.com/embed.js"]')) {
+  if (head && !head.querySelector(`script[src="${TIKTOK_EMBED_SRC}"]`)) {
     const tiktokScript = document.createElement('script');
-    tiktokScript.src = 'https://www.tiktok.com/embed.js';
+    tiktokScript.src = TIKTOK_EMBED_SRC;
     tiktokScript.async = true;
     tiktokScript.dataset.socialScript = 'tiktok';
     head.appendChild(tiktokScript);
   }
 
-  if (head && !head.querySelector('script[src="https://apis.google.com/js/platform.js"]')) {
+  if (head && !head.querySelector(`script[src="${YT_PLATFORM_SRC}"]`)) {
     const ytScript = document.createElement('script');
-    ytScript.src = 'https://apis.google.com/js/platform.js';
+    ytScript.src = YT_PLATFORM_SRC;
     ytScript.async = true;
     ytScript.dataset.socialScript = 'youtube-platform';
     head.appendChild(ytScript);
