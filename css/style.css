@@ -853,17 +853,6 @@ main > .section:first-of-type {
   display: block;
 }
 
-/* Fix for Life Path image with white borders */
-.oracle-card[data-product="life-path-reading"] .oracle-card-image {
-  transform: scale(1.15);
-  object-fit: cover;
-}
-
-/* Chiron Wound Healing - stretch image to fit card dimensions */
-.oracle-card[data-product="chiron-wound-healing"] .oracle-card-image {
-  object-fit: fill;
-}
-
 .oracle-card-content {
   padding: 25px 20px;
   flex: 1;
