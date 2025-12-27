@@ -29,6 +29,10 @@
       max-width: 720px;
       margin: 0 auto;
     }
+    .contact-form {
+      display: grid;
+      gap: 14px;
+    }
     .form-group {
       margin-bottom: 16px;
     }
@@ -41,7 +45,10 @@
     }
     .form-group input,
     .form-group select,
-    .form-group textarea {
+    .form-group textarea,
+    .contact-form-section input,
+    .contact-form-section select,
+    .contact-form-section textarea {
       width: 100%;
       padding: 12px 14px;
       border-radius: 12px;
@@ -52,7 +59,10 @@
     }
     .form-group input:focus,
     .form-group select:focus,
-    .form-group textarea:focus {
+    .form-group textarea:focus,
+    .contact-form-section input:focus,
+    .contact-form-section select:focus,
+    .contact-form-section textarea:focus {
       outline: none;
       border-color: #e8c27c;
       box-shadow: 0 0 0 3px rgba(232, 194, 124, 0.25);
@@ -126,44 +136,27 @@
           <h2>Get in Touch</h2>
           <p>Have questions about our readings? We're here to help guide your journey.</p>
 
-          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-success">
+          <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-success">
             <input type="hidden" name="form-name" value="contact" />
-
-            <div class="form-group">
-              <label for="name">Name * <span class="sr-only">required</span></label>
-              <input type="text" id="name" name="name" required>
-            </div>
-
-            <div class="form-group">
-              <label for="email">Email * <span class="sr-only">required</span></label>
-              <input type="email" id="email" name="email" required>
-            </div>
-
-            <div class="form-group">
-              <label for="subject">Subject * <span class="sr-only">required</span></label>
-              <input type="text" id="subject" name="subject" required>
-            </div>
-
-            <div class="form-group">
-              <label for="reason">Reason * <span class="sr-only">required</span></label>
-              <select id="reason" name="reason" required>
-                <option>Order help</option>
-                <option>Oracle reading</option>
-                <option>Compatibility certificate</option>
-                <option>Event listing (Codex)</option>
-                <option>Other</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="message">Message * <span class="sr-only">required</span></label>
-              <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-
+            <label class="sr-only" for="contact-name">Full name</label>
+            <input id="contact-name" name="name" placeholder="Full name" required />
+            <label class="sr-only" for="contact-email">Email</label>
+            <input id="contact-email" type="email" name="email" placeholder="Email" required />
+            <label class="sr-only" for="contact-reason">Reason</label>
+            <select id="contact-reason" name="reason" aria-label="Reason" required>
+              <option value="" disabled selected>Select a reason</option>
+              <option value="order-help">Order help</option>
+              <option value="oracle-reading">Oracle reading</option>
+              <option value="compatibility-certificate">Compatibility certificate</option>
+              <option value="event-listing">Codex listing</option>
+              <option value="other">Other</option>
+            </select>
+            <label class="sr-only" for="contact-message">Your message</label>
+            <textarea id="contact-message" name="message" placeholder="Your message" rows="5" required></textarea>
             <p style="display:none">
-              <label>Don’t fill: <input name="bot-field" /></label>
+              <label for="bot-field">Website</label>
+              <input id="bot-field" name="bot-field" />
             </p>
-
             <button type="submit" class="submit-btn">Send message</button>
           </form>
         </div>
