@@ -28,5 +28,30 @@
       "sync_source": "manual",
       "thumbnail": "https://files.cdn.printful.com/files/273/273a521304983380ffe07e205bd95374_thumb.png"
     }
+  },
+  {
+    "slug": "aries-denim-bucket-hat",
+    "title": "Aries Denim Bucket Hat",
+    "brand": "Lyrion Atelier",
+    "category": "headwear",
+    "collection": ["Zodiac Hero"],
+    "tags": ["aries", "bucket-hat", "denim", "fire-sign", "unisex"],
+    "images": [
+      {
+        "url": "/aries-denim-bucket-hat/aries-bucket-hat-girl-headshot.jpg",
+        "alt": "Aries Denim Bucket Hat on model",
+        "source": "upload"
+      }
+    ],
+    "variants": [
+      { "id": "694f1219bafde5", "size": "One Size", "priceUSD": 35.5 }
+    ],
+    "status": "active",
+    "availability": "made-to-order",
+    "printful": {
+      "product_type": "Denim Bucket Hat",
+      "sync_source": "manual",
+      "thumbnail": "/aries-denim-bucket-hat/aries-bucket-hat-girl-headshot.jpg"
+    }
   }
 ]
