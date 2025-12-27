@@ -80,8 +80,9 @@ test.describe('homepage featured products', () => {
     await expect(featuredCard).toBeVisible();
     await expect(featuredCard.locator('.price')).toContainText('$34.99');
 
-    const image = featuredCard.locator('img');
-    await expect(image).toHaveAttribute('src', /youth-aries-fire-tee/i);
+    const images = featuredCard.locator('img');
+    expect(await images.count()).toBeGreaterThanOrEqual(4);
+    await expect(images.first()).toHaveAttribute('src', /youth-aries-fire-tee/i);
   });
 
   test('surfaces Leo Zodiac Hoodie in featured/bestseller grid', async ({ page }) => {
@@ -89,8 +90,9 @@ test.describe('homepage featured products', () => {
     const featuredCard = page.locator('#featured-grid .product-card', { hasText: 'Leo Zodiac Hoodie' });
     await expect(featuredCard).toBeVisible();
     await expect(featuredCard.locator('.price')).toContainText('$59.99');
-    const image = featuredCard.locator('img');
-    await expect(image).toHaveAttribute('src', /leo-zodiac-hoodie/i);
+    const images = featuredCard.locator('img');
+    expect(await images.count()).toBeGreaterThanOrEqual(4);
+    await expect(images.first()).toHaveAttribute('src', /leo-zodiac-hoodie/i);
   });
 
   test('promotes Cosmic Crewneck - Pisces as the third featured card', async ({ page }) => {
@@ -98,14 +100,19 @@ test.describe('homepage featured products', () => {
     const thirdCard = page.locator('#featured-grid .product-card').nth(2);
     await expect(thirdCard).toContainText('Cosmic Crewneck - Pisces');
     await expect(thirdCard.locator('.price')).toContainText('$55.99');
-    const image = thirdCard.locator('img');
-    await expect(image).toHaveAttribute('src', /cosmic-crewneck-pisces/i);
+    const images = thirdCard.locator('img');
+    expect(await images.count()).toBeGreaterThanOrEqual(4);
+    await expect(images.first()).toHaveAttribute('src', /cosmic-crewneck-pisces/i);
   });
 
   test('shows four featured products on homepage', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
     const featuredCards = page.locator('#featured-grid .product-card');
     await expect(featuredCards).toHaveCount(4);
+    const imageCounts = await featuredCards.evaluateAll((cards) =>
+      cards.map((card) => card.querySelectorAll('img').length)
+    );
+    expect(imageCounts.every((count) => count >= 4)).toBeTruthy();
   });
 
   test('opens Cosmic Crewneck details from homepage view action', async ({ page }) => {

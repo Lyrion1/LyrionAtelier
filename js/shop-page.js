@@ -242,7 +242,13 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       null;
     const canBuy = price?.cents !== null && !!firstVariantId;
     const image = normalizedImages.find(isUsableImage) || resolveProductImage({ ...p, slug, title }, imageMap, zodiacMap);
-    const images = normalizedImages.length ? normalizedImages : (image ? [image] : []);
+    const images = (() => {
+      const base = normalizedImages.length ? normalizedImages : (image ? [image] : []);
+      const ready = base.filter(Boolean).map(fullRes);
+      if (!ready.length) ready.push(FALLBACK);
+      while (ready.length < 4) ready.push(ready[ready.length % ready.length] || FALLBACK);
+      return ready;
+    })();
     return {
       ...p,
       id: p.id || p.sync_product_id || slug,
@@ -324,7 +330,7 @@ import { formatPrice, currencySymbol } from './price-utils.js';
 
   const createCard = (p) => {
     const slug = p.slug || slugify(p.title || p.name || '');
-    const viewUrl = `/shop/${slug}.html`;
+    const viewUrl = `/product.html?slug=${encodeURIComponent(slug)}`;
     const variant = p.defaultVariant || pickVariant(p);
     const hasPriceData = Number.isFinite(p.price) || Number.isFinite(p.priceCents) || !!p.priceLabel;
     const basePrice = hasPriceData ? null : normalizePrice(p);
@@ -362,7 +368,13 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     const priceDisplay = priceRange || formatPrice(Number.isFinite(priceCents) ? priceCents : priceValue, fallbackLabel);
     const primaryImage = Array.isArray(p.images) ? p.images[0] : null;
     const resolvedImage = isUsableImage(primaryImage) ? primaryImage : resolveProductImage(p, cachedImageMap, cachedZodiacMap);
-    const imgSrc = fullRes(isUsableImage(resolvedImage) ? resolvedImage : FALLBACK);
+    const galleryImages = (() => {
+      const seeds = Array.isArray(p.images) && p.images.length ? p.images : [resolvedImage || FALLBACK];
+      const normalized = seeds.filter(Boolean).map(fullRes);
+      if (!normalized.length) normalized.push(FALLBACK);
+      while (normalized.length < 4) normalized.push(normalized[normalized.length % normalized.length] || FALLBACK);
+      return normalized.slice(0, 4);
+    })();
     const soldOut = (p?.meta?.soldOut ?? p?.soldOut) === true;
 
     const card = document.createElement('article');
@@ -376,19 +388,28 @@ import { formatPrice, currencySymbol } from './price-utils.js';
 
     const media = document.createElement('div');
     media.className = 'product-card__media media';
-    const img = document.createElement('img');
-    img.src = imgSrc || FALLBACK;
-    img.alt = p.title || p.name || 'Product image';
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
-    img.onload = () => {
-      img.classList.remove('placeholder', 'blur');
+    const grid = document.createElement('div');
+    grid.className = 'product-card__media-grid';
+    let ready = false;
+    const markReady = () => {
+      if (ready) return;
+      ready = true;
+      grid.classList.remove('placeholder', 'blur');
       media.classList.remove('placeholder', 'blur');
       card.classList.add('media-ready');
       hideLoader();
     };
-    media.appendChild(img);
+    galleryImages.forEach((src, idx) => {
+      const img = document.createElement('img');
+      img.src = src || FALLBACK;
+      img.alt = `${p.title || p.name || 'Product image'} ${idx + 1}`;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
+      img.onload = markReady;
+      grid.appendChild(img);
+    });
+    media.appendChild(grid);
 
     const body = document.createElement('div');
     body.className = 'product-card__body';

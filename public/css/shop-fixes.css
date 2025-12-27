@@ -1,5 +1,7 @@
 /* keep product cards tidy even if images 404 */
 .product-card img { display:block; width:100%; height:auto; }
+.product-card__media-grid { display:grid; grid-template-columns:repeat(2,1fr); grid-auto-rows:1fr; gap:6px; height:100%; }
+.product-card__media-grid img { height:100%; width:100%; object-fit:cover; }
 
 /* nuke any legacy stray thumbnail containers */
 .thumb-strip, .thumb, .stray-thumb { display:none !important; }

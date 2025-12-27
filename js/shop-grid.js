@@ -50,9 +50,19 @@ function renderCard(product) {
   const altText = product.title || product.name || 'Lyrion piece';
   const variant = pickVariant(product);
   const priceNum = resolvePrice(variant) ?? resolvePrice(product);
-  const imgSrc = pickImage(product, __IMAGE_MAP || {});
   const slug = product.slug || slugify(product.title || product.name || '');
-  const viewUrl = `/shop/${slug}.html`;
+  const viewUrl = `/product.html?slug=${encodeURIComponent(slug)}`;
+  const galleryImages = (() => {
+    const seeds = [];
+    if (product.image) seeds.push(product.image);
+    if (Array.isArray(product.images)) seeds.push(...product.images);
+    const mapped = pickImage(product, __IMAGE_MAP || {});
+    if (mapped) seeds.push(mapped);
+    const normalized = seeds.filter(Boolean);
+    if (!normalized.length) normalized.push(FALLBACK);
+    while (normalized.length < 4) normalized.push(normalized[normalized.length % normalized.length] || FALLBACK);
+    return normalized.slice(0, 4);
+  })();
 
   const card = document.createElement('article');
   card.className = 'product-card';
@@ -61,18 +71,27 @@ function renderCard(product) {
 
   const media = document.createElement('div');
   media.className = 'product-card__media media';
-  const img = document.createElement('img');
-  img.loading = 'lazy';
-  img.decoding = 'async';
-  img.alt = altText;
-  img.src = imgSrc;
-  img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
-  img.onload = () => {
-    img.classList.remove('placeholder', 'blur');
+  const grid = document.createElement('div');
+  grid.className = 'product-card__media-grid';
+  let ready = false;
+  const markReady = () => {
+    if (ready) return;
+    ready = true;
+    grid.classList.remove('placeholder', 'blur');
     media.classList.remove('placeholder', 'blur');
     card.classList.add('media-ready');
   };
-  media.appendChild(img);
+  galleryImages.forEach((src, idx) => {
+    const img = document.createElement('img');
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.alt = `${altText} ${idx + 1}`;
+    img.src = src;
+    img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
+    img.onload = markReady;
+    grid.appendChild(img);
+  });
+  media.appendChild(grid);
 
   const body = document.createElement('div');
   body.className = 'product-card__body';
