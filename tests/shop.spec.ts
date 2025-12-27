@@ -164,6 +164,64 @@ test.describe('shop smoke test', () => {
     await page.screenshot({ path: 'shop-pass.png', fullPage: true });
   });
 
+  test('product cards enforce shorter layout', async ({ page }) => {
+    await page.route('https://fonts.googleapis.com/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'text/css', body: '' })
+    );
+    await page.route('https://fonts.gstatic.com/**', (route) =>
+      route.fulfill({ status: 200, body: '' })
+    );
+
+    await page.goto(`http://localhost:${PORT}/shop`, { waitUntil: 'networkidle' });
+    const firstCard = page.locator('.product-card').first();
+    await expect(firstCard).toBeVisible();
+
+    const metrics = await firstCard.evaluate((card) => {
+      const image = card.querySelector('.product-card-image');
+      const content = card.querySelector('.product-card-content');
+      const description = card.querySelector('.product-card-description');
+      const getStyle = (el: Element | null) => (el ? window.getComputedStyle(el) : null);
+
+      const imageStyle = getStyle(image);
+      const contentStyle = getStyle(content);
+      const descStyle = getStyle(description);
+      const rootFont = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      const fontSize = descStyle ? parseFloat(descStyle.fontSize) : null;
+      const lineHeight = descStyle ? parseFloat(descStyle.lineHeight) : null;
+      const lineClamp = descStyle?.getPropertyValue('-webkit-line-clamp') || null;
+      const boxOrient = descStyle?.getPropertyValue('-webkit-box-orient') || null;
+
+      return {
+        rootFontSize: Number.isFinite(rootFont) ? rootFont : null,
+        imageHeight: imageStyle ? parseFloat(imageStyle.height) : null,
+        contentPadding: contentStyle
+          ? [
+              parseFloat(contentStyle.paddingTop),
+              parseFloat(contentStyle.paddingRight),
+              parseFloat(contentStyle.paddingBottom),
+              parseFloat(contentStyle.paddingLeft)
+            ]
+          : null,
+        descFontSize: fontSize,
+        descLineHeightRatio: fontSize && lineHeight ? lineHeight / fontSize : null,
+        descMaxHeight: descStyle ? parseFloat(descStyle.maxHeight) : null,
+        descLineClamp: lineClamp || null,
+        descBoxOrient: boxOrient || null,
+        descOverflow: descStyle ? descStyle.overflow : null
+      };
+    });
+
+    expect(metrics.imageHeight).toBeCloseTo(220, 0);
+    expect(metrics.contentPadding).toEqual([15, 15, 15, 15]);
+    expect(metrics.rootFontSize).not.toBeNull();
+    expect(metrics.descFontSize).toBeCloseTo((metrics.rootFontSize || 0) * 0.85, 1);
+    expect(metrics.descLineHeightRatio).toBeCloseTo(1.4, 1);
+    expect(metrics.descMaxHeight).toBeCloseTo(80, 0);
+    expect(metrics.descLineClamp).toBe('4');
+    expect((metrics.descBoxOrient || '').toLowerCase()).toBe('vertical');
+    expect(metrics.descOverflow).toBe('hidden');
+  });
+
   test('home hero declutters on mobile', async ({ page }) => {
     await page.route('https://fonts.googleapis.com/**', (route) =>
       route.fulfill({ status: 200, contentType: 'text/css', body: '' })
