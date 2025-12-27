@@ -262,7 +262,7 @@ async function hydrateProductPage() {
   if (nameEl) nameEl.textContent = title;
   if (descEl) descEl.textContent = description;
   if (pillEl) pillEl.textContent = pillText;
-  if (materialsEl) materialsEl.textContent = materials;
+  if (materialsEl) materialsEl.innerHTML = materials;
   if (careEl) careEl.textContent = care;
 
   const sizes = unique(
