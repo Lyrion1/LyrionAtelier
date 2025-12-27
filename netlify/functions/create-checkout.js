@@ -27,8 +27,8 @@ exports.handler = async (event) => {
         quantity: quantity,
       }],
       mode: 'payment',
-      success_url: `${process.env.URL || 'https://lyrionatelier.com'}/thank-you.html`,
-      cancel_url: `${process.env.URL || 'https://lyrionatelier.com'}/test-checkout.html`,
+      success_url: `${process.env.URL || 'https://lyrionatelier.com'}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.URL || 'https://lyrionatelier.com'}/cart.html`,
     });
 
     return {
