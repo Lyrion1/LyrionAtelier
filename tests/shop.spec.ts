@@ -8,7 +8,7 @@ const PORT = 4173;
 const ROOT = path.resolve(__dirname, '..');
 const PLACEHOLDER_NOTICE = /Catalog is updating/i;
 const MIN_VISIBLE_PRODUCTS = 4; // shop grid should show at least four items when catalog data is available
-const OVERFLOW_TOLERANCE_PX = 210;
+const OVERFLOW_TOLERANCE_PX = 4; // Mobile layout now clamps hero width; keep a small guard against horizontal overflow.
 
 const MIME: Record<string, string> = {
   '.html': 'text/html',

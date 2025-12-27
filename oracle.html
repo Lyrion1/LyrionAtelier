@@ -476,12 +476,13 @@
 
     <script src="/js/oracle-products-data.js"></script>
     <script>
-      const WARDROBE_FALLBACK_IMAGE = '/assets/catalog/placeholder.webp';
+      const WARDROBE_FALLBACK_IMAGE = '/assets/catalog/placeholder.webp'; // Keep aligned with shop/product fallbacks
+      const PRICE_CENTS_THRESHOLD = 200;
       const slugify = (value = '') => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
       const moneyValue = (val) => {
         const num = Number(val);
         if (!Number.isFinite(num)) return null;
-        return num > 200 ? num / 100 : num;
+        return num > PRICE_CENTS_THRESHOLD ? num / 100 : num;
       };
       const resolvePriceValue = (product = {}) => {
         if (typeof product.price === 'number') return moneyValue(product.price);
@@ -520,10 +521,12 @@
           zodiac
         };
       };
+      const shopLinkFor = (slug) => (slug ? `/shop.html?highlight=${encodeURIComponent(slug)}` : '/shop.html');
       const selectRecommendations = (catalog = [], sunSign = '') => {
         const normalized = (sunSign || '').toLowerCase();
         const bySign = catalog.filter((p) => p.zodiac === normalized);
-        const pool = bySign.length ? bySign : catalog;
+        const generic = catalog.filter((p) => !p.zodiac || p.zodiac === 'all');
+        const pool = bySign.length ? bySign : (generic.length ? generic : catalog);
         const seen = new Set();
         const picks = [];
         pool.forEach((p) => {
@@ -554,9 +557,11 @@
             if (res.ok) {
               const data = await res.json();
               if (Array.isArray(data)) return data;
+            } else {
+              console.warn('[oracle] failed to load catalog', res.status, res.statusText);
             }
           } catch (err) {
-            console.warn('[oracle] failed to load catalog', err);
+            console.warn('[oracle] failed to load catalog', err?.message || err);
           }
           if (Array.isArray(window.LyrionAtelier?.products)) return window.LyrionAtelier.products;
           if (Array.isArray(window.products)) return window.products;
@@ -574,31 +579,43 @@
         }
 
         recommendations.forEach((product) => {
-          const href = product.slug ? `/shop.html?highlight=${encodeURIComponent(product.slug)}` : '/shop.html';
+          const href = shopLinkFor(product.slug);
           const card = document.createElement('a');
           card.className = 'wardrobe-product-card';
           card.href = href;
           card.setAttribute('data-product', product.slug);
 
-          card.innerHTML = `
-<img src="${product.image}" alt="${product.title}" class="wardrobe-product-image">
-<div class="wardrobe-product-info">
-<h3 class="wardrobe-product-name">${product.title}</h3>
-<p class="wardrobe-mystical-copy">${product.mysticalCopy || ''}</p>
-<p class="wardrobe-product-price">${product.priceLabel}</p>
-<span class="wardrobe-shop-button">View in Shop</span>
-</div>
-`;
-
-          const imgEl = card.querySelector('img');
+          const imgEl = document.createElement('img');
+          imgEl.className = 'wardrobe-product-image';
+          imgEl.alt = product.title;
+          imgEl.src = product.image || WARDROBE_FALLBACK_IMAGE;
           imgEl.loading = 'lazy';
           imgEl.decoding = 'async';
           imgEl.onerror = () => {
             if (imgEl.src !== WARDROBE_FALLBACK_IMAGE) {
               imgEl.src = WARDROBE_FALLBACK_IMAGE;
+            } else {
+              imgEl.onerror = null;
             }
           };
 
+          const info = document.createElement('div');
+          info.className = 'wardrobe-product-info';
+          const nameEl = document.createElement('h3');
+          nameEl.className = 'wardrobe-product-name';
+          nameEl.textContent = product.title;
+          const copyEl = document.createElement('p');
+          copyEl.className = 'wardrobe-mystical-copy';
+          copyEl.textContent = product.mysticalCopy || '';
+          const priceEl = document.createElement('p');
+          priceEl.className = 'wardrobe-product-price';
+          priceEl.textContent = product.priceLabel;
+          const ctaEl = document.createElement('span');
+          ctaEl.className = 'wardrobe-shop-button';
+          ctaEl.textContent = 'View in Shop';
+
+          info.append(nameEl, copyEl, priceEl, ctaEl);
+          card.append(imgEl, info);
           grid.appendChild(card);
         });
       })();
