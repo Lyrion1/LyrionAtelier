@@ -86,20 +86,22 @@ exports.handler = async (event) => {
     return { statusCode: 500, body: 'Server configuration error' };
   }
 
-  const signature = event.headers?.['stripe-signature'];
-  if (!signature) {
-    return { statusCode: 400, body: 'Invalid signature' };
-  }
-
+  const sig = event.headers["stripe-signature"];
   const rawBody = event.isBase64Encoded
     ? Buffer.from(event.body, "base64")
     : Buffer.from(event.body, "utf8");
   let stripeEvent;
 
   try {
-    stripeEvent = stripe.webhooks.constructEvent(rawBody, signature, webhookSecret);
+    stripeEvent = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
-    console.error('Stripe signature verification failed:', err.message);
+    console.error('Stripe signature verification failed:', {
+      message: err?.message,
+      sigExists: Boolean(sig),
+      isBase64Encoded: event.isBase64Encoded,
+      bodyLength: event.body?.length,
+      webhookSecretStart: process.env.STRIPE_WEBHOOK_SECRET?.slice(0, 8),
+    });
     return { statusCode: 400, body: 'Invalid signature' };
   }
 
