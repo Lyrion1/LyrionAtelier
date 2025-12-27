@@ -129,4 +129,19 @@ test.describe('homepage featured products', () => {
     await expect(page.locator('#product-name')).toContainText('Cosmic Crewneck - Pisces');
     await expect(page.locator('#size-select')).toBeVisible();
   });
+
+  test('opens Gemini Starlight Tee with full gallery from homepage view', async ({ page }) => {
+    await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
+    const geminiCard = page.locator('#featured-grid .product-card', { hasText: 'Gemini Starlight Tee' }).first();
+    const viewLink = geminiCard.getByRole('link', { name: 'View' });
+
+    await Promise.all([
+      page.waitForURL(/product\.html.*gemini-starlight-tee/),
+      viewLink.click()
+    ]);
+
+    await expect(page).toHaveURL(/product\.html.*gemini-starlight-tee/);
+    await expect(page.locator('#product-name')).toContainText('Gemini Starlight Tee');
+    await expect(page.locator('#product-gallery img')).toHaveCount(4);
+  });
 });

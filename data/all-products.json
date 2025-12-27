@@ -583,6 +583,146 @@
     }
   },
   {
+    "id": "gemini-starlight-tee",
+    "slug": "gemini-starlight-tee",
+    "title": "Gemini Starlight Tee",
+    "kind": "product",
+    "collection": "Zodiac Hero",
+    "category": "zodiac-hero",
+    "zodiac": "gemini",
+    "zodiacSign": "gemini",
+    "element": "air",
+    "gender": "men",
+    "description": "The cosmic communicator. Gemini doesn't just speak\u2014they weave worlds with words, dance between dimensions, hold contradictions without breaking. Born under Mercury's quicksilver reign, they know that truth has many faces and curiosity is the highest form of intelligence. This premium heavyweight tee channels Geminian duality through sacred twin symbolism, wrapping sharp minds in comfort designed for those who live between worlds and thrive in the space where opposites meet.",
+    "mysticalCopy": "Two minds, one soul. You contain multitudes\u2014and that's your superpower.",
+    "meta": {
+      "category": "Men",
+      "collection": "Zodiac Hero",
+      "zodiac": "Gemini"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 42.99,
+    "price_range": {
+      "min": 42.99,
+      "max": 46.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/gemini-starlight-tee/gemini-starlight-tee-ghost.jpg",
+      "/gemini-starlight-tee/gemini-starlight-tee-model-front.jpg",
+      "/gemini-starlight-tee/gemini-starlight-tee-model-back.jpg",
+      "/gemini-starlight-tee/gemini-starlight-tee-model-side.jpg"
+    ],
+    "mainImage": "/gemini-starlight-tee/gemini-starlight-tee-ghost.jpg",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL",
+        "4XL"
+      ]
+    },
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "694d9579acfff1",
+        "price": 42.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEM-STAR-TEE-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "694d9579ad00a5",
+        "price": 42.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEM-STAR-TEE-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "694d9579ad0139",
+        "price": 42.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEM-STAR-TEE-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "694d9579ad01d1",
+        "price": 42.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEM-STAR-TEE-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "694d9579ad0252",
+        "price": 44.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEM-STAR-TEE-2XL"
+      },
+      {
+        "size": "3XL",
+        "printfulVariantId": "694d9579ad02e2",
+        "price": 46.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEM-STAR-TEE-3XL"
+      },
+      {
+        "size": "4XL",
+        "printfulVariantId": "694d9579ad0373",
+        "price": 46.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEM-STAR-TEE-4XL"
+      }
+    ],
+    "printfulProduct": "Men's Premium Heavyweight Tee",
+    "careInstructions": "Machine wash cold, tumble dry low. Your duality never fades.",
+    "tags": [
+      "gemini",
+      "air-sign",
+      "zodiac",
+      "tee",
+      "men",
+      "boys",
+      "mutable",
+      "mercury-ruled",
+      "twins",
+      "communication",
+      "duality"
+    ],
+    "chartResonance": [
+      "gemini-sun",
+      "gemini-moon",
+      "gemini-rising",
+      "mercury-dominant",
+      "3rd-house-emphasis",
+      "air-dominant"
+    ],
+    "seoTitle": "Gemini Starlight Tee | Men & Boys Zodiac Tee | Lyr\u012bon Atelier",
+    "seoDescription": "Channel Gemini duality with the Starlight Tee. Premium heavyweight design for quick minds ruled by Mercury. For men and young boys.",
+    "launchDate": "2025-01-15",
+    "isBestseller": false,
+    "showOnHomepage": true,
+    "copy": {
+      "notes": "The cosmic communicator. Gemini doesn't just speak\u2014they weave worlds with words, dance between dimensions, hold contradictions without breaking. Born under Mercury's quicksilver reign, they know that truth has many faces and curiosity is the highest form of intelligence. This premium heavyweight tee channels Geminian duality through sacred twin symbolism, wrapping sharp minds in comfort designed for those who live between worlds and thrive in the space where opposites meet.",
+      "materials": "Premium heavyweight cotton for superior quality",
+      "care": "Machine wash cold, tumble dry low. Your duality never fades.",
+      "mysticalCopy": "Two minds, one soul. You contain multitudes\u2014and that's your superpower."
+    }
+  },
+  {
     "slug": "capricorn-verdant-relief-tee",
     "title": "Capricorn Verdant Relief Tee",
     "category": "tshirts",
