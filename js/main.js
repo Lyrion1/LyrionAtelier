@@ -11,11 +11,37 @@
   document.head.appendChild(script);
 })();
 
+// Ensure mobile performance head tags exist
+(function ensureMobilePerformanceHead() {
+  const head = document.head;
+  if (!head) return;
+
+  const viewport = document.querySelector('meta[name="viewport"]');
+  if (!viewport) {
+    const meta = document.createElement('meta');
+    meta.name = 'viewport';
+    meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes';
+    head.prepend(meta);
+  } else if (!/width=device-width/.test(viewport.getAttribute('content') || '')) {
+    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes');
+  }
+
+  ['https://fonts.googleapis.com', 'https://api.stripe.com'].forEach(href => {
+    if (!head.querySelector(`link[rel="preconnect"][href="${href}"]`)) {
+      const link = document.createElement('link');
+      link.rel = 'preconnect';
+      link.href = href;
+      head.appendChild(link);
+    }
+  });
+})();
+
 /**
  * Main initialization on DOM content loaded
  * Sets up all interactive features and event listeners
  */
 document.addEventListener('DOMContentLoaded', function() {
+  document.body.classList.add('loaded');
   applySharedLayout();
   
   // Initialize mobile menu
