@@ -9,10 +9,21 @@ document.addEventListener('click', async function(e) {
         .replace(/^shop\//, '')
         .replace(/\.html$/, '');
     const href = buyLink.getAttribute('href');
-    const productSlug = buyLink.getAttribute('data-slug') || buyLink.closest('[data-slug]')?.dataset.slug || '';
-    const slugFragment = cleanSlug(productSlug);
-    const target = href || (slugFragment ? `/shop/${slugFragment}.html` : null);
-    if (target) window.location.href = target;
+    const productSlug =
+      buyLink.getAttribute('data-slug') ||
+      buyLink.getAttribute('data-product-id') ||
+      buyLink.closest('[data-slug]')?.dataset.slug ||
+      buyLink.closest('[data-id]')?.dataset.id ||
+      '';
+    const slugFragment = (cleanSlug(productSlug) || '').toLowerCase();
+    const normalizedHref = href && href.trim() && href !== '#' ? href : null;
+    const detailUrl = slugFragment ? `/product.html?slug=${encodeURIComponent(slugFragment)}` : null;
+    const legacyUrl = slugFragment ? `/shop/${slugFragment}.html` : null;
+    const target = normalizedHref || detailUrl || legacyUrl;
+    if (target) {
+      e.preventDefault();
+      window.location.href = target;
+    }
     return;
   }
 
