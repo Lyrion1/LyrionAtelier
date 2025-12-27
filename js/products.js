@@ -1035,10 +1035,10 @@ function displayOracleReadings() {
     },
     {
       key: 'life-path',
-    name: 'Life Path Reading - Oracle Reading',
-    price: 50.00,
-    description: 'Identify your current chapter and its lessons',
-    image: 'oracle-images/life-path-reading.jpg'
+      name: 'Life Path Reading - Oracle Reading',
+      price: 50.00,
+      description: 'Identify your current chapter and its lessons',
+      image: 'oracle-images/life-path-reading.jpg'
     },
     {
       key: 'relationship',
