@@ -214,21 +214,19 @@ const YT_PLATFORM_SRC = 'https://apis.google.com/js/platform.js';
 
 function ensureSocialEmbeds() {
   const head = document.head;
-  if (head && !head.querySelector(`script[src="${TIKTOK_EMBED_SRC}"]`)) {
-    const tiktokScript = document.createElement('script');
-    tiktokScript.src = TIKTOK_EMBED_SRC;
-    tiktokScript.async = true;
-    tiktokScript.dataset.socialScript = 'tiktok';
-    head.appendChild(tiktokScript);
-  }
+  if (!head) return;
 
-  if (head && !head.querySelector(`script[src="${YT_PLATFORM_SRC}"]`)) {
-    const ytScript = document.createElement('script');
-    ytScript.src = YT_PLATFORM_SRC;
-    ytScript.async = true;
-    ytScript.dataset.socialScript = 'youtube-platform';
-    head.appendChild(ytScript);
-  }
+  const ensureScript = (src, dataKey) => {
+    if (head.querySelector(`script[src="${src}"]`)) return;
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    if (dataKey) script.dataset.socialScript = dataKey;
+    head.appendChild(script);
+  };
+
+  ensureScript(TIKTOK_EMBED_SRC, 'tiktok');
+  ensureScript(YT_PLATFORM_SRC, 'youtube-platform');
 }
 
 /**
