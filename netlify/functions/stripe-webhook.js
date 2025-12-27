@@ -27,10 +27,10 @@ const formatAmount = (amount, currency = 'USD') => {
 };
 
 const buildAdminHtml = (session) => {
-  const customerEmail = session.customer_details?.email || session.customer_email || 'Unknown';
-  const amount = formatAmount(session.amount_total, session.currency || 'USD');
-  const currency = (session.currency || 'USD').toUpperCase();
-  const sessionId = session.id || 'N/A';
+  const customerEmail = session?.customer_details?.email || session?.customer_email || 'Unknown';
+  const amount = formatAmount(session?.amount_total, session?.currency || 'USD');
+  const currency = (session?.currency || 'USD').toUpperCase();
+  const sessionId = session?.id || 'N/A';
 
   return `
   <div style="font-family: Arial, sans-serif; max-width: 640px; margin: 0 auto; padding: 24px; background: #0b1021; color: #f3f4f6; border-radius: 12px;">
@@ -47,9 +47,9 @@ const buildAdminHtml = (session) => {
 };
 
 const buildCustomerHtml = (session) => {
-  const customerName = session.customer_details?.name || 'Friend';
-  const amount = formatAmount(session.amount_total, session.currency || 'USD');
-  const sessionId = session.id || '';
+  const customerName = session?.customer_details?.name || 'Customer';
+  const amount = formatAmount(session?.amount_total, session?.currency || 'USD');
+  const sessionId = session?.id || '';
 
   return `
   <div style="font-family: 'Helvetica Neue', Arial, sans-serif; background: #0f172a; color: #e5e7eb; padding: 32px 20px;">
@@ -110,7 +110,7 @@ exports.handler = async (event) => {
 
   if (stripeEvent.type === 'checkout.session.completed') {
     const session = stripeEvent.data.object;
-    const customerEmail = session.customer_details?.email || session.customer_email;
+    const customerEmail = session?.customer_details?.email || session?.customer_email || null;
 
     try {
       await resend.emails.send({
