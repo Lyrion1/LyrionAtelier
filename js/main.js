@@ -490,9 +490,11 @@ function createLoadingOverlay() {
   return overlay;
 }
 
+const RITUAL_KEYWORDS = ['ritual', 'ceremony', 'manifestation', 'meditation', 'circle', 'healing'];
+
 function formatListingFeeValue(value) {
   if (value === undefined || value === null) return 'Free';
-  const normalized = value.toString().trim().replace(/^Listing Fee:\s*/i, '');
+  const normalized = value.toString().trim().replace(/^[^$\d]*:\s*/i, '');
   if (!normalized) return 'Free';
   const numericValue = Number(normalized.replace(/[^0-9.]/g, ''));
   if (/^free$/i.test(normalized) || numericValue === 0) return 'Free';
@@ -507,9 +509,8 @@ function getPriceLabel(event) {
 
   const locationText = (event?.location || '').toLowerCase();
   const combinedText = `${event?.title || ''} ${event?.description || ''}`.toLowerCase();
-  const ritualKeywords = ['ritual', 'ceremony', 'manifestation', 'meditation', 'circle', 'healing'];
   const isOnline = locationText.includes('online') || locationText.includes('zoom');
-  const hasKeyword = ritualKeywords.some(keyword => combinedText.includes(keyword));
+  const hasKeyword = RITUAL_KEYWORDS.some(keyword => combinedText.includes(keyword));
   if (isOnline || hasKeyword) return 'Participation';
 
   return 'Ticket';
