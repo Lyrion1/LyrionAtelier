@@ -13,8 +13,13 @@ Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'
 
 [[headers]]
  for = "/oracle"
- [headers.values]
- X-Frame-Options = "ALLOW-FROM https://app.netlify.com"
+  [headers.values]
+  X-Frame-Options = "ALLOW-FROM https://app.netlify.com"
+
+[[redirects]]
+ from = "/api/stripe-webhook"
+ to = "/.netlify/functions/stripe-webhook"
+ status = 200
 
 [[redirects]]
  from = "/api/*"
