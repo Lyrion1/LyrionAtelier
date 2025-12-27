@@ -13,90 +13,12 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <style>
-    body {
-      background: radial-gradient(circle at 20% 20%, rgba(255, 215, 141, 0.08), transparent 35%), radial-gradient(circle at 80% 0%, rgba(122, 94, 255, 0.12), transparent 40%), #0b0f1a;
-      color: #f4efe6;
-    }
-    .contact-form-section {
-      background: linear-gradient(135deg, rgba(20, 24, 38, 0.8), rgba(18, 16, 30, 0.9));
-      border: 1px solid rgba(255, 214, 143, 0.16);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 214, 143, 0.15);
-      border-radius: 20px;
-      padding: 24px;
-    }
-    .form-container {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-    .contact-form {
-      display: grid;
-      gap: 14px;
-    }
-    .form-group {
-      margin-bottom: 16px;
-    }
-    .form-group label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #f8e8c6;
-      letter-spacing: 0.01em;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea,
-    .contact-form-section input,
-    .contact-form-section select,
-    .contact-form-section textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 214, 143, 0.3);
-      background: rgba(255, 255, 255, 0.03);
-      color: #f4efe6;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus,
-    .contact-form-section input:focus,
-    .contact-form-section select:focus,
-    .contact-form-section textarea:focus {
-      outline: none;
-      border-color: #e8c27c;
-      box-shadow: 0 0 0 3px rgba(232, 194, 124, 0.25);
-      background: rgba(255, 255, 255, 0.06);
-    }
-    .submit-btn {
-      background: linear-gradient(135deg, #d8a75f, #f1d9a9);
-      color: #0c0c10;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 999px;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 10px 25px rgba(232, 194, 124, 0.25);
-    }
-    .submit-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(232, 194, 124, 0.35);
-    }
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      clip-path: inset(50%);
-      white-space: nowrap;
-      border: 0;
-    }
-  </style>
+   <style>
+     body {
+       background: radial-gradient(circle at 20% 20%, rgba(255, 215, 141, 0.08), transparent 35%), radial-gradient(circle at 80% 0%, rgba(122, 94, 255, 0.12), transparent 40%), #0b0f1a;
+       color: #f4efe6;
+     }
+   </style>
 </head>
 <body>
   <a class="skip-to-content" href="#main-content">Skip to main content</a>
@@ -131,34 +53,96 @@
         <p class="muted">Need help choosing a reading or garment? Send us a note.</p>
       </div>
 
-      <section class="contact-form-section">
-        <div class="form-container">
-          <h2>Get in Touch</h2>
-          <p>Have questions about our readings? We're here to help guide your journey.</p>
+      <section class="contact-form-section fade-lift">
+        <div class="contact-form-wrap">
+          <div class="form-header">
+            <p class="pill">Celestial support</p>
+            <h2>Get in Touch</h2>
+            <p class="muted">Have questions about a reading, garment, or collaboration? Send us a note.</p>
+          </div>
 
-          <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-success">
-            <input type="hidden" name="form-name" value="contact" />
-            <label class="sr-only" for="contact-name">Full name</label>
-            <input id="contact-name" name="name" placeholder="Full name" required />
-            <label class="sr-only" for="contact-email">Email</label>
-            <input id="contact-email" type="email" name="email" placeholder="Email" required />
-            <label class="sr-only" for="contact-reason">Reason</label>
-            <select id="contact-reason" name="reason" aria-label="Reason" required>
-              <option value="" disabled selected>Select a reason</option>
-              <option value="order-help">Order help</option>
-              <option value="oracle-reading">Oracle reading</option>
-              <option value="compatibility-certificate">Compatibility certificate</option>
-              <option value="event-listing">Codex listing</option>
-              <option value="other">Other</option>
-            </select>
-            <label class="sr-only" for="contact-message">Your message</label>
-            <textarea id="contact-message" name="message" placeholder="Your message" rows="5" required></textarea>
-            <p style="display:none">
-              <label for="bot-field">Website</label>
-              <input id="bot-field" name="bot-field" />
-            </p>
-            <button type="submit" class="submit-btn">Send message</button>
+          <form id="contact-form" class="contact-form" novalidate>
+            <div class="form-status" aria-live="polite"></div>
+
+            <div class="form-grid form-fields">
+              <div class="form-group">
+                <label for="contact-name">Full name</label>
+                <input id="contact-name" name="name" autocomplete="name" placeholder="Your full name" required />
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Email</label>
+                <input id="contact-email" type="email" name="email" autocomplete="email" placeholder="you@example.com" required />
+              </div>
+              <div class="form-group">
+                <label for="contact-subject">Subject <span class="muted">(optional)</span></label>
+                <input id="contact-subject" name="subject" placeholder="Subject" />
+              </div>
+              <div class="form-group">
+                <label for="contact-reason">Reason</label>
+                <select id="contact-reason" name="reason" aria-label="Reason" required>
+                  <option value="" disabled selected>Select a reason</option>
+                  <option value="order-help">Order help</option>
+                  <option value="oracle-readings">Oracle readings</option>
+                  <option value="compatibility-certificates">Compatibility certificates</option>
+                  <option value="event-listing">Event listing</option>
+                  <option value="press-collab">Press / Collaboration</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label for="contact-message">Your message</label>
+                <textarea id="contact-message" name="message" placeholder="Share the details so we can assist you swiftly." rows="5" required></textarea>
+              </div>
+              <div class="form-group honeypot">
+                <label class="visually-hidden" for="bot-field">Leave this field empty</label>
+                <input id="bot-field" name="bot-field" autocomplete="off" tabindex="-1" aria-hidden="true" />
+              </div>
+            </div>
+
+            <div class="button-row">
+              <button type="submit" class="submit-btn">Send message</button>
+            </div>
           </form>
+        </div>
+      </section>
+
+      <section class="follow-section fade-lift" aria-labelledby="follow-title">
+        <div class="follow-header">
+          <p class="pill">Follow us</p>
+          <h2 id="follow-title">Stay in the celestial loop</h2>
+          <p class="muted">Glimpses behind the veil on TikTok, longer rituals and style on YouTube.</p>
+        </div>
+        <div class="follow-grid">
+          <div class="follow-card" data-embed data-platform="tiktok">
+            <div class="embed-frame-wrapper">
+              <iframe title="Lyrion Atelier on TikTok" class="social-embed" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.tiktok.com/embed/@lyrionatelier"></iframe>
+            </div>
+            <div class="embed-fallback" hidden>
+              <div class="embed-meta">
+                <div class="embed-icon">🎵</div>
+                <div>
+                  <p class="embed-title">TikTok</p>
+                  <p class="embed-subtitle">Daily celestial drops & behind-the-scenes.</p>
+                </div>
+              </div>
+              <a class="embed-button" href="https://www.tiktok.com/@lyrionatelier" target="_blank" rel="noopener noreferrer">Open TikTok</a>
+            </div>
+          </div>
+          <div class="follow-card" data-embed data-platform="youtube">
+            <div class="embed-frame-wrapper">
+              <iframe title="Lyrion Atelier on YouTube" class="social-embed" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed?listType=search&list=Lyrion%20Atelier"></iframe>
+            </div>
+            <div class="embed-fallback" hidden>
+              <div class="embed-meta">
+                <div class="embed-icon">▶️</div>
+                <div>
+                  <p class="embed-title">YouTube</p>
+                  <p class="embed-subtitle">Long-form rituals, style, and celestial notes.</p>
+                </div>
+              </div>
+              <a class="embed-button" href="https://www.youtube.com/@LyrionAtelier" target="_blank" rel="noopener noreferrer">Open YouTube</a>
+            </div>
+          </div>
         </div>
       </section>
     </div>
