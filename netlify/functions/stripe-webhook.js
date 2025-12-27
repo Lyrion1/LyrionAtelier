@@ -52,8 +52,9 @@ exports.handler = async (event) => {
             : "N/A";
 
         const currency = session.currency ? session.currency.toUpperCase() : "N/A";
-
-        const customerEmail = session.customer_details?.email || "N/A";
+        const customerEmail =
+          session.customer_details?.email || session.customer_email || null;
+        const customerEmailDisplay = customerEmail || "N/A";
 
         const result = await resend.emails.send({
           from,
@@ -63,12 +64,38 @@ exports.handler = async (event) => {
           html: `
 <h2>New Order</h2>
 <p><strong>Order ID:</strong> ${session.id}</p>
-<p><strong>Customer Email:</strong> ${customerEmail}</p>
+<p><strong>Customer Email:</strong> ${customerEmailDisplay}</p>
 <p><strong>Amount:</strong> ${amount} ${currency}</p>
 `,
         });
 
         console.log("email_send_result", result);
+
+        if (customerEmail) {
+          try {
+            console.log("customer_email_send_start", {
+              to: customerEmail,
+              from,
+            });
+
+            const customerEmailResult = await resend.emails.send({
+              from,
+              to: customerEmail,
+              subject: "Order received ✨ Lyrion Atelier",
+              html: `
+<h2>Thank you for your order 🌙</h2>
+<p>Your order <strong>${session.id}</strong> has landed.</p>
+<p><strong>Amount:</strong> ${amount} ${currency}</p>
+<p>We’re weaving celestial threads just for you. Expect another note when it ships.</p>
+<p>If you didn’t place this order, reply to this email.</p>
+`,
+            });
+
+            console.log("customer_email_send_ok", customerEmailResult);
+          } catch (err) {
+            console.log("customer_email_send_fail", err);
+          }
+        }
       }
     }
 
