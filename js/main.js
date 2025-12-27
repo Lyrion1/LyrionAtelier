@@ -494,7 +494,7 @@ function formatListingFeeValue(value) {
   if (value === undefined || value === null) return 'Free';
   const normalized = value.toString().trim().replace(/^Listing Fee:\s*/i, '');
   if (!normalized) return 'Free';
-  const numericValue = Number(normalized.replace(/[^0-9.-]/g, ''));
+  const numericValue = Number(normalized.replace(/[^0-9.]/g, ''));
   if (/^free$/i.test(normalized) || numericValue === 0) return 'Free';
   return normalized.startsWith('$') ? normalized : `$${normalized}`;
 }
@@ -502,12 +502,12 @@ function formatListingFeeValue(value) {
 function getPriceLabel(event) {
   const priceSource = event?.listingFee ?? event?.price;
   const raw = (priceSource ?? '').toString().trim();
-  const numericValue = Number(raw.replace(/[^0-9.-]/g, ''));
+  const numericValue = Number(raw.replace(/[^0-9.]/g, ''));
   if (!raw || /^free$/i.test(raw) || numericValue === 0) return 'Free';
 
   const locationText = (event?.location || '').toLowerCase();
   const combinedText = `${event?.title || ''} ${event?.description || ''}`.toLowerCase();
-  const ritualKeywords = ['ritual', 'ceremony', 'manifestation', 'meditation', 'circle', 'healing', 'zoom', 'online'];
+  const ritualKeywords = ['ritual', 'ceremony', 'manifestation', 'meditation', 'circle', 'healing'];
   const isOnline = locationText.includes('online') || locationText.includes('zoom');
   const hasKeyword = ritualKeywords.some(keyword => combinedText.includes(keyword));
   if (isOnline || hasKeyword) return 'Participation';
@@ -542,6 +542,11 @@ function loadEvents() {
     const eventUrl = resolveEventUrl(event);
     const hasEventUrl = Boolean(eventUrl);
     const ctaLabel = 'Learn More & Register';
+    const ctaHref = hasEventUrl ? eventUrl : '#';
+    const ctaClass = `event-btn${hasEventUrl ? '' : ' cta-disabled'}`;
+    const ctaAttrs = hasEventUrl
+      ? 'target="_blank" rel="noopener noreferrer"'
+      : 'aria-disabled="true" tabindex="-1" style="pointer-events: none; opacity: 0.75;"';
     return `
     <div class="event-card ${event.featured ? 'featured-event' : ''}">
       ${event.featured ? '<span class="featured-badge">Featured</span>' : ''}
@@ -559,7 +564,7 @@ function loadEvents() {
           ${priceText}
         </p>
         <p class="event-description">${event.description}</p>
-        <a href="${hasEventUrl ? eventUrl : '#'}" class="event-btn${hasEventUrl ? '' : ' cta-disabled'}"${hasEventUrl ? ' target="_blank" rel="noopener noreferrer"' : ' aria-disabled="true" tabindex="-1" style="pointer-events: none; opacity: 0.75;"'}>${ctaLabel}</a>
+        <a href="${ctaHref}" class="${ctaClass}" ${ctaAttrs}>${ctaLabel}</a>
       </div>
     </div>
   `;
