@@ -111,7 +111,9 @@ function applySharedLayout() {
     footer.parentElement.insertBefore(main, footer);
   }
 
-  ensureSocialEmbeds();
+  if (!isContactPage()) {
+    ensureSocialEmbeds();
+  }
 
   body.dataset.layoutApplied = 'true';
 }
@@ -150,62 +152,83 @@ function buildSiteHeader() {
   return header;
 }
 
+function isContactPage() {
+  const path = (window.location.pathname || '').toLowerCase();
+  return path.endsWith('/contact.html') || path === '/contact' || path.endsWith('/contact');
+}
+
 function buildSiteFooter() {
   const footer = document.createElement('footer');
   footer.className = 'footer';
-  footer.innerHTML = `
-    <div class="footer-content">
-      <section class="social-follow" aria-labelledby="follow-atelier">
-        <div class="social-follow-headline">
-          <p class="social-kicker">Stay in orbit</p>
-          <h2 id="follow-atelier">Follow Lyrion Atelier</h2>
-          <p class="social-subtitle">Journey with us across the stars on TikTok and YouTube.</p>
+  if (isContactPage()) {
+    footer.innerHTML = `
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="shop.html">Shop</a>
+          <a href="oracle.html">Oracle Readings</a>
+          <a href="compatibility.html">Compatibility Certificates</a>
+          <a href="codex.html">Codex</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+          <a href="refund-policy.html">Refund Policy</a>
         </div>
-        <div class="social-grid">
-          <article class="social-card">
-            <div class="social-card-header">
-              <span class="social-chip">TikTok</span>
-              <p class="social-card-title">Profile Highlights</p>
-            </div>
-            <div class="social-card-body">
-              <div class="social-embed">
-                <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@lyrionatelier" data-unique-id="lyrionatelier" data-embed-from="embed_page" data-embed-type="creator">
-                  <section>
-                    <a target="_blank" rel="noopener noreferrer" title="@lyrionatelier" href="https://www.tiktok.com/@lyrionatelier">@lyrionatelier</a>
-                  </section>
-                </blockquote>
+        <p>&copy; 2024 Lyrion Atelier. All rights reserved.</p>
+      </div>`;
+  } else {
+    footer.innerHTML = `
+      <div class="footer-content">
+        <section class="social-follow" aria-labelledby="follow-atelier">
+          <div class="social-follow-headline">
+            <p class="social-kicker">Stay in orbit</p>
+            <h2 id="follow-atelier">Follow Lyrion Atelier</h2>
+            <p class="social-subtitle">Journey with us across the stars on TikTok and YouTube.</p>
+          </div>
+          <div class="social-grid">
+            <article class="social-card">
+              <div class="social-card-header">
+                <span class="social-chip">TikTok</span>
+                <p class="social-card-title">Profile Highlights</p>
               </div>
-              <a class="social-fallback" href="https://www.tiktok.com/@lyrionatelier" target="_blank" rel="noopener noreferrer">Follow us on TikTok →</a>
-            </div>
-          </article>
-          <article class="social-card">
-            <div class="social-card-header">
-              <span class="social-chip">YouTube</span>
-              <p class="social-card-title">Channel &amp; Updates</p>
-            </div>
-            <div class="social-card-body">
-              <div class="youtube-subscribe">
-                <div class="g-ytsubscribe" data-channel="@LyrionAtelier" data-layout="default" data-count="default" data-theme="dark"></div>
+              <div class="social-card-body">
+                <div class="social-embed">
+                  <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@lyrionatelier" data-unique-id="lyrionatelier" data-embed-from="embed_page" data-embed-type="creator">
+                    <section>
+                      <a target="_blank" rel="noopener noreferrer" title="@lyrionatelier" href="https://www.tiktok.com/@lyrionatelier">@lyrionatelier</a>
+                    </section>
+                  </blockquote>
+                </div>
+                <a class="social-fallback" href="https://www.tiktok.com/@lyrionatelier" target="_blank" rel="noopener noreferrer">Follow us on TikTok →</a>
               </div>
-              <div class="youtube-links">
-                <a class="youtube-channel-link" href="https://www.youtube.com/@LyrionAtelier" target="_blank" rel="noopener noreferrer">@LyrionAtelier</a>
-                <a class="youtube-cta" href="https://www.youtube.com/@LyrionAtelier" target="_blank" rel="noopener noreferrer">Visit YouTube Channel →</a>
+            </article>
+            <article class="social-card">
+              <div class="social-card-header">
+                <span class="social-chip">YouTube</span>
+                <p class="social-card-title">Channel &amp; Updates</p>
               </div>
-            </div>
-          </article>
+              <div class="social-card-body">
+                <div class="youtube-subscribe">
+                  <div class="g-ytsubscribe" data-channel="@LyrionAtelier" data-layout="default" data-count="default" data-theme="dark"></div>
+                </div>
+                <div class="youtube-links">
+                  <a class="youtube-channel-link" href="https://www.youtube.com/@LyrionAtelier" target="_blank" rel="noopener noreferrer">@LyrionAtelier</a>
+                  <a class="youtube-cta" href="https://www.youtube.com/@LyrionAtelier" target="_blank" rel="noopener noreferrer">Visit YouTube Channel →</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+        <div class="footer-links">
+          <a href="shop.html">Shop</a>
+          <a href="oracle.html">Oracle Readings</a>
+          <a href="compatibility.html">Compatibility Certificates</a>
+          <a href="codex.html">Codex</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+          <a href="refund-policy.html">Refund Policy</a>
         </div>
-      </section>
-      <div class="footer-links">
-        <a href="shop.html">Shop</a>
-        <a href="oracle.html">Oracle Readings</a>
-        <a href="compatibility.html">Compatibility Certificates</a>
-        <a href="codex.html">Codex</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-service.html">Terms of Service</a>
-        <a href="refund-policy.html">Refund Policy</a>
-      </div>
-      <p>&copy; 2024 Lyrion Atelier. All rights reserved.</p>
-    </div>`;
+        <p>&copy; 2024 Lyrion Atelier. All rights reserved.</p>
+      </div>`;
+  }
   return footer;
 }
 

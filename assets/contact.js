@@ -87,8 +87,6 @@ function animateEntrances() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const section = document.querySelector('.contact-form-section');
-  if (section) section.style.setProperty('display', 'block', 'important');
   if (typeof updateCartCount === 'function') {
     try { updateCartCount(); } catch (err) { console.error(err); }
   }
