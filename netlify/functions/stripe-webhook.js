@@ -143,13 +143,18 @@ exports.handler = async (event) => {
           html: buildCustomerHtml(session),
         });
       }
+    } catch (err) {
+      console.error('Failed to send emails:', err);
+      return { statusCode: 500, body: 'Email error' };
+    }
 
+    try {
       await stripe.checkout.sessions.update(sessionId, {
         metadata: { ...(session.metadata || {}), email_sent: 'true' },
       });
     } catch (err) {
-      console.error('Failed to send emails:', err);
-      return { statusCode: 500, body: 'Email error' };
+      console.error('Failed to update session metadata:', { sessionId, error: err });
+      return { statusCode: 500, body: 'Metadata update error' };
     }
   }
 
