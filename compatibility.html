@@ -10,23 +10,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar">
- <div class="nav-container">
- <a href="index.html" class="brand">
- <img src="images/logo.png" alt="Lyrion Atelier" class="brand-logo" onerror="this.style.display='none'">
- <span class="brand-name">LYRION ATELIER</span>
- </a>
- <div class="nav-links">
- <a href="index.html">Home</a>
- <a href="shop.html">Shop</a>
- <a href="oracle.html">Oracle</a>
- <a href="compatibility.html" class="active">Compatibility</a>
- <a href="codex.html">Codex</a>
- <a href="contact.html">Contact</a>
- </div>
- </div>
-</nav>
+<a class="skip-to-content" href="#main-content">Skip to main content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html">
+      <img class="brand-logo" src="images/logo/GOD.PNG" alt="Lyrīon Atelier logo">
+      <span class="brand-name">Lyrīon Atelier</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="oracle.html">Oracle</a></li>
+        <li><a href="compatibility.html">Compatibility</a></li>
+        <li><a href="codex.html">Codex</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="cart-icon" href="cart.html" aria-label="Shopping cart">
+        🛒 <span class="cart-count">0</span>
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
 
+<main id="main-content">
 <section class="hero-compatibility">
  <div class="hero-container">
  <h1 class="hero-main-title">Cosmic Compatibility Certificates</h1>
@@ -208,6 +218,7 @@ Generate Preview
 </div> <!-- /.how-container -->
 </div> <!-- /.container -->
 </section>
+</main>
 
 <footer class="footer">
 <div class="footer-content">
