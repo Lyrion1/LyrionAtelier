@@ -832,20 +832,22 @@ main > .section:first-of-type {
   border: 2px solid rgba(212, 175, 55, 0.3);
   border-radius: 12px;
   overflow: hidden;
-  height: 500px;
+  min-height: 450px;
+  height: auto;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .oracle-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(212, 175, 55, 0.6);
+  transform: translateY(-8px);
+  border-color: #d4af37;
+  box-shadow: 0 15px 50px rgba(212, 175, 55, 0.4);
 }
 
 .oracle-card-image {
   width: 100%;
-  height: 280px;
+  height: 250px;
   object-fit: cover;
   object-position: center;
   display: block;
@@ -863,7 +865,7 @@ main > .section:first-of-type {
 }
 
 .oracle-card-content {
-  padding: 24px 20px;
+  padding: 25px 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -873,7 +875,7 @@ main > .section:first-of-type {
 .oracle-card-title {
   font-size: 1.4rem;
   color: #d4af37;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -883,15 +885,16 @@ main > .section:first-of-type {
   font-size: 2rem;
   color: #d4af37;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .oracle-card-description {
-  font-size: 0.95rem;
-  color: #ffffff;
-  line-height: 1.6;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
   margin-bottom: 20px;
-  opacity: 0.9;
+  flex: 1;
+  min-height: 80px;
 }
 
 .oracle-card-description ul {
@@ -901,27 +904,29 @@ main > .section:first-of-type {
 }
 
 .oracle-card-description li {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   padding-left: 0;
+  line-height: 1.5;
 }
 
 .oracle-card-button {
-  background: #d4af37;
-  color: #0a0820;
+  background: transparent;
+  border: 2px solid #d4af37;
+  color: #d4af37;
   padding: 12px 24px;
-  border: none;
   border-radius: 8px;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
   text-align: center;
   display: block;
   width: 100%;
 }
 
 .oracle-card-button:hover {
-  background: #f0c659;
+  background: #d4af37;
+  color: #0f0c29;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -4553,7 +4558,109 @@ body {
   gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
-  align-items: start;
+  align-items: stretch;
+}
+
+.oracle-readings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  align-items: stretch;
+  max-width: 1200px;
+  margin: 60px auto;
+}
+
+.subscription-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  align-items: stretch;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.subscription-card {
+  background: rgba(10, 8, 32, 0.8);
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  padding: 30px 25px;
+  min-height: 280px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  max-height: none;
+}
+
+.subscription-card:hover {
+  transform: translateY(-5px);
+  border-color: #d4af37;
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.4);
+}
+
+/* Different border colors for tiers */
+.subscription-card.free {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.subscription-card.most-loved {
+  border: 3px solid #d4af37;
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.subscription-card.premium {
+  border: 3px solid #9b59b6;
+  background: rgba(155, 89, 182, 0.05);
+}
+
+.subscription-card .reading-title {
+  font-size: 1.5rem;
+  color: #d4af37;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.subscription-card .reading-price {
+  font-size: 2.5rem;
+  color: #d4af37;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.subscription-card .reading-description {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  flex: 1;
+  min-height: 80px;
+  display: block;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
+  overflow: visible;
+  text-overflow: initial;
+}
+
+.subscription-button {
+  background: #d4af37;
+  color: #0f0c29;
+  padding: 14px 30px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.subscription-button:hover {
+  background: #f0c659;
+  transform: translateY(-2px);
 }
 
 .reading-card {
@@ -5025,10 +5132,24 @@ body {
   .readings-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .oracle-readings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .subscription-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
   .readings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .oracle-readings-grid {
     grid-template-columns: 1fr;
   }
   
