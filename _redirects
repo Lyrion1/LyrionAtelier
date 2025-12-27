@@ -1,6 +1,10 @@
 # Netlify Redirects and Rewrites
 # This file enables clean URLs and SPA-like routing
 
+# API and Functions - must be first
+/.netlify/functions/* /.netlify/functions/:splat 200
+/api/*               /.netlify/functions/:splat 200
+
 # Clean URLs - Remove .html extension
 /shop               /shop.html            200
 /cart               /cart.html            200
