@@ -4,6 +4,7 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Order Confirmed - Lyrīon Atelier</title>
+ <link rel="stylesheet" href="css/style.css">
  <style>
  * {
  margin: 0;
@@ -11,18 +12,30 @@
  box-sizing: border-box;
  }
 
- body {
+body {
  font-family: Georgia, serif;
  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
  min-height: 100vh;
- display: flex;
- align-items: center;
- justify-content: center;
  color: #ffffff;
  padding: 20px;
  position: relative;
  overflow: hidden;
- }
+}
+
+body.success-page {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+body.success-page #main-content {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ min-height: 100vh;
+ width: 100%;
+}
 
  /* Animated stars background */
  .stars {
@@ -174,7 +187,7 @@
  }
  </style>
 </head>
-<body>
+<body class="success-page">
  <!-- Animated stars -->
  <div class="stars" id="stars"></div>
 
@@ -212,6 +225,7 @@
  </a>
  </div>
 
+ <script src="js/main.js" defer></script>
  <script>
  // Create animated stars
  const starsContainer = document.getElementById('stars');
