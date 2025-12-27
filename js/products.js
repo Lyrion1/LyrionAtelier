@@ -594,7 +594,7 @@ const products = [
     price: 50,
     category: "oracle",
     zodiac: "oracle",
-    image: "images/oracle/life-path-reading-cover.webp",
+    image: "oracle-images/life-path-reading.jpg",
     description: "Identify your current chapter and its lessons.",
     sizes: ["Standard"]
   },
@@ -1035,10 +1035,10 @@ function displayOracleReadings() {
     },
     {
       key: 'life-path',
-      name: 'Life Path Reading - Oracle Reading',
-      price: 50.00,
-      description: 'Identify your current chapter and its lessons',
-      image: 'images/oracle/life-path-reading-cover.webp'
+    name: 'Life Path Reading - Oracle Reading',
+    price: 50.00,
+    description: 'Identify your current chapter and its lessons',
+    image: 'oracle-images/life-path-reading.jpg'
     },
     {
       key: 'relationship',
