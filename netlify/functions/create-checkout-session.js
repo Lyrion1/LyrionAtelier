@@ -31,8 +31,8 @@ exports.handler = async (event) => {
     }
   })();
   const origin = event.headers?.origin || originFromReferer || process.env.URL || '';
-  const successUrl = parsedBody.successUrl || `${origin}/success.html`;
-  const cancelUrl = parsedBody.cancelUrl || referer || `${origin}/cart.html`;
+  const successUrl = parsedBody.successUrl || `${origin}/success`;
+  const cancelUrl = parsedBody.cancelUrl || referer || `${origin}/cart`;
   const lineItemsInput = Array.isArray(parsedBody.lineItems) ? parsedBody.lineItems : null;
   const productType = parsedBody.productType || (lineItemsInput ? 'merchandise' : 'oracle_reading');
   const productName = parsedBody.productName;

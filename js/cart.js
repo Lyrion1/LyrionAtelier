@@ -230,7 +230,7 @@ function proceedToCheckout() {
     showToast('Your cart is empty!', 'error');
     return;
   }
-  window.location.href = 'checkout.html';
+  window.location.href = '/checkout';
 }
 
 /**

@@ -12,7 +12,7 @@
   
   <!-- Shop Page -->
   <url>
-    <loc>https://lyrionatelier.com/shop.html</loc>
+    <loc>https://lyrionatelier.com/shop</loc>
     <lastmod>2024-12-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -20,7 +20,7 @@
   
   <!-- Oracle Readings -->
   <url>
-    <loc>https://lyrionatelier.com/oracle.html</loc>
+    <loc>https://lyrionatelier.com/oracle</loc>
     <lastmod>2024-12-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -28,7 +28,7 @@
   
   <!-- Codex -->
   <url>
-    <loc>https://lyrionatelier.com/codex.html</loc>
+    <loc>https://lyrionatelier.com/codex</loc>
     <lastmod>2024-12-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -36,7 +36,7 @@
   
   <!-- Contact -->
   <url>
-    <loc>https://lyrionatelier.com/contact.html</loc>
+    <loc>https://lyrionatelier.com/contact</loc>
     <lastmod>2024-12-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -44,21 +44,21 @@
   
   <!-- Product Categories -->
   <url>
-    <loc>https://lyrionatelier.com/shop.html?category=tshirt</loc>
+    <loc>https://lyrionatelier.com/shop?category=tshirt</loc>
     <lastmod>2024-12-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://lyrionatelier.com/shop.html?category=hoodie</loc>
+    <loc>https://lyrionatelier.com/shop?category=hoodie</loc>
     <lastmod>2024-12-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://lyrionatelier.com/shop.html?category=sweatshirt</loc>
+    <loc>https://lyrionatelier.com/shop?category=sweatshirt</loc>
     <lastmod>2024-12-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -66,14 +66,14 @@
   
   <!-- Individual Products (add more as needed) -->
   <url>
-    <loc>https://lyrionatelier.com/product.html?id=1</loc>
+    <loc>https://lyrionatelier.com/product?id=1</loc>
     <lastmod>2024-12-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://lyrionatelier.com/product.html?id=2</loc>
+    <loc>https://lyrionatelier.com/product?id=2</loc>
     <lastmod>2024-12-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>

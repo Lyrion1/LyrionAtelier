@@ -31,8 +31,8 @@ const lineItems = window.buildLineItems(); // implement or replace
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         lineItems,
-        successUrl: window.location.origin + '/success.html',
-        cancelUrl: window.location.origin + '/cart.html'
+        successUrl: window.location.origin + '/success',
+        cancelUrl: window.location.origin + '/cart'
       })
     });
   } catch (fetchErr) {

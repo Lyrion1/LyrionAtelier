@@ -121,11 +121,11 @@ test.describe('homepage featured products', () => {
     const viewLink = cosmicCard.getByRole('link', { name: 'View' });
 
     await Promise.all([
-      page.waitForURL(/product\.html.*cosmic-crewneck-pisces/),
+      page.waitForURL(/\/shop\/cosmic-crewneck-pisces/),
       viewLink.click()
     ]);
 
-    await expect(page).toHaveURL(/product\.html.*cosmic-crewneck-pisces/);
+    await expect(page).toHaveURL(/\/shop\/cosmic-crewneck-pisces/);
     await expect(page.locator('#product-name')).toContainText('Cosmic Crewneck - Pisces');
     await expect(page.locator('#size-select')).toBeVisible();
   });
@@ -136,11 +136,11 @@ test.describe('homepage featured products', () => {
     const viewLink = geminiCard.getByRole('link', { name: 'View' });
 
     await Promise.all([
-      page.waitForURL(/product\.html.*gemini-starlight-tee/),
+      page.waitForURL(/\/shop\/gemini-starlight-tee/),
       viewLink.click()
     ]);
 
-    await expect(page).toHaveURL(/product\.html.*gemini-starlight-tee/);
+    await expect(page).toHaveURL(/\/shop\/gemini-starlight-tee/);
     await expect(page.locator('#product-name')).toContainText('Gemini Starlight Tee');
     await expect(page.locator('#product-gallery img')).toHaveCount(4);
   });

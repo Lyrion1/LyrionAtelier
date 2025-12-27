@@ -203,7 +203,7 @@ async function startCheckout(variant, product, selection, btnEl = $('#add-to-car
       body: JSON.stringify({
         lineItems,
         productType: 'merchandise',
-        successUrl: `${location.origin}/success.html`,
+        successUrl: `${location.origin}/success`,
         cancelUrl: `${location.origin}/shop`
       })
     });

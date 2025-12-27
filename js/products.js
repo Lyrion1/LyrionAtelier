@@ -729,7 +729,7 @@ function displayProducts(productsToShow = products) {
       // Navigate to product page on card click (except button)
       productCard.addEventListener('click', function(e) {
         if (!e.target.classList.contains('btn')) {
-          window.location.href = `product.html?id=${product.id}`;
+          window.location.href = `/product?id=${product.id}`;
         }
       });
       
@@ -998,7 +998,7 @@ function addOracleReadingToCart(readingKey) {
     return;
   }
   addToCart(product.id, 1, 'Standard', product);
-  window.location.href = 'checkout.html';
+  window.location.href = '/checkout';
 }
 
 /**
@@ -1080,7 +1080,7 @@ function displayOracleReadings() {
       </div>
       <div class="oracle-price">$${reading.price.toFixed(2)}</div>
       <div class="button-row tight">
-        <a class="btn btn-outline" href="contact.html">Ask the oracle</a>
+         <a class="btn btn-outline" href="/contact">Ask the oracle</a>
         <button class="btn btn-primary book-reading-btn" data-product="${reading.key}" aria-label="Book ${reading.name}">Book</button>
       </div>
     `;
@@ -1094,13 +1094,17 @@ function displayOracleReadings() {
  */
 document.addEventListener('DOMContentLoaded', function() {
   // Load filters from URL if on shop page
-  if (window.location.pathname.includes('shop.html')) {
+  if (
+    window.location.pathname === '/shop' ||
+    window.location.pathname === '/shop/' ||
+    window.location.pathname.startsWith('/shop/')
+  ) {
     loadFiltersFromURL();
   }
   
   // Check which page we're on and initialize accordingly
   if (document.getElementById('product-grid')) {
-    if (window.location.pathname.includes('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/')) {
+    if (window.location.pathname === '/' || window.location.pathname === '/index.html' || window.location.pathname.endsWith('/')) {
       displayFeaturedProducts();
     } else {
       displayProducts();

@@ -3,9 +3,7 @@
 
 User-agent: *
 Allow: /
-Disallow: /checkout.html
 Disallow: /checkout
-Disallow: /cart.html
 Disallow: /cart
 
 # Sitemap location
