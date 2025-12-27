@@ -84,7 +84,8 @@ function renderFeaturedProducts() {
     }
     const normalized = seeds.filter(Boolean).map((src) => String(src).replace('_thumb', ''));
     if (!normalized.length) normalized.push('/assets/catalog/placeholder.webp');
-    while (normalized.length < 4) normalized.push(normalized[normalized.length % normalized.length] || normalized[0]);
+    const seed = normalized[0] || '/assets/catalog/placeholder.webp';
+    while (normalized.length < 4) normalized.push(seed);
     return normalized.slice(0, 4);
   };
 

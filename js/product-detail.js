@@ -122,9 +122,9 @@ function renderImages(images = [], productTitle = 'Product') {
   const normalized = Array.isArray(images) ? images.filter(Boolean).map(fullRes) : [];
   const base = normalized.length ? normalized : [FALLBACK_IMAGE];
   const sources = [...base];
+  const seed = sources[0] || FALLBACK_IMAGE;
   while (sources.length < 4) {
-    const next = base[sources.length % base.length] || FALLBACK_IMAGE;
-    sources.push(fullRes(next));
+    sources.push(seed);
   }
   sources.forEach((src, idx) => {
     if (!src) return;

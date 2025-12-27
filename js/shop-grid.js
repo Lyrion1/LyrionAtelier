@@ -60,7 +60,8 @@ function renderCard(product) {
     if (mapped) seeds.push(mapped);
     const normalized = seeds.filter(Boolean);
     if (!normalized.length) normalized.push(FALLBACK);
-    while (normalized.length < 4) normalized.push(normalized[normalized.length % normalized.length] || FALLBACK);
+    const seed = normalized[0] || FALLBACK;
+    while (normalized.length < 4) normalized.push(seed);
     return normalized.slice(0, 4);
   })();
 
