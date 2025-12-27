@@ -439,8 +439,6 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     if (soldOut) {
       buyBtn.classList.add('is-disabled');
       buyBtn.setAttribute('aria-disabled', 'true');
-      buyBtn.href = '#';
-      buyBtn.addEventListener('click', (e) => e.preventDefault());
     }
 
     actions.append(buyBtn);
