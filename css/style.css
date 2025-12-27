@@ -2220,7 +2220,7 @@ PREMIUM TIER CARDS ($350)
 
 .premium-events-grid {
   display: grid;
-  gap: 40px;
+  gap: 28px;
 }
 
 .premium-card {
@@ -2240,7 +2240,7 @@ PREMIUM TIER CARDS ($350)
 
 .event-banner {
   width: 100%;
-  height: 300px;
+  height: 230px;
   position: relative;
   overflow: hidden;
 }
@@ -2260,6 +2260,7 @@ PREMIUM TIER CARDS ($350)
   position: absolute;
   top: 20px;
   right: 20px;
+  pointer-events: none;
 }
 
 .premium-label {
@@ -2275,13 +2276,13 @@ PREMIUM TIER CARDS ($350)
 }
 
 .premium-card .event-content {
-  padding: 32px;
+  padding: 24px;
 }
 
 .event-header {
   display: flex;
-  gap: 24px;
-  margin-bottom: 32px;
+  gap: 16px;
+  margin-bottom: 20px;
   align-items: flex-start;
 }
 
@@ -2329,9 +2330,9 @@ PREMIUM TIER CARDS ($350)
 .event-details {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
-  margin-bottom: 24px;
-  padding: 20px;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding: 14px;
   background: rgba(15, 23, 42, 0.5);
   border-radius: 12px;
 }
@@ -2352,16 +2353,23 @@ PREMIUM TIER CARDS ($350)
   font-weight: 500;
 }
 
+.event-cta,
+.event-btn {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+}
+
 .event-description {
   color: rgba(255, 255, 255, 0.85);
   font-size: 16px;
   line-height: 1.7;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
 }
 
 .premium-cta {
   display: inline-block;
-  padding: 16px 40px;
+  padding: 14px 32px;
   background: linear-gradient(135deg, #fbbf24, #f59e0b);
   color: #0f172a;
   font-size: 16px;
@@ -2384,7 +2392,7 @@ FEATURED TIER CARDS ($200)
 .featured-events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 32px;
+  gap: 24px;
 }
 
 .featured-card {
@@ -2403,7 +2411,7 @@ FEATURED TIER CARDS ($200)
 
 .event-image {
   width: 100%;
-  height: 200px;
+  height: 170px;
   position: relative;
   overflow: hidden;
 }
@@ -2423,6 +2431,7 @@ FEATURED TIER CARDS ($200)
   position: absolute;
   top: 16px;
   right: 16px;
+  pointer-events: none;
 }
 
 .featured-label {
@@ -2527,7 +2536,7 @@ STANDARD TIER CARDS ($75)
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 32px;
-  grid-auto-rows: minmax(520px, auto);
+  grid-auto-rows: minmax(440px, auto);
 }
 
 .standard-card {
@@ -2550,7 +2559,7 @@ STANDARD TIER CARDS ($75)
 
 .standard-banner {
   position: relative;
-  height: 220px;
+  height: 180px;
   overflow: hidden;
   background: linear-gradient(135deg, rgba(129, 140, 248, 0.2), rgba(15, 23, 42, 0.88));
 }
@@ -2581,6 +2590,7 @@ STANDARD TIER CARDS ($75)
   font-weight: 600;
   font-size: 13px;
   letter-spacing: 0.3px;
+  pointer-events: none;
 }
 
 .standard-type-chip {
@@ -2596,6 +2606,7 @@ STANDARD TIER CARDS ($75)
   font-size: 12px;
   letter-spacing: 0.4px;
   text-transform: uppercase;
+  pointer-events: none;
 }
 
 .standard-type-chip.soft {
@@ -2611,10 +2622,10 @@ STANDARD TIER CARDS ($75)
 }
 
 .standard-card-body {
-  padding: 22px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   flex: 1;
 }
 
@@ -2688,7 +2699,7 @@ STANDARD TIER CARDS ($75)
   color: rgba(255, 255, 255, 0.75);
   font-size: 14px;
   line-height: 1.6;
-  margin: 12px 0 20px 0;
+  margin: 10px 0 16px 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -2702,7 +2713,7 @@ STANDARD TIER CARDS ($75)
 
 .standard-cta {
   display: inline-block;
-  padding: 10px 24px;
+  padding: 9px 22px;
   background: rgba(99, 102, 241, 0.15);
   border: 1px solid rgba(99, 102, 241, 0.4);
   color: #818cf8;
@@ -2717,7 +2728,7 @@ STANDARD TIER CARDS ($75)
   background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(139, 92, 246, 0.35));
   border-color: rgba(139, 92, 246, 0.6);
   color: #f3f4ff;
-  padding: 12px 26px;
+  padding: 11px 22px;
   font-weight: 700;
   box-shadow: 0 10px 28px rgba(99, 102, 241, 0.25);
 }
@@ -2824,7 +2835,7 @@ RESPONSIVE DESIGN
   }
 
   .event-banner {
-    height: 250px;
+    height: 200px;
   }
 }
 

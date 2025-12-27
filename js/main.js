@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Load sample events on Codex page
   loadEvents();
+  hydrateCodexCards();
   
   // Initialize scroll-triggered fade-in animations
   initScrollAnimations();
@@ -489,6 +490,22 @@ function createLoadingOverlay() {
   return overlay;
 }
 
+function formatListingFeeValue(value) {
+  if (!value) return 'Free';
+  const normalized = value.toString().trim().replace(/^Listing Fee:\s*/i, '');
+  if (/^free$/i.test(normalized) || normalized === '$0' || normalized === '0') return 'Free';
+  return normalized.startsWith('$') ? normalized : `$${normalized}`;
+}
+
+function resolveEventUrl(event) {
+  const directUrl = event?.url;
+  if (directUrl) return directUrl;
+  const title = event?.title || 'Lyrion Atelier Event';
+  const host = event?.host || 'Lyrion Atelier';
+  const query = encodeURIComponent(`${title} ${host} event`);
+  return `https://www.google.com/search?q=${query}`;
+}
+
 // Load and display sample events
 function loadEvents() {
   const eventsGrid = document.getElementById('eventsGrid');
@@ -498,7 +515,11 @@ function loadEvents() {
     return;
   }
 
-  const eventsHTML = sampleEvents.map(event => `
+  const eventsHTML = sampleEvents.map(event => {
+    const listingFee = formatListingFeeValue(event.listingFee || event.price);
+    const eventUrl = resolveEventUrl(event);
+    const ctaLabel = event.ctaLabel || 'Learn More';
+    return `
     <div class="event-card ${event.featured ? 'featured-event' : ''}">
       ${event.featured ? '<span class="featured-badge">Featured</span>' : ''}
       <div class="event-date">
@@ -512,15 +533,47 @@ function loadEvents() {
         <p class="event-details">
           📍 ${event.location}<br>
           🕐 ${event.time}<br>
-          💰 ${event.price}
+          💰 Listing Fee: ${listingFee}
         </p>
         <p class="event-description">${event.description}</p>
-        <a href="${event.ticketUrl}" class="event-btn">Learn More</a>
+        <a href="${eventUrl}" class="event-btn" target="_blank" rel="noopener noreferrer">${ctaLabel}</a>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   eventsGrid.innerHTML = eventsHTML;
+}
+
+function hydrateCodexCards() {
+  if (typeof sampleEvents === 'undefined') return;
+  const eventsById = new Map(sampleEvents.map(event => [String(event.id), event]));
+  const codexCards = document.querySelectorAll('.events-section .event-card[data-event-id]');
+  if (!codexCards.length) return;
+
+  codexCards.forEach(card => {
+    const event = eventsById.get(card.dataset.eventId);
+    if (!event) return;
+
+    const pricePill = card.querySelector('.price-pill');
+    if (pricePill) {
+      pricePill.textContent = `Listing Fee: ${formatListingFeeValue(event.listingFee || event.price)}`;
+    }
+
+    const cta = card.querySelector('.event-cta, .event-btn');
+    if (cta) {
+      const url = resolveEventUrl(event);
+      cta.href = url;
+      cta.target = '_blank';
+      cta.rel = 'noopener noreferrer';
+      cta.style.pointerEvents = 'auto';
+      cta.style.position = 'relative';
+      cta.style.zIndex = '2';
+      if (event.ctaLabel) {
+        cta.textContent = event.ctaLabel;
+      }
+    }
+  });
 }
 
 /**
