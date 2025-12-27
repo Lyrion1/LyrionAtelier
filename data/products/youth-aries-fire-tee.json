@@ -12,7 +12,8 @@
   "meta": {
     "category": "Youth",
     "collection": "Youth Spark",
-    "zodiac": "Aries"
+    "zodiac": "Aries",
+    "soldOut": true
   },
   "edition": "core",
   "palette": "Lunar Sand",
@@ -168,7 +169,7 @@
   "seoDescription": "Empower young Aries with celestial fire symbolism. Premium unisex youth tee for fearless trailblazers born under the first fire sign.",
   "launchDate": "2025-01-15",
   "isBestseller": true,
-  "showOnHomepage": true,
+  "showOnHomepage": false,
   "copy": {
     "notes": "A celestial flame awakens. Born under the first fire sign, young Aries carry the spark of creation itself—bold, fearless, and unstoppable. This tee channels raw cosmic courage through sacred fire symbolism, empowering the next generation of trailblazers to burn bright and lead fearlessly into the unknown.",
     "materials": "Premium cotton blend for all-day comfort",

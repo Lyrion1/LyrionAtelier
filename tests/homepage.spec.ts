@@ -74,15 +74,15 @@ test.describe('homepage featured products', () => {
     );
   });
 
-  test('shows Aries Fire Tee (Youth) in featured grid', async ({ page }) => {
+  test('shows Youth Aries Heavy Blend Hoodie in featured grid', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
-    const featuredCard = page.locator('#featured-grid .product-card', { hasText: 'Aries Fire Tee (Youth)' });
+    const featuredCard = page.locator('#featured-grid .product-card', { hasText: 'Youth Aries Heavy Blend Hoodie' });
     await expect(featuredCard).toBeVisible();
-    await expect(featuredCard.locator('.price')).toContainText('$34.99');
+    await expect(featuredCard.locator('.price')).toContainText('$42.99');
 
     const images = featuredCard.locator('img');
     await expect(images).toHaveCount(1);
-    await expect(images.first()).toHaveAttribute('src', /youth-aries-fire-tee/i);
+    await expect(images.first()).toHaveAttribute('src', /youth-aries-heavy-blend-hoodie\/youth-aries-hoodie-lifestyle\.jpg/i);
   });
 
   test('surfaces Leo Zodiac Hoodie in featured/bestseller grid', async ({ page }) => {

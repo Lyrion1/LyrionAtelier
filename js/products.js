@@ -39,6 +39,54 @@ const products = [
     description: "Empower young Aries with celestial fire symbolism. Premium unisex tee for fearless trailblazers.",
     sizes: ["XS", "S", "M", "L", "XL"],
     isBestseller: true,
+    showOnHomepage: false
+  },
+  {
+    id: "youth-aries-heavy-blend-hoodie",
+    slug: "youth-aries-heavy-blend-hoodie",
+    name: "Youth Aries Heavy Blend Hoodie",
+    price: 42.99,
+    category: "zodiac-hero",
+    zodiac: "aries",
+    element: "fire",
+    gender: "youth",
+    collection: "Zodiac Hero",
+    image: "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-lifestyle.jpg",
+    images: [
+      "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-lifestyle.jpg",
+      "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-girl-front.jpg",
+      "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-flat-ghost.jpg",
+      "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-ghost.jpg",
+      "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-girl-back.jpg"
+    ],
+    mainImage: "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-lifestyle.jpg",
+    description: "The first flame, sized for young warriors. Born under Mars' fearless command, Aries children move through the world like fire incarnate—bold, unapologetic, impossible to ignore. This premium heavy blend hoodie carries the sacred Ram insignia, designed for the next generation of pioneers.",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    variants: [
+      { size: "XS", printfulVariantId: "694ed9706ecda1", price: 42.99, currency: "USD", inStock: true, sku: "LYR-ARIES-YOUTH-HOODIE-XS" },
+      { size: "S", printfulVariantId: "694ed9706ece08", price: 42.99, currency: "USD", inStock: true, sku: "LYR-ARIES-YOUTH-HOODIE-S" },
+      { size: "M", printfulVariantId: "694ed9706ece51", price: 42.99, currency: "USD", inStock: true, sku: "LYR-ARIES-YOUTH-HOODIE-M" },
+      { size: "L", printfulVariantId: "694ed9706ecea1", price: 42.99, currency: "USD", inStock: true, sku: "LYR-ARIES-YOUTH-HOODIE-L" },
+      { size: "XL", printfulVariantId: "694ed9706ecee2", price: 42.99, currency: "USD", inStock: true, sku: "LYR-ARIES-YOUTH-HOODIE-XL" }
+    ],
+    printfulProduct: "Youth Heavy Blend Hoodie",
+    features: [
+      "Premium heavy blend fleece construction",
+      "Aries Ram insignia embroidered or printed on front",
+      "Warm and durable for active young warriors",
+      "Soft brushed interior for all-day comfort",
+      "Ribbed cuffs and waistband for secure fit",
+      "Youth sizes XS-XL (ages 5-14 approximately)",
+      "Built for pioneers, leaders, and first movers",
+      "Perfect for bold kids who blaze their own trails"
+    ],
+    careInstructions: "Machine wash cold, tumble dry low. Their fire burns eternal.",
+    tags: ["aries", "fire-sign", "zodiac", "youth", "hoodie", "kids", "cardinal", "mars-ruled", "warrior", "bold"],
+    chartResonance: ["aries-sun", "aries-moon", "aries-rising", "mars-dominant", "1st-house-emphasis", "fire-dominant"],
+    seoTitle: "Youth Aries Heavy Blend Hoodie | Fire Sign Kids Apparel | Lyrīon Atelier",
+    seoDescription: "Aries hoodie for young warriors. Premium heavy blend with Ram insignia. Bold design for kids who lead from the front. Ages 5-14.",
+    launchDate: "2025-01-15",
+    isBestseller: false,
     showOnHomepage: true
   },
   {
