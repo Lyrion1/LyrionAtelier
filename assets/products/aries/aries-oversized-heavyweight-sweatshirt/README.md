@@ -1,0 +1,5 @@
+- aries-oversized-sweatshirt-01-hero.jpg
+- aries-oversized-sweatshirt-02-front.jpg
+- aries-oversized-sweatshirt-03-back.jpg
+- aries-oversized-sweatshirt-04-detail.jpg
+- aries-oversized-sweatshirt-05-lifestyle.jpg
