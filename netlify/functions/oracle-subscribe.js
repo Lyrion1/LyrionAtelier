@@ -44,8 +44,8 @@ exports.handler = async (event) => {
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
       payment_method_types: ['card'],
-      success_url: `${siteUrl}/oracle.html?subscription=success`,
-      cancel_url: `${siteUrl}/oracle.html?subscription=cancelled`,
+      success_url: `${siteUrl}/oracle?subscription=success`,
+      cancel_url: `${siteUrl}/oracle?subscription=cancelled`,
       line_items: [{ price: priceId, quantity: 1 }],
       customer_email: email,
       metadata: {

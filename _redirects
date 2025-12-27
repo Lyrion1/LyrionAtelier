@@ -7,14 +7,35 @@
 /checkout           /checkout.html        200
 /contact            /contact.html         200
 /contact-success    /contact-success.html 200
+/compatibility      /compatibility.html   200
 /oracle             /oracle.html          200
 /oracle/free-reading /oracle.html         200
 /codex              /codex.html           200
+/success            /success.html         200
+/privacy-policy     /privacy-policy.html  200
+/terms-of-service   /terms-of-service.html 200
+/refund-policy      /refund-policy.html   200
 /admin/printful-status /admin/printful-status.html 200
 /product            /product.html         200
 /shop/:slug         /product.html?slug=:slug 200
 /shop/:slug.html    /product.html?slug=:slug 200
 /shop/product.html  /product.html 200
+
+# Redirect old .html URLs to extensionless paths
+/shop.html           /shop                 301
+/oracle.html         /oracle               301
+/codex.html          /codex                301
+/compatibility.html  /compatibility        301
+/contact.html        /contact              301
+/cart.html           /cart                 301
+/success.html        /success              301
+/privacy-policy.html /privacy-policy       301
+/terms-of-service.html /terms-of-service   301
+/refund-policy.html  /refund-policy        301
+/contact-success.html /contact-success     301
+
+# Catch-all for any other .html pages
+/*.html             /:splat               301
 
 # Redirect old URLs (if migrating from another platform)
 # /old-shop/*         /shop/:splat          301

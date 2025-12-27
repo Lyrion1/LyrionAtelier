@@ -137,7 +137,7 @@ async function getOracleReading() {
 
 function bookFullReading() {
  const recommended = window.currentReading?.recommendedReading || '';
- window.location.href = recommended ? 'oracle.html#' + recommended : 'oracle.html';
+window.location.href = recommended ? '/oracle#' + recommended : '/oracle';
 }
 
 function shareReading() {

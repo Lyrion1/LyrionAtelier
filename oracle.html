@@ -19,22 +19,22 @@
   <a class="skip-to-content" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="index.html">
+      <a class="logo" href="/">
         <img class="brand-logo" src="images/logo/GOD.PNG" alt="Lyrīon Atelier logo">
         <span class="brand-name">Lyrīon Atelier</span>
       </a>
       <nav aria-label="Main navigation">
         <ul class="nav">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="oracle.html">Oracle</a></li>
-          <li><a href="compatibility.html">Compatibility</a></li>
-          <li><a href="codex.html">Codex</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/shop">Shop</a></li>
+          <li><a href="/oracle">Oracle</a></li>
+          <li><a href="/compatibility">Compatibility</a></li>
+          <li><a href="/codex">Codex</a></li>
+          <li><a href="/contact">Contact</a></li>
         </ul>
       </nav>
       <div class="header-actions">
-        <a class="cart-icon" href="cart.html" aria-label="Shopping cart">🛒 <span class="cart-count">0</span></a>
+        <a class="cart-icon" href="/cart" aria-label="Shopping cart">🛒 <span class="cart-count">0</span></a>
         <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       </div>
     </div>
@@ -521,7 +521,7 @@
           zodiac
         };
       };
-      const shopLinkFor = (slug) => (slug ? `/shop.html?highlight=${encodeURIComponent(slug)}` : '/shop.html');
+      const shopLinkFor = (slug) => (slug ? `/shop?highlight=${encodeURIComponent(slug)}` : '/shop');
       const selectRecommendations = (catalog = [], sunSign = '') => {
         const normalized = (sunSign || '').toLowerCase();
         const bySign = catalog.filter((p) => p.zodiac === normalized);
@@ -647,7 +647,7 @@
           <span class="cross-sell-badge">Perfect for Couples</span>
           <h2>Discover Your Cosmic Compatibility</h2>
           <p>Already exploring your own chart? Take it further—see how you align with your partner through our star-led Cosmic Compatibility Certificates.</p>
-          <a href="compatibility.html" class="cross-sell-btn">Explore Compatibility Certificates →</a>
+          <a href="/compatibility" class="cross-sell-btn">Explore Compatibility Certificates →</a>
         </div>
       </div>
     </section>
@@ -656,7 +656,7 @@
       <p class="light-lamp-header">Offer a light</p>
       <h2 class="light-lamp-title">Light a lantern for our interceders</h2>
       <p class="light-lamp-description">A quiet, voluntary donation that fuels the keepers who pray, divine, and hold space for wishes around the world.</p>
-      <a href="contact.html#donations" class="light-lamp-button" aria-label="Light a lamp to donate">
+      <a href="/contact#donations" class="light-lamp-button" aria-label="Light a lamp to donate">
         <span class="lamp-icon">🏮</span>
         LIGHT A LAMP
       </a>
@@ -667,13 +667,13 @@
     <div class="footer-content">
       <p>&copy; 2024 Lyrion Atelier. All rights reserved.</p>
       <div class="footer-links">
-        <a href="shop.html">Shop</a>
-        <a href="oracle.html">Oracle Readings</a>
-        <a href="compatibility.html">Compatibility Certificates</a>
-        <a href="codex.html">Codex</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-service.html">Terms of Service</a>
-        <a href="refund-policy.html">Refund Policy</a>
+        <a href="/shop">Shop</a>
+        <a href="/oracle">Oracle Readings</a>
+        <a href="/compatibility">Compatibility Certificates</a>
+        <a href="/codex">Codex</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms-of-service">Terms of Service</a>
+        <a href="/refund-policy">Refund Policy</a>
       </div>
     </div>
   </footer>

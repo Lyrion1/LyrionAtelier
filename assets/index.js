@@ -28,9 +28,9 @@ function renderFeaturedProducts() {
   };
   const detailUrl = (product) => {
     const slug = productSlug(product);
-    if (slug) return `/product.html?slug=${encodeURIComponent(slug)}`;
-    if (product?.id != null) return `/product.html?id=${encodeURIComponent(product.id)}`;
-    return '/shop.html';
+    if (slug) return `/shop/${encodeURIComponent(slug)}`;
+    if (product?.id != null) return `/product?id=${encodeURIComponent(product.id)}`;
+    return '/shop';
   };
   /**
    * Normalize a product price value from diverse product shapes.

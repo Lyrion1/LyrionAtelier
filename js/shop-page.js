@@ -331,7 +331,7 @@ import { formatPrice, currencySymbol } from './price-utils.js';
 
   const createCard = (p) => {
     const slug = p.slug || slugify(p.title || p.name || '');
-    const viewUrl = `/product.html?slug=${encodeURIComponent(slug)}`;
+    const viewUrl = `/shop/${encodeURIComponent(slug)}`;
     const variant = p.defaultVariant || pickVariant(p);
     const hasPriceData = Number.isFinite(p.price) || Number.isFinite(p.priceCents) || !!p.priceLabel;
     const basePrice = hasPriceData ? null : normalizePrice(p);

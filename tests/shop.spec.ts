@@ -128,7 +128,7 @@ test.describe('shop smoke test', () => {
       const buyButtons = firstCard.locator('.product-buy-btn');
       await expect(buyButtons).toHaveCount(1);
       await expect(buyButtons.first()).toHaveText(/view product/i);
-      await expect(buyButtons.first()).toHaveAttribute('href', /product\.html\?slug=/);
+      await expect(buyButtons.first()).toHaveAttribute('href', /^\/shop\//);
       const widths = await cards.locator('img').evaluateAll((imgs) =>
         imgs.map((img) => (img as HTMLImageElement).naturalWidth)
       );
