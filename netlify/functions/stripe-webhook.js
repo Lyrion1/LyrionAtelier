@@ -26,13 +26,6 @@ const formatAmount = (amount, currency = 'USD') => {
   }).format(value);
 };
 
-const getRawBody = (event) => {
-  if (event.isBase64Encoded) {
-    return Buffer.from(event.body || '', 'base64');
-  }
-  return event.body || '';
-};
-
 const buildAdminHtml = (session) => {
   const customerEmail = session.customer_details?.email || session.customer_email || 'Unknown';
   const amount = formatAmount(session.amount_total, session.currency || 'USD');
@@ -93,12 +86,14 @@ exports.handler = async (event) => {
     return { statusCode: 500, body: 'Server configuration error' };
   }
 
-  const signature = event.headers?.['stripe-signature'] || event.headers?.['Stripe-Signature'];
+  const signature = event.headers?.['stripe-signature'];
   if (!signature) {
     return { statusCode: 400, body: 'Invalid signature' };
   }
 
-  const rawBody = getRawBody(event);
+  const rawBody = event.isBase64Encoded
+    ? Buffer.from(event.body, "base64")
+    : Buffer.from(event.body, "utf8");
   let stripeEvent;
 
   try {
