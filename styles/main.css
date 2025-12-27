@@ -1,0 +1,103 @@
+@import url("/styles/design-system.css");
+@import url("/css/style.css");
+
+.reading-hero {
+  padding: 80px 40px;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+}
+
+.reading-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.reading-image img {
+  width: 100%;
+  border-radius: 12px;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+}
+
+.reading-details h1 {
+  font-size: 2.5rem;
+  color: #d4af37;
+  margin-bottom: 10px;
+}
+
+.reading-tagline {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.reading-price {
+  font-size: 2rem;
+  color: #d4af37;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.reading-description {
+  margin-bottom: 40px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.whats-included {
+  background: rgba(212, 175, 55, 0.1);
+  border-left: 4px solid #d4af37;
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+.whats-included h3 {
+  color: #d4af37;
+  margin-bottom: 20px;
+}
+
+.whats-included ul {
+  list-style: none;
+  padding: 0;
+}
+
+.whats-included li {
+  margin-bottom: 12px;
+  padding-left: 25px;
+  position: relative;
+}
+
+.whats-included li:before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: #d4af37;
+}
+
+.purchase-reading-button {
+  width: 100%;
+  background: #d4af37;
+  color: #0f0c29;
+  padding: 18px 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.purchase-reading-button:hover {
+  background: #f0c659;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+}
+
+@media (max-width: 900px) {
+  .reading-container {
+    grid-template-columns: 1fr;
+  }
+}

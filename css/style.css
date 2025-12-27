@@ -973,6 +973,13 @@ main > .section:first-of-type {
   color: #0f0c29;
 }
 
+.reading-card-link,
+.compatibility-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 /* ═══════════════════════════════════════════════════════════
    GRID LAYOUT
    ═══════════════════════════════════════════════════════════ */

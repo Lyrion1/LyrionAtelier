@@ -19,7 +19,7 @@ if (!stripe) {
 
 // Universal function to handle checkout for any product
 async function initiateCheckout(productData) {
-  const { name, price, type, variantId } = productData;
+  const { name, price, type, variantId, successUrl, cancelUrl, productId, readingId, certificateTier } = productData || {};
   
   console.log('Initiating checkout:', productData);
   
@@ -39,7 +39,12 @@ async function initiateCheckout(productData) {
         productName: name,
         productPrice: parseFloat(price),
         productType: type || 'oracle_reading',
-        variantId: variantId || null
+        variantId: variantId || null,
+        successUrl: successUrl || null,
+        cancelUrl: cancelUrl || null,
+        productId: productId || readingId || null,
+        readingId: readingId || null,
+        certificateTier: certificateTier || null
       })
     });
     
