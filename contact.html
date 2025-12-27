@@ -78,7 +78,7 @@
       padding: 0;
       margin: -1px;
       overflow: hidden;
-      clip: rect(0, 0, 0, 0);
+      clip-path: inset(50%);
       white-space: nowrap;
       border: 0;
     }
@@ -125,7 +125,7 @@
           <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-success.html">
             <input type="hidden" name="form-name" value="contact" />
             <p class="sr-only">
-              <label>Don’t fill this out: <input name="bot-field" /></label>
+              <label>Don’t fill this out: <input name="bot-field" tabindex="-1" /></label>
             </p>
 
             <div class="form-group">
