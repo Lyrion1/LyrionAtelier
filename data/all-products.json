@@ -1484,20 +1484,142 @@
     "showOnHomepage": false
   },
   {
-    "slug": "travel-altar-kit-rituals",
-    "title": "Travel Altar Kit (Rituals)",
-    "category": "Rituals",
-    "collection": "Lyrion Atelier Core",
-    "zodiac": "None",
-    "soldOut": true,
+    "id": "aries-oversized-heavyweight-sweatshirt",
+    "slug": "aries-oversized-heavyweight-sweatshirt",
+    "name": "Aries Oversized Heavyweight Sweatshirt",
+    "title": "Aries Oversized Heavyweight Sweatshirt",
+    "collection": "Zodiac Hero",
+    "category": "zodiac-hero",
+    "zodiac": "aries",
+    "zodiacSign": "aries",
+    "element": "fire",
+    "gender": "unisex",
+    "description": "Aries doesn’t ask for permission. It moves first, then makes the world catch up. This oversized heavyweight sweatshirt is cut for youth boys and men who lead with heat—but wear it with control. A structured drape, a warm interior, and a calm celestial finish designed to feel like armor without looking loud. Fire, refined.",
+    "mysticalCopy": "You’re not here to fit in. You’re here to ignite the standard.",
     "meta": {
-      "category": "Rituals",
-      "collection": "Lyrion Atelier Core",
-      "zodiac": "None",
-      "soldOut": true
+      "category": "Unisex",
+      "collection": "Zodiac Hero",
+      "zodiac": "Aries",
+      "soldOut": false
     },
-    "price": null,
-    "image": "/assets/placeholders/product.webp"
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "images": [
+      "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-01-hero.jpg",
+      "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-02-front.jpg",
+      "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-03-back.jpg",
+      "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-04-detail.jpg",
+      "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-05-lifestyle.jpg"
+    ],
+    "mainImage": "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-01-hero.jpg",
+    "price": 53.99,
+    "price_range": {
+      "min": 53.99,
+      "max": 57.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ]
+    },
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "694f2f2cb54069",
+        "price": 53.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-OSHW-SWEAT-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "694f2f2cb540d9",
+        "price": 53.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-OSHW-SWEAT-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "694f2f2cb54126",
+        "price": 53.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-OSHW-SWEAT-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "694f2f2cb54164",
+        "price": 53.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-OSHW-SWEAT-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "694f2f2cb541b5",
+        "price": 55.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-OSHW-SWEAT-2XL"
+      },
+      {
+        "size": "3XL",
+        "printfulVariantId": "694f2f2cb54208",
+        "price": 57.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-OSHW-SWEAT-3XL"
+      }
+    ],
+    "printfulProduct": "Oversized Heavyweight Sweatshirt",
+    "features": [
+      "Premium heavyweight fleece with structured drape",
+      "Oversized fit built for confidence and comfort",
+      "Soft brushed interior for warmth",
+      "Ribbed cuffs and hem for clean structure",
+      "Designed for youth boys and men; unisex silhouette",
+      "Street-ready, ritual-ready — Aries fire in restraint",
+      "Durable construction for everyday rotation",
+      "Celestial Aries detailing (subtle, not loud)"
+    ],
+    "careInstructions": "Machine wash cold, inside out, gentle cycle. Mild detergent. Do not bleach. Tumble dry low or lay flat to preserve shape. Cool iron inside out if needed. Do not iron directly on print.",
+    "materials": "Premium heavyweight cotton-poly fleece with structured drape",
+    "care": "Machine wash cold, inside out, gentle cycle. Mild detergent. Do not bleach. Tumble dry low or lay flat to preserve shape. Cool iron inside out if needed. Do not iron directly on print.",
+    "tags": [
+      "aries",
+      "fire-sign",
+      "zodiac",
+      "sweatshirt",
+      "oversized",
+      "heavyweight",
+      "unisex",
+      "mars-ruled",
+      "youth",
+      "menswear"
+    ],
+    "chartResonance": [
+      "aries-sun",
+      "aries-moon",
+      "aries-rising",
+      "mars-dominant",
+      "1st-house-emphasis",
+      "fire-dominant"
+    ],
+    "seoTitle": "Aries Oversized Heavyweight Sweatshirt | Fire Sign | Unisex Zodiac Apparel | Lyrīon Atelier",
+    "seoDescription": "Structured oversized heavyweight sweatshirt for Aries, Mars-ruled fire leaders—premium unisex fleece cut for youth boys and men.",
+    "launchDate": "2025-12-27",
+    "isBestseller": false,
+    "showOnHomepage": false
   },
   {
     "id": "lyrion-sun-crest-socks",
