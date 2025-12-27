@@ -1648,20 +1648,7 @@ textarea:focus {
   opacity: 0;
   transform: translateY(-6px);
   transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
-}
-
-.form-status:empty {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.form-status:empty::before {
-  content: "";
-  display: block;
-  height: 1.5px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(251, 191, 36, 0.7), rgba(251, 191, 36, 0.15), transparent);
-  opacity: 0.75;
+  overflow: hidden;
 }
 
 .form-status.is-visible {
@@ -1672,8 +1659,12 @@ textarea:focus {
   transform: translateY(0);
 }
 
-.form-status.is-visible::before {
-  display: none;
+.form-divider {
+  height: 1.5px;
+  width: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(251, 191, 36, 0.7), rgba(251, 191, 36, 0.15), transparent);
+  opacity: 0.75;
 }
 
 .form-status.status-success {
@@ -1696,6 +1687,8 @@ textarea:focus {
 }
 
 .submit-btn {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   padding: 16px;
   background: linear-gradient(135deg, rgba(251, 191, 36, 0.28), rgba(251, 191, 36, 0.14));
@@ -1708,8 +1701,6 @@ textarea:focus {
   transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
   letter-spacing: 0.02em;
   box-shadow: 0 12px 32px rgba(251, 191, 36, 0.32);
-  position: relative;
-  overflow: hidden;
 }
 
 .submit-btn:hover {
@@ -1777,14 +1768,12 @@ textarea:focus {
   .submit-btn,
   .form-status {
     transition: none !important;
+    transform: none !important;
   }
   .submit-btn::after,
   .submit-btn.is-loading::after {
     animation: none !important;
     opacity: 0 !important;
-  }
-  .form-status {
-    transform: none !important;
   }
 }
 

@@ -3,11 +3,24 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-XXXXXXXXXX');
 
-function setStatus(statusEl, type, message) {
+const FORM_SUBMIT_TIMEOUT = 10000;
+
+function setStatus(statusEl, type, message, subline) {
   if (!statusEl) return;
-  statusEl.innerHTML = message || '';
+  statusEl.textContent = '';
   statusEl.classList.remove('status-success', 'status-error', 'is-visible');
-  if (message) statusEl.classList.add('is-visible');
+  if (message) {
+    const messageEl = document.createElement('div');
+    messageEl.textContent = message;
+    statusEl.appendChild(messageEl);
+    if (subline) {
+      const sublineEl = document.createElement('div');
+      sublineEl.className = 'status-subline';
+      sublineEl.textContent = subline;
+      statusEl.appendChild(sublineEl);
+    }
+    statusEl.classList.add('is-visible');
+  }
   if (type) statusEl.classList.add(type === 'success' ? 'status-success' : 'status-error');
 }
 
@@ -67,7 +80,12 @@ async function handleSubmit(event) {
   formData.set('userAgent', navigator.userAgent);
 
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 10000);
+  let didTimeout = false;
+  let shouldReset = false;
+  const timeoutId = setTimeout(() => {
+    didTimeout = true;
+    controller.abort();
+  }, FORM_SUBMIT_TIMEOUT);
   try {
     const response = await fetch(form.getAttribute('action') || '/', {
       method: 'POST',
@@ -79,19 +97,23 @@ async function handleSubmit(event) {
     setStatus(
       statusEl,
       'success',
-      'Message sent. We’ll reply from admin@lyrionatelier.com.<div class="status-subline">Check your inbox (and spam) for our reply.</div>'
+      'Message sent. We’ll reply from admin@lyrionatelier.com.',
+      'Check your inbox (and spam) for our reply.'
     );
-    form.reset();
+    shouldReset = true;
   } catch (err) {
-    const timedOut = err.name === 'AbortError';
+    shouldReset = false;
     setStatus(
       statusEl,
       'error',
-      timedOut ? 'The request timed out. Please try again.' : 'Something cosmic went awry. Please try again.'
+      didTimeout ? 'The request timed out. Please try again.' : 'Something cosmic went awry. Please try again.'
     );
   } finally {
     clearTimeout(timeoutId);
     setButtonLoading(submitBtn, false);
+    if (shouldReset) {
+      form.reset();
+    }
   }
 }
 
