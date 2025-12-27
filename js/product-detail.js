@@ -262,7 +262,19 @@ async function hydrateProductPage() {
   if (nameEl) nameEl.textContent = title;
   if (descEl) descEl.textContent = description;
   if (pillEl) pillEl.textContent = pillText;
-  if (materialsEl) materialsEl.textContent = materials;
+  if (materialsEl) {
+    materialsEl.textContent = '';
+    const parser = new DOMParser();
+    const parsed = parser.parseFromString(String(materials || '').replace(/<br\s*\/?>/gi, '\n'), 'text/html');
+    const sanitized = parsed.body?.textContent || '';
+    const segments = sanitized.split('\n');
+    const frag = document.createDocumentFragment();
+    segments.forEach((segment, idx) => {
+      frag.appendChild(document.createTextNode(segment));
+      if (idx < segments.length - 1) frag.appendChild(document.createElement('br'));
+    });
+    materialsEl.appendChild(frag);
+  }
   if (careEl) careEl.textContent = care;
 
   const sizes = unique(
