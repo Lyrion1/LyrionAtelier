@@ -2526,89 +2526,131 @@ STANDARD TIER CARDS ($75)
 .standard-events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 24px;
+  gap: 32px;
+  grid-auto-rows: minmax(520px, auto);
 }
 
 .standard-card {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  border-radius: 12px;
-  padding: 20px;
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.78), rgba(56, 41, 96, 0.45));
+  border: 1.5px solid rgba(99, 102, 241, 0.35);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 14px 40px rgba(99, 102, 241, 0.15);
   transition: all 0.3s ease;
 }
 
 .standard-card:hover {
-  border-color: rgba(99, 102, 241, 0.5);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 42px rgba(99, 102, 241, 0.28);
 }
 
-.event-compact-header {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
-  align-items: flex-start;
-}
-
-.event-thumb {
-  width: 100%;
-  height: 160px;
-  border-radius: 10px;
+.standard-banner {
+  position: relative;
+  height: 220px;
   overflow: hidden;
-  background: rgba(99, 102, 241, 0.08);
-  border: 1px solid rgba(99, 102, 241, 0.15);
-  margin: 0 0 14px 0;
+  background: linear-gradient(135deg, rgba(129, 140, 248, 0.2), rgba(15, 23, 42, 0.88));
 }
 
-.event-thumb img {
+.standard-banner img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  opacity: 0.9;
+  transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
-.event-date-badge.mini {
-  background: rgba(99, 102, 241, 0.15);
-  border: 1px solid rgba(99, 102, 241, 0.4);
-  border-radius: 8px;
-  padding: 8px 12px;
-  min-width: 70px;
-  text-align: center;
+.standard-card:hover .standard-banner img {
+  transform: scale(1.04);
+  opacity: 1;
 }
 
-.date-mini {
-  color: #818cf8;
-  font-size: 14px;
+.standard-date-pill {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: #e0e7ff;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+}
+
+.standard-type-chip {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  padding: 7px 14px;
+  border-radius: 12px;
+  background: rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(99, 102, 241, 0.5);
+  color: #c7d2fe;
   font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.4px;
   text-transform: uppercase;
 }
 
-.event-info-compact h4 {
-  color: #818cf8;
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0 0 4px 0;
-  line-height: 1.3;
+.standard-type-chip.soft {
+  background: rgba(139, 92, 246, 0.22);
+  border-color: rgba(139, 92, 246, 0.5);
+  color: #e9d5ff;
+}
+
+.standard-type-chip.host {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(251, 191, 36, 0.18));
+  border-color: rgba(251, 191, 36, 0.6);
+  color: #fef3c7;
+}
+
+.standard-card-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.standard-card-body h4 {
+  color: #e0e7ff;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.35;
+  letter-spacing: 0.2px;
 }
 
 .organizer-compact {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.68);
   font-size: 13px;
   font-style: italic;
   margin: 0;
 }
 
-.event-meta-compact {
+.standard-meta-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin: 16px 0;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.7);
+  gap: 10px;
+  margin: 6px 0 2px 0;
 }
 
-.event-meta-compact span {
-  padding: 4px 0;
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+  letter-spacing: 0.2px;
 }
 
 .price-pill {
@@ -2633,6 +2675,13 @@ STANDARD TIER CARDS ($75)
   background: rgba(99, 102, 241, 0.16);
   border-color: rgba(99, 102, 241, 0.4);
   color: #c7d2fe;
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.15);
+}
+
+.price-pill.standard.accent {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.22), rgba(99, 102, 241, 0.12));
+  border-color: rgba(251, 191, 36, 0.5);
+  color: #fef3c7;
 }
 
 .description-compact {
@@ -2644,6 +2693,11 @@ STANDARD TIER CARDS ($75)
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.description-compact.luxe {
+  -webkit-line-clamp: 3;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .standard-cta {
@@ -2659,10 +2713,37 @@ STANDARD TIER CARDS ($75)
   transition: all 0.3s ease;
 }
 
+.standard-cta.standard-solid {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(139, 92, 246, 0.35));
+  border-color: rgba(139, 92, 246, 0.6);
+  color: #f3f4ff;
+  padding: 12px 26px;
+  font-weight: 700;
+  box-shadow: 0 10px 28px rgba(99, 102, 241, 0.25);
+}
+
+.standard-cta.standard-solid.accent {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.52), rgba(99, 102, 241, 0.28));
+  border-color: rgba(251, 191, 36, 0.65);
+  color: #0b1021;
+  text-shadow: none;
+}
+
 .standard-cta:hover {
   background: rgba(99, 102, 241, 0.25);
   border-color: rgba(99, 102, 241, 0.6);
   transform: translateY(-2px);
+}
+
+.standard-cta.standard-solid:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(139, 92, 246, 0.35);
+}
+
+.lyrion-card {
+  border-color: rgba(251, 191, 36, 0.5);
+  box-shadow: 0 14px 46px rgba(251, 191, 36, 0.22);
+  background: linear-gradient(145deg, rgba(251, 191, 36, 0.12), rgba(15, 23, 42, 0.8));
 }
 
 /* ========================================
