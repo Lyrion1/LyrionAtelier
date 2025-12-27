@@ -253,7 +253,7 @@ async function hydrateProductPage() {
     'Collection';
   const description = product.copy?.notes || product.description || '';
   const materials = product.copy?.materials || product.materials || '';
-  const care = product.copy?.care || product.care || '';
+  const care = product.copy?.care || product.care || product.careInstructions || product.copy?.careInstructions || '';
   const nameEl = $('#product-name');
   const descEl = $('#product-description');
   const pillEl = $('#product-pill');
