@@ -3717,12 +3717,87 @@ RESPONSIVE DESIGN
  margin: 0 0 50px 0;
 }
 
+.compatibility-products {
+ padding: 60px 20px 80px;
+ background: rgba(15, 23, 42, 0.3);
+}
+
 .compatibility-products-grid {
  display: grid;
- grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
- gap: 30px;
+ grid-template-columns: repeat(4, 1fr);
+ gap: 25px;
  max-width: 1400px;
- margin: 0 auto;
+ margin: 60px auto;
+ padding: 0 40px;
+}
+
+.compatibility-product-card {
+ background: rgba(10, 8, 32, 0.8);
+ border: 2px solid rgba(212, 175, 55, 0.3);
+ border-radius: 12px;
+ padding: 0;
+ overflow: hidden;
+ display: flex;
+ flex-direction: column;
+ height: 100%;
+}
+
+.compatibility-card-image {
+ width: 100%;
+ height: 200px;
+ object-fit: cover;
+ display: block;
+}
+
+.compatibility-product-title {
+ font-size: 1.4rem;
+ color: #d4af37;
+ text-align: center;
+ margin: 20px 0 10px;
+ text-transform: uppercase;
+ letter-spacing: 1.5px;
+ padding: 0 15px;
+}
+
+.compatibility-product-price {
+ font-size: 2rem;
+ color: #d4af37;
+ font-weight: 700;
+ text-align: center;
+ margin-bottom: 20px;
+}
+
+.compatibility-product-card ul {
+ list-style: none;
+ padding: 0 25px 25px;
+ margin: 0;
+}
+
+.compatibility-product-card li {
+ font-size: 0.9rem;
+ color: rgba(255, 255, 255, 0.9);
+ margin-bottom: 12px;
+ line-height: 1.5;
+ padding-left: 0;
+}
+
+.compatibility-product-card button,
+.compatibility-product-card .cta-button {
+ background: transparent;
+ border: 2px solid #d4af37;
+ color: #d4af37;
+ padding: 12px 30px;
+ border-radius: 8px;
+ margin: 0 25px 25px;
+ cursor: pointer;
+ font-weight: 600;
+ transition: all 0.3s ease;
+}
+
+.compatibility-product-card button:hover,
+.compatibility-product-card .cta-button:hover {
+ background: #d4af37;
+ color: #0f0c29;
 }
 
 .compat-card {
@@ -3833,6 +3908,18 @@ RESPONSIVE DESIGN
  background: linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(139, 92, 246, 0.3));
  transform: translateY(-2px);
  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+@media (max-width: 1200px) {
+ .compatibility-products-grid {
+  grid-template-columns: repeat(2, 1fr);
+ }
+}
+
+@media (max-width: 768px) {
+ .compatibility-products-grid {
+  grid-template-columns: 1fr;
+ }
 }
 
 .featured-btn {
