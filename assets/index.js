@@ -29,7 +29,7 @@ function renderFeaturedProducts() {
   const detailUrl = (product) => {
     const slug = productSlug(product);
     if (slug) return `/shop/${encodeURIComponent(slug)}`;
-    if (product?.id != null) return `/product?id=${encodeURIComponent(product.id)}`;
+    if (product?.id != null) return `/shop/${encodeURIComponent(product.id)}`;
     return '/shop';
   };
   /**
@@ -135,7 +135,7 @@ function renderFeaturedProducts() {
     addButton.className = 'add-to-cart-button add-to-cart-btn';
     addButton.type = 'button';
     addButton.textContent = 'Add to Cart';
-    addButton.dataset.productId = product.id ?? '';
+    addButton.dataset.productId = (productSlug(product) || product.id || '').toString();
     if (!canAddProduct) addButton.disabled = true;
 
     actions.append(viewLink, addButton);
@@ -150,7 +150,7 @@ function renderFeaturedProducts() {
     if (addButton && canAddProduct) {
       addButton.addEventListener('click', (ev) => {
         ev.stopPropagation();
-        addToCart(product.id);
+        addToCart(addButton.dataset.productId || product.id, null, 1, product);
       });
     }
   });

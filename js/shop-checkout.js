@@ -32,32 +32,38 @@ document.addEventListener('click', async function(e) {
 
   e.preventDefault();
 
-  const productName = button.getAttribute('data-name');
-  const productPrice = button.getAttribute('data-price');
-  const variantId = button.getAttribute('data-variant-id');
-  
-  console.log('Add to cart clicked:', productName);
-  
-  // Show loading state
-  const originalText = button.textContent;
-  button.textContent = 'Processing...';
-  button.disabled = true;
-  
-  if (!variantId) {
-    button.textContent = originalText;
-    button.disabled = false;
-    return;
-  }
+  const productId =
+    button.getAttribute('data-product-id') ||
+    button.getAttribute('data-variant-id') ||
+    button.getAttribute('data-slug') ||
+    button.closest('[data-id]')?.dataset.id ||
+    button.closest('[data-slug]')?.dataset.slug ||
+    '';
+  const catalog = Array.isArray(window?.LyrionAtelier?.products) ? window.LyrionAtelier.products : [];
+  const product =
+    catalog.find((p) => String(p.id) === String(productId)) ||
+    catalog.find((p) => String(p.slug || '') === String(productId)) ||
+    null;
+  const priceAttr = button.getAttribute('data-price');
+  const fallbackProduct = product || {
+    id: productId,
+    name: button.getAttribute('data-name') || 'Product',
+    price: priceAttr ? Number(String(priceAttr).replace(/[^0-9.]/g, '')) : null,
+    image: button.closest('.product-card')?.querySelector('img')?.src || null
+  };
 
-  const success = await window.initiateCheckout({
-    name: productName,
-    price: productPrice,
-    type: 'merchandise',
-    variantId: variantId
-  });
-  
-  if (!success) {
-    // Restore button if checkout failed
+  const originalText = button.textContent;
+  button.textContent = 'Adding…';
+  button.disabled = true;
+
+  const result = typeof addToCart === 'function' ? addToCart(productId, null, 1, fallbackProduct) : { ok: false };
+  if (result?.ok) {
+    button.textContent = 'Added ✓';
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.disabled = false;
+    }, 1200);
+  } else {
     button.textContent = originalText;
     button.disabled = false;
   }

@@ -905,9 +905,6 @@ function displayProductDetails() {
   const productId = urlParams.get('id');
   
   if (!productId) {
-    if (typeof showToast === 'function') {
-      showToast('No product specified', 'error');
-    }
     return;
   }
   

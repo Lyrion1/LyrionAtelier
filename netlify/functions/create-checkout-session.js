@@ -38,6 +38,9 @@ exports.handler = async (event) => {
   const productName = parsedBody.productName;
   const productPrice = parsedBody.productPrice;
   const variantId = parsedBody.variantId;
+  const bundle = parsedBody.bundle && typeof parsedBody.bundle === 'object' ? parsedBody.bundle : null;
+  const bundleSavingsCentsInput = Math.max(0, Math.round(Number(bundle?.savingsCents || 0)));
+  const bundleLabel = bundle?.label || bundle?.id || 'Bundle Savings';
 
   let lineItems = [];
 
@@ -86,6 +89,12 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid redirect URLs' }) };
   }
 
+  const lineTotalCents = lineItems.reduce((sum, item) => {
+    const amount = Number(item?.price_data?.unit_amount) || 0;
+    const qty = Number(item?.quantity) || 1;
+    return sum + amount * qty;
+  }, 0);
+
   const sessionConfig = {
     payment_method_types: ['card'],
     mode: 'payment',
@@ -110,6 +119,19 @@ exports.handler = async (event) => {
   }
 
   try {
+    const bundleSavingsCents = Math.min(bundleSavingsCentsInput, lineTotalCents);
+    if (bundleSavingsCents > 0) {
+      const coupon = await stripe.coupons.create({
+        amount_off: bundleSavingsCents,
+        currency: 'usd',
+        duration: 'once',
+        name: bundleLabel
+      });
+      sessionConfig.discounts = [{ coupon: coupon.id }];
+      sessionConfig.metadata.bundle_id = bundle?.id || 'bundle';
+      sessionConfig.metadata.bundle_savings_cents = String(bundleSavingsCents);
+      if (bundle?.label) sessionConfig.metadata.bundle_label = bundle.label;
+    }
     const session = await stripe.checkout.sessions.create(sessionConfig);
     return { statusCode: 200, headers, body: JSON.stringify({ id: session.id, url: session.url, publishableKey }) };
   } catch (err) {

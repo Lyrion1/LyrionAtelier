@@ -118,7 +118,7 @@ test.describe('product detail page', () => {
     await page.screenshot({ path: 'product-detail-capricorn.png', fullPage: true });
   });
 
-  test('Aries youth PDP wires size selection to checkout payload', async ({ page }) => {
+  test('Aries youth PDP wires size selection into cart payload without checkout redirect', async ({ page }) => {
     await page.route('https://fonts.googleapis.com/**', (route) =>
       route.fulfill({ status: 200, contentType: 'text/css', body: '' })
     );
@@ -144,11 +144,12 @@ test.describe('product detail page', () => {
     await page.click('#add-to-cart-btn');
     await page.waitForTimeout(200);
 
-    const lineItem = checkoutPayload?.lineItems?.[0];
-    const meta = lineItem?.price_data?.product_data?.metadata;
-    expect(meta?.pf_variant_id).toBe('694615f9707eb6');
-    expect(meta?.size).toBe('XL');
-    expect(lineItem?.price_data?.unit_amount).toBe(3899);
+    const cart = await page.evaluate(() => JSON.parse(localStorage.getItem('cart') || '[]'));
+    expect(cart.length).toBeGreaterThan(0);
+    expect(cart[0].size).toBe('XL');
+    expect(cart[0].printfulVariantId).toBe('694615f9707eb6');
+    expect(cart[0].quantity).toBe(1);
+    expect(checkoutPayload).toBeNull();
 
     await page.screenshot({ path: 'shop-product-aries-youth.png', fullPage: true });
   });
