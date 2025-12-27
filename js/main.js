@@ -111,10 +111,6 @@ function applySharedLayout() {
     footer.parentElement.insertBefore(main, footer);
   }
 
-  if (!isContactPage()) {
-    ensureSocialEmbeds();
-  }
-
   body.dataset.layoutApplied = 'true';
 }
 
@@ -152,103 +148,43 @@ function buildSiteHeader() {
   return header;
 }
 
-function isContactPage() {
-  const path = (window.location.pathname || '').toLowerCase();
-  return path.endsWith('/contact.html') || path === '/contact' || path.endsWith('/contact');
-}
+const FOOTER_TIKTOK_ICON = `
+  <svg class="footer-social__icon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M16.5 5.5c.7 1 1.7 1.8 2.9 2v2.3c-1.1-.05-2.1-.37-2.9-.89v5.06c0 2.97-2.41 5.37-5.39 5.37A4.6 4.6 0 0 1 7 14.7c0-2.55 2.04-4.63 4.59-4.63.33 0 .65.04.96.1v2.46c-.31-.12-.65-.18-1-.18-1.12 0-2.03.93-2.03 2.15s.9 2.15 2.03 2.15c1.12 0 2.03-.93 2.03-2.15V4.5h2.62z" />
+  </svg>`;
+
+const FOOTER_YOUTUBE_ICON = `
+  <svg class="footer-social__icon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M21.8 8.2s-.2-1.4-.8-2c-.7-.8-1.5-.8-1.9-.9C16.3 5 12 5 12 5s-4.3 0-7.1.3c-.4.1-1.2.1-1.9.9-.6.6-.8 2-.8 2S2 9.8 2 11.4v1.2c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.7.8 1.5.8 1.9.9 2.8.3 7.1.3 7.1.3s4.3 0 7.1-.3c.4-.1 1.2-.1 1.9-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.2c0-1.6-.2-3.2-.2-3.2zM9.75 14.5v-4l3.75 2-3.75 2z" />
+  </svg>`;
 
 function buildSiteFooter() {
   const footer = document.createElement('footer');
   footer.className = 'footer';
-  if (isContactPage()) {
-    footer.innerHTML = `
-      <div class="footer-content">
-        <div class="footer-links">
-          <a href="shop.html">Shop</a>
-          <a href="oracle.html">Oracle Readings</a>
-          <a href="compatibility.html">Compatibility Certificates</a>
-          <a href="codex.html">Codex</a>
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="terms-of-service.html">Terms of Service</a>
-          <a href="refund-policy.html">Refund Policy</a>
-        </div>
-        <p>&copy; 2024 Lyrion Atelier. All rights reserved.</p>
-      </div>`;
-  } else {
-    footer.innerHTML = `
-      <div class="footer-content">
-        <section class="social-follow" aria-labelledby="follow-atelier">
-          <div class="social-follow-headline">
-            <p class="social-kicker">Stay in orbit</p>
-            <h2 id="follow-atelier">Follow Lyrion Atelier</h2>
-            <p class="social-subtitle">Journey with us across the stars on TikTok and YouTube.</p>
-          </div>
-          <div class="social-grid">
-            <article class="social-card">
-              <div class="social-card-header">
-                <span class="social-chip">TikTok</span>
-                <p class="social-card-title">Profile Highlights</p>
-              </div>
-              <div class="social-card-body">
-                <div class="social-embed">
-                  <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@lyrionatelier" data-unique-id="lyrionatelier" data-embed-from="embed_page" data-embed-type="creator">
-                    <section>
-                      <a target="_blank" rel="noopener noreferrer" title="@lyrionatelier" href="https://www.tiktok.com/@lyrionatelier">@lyrionatelier</a>
-                    </section>
-                  </blockquote>
-                </div>
-                <a class="social-fallback" href="https://www.tiktok.com/@lyrionatelier" target="_blank" rel="noopener noreferrer">Follow us on TikTok →</a>
-              </div>
-            </article>
-            <article class="social-card">
-              <div class="social-card-header">
-                <span class="social-chip">YouTube</span>
-                <p class="social-card-title">Channel &amp; Updates</p>
-              </div>
-              <div class="social-card-body">
-                <div class="youtube-subscribe">
-                  <div class="g-ytsubscribe" data-channel="@LyrionAtelier" data-layout="default" data-count="default" data-theme="dark"></div>
-                </div>
-                <div class="youtube-links">
-                  <a class="youtube-channel-link" href="https://www.youtube.com/@LyrionAtelier" target="_blank" rel="noopener noreferrer">@LyrionAtelier</a>
-                  <a class="youtube-cta" href="https://www.youtube.com/@LyrionAtelier" target="_blank" rel="noopener noreferrer">Visit YouTube Channel →</a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
-        <div class="footer-links">
-          <a href="shop.html">Shop</a>
-          <a href="oracle.html">Oracle Readings</a>
-          <a href="compatibility.html">Compatibility Certificates</a>
-          <a href="codex.html">Codex</a>
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="terms-of-service.html">Terms of Service</a>
-          <a href="refund-policy.html">Refund Policy</a>
-        </div>
-        <p>&copy; 2024 Lyrion Atelier. All rights reserved.</p>
-      </div>`;
-  }
+  const socialLinks = `
+    <div class="footer-social" aria-label="Lyrion Atelier social links">
+      <a class="footer-social__link" href="https://www.tiktok.com/@lyrionatelier" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on TikTok">
+        ${FOOTER_TIKTOK_ICON}
+      </a>
+      <a class="footer-social__link" href="https://www.youtube.com/@LyrionAtelier" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on YouTube">
+        ${FOOTER_YOUTUBE_ICON}
+      </a>
+    </div>`;
+  footer.innerHTML = `
+    <div class="footer-content">
+      ${socialLinks}
+      <div class="footer-links">
+        <a href="shop.html">Shop</a>
+        <a href="oracle.html">Oracle Readings</a>
+        <a href="compatibility.html">Compatibility Certificates</a>
+        <a href="codex.html">Codex</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="refund-policy.html">Refund Policy</a>
+      </div>
+      <p>&copy; 2024 Lyrion Atelier. All rights reserved.</p>
+    </div>`;
   return footer;
-}
-
-const TIKTOK_EMBED_SRC = 'https://www.tiktok.com/embed.js';
-const YT_PLATFORM_SRC = 'https://apis.google.com/js/platform.js';
-
-function ensureSocialEmbeds() {
-  const head = document.head;
-  if (!head) return;
-
-  const ensureScript = (src) => {
-    if (head.querySelector(`script[src="${src}"]`)) return;
-    const script = document.createElement('script');
-    script.src = src;
-    script.async = true;
-    head.appendChild(script);
-  };
-
-  ensureScript(TIKTOK_EMBED_SRC);
-  ensureScript(YT_PLATFORM_SRC);
 }
 
 /**
