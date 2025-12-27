@@ -15,7 +15,7 @@ document.addEventListener('click', async function(e) {
       buyLink.closest('[data-slug]')?.dataset.slug ||
       buyLink.closest('[data-id]')?.dataset.id ||
       '';
-    const slugFragment = cleanSlug(productSlug).toLowerCase();
+    const slugFragment = (cleanSlug(productSlug) || '').toLowerCase();
     const normalizedHref = href && href.trim() && href !== '#' ? href : null;
     const detailUrl = slugFragment ? `/product.html?slug=${encodeURIComponent(slugFragment)}` : null;
     const legacyUrl = slugFragment ? `/shop/${slugFragment}.html` : null;
