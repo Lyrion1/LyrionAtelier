@@ -125,7 +125,7 @@ function renderFeaturedProducts() {
     media.appendChild(gridEl);
 
     const body = document.createElement('div');
-    body.className = 'product-card__body';
+    body.className = 'product-card__body product-card-content';
     const heading = document.createElement('h3');
     heading.textContent = title;
     const desc = document.createElement('p');
@@ -136,13 +136,13 @@ function renderFeaturedProducts() {
     price.textContent = Number.isFinite(displayPrice) ? `$${displayPrice.toFixed(2)}` : 'Price unavailable';
 
     const actions = document.createElement('div');
-    actions.className = 'product-card__actions button-row tight';
+    actions.className = 'product-card__actions button-row tight product-card-buttons';
     const viewLink = document.createElement('a');
-    viewLink.className = 'btn btn-outline';
+    viewLink.className = 'btn btn-outline view-button';
     viewLink.href = detailUrl(product);
     viewLink.textContent = 'View';
     const addButton = document.createElement('button');
-    addButton.className = 'btn btn-primary add-to-cart-btn';
+    addButton.className = 'btn btn-primary add-to-cart-btn add-to-cart-button';
     addButton.type = 'button';
     addButton.textContent = 'Add to cart';
     if (!canAddProduct) addButton.disabled = true;

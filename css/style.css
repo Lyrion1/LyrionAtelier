@@ -684,6 +684,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  height: 100%;
 }
 
 .product-card .title {
@@ -702,6 +703,20 @@ p {
 .product-card__price{opacity:.9;margin-bottom:.5rem}
 .product-card__actions{display:flex;gap:.5rem}
 .product-card--highlight{outline:2px solid var(--accent, #c7b1ff);box-shadow:0 0 0 4px rgba(199,177,255,0.28),var(--shadow);transition:box-shadow .3s ease,outline-color .3s ease}
+
+.product-card .product-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.product-card .product-card-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+}
 
 .product-card-button {
   border: none;
@@ -769,6 +784,40 @@ p {
 .btn:focus-visible {
   transform: translateY(-1px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.product-card .product-card-buttons .view-button,
+.product-card .product-card-buttons .add-to-cart-button {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  border: none;
+}
+
+.product-card .product-card-buttons .view-button {
+  background: transparent;
+  border: 2px solid #d4af37;
+  color: #d4af37;
+}
+
+.product-card .product-card-buttons .add-to-cart-button {
+  background: #4169E1;
+  color: #ffffff;
+}
+
+.product-card .product-card-buttons .view-button:hover {
+  background: #d4af37;
+  color: #0f0c29;
+}
+
+.product-card .product-card-buttons .add-to-cart-button:hover {
+  background: #5179F1;
+  transform: translateY(-2px);
 }
 
 /* SECTION 3: Products */
