@@ -13,6 +13,76 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <style>
+    body {
+      background: radial-gradient(circle at 20% 20%, rgba(255, 215, 141, 0.08), transparent 35%), radial-gradient(circle at 80% 0%, rgba(122, 94, 255, 0.12), transparent 40%), #0b0f1a;
+      color: #f4efe6;
+    }
+    .contact-form-section {
+      background: linear-gradient(135deg, rgba(20, 24, 38, 0.8), rgba(18, 16, 30, 0.9));
+      border: 1px solid rgba(255, 214, 143, 0.16);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 214, 143, 0.15);
+      border-radius: 20px;
+      padding: 24px;
+    }
+    .form-container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #f8e8c6;
+      letter-spacing: 0.01em;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 214, 143, 0.3);
+      background: rgba(255, 255, 255, 0.03);
+      color: #f4efe6;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #e8c27c;
+      box-shadow: 0 0 0 3px rgba(232, 194, 124, 0.25);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .submit-btn {
+      background: linear-gradient(135deg, #d8a75f, #f1d9a9);
+      color: #0c0c10;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 25px rgba(232, 194, 124, 0.25);
+    }
+    .submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(232, 194, 124, 0.35);
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-to-content" href="#main-content">Skip to main content</a>
@@ -52,10 +122,10 @@
           <h2>Get in Touch</h2>
           <p>Have questions about our readings? We're here to help guide your journey.</p>
 
-          <form name="contact" method="POST" action="/contact-success" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="contact">
-            <p class="visually-hidden">
-              <label>Don't fill this out: <input name="bot-field"></label>
+          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-success.html">
+            <input type="hidden" name="form-name" value="contact" />
+            <p class="sr-only">
+              <label>Don’t fill this out: <input name="bot-field" /></label>
             </p>
 
             <div class="form-group">
@@ -69,15 +139,19 @@
             </div>
 
             <div class="form-group">
-              <label for="reading-type">Interested in</label>
-              <select id="reading-type" name="reading-type">
-                <option value="" selected>Select a service</option>
-                <option value="past-life">Past Life Reading</option>
-                <option value="career-compass">Career Compass</option>
-                <option value="love-relationships">Love & Relationships</option>
-                <option value="full-birth-chart">Full Birth Chart</option>
-                <option value="monthly-guidance">Monthly Guidance</option>
-                <option value="other">Other</option>
+              <label for="subject">Subject *</label>
+              <input type="text" id="subject" name="subject" required>
+            </div>
+
+            <div class="form-group">
+              <label for="reason">Reason (optional)</label>
+              <select id="reason" name="reason">
+                <option value="" selected>Select a reason</option>
+                <option value="Order help">Order help</option>
+                <option value="Oracle reading">Oracle reading</option>
+                <option value="Compatibility certificate">Compatibility certificate</option>
+                <option value="Event listing (Codex)">Event listing (Codex)</option>
+                <option value="Other">Other</option>
               </select>
             </div>
 
