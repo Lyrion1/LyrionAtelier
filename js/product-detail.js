@@ -47,11 +47,10 @@ const derivePrice = (product = {}, size = null, variant = null) => {
 
 function getSlug() {
   const normalize = (val) => (val || '').replace(/\.html$/i, '');
-  const params = new URLSearchParams(location.search);
-  const fromQuery = params.get('slug');
-  if (fromQuery) return normalize(fromQuery);
   const parts = location.pathname.split('/').filter(Boolean);
-  if (parts[0] === 'shop' && parts[1]) return decodeURIComponent(normalize(parts[1]));
+  const shopIndex = parts.indexOf('shop');
+  if (shopIndex > -1 && parts[shopIndex + 1]) return decodeURIComponent(normalize(parts[shopIndex + 1]));
+  if (parts[0]) return decodeURIComponent(normalize(parts[parts.length - 1]));
   return null;
 }
 
@@ -145,7 +144,13 @@ function renderImages(images = [], productTitle = 'Product') {
 function showError(message) {
   const wrap = $('#product-wrapper');
   if (!wrap) return;
-  wrap.innerHTML = `<div class="note error">${message}</div>`;
+  wrap.innerHTML = `
+    <div class="note error">
+      <p>${message}</p>
+      <div class="button-row">
+        <a class="btn btn-primary" href="/shop">Back to shop</a>
+      </div>
+    </div>`;
 }
 
 async function startCheckout(variant, product, selection, btnEl = $('#add-to-cart-btn')) {
@@ -224,10 +229,7 @@ async function startCheckout(variant, product, selection, btnEl = $('#add-to-car
 
 async function hydrateProductPage() {
   const slug = getSlug();
-  if (!slug) {
-    showError('Product not found.');
-    return;
-  }
+  if (!slug) return showError('Product not found.');
 
   const catalog = await loadCatalog();
   const slugIndex = new Map();
@@ -372,6 +374,7 @@ async function hydrateProductPage() {
   const priceEl = $('#product-price');
   const addBtn = $('#add-to-cart-btn');
   const currency = product.currency || product.price?.currency || 'USD';
+  if (addBtn) addBtn.dataset.productId = product.id || product.slug || '';
 
   function currentSelection() {
     const selectedButton = sizeButtonsWrap?.querySelector('.size-chip.active');
@@ -427,7 +430,17 @@ async function hydrateProductPage() {
   addBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     const selection = currentSelection();
-    startCheckout(activeVariant, product, selection, addBtn);
+    const originalText = addBtn.textContent;
+    const result =
+      typeof addToCart === 'function'
+        ? addToCart(product.id || product.slug, selection.size, 1, product, activeVariant)
+        : { ok: false };
+    if (result?.ok) {
+      addBtn.textContent = 'Added ✓';
+      setTimeout(() => {
+        addBtn.textContent = originalText;
+      }, 1200);
+    }
   });
 
   updateVariant();

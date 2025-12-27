@@ -8,7 +8,7 @@ function buildLineItemsFromCart() {
     .map(item => ({
       price_data: {
         currency: 'usd',
-        product_data: { name: item.name },
+        product_data: { name: item.size ? `${item.name} • ${item.size}` : item.name },
         unit_amount: Math.round(parseFloat(item.price) * 100)
       },
       quantity: item.quantity || 1
@@ -17,13 +17,27 @@ function buildLineItemsFromCart() {
 
 window.buildLineItems = window.buildLineItems || buildLineItemsFromCart;
 
+function resolveBundlePayload(cart = []) {
+  if (typeof window.evaluateBundleDiscount === 'function') {
+    const result = window.evaluateBundleDiscount(cart);
+    return {
+      id: result?.selectedBundle?.id || null,
+      label: result?.selectedBundle?.label || null,
+      savingsCents: result?.savingsCents || 0
+    };
+  }
+  return { id: null, label: null, savingsCents: 0 };
+}
+
 const checkoutBtn = document.getElementById('checkoutBtn');
 checkoutBtn?.addEventListener('click', async () => {
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
 const lineItems = window.buildLineItems(); // implement or replace
   if (!lineItems || lineItems.length === 0) {
     alert('Your cart is empty.');
     return;
   }
+  const bundle = resolveBundlePayload(cart);
   let res;
   try {
     res = await fetch('/.netlify/functions/create-checkout-session', {
@@ -31,6 +45,7 @@ const lineItems = window.buildLineItems(); // implement or replace
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         lineItems,
+        bundle,
         successUrl: window.location.origin + '/success',
         cancelUrl: window.location.origin + '/cart'
       })

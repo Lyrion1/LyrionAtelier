@@ -331,7 +331,8 @@ import { formatPrice, currencySymbol } from './price-utils.js';
 
   const createCard = (p) => {
     const slug = p.slug || slugify(p.title || p.name || '');
-    const viewUrl = `/shop/${encodeURIComponent(slug)}`;
+    const viewTarget = p.id || slug;
+    const viewUrl = `/shop/${encodeURIComponent(viewTarget)}`;
     const variant = p.defaultVariant || pickVariant(p);
     const hasPriceData = Number.isFinite(p.price) || Number.isFinite(p.priceCents) || !!p.priceLabel;
     const basePrice = hasPriceData ? null : normalizePrice(p);
@@ -422,7 +423,7 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     buyBtn.textContent = 'View Product';
     buyBtn.href = viewUrl;
     buyBtn.dataset.action = 'view';
-    buyBtn.dataset.slug = slug;
+    buyBtn.dataset.slug = viewTarget;
     buyBtn.dataset.name = p.title || p.name || 'Celestial Piece';
     buyBtn.setAttribute('aria-label', 'View');
     const addBtn = document.createElement('button');
