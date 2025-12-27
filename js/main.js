@@ -211,17 +211,19 @@ function buildSiteFooter() {
 
 function ensureSocialEmbeds() {
   const head = document.head;
-  if (head && !head.querySelector('script[src*="tiktok.com/embed.js"]')) {
+  if (head && !head.querySelector('script[src="https://www.tiktok.com/embed.js"]')) {
     const tiktokScript = document.createElement('script');
     tiktokScript.src = 'https://www.tiktok.com/embed.js';
     tiktokScript.async = true;
+    tiktokScript.dataset.socialScript = 'tiktok';
     head.appendChild(tiktokScript);
   }
 
-  if (head && !head.querySelector('script[src*="apis.google.com/js/platform.js"]')) {
+  if (head && !head.querySelector('script[src="https://apis.google.com/js/platform.js"]')) {
     const ytScript = document.createElement('script');
     ytScript.src = 'https://apis.google.com/js/platform.js';
     ytScript.async = true;
+    ytScript.dataset.socialScript = 'youtube-platform';
     head.appendChild(ytScript);
   }
 }
