@@ -11,7 +11,7 @@ document.addEventListener('click', async function(e) {
     const href = buyLink.getAttribute('href');
     const productSlug =
       buyLink.getAttribute('data-slug') ||
-      buyLink.dataset.productId ||
+      buyLink.getAttribute('data-product-id') ||
       buyLink.closest('[data-slug]')?.dataset.slug ||
       buyLink.closest('[data-id]')?.dataset.id ||
       '';
