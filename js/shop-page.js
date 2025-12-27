@@ -391,7 +391,7 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     const media = document.createElement('div');
     media.className = 'product-card__media media';
     const grid = document.createElement('div');
-    grid.className = 'product-card__media-grid';
+    grid.className = 'product-card__media-grid product-card__media-grid--single';
     let ready = false;
     const markReady = () => {
       if (ready) return;
@@ -401,16 +401,21 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       card.classList.add('media-ready');
       hideLoader();
     };
-    galleryImages.forEach((src, idx) => {
-      const img = document.createElement('img');
-      img.src = src || FALLBACK;
-      img.alt = `${p.title || p.name || 'Product image'} ${idx + 1}`;
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
-      img.onload = markReady;
-      grid.appendChild(img);
-    });
+    const coverImage = galleryImages.find(isUsableImage) || resolvedImage || FALLBACK;
+    const img = document.createElement('img');
+    img.src = coverImage || FALLBACK;
+    img.alt = `${p.title || p.name || 'Product image'}`;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.onerror = () => {
+      if (img.src !== FALLBACK) {
+        img.src = FALLBACK;
+      } else {
+        markReady();
+      }
+    };
+    img.onload = markReady;
+    grid.appendChild(img);
     media.appendChild(grid);
 
     const body = document.createElement('div');
@@ -455,15 +460,32 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     return card;
   };
 
+  const highlightFromQuery = () => {
+    const params = new URLSearchParams(location.search);
+    const target = (params.get('highlight') || '').toLowerCase();
+    if (!target) return;
+    const cards = Array.from(document.querySelectorAll('.product-card'));
+    const match = cards.find((card) => {
+      const slug = (card.dataset.slug || '').toLowerCase();
+      const id = (card.dataset.id || '').toLowerCase();
+      return slug === target || id === target;
+    });
+    if (!match) return;
+    match.classList.add('product-card--highlight');
+    match.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
   const renderCards = (items) => {
     if (typeof mountGrid === 'function') {
       mountGrid(items);
+      highlightFromQuery();
       return;
     }
     if (!grid) return;
     grid.innerHTML = '';
     grid.style.display = '';
     (items || []).forEach((p) => grid.append(createCard(p)));
+    highlightFromQuery();
   };
 
   const hydrateGlobal = (catalog, imageMap, zodiacMap) => {

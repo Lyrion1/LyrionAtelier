@@ -73,7 +73,7 @@ function renderCard(product) {
   const media = document.createElement('div');
   media.className = 'product-card__media media';
   const grid = document.createElement('div');
-  grid.className = 'product-card__media-grid';
+  grid.className = 'product-card__media-grid product-card__media-grid--single';
   let ready = false;
   const markReady = () => {
     if (ready) return;
@@ -82,16 +82,21 @@ function renderCard(product) {
     media.classList.remove('placeholder', 'blur');
     card.classList.add('media-ready');
   };
-  galleryImages.forEach((src, idx) => {
-    const img = document.createElement('img');
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.alt = `${altText} ${idx + 1}`;
-    img.src = src;
-    img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
-    img.onload = markReady;
-    grid.appendChild(img);
-  });
+  const coverImage = galleryImages.find((src) => !!src) || FALLBACK;
+  const img = document.createElement('img');
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.alt = `${altText}`;
+  img.src = coverImage;
+  img.onerror = () => {
+    if (img.src !== FALLBACK) {
+      img.src = FALLBACK;
+    } else {
+      markReady();
+    }
+  };
+  img.onload = markReady;
+  grid.appendChild(img);
   media.appendChild(grid);
 
   const body = document.createElement('div');

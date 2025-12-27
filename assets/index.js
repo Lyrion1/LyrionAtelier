@@ -100,23 +100,28 @@ function renderFeaturedProducts() {
     const media = document.createElement('div');
     media.className = 'product-card__media media';
     const gridEl = document.createElement('div');
-    gridEl.className = 'product-card__media-grid';
+    gridEl.className = 'product-card__media-grid product-card__media-grid--single';
     let mediaReady = false;
     const markReady = () => {
       if (mediaReady) return;
       mediaReady = true;
       card.classList.add('media-ready');
     };
-    images.forEach((src, idx) => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = `${title} image ${idx + 1}`;
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      img.onerror = () => { if (img.src !== '/assets/catalog/placeholder.webp') img.src = '/assets/catalog/placeholder.webp'; };
-      img.onload = markReady;
-      gridEl.appendChild(img);
-    });
+    const coverImage = images.find(Boolean) || '/assets/catalog/placeholder.webp';
+    const img = document.createElement('img');
+    img.src = coverImage;
+    img.alt = `${title} image`;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.onerror = () => {
+      if (img.src !== '/assets/catalog/placeholder.webp') {
+        img.src = '/assets/catalog/placeholder.webp';
+      } else {
+        markReady();
+      }
+    };
+    img.onload = markReady;
+    gridEl.appendChild(img);
     media.appendChild(gridEl);
 
     const body = document.createElement('div');
