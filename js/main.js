@@ -169,7 +169,7 @@ function buildSiteFooter() {
             </div>
             <div class="social-card-body">
               <div class="social-embed">
-                <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@lyrionatelier" data-unique-id="lyrionatelier" data-embed-from="embed_page" data-embed-type="creator" style="max-width: 520px; min-width: 280px;">
+                <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@lyrionatelier" data-unique-id="lyrionatelier" data-embed-from="embed_page" data-embed-type="creator">
                   <section>
                     <a target="_blank" rel="noopener noreferrer" title="@lyrionatelier" href="https://www.tiktok.com/@lyrionatelier">@lyrionatelier</a>
                   </section>
@@ -216,17 +216,16 @@ function ensureSocialEmbeds() {
   const head = document.head;
   if (!head) return;
 
-  const ensureScript = (src, dataKey) => {
+  const ensureScript = (src) => {
     if (head.querySelector(`script[src="${src}"]`)) return;
     const script = document.createElement('script');
     script.src = src;
     script.async = true;
-    if (dataKey) script.dataset.socialScript = dataKey;
     head.appendChild(script);
   };
 
-  ensureScript(TIKTOK_EMBED_SRC, 'tiktok');
-  ensureScript(YT_PLATFORM_SRC, 'youtube-platform');
+  ensureScript(TIKTOK_EMBED_SRC);
+  ensureScript(YT_PLATFORM_SRC);
 }
 
 /**

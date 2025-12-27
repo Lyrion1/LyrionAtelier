@@ -3294,6 +3294,7 @@ RESPONSIVE DESIGN
 .social-embed iframe {
   width: 100%;
   max-width: 520px;
+  min-width: 280px;
 }
 
 .social-fallback,
