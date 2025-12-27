@@ -1004,72 +1004,75 @@ main > .section:first-of-type {
   }
 }
 
-.lantern-cta {
-  position: relative;
-  overflow: hidden;
+.light-lamp-section {
+  background: rgba(10, 8, 32, 0.6);
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 60px 40px;
+  text-align: center;
+  margin-top: 80px;
 }
 
-.lantern-card {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  align-items: center;
-  gap: 1.5rem;
-  background: linear-gradient(145deg, rgba(36, 48, 74, 0.7), rgba(30, 41, 59, 0.9));
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
+.light-lamp-header {
+  font-size: 0.9rem;
+  color: rgba(212, 175, 55, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
 }
 
-.lantern-card h2 {
-  margin-bottom: 0.35rem;
+.light-lamp-title {
+  font-size: 1.8rem;
+  color: #d4af37;
+  margin-bottom: 15px;
+  font-weight: 300;
 }
 
-.lantern-card .muted {
-  max-width: 520px;
+.light-lamp-description {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
 }
 
-.lantern-button {
+.light-lamp-button {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(167, 139, 250, 0.14);
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 700;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  gap: 10px;
+  background: transparent;
+  border: 2px solid rgba(212, 175, 55, 0.5);
+  color: #d4af37;
+  padding: 14px 30px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
 }
 
-.lantern-button img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+.light-lamp-button:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: #d4af37;
+  transform: translateY(-2px);
 }
 
-.lantern-button:hover,
-.lantern-button:focus-visible {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 18px 36px rgba(0,0,0,0.4);
-  border-color: rgba(167, 139, 250, 0.5);
+.lamp-icon {
+  font-size: 1.2rem;
 }
 
-.lantern-glow {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 15% 20%, rgba(167, 139, 250, 0.18), transparent 35%),
-              radial-gradient(circle at 80% 60%, rgba(251, 191, 36, 0.15), transparent 32%);
-  filter: blur(40px);
-  opacity: 0.85;
-  pointer-events: none;
+@media (max-width: 768px) {
+  .light-lamp-section {
+    padding: 40px 20px;
+  }
+
+  .light-lamp-title {
+    font-size: 1.4rem;
+  }
+
+  .light-lamp-description {
+    font-size: 0.9rem;
+  }
 }
 
 .newsletter-section {
