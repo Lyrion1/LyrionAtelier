@@ -2092,13 +2092,13 @@
       "/aries-denim-bucket-hat/aries-bucket-hat-girl-side.jpg"
     ],
     "mainImage": "/aries-denim-bucket-hat/aries-bucket-hat-girl-headshot.jpg",
-    "price": 35.5,
+    "price": 35.50,
     "currency": "USD",
     "variants": [
       {
         "size": "One Size",
         "printfulVariantId": "694f1219bafde5",
-        "price": 35.5,
+        "price": 35.50,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-ARIES-BUCKET-DENIM"
@@ -2115,7 +2115,7 @@
       "Durable stitching built for bold living",
       "Designed for pioneers, leaders, and first movers"
     ],
-    "careInstructions": "Spot clean only. Your fire never needs washing.",
+    "careInstructions": "Spot clean with a damp cloth. Do not machine wash or dry clean.",
     "tags": ["aries", "fire-sign", "zodiac", "bucket-hat", "denim", "unisex", "cardinal", "mars-ruled", "warrior", "bold"],
     "chartResonance": ["aries-sun", "aries-moon", "aries-rising", "mars-dominant", "1st-house-emphasis", "fire-dominant"],
     "seoTitle": "Aries Denim Bucket Hat | Fire Sign Headwear | Lyrīon Atelier",
