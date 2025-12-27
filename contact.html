@@ -29,6 +29,9 @@
       max-width: 720px;
       margin: 0 auto;
     }
+    .form-group {
+      margin-bottom: 16px;
+    }
     .form-group label {
       display: block;
       font-weight: 600;
@@ -123,11 +126,8 @@
           <h2>Get in Touch</h2>
           <p>Have questions about our readings? We're here to help guide your journey.</p>
 
-          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-success.html">
+          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-success">
             <input type="hidden" name="form-name" value="contact" />
-            <p class="sr-only">
-              <label>Don’t fill this out: <input name="bot-field" /></label>
-            </p>
 
             <div class="form-group">
               <label for="name">Name * <span class="sr-only">required</span></label>
@@ -145,14 +145,13 @@
             </div>
 
             <div class="form-group">
-              <label for="reason">Reason (optional)</label>
-              <select id="reason" name="reason">
-                <option value="" selected>Select a reason</option>
-                <option value="Order help">Order help</option>
-                <option value="Oracle reading">Oracle reading</option>
-                <option value="Compatibility certificate">Compatibility certificate</option>
-                <option value="Event listing (Codex)">Event listing (Codex)</option>
-                <option value="Other">Other</option>
+              <label for="reason">Reason * <span class="sr-only">required</span></label>
+              <select id="reason" name="reason" required>
+                <option>Order help</option>
+                <option>Oracle reading</option>
+                <option>Compatibility certificate</option>
+                <option>Event listing (Codex)</option>
+                <option>Other</option>
               </select>
             </div>
 
@@ -161,7 +160,11 @@
               <textarea id="message" name="message" rows="5" required></textarea>
             </div>
 
-            <button type="submit" class="submit-btn">Send Message</button>
+            <p style="display:none">
+              <label>Don’t fill: <input name="bot-field" /></label>
+            </p>
+
+            <button type="submit" class="submit-btn">Send message</button>
           </form>
         </div>
       </section>
