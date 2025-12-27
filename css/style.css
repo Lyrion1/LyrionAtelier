@@ -3740,6 +3740,7 @@ RESPONSIVE DESIGN
  display: flex;
  flex-direction: column;
  height: 100%;
+ min-height: 600px;
 }
 
 .compatibility-card-image {
@@ -3747,6 +3748,7 @@ RESPONSIVE DESIGN
  height: 200px;
  object-fit: cover;
  display: block;
+ flex-shrink: 0;
 }
 
 .compatibility-product-title {
@@ -3768,15 +3770,16 @@ RESPONSIVE DESIGN
 }
 
 .compatibility-product-card ul {
+ flex: 1;
  list-style: none;
- padding: 0 25px 25px;
+ padding: 0 25px;
  margin: 0;
 }
 
 .compatibility-product-card li {
  font-size: 0.9rem;
  color: rgba(255, 255, 255, 0.9);
- margin-bottom: 12px;
+ margin-bottom: 10px;
  line-height: 1.5;
  padding-left: 0;
 }
@@ -3788,7 +3791,8 @@ RESPONSIVE DESIGN
  color: #d4af37;
  padding: 12px 30px;
  border-radius: 8px;
- margin: 0 25px 25px;
+ margin: 20px 25px 25px;
+ flex-shrink: 0;
  cursor: pointer;
  font-weight: 600;
  transition: all 0.3s ease;
