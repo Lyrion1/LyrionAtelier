@@ -8,7 +8,7 @@ const adminEmail = process.env.ADMIN_EMAIL;
 
 const stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
-const fromEmail = 'Lyrion Atelier <orders@lyrionatelier.com>';
+const fromEmail = 'Lyrion Atelier <admin@lyrionatelier.com>';
 
 const zeroDecimalCurrencies = new Set([
   'BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF',
