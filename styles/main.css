@@ -101,3 +101,485 @@
     grid-template-columns: 1fr;
   }
 }
+
+.compatibility-hero {
+  padding: 100px 40px;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 16px;
+  border: 3px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.tagline {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.price {
+  font-size: 2rem;
+  color: #d4af37;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.hero-description {
+  margin-top: 40px;
+  line-height: 1.9;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-description p {
+  margin-bottom: 20px;
+}
+
+.what-youll-discover {
+  padding: 100px 40px;
+  background: rgba(10, 8, 32, 0.6);
+}
+
+.what-youll-discover h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #d4af37;
+  margin-bottom: 60px;
+}
+
+.discovery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.discovery-card {
+  background: rgba(10, 8, 32, 0.8);
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  padding: 40px 30px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.discovery-card:hover {
+  transform: translateY(-8px);
+  border-color: #d4af37;
+  box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+}
+
+.discovery-card .icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.discovery-card h3 {
+  color: #d4af37;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.discovery-card p {
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.certificate-preview {
+  padding: 100px 40px;
+}
+
+.certificate-preview h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #d4af37;
+  margin-bottom: 60px;
+}
+
+.certificate-details {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
+}
+
+.detail-item h3 {
+  color: #d4af37;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+.detail-item p {
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.why-matters {
+  padding: 100px 40px;
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.why-matters h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #d4af37;
+  margin-bottom: 40px;
+}
+
+.matters-content {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.9;
+}
+
+.matters-content ul {
+  margin: 30px 0;
+  list-style: none;
+  padding: 0;
+}
+
+.matters-content li {
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.matters-content strong {
+  color: #d4af37;
+}
+
+.perfect-for {
+  padding: 100px 40px;
+}
+
+.perfect-for h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #d4af37;
+  margin-bottom: 60px;
+}
+
+.perfect-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.perfect-card {
+  background: rgba(10, 8, 32, 0.7);
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  padding: 35px 25px;
+  text-align: center;
+}
+
+.perfect-card h3 {
+  color: #d4af37;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonial {
+  background: rgba(212, 175, 55, 0.08);
+  border-left: 4px solid #d4af37;
+  padding: 35px;
+  border-radius: 8px;
+}
+
+.quote {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 20px;
+}
+
+.author {
+  color: #d4af37;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.stars {
+  color: #d4af37;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+.how-it-works {
+  padding: 100px 40px;
+  background: rgba(10, 8, 32, 0.5);
+}
+
+.how-it-works h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #d4af37;
+  margin-bottom: 60px;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.step {
+  text-align: center;
+}
+
+.step-number {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: rgba(212, 175, 55, 0.2);
+  border: 2px solid #d4af37;
+  border-radius: 50%;
+  color: #d4af37;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 56px;
+  margin-bottom: 20px;
+}
+
+.step h3 {
+  color: #d4af37;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.faq {
+  padding: 100px 40px;
+}
+
+.faq h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #d4af37;
+  margin-bottom: 60px;
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.faq-item h3 {
+  color: #d4af37;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.faq-item p {
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.final-cta {
+  padding: 120px 40px;
+  background: linear-gradient(135deg, #302b63, #24243e, #0f0c29);
+  text-align: center;
+}
+
+.final-cta h2 {
+  font-size: 3rem;
+  color: #d4af37;
+  margin-bottom: 20px;
+}
+
+.final-cta > p {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 40px;
+}
+
+.purchase-button {
+  background: #d4af37;
+  color: #0f0c29;
+  padding: 20px 60px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.purchase-button:hover {
+  background: #f0c659;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+}
+
+.guarantee {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+.why-upgrade,
+.unboxing,
+.investment-piece,
+.frame-options,
+.ultimate-expression,
+.display-ideas,
+.when-to-gift {
+  padding: 100px 40px;
+}
+
+.why-upgrade h2,
+.unboxing h2,
+.investment-piece h2,
+.frame-options h2,
+.ultimate-expression h2,
+.display-ideas h2,
+.when-to-gift h2 {
+  text-align: center;
+  font-size: 2.3rem;
+  color: #d4af37;
+  margin-bottom: 30px;
+}
+
+.why-upgrade .intro,
+.investment-piece .lead,
+.ultimate-expression .lead {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.15rem;
+  margin-bottom: 40px;
+}
+
+.upgrade-reasons,
+.investment-grid,
+.frame-grid,
+.unboxing-steps,
+.display-grid,
+.occasions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.reason,
+.investment-point,
+.frame-option,
+.unbox-step,
+.display-idea,
+.occasion {
+  background: rgba(10, 8, 32, 0.7);
+  border: 2px solid rgba(212, 175, 55, 0.25);
+  border-radius: 12px;
+  padding: 30px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.frame-option img,
+.unbox-step img,
+.display-idea img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border: 2px solid rgba(212, 175, 55, 0.2);
+}
+
+.frame-option h3,
+.investment-point h3,
+.reason h3,
+.display-idea h3,
+.occasion h3 {
+  color: #d4af37;
+  margin-bottom: 12px;
+}
+
+.frame-option p,
+.investment-point p,
+.reason p,
+.unbox-step p,
+.display-idea p,
+.occasion p,
+.twin-flames-concept p {
+  line-height: 1.7;
+}
+
+.unboxing {
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.twin-flames-concept {
+  max-width: 900px;
+  margin: 0 auto;
+  background: rgba(10, 8, 32, 0.7);
+  border: 2px solid rgba(212, 175, 55, 0.2);
+  border-radius: 12px;
+  padding: 40px;
+}
+
+.twin-flames-concept h3 {
+  color: #d4af37;
+  margin: 25px 0 15px;
+}
+
+.twin-flames-concept ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.twin-flames-concept li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+@media (max-width: 900px) {
+  .hero-container,
+  .discovery-grid,
+  .certificate-details,
+  .perfect-grid,
+  .testimonial-grid,
+  .steps-grid,
+  .upgrade-reasons,
+  .unboxing-steps,
+  .investment-grid,
+  .frame-grid,
+  .display-grid,
+  .occasions-grid {
+    grid-template-columns: 1fr;
+  }
+}
