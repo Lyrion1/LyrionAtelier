@@ -109,7 +109,20 @@ exports.handler = async (event) => {
   }
 
   if (stripeEvent.type === 'checkout.session.completed') {
-    const session = stripeEvent.data.object;
+    const sessionId = stripeEvent.data.object.id;
+    let session;
+
+    try {
+      session = await stripe.checkout.sessions.retrieve(sessionId);
+    } catch (err) {
+      console.error('Failed to retrieve session:', { sessionId, error: err });
+      return { statusCode: 500, body: 'Session retrieval error' };
+    }
+
+    if (session?.metadata?.email_sent === 'true') {
+      return { statusCode: 200, body: 'duplicate_ignored' };
+    }
+
     const customerEmail = session?.customer_details?.email || session?.customer_email || null;
 
     try {
@@ -130,6 +143,10 @@ exports.handler = async (event) => {
           html: buildCustomerHtml(session),
         });
       }
+
+      await stripe.checkout.sessions.update(sessionId, {
+        metadata: { ...(session.metadata || {}), email_sent: 'true' },
+      });
     } catch (err) {
       console.error('Failed to send emails:', err);
       return { statusCode: 500, body: 'Email error' };
