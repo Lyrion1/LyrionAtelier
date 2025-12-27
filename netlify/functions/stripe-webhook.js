@@ -87,6 +87,9 @@ exports.handler = async (event) => {
   }
 
   const sig = event.headers["stripe-signature"];
+  if (!sig) {
+    return { statusCode: 400, body: 'Invalid signature' };
+  }
   const rawBody = event.isBase64Encoded
     ? Buffer.from(event.body, "base64")
     : Buffer.from(event.body, "utf8");
