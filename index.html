@@ -286,14 +286,26 @@
    <div class="oracle-reading-text" id="reading-text"></div>
    <div class="oracle-urgency-msg" id="urgency-message"></div>
    <div class="oracle-actions">
-   <button id="book-reading-btn" class="oracle-cta-btn">Get Full Reading</button>
-   <button id="share-reading-btn" class="oracle-share-btn">Share</button>
-   </div>
-   <button id="reset-oracle-btn" class="oracle-reset-btn">Try Another Date</button>
-   <button id="oracle-close-bottom-btn" class="oracle-close-bottom-btn">Close</button>
-   </div>
-   </div>
+  <button id="book-reading-btn" class="oracle-cta-btn">Get Full Reading</button>
+  <button id="share-reading-btn" class="oracle-share-btn">Share</button>
   </div>
+  <button id="reset-oracle-btn" class="oracle-reset-btn">Try Another Date</button>
+  <button id="oracle-close-bottom-btn" class="oracle-close-bottom-btn">Close</button>
+  </div>
+  </div>
+  </div>
+
+  <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="contact">
+    <p hidden>
+      <label>Don’t fill this out: <input name="bot-field"></label>
+    </p>
+    <input name="name">
+    <input name="email">
+    <input name="subject">
+    <input name="reason">
+    <textarea name="message"></textarea>
+  </form>
 
   <script src="js/products.js" defer></script>
   <script src="js/cart.js" defer></script>
