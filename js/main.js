@@ -94,14 +94,15 @@ function applySharedLayout() {
   const existingFooter = document.querySelector('footer.footer');
   const existingMain = document.querySelector('main');
 
-  const header = buildSiteHeader();
-  if (existingHeader) {
-    existingHeader.replaceWith(header);
-  } else if (skipLink && skipLink.parentElement === body) {
-    skipLink.insertAdjacentElement('afterend', header);
-  } else {
-    body.insertBefore(header, body.firstChild);
+  const header = existingHeader || buildSiteHeader();
+  if (!existingHeader) {
+    if (skipLink && skipLink.parentElement === body) {
+      skipLink.insertAdjacentElement('afterend', header);
+    } else {
+      body.insertBefore(header, body.firstChild);
+    }
   }
+  setActiveNavLink(header);
 
   let main = existingMain;
   if (!main) {
@@ -147,31 +148,63 @@ function ensureSkipToContent() {
 
 function buildSiteHeader() {
   const header = document.createElement('header');
-  header.className = 'site-header header';
+  header.className = 'site-header';
   header.innerHTML = `
-    <div class="container header-inner">
-      <a class="logo" href="/">
-        <img class="brand-logo" src="images/logo/GOD.PNG" alt="Lyrīon Atelier logo">
-        <span class="brand-name">Lyrīon Atelier</span>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="/" class="logo-link">
+        <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
+        <span class="brand-name">LYRĪON ATELIER</span>
       </a>
-      <nav aria-label="Main navigation">
-        <ul class="nav">
-          <li><a href="/">Home</a></li>
-          <li><a href="/shop">Shop</a></li>
-          <li><a href="/oracle">Oracle</a></li>
-          <li><a href="/compatibility">Compatibility</a></li>
-          <li><a href="/codex">Codex</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="header-actions">
-        <a class="cart-icon" href="/cart" aria-label="Shopping cart">
-          🛒 <span class="cart-count">0</span>
-        </a>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-      </div>
-    </div>`;
+
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        ☰
+      </button>
+
+      <ul class="nav-links" role="menubar">
+        <li><a href="/" role="menuitem">Home</a></li>
+        <li><a href="/shop" role="menuitem">Shop</a></li>
+        <li><a href="/oracle" role="menuitem">Oracle</a></li>
+        <li><a href="/compatibility" role="menuitem">Compatibility</a></li>
+        <li><a href="/codex" role="menuitem">Codex</a></li>
+        <li><a href="/contact" role="menuitem">Contact</a></li>
+        <li><a href="/cart" role="menuitem">Cart</a></li>
+      </ul>
+    </nav>`;
   return header;
+}
+
+function setActiveNavLink(header) {
+  const nav = header?.querySelector('.nav-links');
+  if (!nav) return;
+  const links = Array.from(nav.querySelectorAll('a'));
+  if (!links.length) return;
+
+  const normalizePath = (path) => {
+    if (!path) return '/';
+    const cleaned = path.split('#')[0].split('?')[0];
+    const safePath = cleaned || '/';
+    if (safePath === '/') return '/';
+    return safePath.replace(/\/+$/, '').toLowerCase() || '/';
+  };
+
+  const currentPath = normalizePath(window.location.pathname);
+  let bestMatch = { length: -1, link: null };
+
+  links.forEach(link => {
+    const linkPath = normalizePath(link.getAttribute('href'));
+    const matchesExact = currentPath === linkPath;
+    const matchesPrefix = linkPath !== '/' && currentPath.startsWith(linkPath + '/');
+    if (matchesExact || matchesPrefix) {
+      if (linkPath.length > bestMatch.length) {
+        bestMatch = { length: linkPath.length, link };
+      }
+    }
+  });
+
+  links.forEach(link => link.removeAttribute('aria-current'));
+  if (bestMatch.link) {
+    bestMatch.link.setAttribute('aria-current', 'page');
+  }
 }
 
 const FOOTER_TIKTOK_ICON = `
@@ -223,7 +256,9 @@ function initMobileMenu() {
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const nav = document.querySelector('.nav');
   const body = document.body;
-  
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
   if (mobileMenuToggle && nav) {
     // Toggle menu on button click
     mobileMenuToggle.addEventListener('click', function(e) {
@@ -271,6 +306,27 @@ function initMobileMenu() {
       }
     });
   }
+
+  if (navToggle && navLinks) {
+    const toggleNav = () => {
+      const isActive = navLinks.classList.toggle('active');
+      navToggle.classList.toggle('active', isActive);
+      navToggle.setAttribute('aria-expanded', String(isActive));
+    };
+
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleNav();
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 }
 
 /**
@@ -278,7 +334,7 @@ function initMobileMenu() {
  * Adds visual feedback when user scrolls down the page
  */
 function initStickyHeader() {
-  const header = document.querySelector('.header');
+  const header = document.querySelector('.site-header');
   
   if (header) {
     window.addEventListener('scroll', function() {
