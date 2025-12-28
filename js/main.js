@@ -94,13 +94,13 @@ function applySharedLayout() {
   const existingFooter = document.querySelector('footer.footer');
   const existingMain = document.querySelector('main');
 
-  const header = existingHeader || buildSiteHeader();
-  if (!existingHeader) {
-    if (skipLink && skipLink.parentElement === body) {
-      skipLink.insertAdjacentElement('afterend', header);
-    } else {
-      body.insertBefore(header, body.firstChild);
-    }
+  const header = buildSiteHeader();
+  if (existingHeader) {
+    existingHeader.replaceWith(header);
+  } else if (skipLink && skipLink.parentElement === body) {
+    skipLink.insertAdjacentElement('afterend', header);
+  } else {
+    body.insertBefore(header, body.firstChild);
   }
   setActiveNavLink(header);
 
@@ -155,11 +155,6 @@ function buildSiteHeader() {
         <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
         <span class="brand-name">LYRĪON ATELIER</span>
       </a>
-
-      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
-        ☰
-      </button>
-
       <ul class="nav-links" role="menubar">
         <li><a href="/" role="menuitem">Home</a></li>
         <li><a href="/shop" role="menuitem">Shop</a></li>
