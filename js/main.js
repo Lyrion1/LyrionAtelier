@@ -832,6 +832,8 @@ function createLoadingOverlay() {
 }
 
 const RITUAL_KEYWORDS = ['ritual', 'ceremony', 'manifestation', 'meditation', 'circle', 'healing'];
+const PREMIUM_LISTING_THRESHOLD = 300;
+const FEATURED_LISTING_THRESHOLD = 150;
 
 function formatListingFeeValue(value) {
   if (value === undefined || value === null) return 'Free';
@@ -864,6 +866,51 @@ function getPriceDisplay(event) {
   return `${label}: ${amount}`;
 }
 
+function extractNumericValue(candidate) {
+  if (typeof candidate === 'number' && Number.isFinite(candidate)) return candidate;
+  if (typeof candidate === 'string') {
+    const match = candidate.match(/-?\d+(?:\.\d+)?/);
+    if (match) {
+      const numeric = Number(match[0]);
+      if (Number.isFinite(numeric)) return numeric;
+    }
+  }
+  return null;
+}
+
+function parseEventValue(event) {
+  const numericFields = [event?.listingValue];
+  for (const candidate of numericFields) {
+    const numeric = extractNumericValue(candidate);
+    if (numeric !== null) return numeric;
+  }
+
+  const priceFields = [event?.listingFee, event?.price, event?.priceUSD];
+  for (const candidate of priceFields) {
+    const numeric = extractNumericValue(candidate);
+    if (numeric !== null) return numeric;
+  }
+
+  return 0;
+}
+
+function getEventTier(event) {
+  const value = parseEventValue(event);
+  let tier = 'standard';
+
+  if (value >= PREMIUM_LISTING_THRESHOLD) {
+    tier = 'premium';
+  } else if (value >= FEATURED_LISTING_THRESHOLD) {
+    tier = 'featured';
+  }
+
+  if (event?.featured && tier === 'standard') {
+    tier = 'featured';
+  }
+
+  return tier;
+}
+
 function resolveEventUrl(event) {
   const directUrl = (event?.url || '').trim();
   return directUrl || null;
@@ -883,6 +930,9 @@ function loadEvents() {
     const priceText = priceDisplay === 'Free' ? 'Free' : `💰 ${priceDisplay}`;
     const eventUrl = resolveEventUrl(event);
     const hasEventUrl = Boolean(eventUrl);
+    const tier = getEventTier(event);
+    const tierClass =
+      tier === 'premium' ? 'premium-card' : tier === 'featured' ? 'featured-card' : 'standard-card';
     const ctaLabel = 'Learn More & Register';
     const ctaHref = hasEventUrl ? eventUrl : '#';
     const ctaClass = `event-btn${hasEventUrl ? '' : ' cta-disabled'}`;
@@ -890,7 +940,7 @@ function loadEvents() {
       ? 'target="_blank" rel="noopener noreferrer"'
       : 'aria-disabled="true" tabindex="-1" style="pointer-events: none; opacity: 0.75;"';
     return `
-    <div class="event-card ${event.featured ? 'featured-event' : ''}">
+    <div class="event-card ${tierClass} ${event.featured ? 'featured-event' : ''}" data-event-id="${event.id}" data-event-tier="${tier}">
       ${event.featured ? '<span class="featured-badge">Featured</span>' : ''}
       <div class="event-date">
         <span class="month">${new Date(event.date).toLocaleDateString('en-US', { month: 'short' })}</span>
@@ -924,6 +974,13 @@ function hydrateCodexCards() {
   codexCards.forEach(card => {
     const event = eventsById.get(card.dataset.eventId);
     if (!event) return;
+
+    const tier = getEventTier(event);
+    if (tier) {
+      card.dataset.eventTier = tier;
+      card.classList.remove('premium-card', 'featured-card', 'standard-card');
+      card.classList.add(`${tier}-card`);
+    }
 
     const pricePill = card.querySelector('.price-pill');
     if (pricePill) {

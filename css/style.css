@@ -2676,6 +2676,24 @@ CODEX - TIERED EVENT LISTINGS
   margin-bottom: 40px;
 }
 
+/* Tiered sizing driven by event value */
+.events-section .event-card {
+  --event-card-min-height: auto;
+  min-height: var(--event-card-min-height);
+}
+
+.events-section .event-card[data-event-tier="standard"] {
+  --event-card-min-height: 460px;
+}
+
+.events-section .event-card[data-event-tier="featured"] {
+  --event-card-min-height: 520px;
+}
+
+.events-section .event-card[data-event-tier="premium"] {
+  --event-card-min-height: 600px;
+}
+
 .premium-badge {
   background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(251, 191, 36, 0.15));
   border: 2px solid rgba(251, 191, 36, 0.6);
