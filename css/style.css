@@ -6022,3 +6022,30 @@ button,
   }
 
 }
+
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.95);
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  nav ul.active {
+    display: flex !important;
+  }
+
+  .hamburger {
+    display: block !important;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .nav-toggle {
+    display: block !important;
+  }
+}

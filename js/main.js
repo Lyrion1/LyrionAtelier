@@ -515,15 +515,24 @@ function buildSiteFooter() {
  * - Body scroll lock when open
  */
 function initMobileMenu() {
-  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-  const nav = document.querySelector('.nav');
+  const mobileMenuToggle = document.querySelector('.hamburger') ||
+    document.querySelector('.mobile-menu-toggle') ||
+    document.querySelector('.nav-toggle') ||
+    document.querySelector('#menu-toggle');
+  const nav = document.querySelector('.mobile-nav') ||
+    document.querySelector('.nav-menu') ||
+    document.querySelector('.nav-links') ||
+    document.querySelector('.nav') ||
+    document.querySelector('nav ul');
   const body = document.body;
 
   if (mobileMenuToggle && nav) {
     // Toggle menu on button click
     mobileMenuToggle.addEventListener('click', function(e) {
+      e.preventDefault();
       e.stopPropagation();
       const isActive = nav.classList.toggle('active');
+      mobileMenuToggle.classList.toggle('active');
       
       // Toggle body scroll lock
       if (isActive) {
@@ -536,10 +545,11 @@ function initMobileMenu() {
     });
     
     // Close menu when clicking on a link
-    const navLinks = document.querySelectorAll('.nav a');
+    const navLinks = nav.querySelectorAll('a');
     navLinks.forEach(link => {
       link.addEventListener('click', function() {
         nav.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
         body.style.overflow = '';
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
       });
@@ -551,6 +561,7 @@ function initMobileMenu() {
           !nav.contains(e.target) && 
           !mobileMenuToggle.contains(e.target)) {
         nav.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
         body.style.overflow = '';
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
       }
@@ -560,6 +571,7 @@ function initMobileMenu() {
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && nav.classList.contains('active')) {
         nav.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
         body.style.overflow = '';
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
         mobileMenuToggle.focus();
