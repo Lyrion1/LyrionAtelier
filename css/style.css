@@ -5836,8 +5836,9 @@ button,
 @media (max-width: 768px) {
   .main-nav {
     padding: 12px 16px;
-    flex-wrap: wrap;
-    row-gap: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 
   .logo-link {
@@ -5856,6 +5857,13 @@ button,
   }
 
   .nav-links {
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
   }
 }

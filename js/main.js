@@ -176,12 +176,19 @@ function setActiveNavLink(header) {
   const links = Array.from(nav.querySelectorAll('a'));
   if (!links.length) return;
 
-  const currentPath = (window.location.pathname.replace(/\/$/, '') || '/').toLowerCase();
+  const normalizePath = (path) => {
+    if (!path) return '/';
+    const cleaned = path.split('#')[0].split('?')[0] || '/';
+    if (cleaned === '/') return '/';
+    return cleaned.replace(/\/+$/, '').toLowerCase() || '/';
+  };
+
+  const currentPath = normalizePath(window.location.pathname);
   let bestMatch = { length: -1, link: null };
 
   links.forEach(link => {
-    const href = (link.getAttribute('href') || '').replace(/\/$/, '') || '/';
-    const linkPath = href.toLowerCase();
+    const href = normalizePath(link.getAttribute('href'));
+    const linkPath = href;
     const matchesExact = currentPath === linkPath;
     const matchesPrefix = currentPath.startsWith(linkPath + '/');
     if (matchesExact || matchesPrefix) {
