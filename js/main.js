@@ -94,15 +94,14 @@ function applySharedLayout() {
   const existingFooter = document.querySelector('footer.footer');
   const existingMain = document.querySelector('main');
 
-  const header = buildSiteHeader();
-  if (existingHeader) {
-    existingHeader.replaceWith(header);
-  } else if (skipLink && skipLink.parentElement === body) {
-    skipLink.insertAdjacentElement('afterend', header);
-  } else {
-    body.insertBefore(header, body.firstChild);
+  const header = existingHeader || buildSiteHeader();
+  if (!existingHeader) {
+    if (skipLink && skipLink.parentElement === body) {
+      skipLink.insertAdjacentElement('afterend', header);
+    } else {
+      body.insertBefore(header, body.firstChild);
+    }
   }
-
   setActiveNavLink(header);
 
   let main = existingMain;
@@ -156,6 +155,10 @@ function buildSiteHeader() {
         <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
         <span class="brand-name">LYRĪON ATELIER</span>
       </a>
+
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        ☰
+      </button>
 
       <ul class="nav-links" role="menubar">
         <li><a href="/" role="menuitem">Home</a></li>
@@ -253,7 +256,9 @@ function initMobileMenu() {
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const nav = document.querySelector('.nav');
   const body = document.body;
-  
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
   if (mobileMenuToggle && nav) {
     // Toggle menu on button click
     mobileMenuToggle.addEventListener('click', function(e) {
@@ -299,6 +304,27 @@ function initMobileMenu() {
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
         mobileMenuToggle.focus();
       }
+    });
+  }
+
+  if (navToggle && navLinks) {
+    const toggleNav = () => {
+      const isActive = navLinks.classList.toggle('active');
+      navToggle.classList.toggle('active', isActive);
+      navToggle.setAttribute('aria-expanded', String(isActive));
+    };
+
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleNav();
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
     });
   }
 }
