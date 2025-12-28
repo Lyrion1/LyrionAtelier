@@ -221,21 +221,25 @@ function ensureSkipToContent() {
 function buildSiteHeader() {
   const header = document.createElement('header');
   header.className = 'site-header';
-  header.style.cssText = 'background: rgba(10, 8, 32, 0.95); padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(212, 175, 55, 0.2);';
   header.dataset.navVersion = NAV_VERSION;
   header.innerHTML = `
-    <a href="/" class="logo-link" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
-      <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img" style="height: 50px; width: auto;">
-      <span class="brand-name" style="color: #d4af37; font-size: 1.5rem; font-weight: 600; letter-spacing: 2px; font-family: Georgia, serif;">LYRĪON ATELIER</span>
-    </a>
-    <nav class="nav-links" aria-label="Main navigation" style="display: flex; gap: 25px; align-items: center;">
-      <a href="/" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem; transition: color 0.3s;">Home</a>
-      <a href="/shop" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem;">Shop</a>
-      <a href="/oracle" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem;">Oracle</a>
-      <a href="/compatibility" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem;">Compatibility</a>
-      <a href="/codex" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem;">Codex</a>
-      <a href="/contact" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem;">Contact</a>
-      <a href="/cart" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem;">Cart</a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="/" class="logo-link">
+        <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
+        <span class="brand-name">LYRĪON ATELIER</span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        ☰
+      </button>
+      <ul class="nav-links" role="menubar">
+        <li><a href="/" role="menuitem">Home</a></li>
+        <li><a href="/shop" role="menuitem">Shop</a></li>
+        <li><a href="/oracle" role="menuitem">Oracle</a></li>
+        <li><a href="/compatibility" role="menuitem">Compatibility</a></li>
+        <li><a href="/codex" role="menuitem">Codex</a></li>
+        <li><a href="/contact" role="menuitem">Contact</a></li>
+        <li><a href="/cart" role="menuitem">Cart</a></li>
+      </ul>
     </nav>`;
   return header;
 }
@@ -403,8 +407,8 @@ function ensureSeoMetadata() {
   upsertMeta('X-UA-Compatible', 'IE=edge', 'http-equiv');
 
   upsertLink('canonical', canonicalHref);
-  upsertLink('icon', '/images/favicon.png');
-  upsertLink('apple-touch-icon', '/images/apple-touch-icon.png');
+  upsertLink('icon', '/images/favicon/favicon.png');
+  upsertLink('apple-touch-icon', '/images/favicon/favicon.png');
 
   if (pathname === '/') {
     ensureJsonLd('ldjson-store', {
