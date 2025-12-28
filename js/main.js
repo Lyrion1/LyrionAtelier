@@ -157,15 +157,15 @@ function buildSiteHeader() {
         <span class="brand-name">LYRĪON ATELIER</span>
       </a>
 
-      <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="/shop">Shop</a>
-        <a href="/oracle">Oracle</a>
-        <a href="/compatibility">Compatibility</a>
-        <a href="/codex">Codex</a>
-        <a href="/contact">Contact</a>
-        <a href="/cart">Cart</a>
-      </div>
+      <ul class="nav-links" role="menubar">
+        <li><a href="/" role="menuitem">Home</a></li>
+        <li><a href="/shop" role="menuitem">Shop</a></li>
+        <li><a href="/oracle" role="menuitem">Oracle</a></li>
+        <li><a href="/compatibility" role="menuitem">Compatibility</a></li>
+        <li><a href="/codex" role="menuitem">Codex</a></li>
+        <li><a href="/contact" role="menuitem">Contact</a></li>
+        <li><a href="/cart" role="menuitem">Cart</a></li>
+      </ul>
     </nav>`;
   return header;
 }
@@ -178,9 +178,10 @@ function setActiveNavLink(header) {
 
   const normalizePath = (path) => {
     if (!path) return '/';
-    const cleaned = path.split('#')[0].split('?')[0] || '/';
-    if (cleaned === '/') return '/';
-    return cleaned.replace(/\/+$/, '').toLowerCase() || '/';
+    const cleaned = path.split('#')[0].split('?')[0];
+    const safePath = cleaned || '/';
+    if (safePath === '/') return '/';
+    return safePath.replace(/\/+$/, '').toLowerCase() || '/';
   };
 
   const currentPath = normalizePath(window.location.pathname);

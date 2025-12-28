@@ -5820,6 +5820,9 @@ button,
 .nav-links {
   display: flex;
   gap: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-links a {
@@ -5836,6 +5839,10 @@ button,
 .nav-links a[aria-current="page"] {
   color: #d4af37;
   font-weight: 600;
+}
+
+.site-header.scrolled {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
 @media (max-width: 768px) {
