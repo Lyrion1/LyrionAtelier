@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" role="img" aria-labelledby="title desc">
+<title id="title">Luxury Shipping Tube</title>
+<desc id="desc">Illustration of a premium shipping tube with metallic cap.</desc>
+<rect width="360" height="200" rx="12" fill="#0f182f"/>
+<rect x="46" y="86" width="248" height="32" rx="8" fill="#24345c" stroke="#f5d67b" stroke-width="4"/>
+<rect x="46" y="86" width="44" height="32" rx="8" fill="#d1a75f"/>
+<circle cx="70" cy="102" r="10" fill="#f8e6b7"/>
+<rect x="84" y="96" width="180" height="8" fill="#f5d67b" opacity=".8"/>
+<rect x="84" y="108" width="120" height="6" fill="#d1e0ff" opacity=".8"/>
+<path d="M310 84v36c0 6-5 11-11 11h-5V73h5c6 0 11 5 11 11z" fill="#c6b4ff" opacity=".85"/>
+<circle cx="299" cy="102" r="6" fill="#0f182f"/>
+</svg>
