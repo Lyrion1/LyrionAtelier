@@ -300,7 +300,7 @@
           </div>
           <div class="subscription-card most-loved">
             <div class="featured-badge">MOST LOVED</div>
-            <h3 class="reading-title">Cosmic Insight</h3>
+            <h3 class="reading-title">Cosmic Path</h3>
             <div class="reading-price">$9.99/mo</div>
             <p class="reading-description">Unlimited guidance whenever the night sky nudges.</p>
           </div>
@@ -339,11 +339,15 @@
       .modal,
       .overlay,
       .popup,
+      .modal-overlay,
+      .modal-backdrop,
+      .loading-overlay,
       [class*="modal"],
       [class*="overlay"] {
         display: none !important;
         opacity: 0 !important;
         pointer-events: none !important;
+        z-index: -1 !important;
       }
 
       /* CELESTIAL WARDROBE STYLES */
