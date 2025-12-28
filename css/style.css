@@ -3815,12 +3815,22 @@ RESPONSIVE DESIGN
  min-height: 600px;
 }
 
+.compatibility-card img,
 .compatibility-card-image {
  width: 100%;
- height: 200px;
+ height: auto;
  object-fit: cover;
+ border-radius: 8px;
+ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+ transition: transform 0.3s ease;
  display: block;
  flex-shrink: 0;
+}
+
+.compatibility-card img:hover,
+.compatibility-card-image:hover {
+ transform: scale(1.03);
+ box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
 }
 
 .compatibility-product-title {
@@ -5695,7 +5705,7 @@ button,
     -webkit-line-clamp: 3 !important;
   }
   .compatibility-card-image {
-    height: 200px !important;
+    height: auto !important;
   }
 }
 

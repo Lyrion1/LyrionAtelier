@@ -17,8 +17,17 @@
 
 .reading-image img {
   width: 100%;
-  border-radius: 12px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
   border: 2px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.reading-image img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
 }
 
 .reading-details h1 {
@@ -118,9 +127,17 @@
 
 .hero-image img {
   width: 100%;
-  border-radius: 16px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
   border: 3px solid rgba(212, 175, 55, 0.4);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
 }
 
 .tagline {
