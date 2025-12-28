@@ -147,30 +147,24 @@ function ensureSkipToContent() {
 
 function buildSiteHeader() {
   const header = document.createElement('header');
-  header.className = 'site-header header';
+  header.className = 'site-header';
   header.innerHTML = `
-    <div class="container header-inner">
-      <a class="logo" href="/">
-        <img class="brand-logo" src="images/logo/GOD.PNG" alt="Lyrīon Atelier logo">
-        <span class="brand-name">Lyrīon Atelier</span>
+    <nav class="main-nav">
+      <a href="/" class="logo-link">
+        <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
+        <span class="brand-name">LYRĪON ATELIER</span>
       </a>
-      <nav aria-label="Main navigation">
-        <ul class="nav">
-          <li><a href="/">Home</a></li>
-          <li><a href="/shop">Shop</a></li>
-          <li><a href="/oracle">Oracle</a></li>
-          <li><a href="/compatibility">Compatibility</a></li>
-          <li><a href="/codex">Codex</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="header-actions">
-        <a class="cart-icon" href="/cart" aria-label="Shopping cart">
-          🛒 <span class="cart-count">0</span>
-        </a>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/shop">Shop</a>
+        <a href="/oracle">Oracle</a>
+        <a href="/compatibility">Compatibility</a>
+        <a href="/codex">Codex</a>
+        <a href="/contact">Contact</a>
+        <a href="/cart">Cart</a>
       </div>
-    </div>`;
+    </nav>`;
   return header;
 }
 
@@ -278,7 +272,7 @@ function initMobileMenu() {
  * Adds visual feedback when user scrolls down the page
  */
 function initStickyHeader() {
-  const header = document.querySelector('.header');
+  const header = document.querySelector('.site-header');
   
   if (header) {
     window.addEventListener('scroll', function() {
