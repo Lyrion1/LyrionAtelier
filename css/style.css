@@ -4841,8 +4841,7 @@ body {
 .subscription-card.most-loved {
   border: 3px solid #d4af37;
   background: rgba(212, 175, 55, 0.05);
-  overflow-x: hidden;
-  overflow-y: visible;
+  overflow: visible;
 }
 
 .subscription-card.premium {
@@ -4881,7 +4880,7 @@ body {
 
 .badge-most-loved {
   position: absolute;
-  top: -12px;
+  top: var(--badge-most-loved-offset, -12px);
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(135deg, #d4af37, #f0c659);
