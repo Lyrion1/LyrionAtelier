@@ -2139,6 +2139,9 @@ textarea:focus {
   border: 1px solid rgba(251, 191, 36, 0.2);
   border-radius: 16px;
   padding: 24px;
+  max-width: 800px;
+  width: 100%;
+  margin: 30px auto;
   display: flex;
   gap: 20px;
   transition: all 0.3s ease;
