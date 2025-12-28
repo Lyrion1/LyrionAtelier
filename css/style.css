@@ -5833,6 +5833,11 @@ button,
   color: #d4af37;
 }
 
+.nav-links a[aria-current="page"] {
+  color: #d4af37;
+  font-weight: 600;
+}
+
 @media (max-width: 768px) {
   .main-nav {
     padding: 12px 16px;
