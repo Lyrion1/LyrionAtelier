@@ -5879,7 +5879,9 @@ button,
     flex-direction: row;
     gap: 16px;
     width: auto;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .nav-links a {

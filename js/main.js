@@ -94,7 +94,7 @@ function applySharedLayout() {
   const existingFooter = document.querySelector('footer.footer');
   const existingMain = document.querySelector('main');
 
-  const needsNewHeader = !existingHeader || existingHeader.querySelector('.nav-toggle');
+  const needsNewHeader = !existingHeader || existingHeader.dataset.navVersion !== 'nav-v2';
   const header = needsNewHeader ? buildSiteHeader() : existingHeader;
   if (existingHeader && needsNewHeader) {
     existingHeader.replaceWith(header);
@@ -150,6 +150,7 @@ function ensureSkipToContent() {
 function buildSiteHeader() {
   const header = document.createElement('header');
   header.className = 'site-header';
+  header.dataset.navVersion = 'nav-v2';
   header.innerHTML = `
     <nav class="main-nav" aria-label="Main navigation">
       <a href="/" class="logo-link">
