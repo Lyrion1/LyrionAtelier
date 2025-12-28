@@ -4877,6 +4877,22 @@ body {
   text-overflow: initial;
 }
 
+.badge-most-loved {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #d4af37, #f0c659);
+  color: #0f0c29;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+  z-index: 10;
+}
+
 .subscription-button {
   background: #d4af37;
   color: #0f0c29;
