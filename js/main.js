@@ -187,10 +187,9 @@ function setActiveNavLink(header) {
   let bestMatch = { length: -1, link: null };
 
   links.forEach(link => {
-    const href = normalizePath(link.getAttribute('href'));
-    const linkPath = href;
+    const linkPath = normalizePath(link.getAttribute('href'));
     const matchesExact = currentPath === linkPath;
-    const matchesPrefix = currentPath.startsWith(linkPath + '/');
+    const matchesPrefix = linkPath !== '/' && currentPath.startsWith(linkPath + '/');
     if (matchesExact || matchesPrefix) {
       if (linkPath.length > bestMatch.length) {
         bestMatch = { length: linkPath.length, link };
