@@ -103,6 +103,8 @@ function applySharedLayout() {
     body.insertBefore(header, body.firstChild);
   }
 
+  setActiveNavLink(header);
+
   let main = existingMain;
   if (!main) {
     main = document.createElement('main');
@@ -149,7 +151,7 @@ function buildSiteHeader() {
   const header = document.createElement('header');
   header.className = 'site-header';
   header.innerHTML = `
-    <nav class="main-nav">
+    <nav class="main-nav" aria-label="Main navigation">
       <a href="/" class="logo-link">
         <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
         <span class="brand-name">LYRĪON ATELIER</span>
@@ -166,6 +168,33 @@ function buildSiteHeader() {
       </div>
     </nav>`;
   return header;
+}
+
+function setActiveNavLink(header) {
+  const nav = header?.querySelector('.nav-links');
+  if (!nav) return;
+  const links = Array.from(nav.querySelectorAll('a'));
+  if (!links.length) return;
+
+  const currentPath = (window.location.pathname.replace(/\/$/, '') || '/').toLowerCase();
+  let bestMatch = { length: -1, link: null };
+
+  links.forEach(link => {
+    const href = (link.getAttribute('href') || '').replace(/\/$/, '') || '/';
+    const linkPath = href.toLowerCase();
+    const matchesExact = currentPath === linkPath;
+    const matchesPrefix = currentPath.startsWith(linkPath + '/');
+    if (matchesExact || matchesPrefix) {
+      if (linkPath.length > bestMatch.length) {
+        bestMatch = { length: linkPath.length, link };
+      }
+    }
+  });
+
+  links.forEach(link => link.removeAttribute('aria-current'));
+  if (bestMatch.link) {
+    bestMatch.link.setAttribute('aria-current', 'page');
+  }
 }
 
 const FOOTER_TIKTOK_ICON = `
