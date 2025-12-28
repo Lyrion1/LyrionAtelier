@@ -1,5 +1,7 @@
 // Lyrīon Atelier - Main JavaScript
 
+const NAV_VERSION = 'nav-v2';
+
 // Inject the shop auto-loader once globally (idempotent)
 (function injectShopAutoLoader() {
   const src = '/assets/auto-mount-shop-grid.js';
@@ -94,7 +96,7 @@ function applySharedLayout() {
   const existingFooter = document.querySelector('footer.footer');
   const existingMain = document.querySelector('main');
 
-  const needsNewHeader = !existingHeader || existingHeader.dataset.navVersion !== 'nav-v2';
+  const needsNewHeader = !existingHeader || existingHeader.dataset.navVersion !== NAV_VERSION;
   const header = needsNewHeader ? buildSiteHeader() : existingHeader;
   if (existingHeader && needsNewHeader) {
     existingHeader.replaceWith(header);
@@ -150,7 +152,7 @@ function ensureSkipToContent() {
 function buildSiteHeader() {
   const header = document.createElement('header');
   header.className = 'site-header';
-  header.dataset.navVersion = 'nav-v2';
+  header.dataset.navVersion = NAV_VERSION;
   header.innerHTML = `
     <nav class="main-nav" aria-label="Main navigation">
       <a href="/" class="logo-link">
