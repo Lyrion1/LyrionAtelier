@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 260" role="img" aria-labelledby="title desc">
+<title id="title">Framed Display</title>
+<desc id="desc">Framed certificate display illustration with mat and shadow.</desc>
+<rect width="380" height="260" rx="18" fill="#0f182f"/>
+<rect x="46" y="34" width="288" height="192" fill="#2b395d" stroke="#f8e6b7" stroke-width="5" rx="10"/>
+<rect x="76" y="64" width="228" height="132" fill="#f7f8fb" stroke="#d1d8f2" stroke-width="2"/>
+<rect x="112" y="90" width="156" height="80" fill="#e5e9f7"/>
+<text x="190" y="130" fill="#0f182f" font-family="serif" font-size="18" text-anchor="middle">Compatibility</text>
+<text x="190" y="156" fill="#c6a35d" font-family="serif" font-size="22" font-weight="700" text-anchor="middle">Certificate</text>
+<path d="M70 214h240c5 0 9 4 9 9v3H61v-3c0-5 4-9 9-9z" fill="#0a0f24" opacity=".55"/>
+<line x1="120" y1="80" x2="260" y2="80" stroke="#c6b4ff" stroke-width="2" stroke-dasharray="5 5" opacity=".7"/>
+<circle cx="190" cy="60" r="8" fill="#f5d67b"/>
+</svg>

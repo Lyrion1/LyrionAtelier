@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 240" role="img" aria-labelledby="title desc">
+<title id="title">Gold Foil Names</title>
+<desc id="desc">Stylized gold foil lettering on deep blue background.</desc>
+<rect width="360" height="240" rx="18" fill="#0f182f"/>
+<rect x="36" y="48" width="288" height="144" rx="14" fill="#15244a" stroke="#f5d67b" stroke-width="4"/>
+<text x="180" y="120" fill="#f5d67b" font-family="\"Times New Roman\", serif" font-size="48" font-weight="700" text-anchor="middle">A ♡ B</text>
+<line x1="80" y1="150" x2="280" y2="150" stroke="#c6b4ff" stroke-width="2" stroke-dasharray="6 6" opacity=".7"/>
+<circle cx="90" cy="90" r="10" fill="#f8e6b7"/>
+<circle cx="270" cy="90" r="8" fill="#dbe2ff"/>
+<path d="M120 176h120c6 0 10 4 10 10s-4 10-10 10H120c-6 0-10-4-10-10s4-10 10-10z" fill="#f5d67b" opacity=".4"/>
+</svg>
