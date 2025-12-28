@@ -282,14 +282,17 @@ img {
   display: inline-block;
   padding: 0.55rem 0.9rem;
   border-radius: 10px;
-  color: var(--text);
+  background: none;
+  background-color: transparent;
+  color: #fff;
   text-shadow: var(--text-glow);
   transition: all 0.2s ease;
 }
 
 .nav a:hover,
 .nav a:focus-visible {
-  background: rgba(167, 139, 250, 0.12);
+  background: none;
+  background-color: transparent;
   color: #fff;
 }
 
@@ -404,7 +407,9 @@ img {
 }
 
 .nav-links a {
-  color: rgba(255, 255, 255, 0.8);
+  background: none;
+  background-color: transparent;
+  color: #fff;
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
@@ -413,11 +418,15 @@ img {
 }
 
 .nav-links a:hover {
-  color: #fbbf24;
+  background: none;
+  background-color: transparent;
+  color: #fff;
 }
 
 .nav-links a.active {
-  color: #fbbf24;
+  background: none;
+  background-color: transparent;
+  color: #fff;
   position: relative;
   white-space: nowrap;
 }
@@ -429,7 +438,7 @@ img {
   left: 0;
   right: 0;
   height: 2px;
-  background: #fbbf24;
+  background: #fff;
 }
 
 /* Mobile Navigation Toggle */
@@ -5886,18 +5895,24 @@ button,
 }
 
 .nav-links a {
-  color: rgba(255, 255, 255, 0.9);
+  background: none;
+  background-color: transparent;
+  color: #fff;
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: #d4af37;
+  background: none;
+  background-color: transparent;
+  color: #fff;
 }
 
 .nav-links a[aria-current="page"] {
-  color: #d4af37;
+  background: none;
+  background-color: transparent;
+  color: #fff;
   font-weight: 600;
 }
 
