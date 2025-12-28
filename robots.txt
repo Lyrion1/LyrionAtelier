@@ -3,11 +3,9 @@
 
 User-agent: *
 Allow: /
-Disallow: /checkout
-Disallow: /cart
-
-# Sitemap location
 Sitemap: https://lyrionatelier.com/sitemap.xml
 
-# Crawl delay (optional, in seconds)
-Crawl-delay: 1
+Disallow: /cart
+Disallow: /checkout
+Disallow: /success
+Disallow: /admin

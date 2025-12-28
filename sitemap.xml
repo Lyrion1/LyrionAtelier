@@ -1,84 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  
-  <!-- Homepage -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lyrionatelier.com/</loc>
-    <lastmod>2024-12-12</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2024-12-28</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-  
-  <!-- Shop Page -->
   <url>
     <loc>https://lyrionatelier.com/shop</loc>
-    <lastmod>2024-12-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <!-- Oracle Readings -->
   <url>
     <loc>https://lyrionatelier.com/oracle</loc>
-    <lastmod>2024-12-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- Codex -->
+  <url>
+    <loc>https://lyrionatelier.com/compatibility</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://lyrionatelier.com/codex</loc>
-    <lastmod>2024-12-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
-  <!-- Contact -->
   <url>
     <loc>https://lyrionatelier.com/contact</loc>
-    <lastmod>2024-12-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  
-  <!-- Product Categories -->
-  <url>
-    <loc>https://lyrionatelier.com/shop?category=tshirt</loc>
-    <lastmod>2024-12-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://lyrionatelier.com/shop?category=hoodie</loc>
-    <lastmod>2024-12-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://lyrionatelier.com/shop?category=sweatshirt</loc>
-    <lastmod>2024-12-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- Individual Products (add more as needed) -->
-  <url>
-    <loc>https://lyrionatelier.com/product?id=1</loc>
-    <lastmod>2024-12-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lyrionatelier.com/product?id=2</loc>
-    <lastmod>2024-12-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <!-- Add more product URLs as needed -->
-  
+  <!-- Add all product pages -->
+  <!-- Add all oracle detail pages -->
+  <!-- Add all compatibility detail pages -->
 </urlset>

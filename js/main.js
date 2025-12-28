@@ -1,6 +1,36 @@
 // Lyrīon Atelier - Main JavaScript
 
-const NAV_VERSION = 'nav-v2';
+const NAV_VERSION = 'nav-v3';
+const SITE_ORIGIN = 'https://lyrionatelier.com';
+const OG_IMAGE = `${SITE_ORIGIN}/images/og-image.jpg`;
+const SEO_KEYWORDS = 'astrology, zodiac, luxury apparel, oracle readings, birth chart, horoscope, cosmic fashion, spiritual guidance';
+
+const SEO_TEMPLATES = {
+  '/': {
+    title: 'Lyrīon Atelier - Luxury Astrology, Oracle Readings & Zodiac Apparel',
+    description: 'Discover your cosmic destiny with personalized oracle readings and wear your celestial identity with luxury zodiac apparel. Astrology-inspired fashion and mystical guidance.'
+  },
+  '/shop': {
+    title: 'Luxury Zodiac Apparel - Hoodies, Tees & Accessories | Lyrīon Atelier',
+    description: 'Premium astrology-themed apparel for every zodiac sign. Cosmic hoodies, celestial tees, and mystical accessories designed with intention. Free shipping over $50.'
+  },
+  '/oracle': {
+    title: 'Personalized Oracle Readings - Birth Chart Analysis | Lyrīon Atelier',
+    description: 'Professional astrology readings from expert astrologers. Life path guidance, compatibility analysis, and cosmic forecasts. Delivered in 48 hours.'
+  },
+  '/compatibility': {
+    title: 'Astrological Compatibility Reading - Cosmic Love Analysis | Lyrīon Atelier',
+    description: 'Discover your cosmic connection. Personalized compatibility analysis for couples. Available as digital certificate, luxury print, or museum-quality framed art.'
+  },
+  '/codex': {
+    title: 'Lyrīon Atelier Codex | Cosmic Knowledge & Guidance',
+    description: 'Dive into the Lyrīon Atelier codex for cosmic guidance, rituals, and stories behind our zodiac-inspired creations.'
+  },
+  '/contact': {
+    title: 'Contact Lyrīon Atelier | Astrology & Oracle Support',
+    description: 'Reach the Lyrīon Atelier team for oracle readings, order support, and cosmic concierge assistance.'
+  }
+};
 
 // Inject the shop auto-loader once globally (idempotent)
 (function injectShopAutoLoader() {
@@ -18,6 +48,21 @@ const NAV_VERSION = 'nav-v2';
   const head = document.head;
   if (!head) return;
 
+   const ensureMeta = (attributes) => {
+    const selector = Object.entries(attributes)
+      .map(([key, value]) => `[${key.toLowerCase()}="${value}"]`)
+      .join('');
+    let tag = head.querySelector(`meta${selector}`);
+    if (!tag) {
+      tag = document.createElement('meta');
+      Object.entries(attributes).forEach(([key, value]) => tag.setAttribute(key, value));
+      head.appendChild(tag);
+    } else if (attributes.content) {
+      tag.setAttribute('content', attributes.content);
+    }
+    return tag;
+  };
+
   const viewport = document.querySelector('meta[name="viewport"]');
   if (!viewport) {
     const meta = document.createElement('meta');
@@ -28,14 +73,35 @@ const NAV_VERSION = 'nav-v2';
     viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes');
   }
 
-  ['https://fonts.googleapis.com', 'https://api.stripe.com'].forEach(href => {
+  ensureMeta({ charset: 'UTF-8' });
+  ensureMeta({ 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' });
+  ensureMeta({ name: 'author', content: 'Lyrīon Atelier' });
+  ensureMeta({ 'http-equiv': 'Cache-Control', content: 'max-age=31536000' });
+
+  const preloadHref = '/styles/main.css';
+  if (!head.querySelector(`link[rel="preload"][href="${preloadHref}"]`)) {
+    const preload = document.createElement('link');
+    preload.rel = 'preload';
+    preload.href = preloadHref;
+    preload.as = 'style';
+    head.appendChild(preload);
+  }
+
+  [
+    { href: 'https://fonts.googleapis.com' },
+    { href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
+    { href: 'https://api.stripe.com' }
+  ].forEach(({ href, crossorigin }) => {
     if (!head.querySelector(`link[rel="preconnect"][href="${href}"]`)) {
       const link = document.createElement('link');
       link.rel = 'preconnect';
       link.href = href;
+      if (crossorigin) link.crossOrigin = crossorigin;
       head.appendChild(link);
     }
   });
+
+  ensureAnalytics();
 })();
 
 /**
@@ -45,6 +111,9 @@ const NAV_VERSION = 'nav-v2';
 document.addEventListener('DOMContentLoaded', function() {
   document.body.classList.add('loaded');
   applySharedLayout();
+  ensureSeoMetadata();
+  ensureAnalytics();
+  enhanceImages();
   
   // Initialize mobile menu
   initMobileMenu();
@@ -152,22 +221,21 @@ function ensureSkipToContent() {
 function buildSiteHeader() {
   const header = document.createElement('header');
   header.className = 'site-header';
+  header.style.cssText = 'background: rgba(10, 8, 32, 0.95); padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(212, 175, 55, 0.2);';
   header.dataset.navVersion = NAV_VERSION;
   header.innerHTML = `
-    <nav class="main-nav" aria-label="Main navigation">
-      <a href="/" class="logo-link">
-        <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
-        <span class="brand-name">LYRĪON ATELIER</span>
-      </a>
-      <ul class="nav-links" role="menubar">
-        <li><a href="/" role="menuitem">Home</a></li>
-        <li><a href="/shop" role="menuitem">Shop</a></li>
-        <li><a href="/oracle" role="menuitem">Oracle</a></li>
-        <li><a href="/compatibility" role="menuitem">Compatibility</a></li>
-        <li><a href="/codex" role="menuitem">Codex</a></li>
-        <li><a href="/contact" role="menuitem">Contact</a></li>
-        <li><a href="/cart" role="menuitem">Cart</a></li>
-      </ul>
+    <a href="/" class="logo-link" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+      <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img" style="height: 50px; width: auto;">
+      <span class="brand-name" style="color: #d4af37; font-size: 1.5rem; font-weight: 600; letter-spacing: 2px; font-family: Georgia, serif;">LYRĪON ATELIER</span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation" style="display: flex; gap: 25px; align-items: center;">
+      <a href="/" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem; transition: color 0.3s;">Home</a>
+      <a href="/shop" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem;">Shop</a>
+      <a href="/oracle" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem;">Oracle</a>
+      <a href="/compatibility" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem;">Compatibility</a>
+      <a href="/codex" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem;">Codex</a>
+      <a href="/contact" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem;">Contact</a>
+      <a href="/cart" role="menuitem" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 1rem;">Cart</a>
     </nav>`;
   return header;
 }
@@ -204,6 +272,197 @@ function setActiveNavLink(header) {
   if (bestMatch.link) {
     bestMatch.link.setAttribute('aria-current', 'page');
   }
+}
+
+function ensureAnalytics() {
+  const head = document.head || document.body;
+  if (!head) return;
+
+  if (!document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
+    const gtagScript = document.createElement('script');
+    gtagScript.async = true;
+    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
+    head.appendChild(gtagScript);
+  }
+
+  if (!document.querySelector('script[data-gtag-inline]')) {
+    const inline = document.createElement('script');
+    inline.setAttribute('data-gtag-inline', 'true');
+    inline.textContent = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    `;
+    head.appendChild(inline);
+  }
+
+  if (!document.querySelector('script[data-fb-pixel]')) {
+    const fb = document.createElement('script');
+    fb.setAttribute('data-fb-pixel', 'true');
+    fb.textContent = `
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'YOUR_PIXEL_ID');
+      fbq('track', 'PageView');
+    `;
+    head.appendChild(fb);
+  }
+}
+
+function normalizePathname(pathname = '/') {
+  const normalized = pathname.replace(/\\/g, '/').replace(/\/index\.html$/, '/').replace(/\/+$/, '');
+  return normalized || '/';
+}
+
+function getSeoTemplate(pathname) {
+  const normalized = normalizePathname(pathname);
+  if (SEO_TEMPLATES[normalized]) return SEO_TEMPLATES[normalized];
+  if (normalized.startsWith('/shop/')) {
+    const name = (document.querySelector('#product-name')?.textContent || 'Zodiac Apparel').trim();
+    const title = `${name} | Lyrīon Atelier - Luxury Astrology & Zodiac Apparel`;
+    const description = (document.querySelector('#product-description')?.textContent || 'Premium zodiac apparel featuring celestial symbolism from Lyrīon Atelier.').trim();
+    return { title, description };
+  }
+  return {
+    title: document.title || 'Lyrīon Atelier - Luxury Astrology, Oracle Readings & Zodiac Apparel',
+    description: 'Explore luxury zodiac apparel, oracle readings, and cosmic guidance from Lyrīon Atelier.'
+  };
+}
+
+function ensureJsonLd(id, data) {
+  if (!data) return;
+  const head = document.head || document.body;
+  if (!head) return;
+  let script = document.getElementById(id);
+  if (!script) {
+    script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = id;
+    head.appendChild(script);
+  }
+  script.textContent = JSON.stringify(data);
+}
+
+function ensureSeoMetadata() {
+  const head = document.head;
+  if (!head) return;
+
+  const pathname = normalizePathname(window.location.pathname);
+  const seo = getSeoTemplate(pathname);
+  const canonicalHref = `${SITE_ORIGIN}${pathname}`;
+
+  document.title = seo.title;
+
+  const upsertMeta = (attr, content, key = 'name') => {
+    if (!content) return;
+    let tag = head.querySelector(`meta[${key}="${attr}"]`);
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute(key, attr);
+      head.appendChild(tag);
+    }
+    tag.setAttribute('content', content);
+  };
+
+  const upsertLink = (rel, href, extra = {}) => {
+    if (!href) return;
+    let link = head.querySelector(`link[rel="${rel}"]`);
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = rel;
+      head.appendChild(link);
+    }
+    link.href = href;
+    Object.entries(extra).forEach(([k, v]) => {
+      link.setAttribute(k, v);
+    });
+  };
+
+  upsertMeta('title', seo.title);
+  upsertMeta('description', seo.description);
+  upsertMeta('keywords', SEO_KEYWORDS);
+  upsertMeta('author', 'Lyrīon Atelier');
+  upsertMeta('twitter:card', 'summary_large_image', 'name');
+  upsertMeta('twitter:title', seo.title, 'name');
+  upsertMeta('twitter:description', seo.description, 'name');
+  upsertMeta('twitter:image', OG_IMAGE, 'name');
+  upsertMeta('og:type', 'website', 'property');
+  upsertMeta('og:url', canonicalHref, 'property');
+  upsertMeta('og:title', seo.title, 'property');
+  upsertMeta('og:description', seo.description, 'property');
+  upsertMeta('og:image', OG_IMAGE, 'property');
+  upsertMeta('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes');
+  upsertMeta('Cache-Control', 'max-age=31536000', 'http-equiv');
+  upsertMeta('X-UA-Compatible', 'IE=edge', 'http-equiv');
+
+  upsertLink('canonical', canonicalHref);
+  upsertLink('icon', '/images/favicon.png');
+  upsertLink('apple-touch-icon', '/images/apple-touch-icon.png');
+
+  if (pathname === '/') {
+    ensureJsonLd('ldjson-store', {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Lyrīon Atelier",
+      "description": "Luxury astrology apparel and oracle readings",
+      "url": SITE_ORIGIN,
+      "logo": `${SITE_ORIGIN}/images/lyrion-logo.png`,
+      "sameAs": [
+        "https://www.tiktok.com/@lyrionatelier",
+        "https://www.instagram.com/lyrionatelier"
+      ],
+      "priceRange": "$$-$$$"
+    });
+  }
+
+  if (pathname.startsWith('/shop/')) {
+    const name = (document.querySelector('#product-name')?.textContent || 'Zodiac Apparel').trim();
+    const description = (document.querySelector('#product-description')?.textContent || seo.description).trim();
+    const image = document.querySelector('#product-gallery img')?.src || OG_IMAGE;
+    const price = (document.querySelector('#product-price')?.textContent || '').replace(/[^\d.]/g, '') || '0';
+    ensureJsonLd('ldjson-product', {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": name,
+      "description": description,
+      "image": image.startsWith('http') ? image : `${SITE_ORIGIN}${image}`,
+      "brand": {
+        "@type": "Brand",
+        "name": "Lyrīon Atelier"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": price,
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": canonicalHref
+      }
+    });
+  }
+}
+
+function enhanceImages() {
+  const images = document.querySelectorAll('img');
+  images.forEach((img) => {
+    if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+    if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+    const applyDimensions = () => {
+      if (!img.getAttribute('width') && img.naturalWidth) img.setAttribute('width', img.naturalWidth.toString());
+      if (!img.getAttribute('height') && img.naturalHeight) img.setAttribute('height', img.naturalHeight.toString());
+    };
+    if (img.complete) {
+      applyDimensions();
+    } else {
+      img.addEventListener('load', applyDimensions, { once: true });
+    }
+  });
 }
 
 const FOOTER_TIKTOK_ICON = `
