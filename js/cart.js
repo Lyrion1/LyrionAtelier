@@ -610,8 +610,8 @@ document.addEventListener('DOMContentLoaded', function() {
         notify('Product not found', 'error');
         return;
       }
-      const normalizedId = Number.isFinite(Number(productId)) ? Number(productId) : productId;
-      addToCart(normalizedId, null, quantity);
+      const resolvedId = Number.isFinite(Number(productId)) ? Number(productId) : productId;
+      addToCart(resolvedId, null, quantity);
     });
   }
   bindBundleChips();

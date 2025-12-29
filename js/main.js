@@ -238,7 +238,7 @@ function buildSiteHeader() {
         <li><a href="/compatibility" role="menuitem">Compatibility</a></li>
         <li><a href="/codex" role="menuitem">Codex</a></li>
         <li><a href="/contact" role="menuitem">Contact</a></li>
-        <li><a href="/cart" role="menuitem" class="cart-icon" aria-live="polite">Cart <span class="cart-count" style="display:none;">0</span></a></li>
+        <li><a href="/cart" role="menuitem" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a></li>
       </ul>
     </nav>`;
   return header;
@@ -634,14 +634,14 @@ function updateCartCount() {
   } catch {
     cart = [];
   }
-  let invalidQuantity = 0;
+  let invalidQuantityCount = 0;
   const totalItems = cart.reduce((sum, item) => {
     const qty = Number.isFinite(item.quantity) ? item.quantity : 1;
-    if (!Number.isFinite(item.quantity)) invalidQuantity += 1;
+    if (!Number.isFinite(item.quantity)) invalidQuantityCount += 1;
     return sum + qty;
   }, 0);
-  if (invalidQuantity) {
-    console.warn(`[cart] ${invalidQuantity} item(s) missing valid quantity, defaulting to 1`);
+  if (invalidQuantityCount) {
+    console.warn(`[cart] ${invalidQuantityCount} item(s) missing valid quantity, defaulting to 1`);
   }
   cartCount.textContent = totalItems;
 
