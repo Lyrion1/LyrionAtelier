@@ -3838,6 +3838,10 @@ RESPONSIVE DESIGN
  min-height: 600px;
 }
 
+.compatibility-products .compatibility-product-card {
+  min-height: 0;
+}
+
 .compatibility-card img,
 .compatibility-card-image {
  width: 100%;
@@ -3907,6 +3911,20 @@ RESPONSIVE DESIGN
 .compatibility-product-card .cta-button:hover {
  background: #d4af37;
  color: #0f0c29;
+}
+
+.compatibility-products .compatibility-card-actions {
+  display: flex;
+  gap: 12px;
+  padding: 0 25px 25px;
+  margin-top: auto;
+}
+
+.compatibility-products .compatibility-card-actions .cta-button,
+.compatibility-products .compatibility-card-actions .purchase-reading-button {
+  margin: 0;
+  flex: 1;
+  text-align: center;
 }
 
 .compat-card {
