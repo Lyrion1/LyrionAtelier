@@ -1,6 +1,6 @@
 // Lyrīon Atelier - Main JavaScript
 
-const NAV_VERSION = 'nav-v3';
+const NAV_VERSION = 'nav-v4';
 const SITE_ORIGIN = 'https://lyrionatelier.com';
 const OG_IMAGE = `${SITE_ORIGIN}/images/og-image.jpg`;
 const SEO_KEYWORDS = 'astrology, zodiac, luxury apparel, oracle readings, birth chart, horoscope, cosmic fashion, spiritual guidance';
@@ -175,6 +175,9 @@ function applySharedLayout() {
     body.insertBefore(header, body.firstChild);
   }
   setActiveNavLink(header);
+  if (header.querySelector('.nav-toggle')) {
+    initInlineNavToggle(header);
+  }
 
   let main = existingMain;
   if (!main) {
@@ -224,22 +227,22 @@ function buildSiteHeader() {
   header.dataset.navVersion = NAV_VERSION;
   header.innerHTML = `
     <nav class="main-nav" aria-label="Main navigation">
-      <a href="/" class="logo-link">
-        <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
-        <span class="brand-name">LYRĪON ATELIER</span>
-      </a>
-      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
-        ☰
-      </button>
-      <ul class="nav-links" role="menubar">
-        <li><a href="/" role="menuitem">Home</a></li>
-        <li><a href="/shop" role="menuitem">Shop</a></li>
-        <li><a href="/oracle" role="menuitem">Oracle</a></li>
-        <li><a href="/compatibility" role="menuitem">Compatibility</a></li>
-        <li><a href="/codex" role="menuitem">Codex</a></li>
-        <li><a href="/contact" role="menuitem">Contact</a></li>
-        <li><a href="/cart" role="menuitem" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a></li>
-      </ul>
+    <a href="/" class="logo-link">
+    <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
+    <span class="brand-name">LYRĪON ATELIER</span>
+    </a>
+    
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation" aria-controls="primary-nav">☰</button>
+    
+    <div class="nav-links" id="primary-nav" aria-hidden="true">
+    <a href="/">Home</a>
+    <a href="/shop">Shop</a>
+    <a href="/oracle">Oracle</a>
+    <a href="/compatibility">Compatibility</a>
+    <a href="/codex">Codex</a>
+    <a href="/contact">Contact</a>
+    <a href="/cart" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a>
+    </div>
     </nav>`;
   return header;
 }
@@ -338,6 +341,77 @@ function getSeoTemplate(pathname) {
     title: document.title || 'Lyrīon Atelier - Luxury Astrology, Oracle Readings & Zodiac Apparel',
     description: 'Explore luxury zodiac apparel, oracle readings, and cosmic guidance from Lyrīon Atelier.'
   };
+}
+
+function initInlineNavToggle(header) {
+  const navToggle = header?.querySelector('.nav-toggle');
+  const navLinks = header?.querySelector('.nav-links');
+  if (!navToggle || !navLinks) return;
+
+  const getFocusables = () => [
+    navToggle,
+    ...navLinks.querySelectorAll('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])')
+  ];
+
+  const closeMenu = () => {
+    navLinks.classList.remove('active');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navLinks.setAttribute('aria-hidden', 'true');
+  };
+
+  const openMenu = () => {
+    navLinks.classList.add('active');
+    navToggle.setAttribute('aria-expanded', 'true');
+    navLinks.setAttribute('aria-hidden', 'false');
+    const firstLink = navLinks.querySelector('a');
+    firstLink?.focus();
+  };
+
+  const toggleMenu = () => {
+    if (navLinks.classList.contains('active')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  };
+
+  navToggle.addEventListener('click', toggleMenu);
+
+  navToggle.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleMenu();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (navLinks.classList.contains('active') && !header.contains(event.target)) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && navLinks.classList.contains('active')) {
+      event.preventDefault();
+      closeMenu();
+      navToggle.focus();
+    }
+  });
+
+  header.addEventListener('keydown', (event) => {
+    if (!navLinks.classList.contains('active') || event.key !== 'Tab') return;
+    const focusables = getFocusables();
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
 }
 
 function ensureJsonLd(id, data) {

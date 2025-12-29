@@ -5933,8 +5933,7 @@ button,
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  position: relative;
 }
 
 .logo-link {
@@ -5945,11 +5944,8 @@ button,
 }
 
 .logo-img {
-  height: auto;
-  max-height: 50px;
+  height: var(--logo-height, 50px);
   width: auto;
-  max-width: 200px;
-  object-fit: contain;
 }
 
 .brand-name {
@@ -5961,34 +5957,18 @@ button,
 
 .nav-links {
   display: flex;
-  gap: 25px;
-  align-items: center;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  gap: 30px;
 }
 
 .nav-links a {
-  background: none;
-  background-color: transparent;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-  background: none;
-  background-color: transparent;
-  color: #fff;
-}
-
-.nav-links a[aria-current="page"] {
-  background: none;
-  background-color: transparent;
-  color: #fff;
-  font-weight: 600;
+  color: #d4af37;
 }
 
 .site-header.scrolled {
@@ -5997,54 +5977,40 @@ button,
 
 @media (max-width: 768px) {
   .main-nav {
-    padding: 16px 20px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .logo-link {
-    gap: 10px;
+    padding: 15px 20px;
   }
 
   .logo-img {
-    height: auto;
-    max-height: 40px;
-    max-width: 150px;
+    --logo-height: 40px;
   }
 
   .brand-name {
-    font-size: 1rem;
-    letter-spacing: 1px;
+    font-size: 1.2rem;
   }
 
   .nav-links {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 16px;
-    width: auto;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    position: relative;
-    padding-right: 12px;
-  }
-
-  .nav-links::after {
-    content: '';
     position: absolute;
+    top: 100%;
+    left: 0;
     right: 0;
-    top: 0;
-    height: 100%;
-    width: 16px;
-    background: linear-gradient(90deg, rgba(10, 8, 32, 0), rgba(10, 8, 32, 0.95));
+    background: rgba(10, 8, 32, 0.95);
+    padding: 16px 20px;
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 0.2s ease, transform 0.2s ease;
     pointer-events: none;
+    visibility: hidden;
   }
 
-  .nav-links a {
-    font-size: 0.95rem;
+  .nav-links.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
   }
 
 }
