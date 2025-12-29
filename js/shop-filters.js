@@ -13,7 +13,8 @@ const defaultState = {
   price: 'all',
   collection: 'all',
   palette: 'all',
-  sort: 'featured'
+  sort: 'featured',
+  search: ''
 };
 
 export function apply(products, incomingState) {
@@ -35,6 +36,7 @@ export function apply(products, incomingState) {
     const collection = String(state.collection || 'all').toLowerCase();
     const size = String(state.size || 'all').toLowerCase();
     const sort = String(state.sort || 'featured').toLowerCase();
+    const search = String(state.search || '').toLowerCase().trim();
 
     const normalize = (val) => String(val || '').toLowerCase().trim();
     const toList = (value) => {
@@ -71,6 +73,11 @@ export function apply(products, incomingState) {
       if (palette !== 'all' && !productPalettes.includes(palette)) return false;
       if (collection !== 'all' && !productCollections.includes(collection)) return false;
       if (size !== 'all' && !productSizes.includes(size)) return false;
+      if (search) {
+        const title = normalize(p?.title || p?.name || p?.slug || '');
+        const desc = normalize(p?.description || p?.desc || '');
+        if (!title.includes(search) && !desc.includes(search)) return false;
+      }
       return true;
     });
 

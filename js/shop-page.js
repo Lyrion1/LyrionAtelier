@@ -1,5 +1,5 @@
 import { apply as applyFilters } from './shop-filters.js';
-import { formatPrice, currencySymbol } from './price-utils.js';
+import { formatPrice } from './price-utils.js';
 
 // Load products from global or API and render; hide loader quickly even on empty
 (() => {
@@ -12,6 +12,41 @@ import { formatPrice, currencySymbol } from './price-utils.js';
   const FALLBACK = '/assets/catalog/placeholder.webp';
   const PRICE_UNAVAILABLE_LABEL = '—';
   const LOADER_TIMEOUT_MS = 1800;
+  const PRODUCT_PRIORITY = ['taurus-tank-top', 'taurus-baseball-jersey', 'taurus-crop-tee', 'taurus-pyjama-top'];
+  const FEATURED_PRODUCTS = [
+    {
+      slug: 'taurus-tank-top',
+      title: 'Taurus Micro-Rib Tank Top',
+      price: 32.99,
+      image: '/shop-images/taurus-tank-top/taurus-tank-top-lifestyle-front.jpg',
+      link: '/shop/taurus-tank-top.html',
+      meta: { zodiac: 'Taurus', collection: 'Zodiac' }
+    },
+    {
+      slug: 'taurus-baseball-jersey',
+      title: 'Taurus Recycled Baseball Jersey',
+      price: 49.99,
+      image: '/shop-images/taurus-baseball-jersey/taurus-baseball-jersey-back.png',
+      link: '/shop/taurus-baseball-jersey.html',
+      meta: { zodiac: 'Taurus', collection: 'Zodiac' }
+    },
+    {
+      slug: 'taurus-crop-tee',
+      title: 'Taurus All-Over Print Crop Tee',
+      price: 34.99,
+      image: '/shop-images/taurus-crop-tee/taurus-crop-tee-lifestyle-bicycle.jpg',
+      link: '/shop/taurus-crop-tee.html',
+      meta: { zodiac: 'Taurus', collection: 'Zodiac' }
+    },
+    {
+      slug: 'taurus-pyjama-top',
+      title: 'Taurus Constellation Pyjama Top',
+      price: 44.99,
+      image: '/shop-images/taurus-pyjamas/taurus-pyjamas-back.jpg',
+      link: '/shop/taurus-pyjama-top.html',
+      meta: { zodiac: 'Taurus', collection: 'Zodiac' }
+    }
+  ];
   // Values above this threshold are treated as cents and converted to dollars.
   const PRICE_CENTS_THRESHOLD = 200;
   const ZODIAC_SIGNS = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'];
@@ -332,8 +367,7 @@ import { formatPrice, currencySymbol } from './price-utils.js';
   const createCard = (p) => {
     const slug = p.slug || slugify(p.title || p.name || '');
     const viewTarget = p.id || slug;
-    const viewUrl = `/shop/${encodeURIComponent(viewTarget)}`;
-    const variant = p.defaultVariant || pickVariant(p);
+    const viewUrl = p.link || `/shop/${encodeURIComponent(viewTarget)}`;
     const hasPriceData = Number.isFinite(p.price) || Number.isFinite(p.priceCents) || !!p.priceLabel;
     const basePrice = hasPriceData ? null : normalizePrice(p);
     const fallbackPriceValue = displayPrice(p);
@@ -347,27 +381,12 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     else if (Number.isFinite(fallbackPriceValue)) priceValue = fallbackPriceValue;
     else if (basePrice && Number.isFinite(basePrice.value)) priceValue = basePrice.value;
     else if (Number.isFinite(priceCents)) priceValue = priceCents / 100;
-    const priceRange = (() => {
-      const priceSource = (() => {
-        if (p && typeof p.price === 'object' && p.price !== null) return p.price;
-        if (p && typeof p.price_range === 'object' && p.price_range !== null) return p.price_range;
-        return null;
-      })();
-      const currency = ((priceSource && priceSource.currency) || p.currency || 'USD').toUpperCase();
-      const symbol = currencySymbol(currency);
-      const min = Number(priceSource?.min);
-      const max = Number(priceSource?.max);
-      if (Number.isFinite(min) && Number.isFinite(max) && max >= min) {
-        return max > min ? `${symbol}${min.toFixed(2)} – ${symbol}${max.toFixed(2)}` : `${symbol}${min.toFixed(2)}`;
-      }
-      if (Number.isFinite(min)) return `${symbol}${min.toFixed(2)}`;
-      return null;
-    })();
+
     const fallbackLabel = (() => {
-      const fb = p.priceLabel || priceRange || basePrice?.label;
+      const fb = p.priceLabel || basePrice?.label;
       return typeof fb === 'string' && fb.trim() ? fb : PRICE_UNAVAILABLE_LABEL;
     })();
-    const priceDisplay = priceRange || formatPrice(Number.isFinite(priceCents) ? priceCents : priceValue, fallbackLabel);
+
     const primaryImage = Array.isArray(p.images) ? p.images[0] : null;
     const resolvedImage = isUsableImage(primaryImage) ? primaryImage : resolveProductImage(p, cachedImageMap, cachedZodiacMap);
     const galleryImages = (() => {
@@ -378,16 +397,11 @@ import { formatPrice, currencySymbol } from './price-utils.js';
       while (normalized.length < 4) normalized.push(seed);
       return normalized.slice(0, 4);
     })();
-    const soldOut = (p?.meta?.soldOut ?? p?.soldOut) === true;
 
     const card = document.createElement('div');
     card.className = 'product-card';
     card.dataset.id = p.id || slug;
     card.dataset.slug = slug;
-    if (soldOut) {
-      card.classList.add('product-card--sold-out');
-      card.dataset.soldOut = 'true';
-    }
 
     const coverImage = galleryImages.find(isUsableImage) || resolvedImage || FALLBACK;
     const img = document.createElement('img');
@@ -395,7 +409,6 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     img.alt = `${p.title || p.name || 'Product image'}`;
     img.loading = 'lazy';
     img.decoding = 'async';
-    img.className = 'product-card-image';
     img.onerror = () => {
       if (img.src !== FALLBACK) {
         img.src = FALLBACK;
@@ -404,59 +417,20 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     };
     img.onload = hideLoader;
 
-    const body = document.createElement('div');
-    body.className = 'product-card-content product-card__body';
     const heading = document.createElement('h3');
-    heading.className = 'product-card-title product-card__title';
     heading.textContent = p.title || p.name || 'Celestial Piece';
-    const desc = document.createElement('p');
-    desc.className = 'product-card-description';
-    desc.textContent = p.description || p.desc || '';
+
     const priceEl = document.createElement('p');
-    priceEl.className = 'product-card-price product-card__price price';
-    priceEl.textContent = priceDisplay || PRICE_UNAVAILABLE_LABEL;
+    priceEl.className = 'price';
+    const priceDisplay = formatPrice(Number.isFinite(priceCents) ? priceCents : priceValue, fallbackLabel);
+    priceEl.textContent = priceDisplay === PRICE_UNAVAILABLE_LABEL ? PRICE_UNAVAILABLE_LABEL : `From ${priceDisplay}`;
 
-    const actions = document.createElement('div');
-    actions.className = 'product-card-buttons product-card__actions';
-    const buyBtn = document.createElement('a');
-    buyBtn.className = 'view-product-button view-button product-buy-btn';
-    buyBtn.textContent = 'View Product';
-    buyBtn.href = viewUrl;
-    buyBtn.dataset.action = 'view';
-    buyBtn.dataset.slug = viewTarget;
-    buyBtn.dataset.name = p.title || p.name || 'Celestial Piece';
-    buyBtn.setAttribute('aria-label', 'View');
-    const addBtn = document.createElement('button');
-    addBtn.type = 'button';
-    addBtn.className = 'add-to-cart-button add-to-cart-btn';
-    addBtn.textContent = 'Add to Cart';
-    addBtn.dataset.name = p.title || p.name || 'Celestial Piece';
-    addBtn.dataset.price = priceDisplay || '';
-    addBtn.dataset.variantId = p.firstVariantId || '';
-    addBtn.dataset.productId = p.id || slug;
-    if (soldOut || !p.firstVariantId) {
-      addBtn.disabled = true;
-      addBtn.setAttribute('aria-disabled', 'true');
-    }
-    if (soldOut) {
-      buyBtn.classList.add('is-disabled');
-      buyBtn.setAttribute('aria-disabled', 'true');
-    }
+    const viewLink = document.createElement('a');
+    viewLink.className = 'view-product-btn';
+    viewLink.textContent = 'View Product';
+    viewLink.href = viewUrl;
 
-    actions.append(buyBtn, addBtn);
-    body.append(heading, desc, priceEl, actions);
-    if (soldOut) {
-      const ribbon = document.createElement('span');
-      ribbon.className = 'product-card__ribbon product-card__ribbon--sold-out';
-      ribbon.textContent = 'Sold out';
-      card.append(ribbon);
-    }
-    card.append(img, body);
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.product-buy-btn, .add-to-cart-btn')) return;
-      if (soldOut) return;
-      window.location.href = viewUrl;
-    });
+    card.append(img, heading, priceEl, viewLink);
     return card;
   };
 
@@ -570,8 +544,28 @@ import { formatPrice, currencySymbol } from './price-utils.js';
   const gatherFilterState = () => ({
     category: document.getElementById('filter-category')?.value || 'all',
     zodiac: document.getElementById('filter-zodiac')?.value || 'all',
-    collection: document.getElementById('filter-collection')?.value || 'all'
+    collection: document.getElementById('filter-collection')?.value || 'all',
+    search: document.getElementById('search-bar')?.value || ''
   });
+
+  const rankProduct = (p = {}, fallbackIndex = 0) => {
+    const slug = (p.slug || p.id || '').toLowerCase();
+    const priorityIndex = PRODUCT_PRIORITY.indexOf(slug);
+    if (priorityIndex !== -1) return priorityIndex;
+    if (slug.includes('hoodie')) return PRODUCT_PRIORITY.length;
+    return PRODUCT_PRIORITY.length + 1 + fallbackIndex;
+  };
+
+  const sortProducts = (items = []) =>
+    (items || [])
+      .map((item, index) => ({ item, index }))
+      .sort((a, b) => {
+        const rankA = rankProduct(a.item, a.index);
+        const rankB = rankProduct(b.item, b.index);
+        if (rankA !== rankB) return rankA - rankB;
+        return a.index - b.index;
+      })
+      .map((entry) => entry.item);
 
   const applyAndRender = (incomingState = {}) => {
     if (!normalizedCatalog.length) {
@@ -584,7 +578,8 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     if (!filtered.length) {
       renderEmpty();
     } else {
-      renderCards(filtered);
+      const sorted = sortProducts(filtered);
+      renderCards(sorted);
     }
   };
 
@@ -593,10 +588,12 @@ import { formatPrice, currencySymbol } from './price-utils.js';
     const zodiac = document.getElementById('filter-zodiac');
     const collection = document.getElementById('filter-collection');
     const applyBtn = document.getElementById('filter-apply');
+    const search = document.getElementById('search-bar');
     const handler = () => applyAndRender();
     category?.addEventListener('change', handler);
     zodiac?.addEventListener('change', handler);
     collection?.addEventListener('change', handler);
+    search?.addEventListener('input', handler);
     applyBtn?.addEventListener('click', (e) => { e.preventDefault(); handler(); });
   };
 
@@ -612,20 +609,30 @@ import { formatPrice, currencySymbol } from './price-utils.js';
           (String(p.type || '').toLowerCase() !== 'event')
       );
       const normalized = catalog.map((p) => normalize(p, imageMap || {}, zodiacMap));
-      normalizedCatalog = normalized;
-      hydrateGlobal(normalized, imageMap, zodiacMap);
+      const manualNormalized = FEATURED_PRODUCTS.map((p) => normalize(p, imageMap || {}, zodiacMap));
+      const deduped = [];
+      const seen = new Set();
+      [...manualNormalized, ...normalized].forEach((item) => {
+        const key = (item.slug || item.id || '').toLowerCase();
+        if (key && !seen.has(key)) {
+          seen.add(key);
+          deduped.push(item);
+        }
+      });
+      normalizedCatalog = deduped;
+      hydrateGlobal(normalizedCatalog, imageMap, zodiacMap);
       const isHttp = (val) => /^https?:\/\//i.test(val || '');
       const hasRemote = (item = {}) => {
         const direct = typeof item.image === 'string' ? item.image : '';
         const first = Array.isArray(item.images) ? item.images[0] : '';
         return isHttp(direct) || isHttp(first || '');
       };
-      const remoteCount = normalized.filter(hasRemote).length;
-      console.log(`[shop] products with remote images: ${remoteCount} / total: ${normalized.length}`);
-      populateFilterOptions(normalized);
+      const remoteCount = normalizedCatalog.filter(hasRemote).length;
+      console.log(`[shop] products with remote images: ${remoteCount} / total: ${normalizedCatalog.length}`);
+      populateFilterOptions(normalizedCatalog);
       syncFilterInputs();
       bindFilters();
-      if (!normalized.length) { renderEmpty(); }
+      if (!normalizedCatalog.length) { renderEmpty(); }
       else { applyAndRender(); }
     } catch (err) {
       console.warn('[shop] failed to render catalog', err);
