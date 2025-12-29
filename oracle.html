@@ -17,27 +17,23 @@
   <script src="https://js.stripe.com/v3/" async></script>
 </head>
 <body>
-<header class="site-header">
-  <nav class="main-nav" aria-label="Main navigation">
-    <a href="/" class="logo-link">
-      <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
-      <span class="brand-name">LYRĪON ATELIER</span>
-    </a>
-
-    <button class=\"nav-toggle\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
-      ☰
-    </button>
-
-    <ul class=\"nav-links\" role=\"menubar\">
-      <li><a href="/" role="menuitem">Home</a></li>
-      <li><a href="/shop" role="menuitem">Shop</a></li>
-      <li><a href="/oracle" role="menuitem">Oracle</a></li>
-      <li><a href="/compatibility" role="menuitem">Compatibility</a></li>
-      <li><a href="/codex" role="menuitem">Codex</a></li>
-      <li><a href="/contact" role="menuitem">Contact</a></li>
-      <li><a href="/cart" role="menuitem">Cart</a></li>
-    </ul>
-  </nav>
+<header class="site-header" data-nav-version="nav-v4">
+ <nav class="main-nav">
+ <a href="/" class="logo-link">
+ <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
+ <span class="brand-name">LYRĪON ATELIER</span>
+ </a>
+ 
+ <div class="nav-links">
+ <a href="/">Home</a>
+ <a href="/shop">Shop</a>
+ <a href="/oracle">Oracle</a>
+ <a href="/compatibility">Compatibility</a>
+ <a href="/codex">Codex</a>
+ <a href="/contact">Contact</a>
+ <a href="/cart" class="cart-icon">Cart</a>
+ </div>
+ </nav>
 </header>
 
   <a class="skip-to-content" href="#main-content">Skip to main content</a>

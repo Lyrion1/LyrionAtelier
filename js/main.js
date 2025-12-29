@@ -1,6 +1,6 @@
 // Lyrīon Atelier - Main JavaScript
 
-const NAV_VERSION = 'nav-v3';
+const NAV_VERSION = 'nav-v4';
 const SITE_ORIGIN = 'https://lyrionatelier.com';
 const OG_IMAGE = `${SITE_ORIGIN}/images/og-image.jpg`;
 const SEO_KEYWORDS = 'astrology, zodiac, luxury apparel, oracle readings, birth chart, horoscope, cosmic fashion, spiritual guidance';
@@ -223,23 +223,21 @@ function buildSiteHeader() {
   header.className = 'site-header';
   header.dataset.navVersion = NAV_VERSION;
   header.innerHTML = `
-    <nav class="main-nav" aria-label="Main navigation">
-      <a href="/" class="logo-link">
-        <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
-        <span class="brand-name">LYRĪON ATELIER</span>
-      </a>
-      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
-        ☰
-      </button>
-      <ul class="nav-links" role="menubar">
-        <li><a href="/" role="menuitem">Home</a></li>
-        <li><a href="/shop" role="menuitem">Shop</a></li>
-        <li><a href="/oracle" role="menuitem">Oracle</a></li>
-        <li><a href="/compatibility" role="menuitem">Compatibility</a></li>
-        <li><a href="/codex" role="menuitem">Codex</a></li>
-        <li><a href="/contact" role="menuitem">Contact</a></li>
-        <li><a href="/cart" role="menuitem" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a></li>
-      </ul>
+    <nav class="main-nav">
+    <a href="/" class="logo-link">
+    <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
+    <span class="brand-name">LYRĪON ATELIER</span>
+    </a>
+    
+    <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/shop">Shop</a>
+    <a href="/oracle">Oracle</a>
+    <a href="/compatibility">Compatibility</a>
+    <a href="/codex">Codex</a>
+    <a href="/contact">Contact</a>
+    <a href="/cart" class="cart-icon">Cart</a>
+    </div>
     </nav>`;
   return header;
 }
