@@ -600,7 +600,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const addToCartBtn = document.querySelector('.add-to-cart-btn');
   if (addToCartBtn) {
     addToCartBtn.addEventListener('click', function() {
-      const productId = parseInt(this.getAttribute('data-product-id'));
+      const productId =
+        this.getAttribute('data-product-id') ||
+        this.getAttribute('data-slug') ||
+        this.getAttribute('data-variant-id') ||
+        null;
       const quantityInput = document.getElementById('product-quantity');
       const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
       addToCart(productId, null, quantity);
@@ -615,3 +619,4 @@ document.addEventListener('promobar:ready', bindBundleChips);
 // expose helpers for checkout payloads
 window.evaluateBundleDiscount = window.evaluateBundleDiscount || evaluateBundleDiscount;
 window.readCart = window.readCart || readCart;
+window.addToCart = window.addToCart || addToCart;

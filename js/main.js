@@ -238,7 +238,7 @@ function buildSiteHeader() {
         <li><a href="/compatibility" role="menuitem">Compatibility</a></li>
         <li><a href="/codex" role="menuitem">Codex</a></li>
         <li><a href="/contact" role="menuitem">Contact</a></li>
-        <li><a href="/cart" role="menuitem">Cart</a></li>
+        <li><a href="/cart" role="menuitem" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a></li>
       </ul>
     </nav>`;
   return header;
@@ -603,23 +603,37 @@ function initStickyHeader() {
  * Shows the total number of items in the shopping cart
  */
 function updateCartCount() {
-  const cartCount = document.querySelector('.cart-count');
-  if (cartCount) {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.textContent = totalItems;
-    
-    // Show/hide badge based on cart contents
-    if (totalItems === 0) {
-      cartCount.style.display = 'none';
-    } else {
-      cartCount.style.display = 'flex';
-      // Add animation when count updates
-      cartCount.classList.add('cart-count-pulse');
-      setTimeout(() => cartCount.classList.remove('cart-count-pulse'), 300);
-    }
+  const cartLink = document.querySelector('.nav-links a[href="/cart"]');
+  const cartCount =
+    document.querySelector('.cart-count') ||
+    (cartLink
+      ? (() => {
+          const badge = document.createElement('span');
+          badge.className = 'cart-count';
+          badge.textContent = '0';
+          badge.style.display = 'none';
+          cartLink.appendChild(badge);
+          return badge;
+        })()
+      : null);
+  if (!cartCount) return;
+
+  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  const totalItems = cart.reduce((sum, item) => sum + (Number.isFinite(item.quantity) ? item.quantity : 1), 0);
+  cartCount.textContent = totalItems;
+
+  // Show/hide badge based on cart contents
+  if (totalItems === 0) {
+    cartCount.style.display = 'none';
+  } else {
+    cartCount.style.display = 'flex';
+    // Add animation when count updates
+    cartCount.classList.add('cart-count-pulse');
+    setTimeout(() => cartCount.classList.remove('cart-count-pulse'), 300);
   }
 }
+
+document.addEventListener('cart:updated', updateCartCount);
 
 /**
  * Tab Functionality
