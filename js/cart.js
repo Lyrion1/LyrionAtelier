@@ -600,10 +600,19 @@ document.addEventListener('DOMContentLoaded', function() {
   const addToCartBtn = document.querySelector('.add-to-cart-btn');
   if (addToCartBtn) {
     addToCartBtn.addEventListener('click', function() {
-      const productId = parseInt(this.getAttribute('data-product-id'));
+      // Prefer explicit product id, then slug, then variant id for fallback.
+      const idAttributes = ['data-product-id', 'data-slug', 'data-variant-id'];
+      const productId = idAttributes
+        .map((attr) => this.getAttribute(attr))
+        .find((val) => val) || null;
       const quantityInput = document.getElementById('product-quantity');
       const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
-      addToCart(productId, null, quantity);
+      if (!productId) {
+        notify('Product not found', 'error');
+        return;
+      }
+      const parsedProductId = Number.isFinite(Number(productId)) ? Number(productId) : productId;
+      addToCart(parsedProductId, null, quantity);
     });
   }
   bindBundleChips();
@@ -615,3 +624,4 @@ document.addEventListener('promobar:ready', bindBundleChips);
 // expose helpers for checkout payloads
 window.evaluateBundleDiscount = window.evaluateBundleDiscount || evaluateBundleDiscount;
 window.readCart = window.readCart || readCart;
+window.addToCart = window.addToCart || addToCart;

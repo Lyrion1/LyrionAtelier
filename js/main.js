@@ -238,7 +238,7 @@ function buildSiteHeader() {
         <li><a href="/compatibility" role="menuitem">Compatibility</a></li>
         <li><a href="/codex" role="menuitem">Codex</a></li>
         <li><a href="/contact" role="menuitem">Contact</a></li>
-        <li><a href="/cart" role="menuitem">Cart</a></li>
+        <li><a href="/cart" role="menuitem" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a></li>
       </ul>
     </nav>`;
   return header;
@@ -602,24 +602,62 @@ function initStickyHeader() {
  * Update Cart Count Badge
  * Shows the total number of items in the shopping cart
  */
+/**
+ * Ensures a cart badge element exists on the cart link and returns it.
+ * Creates the badge if missing; returns null when no cart link is present.
+ * @returns {HTMLElement|null}
+ */
+function ensureCartBadge() {
+  const cartLink =
+    document.querySelector('a[href="/cart"].cart-icon') ||
+    document.querySelector('.nav-links a[href="/cart"]');
+  if (!cartLink) return null;
+  let cartCount = cartLink.querySelector('.cart-count');
+  if (!cartCount) {
+    cartCount = document.createElement('span');
+    cartCount.className = 'cart-count';
+    cartCount.textContent = '0';
+    cartCount.style.display = 'none';
+    cartLink.appendChild(cartCount);
+  }
+  return cartCount;
+}
+
 function updateCartCount() {
-  const cartCount = document.querySelector('.cart-count');
-  if (cartCount) {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.textContent = totalItems;
-    
-    // Show/hide badge based on cart contents
-    if (totalItems === 0) {
-      cartCount.style.display = 'none';
-    } else {
-      cartCount.style.display = 'flex';
-      // Add animation when count updates
-      cartCount.classList.add('cart-count-pulse');
-      setTimeout(() => cartCount.classList.remove('cart-count-pulse'), 300);
-    }
+  const cartCount = ensureCartBadge();
+  if (!cartCount) return;
+
+  let cart = [];
+  try {
+    const storedCart = localStorage.getItem('cart');
+    cart = JSON.parse(storedCart && storedCart.trim() ? storedCart : '[]');
+  } catch {
+    cart = [];
+  }
+  let invalidQuantityCount = 0;
+  const totalItems = cart.reduce((sum, item) => {
+    const hasValidQuantity = Number.isFinite(item.quantity);
+    const qty = hasValidQuantity ? item.quantity : 1;
+    if (!hasValidQuantity) invalidQuantityCount += 1;
+    return sum + qty;
+  }, 0);
+  if (invalidQuantityCount) {
+    console.warn(`[cart] ${invalidQuantityCount} item(s) missing valid quantity, defaulting to 1`);
+  }
+  cartCount.textContent = totalItems;
+
+  // Show/hide badge based on cart contents
+  if (totalItems === 0) {
+    cartCount.style.display = 'none';
+  } else {
+    cartCount.style.display = 'flex';
+    // Add animation when count updates
+    cartCount.classList.add('cart-count-pulse');
+    setTimeout(() => cartCount.classList.remove('cart-count-pulse'), 300);
   }
 }
+
+document.addEventListener('cart:updated', updateCartCount);
 
 /**
  * Tab Functionality
