@@ -101,7 +101,8 @@
 
      try {
         const configuredPriceId = window?.STRIPE_PRICE_ID_LIVE || DEFAULT_PRICE_ID;
-        if (!window?.STRIPE_PRICE_ID_LIVE && configuredPriceId === DEFAULT_PRICE_ID) {
+        const hasLivePriceId = Boolean(window?.STRIPE_PRICE_ID_LIVE);
+        if (!hasLivePriceId && configuredPriceId === DEFAULT_PRICE_ID) {
           throw new Error('Stripe price ID is not configured for live mode.');
         }
         const stripe = await stripePromise;

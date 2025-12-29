@@ -16,9 +16,7 @@ exports.handler = async (event) => {
     };
   }
 
-  const allowOrigin = requestOrigin && (!allowedOrigins.length || allowedOrigins.includes(requestOrigin))
-    ? requestOrigin
-    : (allowedOrigins[0] || '');
+  const allowOrigin = requestOrigin || allowedOrigins[0] || '';
 
   return {
     statusCode: 200,
