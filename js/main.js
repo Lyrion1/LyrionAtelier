@@ -603,7 +603,9 @@ function initStickyHeader() {
  * Shows the total number of items in the shopping cart
  */
 function ensureCartBadge() {
-  const cartLink = document.querySelector('.nav-links a[href="/cart"]');
+  const cartLink =
+    document.querySelector('a[href="/cart"].cart-icon') ||
+    document.querySelector('.nav-links a[href="/cart"]');
   if (!cartLink) return null;
   let cartCount = cartLink.querySelector('.cart-count');
   if (!cartCount) {
@@ -620,7 +622,8 @@ function updateCartCount() {
   const cartCount = ensureCartBadge();
   if (!cartCount) return;
 
-  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  const storedCart = localStorage.getItem('cart');
+  const cart = JSON.parse(storedCart && storedCart.trim() ? storedCart : '[]');
   let invalidQuantity = false;
   const totalItems = cart.reduce((sum, item) => {
     const qty = Number.isFinite(item.quantity) ? item.quantity : 1;
