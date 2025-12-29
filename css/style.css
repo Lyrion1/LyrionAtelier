@@ -5929,7 +5929,7 @@ button,
 .main-nav {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 15px 40px;
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -5988,13 +5988,13 @@ button,
   }
 
   .nav-links {
+    display: none;
+  }
+
+  .nav-links.active {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 16px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-right: 12px;
   }
 
 }

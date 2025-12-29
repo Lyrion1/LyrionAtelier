@@ -229,6 +229,8 @@ function buildSiteHeader() {
     <span class="brand-name">LYRĪON ATELIER</span>
     </a>
     
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+    
     <div class="nav-links">
     <a href="/">Home</a>
     <a href="/shop">Shop</a>
