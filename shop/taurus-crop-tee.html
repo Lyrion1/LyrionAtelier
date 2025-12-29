@@ -278,7 +278,6 @@
       const cartPayload = {
         ...product,
         price: variant.price,
-        printfulVariantId: variant.variantId,
         variantId: variant.variantId
       };
       if (typeof addToCart === 'function') {
@@ -289,6 +288,8 @@
           cartPayload,
           variantPayload
         );
+      } else {
+        console.warn('Add to Cart is currently unavailable.');
       }
     });
   })();
