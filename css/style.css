@@ -3824,6 +3824,8 @@ RESPONSIVE DESIGN
  max-width: 1400px;
  margin: 60px auto;
  padding: 0 40px;
+ align-items: stretch;
+ grid-auto-rows: 1fr;
 }
 
 .compatibility-product-card {
@@ -3839,7 +3841,7 @@ RESPONSIVE DESIGN
 }
 
 .compatibility-products .compatibility-product-card {
-  min-height: 0;
+  min-height: 540px;
 }
 
 .compatibility-card img,
@@ -3852,6 +3854,10 @@ RESPONSIVE DESIGN
  transition: transform 0.3s ease;
  display: block;
  flex-shrink: 0;
+}
+
+.compatibility-products-grid .compatibility-card-link {
+  height: 100%;
 }
 
 .compatibility-card img:hover,
