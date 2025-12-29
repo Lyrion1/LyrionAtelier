@@ -184,127 +184,15 @@ To add a new product to the shop:
 
 ## 💳 Stripe Configuration
 
-To enable real payment processing:
+Stripe keys are loaded from Netlify environment variables and never hardcoded in the repository.
 
-### 1. Sign up for Stripe
-- Go to [https://stripe.com](https://stripe.com)
-- Create an account
-- Get your API keys from the Dashboard
-
-### 2. Create `js/stripe-checkout.js`
-```javascript
-// Initialize Stripe with your publishable key
-const stripe = Stripe('USER_WILL_INSERT_LIVE_PUBLISHABLE_KEY_HERE');
-const elements = stripe.elements();
-
-// Create card element
-const cardElement = elements.create('card', {
-  style: {
-    base: {
-      color: '#fff',
-      fontFamily: 'Inter, sans-serif',
-      fontSize: '16px',
-      '::placeholder': { color: '#94a3b8' }
-    },
-    invalid: { color: '#ef4444' }
-  }
-});
-cardElement.mount('#card-element');
-
-// Handle errors
-cardElement.on('change', (event) => {
-  const displayError = document.getElementById('card-errors');
-  displayError.textContent = event.error ? event.error.message : '';
-});
-
-// Handle form submission
-const form = document.getElementById('checkout-form');
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  
-  const submitBtn = form.querySelector('button[type="submit"]');
-  showLoading(submitBtn);
-  
-  // Create payment intent on your backend
-  const response = await fetch('/api/create-payment-intent', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      amount: calculateTotal() * 100, // Amount in cents
-      currency: 'usd'
-    })
-  });
-  
-  const { clientSecret } = await response.json();
-  
-  // Confirm payment
-  const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-    payment_method: {
-      card: cardElement,
-      billing_details: {
-        name: document.getElementById('full-name').value,
-        email: document.getElementById('email').value
-      }
-    }
-  });
-  
-  hideLoading(submitBtn);
-  
-  if (error) {
-    showToast(error.message, 'error');
-  } else if (paymentIntent.status === 'succeeded') {
-    localStorage.removeItem('cart');
-    showToast('Payment successful!', 'success');
-    setTimeout(() => window.location.href = 'index.html', 2000);
-  }
-});
-
-function calculateTotal() {
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const shipping = subtotal > 50 ? 0 : 5.99;
-  return subtotal + shipping;
-}
-```
-
-### 3. Create Backend Endpoint
-You'll need a backend to create payment intents. Example using Node.js + Express:
-
-```javascript
-const stripe = require('stripe')('USER_WILL_INSERT_LIVE_SECRET_KEY_HERE');
-const express = require('express');
-const app = express();
-
-app.use(express.json());
-
-app.post('/api/create-payment-intent', async (req, res) => {
-  const { amount, currency } = req.body;
-  
-  try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount,
-      currency
-    });
-    
-    res.json({ clientSecret: paymentIntent.client_secret });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-app.listen(3000);
-```
-
-### 4. Add Script to checkout.html
-```html
-<script src="js/stripe-checkout.js"></script>
-```
-
-### 5. Test Cards
-- Success: `4242 4242 4242 4242`
-- Decline: `4000 0000 0000 0002`
-- Any future expiry date
-- Any 3-digit CVC
+1. Sign up for Stripe and obtain your API keys.
+2. In Netlify **Site settings → Environment variables**, set:
+   - `STRIPE_PUBLISHABLE_KEY`
+   - `STRIPE_SECRET_KEY`
+   - `STRIPE_WEBHOOK_SECRET`
+3. The frontend fetches the publishable key from `/.netlify/functions/get-stripe-key`.
+4. Netlify functions use the secret keys directly from the environment for Checkout and webhooks.
 
 ## 🌐 Netlify Deployment
 

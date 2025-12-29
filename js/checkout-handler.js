@@ -1,11 +1,16 @@
 console.log('Universal checkout handler loaded');
 
+function resolveStripeKeyMode(keyValue, stripeInstance) {
+  const normalizedKey = typeof keyValue === 'string' ? keyValue : '';
+  const isStripeKey = normalizedKey.startsWith('pk_');
+  if (isStripeKey && normalizedKey.includes('_live_')) {
+    return 'live';
+  }
+  return stripeInstance?._keyMode || 'test';
+}
+
 function warnIfNotLive(stripeInstance, keyValue) {
-  const keyMode = keyValue?.startsWith('pk_live_')
-    ? 'live'
-    : keyValue?.startsWith('pk_test_')
-    ? 'test'
-    : stripeInstance?._keyMode || 'test';
+  const keyMode = resolveStripeKeyMode(keyValue, stripeInstance);
   if (keyMode !== 'live') {
     console.error('WARNING: Stripe is not in live mode!');
   }
