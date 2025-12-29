@@ -1,6 +1,5 @@
 const Stripe = require('stripe');
-// Use test key exclusively for this endpoint
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY_TEST;
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY_LIVE || process.env.STRIPE_SECRET_KEY;
 const stripe = stripeSecretKey ? Stripe(stripeSecretKey) : null;
 
 exports.handler = async (event) => {
@@ -12,7 +11,7 @@ exports.handler = async (event) => {
     return {
       statusCode: 500,
       body: JSON.stringify({
-        error: 'Stripe secret key missing. Set STRIPE_SECRET_KEY_TEST for test mode.'
+        error: 'Stripe secret key missing. Set STRIPE_SECRET_KEY_LIVE (or STRIPE_SECRET_KEY) for live mode.'
       })
     };
   }

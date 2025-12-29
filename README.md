@@ -53,7 +53,7 @@ A modern, accessible e-commerce website featuring astrology-themed clothing and 
 
 ### 💳 Stripe Integration
 - Secure checkout page
-- Test mode banner for development
+- Live-mode readiness checklist
 - Comprehensive setup instructions
 - Stripe Elements mounting (documented)
 - Payment intent handling (documented)
@@ -194,7 +194,7 @@ To enable real payment processing:
 ### 2. Create `js/stripe-checkout.js`
 ```javascript
 // Initialize Stripe with your publishable key
-const stripe = Stripe('pk_test_YOUR_PUBLISHABLE_KEY');
+const stripe = Stripe('USER_WILL_INSERT_LIVE_PUBLISHABLE_KEY_HERE');
 const elements = stripe.elements();
 
 // Create card element
@@ -271,7 +271,7 @@ function calculateTotal() {
 You'll need a backend to create payment intents. Example using Node.js + Express:
 
 ```javascript
-const stripe = require('stripe')('sk_test_YOUR_SECRET_KEY');
+const stripe = require('stripe')('USER_WILL_INSERT_LIVE_SECRET_KEY_HERE');
 const express = require('express');
 const app = express();
 
@@ -324,10 +324,10 @@ app.listen(3000);
    - Click "Deploy site"
 
 3. **Set Environment Variables**
-   - Go to Site settings > Environment variables
-   - Add your Stripe keys:
-     - `STRIPE_PUBLISHABLE_KEY_TEST`
-     - `STRIPE_SECRET_KEY_TEST`
+- Go to Site settings > Environment variables
+- Add your Stripe live keys:
+     - `STRIPE_PUBLISHABLE_KEY_LIVE` (or `STRIPE_PUBLISHABLE_KEY`)
+     - `STRIPE_SECRET_KEY_LIVE` (or `STRIPE_SECRET_KEY`)
 
 4. **Configure Domain**
    - Go to Domain settings

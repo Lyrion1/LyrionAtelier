@@ -1,6 +1,6 @@
 // netlify/functions/get-checkout-session.js
 const stripe = require('stripe')(
- process.env.STRIPE_SECRET_KEY_TEST
+ process.env.STRIPE_SECRET_KEY_LIVE || process.env.STRIPE_SECRET_KEY
 );
 
 exports.handler = async (event) => {
