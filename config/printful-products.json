@@ -1,29 +1,14 @@
-[
-  {
-    "id": "taurus-pyjama-top",
-    "name": "Taurus Constellation Pyjama Top",
-    "variants": [
-      { "size": "XS", "variantId": "6951f0e5ede708", "price": 44.99 },
-      { "size": "S", "variantId": "6951f0e5ede7b3", "price": 44.99 },
-      { "size": "M", "variantId": "6951f0e5ede838", "price": 44.99 },
-      { "size": "L", "variantId": "6951f0e5ede8b2", "price": 44.99 },
-      { "size": "XL", "variantId": "6951f0e5ede948", "price": 44.99 },
-      { "size": "2XL", "variantId": "6951f0e5ede9c2", "price": 46.99 }
-    ],
-    "type": "physical"
-  },
-  {
-    "id": "taurus-crop-tee",
-    "name": "Taurus All-Over Print Crop Tee",
-    "variants": [
-      { "size": "XS", "variantId": "6951cf089ec022", "price": 34.99 },
-      { "size": "S", "variantId": "6951cf089ec096", "price": 34.99 },
-      { "size": "M", "variantId": "6951cf089ec0f9", "price": 34.99 },
-      { "size": "L", "variantId": "6951cf089ec157", "price": 34.99 },
-      { "size": "XL", "variantId": "6951cf089ec1a9", "price": 34.99 },
-      { "size": "2XL", "variantId": "6951cf089ec1f4", "price": 35.99 },
-      { "size": "3XL", "variantId": "6951cf089ec243", "price": 37.99 }
-    ],
-    "type": "physical"
-  }
-]
+{
+  "products": [
+    {
+      "name": "Taurus Constellation Pyjama Top",
+      "printfulVariantId": "6951f0e5ede708",
+      "type": "physical"
+    },
+    {
+      "name": "Taurus All-Over Print Crop Tee",
+      "printfulVariantId": "6951cf089ec022",
+      "type": "physical"
+    }
+  ]
+}
