@@ -11,7 +11,7 @@ function warnIfNotLive(stripeInstance, keyValue) {
   }
 }
 
-let stripePublishableKey = window?.STRIPE_PUBLISHABLE_KEY || window?.STRIPE_PUBLISHABLE_KEY_LIVE;
+let stripePublishableKey = window?.STRIPE_PUBLISHABLE_KEY_LIVE || window?.STRIPE_PUBLISHABLE_KEY;
 let stripe = (typeof Stripe === 'function' && stripePublishableKey)
   ? Stripe(stripePublishableKey)
   : null;
