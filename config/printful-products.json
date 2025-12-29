@@ -9,6 +9,20 @@
       "name": "Taurus All-Over Print Crop Tee",
       "printfulVariantId": "6951cf089ec022",
       "type": "physical"
+    },
+    {
+      "name": "Taurus Recycled Baseball Jersey",
+      "variants": [
+        { "size": "XS", "variantId": "6951db0b91f1d8", "price": 49.99 },
+        { "size": "S", "variantId": "6951db0b91f249", "price": 49.99 },
+        { "size": "M", "variantId": "6951db0b91f294", "price": 49.99 },
+        { "size": "L", "variantId": "6951db0b91f2d5", "price": 49.99 },
+        { "size": "XL", "variantId": "6951db0b91f321", "price": 49.99 },
+        { "size": "2XL", "variantId": "6951db0b91f368", "price": 53.99 },
+        { "size": "3XL", "variantId": "6951db0b91f3b4", "price": 56.99 }
+      ],
+      "type": "physical",
+      "eco": true
     }
   ]
 }

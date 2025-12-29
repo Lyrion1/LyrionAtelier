@@ -19,3 +19,14 @@
 }
 .product-card--sold-out .product-card__media img { opacity: 0.85; filter: grayscale(0.1); }
 .product-card--sold-out .product-buy-btn.is-disabled { pointer-events: none; background: #b8b8b8; border-color: #b8b8b8; color: #2f2f2f; }
+.eco-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #4CAF50;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 11px;
+  font-weight: bold;
+}
