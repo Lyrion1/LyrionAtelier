@@ -346,9 +346,64 @@ function initInlineNavToggle(header) {
   const navLinks = header?.querySelector('.nav-links');
   if (!navToggle || !navLinks) return;
 
-  navToggle.addEventListener('click', () => {
-    const isActive = navLinks.classList.toggle('active');
-    navToggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+  const getFocusables = () => [navToggle, ...navLinks.querySelectorAll('a')];
+
+  const closeMenu = () => {
+    navLinks.classList.remove('active');
+    navToggle.setAttribute('aria-expanded', 'false');
+  };
+
+  const openMenu = () => {
+    navLinks.classList.add('active');
+    navToggle.setAttribute('aria-expanded', 'true');
+    const firstLink = navLinks.querySelector('a');
+    firstLink?.focus();
+  };
+
+  const toggleMenu = () => {
+    if (navLinks.classList.contains('active')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  };
+
+  navToggle.addEventListener('click', toggleMenu);
+
+  navToggle.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleMenu();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (navLinks.classList.contains('active') && !header.contains(event.target)) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && navLinks.classList.contains('active')) {
+      event.preventDefault();
+      closeMenu();
+      navToggle.focus();
+    }
+  });
+
+  header.addEventListener('keydown', (event) => {
+    if (!navLinks.classList.contains('active') || event.key !== 'Tab') return;
+    const focusables = getFocusables();
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      navToggle.focus();
+    }
   });
 }
 
