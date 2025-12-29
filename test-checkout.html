@@ -4,8 +4,8 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
  <title>Stripe Checkout</title>
- <link rel="stylesheet" href="/styles/design-system.css">
- <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/styles/design-system.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://js.stripe.com/v3/"></script>
  <style>
  body {
@@ -80,17 +80,16 @@
   const checkoutButton = document.getElementById('checkout-button');
    const DEFAULT_PRICE_ID = 'price_1ShjdBE6FRwoxLBfyUvK1ark';
    let publishableKey;
-   const stripePromise = fetch('/.netlify/functions/get-stripe-key')
-     .then(res => res.json())
-     .then(data => {
-       if (!data?.publishableKey) {
-         throw new Error('Missing Stripe publishable key');
-       }
-       publishableKey = data.publishableKey;
-       window.STRIPE_PUBLISHABLE_KEY = publishableKey;
-       window.STRIPE_PUBLISHABLE_KEY_LIVE = publishableKey;
-       return Stripe(publishableKey);
-     })
+    const stripePromise = fetch('/.netlify/functions/get-stripe-key')
+      .then(res => res.json())
+      .then(data => {
+        if (!data?.publishableKey) {
+          throw new Error('Missing Stripe publishable key');
+        }
+        publishableKey = data.publishableKey;
+        window.STRIPE_PUBLISHABLE_KEY = publishableKey;
+        return Stripe(publishableKey);
+      })
      .catch(err => {
        console.error('Failed to load Stripe key:', err);
        throw err;

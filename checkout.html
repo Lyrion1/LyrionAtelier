@@ -121,7 +121,6 @@
         const stripe = Stripe(data.publishableKey);
         window.stripe = stripe;
         window.STRIPE_PUBLISHABLE_KEY = data.publishableKey;
-        window.STRIPE_PUBLISHABLE_KEY_LIVE = data.publishableKey;
         initializeCheckout(stripe);
       })
       .catch(err => {

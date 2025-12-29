@@ -5,13 +5,13 @@ function warnIfNotLive(stripeInstance, keyValue) {
   const isStripeKey = normalizedKey.startsWith('pk_');
   const keyMode = isStripeKey && normalizedKey.includes('_live_')
     ? 'live'
-    : stripeInstance?._keyMode || (isStripeKey ? 'test' : 'test');
+    : stripeInstance?._keyMode || 'test';
   if (keyMode !== 'live') {
     console.error('WARNING: Stripe is not in live mode!');
   }
 }
 
-let stripePublishableKey = window?.STRIPE_PUBLISHABLE_KEY_LIVE || window?.STRIPE_PUBLISHABLE_KEY;
+let stripePublishableKey = window?.STRIPE_PUBLISHABLE_KEY || window?.STRIPE_PUBLISHABLE_KEY_LIVE;
 let stripe = (typeof Stripe === 'function' && stripePublishableKey)
   ? Stripe(stripePublishableKey)
   : null;
