@@ -423,7 +423,8 @@ img {
   color: #fff;
 }
 
-.nav-links a.active {
+.nav-links a.active,
+.nav-links a[aria-current="page"] {
   background: none;
   background-color: transparent;
   color: #fff;
@@ -431,14 +432,15 @@ img {
   white-space: nowrap;
 }
 
-.nav-links a.active::after {
+.nav-links a.active::after,
+.nav-links a[aria-current="page"]::after {
   content: '';
   position: absolute;
   bottom: -8px;
   left: 0;
   right: 0;
   height: 2px;
-  background: #fff;
+  background: var(--accent-2);
 }
 
 /* Mobile Navigation Toggle */
