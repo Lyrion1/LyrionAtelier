@@ -1,5 +1,5 @@
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY_TEST;
-const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY_TEST;
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY_LIVE || process.env.STRIPE_SECRET_KEY;
+const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY_LIVE || process.env.STRIPE_PUBLISHABLE_KEY;
 const stripe = stripeSecretKey ? require('stripe')(stripeSecretKey) : null;
 
 exports.handler = async (event) => {

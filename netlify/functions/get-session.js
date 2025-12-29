@@ -1,4 +1,4 @@
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY_TEST;
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY_LIVE || process.env.STRIPE_SECRET_KEY;
 const stripe = stripeSecretKey ? require('stripe')(stripeSecretKey) : null;
 
 exports.handler = async (event) => {

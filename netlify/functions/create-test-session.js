@@ -1,9 +1,9 @@
 // netlify/functions/create-test-session.js
-// Test checkout is disabled unless ENABLE_TEST_CHECKOUT === 'true'
+// Sandbox checkout is disabled unless ENABLE_TEST_CHECKOUT === 'true'. Keep this off in production because it uses the primary Stripe key.
 const ENABLED = process.env.ENABLE_TEST_CHECKOUT === 'true';
 
-// Use the Stripe test key for this endpoint
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY_TEST;
+// Use the live Stripe key; endpoint remains gated for sandbox usage
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY_LIVE || process.env.STRIPE_SECRET_KEY;
 const stripe = stripeSecretKey ? require('stripe')(stripeSecretKey) : null;
 
 exports.handler = async (event) => {
@@ -11,7 +11,7 @@ exports.handler = async (event) => {
     return {
       statusCode: 403,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ error: 'Test checkout disabled (production mode).' })
+      body: JSON.stringify({ error: 'Sandbox checkout disabled in production mode.' })
     };
   }
 

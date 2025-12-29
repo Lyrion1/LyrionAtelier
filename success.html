@@ -300,6 +300,34 @@ body.success-page #main-content {
   }
   }
 
+  const sessionId = new URLSearchParams(window.location.search).get('session_id');
+  if (sessionId) {
+    const target = document.querySelector('.email-notice');
+    if (target) {
+      const refLine = document.createElement('p');
+      refLine.style.marginTop = '12px';
+      const label = document.createElement('span');
+      label.textContent = 'Order reference: ';
+      const strong = document.createElement('strong');
+      strong.textContent = sessionId;
+      refLine.append(label, strong);
+      target.appendChild(refLine);
+    }
+    fetch(`/.netlify/functions/get-checkout-session?session_id=${encodeURIComponent(sessionId)}`)
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        if (data?.payment_status === 'paid') {
+          const paidLine = document.createElement('p');
+          paidLine.style.marginTop = '8px';
+          paidLine.textContent = 'Payment confirmed.';
+          target?.appendChild(paidLine);
+        }
+      })
+      .catch((err) => console.warn('Unable to verify session', err));
+  } else {
+    console.warn('No session_id found on success page.');
+  }
+
   // Ensure page remains scrollable and interactive
   document.body.style.overflow = 'auto';
   document.documentElement.style.overflow = 'auto';

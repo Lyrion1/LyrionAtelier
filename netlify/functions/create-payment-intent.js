@@ -1,5 +1,5 @@
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY_TEST;
-const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY_TEST;
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY_LIVE || process.env.STRIPE_SECRET_KEY;
+const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY_LIVE || process.env.STRIPE_PUBLISHABLE_KEY;
 const printfulApiKey = process.env.PRINTFUL_API_KEY;
 const fetch = require('node-fetch');
 const DEFAULT_ALLOWED_ORIGINS = 'https://lyrionatelier.com,https://www.lyrionatelier.com,http://localhost:8888,http://localhost:8000,http://localhost:5173,http://localhost:3000';
@@ -42,7 +42,7 @@ const STATIC_PRICE_MAP = {
 };
 
 if (!stripeSecretKey) {
-  console.warn('STRIPE_SECRET_KEY_TEST is not set. Stripe payments will fail.');
+  console.warn('STRIPE_SECRET_KEY_LIVE/STRIPE_SECRET_KEY is not set. Stripe payments will fail.');
 }
 
 const stripe = stripeSecretKey ? require('stripe')(stripeSecretKey) : null;

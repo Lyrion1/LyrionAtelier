@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
- <title>TEST - Stripe Checkout Test</title>
+ <title>Stripe Checkout</title>
  <link rel="stylesheet" href="/styles/design-system.css">
  <link rel="stylesheet" href="css/style.css">
  <script src="https://js.stripe.com/v3/"></script>
@@ -15,19 +15,9 @@
  padding: 40px;
  background: #f5f5f5;
  }
- .test-banner {
- background: #ff0000;
- color: white;
- padding: 20px;
- text-align: center;
- font-weight: bold;
- font-size: 1.2rem;
- margin-bottom: 30px;
- border-radius: 8px;
- }
- .product-card {
- background: white;
- padding: 40px;
+  .product-card {
+  background: white;
+  padding: 40px;
  border-radius: 12px;
  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
  }
@@ -52,27 +42,12 @@
  cursor: pointer;
  transition: background 0.3s;
  }
- button:hover {
- background: #000;
- }
- .test-card-info {
- margin-top: 30px;
- padding: 20px;
- background: #fff3cd;
- border-radius: 8px;
- border-left: 4px solid #ffc107;
- }
- .test-card-info h3 {
- margin-top: 0;
- color: #856404;
- }
- .test-card-info p {
- margin: 5px 0;
- color: #856404;
- }
- </style>
-</head>
-<body>
+  button:hover {
+  background: #000;
+  }
+  </style>
+ </head>
+ <body>
 <header class="site-header" data-nav-version="nav-v4">
  <nav class="main-nav" aria-label="Main navigation">
  <a href="/" class="logo-link">
@@ -94,44 +69,39 @@
  </nav>
 </header>
 
- <div class="test-banner">
- TEST MODE ONLY - DO NOT USE FOR REAL PURCHASES 
- </div>
-
  <div class="product-card">
  <h1>Lyrion Billionaire Bag</h1>
         <p class="price">$1.00</p>
- <button id="checkout-button">Test Checkout</button>
-
- <div class="test-card-info">
- <h3>Test Card Details:</h3>
- <p><strong>Card:</strong> 4242 4242 4242 4242</p>
- <p><strong>Expiry:</strong> 12/25</p>
- <p><strong>CVC:</strong> 123</p>
- <p><strong>ZIP:</strong> 12345</p>
- </div>
+ <button id="checkout-button">Checkout</button>
  </div>
 
  <script src="js/main.js" defer></script>
  <script>
-   const checkoutButton = document.getElementById('checkout-button');
+  const checkoutButton = document.getElementById('checkout-button');
+   const LIVE_PUBLISHABLE_KEY_PLACEHOLDER = 'USER_WILL_INSERT_LIVE_PUBLISHABLE_KEY_HERE';
+   // TODO: UPDATE TO LIVE PRICE ID - Current: price_1ShjdBE6FRwoxLBfyUvK1ark
+   const TEST_PRICE_ID_PLACEHOLDER = 'price_1ShjdBE6FRwoxLBfyUvK1ark';
    
    checkoutButton.addEventListener('click', async () => {
      checkoutButton.textContent = 'Loading...';
      checkoutButton.disabled = true;
 
      try {
-       // Call backend to create checkout session
-       const response = await fetch('/.netlify/functions/create-checkout', {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({
-           priceId: 'price_1ShjdBE6FRwoxLBfyUvK1ark',
-           quantity: 1
-         })
-       });
+        const configuredPriceId = window?.STRIPE_PRICE_ID_LIVE || TEST_PRICE_ID_PLACEHOLDER;
+        if (!configuredPriceId || configuredPriceId === TEST_PRICE_ID_PLACEHOLDER) {
+          throw new Error('Stripe price ID is not configured for live mode.');
+        }
+        // Call backend to create checkout session
+        const response = await fetch('/.netlify/functions/create-checkout', {
+          method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+           },
+           body: JSON.stringify({
+            priceId: configuredPriceId,
+            quantity: 1
+          })
+        });
 
        // Check if response is ok
        if (!response.ok) {
@@ -139,16 +109,28 @@
          throw new Error('Backend error: ' + errorText);
        }
 
-       const data = await response.json();
-       console.log('Backend response:', data); // Debug log
+        const data = await response.json();
+        console.log('Backend response:', data); // Debug log
 
        // Check if sessionId exists
        if (!data.sessionId) {
          throw new Error('No sessionId received from backend');
        }
 
-       // Initialize Stripe with your actual test key
-       const stripe = Stripe('pk_test_51QTfpGE6FRwoxLBfmjKFgxWK2pPj3yhrwS8v7WV4u8vX0h3iOzGpShp7EwkIk2cZH03bMDdOX1i2aKwP0okCPUhf00zbfiYCfD');
+        const publishableKey = window?.STRIPE_PUBLISHABLE_KEY_LIVE || LIVE_PUBLISHABLE_KEY_PLACEHOLDER;
+        if (!publishableKey || publishableKey === LIVE_PUBLISHABLE_KEY_PLACEHOLDER) {
+          throw new Error('Stripe publishable key is not configured for live mode.');
+        }
+        // Initialize Stripe with live publishable key (placeholder)
+        const stripe = Stripe(publishableKey);
+        const keyMode = publishableKey.startsWith('pk_live_')
+          ? 'live'
+          : publishableKey.startsWith('pk_test_')
+          ? 'test'
+          : stripe._keyMode || 'test';
+        if (keyMode !== 'live') {
+          console.error('WARNING: Stripe is not in live mode!');
+        }
        
        // Redirect to checkout
        const { error } = await stripe.redirectToCheckout({ 
@@ -158,13 +140,13 @@
        if (error) {
          throw new Error(error.message);
        }
-     } catch (e) {
-       console.error('Checkout error:', e); // Debug log
-       alert('Error: ' + e.message);
-       checkoutButton.textContent = 'Test Checkout';
-       checkoutButton.disabled = false;
-     }
-   });
+      } catch (e) {
+        console.error('Checkout error:', e); // Debug log
+        alert('Error: ' + e.message);
+        checkoutButton.textContent = 'Checkout';
+        checkoutButton.disabled = false;
+      }
+    });
  </script>
 </body>
 </html>
