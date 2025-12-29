@@ -77,19 +77,22 @@
 
  <script src="js/main.js" defer></script>
  <script>
-  const checkoutButton = document.getElementById('checkout-button');
+   const checkoutButton = document.getElementById('checkout-button');
    const DEFAULT_PRICE_ID = 'price_1ShjdBE6FRwoxLBfyUvK1ark';
    let publishableKey;
-    const stripePromise = fetch('/.netlify/functions/get-stripe-key')
-      .then(res => res.json())
-      .then(data => {
-        if (!data?.publishableKey) {
-          throw new Error('Missing Stripe publishable key');
-        }
-        publishableKey = data.publishableKey;
-        window.STRIPE_PUBLISHABLE_KEY = publishableKey;
-        return Stripe(publishableKey);
-      })
+   let stripeMode = 'test';
+   const stripePromise = fetch('/.netlify/functions/get-stripe-key')
+     .then(res => res.json())
+     .then(data => {
+       if (!data?.publishableKey) {
+         throw new Error('Missing Stripe publishable key');
+       }
+       publishableKey = data.publishableKey;
+       window.STRIPE_PUBLISHABLE_KEY = publishableKey;
+       const isStripeKey = typeof publishableKey === 'string' && publishableKey.startsWith('pk_');
+       stripeMode = isStripeKey && publishableKey.includes('_live_') ? 'live' : 'test';
+       return Stripe(publishableKey);
+     })
      .catch(err => {
        console.error('Failed to load Stripe key:', err);
        throw err;
@@ -102,7 +105,7 @@
      try {
         const configuredPriceId = window?.STRIPE_PRICE_ID_LIVE || DEFAULT_PRICE_ID;
         const hasLivePriceId = Boolean(window?.STRIPE_PRICE_ID_LIVE);
-        if (!hasLivePriceId && configuredPriceId === DEFAULT_PRICE_ID) {
+        if (stripeMode === 'live' && !hasLivePriceId) {
           throw new Error('Stripe price ID is not configured for live mode.');
         }
         const stripe = await stripePromise;
@@ -136,7 +139,7 @@
        }
 
         const isStripeKey = typeof publishableKey === 'string' && publishableKey.startsWith('pk_');
-        const keyMode = isStripeKey && publishableKey.includes('_live_') ? 'live' : 'test';
+        const keyMode = stripeMode || (isStripeKey && publishableKey.includes('_live_') ? 'live' : 'test');
         if (keyMode !== 'live') {
           console.error('WARNING: Stripe is not in live mode!');
         }

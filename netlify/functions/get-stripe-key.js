@@ -17,6 +17,13 @@ exports.handler = async (event) => {
   }
 
   const allowOrigin = requestOrigin || allowedOrigins[0] || '';
+  if (!allowOrigin) {
+    return {
+      statusCode: 400,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'Origin not allowed' })
+    };
+  }
 
   return {
     statusCode: 200,
