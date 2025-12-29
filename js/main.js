@@ -602,6 +602,11 @@ function initStickyHeader() {
  * Update Cart Count Badge
  * Shows the total number of items in the shopping cart
  */
+/**
+ * Ensures a cart badge element exists on the cart link and returns it.
+ * Creates the badge if missing; returns null when no cart link is present.
+ * @returns {HTMLElement|null}
+ */
 function ensureCartBadge() {
   const cartLink =
     document.querySelector('a[href="/cart"].cart-icon') ||
@@ -629,14 +634,14 @@ function updateCartCount() {
   } catch {
     cart = [];
   }
-  let invalidQuantity = false;
+  let invalidQuantity = 0;
   const totalItems = cart.reduce((sum, item) => {
     const qty = Number.isFinite(item.quantity) ? item.quantity : 1;
-    if (!Number.isFinite(item.quantity)) invalidQuantity = true;
+    if (!Number.isFinite(item.quantity)) invalidQuantity += 1;
     return sum + qty;
   }, 0);
   if (invalidQuantity) {
-    console.warn('[cart] item missing valid quantity, defaulting to 1');
+    console.warn(`[cart] ${invalidQuantity} item(s) missing valid quantity, defaulting to 1`);
   }
   cartCount.textContent = totalItems;
 

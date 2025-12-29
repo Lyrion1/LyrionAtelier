@@ -600,11 +600,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const addToCartBtn = document.querySelector('.add-to-cart-btn');
   if (addToCartBtn) {
     addToCartBtn.addEventListener('click', function() {
-      const productId =
-        this.getAttribute('data-product-id') ||
-        this.getAttribute('data-slug') ||
-        this.getAttribute('data-variant-id') ||
-        null;
+      const idAttributes = ['data-product-id', 'data-slug', 'data-variant-id'];
+      const productId = idAttributes
+        .map((attr) => this.getAttribute(attr))
+        .find((val) => val) || null;
       const quantityInput = document.getElementById('product-quantity');
       const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
       if (!productId) {
