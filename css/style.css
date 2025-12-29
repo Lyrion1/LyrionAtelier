@@ -5989,7 +5989,9 @@ button,
   }
 
   .nav-links {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     position: absolute;
     top: 100%;
     left: 0;
@@ -5997,12 +5999,15 @@ button,
     background: rgba(10, 8, 32, 0.95);
     padding: 16px 20px;
     z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 
   .nav-links.active {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 
 }

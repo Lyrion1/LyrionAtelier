@@ -402,7 +402,7 @@ function initInlineNavToggle(header) {
       last.focus();
     } else if (!event.shiftKey && document.activeElement === last) {
       event.preventDefault();
-      navToggle.focus();
+      first.focus();
     }
   });
 }
