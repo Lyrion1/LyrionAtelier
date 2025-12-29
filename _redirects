@@ -5,6 +5,10 @@
 /.netlify/functions/* /.netlify/functions/:splat 200!
 /api/*               /.netlify/functions/:splat 200!
 
+# Taurus Constellation Pyjama Top static page
+/shop/taurus-pyjama-top /shop/taurus-pyjama-top.html 200
+/shop/taurus-pyjama-top.html /shop/taurus-pyjama-top.html 200
+
 # Clean URLs - Remove .html extension
 /shop               /shop.html            200
 /cart               /cart.html            200
