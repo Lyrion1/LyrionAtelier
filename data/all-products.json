@@ -181,6 +181,7 @@
   {
     "id": "youth-aries-heavy-blend-hoodie",
     "slug": "youth-aries-heavy-blend-hoodie",
+    "link": "/shop/youth-aries-hoodie.html",
     "name": "Youth Aries Heavy Blend Hoodie",
     "collection": "Zodiac Hero",
     "category": "zodiac-hero",
@@ -382,6 +383,7 @@
   },
   {
     "slug": "leo-zodiac-hoodie",
+    "link": "/shop/leo-hoodie.html",
     "title": "Leo Zodiac Hoodie",
     "collection": "Zodiac Hero",
     "category": "zodiac-hero",
@@ -669,6 +671,7 @@
   {
     "id": "gemini-starlight-tee",
     "slug": "gemini-starlight-tee",
+    "link": "/shop/gemini-tee.html",
     "title": "Gemini Starlight Tee",
     "kind": "product",
     "collection": "Zodiac Hero",

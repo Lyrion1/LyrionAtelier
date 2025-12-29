@@ -367,7 +367,7 @@ import { formatPrice } from './price-utils.js';
   const createCard = (p) => {
     const slug = p.slug || slugify(p.title || p.name || '');
     const viewTarget = p.id || slug;
-    const viewUrl = p.link || `/shop/${encodeURIComponent(viewTarget)}`;
+    const viewUrl = p.link || `/shop/${encodeURIComponent(viewTarget)}.html`;
     const hasPriceData = Number.isFinite(p.price) || Number.isFinite(p.priceCents) || !!p.priceLabel;
     const basePrice = hasPriceData ? null : normalizePrice(p);
     const fallbackPriceValue = displayPrice(p);

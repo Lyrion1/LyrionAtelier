@@ -17,7 +17,7 @@ document.addEventListener('click', async function(e) {
       '';
     const slugFragment = (cleanSlug(productSlug) || '').toLowerCase();
     const normalizedHref = href && href.trim() && href !== '#' ? href : null;
-    const detailUrl = slugFragment ? `/shop/${encodeURIComponent(slugFragment)}` : null;
+    const detailUrl = slugFragment ? `/shop/${encodeURIComponent(slugFragment)}.html` : null;
     const legacyUrl = slugFragment ? `/shop/${slugFragment}` : null;
     const target = normalizedHref || detailUrl || legacyUrl;
     if (target) {
