@@ -5989,8 +5989,12 @@ button,
 
   .nav-links {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex-direction: row;
+    gap: 16px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 12px;
   }
 
 }
