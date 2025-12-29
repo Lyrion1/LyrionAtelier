@@ -5933,6 +5933,7 @@ button,
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .logo-link {
@@ -5943,7 +5944,7 @@ button,
 }
 
 .logo-img {
-  height: 50px;
+  height: var(--logo-height, 50px);
   width: auto;
 }
 
@@ -5980,7 +5981,7 @@ button,
   }
 
   .logo-img {
-    height: 40px;
+    --logo-height: 40px;
   }
 
   .brand-name {
@@ -5989,6 +5990,13 @@ button,
 
   .nav-links {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(10, 8, 32, 0.95);
+    padding: 16px 20px;
+    z-index: 1001;
   }
 
   .nav-links.active {
