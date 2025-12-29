@@ -636,8 +636,9 @@ function updateCartCount() {
   }
   let invalidQuantityCount = 0;
   const totalItems = cart.reduce((sum, item) => {
-    const qty = Number.isFinite(item.quantity) ? item.quantity : 1;
-    if (!Number.isFinite(item.quantity)) invalidQuantityCount += 1;
+    const hasValidQuantity = Number.isFinite(item.quantity);
+    const qty = hasValidQuantity ? item.quantity : 1;
+    if (!hasValidQuantity) invalidQuantityCount += 1;
     return sum + qty;
   }, 0);
   if (invalidQuantityCount) {

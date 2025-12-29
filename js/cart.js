@@ -600,6 +600,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const addToCartBtn = document.querySelector('.add-to-cart-btn');
   if (addToCartBtn) {
     addToCartBtn.addEventListener('click', function() {
+      // Prefer explicit product id, then slug, then variant id for fallback.
       const idAttributes = ['data-product-id', 'data-slug', 'data-variant-id'];
       const productId = idAttributes
         .map((attr) => this.getAttribute(attr))
@@ -610,8 +611,8 @@ document.addEventListener('DOMContentLoaded', function() {
         notify('Product not found', 'error');
         return;
       }
-      const resolvedId = Number.isFinite(Number(productId)) ? Number(productId) : productId;
-      addToCart(resolvedId, null, quantity);
+      const parsedProductId = Number.isFinite(Number(productId)) ? Number(productId) : productId;
+      addToCart(parsedProductId, null, quantity);
     });
   }
   bindBundleChips();
