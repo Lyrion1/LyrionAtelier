@@ -44,6 +44,7 @@ const products = [
   {
     id: "youth-aries-heavy-blend-hoodie",
     slug: "youth-aries-heavy-blend-hoodie",
+    link: "/shop/youth-aries-hoodie.html",
     name: "Youth Aries Heavy Blend Hoodie",
     price: 42.99,
     category: "zodiac-hero",
@@ -92,6 +93,7 @@ const products = [
   {
     id: 2,
     slug: "leo-zodiac-hoodie",
+    link: "/shop/leo-hoodie.html",
     name: "Leo Zodiac Hoodie",
     price: 59.99,
     category: "hoodie",
@@ -136,6 +138,7 @@ const products = [
   {
     id: 4,
     slug: "gemini-starlight-tee",
+    link: "/shop/gemini-tee.html",
     name: "Gemini Starlight Tee",
     price: 42.99,
     category: "zodiac-hero",

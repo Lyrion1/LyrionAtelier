@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta property="og:title" content="Lyrion Atelier - Checkout">
+  <meta property="og:description" content="Complete your Lyrīon Atelier order.">
+  <meta property="og:image" content="https://lyrionatelier.com/images/logo/logo.png">
+  <meta property="og:url" content="https://lyrionatelier.com/checkout">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Checkout | Lyrīon Atelier</title>
+  <link rel="stylesheet" href="/styles/design-system.css">
+  <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header" data-nav-version="nav-v4">
+ <nav class="main-nav" aria-label="Main navigation">
+ <a href="/" class="logo-link">
+ <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
+ <span class="brand-name">LYRĪON ATELIER</span>
+ </a>
+ 
+ <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation" aria-controls="primary-nav">☰</button>
+ 
+ <div class="nav-links" id="primary-nav" aria-hidden="true">
+ <a href="/">Home</a>
+ <a href="/shop">Shop</a>
+ <a href="/oracle">Oracle</a>
+ <a href="/compatibility">Compatibility</a>
+ <a href="/codex">Codex</a>
+ <a href="/contact">Contact</a>
+ <a href="/cart" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a>
+ </div>
+ </nav>
+</header>
+
+  <a class="skip-to-content" href="#main-content">Skip to main content</a>
+<main id="main-content" class="section">
+    <div class="container">
+      <div class="section-title">
+        <p class="pill">Checkout</p>
+        <h1>Review &amp; pay</h1>
+        <p class="muted">Confirm your items and complete payment securely.</p>
+      </div>
+
+      <div class="card">
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p id="empty-cart-message" class="muted" style="display:none;">Your cart is empty. <a href="/shop">Find something magical</a>.</p>
+
+        <div class="checkout-grid" style="display:grid; gap:1rem; margin-top:1rem;">
+          <div class="card">
+            <h3>Contact &amp; Shipping</h3>
+            <div class="form-grid" style="display:grid; gap:0.75rem;">
+              <label class="input-group">
+                <span class="muted">Email</span>
+                <input type="email" id="checkout-email" placeholder="you@example.com" required>
+              </label>
+              <label class="input-group">
+                <span class="muted">Full name</span>
+                <input type="text" id="checkout-name" placeholder="Full name" required>
+              </label>
+              <label class="input-group">
+                <span class="muted">Shipping address</span>
+                <input type="text" id="checkout-address" placeholder="Street, City, State, ZIP" required>
+              </label>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Summary</h3>
+            <div class="cart-summary">
+              <div class="price-row"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+              <div class="price-row" style="display:none;"><span class="discount-label">Bundle Savings</span><strong id="cart-discount">$0.00</strong></div>
+              <div class="price-row"><span>Shipping</span><strong id="cart-shipping">$0.00</strong></div>
+              <div class="price-row"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+            </div>
+            <div class="button-row align-end" style="margin-top:1rem;">
+              <button class="btn btn-primary" type="button" id="checkoutBtn">Pay now</button>
+              <button class="btn btn-outline" type="button" id="clear-cart-button">Clear cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div><strong class="brand-name">Lyrīon Atelier</strong></div>
+      <div class="muted"><a href="/contact">Need help?</a></div>
+    </div>
+  </footer>
+
+  <script src="js/products.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script defer src="/assets/cart.js"></script>
+  <script defer src="/assets/checkout.js"></script>
+  <script defer src="/assets/checkout-bridge.js"></script>
+</body>
+</html>

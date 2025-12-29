@@ -51,7 +51,7 @@ function renderCard(product) {
   const variant = pickVariant(product);
   const priceNum = resolvePrice(variant) ?? resolvePrice(product);
   const slug = product.slug || slugify(product.title || product.name || '');
-  const viewUrl = `/shop/${encodeURIComponent(slug)}`;
+  const viewUrl = product.link || `/shop/${encodeURIComponent(slug)}.html`;
   const galleryImages = (() => {
     const seeds = [];
     if (product.image) seeds.push(product.image);

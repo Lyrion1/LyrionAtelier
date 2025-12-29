@@ -27,9 +27,10 @@ function renderFeaturedProducts() {
     return null;
   };
   const detailUrl = (product) => {
+    if (product?.link) return product.link;
     const slug = productSlug(product);
-    if (slug) return `/shop/${encodeURIComponent(slug)}`;
-    if (product?.id != null) return `/shop/${encodeURIComponent(product.id)}`;
+    if (slug) return `/shop/${encodeURIComponent(slug)}.html`;
+    if (product?.id != null) return `/shop/${encodeURIComponent(product.id)}.html`;
     return '/shop';
   };
   /**
