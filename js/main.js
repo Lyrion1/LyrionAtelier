@@ -175,6 +175,7 @@ function applySharedLayout() {
     body.insertBefore(header, body.firstChild);
   }
   setActiveNavLink(header);
+  initInlineNavToggle(header);
 
   let main = existingMain;
   if (!main) {
@@ -338,6 +339,17 @@ function getSeoTemplate(pathname) {
     title: document.title || 'Lyrīon Atelier - Luxury Astrology, Oracle Readings & Zodiac Apparel',
     description: 'Explore luxury zodiac apparel, oracle readings, and cosmic guidance from Lyrīon Atelier.'
   };
+}
+
+function initInlineNavToggle(header) {
+  const navToggle = header?.querySelector('.nav-toggle');
+  const navLinks = header?.querySelector('.nav-links');
+  if (!navToggle || !navLinks) return;
+
+  navToggle.addEventListener('click', () => {
+    const isActive = navLinks.classList.toggle('active');
+    navToggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+  });
 }
 
 function ensureJsonLd(id, data) {
