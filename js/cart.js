@@ -611,7 +611,7 @@ document.addEventListener('DOMContentLoaded', function() {
         notify('Product not found', 'error');
         return;
       }
-      const normalizedId = !Number.isNaN(Number(productId)) ? Number(productId) : productId;
+      const normalizedId = Number.isFinite(Number(productId)) ? Number(productId) : productId;
       addToCart(normalizedId, null, quantity);
     });
   }

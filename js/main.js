@@ -238,7 +238,7 @@ function buildSiteHeader() {
         <li><a href="/compatibility" role="menuitem">Compatibility</a></li>
         <li><a href="/codex" role="menuitem">Codex</a></li>
         <li><a href="/contact" role="menuitem">Contact</a></li>
-        <li><a href="/cart" role="menuitem" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a></li>
+        <li><a href="/cart" role="menuitem" class="cart-icon" aria-live="polite">Cart <span class="cart-count" style="display:none;">0</span></a></li>
       </ul>
     </nav>`;
   return header;
@@ -622,8 +622,13 @@ function updateCartCount() {
   const cartCount = ensureCartBadge();
   if (!cartCount) return;
 
-  const storedCart = localStorage.getItem('cart');
-  const cart = JSON.parse(storedCart && storedCart.trim() ? storedCart : '[]');
+  let cart = [];
+  try {
+    const storedCart = localStorage.getItem('cart');
+    cart = JSON.parse(storedCart && storedCart.trim() ? storedCart : '[]');
+  } catch {
+    cart = [];
+  }
   let invalidQuantity = false;
   const totalItems = cart.reduce((sum, item) => {
     const qty = Number.isFinite(item.quantity) ? item.quantity : 1;
