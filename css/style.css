@@ -6003,12 +6003,14 @@ button,
     transform: translateY(-100%);
     transition: opacity 0.2s ease, transform 0.2s ease;
     pointer-events: none;
+    visibility: hidden;
   }
 
   .nav-links.active {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+    visibility: visible;
   }
 
 }

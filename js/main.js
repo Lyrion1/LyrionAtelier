@@ -348,7 +348,10 @@ function initInlineNavToggle(header) {
   const navLinks = header?.querySelector('.nav-links');
   if (!navToggle || !navLinks) return;
 
-  const getFocusables = () => [navToggle, ...navLinks.querySelectorAll('a')];
+  const getFocusables = () => [
+    navToggle,
+    ...navLinks.querySelectorAll('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])')
+  ];
 
   const closeMenu = () => {
     navLinks.classList.remove('active');
