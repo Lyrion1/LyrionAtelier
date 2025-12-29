@@ -221,6 +221,7 @@
       { size: '3XL', variantId: '6951cf089ec243', price: 37.99 }
     ];
 
+    const defaultVariant = variants.find((variant) => variant.size === 'M') || variants[0];
     const variantById = Object.fromEntries(variants.map((v) => [v.variantId, v]));
     const minPrice = Math.min(...variants.map((v) => Number(v.price)));
     const product = {
@@ -240,7 +241,7 @@
     const addBtn = document.getElementById('add-to-cart-btn');
     const startingPriceEl = document.getElementById('starting-price');
 
-    const getCurrentVariant = () => variantById[sizeSelect.value] || variants[2];
+    const getCurrentVariant = () => variantById[sizeSelect.value] || defaultVariant;
 
     const updatePrice = () => {
       const variant = getCurrentVariant();
