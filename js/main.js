@@ -175,7 +175,9 @@ function applySharedLayout() {
     body.insertBefore(header, body.firstChild);
   }
   setActiveNavLink(header);
-  initInlineNavToggle(header);
+  if (header.querySelector('.nav-toggle')) {
+    initInlineNavToggle(header);
+  }
 
   let main = existingMain;
   if (!main) {
@@ -232,7 +234,7 @@ function buildSiteHeader() {
     
     <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation" aria-controls="primary-nav">☰</button>
     
-    <div class="nav-links" id="primary-nav">
+    <div class="nav-links" id="primary-nav" aria-hidden="true">
     <a href="/">Home</a>
     <a href="/shop">Shop</a>
     <a href="/oracle">Oracle</a>
@@ -351,11 +353,13 @@ function initInlineNavToggle(header) {
   const closeMenu = () => {
     navLinks.classList.remove('active');
     navToggle.setAttribute('aria-expanded', 'false');
+    navLinks.setAttribute('aria-hidden', 'true');
   };
 
   const openMenu = () => {
     navLinks.classList.add('active');
     navToggle.setAttribute('aria-expanded', 'true');
+    navLinks.setAttribute('aria-hidden', 'false');
     const firstLink = navLinks.querySelector('a');
     firstLink?.focus();
   };
