@@ -12,7 +12,7 @@
 /contact            /contact.html         200
 /contact-success    /contact-success.html 200
 /compatibility      /compatibility.html   200
-/compatibility/digital-certificate /compatibility 301
+/compatibility/digital-certificate /compatibility/digital-certificate.html 200
 /compatibility/luxury-print /compatibility/luxury-print.html 200
 /compatibility/museum-framed /compatibility/museum-framed.html 200
 /compatibility/twin-flames /compatibility/twin-flames.html 200
