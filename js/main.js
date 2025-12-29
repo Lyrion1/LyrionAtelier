@@ -223,7 +223,7 @@ function buildSiteHeader() {
   header.className = 'site-header';
   header.dataset.navVersion = NAV_VERSION;
   header.innerHTML = `
-    <nav class="main-nav">
+    <nav class="main-nav" aria-label="Main navigation">
     <a href="/" class="logo-link">
     <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
     <span class="brand-name">LYRĪON ATELIER</span>
