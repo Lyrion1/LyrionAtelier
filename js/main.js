@@ -602,24 +602,34 @@ function initStickyHeader() {
  * Update Cart Count Badge
  * Shows the total number of items in the shopping cart
  */
-function updateCartCount() {
+function ensureCartBadge() {
   const cartLink = document.querySelector('.nav-links a[href="/cart"]');
-  const cartCount =
-    document.querySelector('.cart-count') ||
-    (cartLink
-      ? (() => {
-          const badge = document.createElement('span');
-          badge.className = 'cart-count';
-          badge.textContent = '0';
-          badge.style.display = 'none';
-          cartLink.appendChild(badge);
-          return badge;
-        })()
-      : null);
+  if (!cartLink) return null;
+  let cartCount = cartLink.querySelector('.cart-count');
+  if (!cartCount) {
+    cartCount = document.createElement('span');
+    cartCount.className = 'cart-count';
+    cartCount.textContent = '0';
+    cartCount.style.display = 'none';
+    cartLink.appendChild(cartCount);
+  }
+  return cartCount;
+}
+
+function updateCartCount() {
+  const cartCount = ensureCartBadge();
   if (!cartCount) return;
 
   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-  const totalItems = cart.reduce((sum, item) => sum + (Number.isFinite(item.quantity) ? item.quantity : 1), 0);
+  let invalidQuantity = false;
+  const totalItems = cart.reduce((sum, item) => {
+    const qty = Number.isFinite(item.quantity) ? item.quantity : 1;
+    if (!Number.isFinite(item.quantity)) invalidQuantity = true;
+    return sum + qty;
+  }, 0);
+  if (invalidQuantity) {
+    console.warn('[cart] item missing valid quantity, defaulting to 1');
+  }
   cartCount.textContent = totalItems;
 
   // Show/hide badge based on cart contents

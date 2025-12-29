@@ -607,6 +607,10 @@ document.addEventListener('DOMContentLoaded', function() {
         null;
       const quantityInput = document.getElementById('product-quantity');
       const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+      if (!productId) {
+        notify('Product not found', 'error');
+        return;
+      }
       addToCart(productId, null, quantity);
     });
   }
