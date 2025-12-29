@@ -142,19 +142,11 @@
 
           <div class="selector-group">
             <label for="size-select" class="muted">Size</label>
-            <select id="size-select" class="input-select">
-              <option value="6951cf089ec022">XS - $34.99</option>
-              <option value="6951cf089ec096">S - $34.99</option>
-              <option value="6951cf089ec0f9" selected>M - $34.99</option>
-              <option value="6951cf089ec157">L - $34.99</option>
-              <option value="6951cf089ec1a9">XL - $34.99</option>
-              <option value="6951cf089ec1f4">2XL - $35.99</option>
-              <option value="6951cf089ec243">3XL - $37.99</option>
-            </select>
+            <select id="size-select" class="input-select"></select>
           </div>
 
           <div class="product-actions" style="margin-top: 1rem;">
-            <button class="btn btn-primary btn-full" type="button" id="add-to-cart-btn">Add to Cart - $34.99</button>
+            <button class="btn btn-primary btn-full" type="button" id="add-to-cart-btn">Add to Cart</button>
             <p class="muted" style="margin-top: 0.25rem;">Premium fulfillment via Printful</p>
           </div>
         </div>
@@ -241,6 +233,18 @@
     const addBtn = document.getElementById('add-to-cart-btn');
     const startingPriceEl = document.getElementById('starting-price');
 
+    const buildSizeOptions = () => {
+      if (!sizeSelect) return;
+      sizeSelect.innerHTML = '';
+      variants.forEach((variant) => {
+        const option = document.createElement('option');
+        option.value = variant.variantId;
+        option.textContent = `${variant.size} - $${Number(variant.price).toFixed(2)}`;
+        if (variant === defaultVariant) option.selected = true;
+        sizeSelect.appendChild(option);
+      });
+    };
+
     const getCurrentVariant = () => variantById[sizeSelect.value] || defaultVariant;
 
     const updatePrice = () => {
@@ -262,8 +266,9 @@
       if (addBtn) addBtn.textContent = `Add to Cart - $${formatted}`;
     };
 
+    buildSizeOptions();
     initializePrice();
-    sizeSelect.addEventListener('change', updatePrice);
+    if (sizeSelect) sizeSelect.addEventListener('change', updatePrice);
     updatePrice();
 
     addBtn.addEventListener('click', () => {
