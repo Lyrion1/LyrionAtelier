@@ -23,6 +23,18 @@
       ],
       "type": "physical",
       "eco": true
+    },
+    {
+      "name": "Taurus Micro-Rib Tank Top",
+      "variants": [
+        { "size": "XS", "variantId": "6951c9104965e8", "price": 32.99 },
+        { "size": "S", "variantId": "6951c910496649", "price": 32.99 },
+        { "size": "M", "variantId": "6951c910496698", "price": 32.99 },
+        { "size": "L", "variantId": "6951c9104966d6", "price": 32.99 },
+        { "size": "XL", "variantId": "6951c910496729", "price": 32.99 },
+        { "size": "2XL", "variantId": "6951c910496768", "price": 34.00 }
+      ],
+      "type": "physical"
     }
   ]
 }
