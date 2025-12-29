@@ -135,7 +135,8 @@
          throw new Error('No sessionId received from backend');
        }
 
-        const keyMode = /_live_/.test(publishableKey) ? 'live' : 'test';
+        const isStripeKey = typeof publishableKey === 'string' && publishableKey.startsWith('pk_');
+        const keyMode = isStripeKey && publishableKey.includes('_live_') ? 'live' : 'test';
         if (keyMode !== 'live') {
           console.error('WARNING: Stripe is not in live mode!');
         }

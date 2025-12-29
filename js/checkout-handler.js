@@ -2,9 +2,10 @@ console.log('Universal checkout handler loaded');
 
 function warnIfNotLive(stripeInstance, keyValue) {
   const normalizedKey = typeof keyValue === 'string' ? keyValue : '';
-  const keyMode = /_live_/.test(normalizedKey)
+  const isStripeKey = normalizedKey.startsWith('pk_');
+  const keyMode = isStripeKey && normalizedKey.includes('_live_')
     ? 'live'
-    : stripeInstance?._keyMode || 'test';
+    : stripeInstance?._keyMode || (isStripeKey ? 'test' : 'test');
   if (keyMode !== 'live') {
     console.error('WARNING: Stripe is not in live mode!');
   }
