@@ -6000,7 +6000,8 @@ button,
     padding: 16px 20px;
     z-index: 1001;
     opacity: 0;
-    transform: translateY(-120%);
+    transform: translateY(-100%);
+    transition: opacity 0.2s ease, transform 0.2s ease;
     pointer-events: none;
   }
 
