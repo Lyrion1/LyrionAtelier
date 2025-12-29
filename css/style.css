@@ -5989,8 +5989,8 @@ button,
 
   .nav-links {
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
+    flex-direction: column;
+    gap: 12px;
   }
 
 }

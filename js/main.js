@@ -236,7 +236,7 @@ function buildSiteHeader() {
     <a href="/compatibility">Compatibility</a>
     <a href="/codex">Codex</a>
     <a href="/contact">Contact</a>
-    <a href="/cart" class="cart-icon">Cart</a>
+    <a href="/cart" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a>
     </div>
     </nav>`;
   return header;
