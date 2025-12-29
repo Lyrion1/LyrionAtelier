@@ -6,7 +6,7 @@
  <title>Stripe Checkout</title>
  <link rel="stylesheet" href="/styles/design-system.css">
  <link rel="stylesheet" href="css/style.css">
- <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://js.stripe.com/v3/"></script>
  <style>
  body {
  font-family: Arial, sans-serif;
@@ -78,18 +78,36 @@
  <script src="js/main.js" defer></script>
  <script>
   const checkoutButton = document.getElementById('checkout-button');
-   const LIVE_PUBLISHABLE_KEY_PLACEHOLDER = 'USER_WILL_INSERT_LIVE_PUBLISHABLE_KEY_HERE';
-   // TODO: UPDATE TO LIVE PRICE ID - Current: price_1ShjdBE6FRwoxLBfyUvK1ark
-   const TEST_PRICE_ID_PLACEHOLDER = 'price_1ShjdBE6FRwoxLBfyUvK1ark';
+   const DEFAULT_PRICE_ID = 'price_1ShjdBE6FRwoxLBfyUvK1ark';
+   let publishableKey;
+   const stripePromise = fetch('/.netlify/functions/get-stripe-key')
+     .then(res => res.json())
+     .then(data => {
+       if (!data?.publishableKey) {
+         throw new Error('Missing Stripe publishable key');
+       }
+       publishableKey = data.publishableKey;
+       window.STRIPE_PUBLISHABLE_KEY = publishableKey;
+       window.STRIPE_PUBLISHABLE_KEY_LIVE = publishableKey;
+       return Stripe(publishableKey);
+     })
+     .catch(err => {
+       console.error('Failed to load Stripe key:', err);
+       throw err;
+     });
    
    checkoutButton.addEventListener('click', async () => {
      checkoutButton.textContent = 'Loading...';
      checkoutButton.disabled = true;
 
      try {
-        const configuredPriceId = window?.STRIPE_PRICE_ID_LIVE || TEST_PRICE_ID_PLACEHOLDER;
-        if (!configuredPriceId || configuredPriceId === TEST_PRICE_ID_PLACEHOLDER) {
+        const configuredPriceId = window?.STRIPE_PRICE_ID_LIVE || DEFAULT_PRICE_ID;
+        if (!configuredPriceId || configuredPriceId === DEFAULT_PRICE_ID) {
           throw new Error('Stripe price ID is not configured for live mode.');
+        }
+        const stripe = await stripePromise;
+        if (!stripe) {
+          throw new Error('Stripe unavailable');
         }
         // Call backend to create checkout session
         const response = await fetch('/.netlify/functions/create-checkout', {
@@ -117,17 +135,7 @@
          throw new Error('No sessionId received from backend');
        }
 
-        const publishableKey = window?.STRIPE_PUBLISHABLE_KEY_LIVE || LIVE_PUBLISHABLE_KEY_PLACEHOLDER;
-        if (!publishableKey || publishableKey === LIVE_PUBLISHABLE_KEY_PLACEHOLDER) {
-          throw new Error('Stripe publishable key is not configured for live mode.');
-        }
-        // Initialize Stripe with live publishable key (placeholder)
-        const stripe = Stripe(publishableKey);
-        const keyMode = publishableKey.startsWith('pk_live_')
-          ? 'live'
-          : publishableKey.startsWith('pk_test_')
-          ? 'test'
-          : stripe._keyMode || 'test';
+        const keyMode = /_live_/.test(publishableKey) ? 'live' : 'test';
         if (keyMode !== 'live') {
           console.error('WARNING: Stripe is not in live mode!');
         }

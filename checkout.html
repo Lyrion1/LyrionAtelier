@@ -110,5 +110,32 @@
   <script defer src="/assets/cart.js"></script>
   <script defer src="/assets/checkout.js"></script>
   <script defer src="/assets/checkout-bridge.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    fetch('/.netlify/functions/get-stripe-key')
+      .then(res => res.json())
+      .then(data => {
+        if (!data?.publishableKey) {
+          throw new Error('Missing Stripe publishable key');
+        }
+        const stripe = Stripe(data.publishableKey);
+        window.stripe = stripe;
+        window.STRIPE_PUBLISHABLE_KEY = data.publishableKey;
+        window.STRIPE_PUBLISHABLE_KEY_LIVE = data.publishableKey;
+        initializeCheckout(stripe);
+      })
+      .catch(err => {
+        console.error('Failed to load Stripe key:', err);
+        alert('Payment system unavailable. Please try again later.');
+      });
+    
+    function initializeCheckout(stripe) {
+      const checkoutBtn = document.getElementById('checkoutBtn');
+      
+      if (checkoutBtn) {
+        checkoutBtn.dataset.stripeReady = 'true';
+      }
+    }
+  </script>
 </body>
 </html>

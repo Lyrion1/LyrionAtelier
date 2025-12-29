@@ -17,11 +17,13 @@
 - [x] netlify/functions/oracle-subscribe.js
 
 ## Manual Steps Required:
-1. Get live publishable key from Stripe dashboard (Live mode → Developers → API keys)
-2. Replace 'USER_WILL_INSERT_LIVE_PUBLISHABLE_KEY_HERE' in all files with actual pk_live_ key
-3. Create live products in Stripe dashboard matching test products
-4. Update all price_XXXXX IDs to live price IDs
-5. Test with real card (then refund yourself)
+1. Verify live keys are saved in Netlify env vars:
+   - `STRIPE_PUBLISHABLE_KEY`
+   - `STRIPE_SECRET_KEY`
+   - `STRIPE_WEBHOOK_SECRET`
+2. Create live products in Stripe dashboard matching test products
+3. Update all price_XXXXX IDs to live price IDs
+4. Test with real card (then refund yourself)
 
 ## Live Price IDs Needed:
 - Product 1: price_1ShjdBE6FRwoxLBfyUvK1ark → NEEDS LIVE VERSION
