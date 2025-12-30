@@ -493,7 +493,7 @@ function ensureSeoMetadata() {
       "url": SITE_ORIGIN,
       "logo": `${SITE_ORIGIN}/images/lyrion-logo.png`,
       "sameAs": [
-        "https://www.tiktok.com/@lyrionatelier",
+        "https://www.tiktok.com/@lyrion_atelier?_r=1&_t=ZN-92ebtSFmVUc",
         "https://www.instagram.com/lyrionatelier"
       ],
       "priceRange": "$$-$$$"
@@ -565,7 +565,7 @@ function buildSiteFooter() {
   footer.className = 'footer';
   const socialLinks = `
     <div class="footer-social" aria-label="Lyrion Atelier social links">
-      <a class="footer-social__link" href="https://www.tiktok.com/@lyrionatelier" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on TikTok">
+      <a class="footer-social__link" href="https://www.tiktok.com/@lyrion_atelier?_r=1&_t=ZN-92ebtSFmVUc" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on TikTok">
         ${FOOTER_TIKTOK_ICON}
       </a>
       <a class="footer-social__link" href="https://www.youtube.com/@LyrionAtelier" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on YouTube">
