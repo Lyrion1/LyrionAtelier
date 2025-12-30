@@ -495,7 +495,7 @@ function ensureSeoMetadata() {
       "logo": `${SITE_ORIGIN}/images/lyrion-logo.png`,
       "sameAs": [
         TIKTOK_URL,
-        "https://www.instagram.com/lyrionatelier"
+        "https://www.instagram.com/lyrionatelier?igsh=cG85eGhodzJkb2Jj&utm_source=qr"
       ],
       "priceRange": "$$-$$$"
     });
@@ -572,7 +572,7 @@ function buildSiteFooter() {
       <a class="footer-social__link" href="https://www.youtube.com/@LyrionAtelier" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on YouTube">
         ${FOOTER_YOUTUBE_ICON}
       </a>
-      <a class="footer-social__link" href="USER_WILL_PASTE_INSTAGRAM_URL" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on Instagram">
+      <a class="footer-social__link" href="https://www.instagram.com/lyrionatelier?igsh=cG85eGhodzJkb2Jj&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on Instagram">
         ${FOOTER_INSTAGRAM_ICON}
       </a>
     </div>`;
