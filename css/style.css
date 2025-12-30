@@ -2007,9 +2007,10 @@ textarea:focus {
 }
 
 .social-icon-link svg {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   fill: currentColor;
+  stroke: currentColor;
 }
 
 .follow-grid {
