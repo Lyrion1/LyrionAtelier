@@ -992,6 +992,10 @@ function addOracleReadingToCart(readingKey) {
   const targetId = mappedId || fallbackId;
   const product = products.find(p => String(p.id) === String(targetId));
   if (!product) {
+    // Skip error for 2026 reading - it handles checkout via bookOracleReading()
+    if (resolvedKey.includes('2026')) {
+      return;
+    }
     if (typeof showToast === 'function') {
       showToast('This reading is unavailable right now.', 'error');
     }
@@ -1145,7 +1149,7 @@ document.addEventListener('DOMContentLoaded', function() {
   oracleBookButtons.forEach(btn => {
     btn.addEventListener('click', (event) => {
       event.preventDefault();
-      const productKey = btn.getAttribute('data-product') || btn.dataset.product || btn.id;
+      const productKey = btn.getAttribute('data-product') || btn.dataset.product || btn.dataset.readingId || btn.id;
       addOracleReadingToCart(productKey);
     });
   });
