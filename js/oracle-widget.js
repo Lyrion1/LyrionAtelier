@@ -136,8 +136,13 @@ async function getOracleReading() {
 }
 
 function bookFullReading() {
- const recommended = window.currentReading?.recommendedReading || '';
-window.location.href = recommended ? '/oracle#' + recommended : '/oracle';
+  const recommended = window.currentReading?.recommendedReading || '';
+  const normalized = recommended === 'natal-chart' ? 'natal-chart-blueprint' : recommended;
+  if (normalized === 'natal-chart-blueprint') {
+    window.location.href = '/oracle/natal-chart-blueprint';
+    return;
+  }
+  window.location.href = normalized ? '/oracle#' + normalized : '/oracle';
 }
 
 function shareReading() {
