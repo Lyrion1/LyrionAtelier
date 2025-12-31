@@ -4,7 +4,7 @@ const NAV_VERSION = 'nav-v4';
 const SITE_ORIGIN = 'https://lyrionatelier.com';
 const OG_IMAGE = `${SITE_ORIGIN}/images/og-image.jpg`;
 const SEO_KEYWORDS = 'astrology, zodiac, luxury apparel, oracle readings, birth chart, horoscope, cosmic fashion, spiritual guidance';
-const TIKTOK_URL = 'https://www.tiktok.com/@lyrion_atelier?_r=1&_t=ZN-92ebtSFmVUc';
+const TIKTOK_URL = 'https://www.tiktok.com/@lyrion_atelier';
 
 const SEO_TEMPLATES = {
   '/': {
