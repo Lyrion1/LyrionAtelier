@@ -186,12 +186,12 @@ function attachOracleEventListeners() {
  const resetBtn = document.getElementById('reset-oracle-btn');
  const closeBottomBtn = document.getElementById('oracle-close-bottom-btn');
  
- if (trigger) {
- trigger.addEventListener('click', openOracleWidget);
- console.log('Crystal ball click listener attached');
- } else {
- console.error('Crystal ball trigger not found');
- }
+  if (trigger) {
+  trigger.addEventListener('click', openOracleWidget);
+  console.log('Crystal ball click listener attached');
+  } else {
+  console.warn('Right-side crystal ball trigger not found; skipping oracle trigger binding');
+  }
  
  if (closeBtn) closeBtn.addEventListener('click', closeOracleWidget);
  if (submitBtn) submitBtn.addEventListener('click', getOracleReading);

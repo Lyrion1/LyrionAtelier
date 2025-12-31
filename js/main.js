@@ -77,15 +77,6 @@ const SEO_TEMPLATES = {
   ensureMeta({ name: 'author', content: 'Lyrīon Atelier' });
   ensureMeta({ 'http-equiv': 'Cache-Control', content: 'max-age=31536000' });
 
-  const preloadHref = '/styles/main.css';
-  if (!head.querySelector(`link[rel="preload"][href="${preloadHref}"]`)) {
-    const preload = document.createElement('link');
-    preload.rel = 'preload';
-    preload.href = preloadHref;
-    preload.as = 'style';
-    head.appendChild(preload);
-  }
-
   [
     { href: 'https://fonts.googleapis.com' },
     { href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
