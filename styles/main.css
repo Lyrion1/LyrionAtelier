@@ -15,6 +15,11 @@
   align-items: start;
 }
 
+.reading-hero .reading-image {
+  height: auto;
+  overflow: visible;
+}
+
 .reading-image img {
   width: 100%;
   height: auto;
