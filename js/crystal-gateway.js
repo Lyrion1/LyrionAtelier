@@ -7,16 +7,7 @@
 
   function openOracleStudio() {
     const modal = document.getElementById('oracleStudioModal');
-    if (modal) {
-      const blueprintTrigger = modal.querySelector('button[data-reading-id="natal-chart-blueprint"]');
-      const blueprintImage = blueprintTrigger?.closest('.reading-card')?.querySelector('img');
-      if (blueprintImage) {
-        blueprintImage.src = '/images/oracle/natal-chart-blueprint.png';
-      } else {
-        console.warn('Natal Chart Blueprint image element missing in oracle studio modal');
-      }
-      modal.classList.add('active');
-    }
+    if (modal) modal.classList.add('active');
   }
 
   function closeModal(modalId) {
