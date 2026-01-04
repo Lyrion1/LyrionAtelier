@@ -639,3 +639,298 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   ENHANCED MOBILE RESPONSIVE STYLES FOR ORACLE/READING PAGES
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  /* Reading Hero Section */
+  .reading-hero {
+    padding: 40px 20px !important;
+  }
+
+  .reading-container {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+
+  .reading-image img {
+    max-height: 350px !important;
+    object-fit: contain !important;
+  }
+
+  .reading-details h1 {
+    font-size: 1.6rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .reading-tagline {
+    font-size: 1rem !important;
+  }
+
+  .reading-price {
+    font-size: 1.5rem !important;
+  }
+
+  .whats-included {
+    padding: 20px 15px !important;
+    margin-bottom: 25px !important;
+  }
+
+  .whats-included h3 {
+    font-size: 1.1rem !important;
+  }
+
+  .whats-included li {
+    font-size: 0.95rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  .purchase-reading-button {
+    padding: 16px 30px !important;
+    font-size: 1rem !important;
+    min-height: 50px !important;
+  }
+
+  /* Compatibility Hero */
+  .compatibility-hero {
+    padding: 50px 20px !important;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  .hero-image img {
+    max-height: 350px !important;
+    object-fit: contain !important;
+  }
+
+  .tagline {
+    font-size: 1.1rem !important;
+  }
+
+  .price {
+    font-size: 1.5rem !important;
+  }
+
+  .hero-description {
+    font-size: 1rem !important;
+  }
+
+  /* Discovery Grid */
+  .what-youll-discover {
+    padding: 50px 20px !important;
+  }
+
+  .what-youll-discover h2 {
+    font-size: 1.6rem !important;
+    margin-bottom: 40px !important;
+  }
+
+  .discovery-grid {
+    gap: 25px !important;
+  }
+
+  .discovery-card {
+    padding: 25px 20px !important;
+  }
+
+  .discovery-card .icon {
+    font-size: 2.5rem !important;
+  }
+
+  .discovery-card h3 {
+    font-size: 1.1rem !important;
+  }
+
+  /* Certificate Preview */
+  .certificate-preview {
+    padding: 50px 20px !important;
+  }
+
+  .certificate-preview h2 {
+    font-size: 1.6rem !important;
+  }
+
+  .certificate-details {
+    gap: 30px !important;
+  }
+
+  .detail-item h3 {
+    font-size: 1.2rem !important;
+  }
+
+  /* Why Matters */
+  .why-matters {
+    padding: 50px 20px !important;
+  }
+
+  .why-matters h2 {
+    font-size: 1.6rem !important;
+  }
+
+  .matters-content {
+    font-size: 1rem !important;
+  }
+
+  /* Perfect For */
+  .perfect-for {
+    padding: 50px 20px !important;
+  }
+
+  .perfect-for h2 {
+    font-size: 1.6rem !important;
+  }
+
+  .perfect-grid {
+    gap: 20px !important;
+  }
+
+  .perfect-card {
+    padding: 25px 20px !important;
+  }
+
+  /* Testimonials */
+  .testimonial-grid {
+    gap: 25px !important;
+  }
+
+  .testimonial {
+    padding: 25px 20px !important;
+  }
+
+  .quote {
+    font-size: 1rem !important;
+  }
+
+  /* How It Works */
+  .how-it-works {
+    padding: 50px 20px !important;
+  }
+
+  .how-it-works h2 {
+    font-size: 1.6rem !important;
+  }
+
+  .steps-grid {
+    gap: 30px !important;
+  }
+
+  .step-number {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.4rem !important;
+    line-height: 46px !important;
+  }
+
+  .step h3 {
+    font-size: 1.1rem !important;
+  }
+
+  /* FAQ */
+  .faq {
+    padding: 50px 20px !important;
+  }
+
+  .faq h2 {
+    font-size: 1.6rem !important;
+  }
+
+  .faq-item h3 {
+    font-size: 1.1rem !important;
+  }
+
+  /* Final CTA */
+  .final-cta {
+    padding: 60px 20px !important;
+  }
+
+  .final-cta h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .final-cta > p {
+    font-size: 1rem !important;
+  }
+
+  .purchase-button {
+    width: 100% !important;
+    padding: 18px 40px !important;
+    font-size: 1.1rem !important;
+    min-height: 50px !important;
+  }
+
+  /* Upgrade/Frame sections */
+  .why-upgrade,
+  .unboxing,
+  .investment-piece,
+  .frame-options,
+  .ultimate-expression,
+  .display-ideas,
+  .when-to-gift {
+    padding: 50px 20px !important;
+  }
+
+  .why-upgrade h2,
+  .unboxing h2,
+  .investment-piece h2,
+  .frame-options h2,
+  .ultimate-expression h2,
+  .display-ideas h2,
+  .when-to-gift h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .upgrade-reasons,
+  .investment-grid,
+  .frame-grid,
+  .unboxing-steps,
+  .display-grid,
+  .occasions-grid {
+    gap: 20px !important;
+  }
+
+  .reason,
+  .investment-point,
+  .frame-option,
+  .unbox-step,
+  .display-idea,
+  .occasion {
+    padding: 20px !important;
+  }
+
+  /* Twin Flames Concept */
+  .twin-flames-concept {
+    padding: 25px 20px !important;
+  }
+}
+
+/* EXTRA SMALL SCREENS - 320px */
+@media (max-width: 374px) {
+  .reading-details h1 {
+    font-size: 1.4rem !important;
+  }
+
+  .reading-price {
+    font-size: 1.3rem !important;
+  }
+
+  .purchase-reading-button,
+  .purchase-button {
+    font-size: 0.95rem !important;
+    padding: 14px 20px !important;
+  }
+
+  .what-youll-discover h2,
+  .certificate-preview h2,
+  .why-matters h2,
+  .perfect-for h2,
+  .how-it-works h2,
+  .faq h2,
+  .final-cta h2 {
+    font-size: 1.4rem !important;
+  }
+}
