@@ -1,3 +1,23 @@
+// ✅ ACTIVE WEBHOOK HANDLER
+// This is the primary webhook handler for Stripe checkout.session.completed events
+// Features:
+// - Automatic Printful order creation for physical products
+// - Email notifications to admin@lyrionatelier.com
+// - Comprehensive error handling and logging
+// - Serverless-optimized (no file system dependencies)
+//
+// Webhook URL: https://lyrionatelier.com/.netlify/functions/stripe-webhook
+// Alternate URL: https://lyrionatelier.com/api/stripe-webhook
+//
+// Required Environment Variables:
+// - STRIPE_SECRET_KEY_LIVE (or STRIPE_SECRET_KEY)
+// - STRIPE_WEBHOOK_SECRET
+// - PRINTFUL_API_KEY
+// - RESEND_API_KEY
+// - OWNER_EMAIL (set to admin@lyrionatelier.com)
+//
+// See WEBHOOK_SETUP.md for full documentation
+//
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY_LIVE || process.env.STRIPE_SECRET_KEY);
 const fetch = require('node-fetch');
 

@@ -1,3 +1,7 @@
+// ⚠️ LEGACY FILE - DO NOT USE
+// This file is kept for reference only
+// USE: stripe-webhook.js instead (has full Printful integration)
+//
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY_LIVE || process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
