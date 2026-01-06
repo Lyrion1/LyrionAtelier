@@ -105,7 +105,14 @@ exports.handler = async (event) => {
       const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
         expand: ['data.price.product']
       });
-      const productName = lineItems.data[0]?.description || '';
+      
+      if (!lineItems.data || lineItems.data.length === 0) {
+        throw new Error('No line items found in session');
+      }
+
+      const lineItem = lineItems.data[0];
+      const productName = lineItem.description || lineItem.price?.product?.name || '';
+      const priceId = lineItem.price?.id || '';
 
       const orderData = {
         sessionId: session.id,
@@ -113,11 +120,19 @@ exports.handler = async (event) => {
         name: session.customer_details?.name || '',
         phone: session.customer_details?.phone || '',
         product: productName,
-        quantity: lineItems.data[0]?.quantity || 1,
+        priceId: priceId,
+        quantity: lineItem.quantity || 1,
         amount: (session.amount_total ?? 0) / 100,
         currency: session.currency?.toUpperCase() || 'USD',
         shipping: session.shipping_details
       };
+
+      console.log('Processing order:', { 
+        sessionId: orderData.sessionId, 
+        product: orderData.product,
+        priceId: orderData.priceId,
+        email: orderData.email 
+      });
 
       // Send notification email immediately
       await sendOrderNotificationEmail(orderData);
@@ -144,6 +159,16 @@ exports.handler = async (event) => {
 };
 
 function isPhysicalProduct(productName) {
+  // First check if product is in mapping (most reliable)
+  const product = PRODUCT_MAPPING.products.find(p => 
+    productName.toLowerCase().includes(p.name.toLowerCase())
+  );
+  
+  if (product) {
+    return product.type === 'physical';
+  }
+  
+  // Fallback to keyword detection for products not in mapping
   const physicalKeywords = ['hoodie', 'tee', 'shirt', 'crewneck', 'sweatshirt', 'apparel', 'hat', 'cap', 'beanie', 'socks', 'polo', 'tank', 'jersey', 'pyjama', 'crop'];
   const productLower = productName.toLowerCase();
   return physicalKeywords.some(keyword => productLower.includes(keyword));
@@ -174,13 +199,17 @@ async function createPrintfulOrder(orderData) {
   // Determine variant ID
   let variantId;
   if (product.printfulVariantId) {
+    // Product has a single variant
     variantId = product.printfulVariantId;
   } else if (product.variants && product.variants.length > 0) {
-    // For products with multiple variants, use the first one or extract size from product name
-    // For now, default to medium if available
+    // Product has multiple variants (sizes)
+    // TODO: Extract size from Stripe price metadata to match exact variant
+    // For now, default to medium if available, otherwise first variant
+    // The Stripe product price should be configured with metadata indicating size
     const mediumVariant = product.variants.find(v => v.size === 'M');
     variantId = mediumVariant ? mediumVariant.variantId : product.variants[0].variantId;
-    console.log(`Using variant ID: ${variantId} for product: ${product.name}`);
+    console.log(`Using variant ID: ${variantId} for product: ${product.name} (size: ${mediumVariant ? 'M' : product.variants[0].size})`);
+    console.log(`NOTE: If incorrect size, ensure Stripe prices include size in metadata or description`);
   } else {
     const error = `No variant ID found for product: ${product.name}`;
     console.error(error);
@@ -275,6 +304,7 @@ async function sendOrderNotificationEmail(orderData) {
         <p style="margin-bottom: 10px;"><strong>Phone:</strong> ${orderData.phone || 'Not provided'}</p>
         <p style="margin-bottom: 10px;"><strong>Amount:</strong> $${orderData.amount.toFixed(2)} ${orderData.currency}</p>
         <p style="margin-bottom: 10px;"><strong>Order ID:</strong> ${orderData.sessionId}</p>
+        ${orderData.priceId ? `<p style="margin-bottom: 10px; font-size: 0.85em; color: #666;"><strong>Price ID:</strong> ${orderData.priceId}</p>` : ''}
       </div>
       
       <div style="background: #fff3cd; padding: 20px; border-radius: 8px; border-left: 4px solid #ffc107; margin-bottom: 20px;">
