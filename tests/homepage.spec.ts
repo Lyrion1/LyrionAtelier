@@ -85,14 +85,15 @@ test.describe('homepage featured products', () => {
     await expect(images.first()).toHaveAttribute('src', /youth-aries-heavy-blend-hoodie\/youth-aries-hoodie-lifestyle\.jpg/i);
   });
 
-  test('surfaces Leo Zodiac Hoodie in featured/bestseller grid', async ({ page }) => {
+  test('shows Taurus Constellation Pyjama Top with BEST SELLER badge in featured grid', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
-    const featuredCard = page.locator('#featured-grid .product-card', { hasText: 'Leo Zodiac Hoodie' });
+    const featuredCard = page.locator('#featured-grid .product-card', { hasText: 'Taurus Constellation Pyjama Top' });
     await expect(featuredCard).toBeVisible();
-    await expect(featuredCard.locator('.price')).toContainText('$59.99');
+    await expect(featuredCard.locator('.price')).toContainText('$44.99');
+    await expect(featuredCard.locator('.product-badge--bestseller')).toContainText('BEST SELLER');
     const images = featuredCard.locator('img');
     await expect(images).toHaveCount(1);
-    await expect(images.first()).toHaveAttribute('src', /leo-zodiac-hoodie/i);
+    await expect(images.first()).toHaveAttribute('src', /taurus-pyjamas/i);
   });
 
   test('promotes Cosmic Crewneck - Pisces as the third featured card', async ({ page }) => {

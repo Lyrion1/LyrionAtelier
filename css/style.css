@@ -667,6 +667,50 @@ p {
   width: 100%;
 }
 
+/* Product Badge Styles - Luxury Celestial Aesthetic */
+.product-card-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.65rem;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.product-badge--bestseller {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: linear-gradient(135deg, #d4af37 0%, #f4e4bc 50%, #d4af37 100%);
+  color: #1a1a1a;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.25);
+  z-index: 2;
+}
+
+.product-badge--scarcity {
+  color: #d4af37;
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  font-size: 0.65rem;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Dark mode scarcity badge variant */
+@media (prefers-color-scheme: dark) {
+  .product-badge--scarcity {
+    color: #f4e4bc;
+    border-color: rgba(244, 228, 188, 0.3);
+  }
+}
+
 .product-grid {
   display: grid;
   gap: 1.25rem;

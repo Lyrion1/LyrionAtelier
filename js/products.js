@@ -102,7 +102,7 @@ const products = [
     description: "The sovereign flame—cosmic lion insignia that wraps natural-born leaders in celestial armor.",
     sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
     isBestseller: true,
-    showOnHomepage: true
+    showOnHomepage: false
   },
   {
     id: 3,
@@ -385,8 +385,9 @@ const products = [
     seoDescription: "Classic fisherman beanie with Tree of Life embroidery. Premium heavyweight ribbed knit for winter warmth and quiet confidence. Unisex design.",
     launchDate: "2025-01-15",
     isBestseller: false,
-    showOnHomepage: false,
+    showOnHomepage: true,
     featured: false,
+    scarcityBadge: "Only 3 Left",
     variants: [
       {
         size: "One Size",
@@ -530,6 +531,55 @@ const products = [
       source: "manual",
       collection: "Logo Line"
     }
+  },
+  {
+    id: 258,
+    slug: "taurus-pyjama-top",
+    link: "/shop/taurus-pyjama-top.html",
+    name: "Taurus Constellation Pyjama Top",
+    title: "Taurus Constellation Pyjama Top",
+    price: 44.99,
+    currency: "USD",
+    category: "sleepwear",
+    zodiac: "taurus",
+    element: "earth",
+    gender: "women",
+    collection: "Taurus Collection",
+    image: "/shop-images/taurus-pyjamas/taurus-pyjamas-back.jpg",
+    images: [
+      "/shop-images/taurus-pyjamas/taurus-pyjamas-lifestyle.jpg",
+      "/shop-images/taurus-pyjamas/taurus-pyjamas-back.jpg",
+      "/shop-images/taurus-pyjamas/taurus-pyjamas-front.jpg",
+      "/shop-images/taurus-pyjamas/taurus-pyjamas-detail.jpg"
+    ],
+    mainImage: "/shop-images/taurus-pyjamas/taurus-pyjamas-back.jpg",
+    description: "Sleep under your stars. This isn't just sleepwear—it's a celestial statement. The Taurus constellation is delicately mapped across the back, connecting the stars that ruled the night sky when Taurus season began.",
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
+    variants: [
+      { size: "XS", printfulVariantId: "6951f0e5ede708", price: 44.99, currency: "USD", inStock: true, sku: "LYR-TAUR-PJ-XS" },
+      { size: "S", printfulVariantId: "6951f0e5ede7b3", price: 44.99, currency: "USD", inStock: true, sku: "LYR-TAUR-PJ-S" },
+      { size: "M", printfulVariantId: "6951f0e5ede838", price: 44.99, currency: "USD", inStock: true, sku: "LYR-TAUR-PJ-M" },
+      { size: "L", printfulVariantId: "6951f0e5ede8b2", price: 44.99, currency: "USD", inStock: true, sku: "LYR-TAUR-PJ-L" },
+      { size: "XL", printfulVariantId: "6951f0e5ede948", price: 44.99, currency: "USD", inStock: true, sku: "LYR-TAUR-PJ-XL" },
+      { size: "2XL", printfulVariantId: "6951f0e5ede9c2", price: 46.99, currency: "USD", inStock: true, sku: "LYR-TAUR-PJ-2XL" }
+    ],
+    printfulProduct: "Women's Pyjama Top",
+    features: [
+      "Your zodiac constellation, wearable",
+      "Luxuriously soft for Taurus-level comfort",
+      "Embroidered stars that won't fade or peel",
+      "Perfect Taurus birthday gift (April 20 - May 20)",
+      "Premium quality fabric"
+    ],
+    careInstructions: "Machine wash cold, tumble dry low. Your comfort endures.",
+    tags: ["taurus", "earth-sign", "zodiac", "sleepwear", "pyjamas", "women", "fixed", "venus-ruled", "constellation"],
+    chartResonance: ["taurus-sun", "taurus-moon", "taurus-rising", "venus-dominant", "2nd-house-emphasis", "earth-dominant"],
+    seoTitle: "Taurus Constellation Pyjama Top | Zodiac Sleepwear | Lyrīon Atelier",
+    seoDescription: "Luxe women's pyjama top with Taurus constellation embroidered on back. Perfect birthday gift for Taurus (April 20-May 20). Premium astrology sleepwear.",
+    launchDate: "2025-01-15",
+    isBestseller: true,
+    showOnHomepage: true,
+    bestSellerBadge: "BEST SELLER"
   },
   {
     id: 101,
