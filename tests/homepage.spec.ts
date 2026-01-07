@@ -96,14 +96,15 @@ test.describe('homepage featured products', () => {
     await expect(images.first()).toHaveAttribute('src', /taurus-pyjamas/i);
   });
 
-  test('promotes Cosmic Crewneck - Pisces as the third featured card', async ({ page }) => {
+  test('shows Fisherman Beanie with scarcity badge as the second featured card', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
-    const thirdCard = page.locator('#featured-grid .product-card').nth(2);
-    await expect(thirdCard).toContainText('Cosmic Crewneck - Pisces');
-    await expect(thirdCard.locator('.price')).toContainText('$55.99');
-    const images = thirdCard.locator('img');
+    const secondCard = page.locator('#featured-grid .product-card').nth(1);
+    await expect(secondCard).toContainText('Fisherman Beanie');
+    await expect(secondCard.locator('.price')).toContainText('$30.00');
+    await expect(secondCard.locator('.product-badge--scarcity')).toContainText('Only 3 Left');
+    const images = secondCard.locator('img');
     await expect(images).toHaveCount(1);
-    await expect(images.first()).toHaveAttribute('src', /cosmic-crewneck-pisces/i);
+    await expect(images.first()).toHaveAttribute('src', /fisherman-beanie/i);
   });
 
   test('shows four featured products on homepage', async ({ page }) => {
@@ -116,33 +117,27 @@ test.describe('homepage featured products', () => {
     expect(imageCounts.every((count) => count === 1)).toBeTruthy();
   });
 
-  test('opens Cosmic Crewneck details from homepage view action', async ({ page }) => {
+  test('shows Aquarius Crop Hoodie with Selling Fast badge in featured grid', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
-    const cosmicCard = page.locator('#featured-grid .product-card', { hasText: 'Cosmic Crewneck - Pisces' }).first();
-    const viewLink = cosmicCard.getByRole('link', { name: 'View' });
-
-    await Promise.all([
-      page.waitForURL(/\/shop\/(cosmic-crewneck-pisces|3)/),
-      viewLink.click()
-    ]);
-
-    await expect(page).toHaveURL(/\/shop\/(cosmic-crewneck-pisces|3)/);
-    await expect(page.locator('#product-name')).toContainText('Cosmic Crewneck - Pisces');
-    await expect(page.locator('#size-select')).toBeVisible();
+    const aquariusCard = page.locator('#featured-grid .product-card', { hasText: 'Aquarius Crop Hoodie' }).first();
+    await expect(aquariusCard).toBeVisible();
+    await expect(aquariusCard.locator('.price')).toContainText('$64.99');
+    await expect(aquariusCard.locator('.product-badge--scarcity')).toContainText('Selling Fast');
+    const images = aquariusCard.locator('img');
+    await expect(images).toHaveCount(1);
+    await expect(images.first()).toHaveAttribute('src', /aquarius-crop-hoodie/i);
   });
 
-  test('opens Gemini Starlight Tee with full gallery from homepage view', async ({ page }) => {
+  test('opens Taurus Pyjama Top details from homepage view action', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
-    const geminiCard = page.locator('#featured-grid .product-card', { hasText: 'Gemini Starlight Tee' }).first();
-    const viewLink = geminiCard.getByRole('link', { name: 'View' });
+    const taurusCard = page.locator('#featured-grid .product-card', { hasText: 'Taurus Constellation Pyjama Top' }).first();
+    const viewLink = taurusCard.getByRole('link', { name: 'View' });
 
     await Promise.all([
-      page.waitForURL(/\/shop\/(gemini-starlight-tee|4)/),
+      page.waitForURL(/\/shop\/(taurus-pyjama-top)/),
       viewLink.click()
     ]);
 
-    await expect(page).toHaveURL(/\/shop\/(gemini-starlight-tee|4)/);
-    await expect(page.locator('#product-name')).toContainText('Gemini Starlight Tee');
-    await expect(page.locator('#product-gallery img')).toHaveCount(4);
+    await expect(page).toHaveURL(/\/shop\/(taurus-pyjama-top)/);
   });
 });

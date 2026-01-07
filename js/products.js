@@ -125,7 +125,7 @@ const products = [
     description: "The mystic ocean. Pisces swim between worlds—one foot in reality, the other in dreams too vast for words. Born under Neptune's ethereal reign, they are the poets, the healers, the souls who feel everything the universe whispers. This organic raglan crewneck channels limitless empathy through sacred fish symbolism, wrapping sensitive spirits in cosmic comfort that honors their gift: to dissolve boundaries and unite all that exists.",
     sizes: ["XS", "S", "M", "L", "XL", "2XL"],
     isBestseller: true,
-    showOnHomepage: true,
+    showOnHomepage: false,
     variants: [
       { size: "XS", printfulVariantId: "694b39d6493ff5", price: 55.99, currency: "USD", inStock: true, sku: "LYR-PISC-CREW-XS" },
       { size: "S", printfulVariantId: "694b39d6494068", price: 55.99, currency: "USD", inStock: true, sku: "LYR-PISC-CREW-S" },
@@ -158,7 +158,7 @@ const products = [
     mysticalCopy: "Two minds, one soul. You contain multitudes—and that's your superpower.",
     sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
     isBestseller: false,
-    showOnHomepage: true,
+    showOnHomepage: false,
     variants: [
       { size: "S", printfulVariantId: "694d9579acfff1", price: 42.99, currency: "USD", inStock: true, sku: "LYR-GEM-STAR-TEE-S" },
       { size: "M", printfulVariantId: "694d9579ad00a5", price: 42.99, currency: "USD", inStock: true, sku: "LYR-GEM-STAR-TEE-M" },
@@ -482,7 +482,7 @@ const products = [
     ],
     careInstructions: "Machine wash cold, hang dry. Quality that lasts.",
     isBestseller: false,
-    showOnHomepage: true,
+    showOnHomepage: false,
     featured: true,
     variants: [
       {
@@ -580,6 +580,54 @@ const products = [
     isBestseller: true,
     showOnHomepage: true,
     bestSellerBadge: "BEST SELLER"
+  },
+  {
+    id: 259,
+    slug: "aquarius-crop-hoodie",
+    name: "Aquarius Crop Hoodie",
+    title: "Aquarius Crop Hoodie",
+    price: 64.99,
+    currency: "USD",
+    category: "zodiac-hero",
+    zodiac: "aquarius",
+    element: "air",
+    gender: "women",
+    collection: "Zodiac Hero",
+    image: "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+    images: [
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-front2.jpg",
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-side.jpg"
+    ],
+    mainImage: "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+    description: "The water bearer flows through you. Aquarius doesn't carry water—they ARE the water, the life force, the current that nourishes all of humanity. This cropped hoodie channels Aquarian defiance through sacred water symbolism, wrapping visionary souls in comfort designed for those who refuse to follow the current—they create it.",
+    mysticalCopy: "Water is life. I am water. I flow where others fear to tread.",
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    variants: [
+      { size: "S", printfulVariantId: "694c9c3fbcb066", price: 64.99, currency: "USD", inStock: true, sku: "LYR-AQU-CROP-MG-S" },
+      { size: "M", printfulVariantId: "694c9c3fbcb105", price: 64.99, currency: "USD", inStock: true, sku: "LYR-AQU-CROP-MG-M" },
+      { size: "L", printfulVariantId: "694c9c3fbcb198", price: 64.99, currency: "USD", inStock: true, sku: "LYR-AQU-CROP-MG-L" },
+      { size: "XL", printfulVariantId: "694c9c3fbcb21e", price: 64.99, currency: "USD", inStock: true, sku: "LYR-AQU-CROP-MG-XL" },
+      { size: "2XL", printfulVariantId: "694c9c3fbcb2a3", price: 67.99, currency: "USD", inStock: true, sku: "LYR-AQU-CROP-MG-2XL" }
+    ],
+    printfulProduct: "Crop Hoodie",
+    features: [
+      "Premium cropped fit for modern style",
+      "Aquarius water bearer insignia centered on chest",
+      "'Water is life, I am water' manifestation text (hidden inner detail)",
+      "Drawstring hood for versatile styling",
+      "Soft fleece interior for all-day comfort"
+    ],
+    careInstructions: "Machine wash cold, tumble dry low. Your revolutionary spirit never fades.",
+    tags: ["aquarius", "air-sign", "zodiac", "crop-hoodie", "women", "fixed", "uranus-ruled", "water-bearer", "visionary"],
+    chartResonance: ["aquarius-sun", "aquarius-moon", "aquarius-rising", "uranus-dominant", "11th-house-emphasis", "air-dominant"],
+    seoTitle: "Aquarius Crop Hoodie | Water Bearer Design | Lyrīon Atelier",
+    seoDescription: "Channel Aquarian flow with the Crop Hoodie. Premium design for visionaries and revolutionaries ruled by Uranus.",
+    launchDate: "2025-01-15",
+    isBestseller: false,
+    showOnHomepage: true,
+    scarcityBadge: "Selling Fast"
   },
   {
     id: 101,
