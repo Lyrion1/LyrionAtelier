@@ -625,9 +625,9 @@ const products = [
     seoTitle: "Aquarius Crop Hoodie | Water Bearer Design | Lyrīon Atelier",
     seoDescription: "Channel Aquarian flow with the Crop Hoodie. Premium design for visionaries and revolutionaries ruled by Uranus.",
     launchDate: "2025-01-15",
-    isBestseller: false,
+    isBestseller: true,
     showOnHomepage: true,
-    scarcityBadge: "Selling Fast"
+    bestSellerBadge: "BEST SELLER"
   },
   {
     id: 101,

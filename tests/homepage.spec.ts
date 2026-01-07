@@ -117,12 +117,12 @@ test.describe('homepage featured products', () => {
     expect(imageCounts.every((count) => count === 1)).toBeTruthy();
   });
 
-  test('shows Aquarius Crop Hoodie with Selling Fast badge in featured grid', async ({ page }) => {
+  test('shows Aquarius Crop Hoodie with BEST SELLER badge in featured grid', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
     const aquariusCard = page.locator('#featured-grid .product-card', { hasText: 'Aquarius Crop Hoodie' }).first();
     await expect(aquariusCard).toBeVisible();
     await expect(aquariusCard.locator('.price')).toContainText('$64.99');
-    await expect(aquariusCard.locator('.product-badge--scarcity')).toContainText('Selling Fast');
+    await expect(aquariusCard.locator('.product-badge--bestseller')).toContainText('BEST SELLER');
     const images = aquariusCard.locator('img');
     await expect(images).toHaveCount(1);
     await expect(images.first()).toHaveAttribute('src', /aquarius-crop-hoodie/i);
