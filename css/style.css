@@ -669,6 +669,7 @@ p {
 
 /* Product Badge Styles - Luxury Celestial Aesthetic */
 .product-card-image-container {
+  --badge-offset: 0.75rem;
   position: relative;
   overflow: hidden;
 }
@@ -685,8 +686,8 @@ p {
 
 .product-badge--bestseller {
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
+  top: var(--badge-offset);
+  left: var(--badge-offset);
   background: linear-gradient(135deg, #d4af37 0%, #f4e4bc 50%, #d4af37 100%);
   color: #1a1a1a;
   border: 1px solid rgba(212, 175, 55, 0.4);
