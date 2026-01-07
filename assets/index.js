@@ -99,6 +99,11 @@ function renderFeaturedProducts() {
     const card = document.createElement('div');
     card.className = 'product-card';
     card.dataset.productId = product.id || productSlug(product) || '';
+    
+    // Create image container for badges overlay
+    const imageContainer = document.createElement('div');
+    imageContainer.className = 'product-card-image-container';
+    
     const coverImage = images.find(Boolean) || '/assets/catalog/placeholder.webp';
     const img = document.createElement('img');
     img.src = coverImage;
@@ -111,6 +116,16 @@ function renderFeaturedProducts() {
         img.src = '/assets/catalog/placeholder.webp';
       }
     };
+    
+    imageContainer.appendChild(img);
+    
+    // Add Best Seller badge if present
+    if (product.bestSellerBadge) {
+      const bestSellerBadge = document.createElement('span');
+      bestSellerBadge.className = 'product-badge product-badge--bestseller';
+      bestSellerBadge.textContent = product.bestSellerBadge;
+      imageContainer.appendChild(bestSellerBadge);
+    }
 
     const body = document.createElement('div');
     body.className = 'product-card-content';
@@ -123,6 +138,14 @@ function renderFeaturedProducts() {
     const price = document.createElement('p');
     price.className = 'product-card-price product-card__price price';
     price.textContent = Number.isFinite(displayPrice) ? `$${displayPrice.toFixed(2)}` : 'Price unavailable';
+    
+    // Add scarcity badge if present
+    if (product.scarcityBadge) {
+      const scarcityBadge = document.createElement('span');
+      scarcityBadge.className = 'product-badge product-badge--scarcity';
+      scarcityBadge.textContent = product.scarcityBadge;
+      body.appendChild(scarcityBadge);
+    }
 
     const actions = document.createElement('div');
     actions.className = 'product-card-buttons';
@@ -141,7 +164,7 @@ function renderFeaturedProducts() {
 
     actions.append(viewLink, addButton);
     body.append(heading, desc, price, actions);
-    card.append(img, body);
+    card.append(imageContainer, body);
     card.addEventListener('click', (e) => {
       if (e.target.closest('button, a')) return;
       window.location.href = detailUrl(product);

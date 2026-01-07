@@ -102,7 +102,7 @@ const products = [
     description: "The sovereign flame—cosmic lion insignia that wraps natural-born leaders in celestial armor.",
     sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
     isBestseller: true,
-    showOnHomepage: true
+    showOnHomepage: false
   },
   {
     id: 3,
@@ -125,7 +125,7 @@ const products = [
     description: "The mystic ocean. Pisces swim between worlds—one foot in reality, the other in dreams too vast for words. Born under Neptune's ethereal reign, they are the poets, the healers, the souls who feel everything the universe whispers. This organic raglan crewneck channels limitless empathy through sacred fish symbolism, wrapping sensitive spirits in cosmic comfort that honors their gift: to dissolve boundaries and unite all that exists.",
     sizes: ["XS", "S", "M", "L", "XL", "2XL"],
     isBestseller: true,
-    showOnHomepage: true,
+    showOnHomepage: false,
     variants: [
       { size: "XS", printfulVariantId: "694b39d6493ff5", price: 55.99, currency: "USD", inStock: true, sku: "LYR-PISC-CREW-XS" },
       { size: "S", printfulVariantId: "694b39d6494068", price: 55.99, currency: "USD", inStock: true, sku: "LYR-PISC-CREW-S" },
@@ -158,7 +158,7 @@ const products = [
     mysticalCopy: "Two minds, one soul. You contain multitudes—and that's your superpower.",
     sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
     isBestseller: false,
-    showOnHomepage: true,
+    showOnHomepage: false,
     variants: [
       { size: "S", printfulVariantId: "694d9579acfff1", price: 42.99, currency: "USD", inStock: true, sku: "LYR-GEM-STAR-TEE-S" },
       { size: "M", printfulVariantId: "694d9579ad00a5", price: 42.99, currency: "USD", inStock: true, sku: "LYR-GEM-STAR-TEE-M" },
@@ -385,8 +385,9 @@ const products = [
     seoDescription: "Classic fisherman beanie with Tree of Life embroidery. Premium heavyweight ribbed knit for winter warmth and quiet confidence. Unisex design.",
     launchDate: "2025-01-15",
     isBestseller: false,
-    showOnHomepage: false,
+    showOnHomepage: true,
     featured: false,
+    scarcityBadge: "Only 3 Left",
     variants: [
       {
         size: "One Size",
@@ -481,7 +482,7 @@ const products = [
     ],
     careInstructions: "Machine wash cold, hang dry. Quality that lasts.",
     isBestseller: false,
-    showOnHomepage: true,
+    showOnHomepage: false,
     featured: true,
     variants: [
       {
@@ -530,6 +531,103 @@ const products = [
       source: "manual",
       collection: "Logo Line"
     }
+  },
+  {
+    id: 258,
+    slug: "taurus-pyjama-top",
+    link: "/shop/taurus-pyjama-top.html",
+    name: "Taurus Constellation Pyjama Top",
+    title: "Taurus Constellation Pyjama Top",
+    price: 44.99,
+    currency: "USD",
+    category: "sleepwear",
+    zodiac: "taurus",
+    element: "earth",
+    gender: "women",
+    collection: "Taurus Collection",
+    image: "/shop-images/taurus-pyjamas/taurus-pyjamas-back.jpg",
+    images: [
+      "/shop-images/taurus-pyjamas/taurus-pyjamas-lifestyle.jpg",
+      "/shop-images/taurus-pyjamas/taurus-pyjamas-back.jpg",
+      "/shop-images/taurus-pyjamas/taurus-pyjamas-front.jpg",
+      "/shop-images/taurus-pyjamas/taurus-pyjamas-detail.jpg"
+    ],
+    mainImage: "/shop-images/taurus-pyjamas/taurus-pyjamas-back.jpg",
+    description: "Sleep under your stars. This isn't just sleepwear—it's a celestial statement. The Taurus constellation is delicately mapped across the back, connecting the stars that ruled the night sky when Taurus season began.",
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
+    variants: [
+      { size: "XS", printfulVariantId: "6951f0e5ede708", price: 44.99, currency: "USD", inStock: true, sku: "LYR-TAUR-PJ-XS" },
+      { size: "S", printfulVariantId: "6951f0e5ede7b3", price: 44.99, currency: "USD", inStock: true, sku: "LYR-TAUR-PJ-S" },
+      { size: "M", printfulVariantId: "6951f0e5ede838", price: 44.99, currency: "USD", inStock: true, sku: "LYR-TAUR-PJ-M" },
+      { size: "L", printfulVariantId: "6951f0e5ede8b2", price: 44.99, currency: "USD", inStock: true, sku: "LYR-TAUR-PJ-L" },
+      { size: "XL", printfulVariantId: "6951f0e5ede948", price: 44.99, currency: "USD", inStock: true, sku: "LYR-TAUR-PJ-XL" },
+      { size: "2XL", printfulVariantId: "6951f0e5ede9c2", price: 46.99, currency: "USD", inStock: true, sku: "LYR-TAUR-PJ-2XL" }
+    ],
+    printfulProduct: "Women's Pyjama Top",
+    features: [
+      "Your zodiac constellation, wearable",
+      "Luxuriously soft for Taurus-level comfort",
+      "Embroidered stars that won't fade or peel",
+      "Perfect Taurus birthday gift (April 20 - May 20)",
+      "Premium quality fabric"
+    ],
+    careInstructions: "Machine wash cold, tumble dry low. Your comfort endures.",
+    tags: ["taurus", "earth-sign", "zodiac", "sleepwear", "pyjamas", "women", "fixed", "venus-ruled", "constellation"],
+    chartResonance: ["taurus-sun", "taurus-moon", "taurus-rising", "venus-dominant", "2nd-house-emphasis", "earth-dominant"],
+    seoTitle: "Taurus Constellation Pyjama Top | Zodiac Sleepwear | Lyrīon Atelier",
+    seoDescription: "Luxe women's pyjama top with Taurus constellation embroidered on back. Perfect birthday gift for Taurus (April 20-May 20). Premium astrology sleepwear.",
+    launchDate: "2025-01-15",
+    isBestseller: true,
+    showOnHomepage: true,
+    bestSellerBadge: "BEST SELLER"
+  },
+  {
+    id: 259,
+    slug: "aquarius-crop-hoodie",
+    name: "Aquarius Crop Hoodie",
+    title: "Aquarius Crop Hoodie",
+    price: 64.99,
+    currency: "USD",
+    category: "zodiac-hero",
+    zodiac: "aquarius",
+    element: "air",
+    gender: "women",
+    collection: "Zodiac Hero",
+    image: "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+    images: [
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-front2.jpg",
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-side.jpg"
+    ],
+    mainImage: "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+    description: "The water bearer flows through you. Aquarius doesn't carry water—they ARE the water, the life force, the current that nourishes all of humanity. This cropped hoodie channels Aquarian defiance through sacred water symbolism, wrapping visionary souls in comfort designed for those who refuse to follow the current—they create it.",
+    mysticalCopy: "Water is life. I am water. I flow where others fear to tread.",
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    variants: [
+      { size: "S", printfulVariantId: "694c9c3fbcb066", price: 64.99, currency: "USD", inStock: true, sku: "LYR-AQU-CROP-MG-S" },
+      { size: "M", printfulVariantId: "694c9c3fbcb105", price: 64.99, currency: "USD", inStock: true, sku: "LYR-AQU-CROP-MG-M" },
+      { size: "L", printfulVariantId: "694c9c3fbcb198", price: 64.99, currency: "USD", inStock: true, sku: "LYR-AQU-CROP-MG-L" },
+      { size: "XL", printfulVariantId: "694c9c3fbcb21e", price: 64.99, currency: "USD", inStock: true, sku: "LYR-AQU-CROP-MG-XL" },
+      { size: "2XL", printfulVariantId: "694c9c3fbcb2a3", price: 67.99, currency: "USD", inStock: true, sku: "LYR-AQU-CROP-MG-2XL" }
+    ],
+    printfulProduct: "Crop Hoodie",
+    features: [
+      "Premium cropped fit for modern style",
+      "Aquarius water bearer insignia centered on chest",
+      "'Water is life, I am water' manifestation text (hidden inner detail)",
+      "Drawstring hood for versatile styling",
+      "Soft fleece interior for all-day comfort"
+    ],
+    careInstructions: "Machine wash cold, tumble dry low. Your revolutionary spirit never fades.",
+    tags: ["aquarius", "air-sign", "zodiac", "crop-hoodie", "women", "fixed", "uranus-ruled", "water-bearer", "visionary"],
+    chartResonance: ["aquarius-sun", "aquarius-moon", "aquarius-rising", "uranus-dominant", "11th-house-emphasis", "air-dominant"],
+    seoTitle: "Aquarius Crop Hoodie | Water Bearer Design | Lyrīon Atelier",
+    seoDescription: "Channel Aquarian flow with the Crop Hoodie. Premium design for visionaries and revolutionaries ruled by Uranus.",
+    launchDate: "2025-01-15",
+    isBestseller: true,
+    showOnHomepage: true,
+    bestSellerBadge: "BEST SELLER"
   },
   {
     id: 101,

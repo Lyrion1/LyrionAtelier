@@ -182,8 +182,9 @@
   "seoTitle": "Aquarius Crop Hoodie | Water Bearer Design | Lyrīon Atelier",
   "seoDescription": "Channel Aquarian flow with the Crop Hoodie. Premium design for visionaries and revolutionaries ruled by Uranus. Water is life, I am water.",
   "launchDate": "2025-01-15",
-  "isBestseller": false,
+  "isBestseller": true,
   "showOnHomepage": true,
+  "bestSellerBadge": "BEST SELLER",
   "copy": {
     "notes": "The water bearer flows through you. Aquarius doesn't carry water—they ARE the water, the life force, the current that nourishes all of humanity.",
     "manifestationText": "Water is life, I am water",
