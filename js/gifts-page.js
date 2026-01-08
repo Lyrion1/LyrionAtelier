@@ -2,11 +2,8 @@ import { formatPrice } from './price-utils.js';
 
 // Load gift-tagged products and render them
 (() => {
-  const grid =
-    document.querySelector('[data-grid="products"]') ||
-    document.getElementById('products-grid') ||
-    document.getElementById('products-grid-local') ||
-    document.getElementById('shopGrid');
+  // Use the same grid ID as the gifts page HTML
+  const grid = document.getElementById('products-grid-local');
   const FALLBACK = '/assets/catalog/placeholder.webp';
   const PRICE_UNAVAILABLE_LABEL = '—';
   const PRICE_CENTS_THRESHOLD = 200;
@@ -218,7 +215,9 @@ import { formatPrice } from './price-utils.js';
     const priceEl = document.createElement('p');
     priceEl.className = 'price';
     const priceDisplay = formatPrice(Number.isFinite(priceCents) ? priceCents : priceValue, fallbackLabel);
-    priceEl.textContent = priceDisplay === PRICE_UNAVAILABLE_LABEL ? PRICE_UNAVAILABLE_LABEL : `From ${priceDisplay}`;
+    // Check if product has multiple variants before showing "From" prefix
+    const hasMultipleVariants = Array.isArray(p.variants) && p.variants.length > 1;
+    priceEl.textContent = priceDisplay === PRICE_UNAVAILABLE_LABEL ? PRICE_UNAVAILABLE_LABEL : (hasMultipleVariants ? `From ${priceDisplay}` : priceDisplay);
 
     const viewLink = document.createElement('a');
     viewLink.className = 'view-product-btn';
@@ -276,7 +275,12 @@ import { formatPrice } from './price-utils.js';
       
       // If no gift-tagged products, show all bestsellers as fallback
       if (!giftProducts.length) {
-        giftProducts = normalizedCatalog.filter((p) => p.isBestseller || p.showOnHomepage);
+        giftProducts = normalizedCatalog.filter((p) => p.isBestseller === true || p.showOnHomepage === true);
+      }
+      
+      // Final fallback: show first 8 products if still empty
+      if (!giftProducts.length && normalizedCatalog.length) {
+        giftProducts = normalizedCatalog.slice(0, 8);
       }
       
       bindFilters();
