@@ -630,6 +630,56 @@ const products = [
     bestSellerBadge: "BEST SELLER"
   },
   {
+    id: 260,
+    slug: "taurus-celestial-slides",
+    link: "/shop/taurus-celestial-slides.html",
+    name: "Taurus Celestial Slides",
+    title: "Taurus Celestial Slides",
+    price: 54.99,
+    currency: "USD",
+    category: ["men", "youth"],
+    zodiac: "taurus",
+    element: "earth",
+    gender: "unisex",
+    collection: "Taurus Collection",
+    image: "/images/products/taurus-slides-lifestyle.jpg",
+    images: [
+      "/images/products/taurus-slides-lifestyle.jpg",
+      "/images/products/taurus-slides-front.jpg",
+      "/images/products/taurus-slides-side.jpg",
+      "/images/products/taurus-slides-flat.jpg"
+    ],
+    mainImage: "/images/products/taurus-slides-lifestyle.jpg",
+    description: "Ground your cosmic energy in luxury. Premium slides featuring the Taurus bull constellation and Lyrīon Atelier signature. Designed for those who move through the world with intention and comfort.",
+    mysticalCopy: "April 20 - May 20. Walk with the earth's grounded strength beneath your feet.",
+    sizes: ["6.5", "7", "8", "8.5", "9.5", "10", "11", "11.5"],
+    variants: [
+      { size: "6.5", printfulVariantId: "695dd0eb3db803", price: 54.99, currency: "USD", inStock: true, sku: "LYR-TAUR-SLIDES-6.5" },
+      { size: "7", printfulVariantId: "695dd0eb3db895", price: 54.99, currency: "USD", inStock: true, sku: "LYR-TAUR-SLIDES-7" },
+      { size: "8", printfulVariantId: "695dd0eb3db918", price: 54.99, currency: "USD", inStock: true, sku: "LYR-TAUR-SLIDES-8" },
+      { size: "8.5", printfulVariantId: "695dd0eb3db991", price: 54.99, currency: "USD", inStock: true, sku: "LYR-TAUR-SLIDES-8.5" },
+      { size: "9.5", printfulVariantId: "695dd0eb3dba01", price: 54.99, currency: "USD", inStock: true, sku: "LYR-TAUR-SLIDES-9.5" },
+      { size: "10", printfulVariantId: "695dd0eb3dba81", price: 54.99, currency: "USD", inStock: true, sku: "LYR-TAUR-SLIDES-10" },
+      { size: "11", printfulVariantId: "695dd0eb3dbb19", price: 54.99, currency: "USD", inStock: true, sku: "LYR-TAUR-SLIDES-11" },
+      { size: "11.5", printfulVariantId: "695dd0eb3dbb94", price: 54.99, currency: "USD", inStock: true, sku: "LYR-TAUR-SLIDES-11.5" }
+    ],
+    printfulProduct: "Slides",
+    features: [
+      "Taurus bull constellation design",
+      "Lyrīon Atelier branding",
+      "Premium comfort construction",
+      "Lightweight, durable"
+    ],
+    careInstructions: "Wipe clean with damp cloth. Air dry. Your grounded steps endure.",
+    tags: ["taurus", "earth-sign", "zodiac", "slides", "men", "youth", "fixed", "venus-ruled", "footwear"],
+    chartResonance: ["taurus-sun", "taurus-moon", "taurus-rising", "venus-dominant", "2nd-house-emphasis", "earth-dominant"],
+    seoTitle: "Taurus Celestial Slides | Zodiac Footwear | Lyrīon Atelier",
+    seoDescription: "Premium slides featuring the Taurus bull constellation and Lyrīon Atelier signature. Ground your cosmic energy in luxury. April 20 - May 20.",
+    launchDate: "2025-01-15",
+    isBestseller: false,
+    showOnHomepage: false
+  },
+  {
     id: 101,
     name: "Past Life Reading",
     price: 65,
