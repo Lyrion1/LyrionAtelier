@@ -2248,13 +2248,13 @@
     "title": "Taurus Celestial Slides",
     "name": "Taurus Celestial Slides",
     "collection": "Taurus Collection",
-    "category": "men",
+    "category": ["men", "youth"],
     "zodiac": "taurus",
     "zodiacSign": "taurus",
     "element": "earth",
-    "gender": "men",
+    "gender": "unisex",
     "meta": {
-      "category": "Men",
+      "category": ["Men", "Youth"],
       "collection": "Taurus Collection",
       "zodiac": "Taurus"
     },

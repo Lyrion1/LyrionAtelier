@@ -637,10 +637,10 @@ const products = [
     title: "Taurus Celestial Slides",
     price: 54.99,
     currency: "USD",
-    category: "men",
+    category: ["men", "youth"],
     zodiac: "taurus",
     element: "earth",
-    gender: "men",
+    gender: "unisex",
     collection: "Taurus Collection",
     image: "/images/products/taurus-slides-lifestyle.jpg",
     images: [
