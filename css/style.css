@@ -35,6 +35,7 @@
 @media (max-width: 768px) {
   body {
     font-size: 16px;
+    overflow-x: hidden;
   }
 
   .product-grid,
@@ -56,16 +57,25 @@
   h3 { font-size: 1.3rem !important; }
 
   .hero-section { padding: 60px 20px !important; }
-  .nav-links { display: none; }
 
   button, .button {
     width: 100% !important;
     padding: 15px !important;
     font-size: 1rem !important;
+    min-height: 44px !important;
   }
 
   img { max-width: 100%; height: auto; }
   section { padding: 40px 20px !important; }
+  
+  /* Prevent horizontal scroll - target main content containers */
+  .container,
+  main,
+  .product-grid,
+  .oracle-grid {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -6227,6 +6237,7 @@ button,
   }
 
   .nav-links {
+    display: flex !important;
     position: fixed !important;
     top: 70px !important;
     left: 0 !important;
