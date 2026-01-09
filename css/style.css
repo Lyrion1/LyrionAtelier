@@ -68,9 +68,13 @@
   img { max-width: 100%; height: auto; }
   section { padding: 40px 20px !important; }
   
-  /* Prevent horizontal scroll */
-  * {
-    max-width: 100vw;
+  /* Prevent horizontal scroll - target main content containers */
+  .container,
+  main,
+  .product-grid,
+  .oracle-grid {
+    max-width: 100%;
+    overflow-x: hidden;
   }
 }
 

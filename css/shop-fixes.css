@@ -83,7 +83,7 @@
 }
 
 /* Tablet breakpoint - 2 columns */
-@media (min-width: 481px) and (max-width: 768px) {
+@media (min-width: 481px) and (max-width: 767px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 20px;
