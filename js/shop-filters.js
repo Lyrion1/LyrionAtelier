@@ -50,6 +50,10 @@ export function apply(products, incomingState) {
       const ready = p?.state?.ready ?? true;
       if (!published || !ready) return false;
 
+      // Hide accessoriesOnly products from main "All" view, but show when filtering by Accessories
+      const isAccessoriesOnly = p?.accessoriesOnly === true;
+      if (isAccessoriesOnly && category === 'all') return false;
+
       const meta = p?.meta || {};
       const productCategories = toList(meta.category || p?.category || p?.metadata?.category).map(normalize);
       const categoryMatch =
