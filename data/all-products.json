@@ -2368,5 +2368,71 @@
     "launchDate": "2025-01-15",
     "isBestseller": false,
     "showOnHomepage": false
+  },
+  {
+    "id": "pisces-luxury-mousepad",
+    "slug": "pisces-luxury-mousepad",
+    "name": "Pisces Luxury Mouse Pad",
+    "title": "Pisces Luxury Mouse Pad",
+    "collection": "Accessories",
+    "category": "Accessories",
+    "zodiac": "None",
+    "element": null,
+    "gender": "unisex",
+    "meta": {
+      "category": "Accessories",
+      "collection": "Accessories",
+      "zodiac": "None"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "description": "Luxury Pisces Mouse Pad\n\nElevate your workspace with cosmic elegance. Premium mouse pad featuring the ethereal Pisces twin fish in stunning detail.\n\n• Smooth glide surface for precision\n• Non-slip rubber base\n• Vibrant, fade-resistant print\n• Generous size for comfort\n• Premium quality materials\n\nPerfect for the Pisces in your life (February 19 - March 20) or anyone who appreciates celestial design.",
+    "mysticalCopy": "Let the twin fish guide your hand across the cosmos of creativity.",
+    "images": [
+      "/images/products/pisces-mousepad-lifestyle-1.jpg",
+      "/images/products/pisces-mousepad-lifestyle-2.jpg",
+      "/images/products/pisces-mousepad-lifestyle-3.jpg"
+    ],
+    "mainImage": "/images/products/pisces-mousepad-lifestyle-1.jpg",
+    "price": 36.99,
+    "price_range": {
+      "min": 36.99,
+      "max": 36.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "options": {
+      "size": ["One Size"]
+    },
+    "variants": [
+      {
+        "size": "One Size",
+        "printfulVariantId": "69600a547890d5",
+        "price": 36.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-MOUSEPAD"
+      }
+    ],
+    "printfulProduct": "Mouse Pad",
+    "features": [
+      "Smooth glide surface for precision",
+      "Non-slip rubber base",
+      "Vibrant, fade-resistant print",
+      "Generous size for comfort",
+      "Premium quality materials",
+      "Ethereal Pisces twin fish design"
+    ],
+    "careInstructions": "Wipe clean with damp cloth. Your cosmic workspace endures.",
+    "tags": ["accessories", "gift", "mousepad", "pisces-design", "workspace", "desk", "premium"],
+    "chartResonance": ["pisces-aesthetic", "water-lovers", "all-charts", "creative-souls"],
+    "seoTitle": "Pisces Luxury Mouse Pad | Celestial Desk Accessories | Lyrīon Atelier",
+    "seoDescription": "Elevate your workspace with cosmic elegance. Premium mouse pad featuring ethereal Pisces twin fish design. Perfect gift for Pisces (February 19 - March 20).",
+    "launchDate": "2025-01-15",
+    "isBestseller": false,
+    "showOnHomepage": false,
+    "accessoriesOnly": true
   }
 ]
