@@ -2434,5 +2434,114 @@
     "isBestseller": false,
     "showOnHomepage": false,
     "accessoriesOnly": true
+  },
+  {
+    "id": "pisces-cropped-windbreaker",
+    "slug": "pisces-cropped-windbreaker",
+    "link": "/shop/pisces-cropped-windbreaker.html",
+    "name": "Pisces Cropped Windbreaker",
+    "title": "Pisces Cropped Windbreaker",
+    "collection": "Pisces Collection",
+    "category": "women",
+    "zodiac": "pisces",
+    "zodiacSign": "pisces",
+    "element": "water",
+    "gender": "women",
+    "meta": {
+      "category": "Women",
+      "collection": "Pisces Collection",
+      "zodiac": "Pisces"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 86.99,
+    "price_range": {
+      "min": 86.99,
+      "max": 87.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/pisces-windbreaker-lifestyle-1.jpg",
+      "/images/products/pisces-windbreaker-lifestyle-2.jpg",
+      "/images/products/pisces-windbreaker-lifestyle-3.jpg",
+      "/images/products/pisces-windbreaker-lifestyle-4.jpg",
+      "/images/products/pisces-windbreaker-lifestyle-5.jpg"
+    ],
+    "mainImage": "/images/products/pisces-windbreaker-lifestyle-1.jpg",
+    "description": "Pisces Cropped Windbreaker\n\nEthereal style meets cosmic protection. Premium cropped windbreaker featuring the dreamy Pisces twin fish in vibrant detail.\n\n• Water-resistant fabric\n• Adjustable drawstring hood\n• Elastic cuffs and hem\n• Front zip closure\n• Cropped silhouette\n\nFor the Pisces who moves between worlds with grace.\n\nFebruary 19 - March 20",
+    "mysticalCopy": "For the Pisces who moves between worlds with grace.",
+    "options": {
+      "size": ["XS", "S", "M", "L", "XL", "2XL"]
+    },
+    "variants": [
+      {
+        "size": "XS",
+        "printfulVariantId": "6960112a067091",
+        "price": 86.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-WIND-XS"
+      },
+      {
+        "size": "S",
+        "printfulVariantId": "6960112a0670f3",
+        "price": 86.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-WIND-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "6960112a067149",
+        "price": 86.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-WIND-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "6960112a067193",
+        "price": 86.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-WIND-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "6960112a0671d2",
+        "price": 86.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-WIND-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "6960112a067227",
+        "price": 87.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-WIND-2XL"
+      }
+    ],
+    "printfulProduct": "Women's Cropped Windbreaker",
+    "features": [
+      "Water-resistant fabric",
+      "Adjustable drawstring hood",
+      "Elastic cuffs and hem",
+      "Front zip closure",
+      "Cropped silhouette",
+      "Dreamy Pisces twin fish design"
+    ],
+    "careInstructions": "Machine wash cold, hang dry. Your ethereal style endures.",
+    "tags": ["pisces", "water-sign", "zodiac", "windbreaker", "women", "mutable", "neptune-ruled", "outerwear", "gift"],
+    "chartResonance": ["pisces-sun", "pisces-moon", "pisces-rising", "neptune-dominant", "12th-house-emphasis", "water-dominant"],
+    "seoTitle": "Pisces Cropped Windbreaker | Women's Zodiac Outerwear | Lyrīon Atelier",
+    "seoDescription": "Ethereal style meets cosmic protection. Premium cropped windbreaker featuring the dreamy Pisces twin fish. Perfect gift for Pisces (February 19 - March 20).",
+    "launchDate": "2025-01-15",
+    "isBestseller": false,
+    "showOnHomepage": false
   }
 ]
