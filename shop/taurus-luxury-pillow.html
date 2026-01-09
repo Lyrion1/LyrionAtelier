@@ -139,14 +139,14 @@
           <div class="selector-group">
             <label for="size-select" class="muted">Size</label>
             <select id="size-select" class="input-select">
-              <option value="69601af7eb63e1">20″×12″ - $33.99</option>
-              <option value="69601af7eb6342" selected>18″×18″ - $36.99</option>
+              <option value="69601af7eb63e1" selected>20″×12″ - $33.99</option>
+              <option value="69601af7eb6342">18″×18″ - $36.99</option>
               <option value="69601af7eb6461">22″×22″ - $39.99</option>
             </select>
           </div>
 
           <div class="product-actions" style="margin-top: 1rem;">
-            <button class="btn btn-primary btn-full" type="button" id="add-to-cart-btn">Add to Cart - $36.99</button>
+            <button class="btn btn-primary btn-full" type="button" id="add-to-cart-btn">Add to Cart - $33.99</button>
             <p class="muted" style="margin-top: 0.25rem;">Premium fulfillment via Printful</p>
           </div>
         </div>
@@ -216,7 +216,7 @@
     const addBtn = document.getElementById('add-to-cart-btn');
     const startingPriceEl = document.getElementById('starting-price');
 
-    const getCurrentVariant = () => variantById[sizeSelect.value] || variants[1];
+    const getCurrentVariant = () => variantById[sizeSelect.value] || variants[0];
 
     const updatePrice = () => {
       const variant = getCurrentVariant();
