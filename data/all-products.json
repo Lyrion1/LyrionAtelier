@@ -2628,5 +2628,73 @@
     "isBestseller": false,
     "showOnHomepage": false,
     "accessoriesOnly": true
+  },
+  {
+    "id": "pisces-clear-tote-bag",
+    "slug": "pisces-clear-tote-bag",
+    "name": "Pisces Clear Tote Bag",
+    "title": "Pisces Clear Tote Bag",
+    "collection": "Accessories",
+    "category": "accessories",
+    "zodiac": "pisces",
+    "element": "water",
+    "gender": "unisex",
+    "meta": {
+      "category": "Accessories",
+      "collection": "Accessories",
+      "zodiac": "Pisces"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "description": "Pisces Clear Tote Bag\n\nCarry your cosmic energy with transparency. Premium clear tote featuring the ethereal Pisces twin fish design.\n\n• Durable clear PVC material\n• Spacious interior\n• Comfortable handles\n• Water-resistant\n• Stadium-approved\n\nFor the Pisces who moves through the world with grace and authenticity.\n\nFebruary 19 - March 20",
+    "mysticalCopy": "Carry your cosmic energy with transparency.",
+    "images": [
+      "/images/products/pisces-tote-lifestyle-1.jpg",
+      "/images/products/pisces-tote-lifestyle-2.jpg",
+      "/images/products/pisces-tote-lifestyle-3.jpg",
+      "/images/products/pisces-tote-lifestyle-4.jpg",
+      "/images/products/pisces-tote-lifestyle-5.jpg"
+    ],
+    "mainImage": "/images/products/pisces-tote-lifestyle-1.jpg",
+    "price": 45.99,
+    "price_range": {
+      "min": 45.99,
+      "max": 45.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "options": {
+      "size": ["One Size"]
+    },
+    "variants": [
+      {
+        "size": "One Size",
+        "printfulVariantId": "6960171c551b37",
+        "price": 45.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-PISC-TOTE-CLEAR"
+      }
+    ],
+    "printfulProduct": "Clear Tote Bag",
+    "features": [
+      "Durable clear PVC material",
+      "Spacious interior",
+      "Comfortable handles",
+      "Water-resistant",
+      "Stadium-approved",
+      "Ethereal Pisces twin fish design"
+    ],
+    "careInstructions": "Wipe clean with damp cloth. Your cosmic clarity endures.",
+    "tags": ["accessories", "gift", "tote-bag", "pisces", "water-sign", "clear-bag", "stadium-approved"],
+    "chartResonance": ["pisces-sun", "pisces-moon", "pisces-rising", "neptune-dominant", "water-dominant"],
+    "seoTitle": "Pisces Clear Tote Bag | Celestial Accessories | Lyrīon Atelier",
+    "seoDescription": "Carry your cosmic energy with transparency. Premium clear tote featuring the ethereal Pisces twin fish design. Perfect gift for Pisces (February 19 - March 20).",
+    "launchDate": "2025-01-15",
+    "isBestseller": false,
+    "showOnHomepage": false,
+    "accessoriesOnly": true
   }
 ]
