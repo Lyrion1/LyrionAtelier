@@ -105,8 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
   ensureAnalytics();
   enhanceImages();
   
-  // Initialize mobile menu
-  initMobileMenu();
+  // Mobile menu is initialized in applySharedLayout via initInlineNavToggle
   
   // Initialize sticky header with shadow on scroll
   initStickyHeader();
@@ -226,7 +225,26 @@ function buildSiteHeader() {
     
     <div class="nav-links" id="primary-nav" aria-hidden="true">
     <a href="/">Home</a>
-    <a href="/shop">Shop</a>
+    <a href="/shop">Shop All</a>
+    <div class="mobile-dropdown">
+      <button class="dropdown-toggle" type="button" aria-expanded="false">Shop Categories ▼</button>
+      <div class="dropdown-content" aria-hidden="true">
+        <a href="/shop">All Products</a>
+        <a href="/shop?zodiac=aries">Aries</a>
+        <a href="/shop?zodiac=taurus">Taurus</a>
+        <a href="/shop?zodiac=gemini">Gemini</a>
+        <a href="/shop?zodiac=cancer">Cancer</a>
+        <a href="/shop?zodiac=leo">Leo</a>
+        <a href="/shop?zodiac=virgo">Virgo</a>
+        <a href="/shop?zodiac=libra">Libra</a>
+        <a href="/shop?zodiac=scorpio">Scorpio</a>
+        <a href="/shop?zodiac=sagittarius">Sagittarius</a>
+        <a href="/shop?zodiac=capricorn">Capricorn</a>
+        <a href="/shop?zodiac=aquarius">Aquarius</a>
+        <a href="/shop?zodiac=pisces">Pisces</a>
+      </div>
+    </div>
+    <a href="/curated-for-gifting">Curated for Gifting</a>
     <a href="/oracle">Oracle</a>
     <a href="/compatibility">Compatibility</a>
     <a href="/codex">Codex</a>
@@ -345,14 +363,20 @@ function initInlineNavToggle(header) {
 
   const closeMenu = () => {
     navLinks.classList.remove('active');
+    navToggle.classList.remove('active');
     navToggle.setAttribute('aria-expanded', 'false');
     navLinks.setAttribute('aria-hidden', 'true');
+    navToggle.textContent = '☰';
+    document.body.style.overflow = '';
   };
 
   const openMenu = () => {
     navLinks.classList.add('active');
+    navToggle.classList.add('active');
     navToggle.setAttribute('aria-expanded', 'true');
     navLinks.setAttribute('aria-hidden', 'false');
+    navToggle.textContent = '×';
+    document.body.style.overflow = 'hidden';
     const firstLink = navLinks.querySelector('a');
     firstLink?.focus();
   };
@@ -372,6 +396,11 @@ function initInlineNavToggle(header) {
       event.preventDefault();
       toggleMenu();
     }
+  });
+
+  // Close menu when clicking on a nav link
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
   });
 
   document.addEventListener('click', (event) => {
@@ -401,6 +430,45 @@ function initInlineNavToggle(header) {
       event.preventDefault();
       first.focus();
     }
+  });
+
+  // Initialize mobile dropdown toggles
+  initMobileDropdowns(header);
+}
+
+/**
+ * Initialize mobile dropdown functionality for Shop categories
+ */
+function initMobileDropdowns(container) {
+  const dropdownToggles = container?.querySelectorAll('.dropdown-toggle');
+  if (!dropdownToggles) return;
+
+  dropdownToggles.forEach(toggle => {
+    const dropdown = toggle.closest('.mobile-dropdown');
+    const content = dropdown?.querySelector('.dropdown-content');
+    if (!content) return;
+
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const isOpen = content.classList.toggle('active');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      content.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      
+      // Update toggle text indicator
+      if (isOpen) {
+        toggle.textContent = toggle.textContent.replace('▼', '▲');
+      } else {
+        toggle.textContent = toggle.textContent.replace('▲', '▼');
+      }
+    });
+
+    toggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle.click();
+      }
+    });
   });
 }
 
@@ -576,9 +644,10 @@ function buildSiteFooter() {
 
 /**
  * Mobile Menu Toggle with Enhancements
- * - Slide-in animation
+ * - Full-screen overlay menu
  * - Click outside to close
  * - Body scroll lock when open
+ * - Toggle button text between ☰ and ×
  */
 function initMobileMenu() {
   const mobileMenuToggle = document.querySelector('.hamburger') ||
@@ -607,6 +676,9 @@ function initMobileMenu() {
       nav.setAttribute('aria-hidden', isActive ? 'false' : 'true');
       navLinksEl?.setAttribute?.('aria-hidden', isActive ? 'false' : 'true');
       
+      // Toggle button text
+      mobileMenuToggle.textContent = isActive ? '×' : '☰';
+      
       // Toggle body scroll lock
       if (isActive) {
         body.style.overflow = 'hidden';
@@ -624,6 +696,7 @@ function initMobileMenu() {
         mobileMenuToggle.classList.remove('active');
         body.style.overflow = '';
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenuToggle.textContent = '☰';
         nav.setAttribute('aria-hidden', 'true');
         navLinksEl?.setAttribute?.('aria-hidden', 'true');
       });
@@ -638,6 +711,7 @@ function initMobileMenu() {
         mobileMenuToggle.classList.remove('active');
         body.style.overflow = '';
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenuToggle.textContent = '☰';
       }
     });
     
@@ -648,6 +722,7 @@ function initMobileMenu() {
         mobileMenuToggle.classList.remove('active');
         body.style.overflow = '';
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenuToggle.textContent = '☰';
         mobileMenuToggle.focus();
       }
     });
