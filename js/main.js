@@ -356,9 +356,6 @@ function initInlineNavToggle(header) {
   const navLinks = header?.querySelector('.nav-links');
   if (!navToggle || !navLinks) return;
 
-  // Store original button text
-  const originalText = navToggle.textContent || '☰';
-
   const getFocusables = () => [
     navToggle,
     ...navLinks.querySelectorAll('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])')
@@ -407,7 +404,7 @@ function initInlineNavToggle(header) {
   });
 
   document.addEventListener('click', (event) => {
-    if (navLinks.classList.contains('active') && !header.contains(event.target) && !navToggle.contains(event.target)) {
+    if (navLinks.classList.contains('active') && !header.contains(event.target)) {
       closeMenu();
     }
   });
