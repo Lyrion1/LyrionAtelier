@@ -2543,5 +2543,90 @@
     "launchDate": "2025-01-15",
     "isBestseller": false,
     "showOnHomepage": false
+  },
+  {
+    "id": "taurus-luxury-pillow",
+    "slug": "taurus-luxury-pillow",
+    "link": "/shop/taurus-luxury-pillow.html",
+    "name": "Taurus Luxury Throw Pillow",
+    "title": "Taurus Luxury Throw Pillow",
+    "collection": "Taurus Collection",
+    "category": "accessories",
+    "zodiac": "taurus",
+    "zodiacSign": "taurus",
+    "element": "earth",
+    "gender": "unisex",
+    "meta": {
+      "category": "Accessories",
+      "collection": "Taurus Collection",
+      "zodiac": "Taurus"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 33.99,
+    "price_range": {
+      "min": 33.99,
+      "max": 39.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/taurus-pillow-lifestyle-1.jpg",
+      "/images/products/taurus-pillow-lifestyle-2.jpg",
+      "/images/products/taurus-pillow-lifestyle-3.jpg",
+      "/images/products/taurus-pillow-lifestyle-4.jpg"
+    ],
+    "mainImage": "/images/products/taurus-pillow-lifestyle-1.jpg",
+    "description": "Taurus Luxury Throw Pillow\n\nGround your space with celestial comfort. Premium throw pillow featuring the Taurus bull constellation and Lyrīon Atelier signature.\n\n• Soft fabric cover\n• Concealed zipper\n• Shape-retaining insert\n• Fade-resistant print\n• Multiple sizes\n\nApril 20 - May 20\n\nStarting at $33.99",
+    "mysticalCopy": "Ground your space with celestial comfort.",
+    "options": {
+      "size": ["18″×18″", "20″×12″", "22″×22″"]
+    },
+    "variants": [
+      {
+        "size": "20″×12″",
+        "printfulVariantId": "69601af7eb63e1",
+        "price": 33.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-TAUR-PILLOW-20x12"
+      },
+      {
+        "size": "18″×18″",
+        "printfulVariantId": "69601af7eb6342",
+        "price": 36.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-TAUR-PILLOW-18x18"
+      },
+      {
+        "size": "22″×22″",
+        "printfulVariantId": "69601af7eb6461",
+        "price": 39.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-TAUR-PILLOW-22x22"
+      }
+    ],
+    "printfulProduct": "Throw Pillow",
+    "features": [
+      "Soft fabric cover",
+      "Concealed zipper",
+      "Shape-retaining insert",
+      "Fade-resistant print",
+      "Multiple sizes",
+      "Taurus bull constellation design"
+    ],
+    "careInstructions": "Spot clean or hand wash cover. Air dry. Your celestial comfort endures.",
+    "tags": ["taurus", "earth-sign", "zodiac", "pillow", "accessories", "fixed", "venus-ruled", "home-decor", "gift"],
+    "chartResonance": ["taurus-sun", "taurus-moon", "taurus-rising", "venus-dominant", "2nd-house-emphasis", "earth-dominant"],
+    "seoTitle": "Taurus Luxury Throw Pillow | Celestial Home Decor | Lyrīon Atelier",
+    "seoDescription": "Ground your space with celestial comfort. Premium throw pillow featuring the Taurus bull constellation. Perfect gift for Taurus (April 20 - May 20).",
+    "launchDate": "2025-01-15",
+    "isBestseller": false,
+    "showOnHomepage": false,
+    "accessoriesOnly": true
   }
 ]
