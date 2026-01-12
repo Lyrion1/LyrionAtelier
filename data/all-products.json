@@ -2809,5 +2809,110 @@
     "launchDate": "2025-01-15",
     "isBestseller": false,
     "showOnHomepage": false
+  },
+  {
+    "id": "taurus-organic-tee",
+    "slug": "taurus-organic-tee",
+    "link": "/shop/taurus-organic-tee.html",
+    "name": "Taurus Unisex Organic Ribbed Neck T-Shirt",
+    "title": "Taurus Unisex Organic Ribbed Neck T-Shirt",
+    "collection": "Taurus Collection",
+    "category": "unisex",
+    "zodiac": "taurus",
+    "zodiacSign": "taurus",
+    "element": "earth",
+    "gender": "unisex",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Taurus Collection",
+      "zodiac": "Taurus"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 54.00,
+    "price_range": {
+      "min": 54.00,
+      "max": 56.64,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/taurus-organic-tee-lifestyle-1.jpg",
+      "/images/products/taurus-organic-tee-lifestyle-2.jpg",
+      "/images/products/taurus-organic-tee-lifestyle-3.jpg",
+      "/images/products/taurus-organic-tee-lifestyle-4.jpg",
+      "/images/products/taurus-organic-tee-lifestyle-5.jpg",
+      "/images/products/taurus-organic-tee-lifestyle-6.jpg",
+      "/images/products/taurus-organic-tee-lifestyle-7.jpg",
+      "/images/products/taurus-organic-tee-lifestyle-8.jpg"
+    ],
+    "mainImage": "/images/products/taurus-organic-tee-lifestyle-1.jpg",
+    "description": "Sustainable luxury meets cosmic style. Premium organic cotton tee with ribbed neckline featuring the Taurus constellation. For the Earth sign who values quality and sustainability.",
+    "mysticalCopy": "April 20 - May 20. For the Earth sign who values quality and sustainability.",
+    "options": {
+      "size": ["S", "M", "L", "XL", "2XL"]
+    },
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "69653de7ef42f3",
+        "price": 54.00,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-TAUR-ORG-TEE-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "69653de7ef4361",
+        "price": 54.00,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-TAUR-ORG-TEE-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "69653de7ef43c4",
+        "price": 54.00,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-TAUR-ORG-TEE-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "69653de7ef4429",
+        "price": 54.00,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-TAUR-ORG-TEE-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "69653de7ef4474",
+        "price": 56.64,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-TAUR-ORG-TEE-2XL"
+      }
+    ],
+    "printfulProduct": "Unisex Organic Ribbed Neck T-Shirt",
+    "features": [
+      "100% organic ring-spun cotton",
+      "Ribbed crew neck detail",
+      "Classic unisex fit",
+      "Soft, breathable fabric",
+      "Ethically made",
+      "Taurus constellation design",
+      "Perfect Taurus birthday gift (April 20 - May 20)"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. Your sustainable style endures.",
+    "tags": ["taurus", "earth-sign", "zodiac", "tee", "unisex", "fixed", "venus-ruled", "organic", "sustainable", "gift"],
+    "chartResonance": ["taurus-sun", "taurus-moon", "taurus-rising", "venus-dominant", "2nd-house-emphasis", "earth-dominant"],
+    "seoTitle": "Taurus Unisex Organic Ribbed Neck T-Shirt | Sustainable Zodiac Apparel | Lyrīon Atelier",
+    "seoDescription": "Sustainable luxury meets cosmic style. Premium organic cotton tee with ribbed neckline featuring the Taurus constellation. Perfect gift for Taurus (April 20 - May 20).",
+    "launchDate": "2025-01-15",
+    "isBestseller": false,
+    "showOnHomepage": false
   }
 ]
