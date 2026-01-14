@@ -117,14 +117,15 @@ test.describe('homepage featured products', () => {
     expect(imageCounts.every((count) => count === 1)).toBeTruthy();
   });
 
-  test('shows Taurus Organic Tee as the first featured product on homepage', async ({ page }) => {
+  test('shows Taurus Organic Tee as the first featured product on homepage with Best Seller badge', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
     const firstCard = page.locator('#featured-grid .product-card').first();
     await expect(firstCard).toContainText('Taurus Unisex Organic Ribbed Neck T-Shirt');
     await expect(firstCard.locator('.price')).toContainText('$54.00');
+    await expect(firstCard.locator('.product-badge--bestseller')).toContainText('Best Seller');
     const images = firstCard.locator('img');
     await expect(images).toHaveCount(1);
-    await expect(images.first()).toHaveAttribute('src', /taurus-organic-tee-lifestyle/i);
+    await expect(images.first()).toHaveAttribute('src', /taurus-organic-tee-lifestyle-4\.jpg/i);
   });
 
   test('opens Taurus Pyjama Top details from homepage view action', async ({ page }) => {
