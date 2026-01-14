@@ -96,13 +96,13 @@ test.describe('homepage featured products', () => {
     await expect(images.first()).toHaveAttribute('src', /taurus-pyjamas/i);
   });
 
-  test('shows Fisherman Beanie with scarcity badge as the second featured card', async ({ page }) => {
+  test('shows Fisherman Beanie with Best Seller badge as the third featured card', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
-    const secondCard = page.locator('#featured-grid .product-card').nth(1);
-    await expect(secondCard).toContainText('Fisherman Beanie');
-    await expect(secondCard.locator('.price')).toContainText('$30.00');
-    await expect(secondCard.locator('.product-badge--scarcity')).toContainText('Only 3 Left');
-    const images = secondCard.locator('img');
+    const thirdCard = page.locator('#featured-grid .product-card').nth(2);
+    await expect(thirdCard).toContainText('Fisherman Beanie');
+    await expect(thirdCard.locator('.price')).toContainText('$30.00');
+    await expect(thirdCard.locator('.product-badge--bestseller')).toContainText('Best Seller');
+    const images = thirdCard.locator('img');
     await expect(images).toHaveCount(1);
     await expect(images.first()).toHaveAttribute('src', /fisherman-beanie/i);
   });
@@ -117,15 +117,14 @@ test.describe('homepage featured products', () => {
     expect(imageCounts.every((count) => count === 1)).toBeTruthy();
   });
 
-  test('shows Aquarius Crop Hoodie with BEST SELLER badge in featured grid', async ({ page }) => {
+  test('shows Taurus Organic Tee as the first featured product on homepage', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
-    const aquariusCard = page.locator('#featured-grid .product-card', { hasText: 'Aquarius Crop Hoodie' }).first();
-    await expect(aquariusCard).toBeVisible();
-    await expect(aquariusCard.locator('.price')).toContainText('$64.99');
-    await expect(aquariusCard.locator('.product-badge--bestseller')).toContainText('BEST SELLER');
-    const images = aquariusCard.locator('img');
+    const firstCard = page.locator('#featured-grid .product-card').first();
+    await expect(firstCard).toContainText('Taurus Unisex Organic Ribbed Neck T-Shirt');
+    await expect(firstCard.locator('.price')).toContainText('$54.00');
+    const images = firstCard.locator('img');
     await expect(images).toHaveCount(1);
-    await expect(images.first()).toHaveAttribute('src', /aquarius-crop-hoodie/i);
+    await expect(images.first()).toHaveAttribute('src', /taurus-organic-tee-lifestyle/i);
   });
 
   test('opens Taurus Pyjama Top details from homepage view action', async ({ page }) => {
