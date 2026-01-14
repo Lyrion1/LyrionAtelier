@@ -2838,6 +2838,7 @@
       "currency": "USD"
     },
     "currency": "USD",
+    "image": "/images/products/taurus-organic-tee-lifestyle-4.jpg",
     "images": [
       "/images/products/taurus-organic-tee-lifestyle-1.jpg",
       "/images/products/taurus-organic-tee-lifestyle-2.jpg",
@@ -2848,7 +2849,7 @@
       "/images/products/taurus-organic-tee-lifestyle-7.jpg",
       "/images/products/taurus-organic-tee-lifestyle-8.jpg"
     ],
-    "mainImage": "/images/products/taurus-organic-tee-lifestyle-1.jpg",
+    "mainImage": "/images/products/taurus-organic-tee-lifestyle-4.jpg",
     "description": "Sustainable luxury meets cosmic style. Premium organic cotton tee with ribbed neckline featuring the Taurus constellation. For the Earth sign who values quality and sustainability.",
     "mysticalCopy": "April 20 - May 20. For the Earth sign who values quality and sustainability.",
     "options": {
@@ -2912,7 +2913,8 @@
     "seoTitle": "Taurus Unisex Organic Ribbed Neck T-Shirt | Sustainable Zodiac Apparel | Lyrīon Atelier",
     "seoDescription": "Sustainable luxury meets cosmic style. Premium organic cotton tee with ribbed neckline featuring the Taurus constellation. Perfect gift for Taurus (April 20 - May 20).",
     "launchDate": "2025-01-15",
-    "isBestseller": false,
-    "showOnHomepage": false
+    "isBestseller": true,
+    "showOnHomepage": true,
+    "bestSellerBadge": "Best Seller"
   }
 ]
