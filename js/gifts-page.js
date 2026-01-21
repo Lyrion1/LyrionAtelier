@@ -8,10 +8,13 @@ import { formatPrice } from './price-utils.js';
   const PRICE_UNAVAILABLE_LABEL = '—';
   const PRICE_CENTS_THRESHOLD = 200;
   // Number of products to skip from the beginning of the gift list (to feature newer items)
-  const PRODUCTS_TO_SKIP = 4;
+  // Reduced to show new Aries Diamond Hoodie prominently
+  const PRODUCTS_TO_SKIP = 0;
+  // Swap to feature Aries Diamond Hoodie in first position (currently at position 0)
+  // No swap needed since aries-diamond-hoodie is already first
   const SWAP_SLUGS = {
-    from: 'aquarius-crop-hoodie',
-    to: 'youth-aries-heavy-blend-hoodie'
+    from: '',
+    to: ''
   };
 
   const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
