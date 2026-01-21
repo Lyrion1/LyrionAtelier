@@ -29,6 +29,59 @@ function resolveProductImage(p = {}, imageMap = {}) {
  */
 const products = [
   {
+    id: "aries-diamond-hoodie",
+    slug: "aries-diamond-hoodie",
+    link: "/shop/aries-diamond-hoodie.html",
+    name: "Aries Diamond Women's Relaxed Hoodie",
+    title: "Aries Diamond Women's Relaxed Hoodie",
+    price: 65.50,
+    currency: "USD",
+    category: "women",
+    zodiac: "aries",
+    element: "fire",
+    gender: "women",
+    collection: "Aries Collection",
+    image: "/images/products/aries-diamond-hoodie-lifestyle-1.jpg",
+    images: [
+      "/images/products/aries-diamond-hoodie-lifestyle-1.jpg",
+      "/images/products/aries-diamond-hoodie-lifestyle-2.jpg",
+      "/images/products/aries-diamond-hoodie-lifestyle-3.jpg",
+      "/images/products/aries-diamond-hoodie-lifestyle-4.jpg",
+      "/images/products/aries-diamond-hoodie-lifestyle-5.jpg"
+    ],
+    mainImage: "/images/products/aries-diamond-hoodie-lifestyle-1.jpg",
+    description: "Born to lead. Designed to conquer. This isn't just a hoodie, it's your cosmic armor. Premium relaxed-fit design featuring the Aries diamond birthstone in striking pink detail. Left sleeve carries your power statement: \"Water is life, I am water\" — a reminder that even fire signs flow with unstoppable force.",
+    mysticalCopy: "For the Aries woman who leads with both strength and grace.",
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
+    variants: [
+      { size: "XS", printfulVariantId: "6970bd2c23d913", price: 65.50, currency: "USD", inStock: true, sku: "LYR-ARIES-DIAMOND-HOODIE-XS" },
+      { size: "S", printfulVariantId: "6970bd2c23d983", price: 65.50, currency: "USD", inStock: true, sku: "LYR-ARIES-DIAMOND-HOODIE-S" },
+      { size: "M", printfulVariantId: "6970bd2c23d9d7", price: 65.50, currency: "USD", inStock: true, sku: "LYR-ARIES-DIAMOND-HOODIE-M" },
+      { size: "L", printfulVariantId: "6970bd2c23da15", price: 65.50, currency: "USD", inStock: true, sku: "LYR-ARIES-DIAMOND-HOODIE-L" },
+      { size: "XL", printfulVariantId: "6970bd2c23da61", price: 65.50, currency: "USD", inStock: true, sku: "LYR-ARIES-DIAMOND-HOODIE-XL" },
+      { size: "2XL", printfulVariantId: "6970bd2c23daa1", price: 66.50, currency: "USD", inStock: true, sku: "LYR-ARIES-DIAMOND-HOODIE-2XL" }
+    ],
+    printfulProduct: "Women's Relaxed Hoodie",
+    features: [
+      "Premium heavyweight fleece",
+      "Relaxed feminine fit",
+      "Diamond birthstone design",
+      "Ribbed cuffs and hem",
+      "Soft brushed interior",
+      "Inspirational sleeve quote: \"Water is life, I am water\"",
+      "Perfect Aries birthday gift (March 21 - April 19)"
+    ],
+    careInstructions: "Machine wash cold, tumble dry low. Your cosmic armor endures.",
+    tags: ["aries", "fire-sign", "zodiac", "hoodie", "women", "cardinal", "mars-ruled", "diamond", "birthstone", "gift"],
+    chartResonance: ["aries-sun", "aries-moon", "aries-rising", "mars-dominant", "1st-house-emphasis", "fire-dominant"],
+    seoTitle: "Aries Diamond Women's Relaxed Hoodie | Zodiac Outerwear | Lyrīon Atelier",
+    seoDescription: "Premium relaxed-fit hoodie featuring the Aries diamond birthstone in striking pink detail. Perfect gift for Aries (March 21 - April 19).",
+    launchDate: "2025-01-21",
+    isBestseller: false,
+    showOnHomepage: true,
+    newArrivalBadge: "Aries Season - Limited Stock"
+  },
+  {
     id: 262,
     slug: "taurus-organic-tee",
     link: "/shop/taurus-organic-tee.html",
