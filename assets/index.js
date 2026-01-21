@@ -12,6 +12,11 @@ function renderFeaturedProducts() {
   if (typeof products === 'undefined') return;
   const catalog = Array.isArray(products) ? products.filter(Boolean) : [];
   const curated = catalog.filter((p) => p.showOnHomepage);
+  const aquariusIndex = curated.findIndex((p) => p.slug === 'aquarius-crop-hoodie');
+  const youthAriesIndex = curated.findIndex((p) => p.slug === 'youth-aries-heavy-blend-hoodie');
+  if (aquariusIndex !== -1 && youthAriesIndex !== -1) {
+    [curated[aquariusIndex], curated[youthAriesIndex]] = [curated[youthAriesIndex], curated[aquariusIndex]];
+  }
   const bestsellers = catalog.filter((p) => p.isBestseller);
   const primary = curated.length ? curated : (bestsellers.length ? bestsellers : catalog);
   const slugifyFn = typeof slugify === 'function' ? slugify : null;

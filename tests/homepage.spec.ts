@@ -74,16 +74,17 @@ test.describe('homepage featured products', () => {
     );
   });
 
-  test('shows Youth Aries Heavy Blend Hoodie in featured grid', async ({ page }) => {
-    await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
-    const featuredCard = page.locator('#featured-grid .product-card', { hasText: 'Youth Aries Heavy Blend Hoodie' });
-    await expect(featuredCard).toBeVisible();
-    await expect(featuredCard.locator('.price')).toContainText('$42.99');
+test('shows Aquarius Crop Hoodie in featured grid with Best Seller badge', async ({ page }) => {
+  await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
+  const featuredCard = page.locator('#featured-grid .product-card', { hasText: 'Aquarius Crop Hoodie' });
+  await expect(featuredCard).toBeVisible();
+  await expect(featuredCard.locator('.price')).toContainText('$64.99');
+  await expect(featuredCard.locator('.product-badge--bestseller')).toContainText('BEST SELLER');
 
-    const images = featuredCard.locator('img');
-    await expect(images).toHaveCount(1);
-    await expect(images.first()).toHaveAttribute('src', /youth-aries-heavy-blend-hoodie\/youth-aries-hoodie-lifestyle\.jpg/i);
-  });
+  const images = featuredCard.locator('img');
+  await expect(images).toHaveCount(1);
+  await expect(images.first()).toHaveAttribute('src', /aquarius-crop-hoodie\/aquarius-crop-hoodie-front1\.jpg/i);
+});
 
   test('shows Taurus Constellation Pyjama Top with BEST SELLER badge in featured grid', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
