@@ -9,6 +9,10 @@ import { formatPrice } from './price-utils.js';
   const PRICE_CENTS_THRESHOLD = 200;
   // Number of products to skip from the beginning of the gift list (to feature newer items)
   const PRODUCTS_TO_SKIP = 4;
+  const SWAP_SLUGS = {
+    from: 'aquarius-crop-hoodie',
+    to: 'youth-aries-heavy-blend-hoodie'
+  };
 
   const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   const pick = (...items) => items.find((x) => typeof x === 'string' && String(x).trim());
@@ -237,6 +241,16 @@ import { formatPrice } from './price-utils.js';
     (items || []).forEach((p) => grid.append(createCard(p)));
   };
 
+  const swapProduct = (items, swap = {}) => {
+    if (!Array.isArray(items) || !swap?.from || !swap?.to) return items;
+    const fromIndex = items.findIndex((p) => p?.slug === swap.from);
+    const toIndex = items.findIndex((p) => p?.slug === swap.to);
+    if (fromIndex === -1 || toIndex === -1) return items;
+    const next = [...items];
+    [next[fromIndex], next[toIndex]] = [next[toIndex], next[fromIndex]];
+    return next;
+  };
+
   let normalizedCatalog = [];
   let giftProducts = [];
 
@@ -274,6 +288,7 @@ import { formatPrice } from './price-utils.js';
       const catalogRaw = await getCatalog();
       normalizedCatalog = catalogRaw.map(normalize);
       giftProducts = filterGiftProducts(normalizedCatalog);
+      giftProducts = swapProduct(giftProducts, SWAP_SLUGS);
       
       // Skip the first PRODUCTS_TO_SKIP products to feature newer items (Pisces, Taurus) more prominently
       // Products are ordered by their position in all-products.json (gift-tagged products preserve catalog order)
