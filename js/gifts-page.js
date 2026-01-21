@@ -10,12 +10,8 @@ import { formatPrice } from './price-utils.js';
   // Number of products to skip from the beginning of the gift list (to feature newer items)
   // Reduced to show new Aries Diamond Hoodie prominently
   const PRODUCTS_TO_SKIP = 0;
-  // Swap to feature Aries Diamond Hoodie in first position (currently at position 0)
-  // No swap needed since aries-diamond-hoodie is already first
-  const SWAP_SLUGS = {
-    from: '',
-    to: ''
-  };
+  // Swap configuration disabled - aries-diamond-hoodie is already first in gift products
+  const SWAP_SLUGS = null;
 
   const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   const pick = (...items) => items.find((x) => typeof x === 'string' && String(x).trim());
