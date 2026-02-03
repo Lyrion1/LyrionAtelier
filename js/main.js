@@ -244,6 +244,7 @@ function buildSiteHeader() {
         <a href="/shop?zodiac=pisces">Pisces</a>
       </div>
     </div>
+    <a href="/valentines">Valentine's 💕</a>
     <a href="/curated-for-gifting">Curated for Gifting</a>
     <a href="/oracle">Oracle</a>
     <a href="/compatibility">Compatibility</a>
