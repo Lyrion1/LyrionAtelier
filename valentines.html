@@ -59,6 +59,19 @@
       margin-bottom: 0.5rem;
     }
     
+    .bundle-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, #ff6b9d, #ff4081);
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+    
     .bundle-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -75,18 +88,49 @@
       flex-direction: column;
     }
     
-    .bundle-item img {
+    .bundle-item .product-gallery-mini {
+      margin-bottom: 12px;
+    }
+    
+    .bundle-item .product-gallery-mini .main-image {
       width: 100%;
-      height: 200px;
+      height: 280px;
       object-fit: cover;
       border-radius: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
+    }
+    
+    .bundle-item .thumbnail-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    
+    .bundle-item .thumbnail-row img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+    
+    .bundle-item .thumbnail-row img:hover {
+      border-color: var(--gold-primary);
     }
     
     .bundle-item h3 {
       color: var(--gold-primary);
       font-size: 1.1rem;
       margin-bottom: 8px;
+    }
+    
+    .bundle-item .product-description {
+      color: var(--white-80);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 12px;
     }
     
     .bundle-item .price {
@@ -168,115 +212,19 @@
       transform: translateY(0);
     }
     
-    /* Products Section */
-    .valentines-products {
-      padding: 20px 0 40px;
-    }
-    
-    .valentines-products .section-header {
-      text-align: center;
-      padding: 0 20px 20px;
-    }
-    
-    .valentines-products .section-header h2 {
-      color: var(--gold-primary);
-      margin-bottom: 0.5rem;
-    }
-    
-    /* Product Grid - Mobile First (1 column) */
-    .valentines-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      padding: 0 15px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    
-    .valentines-grid .product-card {
-      background: rgba(10, 8, 32, 0.8);
-      border: 2px solid rgba(212, 175, 55, 0.3);
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      transition: all 0.3s ease;
-    }
-    
-    .valentines-grid .product-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--gold-primary);
-      box-shadow: 0 15px 50px rgba(212, 175, 55, 0.4);
-    }
-    
-    .valentines-grid .product-card img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-    }
-    
-    .valentines-grid .product-card-content {
-      padding: 15px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .valentines-grid .product-card h3 {
-      font-size: 1.1rem;
-      color: var(--gold-primary);
-      margin-bottom: 10px;
-      min-height: 44px;
-    }
-    
-    .valentines-grid .product-card .price {
-      font-size: 1.3rem;
-      color: var(--gold-primary);
-      font-weight: 700;
-      margin-bottom: 15px;
-      margin-top: auto;
-    }
-    
-    .valentines-grid .product-card .view-product-btn {
-      display: block;
-      width: 100%;
-      padding: 14px 20px;
-      min-height: 48px;
-      background: linear-gradient(135deg, #d4af37, #f0c659);
-      color: var(--navy-darkest);
-      text-align: center;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    
-    .valentines-grid .product-card .view-product-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
-    }
-    
     /* Tablet breakpoint - 2 columns */
     @media (min-width: 481px) and (max-width: 767px) {
-      .valentines-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        padding: 0 20px;
-      }
-      
-      .valentines-grid .product-card img {
-        height: 200px;
-      }
-      
-      .valentines-grid .product-card h3 {
-        font-size: 1rem;
-        min-height: 40px;
-      }
-      
       .bundle-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .bundle-item .product-gallery-mini .main-image {
+        height: 220px;
+      }
+      
+      .bundle-item .thumbnail-row img {
+        width: 40px;
+        height: 40px;
       }
     }
     
@@ -296,39 +244,25 @@
         gap: 30px;
       }
       
-      .bundle-item img {
-        height: 250px;
+      .bundle-item .product-gallery-mini .main-image {
+        height: 300px;
       }
       
-      .valentines-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
-        padding: 0 30px;
+      .bundle-item .thumbnail-row img {
+        width: 55px;
+        height: 55px;
       }
     }
     
-    /* Desktop breakpoint - 3 columns */
+    /* Desktop breakpoint */
     @media (min-width: 992px) {
-      .valentines-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        padding: 0 40px;
-      }
-      
-      .valentines-grid .product-card img {
-        height: 280px;
-      }
-      
       .valentines-bundle {
         max-width: 900px;
         margin: 50px auto;
       }
-    }
-    
-    /* Large Desktop */
-    @media (min-width: 1200px) {
-      .valentines-grid {
-        padding: 0 60px;
+      
+      .bundle-item .product-gallery-mini .main-image {
+        height: 350px;
       }
     }
   </style>
@@ -385,126 +319,78 @@
     </div>
   </section>
 
-  <!-- Valentine's Bundle Section -->
+  <!-- Valentine's Bundle Section - Heartbeat Hoodies -->
   <section class="valentines-bundle">
     <div class="bundle-header">
-      <p class="pill">Limited Time Offer</p>
-      <h2>Couples Bundle</h2>
-      <p class="muted">Two zodiac pieces, one cosmic connection. Save 15% when you buy the set.</p>
+      <span class="bundle-badge">Better Together</span>
+      <h2>Heartbeat Edition</h2>
+      <p class="muted">Half the heartbeat. Complete the connection. Incomplete alone. Whole together.</p>
     </div>
     
     <div class="bundle-grid" id="bundle-products">
-      <!-- Bundle Item 1: Pisces Hoodie -->
+      <!-- Bundle Item 1: Heartbeat Edition - His -->
       <div class="bundle-item" data-bundle-item="1">
-        <img src="/images/pisces-hoodie-couple.png" alt="Pisces Intuition Hoodie" loading="lazy">
-        <h3>Pisces Intuition Hoodie</h3>
-        <p class="price" data-item-price="65.00">$65.00</p>
+        <div class="product-gallery-mini">
+          <img src="/images/products/heartbeat-hoodie-his-3.jpg" alt="Heartbeat Edition - His" loading="lazy" class="main-image" id="his-main-image">
+          <div class="thumbnail-row" data-gallery="his">
+            <img src="/images/products/heartbeat-hoodie-his-1.jpg" alt="His view 1" loading="lazy">
+            <img src="/images/products/heartbeat-hoodie-his-2.jpg" alt="His view 2" loading="lazy">
+            <img src="/images/products/heartbeat-hoodie-his-3.jpg" alt="His view 3" loading="lazy">
+            <img src="/images/products/heartbeat-hoodie-his-4.jpg" alt="His view 4" loading="lazy">
+            <img src="/images/products/heartbeat-hoodie-his-5.jpg" alt="His view 5" loading="lazy">
+          </div>
+        </div>
+        <h3>Heartbeat Edition - His</h3>
+        <p class="product-description">Half the heartbeat. Complete the connection. His side carries the anatomical heart and EKG rhythm. Incomplete alone. Whole together.</p>
+        <p class="price" data-item-price="57.50" id="his-price">$57.50</p>
         <div class="selector-group">
           <label for="bundle-size-1">Size</label>
           <select id="bundle-size-1" data-bundle-size="1">
-            <option value="S">S</option>
-            <option value="M" selected>M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="2XL">2XL</option>
+            <option value="S" data-price="57.50" data-variant="697e67232fff28">S - $57.50</option>
+            <option value="M" data-price="57.50" data-variant="697e67232fffb9" selected>M - $57.50</option>
+            <option value="L" data-price="57.50" data-variant="697e6723300165">L - $57.50</option>
+            <option value="XL" data-price="57.50" data-variant="697e67233001e5">XL - $57.50</option>
+            <option value="2XL" data-price="59.50" data-variant="697e6723300259">2XL - $59.50</option>
+            <option value="3XL" data-price="61.50" data-variant="697e67233002c3">3XL - $61.50</option>
           </select>
         </div>
       </div>
       
-      <!-- Bundle Item 2: Leo Zodiac Hoodie -->
+      <!-- Bundle Item 2: Heartbeat Edition - Hers -->
       <div class="bundle-item" data-bundle-item="2">
-        <img src="/images/leo-zodiac-hoodie-lifestyle.jpg" alt="Leo Zodiac Hoodie" loading="lazy">
-        <h3>Leo Zodiac Hoodie</h3>
-        <p class="price" data-item-price="59.99">$59.99</p>
+        <div class="product-gallery-mini">
+          <img src="/images/products/heartbeat-hoodie-hers-4.jpg" alt="Heartbeat Edition - Hers" loading="lazy" class="main-image" id="hers-main-image">
+          <div class="thumbnail-row" data-gallery="hers">
+            <img src="/images/products/heartbeat-hoodie-hers-1.jpg" alt="Hers view 1" loading="lazy">
+            <img src="/images/products/heartbeat-hoodie-hers-2.jpg" alt="Hers view 2" loading="lazy">
+            <img src="/images/products/heartbeat-hoodie-hers-3.jpg" alt="Hers view 3" loading="lazy">
+            <img src="/images/products/heartbeat-hoodie-hers-4.jpg" alt="Hers view 4" loading="lazy">
+            <img src="/images/products/heartbeat-hoodie-hers-5.jpg" alt="Hers view 5" loading="lazy">
+            <img src="/images/products/heartbeat-hoodie-hers-6.jpg" alt="Hers view 6" loading="lazy">
+          </div>
+        </div>
+        <h3>Heartbeat Edition - Hers</h3>
+        <p class="product-description">Half the heartbeat. Complete the connection. Her side carries the rhythm that completes his. Incomplete alone. Whole together.</p>
+        <p class="price" data-item-price="59.50" id="hers-price">$59.50</p>
         <div class="selector-group">
           <label for="bundle-size-2">Size</label>
           <select id="bundle-size-2" data-bundle-size="2">
-            <option value="S">S</option>
-            <option value="M" selected>M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="2XL">2XL</option>
+            <option value="S" data-price="59.50" data-variant="697e6a819dbb24">S - $59.50</option>
+            <option value="M" data-price="59.50" data-variant="697e6a819dbb98" selected>M - $59.50</option>
+            <option value="L" data-price="59.50" data-variant="697e6a819dbbe3">L - $59.50</option>
+            <option value="XL" data-price="59.50" data-variant="697e6a819dbc21">XL - $59.50</option>
+            <option value="2XL" data-price="61.50" data-variant="697e6a819dbc76">2XL - $61.50</option>
+            <option value="3XL" data-price="63.50" data-variant="697e6a819dbcb4">3XL - $63.50</option>
           </select>
         </div>
       </div>
     </div>
     
     <div class="bundle-summary">
-      <p class="original-price">Original: <span id="bundle-original">$124.99</span></p>
-      <p class="bundle-price">Bundle Price: <span id="bundle-total">$106.24</span></p>
-      <p class="savings">You save <span id="bundle-savings">$18.75</span> (15%)</p>
-      <button type="button" class="buy-set-btn" id="buy-bundle-btn">Buy Set – Add Both to Cart</button>
-    </div>
-  </section>
-
-  <!-- Valentine's Product Grid -->
-  <section class="valentines-products">
-    <div class="section-header">
-      <p class="pill">Gift Ideas</p>
-      <h2>More Valentine's Picks</h2>
-      <p class="muted">Individual pieces perfect for your special someone.</p>
-    </div>
-    
-    <div class="valentines-grid">
-      <!-- Product 1: Aries Diamond Hoodie -->
-      <div class="product-card">
-        <img src="/images/products/aries-diamond-hoodie-lifestyle-1.jpg" alt="Aries Diamond Women's Relaxed Hoodie" loading="lazy">
-        <div class="product-card-content">
-          <h3>Aries Diamond Women's Relaxed Hoodie</h3>
-          <p class="price">From $65.50</p>
-          <a href="/shop/aries-diamond-hoodie.html" class="view-product-btn">View Product</a>
-        </div>
-      </div>
-      
-      <!-- Product 2: Pisces Cropped Windbreaker -->
-      <div class="product-card">
-        <img src="/images/products/pisces-windbreaker-lifestyle-1.jpg" alt="Pisces Cropped Windbreaker" loading="lazy">
-        <div class="product-card-content">
-          <h3>Pisces Cropped Windbreaker</h3>
-          <p class="price">From $86.99</p>
-          <a href="/shop/pisces-cropped-windbreaker.html" class="view-product-btn">View Product</a>
-        </div>
-      </div>
-      
-      <!-- Product 3: Leo Zodiac Hoodie -->
-      <div class="product-card">
-        <img src="/images/leo-zodiac-hoodie-lifestyle.jpg" alt="Leo Zodiac Hoodie" loading="lazy">
-        <div class="product-card-content">
-          <h3>Leo Zodiac Hoodie</h3>
-          <p class="price">From $59.99</p>
-          <a href="/shop/leo-hoodie.html" class="view-product-btn">View Product</a>
-        </div>
-      </div>
-      
-      <!-- Product 4: Taurus Ram Head Hoodie -->
-      <div class="product-card">
-        <img src="/images/products/taurus-ram-hoodie-lifestyle-1.jpg" alt="Taurus Ram Head Unisex Hoodie" loading="lazy">
-        <div class="product-card-content">
-          <h3>Taurus Ram Head Unisex Hoodie</h3>
-          <p class="price">From $75.00</p>
-          <a href="/shop/taurus-ram-hoodie.html" class="view-product-btn">View Product</a>
-        </div>
-      </div>
-      
-      <!-- Product 5: Pisces Luxury Mousepad -->
-      <div class="product-card">
-        <img src="/images/products/pisces-mousepad-lifestyle-1.jpg" alt="Pisces Luxury Mousepad" loading="lazy">
-        <div class="product-card-content">
-          <h3>Pisces Luxury Mousepad</h3>
-          <p class="price">From $24.99</p>
-          <a href="/shop/pisces-luxury-mousepad.html" class="view-product-btn">View Product</a>
-        </div>
-      </div>
-      
-      <!-- Product 6: Taurus Organic Tee -->
-      <div class="product-card">
-        <img src="/images/products/taurus-organic-tee-lifestyle-1.jpg" alt="Taurus Organic Tee" loading="lazy">
-        <div class="product-card-content">
-          <h3>Taurus Organic Tee</h3>
-          <p class="price">From $34.99</p>
-          <a href="/shop/taurus-organic-tee.html" class="view-product-btn">View Product</a>
-        </div>
-      </div>
+      <p class="original-price">Original: <span id="bundle-original">$117.00</span></p>
+      <p class="bundle-price">Bundle Price: <span id="bundle-total">$99.45</span></p>
+      <p class="savings">You save <span id="bundle-savings">$17.55</span> (15%)</p>
+      <button type="button" class="buy-set-btn" id="buy-bundle-btn">Buy Set – Save 15%</button>
     </div>
   </section>
 </main>
@@ -535,40 +421,42 @@
   <!-- Valentine's Bundle Script -->
   <script>
     (function() {
-      // Bundle product definitions with actual variant IDs
+      // Bundle product definitions with actual variant IDs - Heartbeat Edition Hoodies
       const bundleProducts = {
         1: {
-          id: 'pisces-hoodie',
-          slug: 'pisces-hoodie',
-          name: 'Pisces Intuition Hoodie',
-          basePrice: 65.00,
-          category: 'Unisex / Pisces Collection',
-          collection: 'Pisces Collection',
-          image: '/images/pisces-hoodie-couple.png',
+          id: 'heartbeat-hoodie-his',
+          slug: 'heartbeat-hoodie-his',
+          name: 'Heartbeat Edition - His',
+          basePrice: 57.50,
+          category: 'Unisex / Valentine\'s Collection',
+          collection: 'Valentine\'s Collection',
+          image: '/images/products/heartbeat-hoodie-his-3.jpg',
           type: 'physical',
           variants: {
-            'S': { variantId: '696028af08ae15', price: 65.00 },
-            'M': { variantId: '696028af08ae77', price: 65.00 },
-            'L': { variantId: '696028af08aebb', price: 65.00 },
-            'XL': { variantId: '696028af08af09', price: 65.00 },
-            '2XL': { variantId: '696028af08af4d', price: 66.00 }
+            'S': { variantId: '697e67232fff28', price: 57.50 },
+            'M': { variantId: '697e67232fffb9', price: 57.50 },
+            'L': { variantId: '697e6723300165', price: 57.50 },
+            'XL': { variantId: '697e67233001e5', price: 57.50 },
+            '2XL': { variantId: '697e6723300259', price: 59.50 },
+            '3XL': { variantId: '697e67233002c3', price: 61.50 }
           }
         },
         2: {
-          id: 'leo-zodiac-hoodie',
-          slug: 'leo-zodiac-hoodie',
-          name: 'Leo Zodiac Hoodie',
-          basePrice: 59.99,
-          category: 'Unisex / Leo Collection',
-          collection: 'Zodiac Hero',
-          image: '/images/leo-zodiac-hoodie-lifestyle.jpg',
+          id: 'heartbeat-hoodie-hers',
+          slug: 'heartbeat-hoodie-hers',
+          name: 'Heartbeat Edition - Hers',
+          basePrice: 59.50,
+          category: 'Women\'s / Valentine\'s Collection',
+          collection: 'Valentine\'s Collection',
+          image: '/images/products/heartbeat-hoodie-hers-4.jpg',
           type: 'physical',
           variants: {
-            'S': { variantId: '694b0b7b4276f7', price: 59.99 },
-            'M': { variantId: '694b0b7b427766', price: 59.99 },
-            'L': { variantId: '694b0b7b4277b7', price: 59.99 },
-            'XL': { variantId: '694b0b7b427801', price: 61.99 },
-            '2XL': { variantId: '694b0b7b427857', price: 61.99 }
+            'S': { variantId: '697e6a819dbb24', price: 59.50 },
+            'M': { variantId: '697e6a819dbb98', price: 59.50 },
+            'L': { variantId: '697e6a819dbbe3', price: 59.50 },
+            'XL': { variantId: '697e6a819dbc21', price: 59.50 },
+            '2XL': { variantId: '697e6a819dbc76', price: 61.50 },
+            '3XL': { variantId: '697e6a819dbcb4', price: 63.50 }
           }
         }
       };
@@ -582,14 +470,28 @@
       const bundleTotalEl = document.getElementById('bundle-total');
       const bundleSavingsEl = document.getElementById('bundle-savings');
       const buyBundleBtn = document.getElementById('buy-bundle-btn');
+      const hisPriceEl = document.getElementById('his-price');
+      const hersPriceEl = document.getElementById('hers-price');
+
+      // Update individual product price display
+      function updateProductPrices() {
+        const selectedOption1 = sizeSelect1.options[sizeSelect1.selectedIndex];
+        const selectedOption2 = sizeSelect2.options[sizeSelect2.selectedIndex];
+        
+        const price1 = parseFloat(selectedOption1.dataset.price) || bundleProducts[1].basePrice;
+        const price2 = parseFloat(selectedOption2.dataset.price) || bundleProducts[2].basePrice;
+        
+        if (hisPriceEl) hisPriceEl.textContent = `$${price1.toFixed(2)}`;
+        if (hersPriceEl) hersPriceEl.textContent = `$${price2.toFixed(2)}`;
+      }
 
       // Calculate and update bundle pricing
       function updateBundlePricing() {
-        const size1 = sizeSelect1.value;
-        const size2 = sizeSelect2.value;
+        const selectedOption1 = sizeSelect1.options[sizeSelect1.selectedIndex];
+        const selectedOption2 = sizeSelect2.options[sizeSelect2.selectedIndex];
         
-        const price1 = bundleProducts[1].variants[size1]?.price || bundleProducts[1].basePrice;
-        const price2 = bundleProducts[2].variants[size2]?.price || bundleProducts[2].basePrice;
+        const price1 = parseFloat(selectedOption1.dataset.price) || bundleProducts[1].basePrice;
+        const price2 = parseFloat(selectedOption2.dataset.price) || bundleProducts[2].basePrice;
         
         const originalTotal = price1 + price2;
         const savings = originalTotal * BUNDLE_DISCOUNT;
@@ -598,26 +500,30 @@
         bundleOriginalEl.textContent = `$${originalTotal.toFixed(2)}`;
         bundleTotalEl.textContent = `$${bundleTotal.toFixed(2)}`;
         bundleSavingsEl.textContent = `$${savings.toFixed(2)}`;
+        
+        updateProductPrices();
       }
 
       // Add bundle to cart
       function addBundleToCart() {
+        const selectedOption1 = sizeSelect1.options[sizeSelect1.selectedIndex];
+        const selectedOption2 = sizeSelect2.options[sizeSelect2.selectedIndex];
+        
         const size1 = sizeSelect1.value;
         const size2 = sizeSelect2.value;
+        const variantId1 = selectedOption1.dataset.variant;
+        const variantId2 = selectedOption2.dataset.variant;
+        const price1 = parseFloat(selectedOption1.dataset.price);
+        const price2 = parseFloat(selectedOption2.dataset.price);
         
-        const variant1 = bundleProducts[1].variants[size1];
-        const variant2 = bundleProducts[2].variants[size2];
-        
-        if (!variant1 || !variant2) {
+        if (!variantId1 || !variantId2) {
           alert('Please select sizes for both items.');
           return;
         }
 
         // Calculate discounted prices
-        const originalPrice1 = variant1.price;
-        const originalPrice2 = variant2.price;
-        const discountedPrice1 = originalPrice1 * (1 - BUNDLE_DISCOUNT);
-        const discountedPrice2 = originalPrice2 * (1 - BUNDLE_DISCOUNT);
+        const discountedPrice1 = price1 * (1 - BUNDLE_DISCOUNT);
+        const discountedPrice2 = price2 * (1 - BUNDLE_DISCOUNT);
 
         // Build cart payloads for both products
         const cartPayload1 = {
@@ -628,8 +534,8 @@
           size: size1,
           image: bundleProducts[1].image,
           category: bundleProducts[1].category,
-          printfulVariantId: variant1.variantId,
-          variantId: variant1.variantId,
+          printfulVariantId: variantId1,
+          variantId: variantId1,
           type: 'physical'
         };
 
@@ -641,21 +547,21 @@
           size: size2,
           image: bundleProducts[2].image,
           category: bundleProducts[2].category,
-          printfulVariantId: variant2.variantId,
-          variantId: variant2.variantId,
+          printfulVariantId: variantId2,
+          variantId: variantId2,
           type: 'physical'
         };
 
         const variantPayload1 = {
-          id: variant1.variantId,
-          printfulVariantId: variant1.variantId,
+          id: variantId1,
+          printfulVariantId: variantId1,
           size: size1,
           price: discountedPrice1
         };
 
         const variantPayload2 = {
-          id: variant2.variantId,
-          printfulVariantId: variant2.variantId,
+          id: variantId2,
+          printfulVariantId: variantId2,
           size: size2,
           price: discountedPrice2
         };
@@ -689,6 +595,19 @@
 
       // Initialize pricing
       updateBundlePricing();
+
+      // Thumbnail gallery click handlers
+      document.querySelectorAll('.thumbnail-row[data-gallery="his"] img').forEach(thumb => {
+        thumb.addEventListener('click', function() {
+          document.getElementById('his-main-image').src = this.src;
+        });
+      });
+      
+      document.querySelectorAll('.thumbnail-row[data-gallery="hers"] img').forEach(thumb => {
+        thumb.addEventListener('click', function() {
+          document.getElementById('hers-main-image').src = this.src;
+        });
+      });
     })();
   </script>
 </body>
