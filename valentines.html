@@ -644,6 +644,29 @@
         <button type="button" class="add-to-cart-btn" id="buy-cosmic-mug-btn">Add to Cart</button>
         <a href="/shop/single-cosmic-design-mug.html" class="view-details-link">View Full Details</a>
       </div>
+
+      <!-- Saturn Return Hoodie -->
+      <div class="product-card-section" data-product="saturn-return-hoodie">
+        <span class="product-badge" style="display: inline-block; padding: 4px 12px; background: linear-gradient(135deg, #ff6b9d, #ff4081); color: white; font-weight: 700; font-size: 0.75rem; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Anti-Valentine's</span>
+        <div class="product-gallery-mini">
+          <img src="/images/products/saturn-return-hoodie-1.jpg" alt="My Saturn Return Took My Relationship Hoodie" loading="lazy" class="main-image" id="saturn-main-image">
+        </div>
+        <h3>My Saturn Return Took My Relationship Hoodie</h3>
+        <p class="product-description">For the 28-30 year olds who lost everything during their Saturn Return. Cosmic reckoning. Necessary endings. Premium organic hoodie with side pockets.</p>
+        <p class="price" id="saturn-price">$85.64</p>
+        <div class="selector-group">
+          <label for="saturn-size">Size</label>
+          <select id="saturn-size">
+            <option value="S" data-price="85.64" data-variant="697bac34ec7015">S - $85.64</option>
+            <option value="M" data-price="85.64" data-variant="697bac34ec70c8" selected>M - $85.64</option>
+            <option value="L" data-price="85.64" data-variant="697bac34ec7153">L - $85.64</option>
+            <option value="XL" data-price="85.64" data-variant="697bac34ec71e6">XL - $85.64</option>
+            <option value="2XL" data-price="85.64" data-variant="697bac34ec7265">2XL - $85.64</option>
+          </select>
+        </div>
+        <button type="button" class="add-to-cart-btn" id="buy-saturn-btn">Add to Cart</button>
+        <a href="/shop/saturn-return-hoodie.html" class="view-details-link">View Full Details</a>
+      </div>
     </div>
   </section>
 
@@ -1181,6 +1204,83 @@
       cosmicMugSizeSelect.addEventListener('change', updateCosmicMugPrice);
       buyCosmicMugBtn.addEventListener('click', addCosmicMugToCart);
       updateCosmicMugPrice();
+
+      // Saturn Return Hoodie functionality
+      const saturnProduct = {
+        id: 'saturn-return-hoodie',
+        slug: 'saturn-return-hoodie',
+        name: 'My Saturn Return Took My Relationship Hoodie',
+        basePrice: 85.64,
+        category: "Unisex / Cosmic Collection",
+        collection: 'Cosmic Collection',
+        image: '/images/products/saturn-return-hoodie-1.jpg',
+        type: 'physical',
+        variants: {
+          'S': { variantId: '697bac34ec7015', price: 85.64 },
+          'M': { variantId: '697bac34ec70c8', price: 85.64 },
+          'L': { variantId: '697bac34ec7153', price: 85.64 },
+          'XL': { variantId: '697bac34ec71e6', price: 85.64 },
+          '2XL': { variantId: '697bac34ec7265', price: 85.64 }
+        }
+      };
+
+      const saturnSizeSelect = document.getElementById('saturn-size');
+      const saturnPriceEl = document.getElementById('saturn-price');
+      const buySaturnBtn = document.getElementById('buy-saturn-btn');
+
+      function updateSaturnPrice() {
+        const selectedOption = saturnSizeSelect.options[saturnSizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || saturnProduct.basePrice;
+        if (saturnPriceEl) saturnPriceEl.textContent = `$${price.toFixed(2)}`;
+      }
+
+      function addSaturnToCart() {
+        const selectedOption = saturnSizeSelect.options[saturnSizeSelect.selectedIndex];
+        const size = saturnSizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: saturnProduct.id,
+          slug: saturnProduct.slug,
+          name: saturnProduct.name,
+          price: price,
+          size: size,
+          image: saturnProduct.image,
+          category: saturnProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            saturnProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      saturnSizeSelect.addEventListener('change', updateSaturnPrice);
+      buySaturnBtn.addEventListener('click', addSaturnToCart);
+      updateSaturnPrice();
 
       // Mercury Retrograde Hoodie functionality
       const mercuryProduct = {

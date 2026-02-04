@@ -3833,5 +3833,120 @@
     "isBestseller": false,
     "showOnHomepage": true,
     "newArrivalBadge": "Anti-Valentine's"
+  },
+  {
+    "id": 239,
+    "slug": "saturn-return-hoodie",
+    "link": "/shop/saturn-return-hoodie.html",
+    "name": "My Saturn Return Took My Relationship Hoodie",
+    "title": "My Saturn Return Took My Relationship Hoodie",
+    "collection": "Cosmic Collection",
+    "category": "hoodie",
+    "zodiac": "all",
+    "zodiacSign": "all",
+    "element": "all",
+    "gender": "unisex",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Cosmic Collection",
+      "zodiac": "all"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 85.64,
+    "price_range": {
+      "min": 85.64,
+      "max": 85.64,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/saturn-return-hoodie-1.jpg"
+    ],
+    "mainImage": "/images/products/saturn-return-hoodie-1.jpg",
+    "description": "For the 28-30 year olds who lost everything during their Saturn Return. Cosmic reckoning. Necessary endings. Premium organic hoodie with side pockets.",
+    "mysticalCopy": "Saturn teaches through loss. You emerged stronger.",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ]
+    },
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "697bac34ec7015",
+        "price": 85.64,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-SATURN-HOODIE-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "697bac34ec70c8",
+        "price": 85.64,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-SATURN-HOODIE-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "697bac34ec7153",
+        "price": 85.64,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-SATURN-HOODIE-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "697bac34ec71e6",
+        "price": 85.64,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-SATURN-HOODIE-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "697bac34ec7265",
+        "price": 85.64,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-SATURN-HOODIE-2XL"
+      }
+    ],
+    "printfulProduct": "Premium Organic Hoodie",
+    "features": [
+      "Premium organic cotton",
+      "Side pockets",
+      "Ribbed cuffs and hem",
+      "Soft brushed interior",
+      "Saturn Return themed design"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. Handle with cosmic care.",
+    "tags": [
+      "hoodie",
+      "unisex",
+      "gift",
+      "curated for gifting",
+      "valentines",
+      "cosmic",
+      "anti-valentines"
+    ],
+    "chartResonance": [
+      "all-signs",
+      "saturn-return",
+      "transformation-themed"
+    ],
+    "seoTitle": "My Saturn Return Took My Relationship Hoodie | Anti-Valentine's | Lyrīon Atelier",
+    "seoDescription": "For the 28-30 year olds who lost everything during their Saturn Return. Cosmic reckoning. Necessary endings. Premium organic hoodie.",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": true,
+    "newArrivalBadge": "Anti-Valentine's"
   }
 ]
