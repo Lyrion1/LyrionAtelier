@@ -998,6 +998,23 @@ const products = [
       "11oz": "697ba95a591694",
       "15oz": "697ba95a591743"
     }
+  },
+  {
+    id: 239,
+    name: "My Saturn Return Took My Relationship Hoodie",
+    price: 85.64,
+    category: "hoodie",
+    zodiac: "all",
+    image: "/images/products/saturn-return-hoodie-1.jpg",
+    description: "For the 28-30 year olds who lost everything during their Saturn Return. Cosmic reckoning. Necessary endings. Premium organic hoodie with side pockets.",
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    printfulVariants: {
+      "S": "697bac34ec7015",
+      "M": "697bac34ec70c8",
+      "L": "697bac34ec7153",
+      "XL": "697bac34ec71e6",
+      "2XL": "697bac34ec7265"
+    }
   }
 ];
 
