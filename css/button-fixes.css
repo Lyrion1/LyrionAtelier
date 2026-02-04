@@ -48,7 +48,6 @@ button[class*="submit"],
 .promo-cta-primary,
 .promo-cta-secondary {
   background: #d4af37 !important;
-  background-color: #d4af37 !important;
   color: #0f0c29 !important;
   font-size: 16px !important;
   font-weight: 600 !important;
@@ -106,7 +105,6 @@ button[class*="buy"]:hover,
 .promo-cta-primary:hover,
 .promo-cta-secondary:hover {
   background: #e5c245 !important;
-  background-color: #e5c245 !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4) !important;
   opacity: 1 !important;
@@ -124,7 +122,6 @@ button[class*="buy"]:hover,
 a.button:active,
 .button:active {
   background: #c9a030 !important;
-  background-color: #c9a030 !important;
   transform: translateY(0) !important;
 }
 
@@ -168,7 +165,6 @@ button[disabled],
 .btn:disabled,
 .button:disabled {
   background: #b8941f !important;
-  background-color: #b8941f !important;
   color: #0f0c29 !important;
   cursor: not-allowed !important;
   opacity: 0.75 !important;
@@ -221,7 +217,6 @@ button[disabled],
 .btn-outline,
 .promo-cta-secondary {
   background: transparent !important;
-  background-color: transparent !important;
   border: 2px solid #d4af37 !important;
   color: #d4af37 !important;
 }
@@ -229,7 +224,6 @@ button[disabled],
 .btn-outline:hover,
 .promo-cta-secondary:hover {
   background: rgba(212, 175, 55, 0.1) !important;
-  background-color: rgba(212, 175, 55, 0.1) !important;
   border-color: #e5c245 !important;
   color: #e5c245 !important;
 }
