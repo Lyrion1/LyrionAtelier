@@ -44,6 +44,15 @@ export function apply(products, incomingState) {
       if (value === null || typeof value === 'undefined') return [];
       return String(value).split(',').map((v) => v.trim()).filter(Boolean);
     };
+    
+    // Cache for normalized values to avoid repeated string operations
+    const normalizeCache = new Map();
+    const cachedNormalize = (val) => {
+      if (normalizeCache.has(val)) return normalizeCache.get(val);
+      const result = normalize(val);
+      normalizeCache.set(val, result);
+      return result;
+    };
 
     const filtered = baseList.filter((p = {}) => {
       const published = p?.state?.published ?? true;
@@ -55,31 +64,51 @@ export function apply(products, incomingState) {
       if (isAccessoriesOnly && category === 'all') return false;
 
       const meta = p?.meta || {};
-      const productCategories = toList(meta.category || p?.category || p?.metadata?.category).map(normalize);
-      const categoryMatch =
-        category === 'all' ||
-        productCategories.includes(category) ||
-        productCategories.map((c) => (c.endsWith('s') ? c.slice(0, -1) : c)).includes(category);
-      const productZodiac = normalize(meta.zodiac || p?.zodiac || p?.metadata?.zodiac || 'all') || 'all';
-      const productPalettes = toList(p?.palette || p?.metadata?.palette).map(normalize);
-      const productCollections = [
-        ...toList(meta.collection || p?.collection),
-        ...toList(p?.metadata?.collection)
-      ].map(normalize);
-      const productSizes = [
-        ...(Array.isArray(p?.sizes) ? p.sizes : []),
-        ...(Array.isArray(p?.options?.size) ? p.options.size : []),
-        ...(Array.isArray(p?.metadata?.size) ? p.metadata.size : [])
-      ].map(s => String(s || '').toLowerCase());
-
+      const productCategories = toList(meta.category || p?.category || p?.metadata?.category).map(cachedNormalize);
+      
+      // Early exit: check category match first (most selective filter)
+      let categoryMatch = category === 'all';
+      if (!categoryMatch) {
+        categoryMatch = productCategories.includes(category) ||
+          productCategories.some((c) => (c.endsWith('s') ? c.slice(0, -1) : c) === category);
+      }
       if (!categoryMatch) return false;
-      if (zodiac !== 'all' && productZodiac !== zodiac) return false;
-      if (palette !== 'all' && !productPalettes.includes(palette)) return false;
-      if (collection !== 'all' && !productCollections.includes(collection)) return false;
-      if (size !== 'all' && !productSizes.includes(size)) return false;
+      
+      // Check zodiac filter early since it's a common filter
+      if (zodiac !== 'all') {
+        const productZodiac = cachedNormalize(meta.zodiac || p?.zodiac || p?.metadata?.zodiac || 'all') || 'all';
+        if (productZodiac !== zodiac) return false;
+      }
+      
+      // Check palette filter
+      if (palette !== 'all') {
+        const productPalettes = toList(p?.palette || p?.metadata?.palette).map(cachedNormalize);
+        if (!productPalettes.includes(palette)) return false;
+      }
+      
+      // Check collection filter
+      if (collection !== 'all') {
+        const productCollections = [
+          ...toList(meta.collection || p?.collection),
+          ...toList(p?.metadata?.collection)
+        ].map(cachedNormalize);
+        if (!productCollections.includes(collection)) return false;
+      }
+      
+      // Check size filter
+      if (size !== 'all') {
+        const productSizes = [
+          ...(Array.isArray(p?.sizes) ? p.sizes : []),
+          ...(Array.isArray(p?.options?.size) ? p.options.size : []),
+          ...(Array.isArray(p?.metadata?.size) ? p.metadata.size : [])
+        ].map(s => String(s || '').toLowerCase());
+        if (!productSizes.includes(size)) return false;
+      }
+      
+      // Search filter (most expensive, run last)
       if (search) {
-        const title = normalize(p?.title || p?.name || p?.slug || '');
-        const desc = normalize(p?.description || p?.desc || '');
+        const title = cachedNormalize(p?.title || p?.name || p?.slug || '');
+        const desc = cachedNormalize(p?.description || p?.desc || '');
         if (!title.includes(search) && !desc.includes(search)) return false;
       }
       return true;
