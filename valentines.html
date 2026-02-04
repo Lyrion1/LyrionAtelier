@@ -582,6 +582,40 @@
       <p class="savings">You save <span id="bundle-savings">$17.55</span> (15%)</p>
       <button type="button" class="buy-set-btn" id="buy-bundle-btn">Buy Set – Save 15%</button>
     </div>
+    
+    <!-- Cosmic Polo Collection -->
+    <div class="section-header" style="margin-top: 50px;">
+      <h3 style="color: var(--gold-primary); font-size: 1.4rem; margin-bottom: 10px;">Cosmic Polos</h3>
+      <p class="section-subtitle">Celestial connection, elevated casual style.</p>
+    </div>
+    
+    <div class="products-grid-section">
+      <!-- Premium Polo - His -->
+      <div class="product-card-section" data-product="premium-polo-his">
+        <span class="product-badge" style="display: inline-block; padding: 4px 12px; background: linear-gradient(135deg, #ff6b9d, #ff4081); color: white; font-weight: 700; font-size: 0.75rem; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Better Together</span>
+        <div class="product-gallery-mini">
+          <img src="/images/products/premium-polo-his-1.jpg" alt="Lovers' Galaxies Premium Polo - His" loading="lazy" class="main-image" id="polo-his-main-image">
+        </div>
+        <h3>Lovers' Galaxies Premium Polo - His</h3>
+        <p class="product-description">When two galaxies collide, stars are born. His side of the cosmic connection. Premium pique polo featuring celestial lovers meeting across the universe. Incomplete without Hers.</p>
+        <p class="price" id="polo-his-price">$50.99</p>
+        <div class="selector-group">
+          <label for="polo-his-size">Size</label>
+          <select id="polo-his-size">
+            <option value="S" data-price="50.99" data-variant="697bb1ac69d002">S - $50.99</option>
+            <option value="M" data-price="50.99" data-variant="697bb1ac69d068" selected>M - $50.99</option>
+            <option value="L" data-price="50.99" data-variant="697bb1ac69d0c2">L - $50.99</option>
+            <option value="XL" data-price="50.99" data-variant="697bb1ac69d105">XL - $50.99</option>
+            <option value="2XL" data-price="51.99" data-variant="697bb1ac69d142">2XL - $51.99</option>
+            <option value="3XL" data-price="52.99" data-variant="697bb1ac69d183">3XL - $52.99</option>
+            <option value="4XL" data-price="53.99" data-variant="697bb1ac69d1d2">4XL - $53.99</option>
+            <option value="5XL" data-price="54.99" data-variant="697bb1ac69d218">5XL - $54.99</option>
+          </select>
+        </div>
+        <button type="button" class="add-to-cart-btn" id="buy-polo-his-btn">Add to Cart</button>
+        <a href="/shop/premium-polo-his.html" class="view-details-link">View Full Details</a>
+      </div>
+    </div>
   </section>
 
   <!-- SECTION 3: Solo & Thriving - Anti-Valentine's -->
@@ -1368,6 +1402,86 @@
           document.getElementById('mercury-main-image').src = this.src;
         });
       });
+
+      // Premium Polo - His functionality
+      const poloHisProduct = {
+        id: 'premium-polo-his',
+        slug: 'premium-polo-his',
+        name: "Lovers' Galaxies Premium Polo - His",
+        basePrice: 50.99,
+        category: "Men / Couples Collection",
+        collection: 'Couples Collection',
+        image: '/images/products/premium-polo-his-1.jpg',
+        type: 'physical',
+        variants: {
+          'S': { variantId: '697bb1ac69d002', price: 50.99 },
+          'M': { variantId: '697bb1ac69d068', price: 50.99 },
+          'L': { variantId: '697bb1ac69d0c2', price: 50.99 },
+          'XL': { variantId: '697bb1ac69d105', price: 50.99 },
+          '2XL': { variantId: '697bb1ac69d142', price: 51.99 },
+          '3XL': { variantId: '697bb1ac69d183', price: 52.99 },
+          '4XL': { variantId: '697bb1ac69d1d2', price: 53.99 },
+          '5XL': { variantId: '697bb1ac69d218', price: 54.99 }
+        }
+      };
+
+      const poloHisSizeSelect = document.getElementById('polo-his-size');
+      const poloHisPriceEl = document.getElementById('polo-his-price');
+      const buyPoloHisBtn = document.getElementById('buy-polo-his-btn');
+
+      function updatePoloHisPrice() {
+        const selectedOption = poloHisSizeSelect.options[poloHisSizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || poloHisProduct.basePrice;
+        if (poloHisPriceEl) poloHisPriceEl.textContent = `$${price.toFixed(2)}`;
+      }
+
+      function addPoloHisToCart() {
+        const selectedOption = poloHisSizeSelect.options[poloHisSizeSelect.selectedIndex];
+        const size = poloHisSizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: poloHisProduct.id,
+          slug: poloHisProduct.slug,
+          name: poloHisProduct.name,
+          price: price,
+          size: size,
+          image: poloHisProduct.image,
+          category: poloHisProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            poloHisProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      poloHisSizeSelect.addEventListener('change', updatePoloHisPrice);
+      buyPoloHisBtn.addEventListener('click', addPoloHisToCart);
+      updatePoloHisPrice();
     })();
   </script>
 </body>
