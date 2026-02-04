@@ -4717,5 +4717,110 @@
     "launchDate": "2025-02-04",
     "isBestseller": false,
     "showOnHomepage": false
+  },
+  {
+    "id": 247,
+    "slug": "virgo-bandana",
+    "link": "/shop/virgo-bandana.html",
+    "name": "Virgo All-Over Print Bandana",
+    "title": "Virgo All-Over Print Bandana",
+    "collection": "Virgo Collection",
+    "category": "bandana",
+    "zodiac": "virgo",
+    "zodiacSign": "virgo",
+    "element": "earth",
+    "gender": "unisex",
+    "meta": {
+      "category": "Bandana",
+      "collection": "Virgo Collection",
+      "zodiac": "Virgo"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 25.99,
+    "price_range": {
+      "min": 25.99,
+      "max": 27.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/virgo-bandana-1.jpg",
+      "/images/products/virgo-bandana-2.jpg",
+      "/images/products/virgo-bandana-3.jpg",
+      "/images/products/virgo-bandana-4.jpg",
+      "/images/products/virgo-bandana-5.jpg",
+      "/images/products/virgo-bandana-6.jpg"
+    ],
+    "mainImage": "/images/products/virgo-bandana-1.jpg",
+    "description": "Practical meets celestial. The Virgo bandana that serves a purpose—hair control, neck protection, pocket square precision. All-over maiden print for the sign that believes accessories should work as hard as they do.",
+    "mysticalCopy": "Accessories should work as hard as you do.",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L"
+      ]
+    },
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "697c1335c39ee7",
+        "price": 25.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-VIRGO-BANDANA-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "697c1335c39f42",
+        "price": 25.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-VIRGO-BANDANA-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "697c1335c39fa3",
+        "price": 27.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-VIRGO-BANDANA-L"
+      }
+    ],
+    "printfulProduct": "All-Over Print Bandana",
+    "features": [
+      "All-over Virgo maiden print",
+      "Premium polyester fabric",
+      "Versatile wear options",
+      "Hair control and neck protection",
+      "Perfect Virgo birthday gift (August 23 - September 22)"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. Your cosmic accessory endures.",
+    "tags": [
+      "virgo",
+      "earth-sign",
+      "zodiac",
+      "bandana",
+      "unisex",
+      "gift",
+      "curated for gifting",
+      "valentines"
+    ],
+    "chartResonance": [
+      "virgo-sun",
+      "virgo-moon",
+      "virgo-rising",
+      "mercury-dominant",
+      "6th-house-emphasis",
+      "earth-dominant"
+    ],
+    "seoTitle": "Virgo All-Over Print Bandana | Zodiac Accessories | Lyrīon Atelier",
+    "seoDescription": "Premium all-over print bandana featuring Virgo maiden design. Perfect gift for Virgo (August 23 - September 22).",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": false
   }
 ]

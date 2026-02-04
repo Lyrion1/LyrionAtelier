@@ -909,6 +909,34 @@
         <button type="button" class="add-to-cart-btn" id="buy-virgo-mousepad-btn">Add to Cart</button>
         <a href="/shop/virgo-mousepad.html" class="view-details-link">View Full Details</a>
       </div>
+
+      <!-- Virgo All-Over Print Bandana -->
+      <div class="product-card-section" data-product="virgo-bandana">
+        <div class="product-gallery-mini">
+          <img src="/images/products/virgo-bandana-1.jpg" alt="Virgo All-Over Print Bandana" loading="lazy" class="main-image" id="virgo-bandana-main-image">
+          <div class="thumbnail-row" data-gallery="virgo-bandana">
+            <img src="/images/products/virgo-bandana-1.jpg" alt="Virgo Bandana view 1" loading="lazy">
+            <img src="/images/products/virgo-bandana-2.jpg" alt="Virgo Bandana view 2" loading="lazy">
+            <img src="/images/products/virgo-bandana-3.jpg" alt="Virgo Bandana view 3" loading="lazy">
+            <img src="/images/products/virgo-bandana-4.jpg" alt="Virgo Bandana view 4" loading="lazy">
+            <img src="/images/products/virgo-bandana-5.jpg" alt="Virgo Bandana view 5" loading="lazy">
+            <img src="/images/products/virgo-bandana-6.jpg" alt="Virgo Bandana view 6" loading="lazy">
+          </div>
+        </div>
+        <h3>Virgo All-Over Print Bandana</h3>
+        <p class="product-description">Practical meets celestial. The Virgo bandana that serves a purpose—hair control, neck protection, pocket square precision. All-over maiden print for the sign that believes accessories should work as hard as they do.</p>
+        <p class="price" id="virgo-bandana-price">$25.99</p>
+        <div class="selector-group">
+          <label for="virgo-bandana-size">Size</label>
+          <select id="virgo-bandana-size">
+            <option value="S" data-price="25.99" data-variant="697c1335c39ee7" selected>S - $25.99</option>
+            <option value="M" data-price="25.99" data-variant="697c1335c39f42">M - $25.99</option>
+            <option value="L" data-price="27.99" data-variant="697c1335c39fa3">L - $27.99</option>
+          </select>
+        </div>
+        <button type="button" class="add-to-cart-btn" id="buy-virgo-bandana-btn">Add to Cart</button>
+        <a href="/shop/virgo-bandana.html" class="view-details-link">View Full Details</a>
+      </div>
     </div>
   </section>
 </main>
@@ -1671,6 +1699,88 @@
       virgoMousepadSizeSelect.addEventListener('change', updateVirgoMousepadPrice);
       buyVirgoMousepadBtn.addEventListener('click', addVirgoMousepadToCart);
       updateVirgoMousepadPrice();
+
+      // Virgo All-Over Print Bandana functionality
+      const virgoBandanaProduct = {
+        id: 'virgo-bandana',
+        slug: 'virgo-bandana',
+        name: 'Virgo All-Over Print Bandana',
+        basePrice: 25.99,
+        category: "Accessories / Virgo Collection",
+        collection: 'Virgo Collection',
+        image: '/images/products/virgo-bandana-1.jpg',
+        type: 'physical',
+        variants: {
+          'S': { variantId: '697c1335c39ee7', price: 25.99 },
+          'M': { variantId: '697c1335c39f42', price: 25.99 },
+          'L': { variantId: '697c1335c39fa3', price: 27.99 }
+        }
+      };
+
+      const virgoBandanaSizeSelect = document.getElementById('virgo-bandana-size');
+      const virgoBandanaPriceEl = document.getElementById('virgo-bandana-price');
+      const buyVirgoBandanaBtn = document.getElementById('buy-virgo-bandana-btn');
+
+      function updateVirgoBandanaPrice() {
+        const selectedOption = virgoBandanaSizeSelect.options[virgoBandanaSizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || virgoBandanaProduct.basePrice;
+        if (virgoBandanaPriceEl) virgoBandanaPriceEl.textContent = `$${price.toFixed(2)}`;
+      }
+
+      function addVirgoBandanaToCart() {
+        const selectedOption = virgoBandanaSizeSelect.options[virgoBandanaSizeSelect.selectedIndex];
+        const size = virgoBandanaSizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: virgoBandanaProduct.id,
+          slug: virgoBandanaProduct.slug,
+          name: virgoBandanaProduct.name,
+          price: price,
+          size: size,
+          image: virgoBandanaProduct.image,
+          category: virgoBandanaProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            virgoBandanaProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      virgoBandanaSizeSelect.addEventListener('change', updateVirgoBandanaPrice);
+      buyVirgoBandanaBtn.addEventListener('click', addVirgoBandanaToCart);
+      updateVirgoBandanaPrice();
+
+      // Virgo Bandana thumbnail gallery click handlers
+      document.querySelectorAll('.thumbnail-row[data-gallery="virgo-bandana"] img').forEach(thumb => {
+        thumb.addEventListener('click', function() {
+          document.getElementById('virgo-bandana-main-image').src = this.src;
+        });
+      });
 
       // Single by Cosmic Design Mug functionality
       const cosmicMugProduct = {
