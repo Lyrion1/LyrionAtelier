@@ -1,5 +1,5 @@
 /* keep product cards tidy even if images 404 */
-.product-card img { display:block; width:100%; height:auto; }
+.product-card img { display:block; width:100%; height:auto; object-fit: contain !important; padding: 20px; background: #ffffff; box-sizing: border-box; }
 
 /* nuke any legacy stray thumbnail containers */
 .thumb-strip, .thumb, .stray-thumb { display:none !important; }
@@ -10,13 +10,23 @@
   aspect-ratio: 1 / 1;
   height: auto;
   min-height: 0;
+  background: #ffffff !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 .shop-products-section .product-image {
   aspect-ratio: 1 / 1;
   height: auto;
+  background: #ffffff !important;
+  padding: 20px;
 }
 .product-image img {
-  object-fit: cover;
+  object-fit: contain !important;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /* optional: center empty note */
