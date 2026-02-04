@@ -393,6 +393,47 @@
       <button type="button" class="buy-set-btn" id="buy-bundle-btn">Buy Set – Save 15%</button>
     </div>
   </section>
+
+  <!-- Gemini Love Language Hoodie - Valentine's Featured Product -->
+  <section class="valentines-bundle" style="background: rgba(212, 175, 55, 0.08);">
+    <div class="bundle-header">
+      <span class="bundle-badge" style="background: linear-gradient(135deg, #d4af37, #f0c659);">Best Seller</span>
+      <h2>Gemini Love Language Hoodie</h2>
+      <p class="muted">Love Language: 3AM Conversations</p>
+    </div>
+    
+    <div class="bundle-grid" style="grid-template-columns: 1fr;">
+      <div class="bundle-item" data-product="gemini-love-language-hoodie" style="max-width: 500px; margin: 0 auto;">
+        <div class="product-gallery-mini">
+          <img src="/images/products/gemini-love-language-hoodie-1.jpg" alt="Gemini Love Language Hoodie" loading="lazy" class="main-image" id="gemini-main-image">
+          <div class="thumbnail-row" data-gallery="gemini">
+            <img src="/images/products/gemini-love-language-hoodie-1.jpg" alt="Gemini view 1" loading="lazy">
+            <img src="/images/products/gemini-love-language-hoodie-2.jpg" alt="Gemini view 2" loading="lazy">
+            <img src="/images/products/gemini-love-language-hoodie-3.jpg" alt="Gemini view 3" loading="lazy">
+            <img src="/images/products/gemini-love-language-hoodie-4.jpg" alt="Gemini view 4" loading="lazy">
+            <img src="/images/products/gemini-love-language-hoodie-5.jpg" alt="Gemini view 5" loading="lazy">
+            <img src="/images/products/gemini-love-language-hoodie-6.jpg" alt="Gemini view 6" loading="lazy">
+          </div>
+        </div>
+        <h3>Gemini Love Language Hoodie</h3>
+        <p class="product-description">For the Gemini who finds intimacy in intellectual connection. Late-night conversations about everything and nothing. Premium box hoodie for those who speak love through words.</p>
+        <p class="price" id="gemini-price">$83.05</p>
+        <div class="selector-group">
+          <label for="gemini-size">Size</label>
+          <select id="gemini-size">
+            <option value="S" data-price="83.05" data-variant="697bb788231124">S - $83.05</option>
+            <option value="M" data-price="83.05" data-variant="697bb7882311c2" selected>M - $83.05</option>
+            <option value="L" data-price="83.05" data-variant="697bb788231256">L - $83.05</option>
+            <option value="XL" data-price="83.05" data-variant="697bb7882312d9">XL - $83.05</option>
+            <option value="2XL" data-price="85.05" data-variant="697bb788231366">2XL - $85.05</option>
+            <option value="3XL" data-price="87.05" data-variant="697bb7882313d7">3XL - $87.05</option>
+          </select>
+        </div>
+        <button type="button" class="buy-set-btn" id="buy-gemini-btn" style="margin-top: 1rem;">Add to Cart</button>
+        <a href="/shop/gemini-love-language-hoodie.html" style="display: block; text-align: center; margin-top: 0.5rem; color: var(--gold-primary);">View Full Details</a>
+      </div>
+    </div>
+  </section>
 </main>
 
   <footer class="footer">
@@ -606,6 +647,91 @@
       document.querySelectorAll('.thumbnail-row[data-gallery="hers"] img').forEach(thumb => {
         thumb.addEventListener('click', function() {
           document.getElementById('hers-main-image').src = this.src;
+        });
+      });
+
+      // Gemini Love Language Hoodie functionality
+      const geminiProduct = {
+        id: 'gemini-love-language-hoodie',
+        slug: 'gemini-love-language-hoodie',
+        name: 'Gemini Love Language Hoodie',
+        basePrice: 83.05,
+        category: "Men's / Gemini Collection",
+        collection: 'Gemini Collection',
+        image: '/images/products/gemini-love-language-hoodie-1.jpg',
+        type: 'physical',
+        variants: {
+          'S': { variantId: '697bb788231124', price: 83.05 },
+          'M': { variantId: '697bb7882311c2', price: 83.05 },
+          'L': { variantId: '697bb788231256', price: 83.05 },
+          'XL': { variantId: '697bb7882312d9', price: 83.05 },
+          '2XL': { variantId: '697bb788231366', price: 85.05 },
+          '3XL': { variantId: '697bb7882313d7', price: 87.05 }
+        }
+      };
+
+      const geminiSizeSelect = document.getElementById('gemini-size');
+      const geminiPriceEl = document.getElementById('gemini-price');
+      const buyGeminiBtn = document.getElementById('buy-gemini-btn');
+
+      function updateGeminiPrice() {
+        const selectedOption = geminiSizeSelect.options[geminiSizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || geminiProduct.basePrice;
+        if (geminiPriceEl) geminiPriceEl.textContent = `$${price.toFixed(2)}`;
+      }
+
+      function addGeminiToCart() {
+        const selectedOption = geminiSizeSelect.options[geminiSizeSelect.selectedIndex];
+        const size = geminiSizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: geminiProduct.id,
+          slug: geminiProduct.slug,
+          name: geminiProduct.name,
+          price: price,
+          size: size,
+          image: geminiProduct.image,
+          category: geminiProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            geminiProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      geminiSizeSelect.addEventListener('change', updateGeminiPrice);
+      buyGeminiBtn.addEventListener('click', addGeminiToCart);
+      updateGeminiPrice();
+
+      // Gemini thumbnail gallery click handlers
+      document.querySelectorAll('.thumbnail-row[data-gallery="gemini"] img').forEach(thumb => {
+        thumb.addEventListener('click', function() {
+          document.getElementById('gemini-main-image').src = this.src;
         });
       });
     })();

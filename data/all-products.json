@@ -3026,5 +3026,117 @@
     "isBestseller": true,
     "showOnHomepage": true,
     "bestSellerBadge": "Best Seller"
+  },
+  {
+    "id": "gemini-love-language-hoodie",
+    "slug": "gemini-love-language-hoodie",
+    "link": "/shop/gemini-love-language-hoodie.html",
+    "name": "Gemini Love Language Hoodie",
+    "title": "Gemini Love Language Hoodie",
+    "collection": "Gemini Collection",
+    "category": "men",
+    "zodiac": "gemini",
+    "zodiacSign": "gemini",
+    "element": "air",
+    "gender": "unisex",
+    "meta": {
+      "category": "Men",
+      "collection": "Gemini Collection",
+      "zodiac": "Gemini"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 83.05,
+    "price_range": {
+      "min": 83.05,
+      "max": 87.05,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/gemini-love-language-hoodie-1.jpg",
+      "/images/products/gemini-love-language-hoodie-2.jpg",
+      "/images/products/gemini-love-language-hoodie-3.jpg",
+      "/images/products/gemini-love-language-hoodie-4.jpg",
+      "/images/products/gemini-love-language-hoodie-5.jpg",
+      "/images/products/gemini-love-language-hoodie-6.jpg"
+    ],
+    "mainImage": "/images/products/gemini-love-language-hoodie-1.jpg",
+    "description": "For the Gemini who finds intimacy in intellectual connection. Late-night conversations about everything and nothing. Premium box hoodie for those who speak love through words.",
+    "mysticalCopy": "Love Language: 3AM Conversations",
+    "options": {
+      "size": ["S", "M", "L", "XL", "2XL", "3XL"]
+    },
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "697bb788231124",
+        "price": 83.05,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEM-LOVE-LANG-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "697bb7882311c2",
+        "price": 83.05,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEM-LOVE-LANG-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "697bb788231256",
+        "price": 83.05,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEM-LOVE-LANG-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "697bb7882312d9",
+        "price": 83.05,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEM-LOVE-LANG-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "697bb788231366",
+        "price": 85.05,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEM-LOVE-LANG-2XL"
+      },
+      {
+        "size": "3XL",
+        "printfulVariantId": "697bb7882313d7",
+        "price": 87.05,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEM-LOVE-LANG-3XL"
+      }
+    ],
+    "printfulProduct": "Premium Box Hoodie",
+    "features": [
+      "Premium heavyweight fleece",
+      "Unisex box fit",
+      "Adjustable drawstring hood",
+      "Front kangaroo pocket",
+      "Soft brushed interior",
+      "Gemini constellation design",
+      "Perfect Gemini birthday gift (May 21 - June 20)"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. Your conversations endure.",
+    "tags": ["gemini", "air-sign", "zodiac", "hoodie", "men", "gifts", "mutable", "mercury-ruled", "love-language"],
+    "chartResonance": ["gemini-sun", "gemini-moon", "gemini-rising", "mercury-dominant", "3rd-house-emphasis", "air-dominant"],
+    "seoTitle": "Gemini Love Language Hoodie | 3AM Conversations | Lyrīon Atelier",
+    "seoDescription": "For the Gemini who finds intimacy in intellectual connection. Premium box hoodie for those who speak love through words. Perfect gift for Gemini (May 21 - June 20).",
+    "launchDate": "2025-02-04",
+    "isBestseller": true,
+    "showOnHomepage": true,
+    "bestSellerBadge": "Best Seller"
   }
 ]
