@@ -984,6 +984,20 @@ const products = [
     image: "/images/products/mercury-retrograde-hoodie-1.jpg",
     sizes: ["S","M","L","XL","2XL","3XL","4XL","5XL"],
     printfulVariants: {"S":"697ba455db1785","M":"697ba455db17f3","L":"697ba455db1844","XL":"697ba455db1891","2XL":"697ba455db18d2","3XL":"697ba455db1926","4XL":"697ba455db1975","5XL":"697ba455db19b8"}
+  },
+  {
+    id: 238,
+    name: "Single by Cosmic Design Mug",
+    price: 16.95,
+    category: "mug",
+    zodiac: "all",
+    image: "/images/products/single-cosmic-design-mug-1.jpg",
+    description: "For those choosing themselves. Black glossy mug celebrating solo cosmic energy.",
+    sizes: ["11oz", "15oz"],
+    printfulVariants: {
+      "11oz": "697ba95a591694",
+      "15oz": "697ba95a591743"
+    }
   }
 ];
 
