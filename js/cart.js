@@ -248,33 +248,61 @@ function updateQuantity(productId, size, newQuantity) {
 }
 
 const computeBundleOptions = (cart = []) => {
-  const subtotalCents = cart.reduce((sum, item) => {
-    const price = toNumber(item.price) || 0;
-    const qty = Number.isFinite(item.quantity) ? item.quantity : 1;
-    return sum + Math.round(price * 100) * qty;
-  }, 0);
-  const totalQty = cart.reduce((sum, item) => sum + (Number.isFinite(item.quantity) ? item.quantity : 1), 0);
-  const adultItems = cart.filter((i) => (i.audience || inferAudience(i)) !== 'youth');
-  const adultCents = adultItems.reduce((sum, item) => sum + Math.round((toNumber(item.price) || 0) * 100) * (item.quantity || 1), 0);
-  const adultQty = adultItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
-  const posters = cart.filter((i) => i.poster);
-  const postersCents = posters.reduce((sum, item) => sum + Math.round((toNumber(item.price) || 0) * 100) * (item.quantity || 1), 0);
+  // Single-pass computation to avoid multiple reduce/filter operations
+  let subtotalCents = 0;
+  let totalQty = 0;
+  let adultCents = 0;
+  let adultQty = 0;
+  let postersCents = 0;
+  let cheapestCents = Infinity;
+  
   const adultBySign = new Map();
   const youthBySign = new Map();
+  
   const bump = (map, key, cents, qty) => {
     const current = map.get(key) || { cents: 0, qty: 0 };
     map.set(key, { cents: current.cents + cents, qty: current.qty + qty });
   };
-  cart.forEach((item) => {
-    const cents = Math.round((toNumber(item.price) || 0) * 100) * (item.quantity || 1);
-    const qty = item.quantity || 1;
-    const sign = item.zodiac || inferSign(item);
-    const audience = item.audience || inferAudience(item);
-    if (sign) {
-      if (audience === 'youth') bump(youthBySign, sign, cents, qty);
-      else bump(adultBySign, sign, cents, qty);
+  
+  // Single iteration over cart items
+  for (const item of cart) {
+    const price = toNumber(item.price) || 0;
+    const qty = Number.isFinite(item.quantity) ? item.quantity : 1;
+    const itemCents = Math.round(price * 100);
+    const lineCents = itemCents * qty;
+    
+    subtotalCents += lineCents;
+    totalQty += qty;
+    
+    // Track cheapest unit price for trinity bundle (15% off cheapest item)
+    // Uses unit price not line total to match original behavior
+    if (itemCents > 0 && itemCents < cheapestCents) {
+      cheapestCents = itemCents;
     }
-  });
+    
+    // Determine audience once per item
+    const audience = item.audience || inferAudience(item);
+    const isYouth = audience === 'youth';
+    
+    if (!isYouth) {
+      adultCents += lineCents;
+      adultQty += qty;
+    }
+    
+    if (item.poster) {
+      postersCents += lineCents;
+    }
+    
+    // Track by zodiac sign for family bundles
+    const sign = item.zodiac || inferSign(item);
+    if (sign) {
+      if (isYouth) {
+        bump(youthBySign, sign, lineCents, qty);
+      } else {
+        bump(adultBySign, sign, lineCents, qty);
+      }
+    }
+  }
 
   const bundles = [];
   if (adultQty >= 2 && adultCents > 0) {
@@ -295,14 +323,8 @@ const computeBundleOptions = (cart = []) => {
   if (postersCents > 0 && subtotalCents - postersCents > 0) {
     bundles.push({ id: 'poster', label: BUNDLE_LABELS.poster, savingsCents: Math.round(postersCents * 0.2) });
   }
-  if (totalQty >= 3) {
-    const cheapestCents = cart
-      .map((item) => Math.round((toNumber(item.price) || 0) * 100))
-      .filter((c) => Number.isFinite(c) && c > 0)
-      .sort((a, b) => a - b)[0];
-    if (cheapestCents) {
-      bundles.push({ id: 'trinity', label: BUNDLE_LABELS.trinity, savingsCents: Math.round(cheapestCents * 0.15) });
-    }
+  if (totalQty >= 3 && cheapestCents !== Infinity) {
+    bundles.push({ id: 'trinity', label: BUNDLE_LABELS.trinity, savingsCents: Math.round(cheapestCents * 0.15) });
   }
   return { bundles, subtotalCents };
 };

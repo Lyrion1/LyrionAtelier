@@ -127,23 +127,29 @@ import { formatPrice } from './price-utils.js';
     const map = {};
     const entries = Object.entries(imageMap || {});
     for (const [key, url] of entries) {
-      const sign = ZODIAC_SIGNS.find((z) => key.includes(z) || String(url || '').includes(`/${z}`));
+      const keyLower = key.toLowerCase();
+      const urlStr = String(url || '').toLowerCase();
+      // Check key and url only once
+      const sign = ZODIAC_SIGNS.find((z) => keyLower.includes(z) || urlStr.includes(`/${z}`));
       if (sign && !map[sign]) map[sign] = url;
     }
-    ZODIAC_SIGNS.forEach((sign) => {
-      if (!map[sign] && imageMap[sign]) map[sign] = imageMap[sign];
-      if (!map[sign]) {
-        const candidate =
-          pick(
-            `/assets/catalog/zodiac/${sign}.webp`,
-            `/assets/catalog/zodiac/${sign}.png`,
-            `/assets/catalog/${sign}.webp`,
-            `/assets/catalog/${sign}.png`
-          ) || null;
-        if (candidate) map[sign] = candidate;
+    // Second pass: fill in missing zodiac signs with fallbacks
+    for (const sign of ZODIAC_SIGNS) {
+      if (map[sign]) continue;
+      if (imageMap[sign]) {
+        map[sign] = imageMap[sign];
+        continue;
       }
-      if (!map[sign]) map[sign] = FALLBACK;
-    });
+      // Try multiple file paths for fallback
+      const candidate =
+        pick(
+          `/assets/catalog/zodiac/${sign}.webp`,
+          `/assets/catalog/zodiac/${sign}.png`,
+          `/assets/catalog/${sign}.webp`,
+          `/assets/catalog/${sign}.png`
+        ) || null;
+      map[sign] = candidate || FALLBACK;
+    }
     cachedZodiacMap = map;
     return map;
   };
