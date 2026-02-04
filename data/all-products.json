@@ -4352,5 +4352,124 @@
     "isBestseller": false,
     "showOnHomepage": false,
     "loveLanguageBadge": "Love Language"
+  },
+  {
+    "slug": "leo-love-language-tee",
+    "link": "/shop/leo-love-language-tee.html",
+    "name": "Leo Love Language Tee - Public Adoration",
+    "title": "Leo Love Language Tee - Public Adoration",
+    "collection": "Leo Collection",
+    "category": "tee",
+    "zodiac": "leo",
+    "zodiacSign": "leo",
+    "element": "fire",
+    "gender": "unisex",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Leo Collection",
+      "zodiac": "Leo"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 42.99,
+    "price_range": {
+      "min": 42.99,
+      "max": 44.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/leo-love-language-tee-1.jpg"
+    ],
+    "mainImage": "/images/products/leo-love-language-tee-1.jpg",
+    "description": "Love Language: Public Adoration. The Leo who needs their person to shout it from the rooftops. Hand-holding in crowded rooms. Instagram stories. Being claimed, celebrated, shown off. Premium organic tee that says what Leos need to hear: You're mine and everyone should know it.",
+    "mysticalCopy": "Love Language: Public Adoration. For the Leo who needs to be celebrated.",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ]
+    },
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "697bc1230bd778",
+        "price": 42.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-LEO-LOVE-LANG-TEE-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "697bc1230bd7e5",
+        "price": 42.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-LEO-LOVE-LANG-TEE-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "697bc1230bd839",
+        "price": 42.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-LEO-LOVE-LANG-TEE-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "697bc1230bd873",
+        "price": 42.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-LEO-LOVE-LANG-TEE-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "697bc1230bd8c9",
+        "price": 44.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-LEO-LOVE-LANG-TEE-2XL"
+      }
+    ],
+    "printfulProduct": "Premium Organic Tee",
+    "features": [
+      "Premium organic cotton",
+      "Leo zodiac design",
+      "Soft and breathable",
+      "Unisex fit",
+      "Perfect Leo birthday gift (July 23 - August 22)"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. Your cosmic radiance endures.",
+    "tags": [
+      "leo",
+      "fire-sign",
+      "zodiac",
+      "tee",
+      "unisex",
+      "gift",
+      "curated for gifting",
+      "valentines",
+      "love-language"
+    ],
+    "chartResonance": [
+      "leo-sun",
+      "leo-moon",
+      "leo-rising",
+      "sun-dominant",
+      "5th-house-emphasis",
+      "fire-dominant"
+    ],
+    "seoTitle": "Leo Love Language Tee - Public Adoration | Zodiac Apparel | Lyrīon Atelier",
+    "seoDescription": "Love Language: Public Adoration. Premium organic tee for the Leo who needs their person to shout it from the rooftops. Perfect gift for Leo (July 23 - August 22).",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": false,
+    "loveLanguageBadge": "Love Language"
   }
 ]

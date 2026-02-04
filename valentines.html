@@ -832,6 +832,29 @@
         <button type="button" class="add-to-cart-btn" id="buy-gemini-windbreaker-btn">Add to Cart</button>
         <a href="/shop/gemini-windbreaker.html" class="view-details-link">View Full Details</a>
       </div>
+
+      <!-- Leo Love Language Tee -->
+      <div class="product-card-section" data-product="leo-love-language-tee">
+        <div class="product-gallery-mini">
+          <img src="/images/products/leo-love-language-tee-1.jpg" alt="Leo Love Language Tee - Public Adoration" loading="lazy" class="main-image" id="leo-love-language-main-image">
+        </div>
+        <span class="product-badge" style="display: inline-block; padding: 4px 12px; background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white; font-weight: 700; font-size: 0.75rem; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Love Language</span>
+        <h3>Leo Love Language Tee - Public Adoration</h3>
+        <p class="product-description">Love Language: Public Adoration. The Leo who needs their person to shout it from the rooftops. Hand-holding in crowded rooms. Instagram stories. Being claimed, celebrated, shown off. Premium organic tee that says what Leos need to hear: You're mine and everyone should know it.</p>
+        <p class="price" id="leo-love-language-price">$42.99</p>
+        <div class="selector-group">
+          <label for="leo-love-language-size">Size</label>
+          <select id="leo-love-language-size">
+            <option value="S" data-price="42.99" data-variant="697bc1230bd778">S - $42.99</option>
+            <option value="M" data-price="42.99" data-variant="697bc1230bd7e5" selected>M - $42.99</option>
+            <option value="L" data-price="42.99" data-variant="697bc1230bd839">L - $42.99</option>
+            <option value="XL" data-price="42.99" data-variant="697bc1230bd873">XL - $42.99</option>
+            <option value="2XL" data-price="44.99" data-variant="697bc1230bd8c9">2XL - $44.99</option>
+          </select>
+        </div>
+        <button type="button" class="add-to-cart-btn" id="buy-leo-love-language-btn">Add to Cart</button>
+        <a href="/shop/leo-love-language-tee.html" class="view-details-link">View Full Details</a>
+      </div>
     </div>
   </section>
 </main>
@@ -1298,6 +1321,83 @@
       geminiWindbreakerSizeSelect.addEventListener('change', updateGeminiWindbreakerPrice);
       buyGeminiWindbreakerBtn.addEventListener('click', addGeminiWindbreakerToCart);
       updateGeminiWindbreakerPrice();
+
+      // Leo Love Language Tee functionality
+      const leoLoveLanguageProduct = {
+        id: 'leo-love-language-tee',
+        slug: 'leo-love-language-tee',
+        name: 'Leo Love Language Tee - Public Adoration',
+        basePrice: 42.99,
+        category: "Unisex / Leo Collection",
+        collection: 'Leo Collection',
+        image: '/images/products/leo-love-language-tee-1.jpg',
+        type: 'physical',
+        variants: {
+          'S': { variantId: '697bc1230bd778', price: 42.99 },
+          'M': { variantId: '697bc1230bd7e5', price: 42.99 },
+          'L': { variantId: '697bc1230bd839', price: 42.99 },
+          'XL': { variantId: '697bc1230bd873', price: 42.99 },
+          '2XL': { variantId: '697bc1230bd8c9', price: 44.99 }
+        }
+      };
+
+      const leoLoveLanguageSizeSelect = document.getElementById('leo-love-language-size');
+      const leoLoveLanguagePriceEl = document.getElementById('leo-love-language-price');
+      const buyLeoLoveLanguageBtn = document.getElementById('buy-leo-love-language-btn');
+
+      function updateLeoLoveLanguagePrice() {
+        const selectedOption = leoLoveLanguageSizeSelect.options[leoLoveLanguageSizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || leoLoveLanguageProduct.basePrice;
+        if (leoLoveLanguagePriceEl) leoLoveLanguagePriceEl.textContent = `$${price.toFixed(2)}`;
+      }
+
+      function addLeoLoveLanguageToCart() {
+        const selectedOption = leoLoveLanguageSizeSelect.options[leoLoveLanguageSizeSelect.selectedIndex];
+        const size = leoLoveLanguageSizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: leoLoveLanguageProduct.id,
+          slug: leoLoveLanguageProduct.slug,
+          name: leoLoveLanguageProduct.name,
+          price: price,
+          size: size,
+          image: leoLoveLanguageProduct.image,
+          category: leoLoveLanguageProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            leoLoveLanguageProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      leoLoveLanguageSizeSelect.addEventListener('change', updateLeoLoveLanguagePrice);
+      buyLeoLoveLanguageBtn.addEventListener('click', addLeoLoveLanguageToCart);
+      updateLeoLoveLanguagePrice();
 
       // Single by Cosmic Design Mug functionality
       const cosmicMugProduct = {

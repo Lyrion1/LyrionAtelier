@@ -1073,6 +1073,24 @@ const products = [
       "2XL": "697bba6106f433"
     },
     loveLanguageBadge: "Love Language"
+  },
+  {
+    id: 243,
+    name: "Leo Love Language Tee - Public Adoration",
+    price: 42.99,
+    category: "tee",
+    zodiac: "leo",
+    image: "/images/products/leo-love-language-tee-1.jpg",
+    description: "Love Language: Public Adoration. The Leo who needs their person to shout it from the rooftops. Hand-holding in crowded rooms. Instagram stories. Being claimed, celebrated, shown off. Premium organic tee that says what Leos need to hear: You're mine and everyone should know it.",
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    printfulVariants: {
+      "S": "697bc1230bd778",
+      "M": "697bc1230bd7e5",
+      "L": "697bc1230bd839",
+      "XL": "697bc1230bd873",
+      "2XL": "697bc1230bd8c9"
+    },
+    loveLanguageBadge: "Love Language"
   }
 ];
 
