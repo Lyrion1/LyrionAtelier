@@ -3594,5 +3594,156 @@
     "isBestseller": true,
     "showOnHomepage": true,
     "bestSellerBadge": "Best Seller"
+  },
+  {
+    "id": "mercury-retrograde-hoodie",
+    "slug": "mercury-retrograde-hoodie",
+    "link": "/shop/mercury-retrograde-hoodie.html",
+    "name": "Mercury Retrograde Ruined My Love Life Hoodie",
+    "title": "Mercury Retrograde Ruined My Love Life Hoodie",
+    "collection": "Cosmic Collection",
+    "category": "unisex",
+    "zodiac": "none",
+    "zodiacSign": "none",
+    "element": "cosmic",
+    "gender": "unisex",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Cosmic Collection",
+      "zodiac": "none"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 66.50,
+    "price_range": {
+      "min": 66.50,
+      "max": 72.00,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/mercury-retrograde-hoodie-1.jpg",
+      "/images/products/mercury-retrograde-hoodie-2.jpg",
+      "/images/products/mercury-retrograde-hoodie-3.jpg",
+      "/images/products/mercury-retrograde-hoodie-4.jpg",
+      "/images/products/mercury-retrograde-hoodie-5.jpg",
+      "/images/products/mercury-retrograde-hoodie-6.jpg"
+    ],
+    "mainImage": "/images/products/mercury-retrograde-hoodie-1.jpg",
+    "description": "When Mercury goes retrograde, plans derail and love goes sideways. The Beetle that won't start. The flowers that arrived too late. This hoodie captures every missed connection, every 'we need to talk' text that never sent, every relationship that ended because the cosmos said so. For those who've survived Mercury's chaos and lived to laugh about it. Military green. Unisex fit. Cosmic humor meets streetwear.",
+    "mysticalCopy": "Survived Mercury Retrograde (barely).",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL",
+        "4XL",
+        "5XL"
+      ]
+    },
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "697ba455db1785",
+        "price": 66.50,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-MERC-RETRO-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "697ba455db17f3",
+        "price": 66.50,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-MERC-RETRO-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "697ba455db1844",
+        "price": 66.50,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-MERC-RETRO-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "697ba455db1891",
+        "price": 66.50,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-MERC-RETRO-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "697ba455db18d2",
+        "price": 67.50,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-MERC-RETRO-2XL"
+      },
+      {
+        "size": "3XL",
+        "printfulVariantId": "697ba455db1926",
+        "price": 69.50,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-MERC-RETRO-3XL"
+      },
+      {
+        "size": "4XL",
+        "printfulVariantId": "697ba455db1975",
+        "price": 69.50,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-MERC-RETRO-4XL"
+      },
+      {
+        "size": "5XL",
+        "printfulVariantId": "697ba455db19b8",
+        "price": 72.00,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-MERC-RETRO-5XL"
+      }
+    ],
+    "printfulProduct": "Unisex Hoodie",
+    "features": [
+      "Premium heavyweight fleece",
+      "Unisex fit",
+      "Adjustable drawstring hood",
+      "Front kangaroo pocket",
+      "Soft brushed interior",
+      "Military green color",
+      "Cosmic humor meets streetwear"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. May cause spontaneous laughter during retrograde.",
+    "tags": [
+      "hoodie",
+      "unisex",
+      "gift",
+      "cosmic",
+      "mercury-retrograde",
+      "humor",
+      "streetwear"
+    ],
+    "chartResonance": [
+      "mercury-dominant",
+      "gemini-placements",
+      "virgo-placements",
+      "3rd-house-emphasis",
+      "6th-house-emphasis"
+    ],
+    "seoTitle": "Mercury Retrograde Ruined My Love Life Hoodie | Lyrīon Atelier",
+    "seoDescription": "When Mercury goes retrograde, plans derail and love goes sideways. Military green hoodie for those who've survived Mercury's chaos and lived to laugh about it.",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": true,
+    "trendingBadge": "Trending"
   }
 ]
