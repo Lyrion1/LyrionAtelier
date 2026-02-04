@@ -476,6 +476,35 @@
       </div>
     </div>
   </section>
+
+  <!-- Single by Cosmic Design Mug - Anti-Valentine's Featured Product -->
+  <section class="valentines-bundle" style="background: rgba(107, 76, 255, 0.08);">
+    <div class="bundle-header">
+      <span class="bundle-badge" style="background: linear-gradient(135deg, #6b4cff, #9b59b6);">Anti-Valentine's</span>
+      <h2>Single by Cosmic Design Mug</h2>
+      <p class="muted">For those choosing themselves. Solo cosmic energy.</p>
+    </div>
+    
+    <div class="bundle-grid" style="grid-template-columns: 1fr;">
+      <div class="bundle-item" data-product="single-cosmic-design-mug" style="max-width: 500px; margin: 0 auto;">
+        <div class="product-gallery-mini">
+          <img src="/images/products/single-cosmic-design-mug-1.jpg" alt="Single by Cosmic Design Mug" loading="lazy" class="main-image" id="cosmic-mug-main-image">
+        </div>
+        <h3>Single by Cosmic Design Mug</h3>
+        <p class="product-description">For those choosing themselves. Black glossy mug celebrating solo cosmic energy.</p>
+        <p class="price" id="cosmic-mug-price">$16.95</p>
+        <div class="selector-group">
+          <label for="cosmic-mug-size">Size</label>
+          <select id="cosmic-mug-size">
+            <option value="11oz" data-price="16.95" data-variant="697ba95a591694" selected>11oz - $16.95</option>
+            <option value="15oz" data-price="16.95" data-variant="697ba95a591743">15oz - $16.95</option>
+          </select>
+        </div>
+        <button type="button" class="buy-set-btn" id="buy-cosmic-mug-btn" style="margin-top: 1rem;">Add to Cart</button>
+        <a href="/shop/single-cosmic-design-mug.html" style="display: block; text-align: center; margin-top: 0.5rem; color: var(--gold-primary);">View Full Details</a>
+      </div>
+    </div>
+  </section>
 </main>
 
   <footer class="footer">
@@ -863,6 +892,80 @@
           document.getElementById('aries-main-image').src = this.src;
         });
       });
+
+      // Single by Cosmic Design Mug functionality
+      const cosmicMugProduct = {
+        id: 'single-cosmic-design-mug',
+        slug: 'single-cosmic-design-mug',
+        name: 'Single by Cosmic Design Mug',
+        basePrice: 16.95,
+        category: "Accessories / Cosmic Collection",
+        collection: 'Cosmic Collection',
+        image: '/images/products/single-cosmic-design-mug-1.jpg',
+        type: 'physical',
+        variants: {
+          '11oz': { variantId: '697ba95a591694', price: 16.95 },
+          '15oz': { variantId: '697ba95a591743', price: 16.95 }
+        }
+      };
+
+      const cosmicMugSizeSelect = document.getElementById('cosmic-mug-size');
+      const cosmicMugPriceEl = document.getElementById('cosmic-mug-price');
+      const buyCosmicMugBtn = document.getElementById('buy-cosmic-mug-btn');
+
+      function updateCosmicMugPrice() {
+        const selectedOption = cosmicMugSizeSelect.options[cosmicMugSizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || cosmicMugProduct.basePrice;
+        if (cosmicMugPriceEl) cosmicMugPriceEl.textContent = `$${price.toFixed(2)}`;
+      }
+
+      function addCosmicMugToCart() {
+        const selectedOption = cosmicMugSizeSelect.options[cosmicMugSizeSelect.selectedIndex];
+        const size = cosmicMugSizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: cosmicMugProduct.id,
+          slug: cosmicMugProduct.slug,
+          name: cosmicMugProduct.name,
+          price: price,
+          size: size,
+          image: cosmicMugProduct.image,
+          category: cosmicMugProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            cosmicMugProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      cosmicMugSizeSelect.addEventListener('change', updateCosmicMugPrice);
+      buyCosmicMugBtn.addEventListener('click', addCosmicMugToCart);
+      updateCosmicMugPrice();
     })();
   </script>
 </body>

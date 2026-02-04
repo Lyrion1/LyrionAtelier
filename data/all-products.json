@@ -3745,5 +3745,93 @@
     "isBestseller": false,
     "showOnHomepage": true,
     "trendingBadge": "Trending"
+  },
+  {
+    "id": 238,
+    "slug": "single-cosmic-design-mug",
+    "link": "/shop/single-cosmic-design-mug.html",
+    "name": "Single by Cosmic Design Mug",
+    "title": "Single by Cosmic Design Mug",
+    "collection": "Cosmic Collection",
+    "category": "mug",
+    "zodiac": "all",
+    "zodiacSign": "all",
+    "element": "all",
+    "gender": "unisex",
+    "meta": {
+      "category": "Accessories",
+      "collection": "Cosmic Collection",
+      "zodiac": "all"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 16.95,
+    "price_range": {
+      "min": 16.95,
+      "max": 16.95,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/single-cosmic-design-mug-1.jpg"
+    ],
+    "mainImage": "/images/products/single-cosmic-design-mug-1.jpg",
+    "description": "For those choosing themselves. Black glossy mug celebrating solo cosmic energy.",
+    "mysticalCopy": "Embrace your cosmic independence.",
+    "options": {
+      "size": [
+        "11oz",
+        "15oz"
+      ]
+    },
+    "variants": [
+      {
+        "size": "11oz",
+        "printfulVariantId": "697ba95a591694",
+        "price": 16.95,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-COSMIC-MUG-11OZ"
+      },
+      {
+        "size": "15oz",
+        "printfulVariantId": "697ba95a591743",
+        "price": 16.95,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-COSMIC-MUG-15OZ"
+      }
+    ],
+    "printfulProduct": "Black Glossy Mug",
+    "features": [
+      "Black glossy finish",
+      "Available in 11oz and 15oz sizes",
+      "Dishwasher and microwave safe",
+      "Premium ceramic construction",
+      "Celebrates solo cosmic energy"
+    ],
+    "careInstructions": "Dishwasher safe. Hand wash recommended for longevity.",
+    "tags": [
+      "mug",
+      "unisex",
+      "gift",
+      "curated for gifting",
+      "valentines",
+      "cosmic",
+      "accessories",
+      "anti-valentines"
+    ],
+    "chartResonance": [
+      "all-signs",
+      "independence-themed"
+    ],
+    "seoTitle": "Single by Cosmic Design Mug | Anti-Valentine's | Lyrīon Atelier",
+    "seoDescription": "For those choosing themselves. Black glossy mug celebrating solo cosmic energy. Perfect anti-Valentine's gift.",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": true,
+    "newArrivalBadge": "Anti-Valentine's"
   }
 ]
