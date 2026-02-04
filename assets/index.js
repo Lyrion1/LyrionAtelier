@@ -50,26 +50,38 @@ function renderFeaturedProducts() {
     return 0;
   };
   const pickFeatured = (pool) => {
-    const withSlugs = pool.reduce((list, product) => {
+    // Specific Valentine's Day homepage products in exact order
+    const valentinesSlugs = [
+      'heartbeat-hoodie-his',
+      'heartbeat-hoodie-hers',
+      'mercury-retrograde-hoodie',
+      'gemini-love-language-hoodie',
+      'single-cosmic-design-mug',
+      'virgo-round-mousepad'
+    ];
+    
+    const selections = [];
+    const slugMap = new Map();
+    
+    // Build a map of slug -> product for quick lookup
+    for (const product of pool) {
       const slug = productSlug(product);
-      if (slug) list.push({ product, slug });
-      return list;
-    }, []);
-    const selections = withSlugs.slice(0, 4);
-    if (selections.length < 4) {
-      const seen = new Set(selections.map((item) => item.slug));
-      const needed = 4 - selections.length;
-      const extras = [];
-      for (const product of catalog) {
-        if (extras.length >= needed) break;
-        const slug = productSlug(product);
-        if (slug && !seen.has(slug)) {
-          extras.push({ product, slug });
-        }
-      }
-      selections.push(...extras);
+      if (slug) slugMap.set(slug, product);
     }
-    return selections.map((item) => item.product);
+    
+    // Also check the full catalog for products not in the filtered pool
+    for (const product of catalog) {
+      const slug = productSlug(product);
+      if (slug && !slugMap.has(slug)) slugMap.set(slug, product);
+    }
+    
+    // Pick products in the exact order specified
+    for (const slug of valentinesSlugs) {
+      const product = slugMap.get(slug);
+      if (product) selections.push(product);
+    }
+    
+    return selections;
   };
   const featured = pickFeatured(primary);
   const grid = document.getElementById('featured-grid');
