@@ -1,0 +1,450 @@
+/* Spinning Wheel Popup Styles - Lyrīon Atelier */
+
+/* Overlay */
+.spin-wheel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.spin-wheel-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* Popup Container */
+.spin-wheel-popup {
+  position: relative;
+  background: linear-gradient(145deg, #0f0c29 0%, #24243e 50%, #302b63 100%);
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+              0 0 40px rgba(212, 175, 55, 0.2);
+  animation: popup-entrance 0.4s ease-out;
+}
+
+@keyframes popup-entrance {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Close Button */
+.spin-wheel-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.spin-wheel-close:hover {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: #d4af37;
+}
+
+/* Logo */
+.spin-wheel-logo {
+  text-align: center;
+  margin-bottom: 15px;
+  max-height: 50px;
+  overflow: hidden;
+}
+
+.spin-wheel-logo img {
+  height: 40px;
+  max-height: 40px;
+  max-width: 150px;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* Header */
+.spin-wheel-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.spin-wheel-header h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
+  color: #d4af37;
+  margin: 0 0 8px 0;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.spin-wheel-header p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Wheel Container */
+.spin-wheel-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin: 0 auto 25px;
+}
+
+/* Wheel Pointer */
+.spin-wheel-pointer {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid #d4af37;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Wheel Canvas */
+.spin-wheel-canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3),
+              inset 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Spin Button */
+.spin-wheel-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #d4af37, #b8941f);
+  border: 3px solid #f0c659;
+  color: #0f0c29;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  line-height: 1.2;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  z-index: 10;
+  padding: 8px;
+}
+
+.spin-wheel-btn:hover:not(:disabled) {
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+}
+
+.spin-wheel-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.spin-wheel-btn.spinning {
+  animation: button-pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes button-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(0.95); }
+}
+
+/* Prize Display */
+.spin-wheel-prize {
+  display: none;
+  text-align: center;
+  padding: 20px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.spin-wheel-prize.active {
+  display: block;
+  animation: prize-reveal 0.5s ease-out;
+}
+
+@keyframes prize-reveal {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.spin-wheel-prize h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  color: #d4af37;
+  margin: 0 0 10px 0;
+}
+
+.spin-wheel-prize .prize-emoji {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.spin-wheel-prize .prize-details {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+/* Discount Code Display */
+.spin-wheel-code {
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px dashed rgba(212, 175, 55, 0.5);
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.spin-wheel-code-text {
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #f0c659;
+  letter-spacing: 2px;
+}
+
+.spin-wheel-copy-btn {
+  background: rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #d4af37;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.spin-wheel-copy-btn:hover {
+  background: rgba(212, 175, 55, 0.3);
+}
+
+.spin-wheel-copy-btn.copied {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.4);
+  color: #22c55e;
+}
+
+/* Claim Button */
+.spin-wheel-claim-btn {
+  width: 100%;
+  padding: 14px 24px;
+  background: linear-gradient(145deg, #d4af37, #b8941f);
+  border: none;
+  border-radius: 10px;
+  color: #0f0c29;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.spin-wheel-claim-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+/* Expiry Text */
+.spin-wheel-expiry {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+/* Share Section */
+.spin-wheel-share {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.spin-wheel-share p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.spin-wheel-share strong {
+  color: #d4af37;
+}
+
+/* Better Luck Meme */
+.spin-wheel-meme {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.spin-wheel-meme img {
+  max-width: 200px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.spin-wheel-meme p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Free Reading Link */
+.spin-wheel-reading-link {
+  display: inline-block;
+  color: #d4af37;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.spin-wheel-reading-link:hover {
+  color: #f0c659;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .spin-wheel-popup {
+    padding: 20px;
+    max-width: 95%;
+    width: 90%;
+  }
+
+  .spin-wheel-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .spin-wheel-container {
+    width: 240px;
+    height: 240px;
+  }
+
+  .spin-wheel-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 0.55rem;
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  .spin-wheel-prize h3 {
+    font-size: 1.2rem;
+  }
+
+  .spin-wheel-code-text {
+    font-size: 1rem;
+  }
+
+  .spin-wheel-claim-btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    min-height: 48px;
+  }
+
+  .spin-wheel-close {
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 400px) {
+  .spin-wheel-popup {
+    padding: 15px;
+  }
+
+  .spin-wheel-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .spin-wheel-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 0.5rem;
+  }
+
+  .spin-wheel-header h2 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Stars Animation Background */
+.spin-wheel-popup::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 30% 50%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1.5px 1.5px at 50% 10%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1.2px 1.2px at 90% 30%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 20% 80%, rgba(255,255,255,0.35), transparent),
+    radial-gradient(1px 1px at 60% 90%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1.3px 1.3px at 80% 70%, rgba(255,255,255,0.4), transparent);
+  background-size: 100px 100px, 150px 150px, 200px 200px, 120px 120px, 180px 180px, 140px 140px, 160px 160px, 130px 130px;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: -1;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
