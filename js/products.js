@@ -333,7 +333,7 @@ const products = [
       "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-guy-side.jpg",
       "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-guy-back.jpg"
     ],
-    description: "The mystic ocean. Pisces swim between worlds—one foot in reality, the other in dreams too vast for words. Born under Neptune's ethereal reign, they are the poets, the healers, the souls who feel everything the universe whispers. This organic raglan crewneck channels limitless empathy through sacred fish symbolism, wrapping sensitive spirits in cosmic comfort that honors their gift: to dissolve boundaries and unite all that exists.",
+    description: "The cosmic ocean. Pisces swim between worlds—one foot in reality, the other in dreams too vast for words. Born under Neptune's ethereal reign, they are the poets, the healers, the souls who feel everything the universe whispers. This organic raglan crewneck channels limitless empathy through sacred fish symbolism, wrapping sensitive spirits in cosmic comfort that honors their gift: to dissolve boundaries and unite all that exists.",
     sizes: ["XS", "S", "M", "L", "XL", "2XL"],
     isBestseller: true,
     showOnHomepage: false,
@@ -399,12 +399,12 @@ const products = [
   },
   {
     id: 5,
-    name: "Mystic Hoodie - Scorpio",
+    name: "Cosmic Hoodie - Scorpio",
     price: 59.99,
     category: "hoodie",
     zodiac: "scorpio",
     image: null,
-    description: "Bold Scorpio design with mystical elements and powerful scorpion constellation. For the intense, passionate, and transformative soul.",
+    description: "Bold Scorpio design with cosmic elements and powerful scorpion constellation. For the intense, passionate, and transformative soul.",
     sizes: ["S", "M", "L", "XL", "XXL"]
   },
   {
@@ -586,7 +586,7 @@ const products = [
       "Classic fisherman beanie silhouette",
       "Snug, comfortable fit for all-day wear",
       "Unisex design—equally powerful on everyone",
-      "Durable enough for actual winters, styled for urban mysticism",
+      "Durable enough for actual winters, styled for urban cosmic vibes",
       "Pairs with everything, anchors any outfit"
     ],
     careInstructions: "Hand wash cold, lay flat to dry. Like you, built to endure.",
@@ -638,7 +638,7 @@ const products = [
       "/pisces-intuition-hoodie/pisces-intuition-hoodie-ghost.jpg",
       "/pisces-intuition-hoodie/pisces-intuition-hoodie-lifestyle.jpg"
     ],
-    description: "Trust what you feel before you think. Pisces doesn't navigate by maps—they swim by currents only their soul can sense. Born under Neptune's mystical depths, they know the truth before it speaks, feel the shift before it happens, see the invisible threads connecting all things. This heavyweight hoodie channels Piscean knowing through sacred fish symbolism and the single most powerful word for water signs: INTUITION. Wear this when the world demands logic but your gut whispers louder.",
+    description: "Trust what you feel before you think. Pisces doesn't navigate by maps—they swim by currents only their soul can sense. Born under Neptune's cosmic depths, they know the truth before it speaks, feel the shift before it happens, see the invisible threads connecting all things. This heavyweight hoodie channels Piscean knowing through sacred fish symbolism and the single most powerful word for water signs: INTUITION. Wear this when the world demands logic but your gut whispers louder.",
     variants: [
       { size: "S", printfulVariantId: "694d5eae116cb7", price: 55.99, sku: "LYR-PISC-INTUIT-S" },
       { size: "M", printfulVariantId: "694d5eae116d62", price: 55.99, sku: "LYR-PISC-INTUIT-M" },
@@ -1361,7 +1361,7 @@ const products = [
     category: "mystery",
     zodiac: "all",
     image: "/images/products/mystery-box-curiosity.png",
-    description: "Value $60-80. Mystery zodiac item curated by the cosmos. Could be apparel, accessories, or cosmic essentials. Your sign influences what you receive. Every box is different. The stars decide your gift.",
+    description: "Value $60-80. Surprise zodiac item curated by the stars. Could be apparel, accessories, or cosmic essentials. Your sign influences what you receive. Every box is different.",
     sizes: ["One Size"],
     printfulVariants: {
       "One Size": "manual-fulfillment"
@@ -1378,7 +1378,7 @@ const products = [
     category: "mystery",
     zodiac: "all",
     image: "/images/products/mystery-box-vault.png",
-    description: "Value $120-150. Premium zodiac mystery. Hoodie, tee, tote, or accessories curated by cosmic energy. What will the universe reveal? Open your vault and discover your destined piece.",
+    description: "Value $120-150. Premium zodiac surprise. Hoodie, tee, tote, or accessories chosen for you. What will you discover? Open your vault and reveal your cosmic gift.",
     sizes: ["One Size"],
     printfulVariants: {
       "One Size": "manual-fulfillment"
@@ -1395,7 +1395,7 @@ const products = [
     category: "mystery",
     zodiac: "all",
     image: "/images/products/mystery-box-lovers.png",
-    description: "Value $200+. His & Hers mystery items cosmically curated for your connection. Two products chosen by the stars, one cosmic bond. Perfect for couples ready to trust the universe.",
+    description: "Value $200+. His & Hers surprise items cosmically curated for your connection. Two products chosen by the stars, one cosmic bond. Perfect for couples.",
     sizes: ["One Size"],
     printfulVariants: {
       "One Size": "manual-fulfillment"
