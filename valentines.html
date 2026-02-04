@@ -1563,7 +1563,7 @@
         const hisPrice = parseFloat(hisOption.dataset.price) || 50.99;
         const hersPrice = parseFloat(hersOption.dataset.price) || 50.99;
         const originalTotal = hisPrice + hersPrice;
-        const bundleTotal = originalTotal * 0.85; // 15% discount
+        const bundleTotal = originalTotal * (1 - BUNDLE_DISCOUNT); // Use consistent 15% discount
         const savings = originalTotal - bundleTotal;
 
         if (poloBundleOriginalEl) poloBundleOriginalEl.textContent = `$${originalTotal.toFixed(2)}`;
@@ -1643,8 +1643,8 @@
         }
 
         // Apply 15% discount to each item
-        const hisBundlePrice = hisPrice * 0.85;
-        const hersBundlePrice = hersPrice * 0.85;
+        const hisBundlePrice = hisPrice * (1 - BUNDLE_DISCOUNT);
+        const hersBundlePrice = hersPrice * (1 - BUNDLE_DISCOUNT);
 
         // Add His polo to cart
         const hisCartPayload = {
