@@ -1091,6 +1091,19 @@ const products = [
       "2XL": "697bc1230bd8c9"
     },
     loveLanguageBadge: "Love Language"
+  },
+  {
+    id: 244,
+    name: "Libra All Over Print Tote Bag",
+    price: 39.99,
+    category: "tote",
+    zodiac: "libra",
+    image: "/images/products/libra-scale-tote-1.jpg",
+    description: "The Libra who carries balance wherever they go. All-over celestial print featuring the scales of justice and cosmic harmony. Everything in its right place—beauty, function, aesthetic equilibrium. Premium tote for the sign that refuses to compromise on either style or substance.",
+    sizes: ["One Size"],
+    printfulVariants: {
+      "One Size": "697c09e3136474"
+    }
   }
 ];
 

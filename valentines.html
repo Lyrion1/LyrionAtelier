@@ -855,6 +855,24 @@
         <button type="button" class="add-to-cart-btn" id="buy-leo-love-language-btn">Add to Cart</button>
         <a href="/shop/leo-love-language-tee.html" class="view-details-link">View Full Details</a>
       </div>
+
+      <!-- Libra Scale Tote Bag -->
+      <div class="product-card-section" data-product="libra-scale-tote">
+        <div class="product-gallery-mini">
+          <img src="/images/products/libra-scale-tote-1.jpg" alt="Libra All Over Print Tote Bag" loading="lazy" class="main-image" id="libra-tote-main-image">
+        </div>
+        <h3>Libra All Over Print Tote Bag</h3>
+        <p class="product-description">The Libra who carries balance wherever they go. All-over celestial print featuring the scales of justice and cosmic harmony. Everything in its right place—beauty, function, aesthetic equilibrium.</p>
+        <p class="price" id="libra-tote-price">$39.99</p>
+        <div class="selector-group">
+          <label for="libra-tote-size">Size</label>
+          <select id="libra-tote-size">
+            <option value="One Size" data-price="39.99" data-variant="697c09e3136474" selected>One Size - $39.99</option>
+          </select>
+        </div>
+        <button type="button" class="add-to-cart-btn" id="buy-libra-tote-btn">Add to Cart</button>
+        <a href="/shop/libra-scale-tote.html" class="view-details-link">View Full Details</a>
+      </div>
     </div>
   </section>
 </main>
@@ -1398,6 +1416,79 @@
       leoLoveLanguageSizeSelect.addEventListener('change', updateLeoLoveLanguagePrice);
       buyLeoLoveLanguageBtn.addEventListener('click', addLeoLoveLanguageToCart);
       updateLeoLoveLanguagePrice();
+
+      // Libra Scale Tote Bag functionality
+      const libraToteProduct = {
+        id: 'libra-scale-tote',
+        slug: 'libra-scale-tote',
+        name: 'Libra All Over Print Tote Bag',
+        basePrice: 39.99,
+        category: "Accessories / Libra Collection",
+        collection: 'Libra Collection',
+        image: '/images/products/libra-scale-tote-1.jpg',
+        type: 'physical',
+        variants: {
+          'One Size': { variantId: '697c09e3136474', price: 39.99 }
+        }
+      };
+
+      const libraToteSizeSelect = document.getElementById('libra-tote-size');
+      const libraTotePriceEl = document.getElementById('libra-tote-price');
+      const buyLibraToteBtn = document.getElementById('buy-libra-tote-btn');
+
+      function updateLibraTotePrice() {
+        const selectedOption = libraToteSizeSelect.options[libraToteSizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || libraToteProduct.basePrice;
+        if (libraTotePriceEl) libraTotePriceEl.textContent = `$${price.toFixed(2)}`;
+      }
+
+      function addLibraToteToCart() {
+        const selectedOption = libraToteSizeSelect.options[libraToteSizeSelect.selectedIndex];
+        const size = libraToteSizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: libraToteProduct.id,
+          slug: libraToteProduct.slug,
+          name: libraToteProduct.name,
+          price: price,
+          size: size,
+          image: libraToteProduct.image,
+          category: libraToteProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            libraToteProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      libraToteSizeSelect.addEventListener('change', updateLibraTotePrice);
+      buyLibraToteBtn.addEventListener('click', addLibraToteToCart);
+      updateLibraTotePrice();
 
       // Single by Cosmic Design Mug functionality
       const cosmicMugProduct = {

@@ -4471,5 +4471,87 @@
     "isBestseller": false,
     "showOnHomepage": false,
     "loveLanguageBadge": "Love Language"
+  },
+  {
+    "id": 244,
+    "slug": "libra-scale-tote",
+    "link": "/shop/libra-scale-tote.html",
+    "name": "Libra All Over Print Tote Bag",
+    "title": "Libra All Over Print Tote Bag",
+    "collection": "Libra Collection",
+    "category": "tote",
+    "zodiac": "libra",
+    "zodiacSign": "libra",
+    "element": "air",
+    "gender": "unisex",
+    "meta": {
+      "category": "Tote",
+      "collection": "Libra Collection",
+      "zodiac": "Libra"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 39.99,
+    "price_range": {
+      "min": 39.99,
+      "max": 39.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/libra-scale-tote-1.jpg"
+    ],
+    "mainImage": "/images/products/libra-scale-tote-1.jpg",
+    "description": "The Libra who carries balance wherever they go. All-over celestial print featuring the scales of justice and cosmic harmony. Everything in its right place—beauty, function, aesthetic equilibrium. Premium tote for the sign that refuses to compromise on either style or substance.",
+    "mysticalCopy": "Balance, beauty, and cosmic harmony in every carry.",
+    "options": {
+      "size": [
+        "One Size"
+      ]
+    },
+    "variants": [
+      {
+        "size": "One Size",
+        "printfulVariantId": "697c09e3136474",
+        "price": 39.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-LIBRA-TOTE-OS"
+      }
+    ],
+    "printfulProduct": "All Over Print Tote Bag",
+    "features": [
+      "All-over celestial print",
+      "Libra scales design",
+      "Premium quality material",
+      "Spacious interior",
+      "Perfect Libra birthday gift (September 23 - October 22)"
+    ],
+    "careInstructions": "Spot clean or hand wash cold. Your cosmic balance endures.",
+    "tags": [
+      "libra",
+      "air-sign",
+      "zodiac",
+      "tote",
+      "unisex",
+      "gift",
+      "curated for gifting",
+      "valentines"
+    ],
+    "chartResonance": [
+      "libra-sun",
+      "libra-moon",
+      "libra-rising",
+      "venus-dominant",
+      "7th-house-emphasis",
+      "air-dominant"
+    ],
+    "seoTitle": "Libra All Over Print Tote Bag | Zodiac Accessories | Lyrīon Atelier",
+    "seoDescription": "Premium all-over print tote bag featuring celestial Libra scales. Perfect gift for Libra (September 23 - October 22).",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": false
   }
 ]
