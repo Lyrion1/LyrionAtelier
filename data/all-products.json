@@ -4553,5 +4553,87 @@
     "launchDate": "2025-02-04",
     "isBestseller": false,
     "showOnHomepage": false
+  },
+  {
+    "id": 245,
+    "slug": "aries-weekender-bag",
+    "link": "/shop/aries-weekender-bag.html",
+    "name": "Aries Oversized Weekender Bag",
+    "title": "Aries Oversized Weekender Bag",
+    "collection": "Aries Collection",
+    "category": "bag",
+    "zodiac": "aries",
+    "zodiacSign": "aries",
+    "element": "fire",
+    "gender": "unisex",
+    "meta": {
+      "category": "Bag",
+      "collection": "Aries Collection",
+      "zodiac": "Aries"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 49.99,
+    "price_range": {
+      "min": 49.99,
+      "max": 49.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/aries-weekender-bag-1.jpg"
+    ],
+    "mainImage": "/images/products/aries-weekender-bag-1.jpg",
+    "description": "The Aries who runs toward adventure, not away from it. Oversized weekender for spontaneous escapes and bold moves. Ram symbol declaring: I go where I want, when I want. Premium bag built for the sign that never asks permission.",
+    "mysticalCopy": "For the Aries who runs toward adventure, not away from it.",
+    "options": {
+      "size": [
+        "One Size"
+      ]
+    },
+    "variants": [
+      {
+        "size": "One Size",
+        "printfulVariantId": "697c0a161b4606",
+        "price": 49.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-WEEKENDER-OS"
+      }
+    ],
+    "printfulProduct": "Oversized Weekender Bag",
+    "features": [
+      "Oversized weekender design",
+      "Ram symbol decoration",
+      "Premium quality material",
+      "Spacious interior for spontaneous escapes",
+      "Perfect Aries birthday gift (March 21 - April 19)"
+    ],
+    "careInstructions": "Spot clean or hand wash cold. Your cosmic armor for adventure endures.",
+    "tags": [
+      "aries",
+      "fire-sign",
+      "zodiac",
+      "bag",
+      "unisex",
+      "gift",
+      "curated for gifting",
+      "valentines"
+    ],
+    "chartResonance": [
+      "aries-sun",
+      "aries-moon",
+      "aries-rising",
+      "mars-dominant",
+      "1st-house-emphasis",
+      "fire-dominant"
+    ],
+    "seoTitle": "Aries Oversized Weekender Bag | Zodiac Accessories | Lyrīon Atelier",
+    "seoDescription": "Premium oversized weekender bag featuring Aries ram symbol. Perfect gift for Aries (March 21 - April 19).",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": false
   }
 ]

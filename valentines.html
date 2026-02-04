@@ -873,6 +873,24 @@
         <button type="button" class="add-to-cart-btn" id="buy-libra-tote-btn">Add to Cart</button>
         <a href="/shop/libra-scale-tote.html" class="view-details-link">View Full Details</a>
       </div>
+
+      <!-- Aries Oversized Weekender Bag -->
+      <div class="product-card-section" data-product="aries-weekender-bag">
+        <div class="product-gallery-mini">
+          <img src="/images/products/aries-weekender-bag-1.jpg" alt="Aries Oversized Weekender Bag" loading="lazy" class="main-image" id="aries-weekender-main-image">
+        </div>
+        <h3>Aries Oversized Weekender Bag</h3>
+        <p class="product-description">The Aries who runs toward adventure, not away from it. Oversized weekender for spontaneous escapes and bold moves. Ram symbol declaring: I go where I want, when I want.</p>
+        <p class="price" id="aries-weekender-price">$49.99</p>
+        <div class="selector-group">
+          <label for="aries-weekender-size">Size</label>
+          <select id="aries-weekender-size">
+            <option value="One Size" data-price="49.99" data-variant="697c0a161b4606" selected>One Size - $49.99</option>
+          </select>
+        </div>
+        <button type="button" class="add-to-cart-btn" id="buy-aries-weekender-btn">Add to Cart</button>
+        <a href="/shop/aries-weekender-bag.html" class="view-details-link">View Full Details</a>
+      </div>
     </div>
   </section>
 </main>
@@ -1489,6 +1507,79 @@
       libraToteSizeSelect.addEventListener('change', updateLibraTotePrice);
       buyLibraToteBtn.addEventListener('click', addLibraToteToCart);
       updateLibraTotePrice();
+
+      // Aries Oversized Weekender Bag functionality
+      const ariesWeekenderProduct = {
+        id: 'aries-weekender-bag',
+        slug: 'aries-weekender-bag',
+        name: 'Aries Oversized Weekender Bag',
+        basePrice: 49.99,
+        category: "Accessories / Aries Collection",
+        collection: 'Aries Collection',
+        image: '/images/products/aries-weekender-bag-1.jpg',
+        type: 'physical',
+        variants: {
+          'One Size': { variantId: '697c0a161b4606', price: 49.99 }
+        }
+      };
+
+      const ariesWeekenderSizeSelect = document.getElementById('aries-weekender-size');
+      const ariesWeekenderPriceEl = document.getElementById('aries-weekender-price');
+      const buyAriesWeekenderBtn = document.getElementById('buy-aries-weekender-btn');
+
+      function updateAriesWeekenderPrice() {
+        const selectedOption = ariesWeekenderSizeSelect.options[ariesWeekenderSizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || ariesWeekenderProduct.basePrice;
+        if (ariesWeekenderPriceEl) ariesWeekenderPriceEl.textContent = `$${price.toFixed(2)}`;
+      }
+
+      function addAriesWeekenderToCart() {
+        const selectedOption = ariesWeekenderSizeSelect.options[ariesWeekenderSizeSelect.selectedIndex];
+        const size = ariesWeekenderSizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: ariesWeekenderProduct.id,
+          slug: ariesWeekenderProduct.slug,
+          name: ariesWeekenderProduct.name,
+          price: price,
+          size: size,
+          image: ariesWeekenderProduct.image,
+          category: ariesWeekenderProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            ariesWeekenderProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      ariesWeekenderSizeSelect.addEventListener('change', updateAriesWeekenderPrice);
+      buyAriesWeekenderBtn.addEventListener('click', addAriesWeekenderToCart);
+      updateAriesWeekenderPrice();
 
       // Single by Cosmic Design Mug functionality
       const cosmicMugProduct = {
