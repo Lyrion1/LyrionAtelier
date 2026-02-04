@@ -600,10 +600,14 @@
       background: linear-gradient(145deg, rgba(139, 69, 109, 0.2), rgba(75, 0, 130, 0.15));
       border: 2px solid rgba(212, 175, 55, 0.3);
       border-radius: 16px;
-      padding: 24px;
+      padding: 20px;
       position: relative;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 520px;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
     }
     
     .mystery-card::before {
@@ -645,13 +649,15 @@
       justify-content: center;
       padding: 20px;
       box-sizing: border-box;
+      height: 300px;
+      flex-shrink: 0;
     }
     
     .mystery-card .main-image {
       width: auto;
       max-width: 100%;
       height: auto;
-      max-height: 250px;
+      max-height: 280px;
       object-fit: contain;
       display: block;
       margin: 0 auto;
@@ -669,6 +675,8 @@
       font-size: 0.9rem;
       line-height: 1.6;
       margin-bottom: 16px;
+      flex-grow: 1;
+      overflow: hidden;
     }
     
     .mystery-card .price {
@@ -710,7 +718,7 @@
         grid-template-columns: repeat(2, 1fr);
       }
       .mystery-card .main-image {
-        height: 280px;
+        max-height: 280px;
       }
     }
     
@@ -758,6 +766,10 @@
       border-radius: 16px;
       padding: 20px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 520px;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
     }
     
     .product-card:hover {
@@ -775,6 +787,8 @@
       justify-content: center;
       padding: 20px;
       box-sizing: border-box;
+      height: 300px;
+      flex-shrink: 0;
     }
     
     .product-card .main-image {
@@ -831,6 +845,8 @@
       font-size: 0.9rem;
       line-height: 1.5;
       margin-bottom: 15px;
+      flex-grow: 1;
+      overflow: hidden;
     }
     
     .product-card .price {
@@ -901,7 +917,7 @@
         grid-template-columns: repeat(2, 1fr);
       }
       .product-card .main-image {
-        max-height: 250px;
+        max-height: 280px;
       }
     }
     
@@ -1393,7 +1409,7 @@
       <div class="mystery-card" data-product="cosmic-curiosity-box">
         <span class="mystery-badge">✨ Mystery</span>
         <div class="product-image-wrapper">
-          <img src="/images/products/mystery-box-curiosity.jpg" alt="Cosmic Curiosity Box" loading="lazy" class="main-image">
+          <img src="/images/products/mystery-box-curiosity.png" alt="Cosmic Curiosity Box" loading="lazy" class="main-image">
         </div>
         <h3>Cosmic Curiosity Box</h3>
         <p class="product-description">Value $60-80. Surprise zodiac item curated by the stars. Could be apparel, accessories, or cosmic essentials. Your sign influences what you receive. Every box is different.</p>
@@ -1405,7 +1421,7 @@
       <div class="mystery-card" data-product="zodiac-mystery-vault">
         <span class="mystery-badge">🔮 Limited Edition</span>
         <div class="product-image-wrapper">
-          <img src="/images/products/mystery-box-vault.jpg" alt="Zodiac Mystery Vault" loading="lazy" class="main-image">
+          <img src="/images/products/mystery-box-vault.png" alt="Zodiac Mystery Vault" loading="lazy" class="main-image">
         </div>
         <h3>Zodiac Mystery Vault</h3>
         <p class="product-description">Value $120-150. Premium zodiac surprise. Hoodie, tee, tote, or accessories chosen for you. What will you discover? Open your vault and reveal your cosmic gift.</p>
@@ -1417,7 +1433,7 @@
       <div class="mystery-card" data-product="lovers-fate-box">
         <span class="mystery-badge">💕 Limited Edition</span>
         <div class="product-image-wrapper">
-          <img src="/images/products/mystery-box-lovers.jpg" alt="Lovers' Fate Box" loading="lazy" class="main-image">
+          <img src="/images/products/mystery-box-lovers.png" alt="Lovers' Fate Box" loading="lazy" class="main-image">
         </div>
         <h3>Lovers' Fate Box</h3>
         <p class="product-description">Value $200+. His & Hers surprise items cosmically curated for your connection. Two products chosen by the stars, one cosmic bond. Perfect for couples.</p>
