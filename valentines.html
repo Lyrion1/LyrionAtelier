@@ -614,20 +614,22 @@
       gap: 24px;
     }
     
-    /* MYSTERY CARD - 480px fixed height matching product cards */
+    /* MYSTERY CARD - auto height to ensure buttons visible */
     .mystery-card {
       background: #ffffff;
       border-radius: 12px;
       padding: 20px;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      height: 480px;
+      height: auto;
+      min-height: 550px;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       border: none;
+      margin-bottom: 30px;
     }
     
     .mystery-card:hover {
@@ -661,9 +663,9 @@
       justify-content: center;
       padding: 0;
       box-sizing: border-box;
-      height: 320px;
-      min-height: 320px;
-      max-height: 320px;
+      height: 300px;
+      min-height: 300px;
+      max-height: 300px;
       flex-shrink: 0;
     }
     
@@ -672,14 +674,14 @@
       width: auto;
       max-width: 100%;
       height: auto;
-      max-height: 320px;
+      max-height: 300px;
       object-fit: contain;
       object-position: center;
       display: block;
       margin: 0 auto;
     }
     
-    /* INFO SECTION - 140px fixed */
+    /* INFO SECTION - flexible height */
     .mystery-card h3 {
       color: #d4af37;
       font-size: 18px;
@@ -705,14 +707,14 @@
       margin: 0 0 12px 0;
     }
     
-    /* BUTTON - 44px height, gold */
+    /* BUTTON - 48px height, gold, ALWAYS VISIBLE */
     .mystery-card .reveal-btn {
       width: 100%;
-      height: 44px;
-      min-height: 44px;
+      height: 48px;
+      min-height: 48px;
       background: #d4af37;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       color: #0f0c29;
       font-size: 16px;
       font-weight: 600;
@@ -723,6 +725,12 @@
       align-items: center;
       justify-content: center;
       margin-top: auto;
+      margin-bottom: 0;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      flex-shrink: 0;
+      z-index: 10;
     }
     
     .mystery-card .reveal-btn:hover {
@@ -739,20 +747,50 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
       }
+      .mystery-card {
+        min-height: 500px;
+        height: auto;
+      }
     }
     
     /* MOBILE: 1 column */
-    @media (max-width: 767px) {
+    @media (max-width: 768px) {
       .mystery-magic-section {
         padding: 60px 16px;
       }
       .mystery-products-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 20px;
+        padding: 0 16px;
       }
       .mystery-card {
-        max-width: 400px;
-        margin: 0 auto;
+        max-width: 100%;
+        min-height: 480px;
+        height: auto;
+        margin: 0 auto 20px;
+      }
+      .mystery-card .product-image-wrapper {
+        height: 280px;
+        min-height: 280px;
+        max-height: 280px;
+      }
+      .mystery-card .reveal-btn {
+        min-height: 48px;
+        font-size: 16px;
+        padding: 14px 16px;
+      }
+    }
+    
+    /* SMALL MOBILE: 375px and below */
+    @media (max-width: 375px) {
+      .mystery-card {
+        min-height: 460px;
+        padding: 16px;
+      }
+      .mystery-card .product-image-wrapper {
+        height: 260px;
+        min-height: 260px;
+        max-height: 260px;
       }
     }
     
@@ -806,11 +844,15 @@
       border-radius: 12px;
       padding: 20px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      height: 480px;
+      height: auto;
+      min-height: 550px;
+      max-height: none;
+      overflow: visible;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
     }
     
     .product-card:hover {
@@ -828,9 +870,9 @@
       justify-content: center;
       padding: 0;
       box-sizing: border-box;
-      height: 320px;
-      min-height: 320px;
-      max-height: 320px;
+      height: 300px;
+      min-height: 300px;
+      max-height: 300px;
       flex-shrink: 0;
     }
     
@@ -838,7 +880,7 @@
       width: auto;
       max-width: 100%;
       height: auto;
-      max-height: 320px;
+      max-height: 300px;
       object-fit: contain;
       object-position: center;
       display: block;
@@ -893,23 +935,29 @@
       display: none;
     }
     
-    /* BUTTON - EXACT: 44px height, gold bg, navy text */
+    /* BUTTON - 48px height, gold bg, navy text, ALWAYS VISIBLE */
     .product-card .add-to-cart-btn {
       width: 100%;
-      height: 44px;
-      min-height: 44px;
+      height: 48px;
+      min-height: 48px;
       background: #d4af37;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       color: #0f0c29;
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
       margin-top: auto;
+      margin-bottom: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      flex-shrink: 0;
+      z-index: 10;
     }
     
     .product-card .add-to-cart-btn:hover {
@@ -922,7 +970,7 @@
     }
     
     /* TABLET: 2 columns */
-    @media (min-width: 768px) and (max-width: 1199px) {
+    @media (max-width: 1024px) {
       .love-languages-section {
         padding: 80px 40px;
       }
@@ -930,17 +978,47 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
       }
+      .product-card {
+        min-height: 500px;
+        height: auto;
+      }
     }
     
     /* MOBILE: 1 column */
-    @media (max-width: 767px) {
+    @media (max-width: 768px) {
       .products-grid-3col {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 20px;
+        padding: 0 16px;
       }
       .product-card {
-        max-width: 400px;
-        margin: 0 auto;
+        max-width: 100%;
+        min-height: 480px;
+        height: auto;
+        margin: 0 auto 20px;
+      }
+      .product-card .product-image-wrapper {
+        height: 280px;
+        min-height: 280px;
+        max-height: 280px;
+      }
+      .product-card .add-to-cart-btn {
+        min-height: 48px;
+        font-size: 16px;
+        padding: 14px 16px;
+      }
+    }
+    
+    /* SMALL MOBILE: 375px and below */
+    @media (max-width: 375px) {
+      .product-card {
+        min-height: 460px;
+        padding: 16px;
+      }
+      .product-card .product-image-wrapper {
+        height: 260px;
+        min-height: 260px;
+        max-height: 260px;
       }
     }
     
