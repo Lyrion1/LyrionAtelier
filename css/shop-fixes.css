@@ -55,7 +55,7 @@
 
 /* ===========================================
    PRODUCT CARD - COMPREHENSIVE FIX
-   Height: auto with min-height to ensure buttons visible
+   Height: auto - cards size naturally based on content
    Border-radius: 12px
    Background: White
    Padding: 20px all sides
@@ -64,6 +64,7 @@
    =========================================== */
 
 .product-card,
+.product,
 .shop-card,
 [class*="product-card"],
 [class*="product-item"],
@@ -73,7 +74,7 @@
   display: flex !important;
   flex-direction: column !important;
   height: auto !important;
-  min-height: 550px !important;
+  min-height: auto !important;
   max-height: none !important;
   width: 100% !important;
   background: #ffffff !important;
@@ -379,10 +380,10 @@ button[class*="view"],
   }
 
   .product-card,
-  .shop-card,
-  .product {
-    min-height: 500px !important;
+  .product,
+  .shop-card {
     height: auto !important;
+    min-height: auto !important;
     max-height: none !important;
     overflow: visible !important;
   }
@@ -406,10 +407,10 @@ button[class*="view"],
   }
 
   .product-card,
-  .shop-card,
-  .product {
-    min-height: 480px !important;
+  .product,
+  .shop-card {
     height: auto !important;
+    min-height: auto !important;
     max-height: none !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -455,10 +456,11 @@ button[class*="view"],
 
 @media (max-width: 375px) {
   .product-card,
-  .shop-card,
-  .product {
-    min-height: 460px !important;
+  .product,
+  .shop-card {
     height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
     padding: 16px !important;
     overflow: visible !important;
   }
@@ -496,7 +498,7 @@ button[class*="view"],
 body #featured-grid .product-card,
 html body #featured-grid .product-card {
   height: auto !important;
-  min-height: 550px !important;
+  min-height: auto !important;
   max-height: none !important;
   overflow: visible !important;
   display: flex !important;

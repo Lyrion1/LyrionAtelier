@@ -55,7 +55,7 @@
 
 /* ===========================================
    PRODUCT CARD - EXACT SPECIFICATIONS
-   Height: 480px FIXED
+   Height: auto - cards size naturally based on content
    Border-radius: 12px
    Background: White
    Padding: 20px all sides
@@ -63,11 +63,14 @@
    =========================================== */
 
 .product-card,
+.product,
 .shop-card,
 [class*="product-card"] {
   display: flex !important;
   flex-direction: column !important;
-  height: 480px !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
   width: 100% !important;
   background: #ffffff !important;
   border-radius: 12px !important;
@@ -320,8 +323,11 @@
   }
 
   .product-card,
+  .product,
   .shop-card {
-    height: 480px !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
   }
 }
 
@@ -343,8 +349,11 @@
   }
 
   .product-card,
+  .product,
   .shop-card {
-    height: 480px !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
     width: 100% !important;
     max-width: 400px !important;
     margin: 0 auto !important;

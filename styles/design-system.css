@@ -34,14 +34,17 @@
  - Button: 44px height, gold bg, navy text
  ═══════════════════════════════════════════════════════════ */
 
-.product-card {
+.product-card,
+.product {
  background: #ffffff !important;
  border: none !important;
  border-radius: 12px !important;
  overflow: hidden !important;
  display: flex !important;
  flex-direction: column !important;
- height: 480px !important;
+ height: auto !important;
+ min-height: auto !important;
+ max-height: none !important;
  transition: all 0.3s ease !important;
  padding: 20px !important;
  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
@@ -344,13 +347,16 @@ a[style],
 }
 
 /* ═══════════════════════════════════════════════════════════
- RESPONSIVE - ALL BREAKPOINTS MAINTAIN 480px CARD HEIGHT
+ RESPONSIVE - CARDS SIZE NATURALLY BASED ON CONTENT
  ═══════════════════════════════════════════════════════════ */
 
 /* MOBILE (below 768px) */
 @media (max-width: 767px) {
- .product-card {
-   height: 480px !important;
+ .product-card,
+ .product {
+   height: auto !important;
+   min-height: auto !important;
+   max-height: none !important;
    max-width: 400px !important;
    margin: 0 auto !important;
  }
@@ -375,8 +381,11 @@ a[style],
 
 /* TABLET (768px - 1199px) */
 @media (min-width: 768px) and (max-width: 1199px) {
- .product-card {
-   height: 480px !important;
+ .product-card,
+ .product {
+   height: auto !important;
+   min-height: auto !important;
+   max-height: none !important;
  }
  
  .product-card .media,
@@ -399,8 +408,11 @@ a[style],
 
 /* DESKTOP (1200px+) */
 @media (min-width: 1200px) {
- .product-card {
-   height: 480px !important;
+ .product-card,
+ .product {
+   height: auto !important;
+   min-height: auto !important;
+   max-height: none !important;
  }
  
  .product-card .media,
