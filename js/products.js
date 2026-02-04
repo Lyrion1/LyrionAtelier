@@ -1055,6 +1055,24 @@ const products = [
       "4XL": "697bb4f40d67e8",
       "5XL": "697bb4f40d6836"
     }
+  },
+  {
+    id: 242,
+    name: "Gemini Windbreaker - My Love Song is in Gemini",
+    price: 55.99,
+    category: "windbreaker",
+    zodiac: "gemini",
+    image: "/images/products/gemini-windbreaker-1.jpg",
+    description: "For the Gemini who speaks love through words, lyrics, and late-night playlists. Every conversation is a verse. Every text is a chorus. Premium windbreaker for those whose love language lives in Gemini season.",
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    printfulVariants: {
+      "S": "697bba6106f234",
+      "M": "697bba6106f2d5",
+      "L": "697bba6106f355",
+      "XL": "697bba6106f3c6",
+      "2XL": "697bba6106f433"
+    },
+    loveLanguageBadge: "Love Language"
   }
 ];
 

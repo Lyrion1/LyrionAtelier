@@ -809,6 +809,29 @@
         <button type="button" class="add-to-cart-btn" id="buy-aries-btn">Add to Cart</button>
         <a href="/shop/aries-love-language-hoodie.html" class="view-details-link">View Full Details</a>
       </div>
+
+      <!-- Gemini Windbreaker - Love Language -->
+      <div class="product-card-section" data-product="gemini-windbreaker">
+        <div class="product-gallery-mini">
+          <img src="/images/products/gemini-windbreaker-1.jpg" alt="Gemini Windbreaker - My Love Song is in Gemini" loading="lazy" class="main-image" id="gemini-windbreaker-main-image">
+        </div>
+        <span class="product-badge" style="display: inline-block; padding: 4px 12px; background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white; font-weight: 700; font-size: 0.75rem; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Love Language</span>
+        <h3>Gemini Windbreaker - My Love Song is in Gemini</h3>
+        <p class="product-description">For the Gemini who speaks love through words, lyrics, and late-night playlists. Every conversation is a verse. Every text is a chorus. Premium windbreaker for those whose love language lives in Gemini season.</p>
+        <p class="price" id="gemini-windbreaker-price">$55.99</p>
+        <div class="selector-group">
+          <label for="gemini-windbreaker-size">Size</label>
+          <select id="gemini-windbreaker-size">
+            <option value="S" data-price="55.99" data-variant="697bba6106f234">S - $55.99</option>
+            <option value="M" data-price="55.99" data-variant="697bba6106f2d5" selected>M - $55.99</option>
+            <option value="L" data-price="55.99" data-variant="697bba6106f355">L - $55.99</option>
+            <option value="XL" data-price="55.99" data-variant="697bba6106f3c6">XL - $55.99</option>
+            <option value="2XL" data-price="59.99" data-variant="697bba6106f433">2XL - $59.99</option>
+          </select>
+        </div>
+        <button type="button" class="add-to-cart-btn" id="buy-gemini-windbreaker-btn">Add to Cart</button>
+        <a href="/shop/gemini-windbreaker.html" class="view-details-link">View Full Details</a>
+      </div>
     </div>
   </section>
 </main>
@@ -1198,6 +1221,83 @@
           document.getElementById('aries-main-image').src = this.src;
         });
       });
+
+      // Gemini Windbreaker functionality
+      const geminiWindbreakerProduct = {
+        id: 'gemini-windbreaker',
+        slug: 'gemini-windbreaker',
+        name: 'Gemini Windbreaker - My Love Song is in Gemini',
+        basePrice: 55.99,
+        category: "Unisex / Gemini Collection",
+        collection: 'Gemini Collection',
+        image: '/images/products/gemini-windbreaker-1.jpg',
+        type: 'physical',
+        variants: {
+          'S': { variantId: '697bba6106f234', price: 55.99 },
+          'M': { variantId: '697bba6106f2d5', price: 55.99 },
+          'L': { variantId: '697bba6106f355', price: 55.99 },
+          'XL': { variantId: '697bba6106f3c6', price: 55.99 },
+          '2XL': { variantId: '697bba6106f433', price: 59.99 }
+        }
+      };
+
+      const geminiWindbreakerSizeSelect = document.getElementById('gemini-windbreaker-size');
+      const geminiWindbreakerPriceEl = document.getElementById('gemini-windbreaker-price');
+      const buyGeminiWindbreakerBtn = document.getElementById('buy-gemini-windbreaker-btn');
+
+      function updateGeminiWindbreakerPrice() {
+        const selectedOption = geminiWindbreakerSizeSelect.options[geminiWindbreakerSizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || geminiWindbreakerProduct.basePrice;
+        if (geminiWindbreakerPriceEl) geminiWindbreakerPriceEl.textContent = `$${price.toFixed(2)}`;
+      }
+
+      function addGeminiWindbreakerToCart() {
+        const selectedOption = geminiWindbreakerSizeSelect.options[geminiWindbreakerSizeSelect.selectedIndex];
+        const size = geminiWindbreakerSizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: geminiWindbreakerProduct.id,
+          slug: geminiWindbreakerProduct.slug,
+          name: geminiWindbreakerProduct.name,
+          price: price,
+          size: size,
+          image: geminiWindbreakerProduct.image,
+          category: geminiWindbreakerProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            geminiWindbreakerProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      geminiWindbreakerSizeSelect.addEventListener('change', updateGeminiWindbreakerPrice);
+      buyGeminiWindbreakerBtn.addEventListener('click', addGeminiWindbreakerToCart);
+      updateGeminiWindbreakerPrice();
 
       // Single by Cosmic Design Mug functionality
       const cosmicMugProduct = {
