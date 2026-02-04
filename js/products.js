@@ -1130,6 +1130,29 @@ const products = [
     printfulVariants: {
       "One Size": "697c0c6089091f6"
     }
+  },
+  {
+    id: 247,
+    name: "Virgo All-Over Print Bandana",
+    price: 25.99,
+    category: "bandana",
+    zodiac: "virgo",
+    image: "/images/products/virgo-bandana-1.jpg",
+    galleryImages: [
+      "/images/products/virgo-bandana-1.jpg",
+      "/images/products/virgo-bandana-2.jpg",
+      "/images/products/virgo-bandana-3.jpg",
+      "/images/products/virgo-bandana-4.jpg",
+      "/images/products/virgo-bandana-5.jpg",
+      "/images/products/virgo-bandana-6.jpg"
+    ],
+    description: "Practical meets celestial. The Virgo bandana that serves a purpose—hair control, neck protection, pocket square precision. All-over maiden print for the sign that believes accessories should work as hard as they do.",
+    sizes: ["S", "M", "L"],
+    printfulVariants: {
+      "S": "697c1335c39ee7",
+      "M": "697c1335c39f42",
+      "L": "697c1335c39fa3"
+    }
   }
 ];
 
