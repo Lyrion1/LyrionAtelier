@@ -1104,6 +1104,19 @@ const products = [
     printfulVariants: {
       "One Size": "697c09e3136474"
     }
+  },
+  {
+    id: 245,
+    name: "Aries Oversized Weekender Bag",
+    price: 49.99,
+    category: "bag",
+    zodiac: "aries",
+    image: "/images/products/aries-weekender-bag-1.jpg",
+    description: "The Aries who runs toward adventure, not away from it. Oversized weekender for spontaneous escapes and bold moves. Ram symbol declaring: I go where I want, when I want. Premium bag built for the sign that never asks permission.",
+    sizes: ["One Size"],
+    printfulVariants: {
+      "One Size": "697c0a161b4606"
+    }
   }
 ];
 
