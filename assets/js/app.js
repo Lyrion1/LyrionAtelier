@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const featuredImages = document.querySelectorAll('#featured-grid .product-card img');
   featuredImages.forEach((img, index) => {
-    if (index < 4) {
+    if (index < 6) {
       img.setAttribute('loading', 'eager');
     }
   });
