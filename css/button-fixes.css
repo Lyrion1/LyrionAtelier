@@ -1,27 +1,55 @@
 /* ===========================================
-   BUTTON FIXES - OVERRIDE ALL BUTTON STYLES
+   BUTTON FIXES - NUCLEAR OPTION OVERRIDE
    Priority rules with !important for live site
-   Version: 2
+   Version: 3
+   
+   EMERGENCY FIX: This file ensures ALL buttons across
+   the entire website are visible, clickable, and styled
+   correctly with the brand gold color.
    
    Note: !important is intentionally used to override
-   conflicting styles that were causing buttons to appear
-   greyed out and non-clickable on a live revenue site.
+   any conflicting styles that may cause buttons to appear
+   greyed out or non-clickable on a live revenue site.
    =========================================== */
 
-/* OVERRIDE ALL BUTTON STYLES - PRIORITY RULES */
+/* ===========================================
+   SECTION 1: UNIVERSAL BUTTON RESET
+   Targets ALL possible button elements site-wide
+   =========================================== */
 
+/* Primary button selectors - product cards and CTAs */
 .product-card button,
+.product-card .add-to-cart-btn,
+.product-card .view-product-btn,
 .add-to-cart-btn,
 .view-product-btn,
 .cta-button,
+.btn,
+.btn-primary,
+.btn-outline,
+a.button,
+a.btn,
+.button,
 button[class*="add"],
 button[class*="cart"],
 button[class*="buy"],
 button[class*="reveal"],
-a.button,
-.button {
-  background: #FFD700 !important;
-  color: #1a1a2e !important;
+button[class*="submit"],
+.buy-set-btn,
+.reveal-btn,
+.book-reading-btn,
+.modal-primary-btn,
+.oracle-submit,
+.oracle-cta-btn,
+.purchase-button,
+.purchase-reading-button,
+.compatibility-cta-btn,
+.relationship-card-btn,
+.promo-cta-primary,
+.promo-cta-secondary {
+  background: #d4af37 !important;
+  background-color: #d4af37 !important;
+  color: #0f0c29 !important;
   font-size: 16px !important;
   font-weight: 600 !important;
   border: none !important;
@@ -29,73 +57,179 @@ a.button,
   padding: 14px 28px !important;
   min-height: 48px !important;
   cursor: pointer !important;
-  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3) !important;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3) !important;
   transition: all 0.3s ease !important;
   text-align: center !important;
   text-decoration: none !important;
-  display: inline-block !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   pointer-events: auto !important;
   opacity: 1 !important;
+  visibility: visible !important;
+  filter: none !important;
   z-index: 10 !important;
 }
 
 /* Full width only for buttons inside product cards */
 .product-card button,
+.product-card .add-to-cart-btn,
 .add-to-cart-btn {
   width: 100% !important;
 }
 
+/* ===========================================
+   SECTION 2: HOVER STATES
+   =========================================== */
+
 .product-card button:hover,
+.product-card .add-to-cart-btn:hover,
 .add-to-cart-btn:hover,
 .view-product-btn:hover,
 .cta-button:hover,
+.btn:hover,
+.btn-primary:hover,
+.btn-outline:hover,
+a.button:hover,
+a.btn:hover,
+.button:hover,
 button[class*="add"]:hover,
 button[class*="cart"]:hover,
-a.button:hover,
-.button:hover {
-  background: #FFC700 !important;
+button[class*="buy"]:hover,
+.buy-set-btn:hover,
+.reveal-btn:hover,
+.book-reading-btn:hover,
+.purchase-button:hover,
+.purchase-reading-button:hover,
+.compatibility-cta-btn:hover,
+.relationship-card-btn:hover,
+.promo-cta-primary:hover,
+.promo-cta-secondary:hover {
+  background: #e5c245 !important;
+  background-color: #e5c245 !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4) !important;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4) !important;
+  opacity: 1 !important;
 }
+
+/* ===========================================
+   SECTION 3: ACTIVE STATES
+   =========================================== */
 
 .product-card button:active,
 .add-to-cart-btn:active,
 .view-product-btn:active,
 .cta-button:active,
+.btn:active,
 a.button:active,
 .button:active {
-  background: #FFB700 !important;
+  background: #c9a030 !important;
+  background-color: #c9a030 !important;
   transform: translateY(0) !important;
 }
 
-/* ENSURE BUTTONS ARE CLICKABLE */
+/* ===========================================
+   SECTION 4: ENSURE CLICKABILITY
+   Remove any pointer-events blocking
+   =========================================== */
+
 .product-card button,
+.product-card .add-to-cart-btn,
 .add-to-cart-btn,
-.view-product-btn {
+.view-product-btn,
+.cta-button,
+.btn,
+a.button,
+.button,
+button[type="button"],
+button[type="submit"],
+input[type="submit"],
+.buy-set-btn,
+.reveal-btn {
   pointer-events: auto !important;
   user-select: auto !important;
   -webkit-user-select: auto !important;
 }
 
-/* Disabled buttons maintain visual distinction for accessibility */
+/* ===========================================
+   SECTION 5: DISABLED BUTTON STATES
+   Maintain visual distinction for accessibility
+   but keep them visually present
+   =========================================== */
+
 .product-card button:disabled,
+.product-card button[disabled],
 .add-to-cart-btn:disabled,
+.add-to-cart-btn[disabled],
 button[class*="add"]:disabled,
-button[class*="cart"]:disabled {
-  background: #b8a000 !important;
+button[class*="cart"]:disabled,
+button:disabled,
+button[disabled],
+.btn:disabled,
+.button:disabled {
+  background: #b8941f !important;
+  background-color: #b8941f !important;
+  color: #0f0c29 !important;
   cursor: not-allowed !important;
-  opacity: 0.7 !important;
+  opacity: 0.75 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
 }
 
-/* MOBILE OPTIMIZATION */
+/* ===========================================
+   SECTION 6: REMOVE GREY OVERLAYS
+   Kill any pseudo-elements that might overlay buttons
+   =========================================== */
+
+.product-card button::before,
+.product-card button::after,
+.add-to-cart-btn::before,
+.add-to-cart-btn::after,
+.btn::before,
+.btn::after,
+.button::before,
+.button::after {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ===========================================
+   SECTION 7: MOBILE OPTIMIZATION
+   Ensure touch targets are adequate (48px min)
+   =========================================== */
+
 @media (max-width: 768px) {
   .product-card button,
   .add-to-cart-btn,
   .view-product-btn,
   .cta-button,
+  .btn,
+  .button,
   button {
     min-height: 48px !important;
     font-size: 16px !important;
     padding: 14px 20px !important;
   }
+}
+
+/* ===========================================
+   SECTION 8: OUTLINE VARIANT BUTTONS
+   Secondary/outline style buttons
+   =========================================== */
+
+.btn-outline,
+.promo-cta-secondary {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 2px solid #d4af37 !important;
+  color: #d4af37 !important;
+}
+
+.btn-outline:hover,
+.promo-cta-secondary:hover {
+  background: rgba(212, 175, 55, 0.1) !important;
+  background-color: rgba(212, 175, 55, 0.1) !important;
+  border-color: #e5c245 !important;
+  color: #e5c245 !important;
 }
