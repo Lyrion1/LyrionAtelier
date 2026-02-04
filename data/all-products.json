@@ -3948,5 +3948,147 @@
     "isBestseller": false,
     "showOnHomepage": true,
     "newArrivalBadge": "Anti-Valentine's"
+  },
+  {
+    "id": 240,
+    "slug": "premium-polo-his",
+    "link": "/shop/premium-polo-his.html",
+    "name": "Lovers' Galaxies Premium Polo - His",
+    "title": "Lovers' Galaxies Premium Polo - His",
+    "collection": "Couples Collection",
+    "category": "polo",
+    "zodiac": "all",
+    "zodiacSign": "all",
+    "element": "all",
+    "gender": "men",
+    "meta": {
+      "category": "Men",
+      "collection": "Couples Collection",
+      "zodiac": "all"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 50.99,
+    "price_range": {
+      "min": 50.99,
+      "max": 54.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/premium-polo-his-1.jpg"
+    ],
+    "mainImage": "/images/products/premium-polo-his-1.jpg",
+    "description": "When two galaxies collide, stars are born. His side of the cosmic connection. Premium pique polo featuring celestial lovers meeting across the universe. Incomplete without Hers.",
+    "mysticalCopy": "When two galaxies collide, stars are born.",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL",
+        "4XL",
+        "5XL"
+      ]
+    },
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "697bb1ac69d002",
+        "price": 50.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-HIS-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "697bb1ac69d068",
+        "price": 50.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-HIS-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "697bb1ac69d0c2",
+        "price": 50.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-HIS-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "697bb1ac69d105",
+        "price": 50.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-HIS-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "697bb1ac69d142",
+        "price": 51.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-HIS-2XL"
+      },
+      {
+        "size": "3XL",
+        "printfulVariantId": "697bb1ac69d183",
+        "price": 52.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-HIS-3XL"
+      },
+      {
+        "size": "4XL",
+        "printfulVariantId": "697bb1ac69d1d2",
+        "price": 53.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-HIS-4XL"
+      },
+      {
+        "size": "5XL",
+        "printfulVariantId": "697bb1ac69d218",
+        "price": 54.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-POLO-HIS-5XL"
+      }
+    ],
+    "printfulProduct": "Premium Pique Polo",
+    "features": [
+      "Premium pique fabric",
+      "Classic polo collar",
+      "Celestial lovers design",
+      "Part of couples collection",
+      "Pairs with Hers edition"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. Handle with cosmic care.",
+    "tags": [
+      "polo",
+      "men",
+      "gift",
+      "curated for gifting",
+      "valentines",
+      "couples",
+      "better-together"
+    ],
+    "chartResonance": [
+      "all-signs",
+      "couples-themed",
+      "valentines"
+    ],
+    "seoTitle": "Lovers' Galaxies Premium Polo - His | Couples Collection | Lyrīon Atelier",
+    "seoDescription": "When two galaxies collide, stars are born. His side of the cosmic connection. Premium pique polo featuring celestial lovers meeting across the universe.",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": false,
+    "betterTogetherBadge": "Better Together"
   }
 ]

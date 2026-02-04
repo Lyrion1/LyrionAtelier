@@ -1015,6 +1015,26 @@ const products = [
       "XL": "697bac34ec71e6",
       "2XL": "697bac34ec7265"
     }
+  },
+  {
+    id: 240,
+    name: "Lovers' Galaxies Premium Polo - His",
+    price: 50.99,
+    category: "polo",
+    zodiac: "all",
+    image: "/images/products/premium-polo-his-1.jpg",
+    description: "When two galaxies collide, stars are born. His side of the cosmic connection. Premium pique polo featuring celestial lovers meeting across the universe. Incomplete without Hers.",
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"],
+    printfulVariants: {
+      "S": "697bb1ac69d002",
+      "M": "697bb1ac69d068",
+      "L": "697bb1ac69d0c2",
+      "XL": "697bb1ac69d105",
+      "2XL": "697bb1ac69d142",
+      "3XL": "697bb1ac69d183",
+      "4XL": "697bb1ac69d1d2",
+      "5XL": "697bb1ac69d218"
+    }
   }
 ];
 
