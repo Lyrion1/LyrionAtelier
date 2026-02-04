@@ -54,20 +54,27 @@
 }
 
 /* ===========================================
-   PRODUCT CARD - EXACT SPECIFICATIONS
-   Height: 480px FIXED
+   PRODUCT CARD - COMPREHENSIVE FIX
+   Height: auto with min-height to ensure buttons visible
    Border-radius: 12px
    Background: White
    Padding: 20px all sides
    Shadow: 0 2px 8px rgba(0,0,0,0.1)
+   overflow: visible to prevent button cutoff
    =========================================== */
 
 .product-card,
 .shop-card,
-[class*="product-card"] {
+[class*="product-card"],
+[class*="product-item"],
+#featured-grid .product-card,
+#products-grid-local .product-card,
+.product-grid .product-card {
   display: flex !important;
   flex-direction: column !important;
-  height: 480px !important;
+  height: auto !important;
+  min-height: 550px !important;
+  max-height: none !important;
   width: 100% !important;
   background: #ffffff !important;
   border-radius: 12px !important;
@@ -75,19 +82,21 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease !important;
   box-sizing: border-box !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   border: none !important;
+  margin-bottom: 30px !important;
 }
 
 .product-card:hover,
-.shop-card:hover {
+.shop-card:hover,
+#featured-grid .product-card:hover {
   transform: translateY(-5px) !important;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* ===========================================
    IMAGE CONTAINER - EXACT SPECIFICATIONS
-   Height: 320px FIXED
+   Height: 300px FIXED
    Width: 100%
    Margin-bottom: 15px
    Display: flex (centered)
@@ -102,11 +111,13 @@
 .product-card-image-container,
 .card__image,
 .shop-img,
-.product-image-wrapper {
-  height: 320px !important;
+.product-image-wrapper,
+.product-image-container,
+[class*="image-container"] {
+  height: 300px !important;
   width: 100% !important;
-  min-height: 320px !important;
-  max-height: 320px !important;
+  min-height: 300px !important;
+  max-height: 300px !important;
   margin-bottom: 15px !important;
   display: flex !important;
   align-items: center !important;
@@ -122,7 +133,7 @@
 
 /* ===========================================
    PRODUCT IMAGE - EXACT SPECIFICATIONS
-   Max-height: 320px (FILLS container)
+   Max-height: 300px (FILLS container)
    Max-width: 100%
    Width: auto
    Height: auto
@@ -145,7 +156,7 @@
 .product-image-wrapper img,
 #featured-grid .product-image img,
 #products-grid-local .product-card img {
-  max-height: 320px !important;
+  max-height: 300px !important;
   max-width: 100% !important;
   width: auto !important;
   height: auto !important;
@@ -160,7 +171,7 @@
 
 /* Direct img child of product-card */
 .product-card > img {
-  max-height: 320px !important;
+  max-height: 300px !important;
   max-width: 100% !important;
   width: auto !important;
   height: auto !important;
@@ -175,26 +186,44 @@
 }
 
 /* ===========================================
-   PRODUCT INFO SECTION - EXACT SPECIFICATIONS
-   Height: 140px FIXED
+   PRODUCT INFO SECTION - FLEXIBLE HEIGHT
+   Min-height: 180px
    Display: flex
    Flex-direction: column
    Justify-content: space-between
+   Allow buttons to always be visible
    =========================================== */
 
 .product-card .product-card-content,
 .product-card__body,
 .card__body,
-.shop-meta {
-  height: 140px !important;
-  min-height: 140px !important;
-  max-height: 140px !important;
+.shop-meta,
+.product-info,
+.product-details,
+[class*="product-info"],
+#featured-grid .product-card .product-card-content,
+#products-grid-local .product-card .product-card-content {
+  flex-grow: 1 !important;
+  min-height: 180px !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
   flex-shrink: 0 !important;
   padding: 0 !important;
+  margin-top: 15px !important;
+}
+
+/* Product card buttons container - ensure visibility */
+.product-card-buttons,
+.product-card .product-card-buttons,
+#featured-grid .product-card .product-card-buttons,
+#products-grid-local .product-card .product-card-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
   margin-top: auto !important;
+  padding-top: 10px !important;
+  width: 100% !important;
 }
 
 /* ===========================================
@@ -248,46 +277,74 @@
 }
 
 /* ===========================================
-   BUTTON - EXACT SPECIFICATIONS
+   BUTTON - COMPREHENSIVE FIX
    Width: 100%
-   Height: 44px
+   Height: 48px
    Background: Gold (#d4af37)
    Color: Navy (#0f0c29)
-   Border-radius: 6px
+   Border-radius: 8px
    Font-size: 16px
    Font-weight: 600
+   MUST ALWAYS BE VISIBLE
    =========================================== */
 
 .product-card .view-product-btn,
 .product-card .add-to-cart-btn,
+.product-card button,
 .product-card-buttons .view-button,
+.product-card-buttons .add-to-cart-button,
+.product-card-buttons .view-product-button,
 .product-card-buttons .add-to-cart-button,
 .product-card__actions button,
 .product-card__actions a,
 .card__actions button,
-.card__actions a {
+.card__actions a,
+.add-to-cart,
+.view-product,
+button[class*="add"],
+button[class*="cart"],
+button[class*="view"],
+.product button,
+#featured-grid .product-card .add-to-cart-btn,
+#featured-grid .product-card .view-product-button,
+#featured-grid .product-card-buttons button,
+#featured-grid .product-card-buttons a,
+#products-grid-local .product-card button,
+#products-grid-local .product-card a.view-product-button {
   width: 100% !important;
-  height: 44px !important;
-  min-height: 44px !important;
+  min-height: 48px !important;
+  height: 48px !important;
   background: #d4af37 !important;
   color: #0f0c29 !important;
-  border-radius: 6px !important;
+  border: none !important;
+  border-radius: 8px !important;
   font-size: 16px !important;
   font-weight: 600 !important;
-  text-align: center !important;
-  text-decoration: none !important;
+  padding: 14px 20px !important;
+  cursor: pointer !important;
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
+  flex-shrink: 0 !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
   display: flex !important;
+  visibility: visible !important;
+  text-align: center !important;
   align-items: center !important;
   justify-content: center !important;
-  border: none !important;
-  cursor: pointer !important;
+  text-decoration: none !important;
   transition: all 0.3s ease !important;
+  z-index: 10 !important;
 }
 
 .product-card .view-product-btn:hover,
 .product-card .add-to-cart-btn:hover,
+.product-card button:hover,
 .product-card-buttons .view-button:hover,
-.product-card-buttons .add-to-cart-button:hover {
+.product-card-buttons .add-to-cart-button:hover,
+.add-to-cart:hover,
+#featured-grid .product-card button:hover,
+#featured-grid .product-card a:hover {
   background: #e5c245 !important;
   transform: translateY(-2px) !important;
 }
@@ -295,19 +352,21 @@
 /* Product card buttons container */
 .product-card .product-card-buttons,
 .product-card__actions,
-.card__actions {
+.card__actions,
+#featured-grid .product-card .product-card-buttons {
   display: flex !important;
   flex-direction: column !important;
   gap: 8px !important;
   margin-top: auto !important;
+  width: 100% !important;
 }
 
 /* ===========================================
-   TABLET BREAKPOINT (768px - 1199px)
+   TABLET BREAKPOINT (769px - 1024px)
    2 columns, 20px gap
    =========================================== */
 
-@media (min-width: 768px) and (max-width: 1199px) {
+@media (min-width: 769px) and (max-width: 1024px) {
   .product-grid,
   .products-grid,
   #featured-grid,
@@ -320,17 +379,21 @@
   }
 
   .product-card,
-  .shop-card {
-    height: 480px !important;
+  .shop-card,
+  .product {
+    min-height: 500px !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
 }
 
 /* ===========================================
-   MOBILE BREAKPOINT (below 768px)
-   1 column, 16px gap
+   MOBILE BREAKPOINT (768px and below)
+   1 column, 20px gap
    =========================================== */
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .product-grid,
   .products-grid,
   #featured-grid,
@@ -338,16 +401,37 @@
   [class*="product-grid"],
   [data-shop-grid] {
     grid-template-columns: 1fr !important;
-    gap: 16px !important;
-    padding: 20px 16px !important;
+    gap: 20px !important;
+    padding: 0 16px !important;
   }
 
   .product-card,
-  .shop-card {
-    height: 480px !important;
+  .shop-card,
+  .product {
+    min-height: 480px !important;
+    height: auto !important;
+    max-height: none !important;
     width: 100% !important;
-    max-width: 400px !important;
-    margin: 0 auto !important;
+    max-width: 100% !important;
+    margin: 0 auto 20px !important;
+    overflow: visible !important;
+  }
+  
+  .product-image-container,
+  .product-card img,
+  .product-image-wrapper {
+    height: 280px !important;
+    max-height: 280px !important;
+    min-height: 280px !important;
+  }
+  
+  .product-card button,
+  .product-card .add-to-cart-btn,
+  .add-to-cart-btn,
+  button {
+    min-height: 48px !important;
+    font-size: 16px !important;
+    padding: 14px 16px !important;
   }
 
   /* Forms mobile optimization */
@@ -366,6 +450,29 @@
 }
 
 /* ===========================================
+   SMALL MOBILE BREAKPOINT (375px and below)
+   =========================================== */
+
+@media (max-width: 375px) {
+  .product-card,
+  .shop-card,
+  .product {
+    min-height: 460px !important;
+    height: auto !important;
+    padding: 16px !important;
+    overflow: visible !important;
+  }
+  
+  .product-image-container,
+  .product-card img,
+  .product-image-wrapper {
+    height: 260px !important;
+    max-height: 260px !important;
+    min-height: 260px !important;
+  }
+}
+
+/* ===========================================
    HIDE DESCRIPTIONS ON PRODUCT CARDS
    Keep cards clean and focused
    =========================================== */
@@ -375,4 +482,90 @@
 .product-card__description,
 .card__desc {
   display: none !important;
+}
+
+/* ===========================================
+   CRITICAL FIX: OVERRIDE style.css RULES
+   These rules have maximum specificity to ensure
+   product card buttons are ALWAYS visible
+   =========================================== */
+
+/* Override #featured-grid .product-card { height: 100% } from style.css */
+#featured-grid .product-card,
+#featured-grid .product-card.product-card,
+body #featured-grid .product-card,
+html body #featured-grid .product-card {
+  height: auto !important;
+  min-height: 550px !important;
+  max-height: none !important;
+  overflow: visible !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Ensure product-card-content takes remaining space */
+#featured-grid .product-card .product-card-content,
+body #featured-grid .product-card .product-card-content {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  min-height: 180px !important;
+}
+
+/* Ensure buttons are at the bottom and visible */
+#featured-grid .product-card .product-card-buttons,
+body #featured-grid .product-card .product-card-buttons {
+  margin-top: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+/* Style the buttons in featured grid */
+#featured-grid .product-card .product-card-buttons a,
+#featured-grid .product-card .product-card-buttons button,
+#featured-grid .product-card .view-product-button,
+#featured-grid .product-card .add-to-cart-btn,
+body #featured-grid .product-card button,
+body #featured-grid .product-card a.view-product-button {
+  width: 100% !important;
+  min-height: 48px !important;
+  height: 48px !important;
+  background: #d4af37 !important;
+  color: #0f0c29 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  padding: 12px 20px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  flex-shrink: 0 !important;
+}
+
+/* Image container in featured grid */
+#featured-grid .product-card .product-card-image-container,
+#featured-grid .product-card > img,
+body #featured-grid .product-card .product-card-image-container {
+  height: 300px !important;
+  max-height: 300px !important;
+  min-height: 300px !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+}
+
+#featured-grid .product-card img.product-card-image,
+body #featured-grid .product-card img.product-card-image {
+  max-height: 300px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
 }
