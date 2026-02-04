@@ -4943,5 +4943,170 @@
     "launchDate": "2025-02-04",
     "isBestseller": false,
     "showOnHomepage": true
+  },
+  {
+    "id": 249,
+    "slug": "cosmic-curiosity-box",
+    "name": "Cosmic Curiosity Box",
+    "title": "Cosmic Curiosity Box",
+    "price": 45.00,
+    "priceUSD": 45.00,
+    "currency": "USD",
+    "category": "mystery",
+    "zodiac": "all",
+    "element": "all",
+    "gender": "unisex",
+    "collection": "Mystery Collection",
+    "image": "/images/products/mystery-box-curiosity.jpg",
+    "images": [
+      "/images/products/mystery-box-curiosity.jpg"
+    ],
+    "mainImage": "/images/products/mystery-box-curiosity.jpg",
+    "description": "Value $60-80. Mystery zodiac item curated by the cosmos. Could be apparel, accessories, or cosmic essentials. Your sign influences what you receive. Every box is different. The stars decide your gift.",
+    "mysticalCopy": "Trust the stars. Receive your cosmic gift.",
+    "sizes": ["One Size"],
+    "variants": [
+      {
+        "size": "One Size",
+        "printfulVariantId": "manual-fulfillment",
+        "price": 45.00,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-MYSTERY-CURIOSITY-ONE"
+      }
+    ],
+    "printfulProduct": "Mystery Box",
+    "features": [
+      "Value $60-80",
+      "Mystery zodiac item",
+      "Curated by the cosmos",
+      "Your sign influences the gift",
+      "Every box is different",
+      "Perfect surprise gift"
+    ],
+    "careInstructions": "Contents vary. Let the universe surprise you.",
+    "tags": [
+      "mystery",
+      "gift",
+      "limited-edition",
+      "curated for gifting",
+      "zodiac"
+    ],
+    "seoTitle": "Cosmic Curiosity Box - Mystery Zodiac Gift | Lyrīon Atelier",
+    "seoDescription": "Value $60-80. Mystery zodiac item curated by the cosmos. Your sign influences what you receive. Every box is different.",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": true
+  },
+  {
+    "id": 250,
+    "slug": "zodiac-mystery-vault",
+    "name": "Zodiac Mystery Vault",
+    "title": "Zodiac Mystery Vault",
+    "price": 89.00,
+    "priceUSD": 89.00,
+    "currency": "USD",
+    "category": "mystery",
+    "zodiac": "all",
+    "element": "all",
+    "gender": "unisex",
+    "collection": "Mystery Collection",
+    "image": "/images/products/mystery-box-vault.jpg",
+    "images": [
+      "/images/products/mystery-box-vault.jpg"
+    ],
+    "mainImage": "/images/products/mystery-box-vault.jpg",
+    "description": "Value $120-150. Premium zodiac mystery. Hoodie, tee, tote, or accessories curated by cosmic energy. What will the universe reveal? Open your vault and discover your destined piece.",
+    "mysticalCopy": "Open your vault. Discover your destiny.",
+    "sizes": ["One Size"],
+    "variants": [
+      {
+        "size": "One Size",
+        "printfulVariantId": "manual-fulfillment",
+        "price": 89.00,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-MYSTERY-VAULT-ONE"
+      }
+    ],
+    "printfulProduct": "Mystery Box Premium",
+    "features": [
+      "Value $120-150",
+      "Premium zodiac mystery",
+      "Could include hoodie, tee, tote, or accessories",
+      "Curated by cosmic energy",
+      "Discover your destined piece",
+      "Perfect premium gift"
+    ],
+    "careInstructions": "Contents vary. Trust the cosmic selection.",
+    "tags": [
+      "mystery",
+      "gift",
+      "limited-edition",
+      "curated for gifting",
+      "zodiac",
+      "premium"
+    ],
+    "seoTitle": "Zodiac Mystery Vault - Premium Mystery Box | Lyrīon Atelier",
+    "seoDescription": "Value $120-150. Premium zodiac mystery. Hoodie, tee, tote, or accessories curated by cosmic energy.",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": true
+  },
+  {
+    "id": 251,
+    "slug": "lovers-fate-box",
+    "name": "Lovers' Fate Box",
+    "title": "Lovers' Fate Box",
+    "price": 149.00,
+    "priceUSD": 149.00,
+    "currency": "USD",
+    "category": "mystery",
+    "zodiac": "all",
+    "element": "all",
+    "gender": "unisex",
+    "collection": "Mystery Collection",
+    "image": "/images/products/mystery-box-lovers.jpg",
+    "images": [
+      "/images/products/mystery-box-lovers.jpg"
+    ],
+    "mainImage": "/images/products/mystery-box-lovers.jpg",
+    "description": "Value $200+. His & Hers mystery items cosmically curated for your connection. Two products chosen by the stars, one cosmic bond. Perfect for couples ready to trust the universe.",
+    "mysticalCopy": "Two souls. One cosmic bond. Trust the universe.",
+    "sizes": ["One Size"],
+    "variants": [
+      {
+        "size": "One Size",
+        "printfulVariantId": "manual-fulfillment",
+        "price": 149.00,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-MYSTERY-LOVERS-ONE"
+      }
+    ],
+    "printfulProduct": "Mystery Box Couples",
+    "features": [
+      "Value $200+",
+      "His & Hers mystery items",
+      "Cosmically curated for couples",
+      "Two products chosen by the stars",
+      "One cosmic bond",
+      "Perfect Valentine's gift"
+    ],
+    "careInstructions": "Contents vary. A gift for cosmic connections.",
+    "tags": [
+      "mystery",
+      "gift",
+      "limited-edition",
+      "curated for gifting",
+      "zodiac",
+      "valentine",
+      "couples"
+    ],
+    "seoTitle": "Lovers' Fate Box - His & Hers Mystery Gift | Lyrīon Atelier",
+    "seoDescription": "Value $200+. His & Hers mystery items cosmically curated for your connection. Perfect for couples ready to trust the universe.",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": true
   }
 ]
