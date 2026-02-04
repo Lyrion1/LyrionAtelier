@@ -37,7 +37,14 @@
     "description": "Aries Diamond Women's Relaxed Hoodie\n\nBorn to lead. Designed to conquer.\n\nThis isn't just a hoodie, it's your cosmic armor. Premium relaxed-fit design featuring the Aries diamond birthstone in striking pink detail.\n\nLeft sleeve carries your power statement: \"Water is life, I am water\" a reminder that even fire signs flow with unstoppable force.\n\n• Premium heavyweight fleece\n• Relaxed feminine fit\n• Diamond birthstone design\n• Ribbed cuffs and hem\n• Soft brushed interior\n• Inspirational sleeve quote\n\nFor the Aries woman who leads with both strength and grace.\n\nMarch 21 - April 19\n\n$65.50\n\nLimited stock. Your birthright awaits.",
     "mysticalCopy": "For the Aries woman who leads with both strength and grace.",
     "options": {
-      "size": ["XS", "S", "M", "L", "XL", "2XL"]
+      "size": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ]
     },
     "variants": [
       {
@@ -100,14 +107,188 @@
       "Perfect Aries birthday gift (March 21 - April 19)"
     ],
     "careInstructions": "Machine wash cold, tumble dry low. Your cosmic armor endures.",
-    "tags": ["aries", "fire-sign", "zodiac", "hoodie", "women", "cardinal", "mars-ruled", "diamond", "birthstone", "gift"],
-    "chartResonance": ["aries-sun", "aries-moon", "aries-rising", "mars-dominant", "1st-house-emphasis", "fire-dominant"],
+    "tags": [
+      "aries",
+      "fire-sign",
+      "zodiac",
+      "hoodie",
+      "women",
+      "cardinal",
+      "mars-ruled",
+      "diamond",
+      "birthstone",
+      "gift"
+    ],
+    "chartResonance": [
+      "aries-sun",
+      "aries-moon",
+      "aries-rising",
+      "mars-dominant",
+      "1st-house-emphasis",
+      "fire-dominant"
+    ],
     "seoTitle": "Aries Diamond Women's Relaxed Hoodie | Zodiac Outerwear | Lyrīon Atelier",
     "seoDescription": "Premium relaxed-fit hoodie featuring the Aries diamond birthstone in striking pink detail. Perfect gift for Aries (March 21 - April 19).",
     "launchDate": "2025-01-21",
     "isBestseller": false,
     "showOnHomepage": true,
     "newArrivalBadge": "Aries Season - Limited Stock"
+  },
+  {
+    "id": "aries-love-language-hoodie",
+    "slug": "aries-love-language-hoodie",
+    "link": "/shop/aries-love-language-hoodie.html",
+    "name": "Aries Love Language Hoodie",
+    "title": "Aries Love Language Hoodie",
+    "collection": "Aries Collection",
+    "category": "unisex",
+    "zodiac": "aries",
+    "zodiacSign": "aries",
+    "element": "fire",
+    "gender": "unisex",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Aries Collection",
+      "zodiac": "Aries"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 64.07,
+    "price_range": {
+      "min": 64.07,
+      "max": 70.67,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/aries-love-language-hoodie-1.jpg",
+      "/images/products/aries-love-language-hoodie-2.jpg",
+      "/images/products/aries-love-language-hoodie-3.jpg",
+      "/images/products/aries-love-language-hoodie-4.jpg",
+      "/images/products/aries-love-language-hoodie-5.jpg"
+    ],
+    "mainImage": "/images/products/aries-love-language-hoodie-1.jpg",
+    "description": "For the Aries who shows love through bravery. Bold moves. Fearless protection. Standing up when it matters. Premium hoodie for those who lead with courage.",
+    "mysticalCopy": "Love Language: Acts of Courage",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL",
+        "4XL",
+        "5XL"
+      ]
+    },
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "6973fd61a6ab49",
+        "price": 64.07,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-LOVE-LANG-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "6973fd61a6abd4",
+        "price": 64.07,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-LOVE-LANG-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "6973fd61a6ac52",
+        "price": 64.07,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-LOVE-LANG-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "6973fd61a6acc4",
+        "price": 64.07,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-LOVE-LANG-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "6973fd61a6ad32",
+        "price": 65.72,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-LOVE-LANG-2XL"
+      },
+      {
+        "size": "3XL",
+        "printfulVariantId": "6973fd61a6ada2",
+        "price": 67.37,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-LOVE-LANG-3XL"
+      },
+      {
+        "size": "4XL",
+        "printfulVariantId": "6973fd61a6ae15",
+        "price": 69.02,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-LOVE-LANG-4XL"
+      },
+      {
+        "size": "5XL",
+        "printfulVariantId": "6973fd61a6ae89",
+        "price": 70.67,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-ARIES-LOVE-LANG-5XL"
+      }
+    ],
+    "printfulProduct": "Premium Hoodie",
+    "features": [
+      "Premium heavyweight fleece",
+      "Unisex fit",
+      "Adjustable drawstring hood",
+      "Front kangaroo pocket",
+      "Soft brushed interior",
+      "Aries constellation design",
+      "Perfect Aries birthday gift (March 21 - April 19)"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. Your courage endures.",
+    "tags": [
+      "aries",
+      "fire-sign",
+      "zodiac",
+      "hoodie",
+      "hoodies",
+      "unisex",
+      "cardinal",
+      "mars-ruled",
+      "love-language",
+      "gift",
+      "curated for gifting",
+      "valentines"
+    ],
+    "chartResonance": [
+      "aries-sun",
+      "aries-moon",
+      "aries-rising",
+      "mars-dominant",
+      "1st-house-emphasis",
+      "fire-dominant"
+    ],
+    "seoTitle": "Aries Love Language Hoodie | Acts of Courage | Lyrīon Atelier",
+    "seoDescription": "For the Aries who shows love through bravery. Bold moves. Fearless protection. Standing up when it matters. Premium hoodie for those who lead with courage. Perfect gift for Aries (March 21 - April 19).",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": true,
+    "newArrivalBadge": "New Arrival"
   },
   {
     "slug": "youth-aries-fire-tee",
@@ -364,8 +545,27 @@
       "Perfect for bold kids who blaze their own trails"
     ],
     "careInstructions": "Machine wash cold, tumble dry low. Their fire burns eternal.",
-    "tags": ["aries", "fire-sign", "zodiac", "youth", "hoodie", "kids", "cardinal", "mars-ruled", "warrior", "bold", "gift"],
-    "chartResonance": ["aries-sun", "aries-moon", "aries-rising", "mars-dominant", "1st-house-emphasis", "fire-dominant"],
+    "tags": [
+      "aries",
+      "fire-sign",
+      "zodiac",
+      "youth",
+      "hoodie",
+      "kids",
+      "cardinal",
+      "mars-ruled",
+      "warrior",
+      "bold",
+      "gift"
+    ],
+    "chartResonance": [
+      "aries-sun",
+      "aries-moon",
+      "aries-rising",
+      "mars-dominant",
+      "1st-house-emphasis",
+      "fire-dominant"
+    ],
     "seoTitle": "Youth Aries Heavy Blend Hoodie | Fire Sign Kids Apparel | Lyrīon Atelier",
     "seoDescription": "Aries hoodie for young warriors. Premium heavy blend with Ram insignia. Bold design for kids who lead from the front. Ages 5-14.",
     "launchDate": "2025-01-15",
@@ -793,8 +993,8 @@
     "zodiacSign": "gemini",
     "element": "air",
     "gender": "men",
-    "description": "The cosmic communicator. Gemini doesn't just speak\u2014they weave worlds with words, dance between dimensions, hold contradictions without breaking. Born under Mercury's quicksilver reign, they know that truth has many faces and curiosity is the highest form of intelligence. This premium heavyweight tee channels Geminian duality through sacred twin symbolism, wrapping sharp minds in comfort designed for those who live between worlds and thrive in the space where opposites meet.",
-    "mysticalCopy": "Two minds, one soul. You contain multitudes\u2014and that's your superpower.",
+    "description": "The cosmic communicator. Gemini doesn't just speak—they weave worlds with words, dance between dimensions, hold contradictions without breaking. Born under Mercury's quicksilver reign, they know that truth has many faces and curiosity is the highest form of intelligence. This premium heavyweight tee channels Geminian duality through sacred twin symbolism, wrapping sharp minds in comfort designed for those who live between worlds and thrive in the space where opposites meet.",
+    "mysticalCopy": "Two minds, one soul. You contain multitudes—and that's your superpower.",
     "meta": {
       "category": "Men",
       "collection": "Zodiac Hero",
@@ -911,16 +1111,16 @@
       "3rd-house-emphasis",
       "air-dominant"
     ],
-    "seoTitle": "Gemini Starlight Tee | Men & Boys Zodiac Tee | Lyr\u012bon Atelier",
+    "seoTitle": "Gemini Starlight Tee | Men & Boys Zodiac Tee | Lyrīon Atelier",
     "seoDescription": "Channel Gemini duality with the Starlight Tee. Premium heavyweight design for quick minds ruled by Mercury. For men and young boys.",
     "launchDate": "2025-01-15",
     "isBestseller": false,
     "showOnHomepage": true,
     "copy": {
-      "notes": "The cosmic communicator. Gemini doesn't just speak\u2014they weave worlds with words, dance between dimensions, hold contradictions without breaking. Born under Mercury's quicksilver reign, they know that truth has many faces and curiosity is the highest form of intelligence. This premium heavyweight tee channels Geminian duality through sacred twin symbolism, wrapping sharp minds in comfort designed for those who live between worlds and thrive in the space where opposites meet.",
+      "notes": "The cosmic communicator. Gemini doesn't just speak—they weave worlds with words, dance between dimensions, hold contradictions without breaking. Born under Mercury's quicksilver reign, they know that truth has many faces and curiosity is the highest form of intelligence. This premium heavyweight tee channels Geminian duality through sacred twin symbolism, wrapping sharp minds in comfort designed for those who live between worlds and thrive in the space where opposites meet.",
       "materials": "100% ring-spun cotton<br>Fabric weight: 4.5 oz/yd² (153 g/m²)<br>Pre-shrunk for perfect fit<br>Shoulder-to-shoulder taping",
       "care": "Machine wash cold, tumble dry low. Your duality never fades.",
-      "mysticalCopy": "Two minds, one soul. You contain multitudes\u2014and that's your superpower."
+      "mysticalCopy": "Two minds, one soul. You contain multitudes—and that's your superpower."
     }
   },
   {
@@ -1417,8 +1617,26 @@
       "Designed for empaths, dreamers, and cosmic swimmers"
     ],
     "careInstructions": "Machine wash cold, tumble dry low. Your depth never fades.",
-    "tags": ["pisces", "water-sign", "zodiac", "hoodie", "unisex", "mutable", "neptune-ruled", "empathy", "mysticism", "dual-fish"],
-    "chartResonance": ["pisces-sun", "pisces-moon", "pisces-rising", "neptune-dominant", "12th-house-emphasis", "water-dominant"],
+    "tags": [
+      "pisces",
+      "water-sign",
+      "zodiac",
+      "hoodie",
+      "unisex",
+      "mutable",
+      "neptune-ruled",
+      "empathy",
+      "mysticism",
+      "dual-fish"
+    ],
+    "chartResonance": [
+      "pisces-sun",
+      "pisces-moon",
+      "pisces-rising",
+      "neptune-dominant",
+      "12th-house-emphasis",
+      "water-dominant"
+    ],
     "seoTitle": "Pisces Hoodie | Dual Fish Design | Unisex Zodiac Apparel | Lyrīon Atelier",
     "seoDescription": "Embrace Piscean depths with the Pisces Hoodie. Premium unisex design for mystics and empaths ruled by Neptune's oceanic flow.",
     "launchDate": "2025-01-15",
@@ -1873,8 +2091,23 @@
       "Luxury in the details nobody sees"
     ],
     "careInstructions": "Machine wash cold, tumble dry low. Your foundation stays solid.",
-    "tags": ["logo-line", "socks", "unisex", "embroidered", "sun-crest", "tree-of-life", "premium", "basics"],
-    "chartResonance": ["earth-signs", "capricorn-emphasis", "virgo-emphasis", "grounded-souls", "all-charts"],
+    "tags": [
+      "logo-line",
+      "socks",
+      "unisex",
+      "embroidered",
+      "sun-crest",
+      "tree-of-life",
+      "premium",
+      "basics"
+    ],
+    "chartResonance": [
+      "earth-signs",
+      "capricorn-emphasis",
+      "virgo-emphasis",
+      "grounded-souls",
+      "all-charts"
+    ],
     "seoTitle": "Lyrīon Sun Crest Socks | Embroidered Tree of Life | Premium Socks",
     "seoDescription": "Ground your energy with Lyrīon Sun Crest Socks. Premium embroidered cotton blend with Tree of Life detail. Unisex luxury from the feet up.",
     "launchDate": "2025-01-15",
@@ -2242,8 +2475,26 @@
       "Designed for pioneers, leaders, and first movers"
     ],
     "careInstructions": "Spot clean with a damp cloth. Do not machine wash or dry clean.",
-    "tags": ["aries", "fire-sign", "zodiac", "bucket-hat", "denim", "unisex", "cardinal", "mars-ruled", "warrior", "bold"],
-    "chartResonance": ["aries-sun", "aries-moon", "aries-rising", "mars-dominant", "1st-house-emphasis", "fire-dominant"],
+    "tags": [
+      "aries",
+      "fire-sign",
+      "zodiac",
+      "bucket-hat",
+      "denim",
+      "unisex",
+      "cardinal",
+      "mars-ruled",
+      "warrior",
+      "bold"
+    ],
+    "chartResonance": [
+      "aries-sun",
+      "aries-moon",
+      "aries-rising",
+      "mars-dominant",
+      "1st-house-emphasis",
+      "fire-dominant"
+    ],
     "seoTitle": "Aries Denim Bucket Hat | Fire Sign Headwear | Lyrīon Atelier",
     "seoDescription": "Lead from the front. Premium denim bucket hat with Aries Ram embroidery. Bold unisex design for warriors ruled by Mars. Blaze your own trail.",
     "launchDate": "2025-01-15",
@@ -2287,7 +2538,14 @@
     "description": "Sleep under your stars. This isn't just sleepwear—it's a celestial statement. The Taurus constellation is delicately mapped across the back, connecting the stars that ruled the night sky when Taurus season began.",
     "mysticalCopy": "The bull doesn't settle. Neither should your sleepwear.",
     "options": {
-      "size": ["XS", "S", "M", "L", "XL", "2XL"]
+      "size": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ]
     },
     "variants": [
       {
@@ -2348,8 +2606,26 @@
       "Premium quality fabric"
     ],
     "careInstructions": "Machine wash cold, tumble dry low. Your comfort endures.",
-    "tags": ["taurus", "earth-sign", "zodiac", "sleepwear", "pyjamas", "women", "fixed", "venus-ruled", "constellation", "gift"],
-    "chartResonance": ["taurus-sun", "taurus-moon", "taurus-rising", "venus-dominant", "2nd-house-emphasis", "earth-dominant"],
+    "tags": [
+      "taurus",
+      "earth-sign",
+      "zodiac",
+      "sleepwear",
+      "pyjamas",
+      "women",
+      "fixed",
+      "venus-ruled",
+      "constellation",
+      "gift"
+    ],
+    "chartResonance": [
+      "taurus-sun",
+      "taurus-moon",
+      "taurus-rising",
+      "venus-dominant",
+      "2nd-house-emphasis",
+      "earth-dominant"
+    ],
     "seoTitle": "Taurus Constellation Pyjama Top | Zodiac Sleepwear | Lyrīon Atelier",
     "seoDescription": "Luxe women's pyjama top with Taurus constellation embroidered on back. Perfect birthday gift for Taurus (April 20-May 20). Premium astrology sleepwear.",
     "launchDate": "2025-01-15",
@@ -2364,13 +2640,19 @@
     "title": "Taurus Celestial Slides",
     "name": "Taurus Celestial Slides",
     "collection": "Taurus Collection",
-    "category": ["men", "youth"],
+    "category": [
+      "men",
+      "youth"
+    ],
     "zodiac": "taurus",
     "zodiacSign": "taurus",
     "element": "earth",
     "gender": "unisex",
     "meta": {
-      "category": ["Men", "Youth"],
+      "category": [
+        "Men",
+        "Youth"
+      ],
       "collection": "Taurus Collection",
       "zodiac": "Taurus"
     },
@@ -2395,7 +2677,16 @@
     "description": "Ground your cosmic energy in luxury. Premium slides featuring the Taurus bull constellation and Lyrīon Atelier signature. Designed for those who move through the world with intention and comfort.",
     "mysticalCopy": "April 20 - May 20. Walk with the earth's grounded strength beneath your feet.",
     "options": {
-      "size": ["6.5", "7", "8", "8.5", "9.5", "10", "11", "11.5"]
+      "size": [
+        "6.5",
+        "7",
+        "8",
+        "8.5",
+        "9.5",
+        "10",
+        "11",
+        "11.5"
+      ]
     },
     "variants": [
       {
@@ -2471,8 +2762,25 @@
       "Lightweight, durable"
     ],
     "careInstructions": "Wipe clean with damp cloth. Air dry. Your grounded steps endure.",
-    "tags": ["taurus", "earth-sign", "zodiac", "slides", "men", "youth", "fixed", "venus-ruled", "footwear"],
-    "chartResonance": ["taurus-sun", "taurus-moon", "taurus-rising", "venus-dominant", "2nd-house-emphasis", "earth-dominant"],
+    "tags": [
+      "taurus",
+      "earth-sign",
+      "zodiac",
+      "slides",
+      "men",
+      "youth",
+      "fixed",
+      "venus-ruled",
+      "footwear"
+    ],
+    "chartResonance": [
+      "taurus-sun",
+      "taurus-moon",
+      "taurus-rising",
+      "venus-dominant",
+      "2nd-house-emphasis",
+      "earth-dominant"
+    ],
     "seoTitle": "Taurus Celestial Slides | Zodiac Footwear | Lyrīon Atelier",
     "seoDescription": "Premium slides featuring the Taurus bull constellation and Lyrīon Atelier signature. Ground your cosmic energy in luxury. April 20 - May 20.",
     "launchDate": "2025-01-15",
@@ -2514,7 +2822,9 @@
     },
     "currency": "USD",
     "options": {
-      "size": ["One Size"]
+      "size": [
+        "One Size"
+      ]
     },
     "variants": [
       {
@@ -2536,8 +2846,21 @@
       "Ethereal Pisces twin fish design"
     ],
     "careInstructions": "Wipe clean with damp cloth. Your cosmic workspace endures.",
-    "tags": ["accessories", "gift", "mousepad", "pisces-design", "workspace", "desk", "premium"],
-    "chartResonance": ["pisces-aesthetic", "water-lovers", "all-charts", "creative-souls"],
+    "tags": [
+      "accessories",
+      "gift",
+      "mousepad",
+      "pisces-design",
+      "workspace",
+      "desk",
+      "premium"
+    ],
+    "chartResonance": [
+      "pisces-aesthetic",
+      "water-lovers",
+      "all-charts",
+      "creative-souls"
+    ],
     "seoTitle": "Pisces Luxury Mouse Pad | Celestial Desk Accessories | Lyrīon Atelier",
     "seoDescription": "Elevate your workspace with cosmic elegance. Premium mouse pad featuring ethereal Pisces twin fish design. Perfect gift for Pisces (February 19 - March 20).",
     "launchDate": "2025-01-15",
@@ -2584,7 +2907,14 @@
     "description": "Pisces Cropped Windbreaker\n\nEthereal style meets cosmic protection. Premium cropped windbreaker featuring the dreamy Pisces twin fish in vibrant detail.\n\n• Water-resistant fabric\n• Adjustable drawstring hood\n• Elastic cuffs and hem\n• Front zip closure\n• Cropped silhouette\n\nFor the Pisces who moves between worlds with grace.\n\nFebruary 19 - March 20",
     "mysticalCopy": "For the Pisces who moves between worlds with grace.",
     "options": {
-      "size": ["XS", "S", "M", "L", "XL", "2XL"]
+      "size": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ]
     },
     "variants": [
       {
@@ -2646,8 +2976,25 @@
       "Dreamy Pisces twin fish design"
     ],
     "careInstructions": "Machine wash cold, hang dry. Your ethereal style endures.",
-    "tags": ["pisces", "water-sign", "zodiac", "windbreaker", "women", "mutable", "neptune-ruled", "outerwear", "gift"],
-    "chartResonance": ["pisces-sun", "pisces-moon", "pisces-rising", "neptune-dominant", "12th-house-emphasis", "water-dominant"],
+    "tags": [
+      "pisces",
+      "water-sign",
+      "zodiac",
+      "windbreaker",
+      "women",
+      "mutable",
+      "neptune-ruled",
+      "outerwear",
+      "gift"
+    ],
+    "chartResonance": [
+      "pisces-sun",
+      "pisces-moon",
+      "pisces-rising",
+      "neptune-dominant",
+      "12th-house-emphasis",
+      "water-dominant"
+    ],
     "seoTitle": "Pisces Cropped Windbreaker | Women's Zodiac Outerwear | Lyrīon Atelier",
     "seoDescription": "Ethereal style meets cosmic protection. Premium cropped windbreaker featuring the dreamy Pisces twin fish. Perfect gift for Pisces (February 19 - March 20).",
     "launchDate": "2025-01-15",
@@ -2692,7 +3039,11 @@
     "description": "Taurus Luxury Throw Pillow\n\nGround your space with celestial comfort. Premium throw pillow featuring the Taurus bull constellation and Lyrīon Atelier signature.\n\n• Soft fabric cover\n• Concealed zipper\n• Shape-retaining insert\n• Fade-resistant print\n• Multiple sizes\n\nApril 20 - May 20\n\nStarting at $33.99",
     "mysticalCopy": "Ground your space with celestial comfort.",
     "options": {
-      "size": ["18″×18″", "20″×12″", "22″×22″"]
+      "size": [
+        "18″×18″",
+        "20″×12″",
+        "22″×22″"
+      ]
     },
     "variants": [
       {
@@ -2730,8 +3081,25 @@
       "Taurus bull constellation design"
     ],
     "careInstructions": "Spot clean or hand wash cover. Air dry. Your celestial comfort endures.",
-    "tags": ["taurus", "earth-sign", "zodiac", "pillow", "accessories", "fixed", "venus-ruled", "home-decor", "gift"],
-    "chartResonance": ["taurus-sun", "taurus-moon", "taurus-rising", "venus-dominant", "2nd-house-emphasis", "earth-dominant"],
+    "tags": [
+      "taurus",
+      "earth-sign",
+      "zodiac",
+      "pillow",
+      "accessories",
+      "fixed",
+      "venus-ruled",
+      "home-decor",
+      "gift"
+    ],
+    "chartResonance": [
+      "taurus-sun",
+      "taurus-moon",
+      "taurus-rising",
+      "venus-dominant",
+      "2nd-house-emphasis",
+      "earth-dominant"
+    ],
     "seoTitle": "Taurus Luxury Throw Pillow | Celestial Home Decor | Lyrīon Atelier",
     "seoDescription": "Ground your space with celestial comfort. Premium throw pillow featuring the Taurus bull constellation. Perfect gift for Taurus (April 20 - May 20).",
     "launchDate": "2025-01-15",
@@ -2776,7 +3144,9 @@
     },
     "currency": "USD",
     "options": {
-      "size": ["One Size"]
+      "size": [
+        "One Size"
+      ]
     },
     "variants": [
       {
@@ -2798,8 +3168,22 @@
       "Ethereal Pisces twin fish design"
     ],
     "careInstructions": "Wipe clean with damp cloth. Your cosmic clarity endures.",
-    "tags": ["accessories", "gift", "tote-bag", "pisces", "water-sign", "clear-bag", "stadium-approved"],
-    "chartResonance": ["pisces-sun", "pisces-moon", "pisces-rising", "neptune-dominant", "water-dominant"],
+    "tags": [
+      "accessories",
+      "gift",
+      "tote-bag",
+      "pisces",
+      "water-sign",
+      "clear-bag",
+      "stadium-approved"
+    ],
+    "chartResonance": [
+      "pisces-sun",
+      "pisces-moon",
+      "pisces-rising",
+      "neptune-dominant",
+      "water-dominant"
+    ],
     "seoTitle": "Pisces Clear Tote Bag | Celestial Accessories | Lyrīon Atelier",
     "seoDescription": "Carry your cosmic energy with transparency. Premium clear tote featuring the ethereal Pisces twin fish design. Perfect gift for Pisces (February 19 - March 20).",
     "launchDate": "2025-01-15",
@@ -2849,7 +3233,14 @@
     "description": "Bold cosmic statement piece. Premium unisex hoodie featuring the Taurus ram head in striking pink detail. For those born under the sign of strength and determination.",
     "mysticalCopy": "April 20 - May 20. For those born under the sign of strength and determination.",
     "options": {
-      "size": ["S", "M", "L", "XL", "2XL", "3XL"]
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ]
     },
     "variants": [
       {
@@ -2912,8 +3303,25 @@
       "Perfect Taurus birthday gift (April 20 - May 20)"
     ],
     "careInstructions": "Machine wash cold, tumble dry low. Your strength endures.",
-    "tags": ["taurus", "earth-sign", "zodiac", "hoodie", "unisex", "fixed", "venus-ruled", "ram-head", "gift"],
-    "chartResonance": ["taurus-sun", "taurus-moon", "taurus-rising", "venus-dominant", "2nd-house-emphasis", "earth-dominant"],
+    "tags": [
+      "taurus",
+      "earth-sign",
+      "zodiac",
+      "hoodie",
+      "unisex",
+      "fixed",
+      "venus-ruled",
+      "ram-head",
+      "gift"
+    ],
+    "chartResonance": [
+      "taurus-sun",
+      "taurus-moon",
+      "taurus-rising",
+      "venus-dominant",
+      "2nd-house-emphasis",
+      "earth-dominant"
+    ],
     "seoTitle": "Taurus Ram Head Unisex Hoodie | Bold Cosmic Statement | Lyrīon Atelier",
     "seoDescription": "Bold cosmic statement piece. Premium unisex hoodie featuring the Taurus ram head in striking pink detail. For those born under the sign of strength and determination.",
     "launchDate": "2025-01-15",
@@ -2963,7 +3371,13 @@
     "description": "Sustainable luxury meets cosmic style. Premium organic cotton tee with ribbed neckline featuring the Taurus constellation. For the Earth sign who values quality and sustainability.",
     "mysticalCopy": "April 20 - May 20. For the Earth sign who values quality and sustainability.",
     "options": {
-      "size": ["S", "M", "L", "XL", "2XL"]
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ]
     },
     "variants": [
       {
@@ -3018,8 +3432,26 @@
       "Perfect Taurus birthday gift (April 20 - May 20)"
     ],
     "careInstructions": "Machine wash cold, tumble dry low. Your sustainable style endures.",
-    "tags": ["taurus", "earth-sign", "zodiac", "tee", "unisex", "fixed", "venus-ruled", "organic", "sustainable", "gift"],
-    "chartResonance": ["taurus-sun", "taurus-moon", "taurus-rising", "venus-dominant", "2nd-house-emphasis", "earth-dominant"],
+    "tags": [
+      "taurus",
+      "earth-sign",
+      "zodiac",
+      "tee",
+      "unisex",
+      "fixed",
+      "venus-ruled",
+      "organic",
+      "sustainable",
+      "gift"
+    ],
+    "chartResonance": [
+      "taurus-sun",
+      "taurus-moon",
+      "taurus-rising",
+      "venus-dominant",
+      "2nd-house-emphasis",
+      "earth-dominant"
+    ],
     "seoTitle": "Taurus Unisex Organic Ribbed Neck T-Shirt | Sustainable Zodiac Apparel | Lyrīon Atelier",
     "seoDescription": "Sustainable luxury meets cosmic style. Premium organic cotton tee with ribbed neckline featuring the Taurus constellation. Perfect gift for Taurus (April 20 - May 20).",
     "launchDate": "2025-01-15",
@@ -3067,7 +3499,14 @@
     "description": "For the Gemini who finds intimacy in intellectual connection. Late-night conversations about everything and nothing. Premium box hoodie for those who speak love through words.",
     "mysticalCopy": "Love Language: 3AM Conversations",
     "options": {
-      "size": ["S", "M", "L", "XL", "2XL", "3XL"]
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL"
+      ]
     },
     "variants": [
       {
@@ -3130,8 +3569,25 @@
       "Perfect Gemini birthday gift (May 21 - June 20)"
     ],
     "careInstructions": "Machine wash cold, tumble dry low. Your conversations endure.",
-    "tags": ["gemini", "air-sign", "zodiac", "hoodie", "men", "gifts", "mutable", "mercury-ruled", "love-language"],
-    "chartResonance": ["gemini-sun", "gemini-moon", "gemini-rising", "mercury-dominant", "3rd-house-emphasis", "air-dominant"],
+    "tags": [
+      "gemini",
+      "air-sign",
+      "zodiac",
+      "hoodie",
+      "men",
+      "gifts",
+      "mutable",
+      "mercury-ruled",
+      "love-language"
+    ],
+    "chartResonance": [
+      "gemini-sun",
+      "gemini-moon",
+      "gemini-rising",
+      "mercury-dominant",
+      "3rd-house-emphasis",
+      "air-dominant"
+    ],
     "seoTitle": "Gemini Love Language Hoodie | 3AM Conversations | Lyrīon Atelier",
     "seoDescription": "For the Gemini who finds intimacy in intellectual connection. Premium box hoodie for those who speak love through words. Perfect gift for Gemini (May 21 - June 20).",
     "launchDate": "2025-02-04",

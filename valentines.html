@@ -434,6 +434,48 @@
       </div>
     </div>
   </section>
+
+  <!-- Aries Love Language Hoodie - Valentine's Featured Product -->
+  <section class="valentines-bundle" style="background: rgba(255, 107, 107, 0.08);">
+    <div class="bundle-header">
+      <span class="bundle-badge" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">New Arrival</span>
+      <h2>Aries Love Language Hoodie</h2>
+      <p class="muted">Love Language: Acts of Courage</p>
+    </div>
+    
+    <div class="bundle-grid" style="grid-template-columns: 1fr;">
+      <div class="bundle-item" data-product="aries-love-language-hoodie" style="max-width: 500px; margin: 0 auto;">
+        <div class="product-gallery-mini">
+          <img src="/images/products/aries-love-language-hoodie-1.jpg" alt="Aries Love Language Hoodie" loading="lazy" class="main-image" id="aries-main-image">
+          <div class="thumbnail-row" data-gallery="aries">
+            <img src="/images/products/aries-love-language-hoodie-1.jpg" alt="Aries view 1" loading="lazy">
+            <img src="/images/products/aries-love-language-hoodie-2.jpg" alt="Aries view 2" loading="lazy">
+            <img src="/images/products/aries-love-language-hoodie-3.jpg" alt="Aries view 3" loading="lazy">
+            <img src="/images/products/aries-love-language-hoodie-4.jpg" alt="Aries view 4" loading="lazy">
+            <img src="/images/products/aries-love-language-hoodie-5.jpg" alt="Aries view 5" loading="lazy">
+          </div>
+        </div>
+        <h3>Aries Love Language Hoodie</h3>
+        <p class="product-description">For the Aries who shows love through bravery. Bold moves. Fearless protection. Standing up when it matters. Premium hoodie for those who lead with courage.</p>
+        <p class="price" id="aries-price">$64.07</p>
+        <div class="selector-group">
+          <label for="aries-size">Size</label>
+          <select id="aries-size">
+            <option value="S" data-price="64.07" data-variant="6973fd61a6ab49">S - $64.07</option>
+            <option value="M" data-price="64.07" data-variant="6973fd61a6abd4" selected>M - $64.07</option>
+            <option value="L" data-price="64.07" data-variant="6973fd61a6ac52">L - $64.07</option>
+            <option value="XL" data-price="64.07" data-variant="6973fd61a6acc4">XL - $64.07</option>
+            <option value="2XL" data-price="65.72" data-variant="6973fd61a6ad32">2XL - $65.72</option>
+            <option value="3XL" data-price="67.37" data-variant="6973fd61a6ada2">3XL - $67.37</option>
+            <option value="4XL" data-price="69.02" data-variant="6973fd61a6ae15">4XL - $69.02</option>
+            <option value="5XL" data-price="70.67" data-variant="6973fd61a6ae89">5XL - $70.67</option>
+          </select>
+        </div>
+        <button type="button" class="buy-set-btn" id="buy-aries-btn" style="margin-top: 1rem;">Add to Cart</button>
+        <a href="/shop/aries-love-language-hoodie.html" style="display: block; text-align: center; margin-top: 0.5rem; color: var(--gold-primary);">View Full Details</a>
+      </div>
+    </div>
+  </section>
 </main>
 
   <footer class="footer">
@@ -732,6 +774,93 @@
       document.querySelectorAll('.thumbnail-row[data-gallery="gemini"] img').forEach(thumb => {
         thumb.addEventListener('click', function() {
           document.getElementById('gemini-main-image').src = this.src;
+        });
+      });
+
+      // Aries Love Language Hoodie functionality
+      const ariesProduct = {
+        id: 'aries-love-language-hoodie',
+        slug: 'aries-love-language-hoodie',
+        name: 'Aries Love Language Hoodie',
+        basePrice: 64.07,
+        category: "Unisex / Aries Collection",
+        collection: 'Aries Collection',
+        image: '/images/products/aries-love-language-hoodie-1.jpg',
+        type: 'physical',
+        variants: {
+          'S': { variantId: '6973fd61a6ab49', price: 64.07 },
+          'M': { variantId: '6973fd61a6abd4', price: 64.07 },
+          'L': { variantId: '6973fd61a6ac52', price: 64.07 },
+          'XL': { variantId: '6973fd61a6acc4', price: 64.07 },
+          '2XL': { variantId: '6973fd61a6ad32', price: 65.72 },
+          '3XL': { variantId: '6973fd61a6ada2', price: 67.37 },
+          '4XL': { variantId: '6973fd61a6ae15', price: 69.02 },
+          '5XL': { variantId: '6973fd61a6ae89', price: 70.67 }
+        }
+      };
+
+      const ariesSizeSelect = document.getElementById('aries-size');
+      const ariesPriceEl = document.getElementById('aries-price');
+      const buyAriesBtn = document.getElementById('buy-aries-btn');
+
+      function updateAriesPrice() {
+        const selectedOption = ariesSizeSelect.options[ariesSizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || ariesProduct.basePrice;
+        if (ariesPriceEl) ariesPriceEl.textContent = `$${price.toFixed(2)}`;
+      }
+
+      function addAriesToCart() {
+        const selectedOption = ariesSizeSelect.options[ariesSizeSelect.selectedIndex];
+        const size = ariesSizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: ariesProduct.id,
+          slug: ariesProduct.slug,
+          name: ariesProduct.name,
+          price: price,
+          size: size,
+          image: ariesProduct.image,
+          category: ariesProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            ariesProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      ariesSizeSelect.addEventListener('change', updateAriesPrice);
+      buyAriesBtn.addEventListener('click', addAriesToCart);
+      updateAriesPrice();
+
+      // Aries thumbnail gallery click handlers
+      document.querySelectorAll('.thumbnail-row[data-gallery="aries"] img').forEach(thumb => {
+        thumb.addEventListener('click', function() {
+          document.getElementById('aries-main-image').src = this.src;
         });
       });
     })();
