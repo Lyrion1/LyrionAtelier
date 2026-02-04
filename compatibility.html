@@ -18,6 +18,211 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="images/favicon/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Valentine's Special Styles for Compatibility Page */
+.valentines-banner {
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.15), rgba(212, 175, 55, 0.1), rgba(139, 69, 109, 0.15));
+  border-bottom: 2px solid rgba(255, 107, 157, 0.3);
+  text-align: center;
+  padding: 20px 15px;
+}
+.valentines-banner h2 {
+  color: #ff6b9d;
+  font-size: 1.5rem;
+  margin: 0 0 8px 0;
+  font-weight: 700;
+}
+.valentines-banner p {
+  color: var(--white-80, rgba(255,255,255,0.8));
+  margin: 0;
+  font-size: 1rem;
+}
+.hero-compatibility {
+  background: linear-gradient(180deg, rgba(255, 107, 157, 0.08) 0%, rgba(139, 69, 109, 0.05) 50%, transparent 100%);
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  padding: 60px 20px;
+  background: rgba(139, 69, 109, 0.08);
+  border-radius: 16px;
+  margin: 40px 15px;
+}
+.testimonials-section .section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.testimonials-section .section-header h2 {
+  color: var(--gold-primary, #d4af37);
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+.testimonials-section .section-divider {
+  width: 80%;
+  max-width: 300px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-primary, #d4af37), transparent);
+  margin: 0 auto;
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .testimonials-section {
+    margin: 50px auto;
+    max-width: 1300px;
+  }
+}
+.testimonial-card {
+  background: rgba(10, 8, 32, 0.7);
+  border: 2px solid rgba(255, 107, 157, 0.2);
+  border-radius: 12px;
+  padding: 25px 20px;
+  transition: all 0.3s ease;
+}
+.testimonial-card:hover {
+  border-color: rgba(255, 107, 157, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(255, 107, 157, 0.15);
+}
+.testimonial-text {
+  color: var(--white-80, rgba(255,255,255,0.8));
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+.testimonial-author {
+  color: #ff6b9d;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.testimonial-stars {
+  color: #fbbf24;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
+/* Upsell Section */
+.upsell-section {
+  padding: 50px 20px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(255, 107, 157, 0.08));
+  border-radius: 16px;
+  margin: 40px 15px;
+  text-align: center;
+}
+.upsell-section h3 {
+  color: var(--gold-primary, #d4af37);
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+.upsell-section .upsell-intro {
+  color: var(--white-80, rgba(255,255,255,0.8));
+  font-size: 1.05rem;
+  margin-bottom: 25px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.upsell-features {
+  text-align: left;
+  max-width: 500px;
+  margin: 0 auto 30px;
+  padding: 0 20px;
+}
+.upsell-features li {
+  color: var(--white-80, rgba(255,255,255,0.8));
+  font-size: 1rem;
+  margin-bottom: 12px;
+  padding-left: 8px;
+  list-style: none;
+  position: relative;
+}
+.upsell-features li::before {
+  content: "✨";
+  position: absolute;
+  left: -20px;
+}
+.upsell-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+@media (min-width: 600px) {
+  .upsell-buttons {
+    flex-direction: row;
+    max-width: 600px;
+    justify-content: center;
+  }
+}
+.upsell-btn-primary {
+  display: inline-block;
+  padding: 16px 30px;
+  background: linear-gradient(135deg, #ff6b9d, #ff4081);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+.upsell-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+}
+.upsell-btn-secondary {
+  display: inline-block;
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--gold-primary, #d4af37);
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 2px solid var(--gold-primary, #d4af37);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+.upsell-btn-secondary:hover {
+  background: var(--gold-primary, #d4af37);
+  color: var(--navy-darkest, #0a0820);
+}
+@media (min-width: 600px) {
+  .upsell-btn-primary, .upsell-btn-secondary {
+    width: auto;
+  }
+}
+@media (min-width: 992px) {
+  .upsell-section {
+    max-width: 900px;
+    margin: 50px auto;
+  }
+}
+
+/* Preview result CTA enhancement */
+.preview-cta-text {
+  color: #ff6b9d !important;
+  font-weight: 600;
+}
+</style>
 </head>
 <body>
 <header class="site-header" data-nav-version="nav-v4">
@@ -45,6 +250,13 @@
 
 <a class="skip-to-content" href="#main-content">Skip to main content</a>
 <main id="main-content">
+
+<!-- Valentine's Special Banner -->
+<section class="valentines-banner">
+  <h2>Valentine's Special: Discover Your Cosmic Connection <span aria-hidden="true">💕</span></h2>
+  <p>Free compatibility preview. Full reading available.</p>
+</section>
+
 <section class="hero-compatibility">
  <div class="hero-container">
  <h1 class="hero-main-title">Cosmic Compatibility Certificates</h1>
@@ -143,6 +355,92 @@ Generate Preview
 </div>
 </div> <!-- /.generator-container -->
 </div> <!-- /.container -->
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+  <div class="section-header">
+    <h2>What Our Clients Say</h2>
+    <div class="section-divider"></div>
+  </div>
+  
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <p class="testimonial-text">"Saved our relationship. We were on the verge of breaking up after 3 years. The compatibility reading showed us our communication styles were clashing because of our Mars placements. Once we understood why we fight the way we do, everything changed. We're engaged now. This reading literally saved us."</p>
+      <p class="testimonial-author">— Jessica M., Scorpio + Taurus couple</p>
+      <p class="testimonial-stars">⭐⭐⭐⭐⭐</p>
+    </div>
+    
+    <div class="testimonial-card">
+      <p class="testimonial-text">"Finally understood why we work. My friends kept saying we were wrong for each other. The reading explained our Venus-Mars connection and why our differences actually make us stronger. Now I don't second-guess us anymore. Worth every penny."</p>
+      <p class="testimonial-author">— Aisha R., Gemini + Capricorn couple</p>
+      <p class="testimonial-stars">⭐⭐⭐⭐⭐</p>
+    </div>
+    
+    <div class="testimonial-card">
+      <p class="testimonial-text">"Saw the red flags before I wasted more time. Six months in and something felt off. The reading revealed our Saturn square that meant long-term incompatibility. Hurt to hear, but I'm grateful I found out before I invested years. The insight was incredibly accurate."</p>
+      <p class="testimonial-author">— Maya Chen, Pisces</p>
+      <p class="testimonial-stars">⭐⭐⭐⭐⭐</p>
+    </div>
+    
+    <div class="testimonial-card">
+      <p class="testimonial-text">"The timing advice was spot-on. The reading told us to wait 6 months before moving in together because of Mercury retrograde and my Saturn return. We waited. Best decision ever. We would've crashed and burned if we'd rushed it."</p>
+      <p class="testimonial-author">— Priya S., Virgo + Leo couple</p>
+      <p class="testimonial-stars">⭐⭐⭐⭐⭐</p>
+    </div>
+    
+    <div class="testimonial-card">
+      <p class="testimonial-text">"Gave us a roadmap. We knew we were compatible but didn't know HOW to navigate our differences. The reading gave us specific strategies for our Moon placements. It's like having a relationship manual written specifically for us."</p>
+      <p class="testimonial-author">— Emily Rodriguez, Cancer + Aquarius couple</p>
+      <p class="testimonial-stars">⭐⭐⭐⭐⭐</p>
+    </div>
+    
+    <div class="testimonial-card">
+      <p class="testimonial-text">"My mom was right about him. She said he wasn't the one. I didn't believe her. Got the reading. Our charts showed we'd peak at 2 years then decline. We broke up at exactly 2 years. Wish I'd listened to the stars sooner. At least now I know what to look for."</p>
+      <p class="testimonial-author">— Taylor B., Libra</p>
+      <p class="testimonial-stars">⭐⭐⭐⭐⭐</p>
+    </div>
+    
+    <div class="testimonial-card">
+      <p class="testimonial-text">"Worth more than couples therapy. We spent $2,000 on therapy. This $174 reading gave us more clarity in 45 minutes than 6 months of sessions. Our therapist didn't catch what our Venus opposition meant for intimacy. This did."</p>
+      <p class="testimonial-author">— Rachel Kim, Aries + Libra couple</p>
+      <p class="testimonial-stars">⭐⭐⭐⭐⭐</p>
+    </div>
+    
+    <div class="testimonial-card">
+      <p class="testimonial-text">"Confirmed what I already felt. I knew we were soulmates but couldn't explain it. The reading showed our North Node conjunction and past-life indicators. Everything made sense. We're getting married in June."</p>
+      <p class="testimonial-author">— Sophie Williams, Sagittarius + Gemini couple</p>
+      <p class="testimonial-stars">⭐⭐⭐⭐⭐</p>
+    </div>
+    
+    <div class="testimonial-card">
+      <p class="testimonial-text">"Helped me let go. After my breakup I kept wondering if I made a mistake. The reading showed our fundamental incompatibility—it was never going to work long-term. Finally got closure. Now I'm dating someone whose chart actually aligns with mine."</p>
+      <p class="testimonial-author">— Jasmine H., Leo</p>
+      <p class="testimonial-stars">⭐⭐⭐⭐⭐</p>
+    </div>
+    
+    <div class="testimonial-card">
+      <p class="testimonial-text">"My husband was skeptical until he read it. He doesn't believe in astrology. But when the reading nailed why he shuts down during arguments (Moon in Capricorn) and why I need constant reassurance (Venus in Cancer), he couldn't deny it. Now he references our reading during conflicts."</p>
+      <p class="testimonial-author">— Maria Santos, Cancer + Capricorn couple</p>
+      <p class="testimonial-stars">⭐⭐⭐⭐⭐</p>
+    </div>
+  </div>
+</section>
+
+<!-- Upsell Section -->
+<section class="upsell-section">
+  <h3>Want the Full Story?</h3>
+  <p class="upsell-intro">This free preview shows your surface compatibility. Get a deep-dive professional reading that reveals:</p>
+  <ul class="upsell-features">
+    <li>Emotional compatibility & communication styles</li>
+    <li>Long-term potential & challenges</li>
+    <li>Timing for major relationship milestones</li>
+    <li>Intimacy & conflict resolution insights</li>
+  </ul>
+  <div class="upsell-buttons">
+    <a href="/oracle" class="upsell-btn-primary">Book Full Compatibility Reading - $174</a>
+    <a href="/oracle" class="upsell-btn-secondary">Explore All Love Readings</a>
+  </div>
 </section>
 
 <section class="how-it-works">

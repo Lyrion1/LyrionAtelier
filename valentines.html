@@ -454,6 +454,110 @@
         height: 250px;
       }
     }
+
+    /* Cosmic Compatibility Promo Section */
+    .cosmic-compatibility-promo {
+      position: relative;
+      padding: 60px 20px;
+      margin: 30px 15px;
+      background: linear-gradient(135deg, rgba(139, 69, 109, 0.2) 0%, rgba(75, 0, 130, 0.15) 50%, rgba(10, 8, 32, 0.9) 100%);
+      border: 2px solid rgba(255, 107, 157, 0.4);
+      border-radius: 20px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .cosmic-compatibility-promo::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(2px 2px at 10% 20%, rgba(255, 255, 255, 0.6), transparent 50%),
+        radial-gradient(2px 2px at 30% 60%, rgba(255, 255, 255, 0.5), transparent 50%),
+        radial-gradient(2px 2px at 50% 30%, rgba(255, 255, 255, 0.7), transparent 50%),
+        radial-gradient(2px 2px at 70% 70%, rgba(255, 255, 255, 0.4), transparent 50%),
+        radial-gradient(2px 2px at 90% 40%, rgba(255, 255, 255, 0.6), transparent 50%),
+        radial-gradient(1.5px 1.5px at 20% 80%, rgba(255, 255, 255, 0.5), transparent 50%),
+        radial-gradient(1.5px 1.5px at 80% 10%, rgba(255, 255, 255, 0.4), transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .cosmic-compatibility-promo > * {
+      position: relative;
+      z-index: 1;
+    }
+    .cosmic-promo-hearts {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    .cosmic-compatibility-promo h2 {
+      color: #ff6b9d;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(255, 107, 157, 0.3);
+    }
+    .cosmic-promo-subtitle {
+      color: var(--gold-primary, #d4af37);
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    .cosmic-promo-text {
+      color: var(--white-80, rgba(255,255,255,0.8));
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 25px;
+      line-height: 1.6;
+    }
+    .cosmic-promo-btn {
+      display: inline-block;
+      padding: 18px 40px;
+      background: linear-gradient(135deg, #ff6b9d 0%, #ff4081 50%, #d4af37 100%);
+      background-size: 200% 200%;
+      animation: gradientShift 3s ease infinite;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .cosmic-promo-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 35px rgba(255, 107, 157, 0.5);
+    }
+    .cosmic-promo-zodiac {
+      margin-top: 20px;
+      font-size: 1.8rem;
+      opacity: 0.7;
+    }
+    @media (min-width: 768px) {
+      .cosmic-compatibility-promo {
+        padding: 80px 40px;
+        margin: 40px 20px;
+      }
+      .cosmic-compatibility-promo h2 {
+        font-size: 2.5rem;
+      }
+      .cosmic-promo-subtitle {
+        font-size: 1.6rem;
+      }
+    }
+    @media (min-width: 992px) {
+      .cosmic-compatibility-promo {
+        max-width: 1000px;
+        margin: 50px auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -507,6 +611,16 @@
       <h1>Cosmic Gifts for Your Cosmic Love</h1>
       <p class="muted">Thoughtfully curated zodiac-inspired pieces. Perfect for showing someone special that you truly see them—stars and all.</p>
     </div>
+  </section>
+
+  <!-- COSMIC COMPATIBILITY PROMO - Unmissable CTA Section -->
+  <section class="cosmic-compatibility-promo">
+    <div class="cosmic-promo-hearts" aria-hidden="true">💕 ♈ ♉ ♊ ♋ ♌ ♍ ♎ ♏ ♐ ♑ ♒ ♓ 💕</div>
+    <h2>Are You Cosmically Compatible?</h2>
+    <p class="cosmic-promo-subtitle">Preview Your Cosmic Connection - Free</p>
+    <p class="cosmic-promo-text">Enter both birth dates to see your compatibility score instantly. Discover if the stars align for your relationship.</p>
+    <a href="/compatibility" class="cosmic-promo-btn">Check Compatibility Now <span aria-hidden="true">✨</span></a>
+    <div class="cosmic-promo-zodiac" aria-hidden="true">🌟 💫 ⭐ 💕 ⭐ 💫 🌟</div>
   </section>
 
   <!-- SECTION 2: Better Together - Couples Collection -->
