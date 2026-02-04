@@ -975,6 +975,15 @@ const products = [
     image: "images/oracle/the-oracles-lantern-cover.webp",
     description: "A deep dive session for seekers ready for transformation.",
     sizes: ["Standard"]
+  },
+  {
+    id: 237,
+    name: "Mercury Retrograde Ruined My Love Life Hoodie",
+    price: 66.50,
+    category: "hoodie",
+    image: "/images/products/mercury-retrograde-hoodie-1.jpg",
+    sizes: ["S","M","L","XL","2XL","3XL","4XL","5XL"],
+    printfulVariants: {"S":"697ba455db1785","M":"697ba455db17f3","L":"697ba455db1844","XL":"697ba455db1891","2XL":"697ba455db18d2","3XL":"697ba455db1926","4XL":"697ba455db1975","5XL":"697ba455db19b8"}
   }
 ];
 
