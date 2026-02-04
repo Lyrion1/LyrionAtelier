@@ -362,11 +362,11 @@ button[class*="view"],
 }
 
 /* ===========================================
-   TABLET BREAKPOINT (768px - 1024px)
+   TABLET BREAKPOINT (769px - 1024px)
    2 columns, 20px gap
    =========================================== */
 
-@media (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1024px) {
   .product-grid,
   .products-grid,
   #featured-grid,
@@ -389,7 +389,7 @@ button[class*="view"],
 }
 
 /* ===========================================
-   MOBILE BREAKPOINT (below 768px)
+   MOBILE BREAKPOINT (768px and below)
    1 column, 20px gap
    =========================================== */
 
