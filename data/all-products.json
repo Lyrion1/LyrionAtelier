@@ -4232,5 +4232,125 @@
     "isBestseller": false,
     "showOnHomepage": false,
     "betterTogetherBadge": "Better Together"
+  },
+  {
+    "id": 242,
+    "slug": "gemini-windbreaker",
+    "link": "/shop/gemini-windbreaker.html",
+    "name": "Gemini Windbreaker - My Love Song is in Gemini",
+    "title": "Gemini Windbreaker - My Love Song is in Gemini",
+    "collection": "Gemini Collection",
+    "category": "windbreaker",
+    "zodiac": "gemini",
+    "zodiacSign": "gemini",
+    "element": "air",
+    "gender": "unisex",
+    "meta": {
+      "category": "Unisex",
+      "collection": "Gemini Collection",
+      "zodiac": "Gemini"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 55.99,
+    "price_range": {
+      "min": 55.99,
+      "max": 59.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/gemini-windbreaker-1.jpg"
+    ],
+    "mainImage": "/images/products/gemini-windbreaker-1.jpg",
+    "description": "For the Gemini who speaks love through words, lyrics, and late-night playlists. Every conversation is a verse. Every text is a chorus. Premium windbreaker for those whose love language lives in Gemini season.",
+    "mysticalCopy": "For the Gemini who speaks love through words, lyrics, and late-night playlists.",
+    "options": {
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ]
+    },
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "697bba6106f234",
+        "price": 55.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEMINI-WINDBREAKER-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "697bba6106f2d5",
+        "price": 55.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEMINI-WINDBREAKER-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "697bba6106f355",
+        "price": 55.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEMINI-WINDBREAKER-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "697bba6106f3c6",
+        "price": 55.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEMINI-WINDBREAKER-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "697bba6106f433",
+        "price": 59.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-GEMINI-WINDBREAKER-2XL"
+      }
+    ],
+    "printfulProduct": "Windbreaker",
+    "features": [
+      "Premium windbreaker material",
+      "Gemini zodiac design",
+      "Lightweight and durable",
+      "Water-resistant",
+      "Perfect Gemini birthday gift (May 21 - June 20)"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. Your cosmic words endure.",
+    "tags": [
+      "gemini",
+      "air-sign",
+      "zodiac",
+      "windbreaker",
+      "unisex",
+      "gift",
+      "curated for gifting",
+      "valentines",
+      "love-language"
+    ],
+    "chartResonance": [
+      "gemini-sun",
+      "gemini-moon",
+      "gemini-rising",
+      "mercury-dominant",
+      "3rd-house-emphasis",
+      "air-dominant"
+    ],
+    "seoTitle": "Gemini Windbreaker - My Love Song is in Gemini | Zodiac Apparel | Lyrīon Atelier",
+    "seoDescription": "For the Gemini who speaks love through words, lyrics, and late-night playlists. Premium windbreaker for those whose love language lives in Gemini season.",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": false,
+    "loveLanguageBadge": "Love Language"
   }
 ]
