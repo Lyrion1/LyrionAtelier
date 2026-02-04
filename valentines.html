@@ -615,6 +615,40 @@
         <button type="button" class="add-to-cart-btn" id="buy-polo-his-btn">Add to Cart</button>
         <a href="/shop/premium-polo-his.html" class="view-details-link">View Full Details</a>
       </div>
+
+      <!-- Premium Polo - Hers -->
+      <div class="product-card-section" data-product="premium-polo-hers">
+        <span class="product-badge" style="display: inline-block; padding: 4px 12px; background: linear-gradient(135deg, #ff6b9d, #ff4081); color: white; font-weight: 700; font-size: 0.75rem; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Better Together</span>
+        <div class="product-gallery-mini">
+          <img src="/images/products/premium-polo-hers-1.jpg" alt="Lovers' Galaxies Premium Polo - Hers" loading="lazy" class="main-image" id="polo-hers-main-image">
+        </div>
+        <h3>Lovers' Galaxies Premium Polo - Hers</h3>
+        <p class="product-description">When two galaxies collide, stars are born. Her side of the cosmic connection. Premium pique polo featuring celestial lovers meeting across the universe. Incomplete without His.</p>
+        <p class="price" id="polo-hers-price">$50.99</p>
+        <div class="selector-group">
+          <label for="polo-hers-size">Size</label>
+          <select id="polo-hers-size">
+            <option value="S" data-price="50.99" data-variant="697bb4f40d65e5">S - $50.99</option>
+            <option value="M" data-price="50.99" data-variant="697bb4f40d6649" selected>M - $50.99</option>
+            <option value="L" data-price="50.99" data-variant="697bb4f40d66a7">L - $50.99</option>
+            <option value="XL" data-price="50.99" data-variant="697bb4f40d66f9">XL - $50.99</option>
+            <option value="2XL" data-price="50.99" data-variant="697bb4f40d6744">2XL - $50.99</option>
+            <option value="3XL" data-price="52.99" data-variant="697bb4f40d6792">3XL - $52.99</option>
+            <option value="4XL" data-price="53.99" data-variant="697bb4f40d67e8">4XL - $53.99</option>
+            <option value="5XL" data-price="55.99" data-variant="697bb4f40d6836">5XL - $55.99</option>
+          </select>
+        </div>
+        <button type="button" class="add-to-cart-btn" id="buy-polo-hers-btn">Add to Cart</button>
+        <a href="/shop/premium-polo-hers.html" class="view-details-link">View Full Details</a>
+      </div>
+    </div>
+
+    <!-- Polo Set Bundle -->
+    <div class="bundle-summary" style="margin-top: 25px;">
+      <p class="original-price">Original: <span id="polo-bundle-original">$101.98</span></p>
+      <p class="bundle-price">Bundle Price: <span id="polo-bundle-total">$86.68</span></p>
+      <p class="savings">You save <span id="polo-bundle-savings">$15.30</span> (15%)</p>
+      <button type="button" class="buy-set-btn" id="buy-polo-bundle-btn">Buy Set – Save 15%</button>
     </div>
   </section>
 
@@ -1403,6 +1437,12 @@
         });
       });
 
+      // Polo Bundle elements - defined early for bundle calculations
+      const poloBundleOriginalEl = document.getElementById('polo-bundle-original');
+      const poloBundleTotalEl = document.getElementById('polo-bundle-total');
+      const poloBundleSavingsEl = document.getElementById('polo-bundle-savings');
+      const buyPoloBundleBtn = document.getElementById('buy-polo-bundle-btn');
+
       // Premium Polo - His functionality
       const poloHisProduct = {
         id: 'premium-polo-his',
@@ -1433,6 +1473,8 @@
         const selectedOption = poloHisSizeSelect.options[poloHisSizeSelect.selectedIndex];
         const price = parseFloat(selectedOption.dataset.price) || poloHisProduct.basePrice;
         if (poloHisPriceEl) poloHisPriceEl.textContent = `$${price.toFixed(2)}`;
+        // Update bundle price if elements exist
+        if (typeof updatePoloBundlePrice === 'function') updatePoloBundlePrice();
       }
 
       function addPoloHisToCart() {
@@ -1482,6 +1524,182 @@
       poloHisSizeSelect.addEventListener('change', updatePoloHisPrice);
       buyPoloHisBtn.addEventListener('click', addPoloHisToCart);
       updatePoloHisPrice();
+
+      // Premium Polo - Hers functionality
+      const poloHersProduct = {
+        id: 'premium-polo-hers',
+        slug: 'premium-polo-hers',
+        name: "Lovers' Galaxies Premium Polo - Hers",
+        basePrice: 50.99,
+        category: "Women / Couples Collection",
+        collection: 'Couples Collection',
+        image: '/images/products/premium-polo-hers-1.jpg',
+        type: 'physical',
+        variants: {
+          'S': { variantId: '697bb4f40d65e5', price: 50.99 },
+          'M': { variantId: '697bb4f40d6649', price: 50.99 },
+          'L': { variantId: '697bb4f40d66a7', price: 50.99 },
+          'XL': { variantId: '697bb4f40d66f9', price: 50.99 },
+          '2XL': { variantId: '697bb4f40d6744', price: 50.99 },
+          '3XL': { variantId: '697bb4f40d6792', price: 52.99 },
+          '4XL': { variantId: '697bb4f40d67e8', price: 53.99 },
+          '5XL': { variantId: '697bb4f40d6836', price: 55.99 }
+        }
+      };
+
+      const poloHersSizeSelect = document.getElementById('polo-hers-size');
+      const poloHersPriceEl = document.getElementById('polo-hers-price');
+      const buyPoloHersBtn = document.getElementById('buy-polo-hers-btn');
+
+      // Bundle price update - called after both products are initialized
+      function updatePoloBundlePrice() {
+        // Get elements by ID to avoid TDZ issues
+        const hisSizeSelect = document.getElementById('polo-his-size');
+        const hersSizeSelect = document.getElementById('polo-hers-size');
+        if (!hisSizeSelect || !hersSizeSelect) return;
+        
+        const hisOption = hisSizeSelect.options[hisSizeSelect.selectedIndex];
+        const hersOption = hersSizeSelect.options[hersSizeSelect.selectedIndex];
+        const hisPrice = parseFloat(hisOption.dataset.price) || 50.99;
+        const hersPrice = parseFloat(hersOption.dataset.price) || 50.99;
+        const originalTotal = hisPrice + hersPrice;
+        const bundleTotal = originalTotal * 0.85; // 15% discount
+        const savings = originalTotal - bundleTotal;
+
+        if (poloBundleOriginalEl) poloBundleOriginalEl.textContent = `$${originalTotal.toFixed(2)}`;
+        if (poloBundleTotalEl) poloBundleTotalEl.textContent = `$${bundleTotal.toFixed(2)}`;
+        if (poloBundleSavingsEl) poloBundleSavingsEl.textContent = `$${savings.toFixed(2)}`;
+      }
+
+      function updatePoloHersPrice() {
+        const selectedOption = poloHersSizeSelect.options[poloHersSizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || poloHersProduct.basePrice;
+        if (poloHersPriceEl) poloHersPriceEl.textContent = `$${price.toFixed(2)}`;
+        updatePoloBundlePrice();
+      }
+
+      function addPoloHersToCart() {
+        const selectedOption = poloHersSizeSelect.options[poloHersSizeSelect.selectedIndex];
+        const size = poloHersSizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: poloHersProduct.id,
+          slug: poloHersProduct.slug,
+          name: poloHersProduct.name,
+          price: price,
+          size: size,
+          image: poloHersProduct.image,
+          category: poloHersProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            poloHersProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      poloHersSizeSelect.addEventListener('change', updatePoloHersPrice);
+      buyPoloHersBtn.addEventListener('click', addPoloHersToCart);
+      updatePoloHersPrice();
+
+      // Polo Bundle add to cart functionality
+      function addPoloBundleToCart() {
+        const hisOption = poloHisSizeSelect.options[poloHisSizeSelect.selectedIndex];
+        const hersOption = poloHersSizeSelect.options[poloHersSizeSelect.selectedIndex];
+        const hisSize = poloHisSizeSelect.value;
+        const hersSize = poloHersSizeSelect.value;
+        const hisVariantId = hisOption.dataset.variant;
+        const hersVariantId = hersOption.dataset.variant;
+        const hisPrice = parseFloat(hisOption.dataset.price);
+        const hersPrice = parseFloat(hersOption.dataset.price);
+
+        if (!hisVariantId || !hersVariantId) {
+          alert('Please select sizes for both polos.');
+          return;
+        }
+
+        // Apply 15% discount to each item
+        const hisBundlePrice = hisPrice * 0.85;
+        const hersBundlePrice = hersPrice * 0.85;
+
+        // Add His polo to cart
+        const hisCartPayload = {
+          id: poloHisProduct.id,
+          slug: poloHisProduct.slug,
+          name: poloHisProduct.name + ' (Bundle)',
+          price: hisBundlePrice,
+          size: hisSize,
+          image: poloHisProduct.image,
+          category: poloHisProduct.category,
+          printfulVariantId: hisVariantId,
+          variantId: hisVariantId,
+          type: 'physical'
+        };
+
+        const hisVariantPayload = {
+          id: hisVariantId,
+          printfulVariantId: hisVariantId,
+          size: hisSize,
+          price: hisBundlePrice
+        };
+
+        // Add Hers polo to cart
+        const hersCartPayload = {
+          id: poloHersProduct.id,
+          slug: poloHersProduct.slug,
+          name: poloHersProduct.name + ' (Bundle)',
+          price: hersBundlePrice,
+          size: hersSize,
+          image: poloHersProduct.image,
+          category: poloHersProduct.category,
+          printfulVariantId: hersVariantId,
+          variantId: hersVariantId,
+          type: 'physical'
+        };
+
+        const hersVariantPayload = {
+          id: hersVariantId,
+          printfulVariantId: hersVariantId,
+          size: hersSize,
+          price: hersBundlePrice
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(poloHisProduct.slug, hisSize, 1, hisCartPayload, hisVariantPayload);
+          addToCart(poloHersProduct.slug, hersSize, 1, hersCartPayload, hersVariantPayload);
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      // Update polo bundle price when His polo size changes
+      poloHisSizeSelect.addEventListener('change', updatePoloBundlePrice);
+      buyPoloBundleBtn.addEventListener('click', addPoloBundleToCart);
+      updatePoloBundlePrice();
     })();
   </script>
 </body>
