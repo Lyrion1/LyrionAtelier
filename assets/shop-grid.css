@@ -1,9 +1,16 @@
-.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
-.shop-card{border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.02);text-decoration:none;color:inherit;display:block}
-.shop-img{aspect-ratio:1/1;overflow:hidden;background:#ffffff;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box}
-.shop-img img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;transition:transform .25s ease;margin:0 auto}
+/* ===========================================
+   SHOP GRID - LUXURY PRODUCT LAYOUT
+   EXACT SPECIFICATIONS
+   =========================================== */
+.shop-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;max-width:1400px;margin:0 auto;padding:40px 20px}
+.shop-card{border:none;border-radius:12px;overflow:hidden;background:#ffffff;text-decoration:none;color:inherit;display:flex;flex-direction:column;height:480px;padding:20px;box-sizing:border-box;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:transform 0.3s ease,box-shadow 0.3s ease}
+.shop-card:hover{transform:translateY(-5px);box-shadow:0 12px 30px rgba(0,0,0,0.15)}
+.shop-img{height:320px;min-height:320px;max-height:320px;overflow:hidden;background:#f8f8f8;display:flex;align-items:center;justify-content:center;padding:0;box-sizing:border-box;border-radius:8px;margin-bottom:15px;flex-shrink:0}
+.shop-img img{max-width:100%;max-height:320px;width:auto;height:auto;object-fit:contain;display:block;transition:transform .25s ease;margin:0 auto}
 .shop-card:hover .shop-img img{transform:scale(1.03)}
-.shop-meta{padding:12px;display:grid;gap:6px}
-.shop-title{font-weight:700}
-.shop-sub{font-size:.9rem;opacity:.8;text-transform:capitalize}
-.shop-price{font-weight:700}
+.shop-meta{padding:0;display:flex;flex-direction:column;justify-content:space-between;flex:1;height:140px}
+.shop-title{font-weight:600;font-size:18px;color:#d4af37;line-height:1.3;max-height:48px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-bottom:8px}
+.shop-sub{display:none}
+.shop-price{font-weight:700;font-size:24px;color:#d4af37;margin-bottom:12px}
+@media (max-width:1199px){.shop-grid{grid-template-columns:repeat(2, 1fr);gap:20px}}
+@media (max-width:767px){.shop-grid{grid-template-columns:1fr;gap:16px;padding:20px 16px}.shop-card{max-width:400px;margin:0 auto}}

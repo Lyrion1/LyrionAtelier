@@ -1,33 +1,378 @@
-/* keep product cards tidy even if images 404 */
-.product-card img { display:block; width:100%; height:auto; object-fit: contain !important; padding: 20px; background: #ffffff; box-sizing: border-box; }
+/* ===========================================
+   SHOP PAGE - LUXURY BRAND STANDARD CSS
+   Reference: net-a-porter.com, ssense.com, farfetch.com
+   ABSOLUTE FINAL FIX - DO NOT MODIFY
+   =========================================== */
 
-/* nuke any legacy stray thumbnail containers */
-.thumb-strip, .thumb, .stray-thumb { display:none !important; }
-#sign-gallery, .sign-strip { display:none !important; }
-
-.product-image,
-.product-card__media {
-  aspect-ratio: 1 / 1;
-  height: auto;
-  min-height: 0;
-  background: #ffffff !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
-}
-.shop-products-section .product-image {
-  aspect-ratio: 1 / 1;
-  height: auto;
-  background: #ffffff !important;
-  padding: 20px;
-}
-.product-image img {
-  object-fit: contain !important;
-  max-width: 100%;
-  max-height: 100%;
+.shop-hero {
+  text-align: center;
+  padding: 60px 0 20px;
 }
 
-/* optional: center empty note */
+.shop-filters {
+  padding: 10px 0 20px;
+}
+
+#search-bar {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f4f5fb;
+  margin-bottom: 14px;
+}
+
+.filters-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
 .shop-empty-note { color: #cfd8ff; text-align:center; }
+
+/* ===========================================
+   PRODUCT GRID - LUXURY LAYOUT (EXACT SPECS)
+   Desktop: 3 columns, 24px gap
+   Tablet: 2 columns, 20px gap  
+   Mobile: 1 column, 16px gap
+   =========================================== */
+
+.product-grid,
+.products-grid,
+#featured-grid,
+#products-grid-local,
+[class*="product-grid"],
+[data-shop-grid] {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 24px !important;
+  padding: 40px 20px !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  align-items: stretch !important;
+}
+
+/* ===========================================
+   PRODUCT CARD - EXACT SPECIFICATIONS
+   Height: 480px FIXED
+   Border-radius: 12px
+   Background: White
+   Padding: 20px all sides
+   Shadow: 0 2px 8px rgba(0,0,0,0.1)
+   =========================================== */
+
+.product-card,
+.shop-card,
+[class*="product-card"] {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 480px !important;
+  width: 100% !important;
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  padding: 20px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  border: none !important;
+}
+
+.product-card:hover,
+.shop-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ===========================================
+   IMAGE CONTAINER - EXACT SPECIFICATIONS
+   Height: 320px FIXED
+   Width: 100%
+   Margin-bottom: 15px
+   Display: flex (centered)
+   Background: white (no weird backgrounds)
+   Padding: 0px (ZERO padding)
+   =========================================== */
+
+.product-card .media,
+.product-card .image,
+.product-card__media,
+.product-image,
+.product-card-image-container,
+.card__image,
+.shop-img,
+.product-image-wrapper {
+  height: 320px !important;
+  width: 100% !important;
+  min-height: 320px !important;
+  max-height: 320px !important;
+  margin-bottom: 15px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #ffffff !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+  aspect-ratio: unset !important;
+}
+
+/* ===========================================
+   PRODUCT IMAGE - EXACT SPECIFICATIONS
+   Max-height: 320px (FILLS container)
+   Max-width: 100%
+   Width: auto
+   Height: auto
+   object-fit: contain
+   object-position: center
+   Display: block
+   Margin: 0 auto
+   NO IMAGE SHOULD BE CUT OFF
+   IMAGES SHOULD FILL THE SPACE
+   =========================================== */
+
+.product-card img,
+.product-card .media img,
+.product-card .image img,
+.product-card__media img,
+.product-image img,
+.product-card-image,
+.card__image img,
+.shop-img img,
+.product-image-wrapper img,
+#featured-grid .product-image img,
+#products-grid-local .product-card img {
+  max-height: 320px !important;
+  max-width: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  display: block !important;
+  margin: 0 auto !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Direct img child of product-card */
+.product-card > img {
+  max-height: 320px !important;
+  max-width: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  display: block !important;
+  margin: 0 auto 15px auto !important;
+  background: #ffffff !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+/* ===========================================
+   PRODUCT INFO SECTION - EXACT SPECIFICATIONS
+   Height: 140px FIXED
+   Display: flex
+   Flex-direction: column
+   Justify-content: space-between
+   =========================================== */
+
+.product-card .product-card-content,
+.product-card__body,
+.card__body,
+.shop-meta {
+  height: 140px !important;
+  min-height: 140px !important;
+  max-height: 140px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+  margin-top: auto !important;
+}
+
+/* ===========================================
+   PRODUCT TITLE - EXACT SPECIFICATIONS
+   Font-size: 18px
+   Font-weight: 600
+   Color: Gold (#d4af37)
+   Margin-bottom: 8px
+   Line-height: 1.3
+   Max-height: 48px (2 lines max)
+   Overflow: hidden
+   Text-overflow: ellipsis
+   =========================================== */
+
+.product-card h3,
+.product-card .title,
+.product-card__title,
+.product-card-title,
+.card__title,
+.shop-title {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #d4af37 !important;
+  margin: 0 0 8px 0 !important;
+  line-height: 1.3 !important;
+  max-height: 48px !important;
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  text-overflow: ellipsis !important;
+}
+
+/* ===========================================
+   PRICE - EXACT SPECIFICATIONS
+   Font-size: 24px
+   Font-weight: bold
+   Color: Gold (#d4af37)
+   Margin-bottom: 12px
+   =========================================== */
+
+.product-card .price,
+.product-card__price,
+.product-card-price,
+.card__price,
+.shop-price {
+  font-size: 24px !important;
+  font-weight: bold !important;
+  color: #d4af37 !important;
+  margin: 0 0 12px 0 !important;
+}
+
+/* ===========================================
+   BUTTON - EXACT SPECIFICATIONS
+   Width: 100%
+   Height: 44px
+   Background: Gold (#d4af37)
+   Color: Navy (#0f0c29)
+   Border-radius: 6px
+   Font-size: 16px
+   Font-weight: 600
+   =========================================== */
+
+.product-card .view-product-btn,
+.product-card .add-to-cart-btn,
+.product-card-buttons .view-button,
+.product-card-buttons .add-to-cart-button,
+.product-card__actions button,
+.product-card__actions a,
+.card__actions button,
+.card__actions a {
+  width: 100% !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  background: #d4af37 !important;
+  color: #0f0c29 !important;
+  border-radius: 6px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.product-card .view-product-btn:hover,
+.product-card .add-to-cart-btn:hover,
+.product-card-buttons .view-button:hover,
+.product-card-buttons .add-to-cart-button:hover {
+  background: #e5c245 !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Product card buttons container */
+.product-card .product-card-buttons,
+.product-card__actions,
+.card__actions {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  margin-top: auto !important;
+}
+
+/* ===========================================
+   TABLET BREAKPOINT (768px - 1199px)
+   2 columns, 20px gap
+   =========================================== */
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .product-grid,
+  .products-grid,
+  #featured-grid,
+  #products-grid-local,
+  [class*="product-grid"],
+  [data-shop-grid] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+    padding: 30px 20px !important;
+  }
+
+  .product-card,
+  .shop-card {
+    height: 480px !important;
+  }
+}
+
+/* ===========================================
+   MOBILE BREAKPOINT (below 768px)
+   1 column, 16px gap
+   =========================================== */
+
+@media (max-width: 767px) {
+  .product-grid,
+  .products-grid,
+  #featured-grid,
+  #products-grid-local,
+  [class*="product-grid"],
+  [data-shop-grid] {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding: 20px 16px !important;
+  }
+
+  .product-card,
+  .shop-card {
+    height: 480px !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Forms mobile optimization */
+  input, select, textarea {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+  }
+
+  /* Filter panel stacking */
+  .filters-panel {
+    grid-template-columns: 1fr !important;
+  }
+
+  .shop-filters .form-group {
+    width: 100%;
+  }
+}
+
+/* ===========================================
+   HIDE DESCRIPTIONS ON PRODUCT CARDS
+   Keep cards clean and focused
+   =========================================== */
+
+.product-card .muted,
+.product-card .product-card-description,
+.product-card__description,
+.card__desc {
+  display: none !important;
+}
