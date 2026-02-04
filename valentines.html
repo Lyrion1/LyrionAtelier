@@ -735,6 +735,39 @@
         <button type="button" class="add-to-cart-btn" id="buy-saturn-btn">Add to Cart</button>
         <a href="/shop/saturn-return-hoodie.html" class="view-details-link">View Full Details</a>
       </div>
+
+      <!-- Saturn Return White Hoodie -->
+      <div class="product-card-section" data-product="saturn-return-white-hoodie">
+        <span class="product-badge" style="display: inline-block; padding: 4px 12px; background: linear-gradient(135deg, #ff6b9d, #ff4081); color: white; font-weight: 700; font-size: 0.75rem; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Anti-Valentine's</span>
+        <div class="product-gallery-mini">
+          <img src="/images/products/saturn-return-white-hoodie-1.jpg" alt="My Saturn Return Took My Relationship Hoodie - White" loading="lazy" class="main-image" id="saturn-white-main-image">
+          <div class="thumbnail-row" data-gallery="saturn-white">
+            <img src="/images/products/saturn-return-white-hoodie-1.jpg" alt="White Saturn Return view 1" loading="lazy">
+            <img src="/images/products/saturn-return-white-hoodie-2.jpg" alt="White Saturn Return view 2" loading="lazy">
+            <img src="/images/products/saturn-return-white-hoodie-3.jpg" alt="White Saturn Return view 3" loading="lazy">
+            <img src="/images/products/saturn-return-white-hoodie-4.jpg" alt="White Saturn Return view 4" loading="lazy">
+            <img src="/images/products/saturn-return-white-hoodie-5.jpg" alt="White Saturn Return view 5" loading="lazy">
+            <img src="/images/products/saturn-return-white-hoodie-6.jpg" alt="White Saturn Return view 6" loading="lazy">
+            <img src="/images/products/saturn-return-white-hoodie-7.jpg" alt="White Saturn Return view 7" loading="lazy">
+          </div>
+        </div>
+        <h3>My Saturn Return Took My Relationship Hoodie - White</h3>
+        <p class="product-description">Saturn Return hits different. White colorway for fresh starts after cosmic reckonings and necessary endings.</p>
+        <p class="price" id="saturn-white-price">$65.00</p>
+        <div class="selector-group">
+          <label for="saturn-white-size">Size</label>
+          <select id="saturn-white-size">
+            <option value="S" data-price="65.00" data-variant="697c0e9b30b4c3">S - $65.00</option>
+            <option value="M" data-price="65.00" data-variant="697c0e9b30b525" selected>M - $65.00</option>
+            <option value="L" data-price="65.00" data-variant="697c0e9b30b579">L - $65.00</option>
+            <option value="XL" data-price="65.00" data-variant="697c0e9b30b5c1">XL - $65.00</option>
+            <option value="2XL" data-price="66.99" data-variant="697c0e9b30b612">2XL - $66.99</option>
+            <option value="3XL" data-price="68.99" data-variant="697c0e9b30b656">3XL - $68.99</option>
+          </select>
+        </div>
+        <button type="button" class="add-to-cart-btn" id="buy-saturn-white-btn">Add to Cart</button>
+        <a href="/shop/saturn-return-white-hoodie.html" class="view-details-link">View Full Details</a>
+      </div>
     </div>
   </section>
 
@@ -1932,6 +1965,84 @@
       saturnSizeSelect.addEventListener('change', updateSaturnPrice);
       buySaturnBtn.addEventListener('click', addSaturnToCart);
       updateSaturnPrice();
+
+      // Saturn Return White Hoodie functionality
+      const saturnWhiteProduct = {
+        id: 'saturn-return-white-hoodie',
+        slug: 'saturn-return-white-hoodie',
+        name: 'My Saturn Return Took My Relationship Hoodie - White',
+        basePrice: 65.00,
+        category: "Unisex / Cosmic Collection",
+        collection: 'Saturn Return Collection',
+        image: '/images/products/saturn-return-white-hoodie-1.jpg',
+        type: 'physical',
+        variants: {
+          'S': { variantId: '697c0e9b30b4c3', price: 65.00 },
+          'M': { variantId: '697c0e9b30b525', price: 65.00 },
+          'L': { variantId: '697c0e9b30b579', price: 65.00 },
+          'XL': { variantId: '697c0e9b30b5c1', price: 65.00 },
+          '2XL': { variantId: '697c0e9b30b612', price: 66.99 },
+          '3XL': { variantId: '697c0e9b30b656', price: 68.99 }
+        }
+      };
+
+      const saturnWhiteSizeSelect = document.getElementById('saturn-white-size');
+      const saturnWhitePriceEl = document.getElementById('saturn-white-price');
+      const buySaturnWhiteBtn = document.getElementById('buy-saturn-white-btn');
+
+      function updateSaturnWhitePrice() {
+        const selectedOption = saturnWhiteSizeSelect.options[saturnWhiteSizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || saturnWhiteProduct.basePrice;
+        if (saturnWhitePriceEl) saturnWhitePriceEl.textContent = `$${price.toFixed(2)}`;
+      }
+
+      function addSaturnWhiteToCart() {
+        const selectedOption = saturnWhiteSizeSelect.options[saturnWhiteSizeSelect.selectedIndex];
+        const size = saturnWhiteSizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: saturnWhiteProduct.id,
+          slug: saturnWhiteProduct.slug,
+          name: saturnWhiteProduct.name,
+          price: price,
+          size: size,
+          image: saturnWhiteProduct.image,
+          category: saturnWhiteProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            saturnWhiteProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      saturnWhiteSizeSelect.addEventListener('change', updateSaturnWhitePrice);
+      buySaturnWhiteBtn.addEventListener('click', addSaturnWhiteToCart);
+      updateSaturnWhitePrice();
 
       // Mercury Retrograde Hoodie functionality
       const mercuryProduct = {

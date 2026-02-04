@@ -4822,5 +4822,126 @@
     "launchDate": "2025-02-04",
     "isBestseller": false,
     "showOnHomepage": false
+  },
+  {
+    "id": 248,
+    "slug": "saturn-return-white-hoodie",
+    "link": "/shop/saturn-return-white-hoodie.html",
+    "name": "My Saturn Return Took My Relationship Hoodie - White",
+    "title": "My Saturn Return Took My Relationship Hoodie - White",
+    "collection": "Saturn Return Collection",
+    "category": "hoodie",
+    "zodiac": "all",
+    "zodiacSign": "all",
+    "element": "cosmic",
+    "gender": "unisex",
+    "meta": {
+      "category": "Hoodie",
+      "collection": "Saturn Return Collection",
+      "zodiac": "All"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 65.00,
+    "priceUSD": 65.00,
+    "currency": "USD",
+    "image": "/images/products/saturn-return-white-hoodie-1.jpg",
+    "images": [
+      "/images/products/saturn-return-white-hoodie-1.jpg",
+      "/images/products/saturn-return-white-hoodie-2.jpg",
+      "/images/products/saturn-return-white-hoodie-3.jpg",
+      "/images/products/saturn-return-white-hoodie-4.jpg",
+      "/images/products/saturn-return-white-hoodie-5.jpg",
+      "/images/products/saturn-return-white-hoodie-6.jpg",
+      "/images/products/saturn-return-white-hoodie-7.jpg"
+    ],
+    "mainImage": "/images/products/saturn-return-white-hoodie-1.jpg",
+    "description": "Saturn Return hits different. When the planet completes its 29-year orbit and reality checks every choice you've made. Relationships transform. Foundations rebuild. This hoodie speaks to cosmic reckonings, necessary endings, and the clarity that comes after chaos. White colorway for fresh starts.",
+    "sizes": ["S", "M", "L", "XL", "2XL", "3XL"],
+    "variants": [
+      {
+        "size": "S",
+        "printfulVariantId": "697c0e9b30b4c3",
+        "price": 65.00,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-SATURN-WHITE-HOODIE-S"
+      },
+      {
+        "size": "M",
+        "printfulVariantId": "697c0e9b30b525",
+        "price": 65.00,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-SATURN-WHITE-HOODIE-M"
+      },
+      {
+        "size": "L",
+        "printfulVariantId": "697c0e9b30b579",
+        "price": 65.00,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-SATURN-WHITE-HOODIE-L"
+      },
+      {
+        "size": "XL",
+        "printfulVariantId": "697c0e9b30b5c1",
+        "price": 65.00,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-SATURN-WHITE-HOODIE-XL"
+      },
+      {
+        "size": "2XL",
+        "printfulVariantId": "697c0e9b30b612",
+        "price": 66.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-SATURN-WHITE-HOODIE-2XL"
+      },
+      {
+        "size": "3XL",
+        "printfulVariantId": "697c0e9b30b656",
+        "price": 68.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-SATURN-WHITE-HOODIE-3XL"
+      }
+    ],
+    "printfulProduct": "Unisex Hoodie",
+    "features": [
+      "Premium unisex fit",
+      "Saturn Return design",
+      "White colorway",
+      "Soft brushed interior",
+      "Ribbed cuffs and hem",
+      "Perfect gift for cosmic reawakening"
+    ],
+    "careInstructions": "Machine wash cold, tumble dry low. Your cosmic armor endures.",
+    "tags": [
+      "saturn-return",
+      "cosmic",
+      "zodiac",
+      "hoodie",
+      "unisex",
+      "gift",
+      "curated for gifting",
+      "valentines",
+      "anti-valentines"
+    ],
+    "chartResonance": [
+      "saturn-dominant",
+      "capricorn-sun",
+      "aquarius-sun",
+      "10th-house-emphasis",
+      "11th-house-emphasis"
+    ],
+    "seoTitle": "My Saturn Return Took My Relationship Hoodie - White | Lyrīon Atelier",
+    "seoDescription": "Saturn Return hits different. White colorway hoodie for fresh starts after cosmic reckonings. Perfect anti-valentine's gift.",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": true
   }
 ]
