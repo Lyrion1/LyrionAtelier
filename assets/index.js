@@ -54,6 +54,9 @@ function renderFeaturedProducts() {
     const valentinesSlugs = [
       'heartbeat-hoodie-his',
       'heartbeat-hoodie-hers',
+      'cosmic-curiosity-box',
+      'zodiac-mystery-vault',
+      'lovers-fate-box',
       'mercury-retrograde-hoodie',
       'gemini-love-language-hoodie',
       'single-cosmic-design-mug',
