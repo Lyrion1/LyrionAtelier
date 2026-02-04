@@ -1360,7 +1360,7 @@ const products = [
     price: 45.00,
     category: "mystery",
     zodiac: "all",
-    image: "/images/products/mystery-box-curiosity.jpg",
+    image: "/images/products/mystery-box-curiosity.png",
     description: "Value $60-80. Mystery zodiac item curated by the cosmos. Could be apparel, accessories, or cosmic essentials. Your sign influences what you receive. Every box is different. The stars decide your gift.",
     sizes: ["One Size"],
     printfulVariants: {
@@ -1377,7 +1377,7 @@ const products = [
     price: 89.00,
     category: "mystery",
     zodiac: "all",
-    image: "/images/products/mystery-box-vault.jpg",
+    image: "/images/products/mystery-box-vault.png",
     description: "Value $120-150. Premium zodiac mystery. Hoodie, tee, tote, or accessories curated by cosmic energy. What will the universe reveal? Open your vault and discover your destined piece.",
     sizes: ["One Size"],
     printfulVariants: {
@@ -1394,7 +1394,7 @@ const products = [
     price: 149.00,
     category: "mystery",
     zodiac: "all",
-    image: "/images/products/mystery-box-lovers.jpg",
+    image: "/images/products/mystery-box-lovers.png",
     description: "Value $200+. His & Hers mystery items cosmically curated for your connection. Two products chosen by the stars, one cosmic bond. Perfect for couples ready to trust the universe.",
     sizes: ["One Size"],
     printfulVariants: {
