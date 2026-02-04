@@ -265,6 +265,172 @@
         height: 350px;
       }
     }
+
+    /* Section Headers with Gold Text and Separators */
+    .valentines-section {
+      padding: 50px 20px;
+      margin: 40px 15px;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .section-header h2 {
+      color: var(--gold-primary, #d4af37);
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    
+    .section-header .section-subtitle {
+      color: var(--white-80, rgba(255,255,255,0.8));
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+    
+    .section-divider {
+      width: 80%;
+      max-width: 300px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary, #d4af37), transparent);
+      margin: 0 auto;
+    }
+    
+    /* Product Grid for Sections - 2 columns desktop, 1 mobile */
+    .products-grid-section {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 25px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    @media (min-width: 768px) {
+      .products-grid-section {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+      
+      .valentines-section {
+        padding: 60px 40px;
+        margin: 50px 20px;
+      }
+      
+      .section-header h2 {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (min-width: 992px) {
+      .valentines-section {
+        max-width: 1000px;
+        margin: 60px auto;
+      }
+    }
+    
+    /* Product Card for individual items in sections */
+    .product-card-section {
+      background: rgba(10, 8, 32, 0.6);
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .product-card-section .product-gallery-mini {
+      margin-bottom: 15px;
+    }
+    
+    .product-card-section .product-gallery-mini .main-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    
+    .product-card-section h3 {
+      color: var(--gold-primary, #d4af37);
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+    
+    .product-card-section .product-description {
+      color: var(--white-80, rgba(255,255,255,0.8));
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+    
+    .product-card-section .price {
+      color: var(--gold-primary, #d4af37);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .product-card-section .selector-group {
+      margin-bottom: 12px;
+    }
+    
+    .product-card-section .selector-group label {
+      display: block;
+      color: var(--white-80, rgba(255,255,255,0.8));
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+    
+    .product-card-section .selector-group select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      background: rgba(10, 8, 32, 0.8);
+      color: var(--white, #fff);
+      font-size: 16px;
+    }
+    
+    .product-card-section .add-to-cart-btn {
+      width: 100%;
+      padding: 14px 20px;
+      min-height: 48px;
+      background: linear-gradient(135deg, #d4af37, #f0c659);
+      border: none;
+      border-radius: 8px;
+      color: var(--navy-darkest, #0a0820);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .product-card-section .add-to-cart-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+    }
+    
+    .product-card-section .view-details-link {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      color: var(--gold-primary, #d4af37);
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+    
+    .product-card-section .view-details-link:hover {
+      text-decoration: underline;
+    }
+    
+    @media (min-width: 768px) {
+      .product-card-section .product-gallery-mini .main-image {
+        height: 300px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -298,6 +464,7 @@
      <a href="/shop?zodiac=pisces">Pisces</a>
    </div>
  </div>
+ <a href="/valentines">Valentine's 💕</a>
  <a href="/curated-for-gifting">Curated for Gifting</a>
  <a href="/oracle">Oracle</a>
  <a href="/compatibility">Compatibility</a>
@@ -319,12 +486,12 @@
     </div>
   </section>
 
-  <!-- Valentine's Bundle Section - Heartbeat Hoodies -->
-  <section class="valentines-bundle">
-    <div class="bundle-header">
-      <span class="bundle-badge">Better Together</span>
-      <h2>Heartbeat Edition</h2>
-      <p class="muted">Half the heartbeat. Complete the connection. Incomplete alone. Whole together.</p>
+  <!-- SECTION 2: Better Together - Couples Collection -->
+  <section class="valentines-section valentines-bundle">
+    <div class="section-header">
+      <h2>Better Together – Couples Collection</h2>
+      <p class="section-subtitle">Half the heartbeat. Complete the connection. Incomplete alone. Whole together.</p>
+      <div class="section-divider"></div>
     </div>
     
     <div class="bundle-grid" id="bundle-products">
@@ -394,128 +561,17 @@
     </div>
   </section>
 
-  <!-- Gemini Love Language Hoodie - Valentine's Featured Product -->
-  <section class="valentines-bundle" style="background: rgba(212, 175, 55, 0.08);">
-    <div class="bundle-header">
-      <span class="bundle-badge" style="background: linear-gradient(135deg, #d4af37, #f0c659);">Best Seller</span>
-      <h2>Gemini Love Language Hoodie</h2>
-      <p class="muted">Love Language: 3AM Conversations</p>
+  <!-- SECTION 3: Solo & Thriving - Anti-Valentine's -->
+  <section class="valentines-section" style="background: rgba(107, 76, 255, 0.08); border-radius: 16px;">
+    <div class="section-header">
+      <h2>Solo & Thriving – Anti-Valentine's</h2>
+      <p class="section-subtitle">For those choosing themselves. Embrace the single cosmic energy.</p>
+      <div class="section-divider"></div>
     </div>
     
-    <div class="bundle-grid" style="grid-template-columns: 1fr;">
-      <div class="bundle-item" data-product="gemini-love-language-hoodie" style="max-width: 500px; margin: 0 auto;">
-        <div class="product-gallery-mini">
-          <img src="/images/products/gemini-love-language-hoodie-1.jpg" alt="Gemini Love Language Hoodie" loading="lazy" class="main-image" id="gemini-main-image">
-          <div class="thumbnail-row" data-gallery="gemini">
-            <img src="/images/products/gemini-love-language-hoodie-1.jpg" alt="Gemini view 1" loading="lazy">
-            <img src="/images/products/gemini-love-language-hoodie-2.jpg" alt="Gemini view 2" loading="lazy">
-            <img src="/images/products/gemini-love-language-hoodie-3.jpg" alt="Gemini view 3" loading="lazy">
-            <img src="/images/products/gemini-love-language-hoodie-4.jpg" alt="Gemini view 4" loading="lazy">
-            <img src="/images/products/gemini-love-language-hoodie-5.jpg" alt="Gemini view 5" loading="lazy">
-            <img src="/images/products/gemini-love-language-hoodie-6.jpg" alt="Gemini view 6" loading="lazy">
-          </div>
-        </div>
-        <h3>Gemini Love Language Hoodie</h3>
-        <p class="product-description">For the Gemini who finds intimacy in intellectual connection. Late-night conversations about everything and nothing. Premium box hoodie for those who speak love through words.</p>
-        <p class="price" id="gemini-price">$83.05</p>
-        <div class="selector-group">
-          <label for="gemini-size">Size</label>
-          <select id="gemini-size">
-            <option value="S" data-price="83.05" data-variant="697bb788231124">S - $83.05</option>
-            <option value="M" data-price="83.05" data-variant="697bb7882311c2" selected>M - $83.05</option>
-            <option value="L" data-price="83.05" data-variant="697bb788231256">L - $83.05</option>
-            <option value="XL" data-price="83.05" data-variant="697bb7882312d9">XL - $83.05</option>
-            <option value="2XL" data-price="85.05" data-variant="697bb788231366">2XL - $85.05</option>
-            <option value="3XL" data-price="87.05" data-variant="697bb7882313d7">3XL - $87.05</option>
-          </select>
-        </div>
-        <button type="button" class="buy-set-btn" id="buy-gemini-btn" style="margin-top: 1rem;">Add to Cart</button>
-        <a href="/shop/gemini-love-language-hoodie.html" style="display: block; text-align: center; margin-top: 0.5rem; color: var(--gold-primary);">View Full Details</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Aries Love Language Hoodie - Valentine's Featured Product -->
-  <section class="valentines-bundle" style="background: rgba(255, 107, 107, 0.08);">
-    <div class="bundle-header">
-      <span class="bundle-badge" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">New Arrival</span>
-      <h2>Aries Love Language Hoodie</h2>
-      <p class="muted">Love Language: Acts of Courage</p>
-    </div>
-    
-    <div class="bundle-grid" style="grid-template-columns: 1fr;">
-      <div class="bundle-item" data-product="aries-love-language-hoodie" style="max-width: 500px; margin: 0 auto;">
-        <div class="product-gallery-mini">
-          <img src="/images/products/aries-love-language-hoodie-1.jpg" alt="Aries Love Language Hoodie" loading="lazy" class="main-image" id="aries-main-image">
-          <div class="thumbnail-row" data-gallery="aries">
-            <img src="/images/products/aries-love-language-hoodie-1.jpg" alt="Aries view 1" loading="lazy">
-            <img src="/images/products/aries-love-language-hoodie-2.jpg" alt="Aries view 2" loading="lazy">
-            <img src="/images/products/aries-love-language-hoodie-3.jpg" alt="Aries view 3" loading="lazy">
-            <img src="/images/products/aries-love-language-hoodie-4.jpg" alt="Aries view 4" loading="lazy">
-            <img src="/images/products/aries-love-language-hoodie-5.jpg" alt="Aries view 5" loading="lazy">
-          </div>
-        </div>
-        <h3>Aries Love Language Hoodie</h3>
-        <p class="product-description">For the Aries who shows love through bravery. Bold moves. Fearless protection. Standing up when it matters. Premium hoodie for those who lead with courage.</p>
-        <p class="price" id="aries-price">$64.07</p>
-        <div class="selector-group">
-          <label for="aries-size">Size</label>
-          <select id="aries-size">
-            <option value="S" data-price="64.07" data-variant="6973fd61a6ab49">S - $64.07</option>
-            <option value="M" data-price="64.07" data-variant="6973fd61a6abd4" selected>M - $64.07</option>
-            <option value="L" data-price="64.07" data-variant="6973fd61a6ac52">L - $64.07</option>
-            <option value="XL" data-price="64.07" data-variant="6973fd61a6acc4">XL - $64.07</option>
-            <option value="2XL" data-price="65.72" data-variant="6973fd61a6ad32">2XL - $65.72</option>
-            <option value="3XL" data-price="67.37" data-variant="6973fd61a6ada2">3XL - $67.37</option>
-            <option value="4XL" data-price="69.02" data-variant="6973fd61a6ae15">4XL - $69.02</option>
-            <option value="5XL" data-price="70.67" data-variant="6973fd61a6ae89">5XL - $70.67</option>
-          </select>
-        </div>
-        <button type="button" class="buy-set-btn" id="buy-aries-btn" style="margin-top: 1rem;">Add to Cart</button>
-        <a href="/shop/aries-love-language-hoodie.html" style="display: block; text-align: center; margin-top: 0.5rem; color: var(--gold-primary);">View Full Details</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Single by Cosmic Design Mug - Anti-Valentine's Featured Product -->
-  <section class="valentines-bundle" style="background: rgba(107, 76, 255, 0.08);">
-    <div class="bundle-header">
-      <span class="bundle-badge" style="background: linear-gradient(135deg, #6b4cff, #9b59b6);">Anti-Valentine's</span>
-      <h2>Single by Cosmic Design Mug</h2>
-      <p class="muted">For those choosing themselves. Solo cosmic energy.</p>
-    </div>
-    
-    <div class="bundle-grid" style="grid-template-columns: 1fr;">
-      <div class="bundle-item" data-product="single-cosmic-design-mug" style="max-width: 500px; margin: 0 auto;">
-        <div class="product-gallery-mini">
-          <img src="/images/products/single-cosmic-design-mug-1.jpg" alt="Single by Cosmic Design Mug" loading="lazy" class="main-image" id="cosmic-mug-main-image">
-        </div>
-        <h3>Single by Cosmic Design Mug</h3>
-        <p class="product-description">For those choosing themselves. Black glossy mug celebrating solo cosmic energy.</p>
-        <p class="price" id="cosmic-mug-price">$16.95</p>
-        <div class="selector-group">
-          <label for="cosmic-mug-size">Size</label>
-          <select id="cosmic-mug-size">
-            <option value="11oz" data-price="16.95" data-variant="697ba95a591694" selected>11oz - $16.95</option>
-            <option value="15oz" data-price="16.95" data-variant="697ba95a591743">15oz - $16.95</option>
-          </select>
-        </div>
-        <button type="button" class="buy-set-btn" id="buy-cosmic-mug-btn" style="margin-top: 1rem;">Add to Cart</button>
-        <a href="/shop/single-cosmic-design-mug.html" style="display: block; text-align: center; margin-top: 0.5rem; color: var(--gold-primary);">View Full Details</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mercury Retrograde Hoodie - Trending Product -->
-  <section class="valentines-bundle" style="background: rgba(255, 107, 157, 0.08);">
-    <div class="bundle-header">
-      <span class="bundle-badge" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">Trending</span>
-      <h2>Mercury Retrograde Ruined My Love Life Hoodie</h2>
-      <p class="muted">When Mercury goes retrograde, plans derail and love goes sideways.</p>
-    </div>
-    
-    <div class="bundle-grid" style="grid-template-columns: 1fr;">
-      <div class="bundle-item" data-product="mercury-retrograde-hoodie" style="max-width: 500px; margin: 0 auto;">
+    <div class="products-grid-section">
+      <!-- Mercury Retrograde Hoodie -->
+      <div class="product-card-section" data-product="mercury-retrograde-hoodie">
         <div class="product-gallery-mini">
           <img src="/images/products/mercury-retrograde-hoodie-1.jpg" alt="Mercury Retrograde Ruined My Love Life Hoodie" loading="lazy" class="main-image" id="mercury-main-image">
           <div class="thumbnail-row" data-gallery="mercury">
@@ -543,8 +599,101 @@
             <option value="5XL" data-price="72.00" data-variant="697ba455db19b8">5XL - $72.00</option>
           </select>
         </div>
-        <button type="button" class="buy-set-btn" id="buy-mercury-btn" style="margin-top: 1rem;">Add to Cart</button>
-        <a href="/shop/mercury-retrograde-hoodie.html" style="display: block; text-align: center; margin-top: 0.5rem; color: var(--gold-primary);">View Full Details</a>
+        <button type="button" class="add-to-cart-btn" id="buy-mercury-btn">Add to Cart</button>
+        <a href="/shop/mercury-retrograde-hoodie.html" class="view-details-link">View Full Details</a>
+      </div>
+
+      <!-- Single by Cosmic Design Mug -->
+      <div class="product-card-section" data-product="single-cosmic-design-mug">
+        <div class="product-gallery-mini">
+          <img src="/images/products/single-cosmic-design-mug-1.jpg" alt="Single by Cosmic Design Mug" loading="lazy" class="main-image" id="cosmic-mug-main-image">
+        </div>
+        <h3>Single by Cosmic Design Mug</h3>
+        <p class="product-description">For those choosing themselves. Black glossy mug celebrating solo cosmic energy.</p>
+        <p class="price" id="cosmic-mug-price">$16.95</p>
+        <div class="selector-group">
+          <label for="cosmic-mug-size">Size</label>
+          <select id="cosmic-mug-size">
+            <option value="11oz" data-price="16.95" data-variant="697ba95a591694" selected>11oz - $16.95</option>
+            <option value="15oz" data-price="16.95" data-variant="697ba95a591743">15oz - $16.95</option>
+          </select>
+        </div>
+        <button type="button" class="add-to-cart-btn" id="buy-cosmic-mug-btn">Add to Cart</button>
+        <a href="/shop/single-cosmic-design-mug.html" class="view-details-link">View Full Details</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: Love Languages Collection -->
+  <section class="valentines-section" style="background: rgba(212, 175, 55, 0.08); border-radius: 16px;">
+    <div class="section-header">
+      <h2>Love Languages Collection</h2>
+      <p class="section-subtitle">Express your cosmic love language through zodiac-inspired comfort.</p>
+      <div class="section-divider"></div>
+    </div>
+    
+    <div class="products-grid-section">
+      <!-- Gemini Love Language Hoodie -->
+      <div class="product-card-section" data-product="gemini-love-language-hoodie">
+        <div class="product-gallery-mini">
+          <img src="/images/products/gemini-love-language-hoodie-1.jpg" alt="Gemini Love Language Hoodie" loading="lazy" class="main-image" id="gemini-main-image">
+          <div class="thumbnail-row" data-gallery="gemini">
+            <img src="/images/products/gemini-love-language-hoodie-1.jpg" alt="Gemini view 1" loading="lazy">
+            <img src="/images/products/gemini-love-language-hoodie-2.jpg" alt="Gemini view 2" loading="lazy">
+            <img src="/images/products/gemini-love-language-hoodie-3.jpg" alt="Gemini view 3" loading="lazy">
+            <img src="/images/products/gemini-love-language-hoodie-4.jpg" alt="Gemini view 4" loading="lazy">
+            <img src="/images/products/gemini-love-language-hoodie-5.jpg" alt="Gemini view 5" loading="lazy">
+            <img src="/images/products/gemini-love-language-hoodie-6.jpg" alt="Gemini view 6" loading="lazy">
+          </div>
+        </div>
+        <h3>Gemini Love Language Hoodie</h3>
+        <p class="product-description">For the Gemini who finds intimacy in intellectual connection. Love Language: 3AM Conversations. Premium box hoodie for those who speak love through words.</p>
+        <p class="price" id="gemini-price">$83.05</p>
+        <div class="selector-group">
+          <label for="gemini-size">Size</label>
+          <select id="gemini-size">
+            <option value="S" data-price="83.05" data-variant="697bb788231124">S - $83.05</option>
+            <option value="M" data-price="83.05" data-variant="697bb7882311c2" selected>M - $83.05</option>
+            <option value="L" data-price="83.05" data-variant="697bb788231256">L - $83.05</option>
+            <option value="XL" data-price="83.05" data-variant="697bb7882312d9">XL - $83.05</option>
+            <option value="2XL" data-price="85.05" data-variant="697bb788231366">2XL - $85.05</option>
+            <option value="3XL" data-price="87.05" data-variant="697bb7882313d7">3XL - $87.05</option>
+          </select>
+        </div>
+        <button type="button" class="add-to-cart-btn" id="buy-gemini-btn">Add to Cart</button>
+        <a href="/shop/gemini-love-language-hoodie.html" class="view-details-link">View Full Details</a>
+      </div>
+
+      <!-- Aries Love Language Hoodie -->
+      <div class="product-card-section" data-product="aries-love-language-hoodie">
+        <div class="product-gallery-mini">
+          <img src="/images/products/aries-love-language-hoodie-1.jpg" alt="Aries Love Language Hoodie" loading="lazy" class="main-image" id="aries-main-image">
+          <div class="thumbnail-row" data-gallery="aries">
+            <img src="/images/products/aries-love-language-hoodie-1.jpg" alt="Aries view 1" loading="lazy">
+            <img src="/images/products/aries-love-language-hoodie-2.jpg" alt="Aries view 2" loading="lazy">
+            <img src="/images/products/aries-love-language-hoodie-3.jpg" alt="Aries view 3" loading="lazy">
+            <img src="/images/products/aries-love-language-hoodie-4.jpg" alt="Aries view 4" loading="lazy">
+            <img src="/images/products/aries-love-language-hoodie-5.jpg" alt="Aries view 5" loading="lazy">
+          </div>
+        </div>
+        <h3>Aries Love Language Hoodie</h3>
+        <p class="product-description">For the Aries who shows love through bravery. Love Language: Acts of Courage. Premium hoodie for those who lead with fearless protection.</p>
+        <p class="price" id="aries-price">$64.07</p>
+        <div class="selector-group">
+          <label for="aries-size">Size</label>
+          <select id="aries-size">
+            <option value="S" data-price="64.07" data-variant="6973fd61a6ab49">S - $64.07</option>
+            <option value="M" data-price="64.07" data-variant="6973fd61a6abd4" selected>M - $64.07</option>
+            <option value="L" data-price="64.07" data-variant="6973fd61a6ac52">L - $64.07</option>
+            <option value="XL" data-price="64.07" data-variant="6973fd61a6acc4">XL - $64.07</option>
+            <option value="2XL" data-price="65.72" data-variant="6973fd61a6ad32">2XL - $65.72</option>
+            <option value="3XL" data-price="67.37" data-variant="6973fd61a6ada2">3XL - $67.37</option>
+            <option value="4XL" data-price="69.02" data-variant="6973fd61a6ae15">4XL - $69.02</option>
+            <option value="5XL" data-price="70.67" data-variant="6973fd61a6ae89">5XL - $70.67</option>
+          </select>
+        </div>
+        <button type="button" class="add-to-cart-btn" id="buy-aries-btn">Add to Cart</button>
+        <a href="/shop/aries-love-language-hoodie.html" class="view-details-link">View Full Details</a>
       </div>
     </div>
   </section>
