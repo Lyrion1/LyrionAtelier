@@ -125,25 +125,30 @@ import { formatPrice } from './price-utils.js';
 
   const buildZodiacMap = (imageMap = {}) => {
     const map = {};
-    // Pre-compute lowercase zodiac signs Set for O(1) lookups instead of O(n) per entry
-    const zodiacSet = new Set(ZODIAC_SIGNS);
     const entries = Object.entries(imageMap || {});
     for (const [key, url] of entries) {
       const keyLower = key.toLowerCase();
       const urlStr = String(url || '').toLowerCase();
-      // Check key and url only once against the set
+      // Check key and url only once
       const sign = ZODIAC_SIGNS.find((z) => keyLower.includes(z) || urlStr.includes(`/${z}`));
       if (sign && !map[sign]) map[sign] = url;
     }
-    // Second pass: fill in missing zodiac signs
+    // Second pass: fill in missing zodiac signs with fallbacks
     for (const sign of ZODIAC_SIGNS) {
       if (map[sign]) continue;
       if (imageMap[sign]) {
         map[sign] = imageMap[sign];
         continue;
       }
-      // Use static path lookup - first match wins
-      map[sign] = `/assets/catalog/zodiac/${sign}.webp`;
+      // Try multiple file paths for fallback
+      const candidate =
+        pick(
+          `/assets/catalog/zodiac/${sign}.webp`,
+          `/assets/catalog/zodiac/${sign}.png`,
+          `/assets/catalog/${sign}.webp`,
+          `/assets/catalog/${sign}.png`
+        ) || null;
+      map[sign] = candidate || FALLBACK;
     }
     cachedZodiacMap = map;
     return map;

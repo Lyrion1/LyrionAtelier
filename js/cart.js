@@ -274,7 +274,8 @@ const computeBundleOptions = (cart = []) => {
     subtotalCents += lineCents;
     totalQty += qty;
     
-    // Track cheapest item for trinity bundle
+    // Track cheapest unit price for trinity bundle (15% off cheapest item)
+    // Uses unit price not line total to match original behavior
     if (itemCents > 0 && itemCents < cheapestCents) {
       cheapestCents = itemCents;
     }
