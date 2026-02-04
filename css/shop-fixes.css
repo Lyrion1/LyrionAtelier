@@ -119,7 +119,6 @@
 
   .product-card img {
     height: 320px;
-    max-height: 300px;
     object-fit: contain;
     padding: 10px;
     background: #ffffff;
@@ -127,8 +126,7 @@
 
   .product-card h3 {
     font-size: 16px;
-    min-height: 42px;
-    max-height: 42px;
+    height: 42px;
   }
 }
 
@@ -148,7 +146,6 @@
 
   .product-card img {
     height: 300px;
-    max-height: 280px;
     object-fit: contain;
     padding: 10px;
     background: #ffffff;
@@ -156,8 +153,7 @@
 
   .product-card h3 {
     font-size: 16px;
-    min-height: 42px;
-    max-height: 42px;
+    height: 42px;
   }
 
   .product-card .view-product-btn {
