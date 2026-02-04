@@ -7497,7 +7497,7 @@ button,
   max-width: 1200px;
   margin: 0 auto;
   padding: 60px 20px;
-  background: rgba(19, 28, 49, 0.6);
+  background: var(--bg-alt);
 }
 
 .trust-badges-grid {
