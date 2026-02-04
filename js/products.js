@@ -1153,6 +1153,34 @@ const products = [
       "M": "697c1335c39f42",
       "L": "697c1335c39fa3"
     }
+  },
+  {
+    id: 248,
+    name: "My Saturn Return Took My Relationship Hoodie - White",
+    price: 65.00,
+    category: "hoodie",
+    zodiac: "all",
+    image: "/images/products/saturn-return-white-hoodie-1.jpg",
+    galleryImages: [
+      "/images/products/saturn-return-white-hoodie-1.jpg",
+      "/images/products/saturn-return-white-hoodie-2.jpg",
+      "/images/products/saturn-return-white-hoodie-3.jpg",
+      "/images/products/saturn-return-white-hoodie-4.jpg",
+      "/images/products/saturn-return-white-hoodie-5.jpg",
+      "/images/products/saturn-return-white-hoodie-6.jpg",
+      "/images/products/saturn-return-white-hoodie-7.jpg"
+    ],
+    description: "Saturn Return hits different. When the planet completes its 29-year orbit and reality checks every choice you've made. Relationships transform. Foundations rebuild. This hoodie speaks to cosmic reckonings, necessary endings, and the clarity that comes after chaos. White colorway for fresh starts.",
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
+    printfulVariants: {
+      "S": "697c0e9b30b4c3",
+      "M": "697c0e9b30b525",
+      "L": "697c0e9b30b579",
+      "XL": "697c0e9b30b5c1",
+      "2XL": "697c0e9b30b612",
+      "3XL": "697c0e9b30b656"
+    },
+    tags: ["gift", "saturn-return", "anti-valentines"]
   }
 ];
 
