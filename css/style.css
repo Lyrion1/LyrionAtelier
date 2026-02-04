@@ -7489,3 +7489,104 @@ button,
     font-size: 1.4rem !important;
   }
 }
+
+/* ===========================================
+   TRUST SECTION - Site-wide Trust Badges
+   =========================================== */
+.trust-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  background: rgba(19, 28, 49, 0.6);
+}
+
+.trust-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.trust-badge {
+  text-align: center;
+  padding: 20px 15px;
+}
+
+.trust-badge-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.trust-badge-title {
+  color: var(--brand-gold);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-family: 'Cinzel', serif;
+}
+
+.trust-badge-subtext {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
+/* Mobile responsiveness for trust section */
+@media (max-width: 768px) {
+  .trust-section {
+    padding: 40px 15px;
+  }
+  
+  .trust-badges-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .trust-badge {
+    padding: 15px 10px;
+  }
+  
+  .trust-badge-icon {
+    font-size: 2rem;
+  }
+  
+  .trust-badge-title {
+    font-size: 1rem;
+  }
+  
+  .trust-badge-subtext {
+    font-size: 0.85rem;
+  }
+}
+
+/* ===========================================
+   VALENTINE'S GUARANTEE BANNER
+   =========================================== */
+.valentines-guarantee-banner {
+  background: linear-gradient(135deg, var(--brand-gold) 0%, #c5a050 100%);
+  padding: 16px 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.valentines-guarantee-banner p {
+  color: #0f172a;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  font-family: 'Cinzel', serif;
+}
+
+@media (max-width: 768px) {
+  .valentines-guarantee-banner {
+    padding: 14px 15px;
+  }
+  
+  .valentines-guarantee-banner p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+}
