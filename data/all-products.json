@@ -4635,5 +4635,87 @@
     "launchDate": "2025-02-04",
     "isBestseller": false,
     "showOnHomepage": false
+  },
+  {
+    "id": 246,
+    "slug": "virgo-mousepad",
+    "link": "/shop/virgo-mousepad.html",
+    "name": "Virgo Round Mousepad",
+    "title": "Virgo Round Mousepad",
+    "collection": "Virgo Collection",
+    "category": "mousepad",
+    "zodiac": "virgo",
+    "zodiacSign": "virgo",
+    "element": "earth",
+    "gender": "unisex",
+    "meta": {
+      "category": "Mousepad",
+      "collection": "Virgo Collection",
+      "zodiac": "Virgo"
+    },
+    "state": {
+      "ready": true,
+      "published": true
+    },
+    "price": 24.99,
+    "price_range": {
+      "min": 24.99,
+      "max": 24.99,
+      "currency": "USD"
+    },
+    "currency": "USD",
+    "images": [
+      "/images/products/virgo-mousepad-1.jpg"
+    ],
+    "mainImage": "/images/products/virgo-mousepad-1.jpg",
+    "description": "The Virgo workspace necessity. Clean lines. Perfect alignment. A mousepad that stays exactly where you put it. No chaos allowed—just organized excellence and the maiden's quiet precision.",
+    "mysticalCopy": "Organized excellence and the maiden's quiet precision.",
+    "options": {
+      "size": [
+        "One Size"
+      ]
+    },
+    "variants": [
+      {
+        "size": "One Size",
+        "printfulVariantId": "697c0c6089091f6",
+        "price": 24.99,
+        "currency": "USD",
+        "inStock": true,
+        "sku": "LYR-VIRGO-MOUSEPAD-OS"
+      }
+    ],
+    "printfulProduct": "Round Mousepad",
+    "features": [
+      "Premium round mousepad",
+      "Virgo constellation design",
+      "Non-slip rubber base",
+      "Smooth surface for precision",
+      "Perfect Virgo birthday gift (August 23 - September 22)"
+    ],
+    "careInstructions": "Wipe clean with damp cloth. Your cosmic workspace endures.",
+    "tags": [
+      "virgo",
+      "earth-sign",
+      "zodiac",
+      "mousepad",
+      "unisex",
+      "gift",
+      "curated for gifting",
+      "valentines"
+    ],
+    "chartResonance": [
+      "virgo-sun",
+      "virgo-moon",
+      "virgo-rising",
+      "mercury-dominant",
+      "6th-house-emphasis",
+      "earth-dominant"
+    ],
+    "seoTitle": "Virgo Round Mousepad | Zodiac Accessories | Lyrīon Atelier",
+    "seoDescription": "Premium round mousepad featuring Virgo constellation design. Perfect gift for Virgo (August 23 - September 22).",
+    "launchDate": "2025-02-04",
+    "isBestseller": false,
+    "showOnHomepage": false
   }
 ]

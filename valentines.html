@@ -891,6 +891,24 @@
         <button type="button" class="add-to-cart-btn" id="buy-aries-weekender-btn">Add to Cart</button>
         <a href="/shop/aries-weekender-bag.html" class="view-details-link">View Full Details</a>
       </div>
+
+      <!-- Virgo Round Mousepad -->
+      <div class="product-card-section" data-product="virgo-mousepad">
+        <div class="product-gallery-mini">
+          <img src="/images/products/virgo-mousepad-1.jpg" alt="Virgo Round Mousepad" loading="lazy" class="main-image" id="virgo-mousepad-main-image">
+        </div>
+        <h3>Virgo Round Mousepad</h3>
+        <p class="product-description">The Virgo workspace necessity. Clean lines. Perfect alignment. A mousepad that stays exactly where you put it. No chaos allowed—just organized excellence and the maiden's quiet precision.</p>
+        <p class="price" id="virgo-mousepad-price">$24.99</p>
+        <div class="selector-group">
+          <label for="virgo-mousepad-size">Size</label>
+          <select id="virgo-mousepad-size">
+            <option value="One Size" data-price="24.99" data-variant="697c0c6089091f6" selected>One Size - $24.99</option>
+          </select>
+        </div>
+        <button type="button" class="add-to-cart-btn" id="buy-virgo-mousepad-btn">Add to Cart</button>
+        <a href="/shop/virgo-mousepad.html" class="view-details-link">View Full Details</a>
+      </div>
     </div>
   </section>
 </main>
@@ -1580,6 +1598,79 @@
       ariesWeekenderSizeSelect.addEventListener('change', updateAriesWeekenderPrice);
       buyAriesWeekenderBtn.addEventListener('click', addAriesWeekenderToCart);
       updateAriesWeekenderPrice();
+
+      // Virgo Round Mousepad functionality
+      const virgoMousepadProduct = {
+        id: 'virgo-mousepad',
+        slug: 'virgo-mousepad',
+        name: 'Virgo Round Mousepad',
+        basePrice: 24.99,
+        category: "Accessories / Virgo Collection",
+        collection: 'Virgo Collection',
+        image: '/images/products/virgo-mousepad-1.jpg',
+        type: 'physical',
+        variants: {
+          'One Size': { variantId: '697c0c6089091f6', price: 24.99 }
+        }
+      };
+
+      const virgoMousepadSizeSelect = document.getElementById('virgo-mousepad-size');
+      const virgoMousepadPriceEl = document.getElementById('virgo-mousepad-price');
+      const buyVirgoMousepadBtn = document.getElementById('buy-virgo-mousepad-btn');
+
+      function updateVirgoMousepadPrice() {
+        const selectedOption = virgoMousepadSizeSelect.options[virgoMousepadSizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || virgoMousepadProduct.basePrice;
+        if (virgoMousepadPriceEl) virgoMousepadPriceEl.textContent = `$${price.toFixed(2)}`;
+      }
+
+      function addVirgoMousepadToCart() {
+        const selectedOption = virgoMousepadSizeSelect.options[virgoMousepadSizeSelect.selectedIndex];
+        const size = virgoMousepadSizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: virgoMousepadProduct.id,
+          slug: virgoMousepadProduct.slug,
+          name: virgoMousepadProduct.name,
+          price: price,
+          size: size,
+          image: virgoMousepadProduct.image,
+          category: virgoMousepadProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            virgoMousepadProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      virgoMousepadSizeSelect.addEventListener('change', updateVirgoMousepadPrice);
+      buyVirgoMousepadBtn.addEventListener('click', addVirgoMousepadToCart);
+      updateVirgoMousepadPrice();
 
       // Single by Cosmic Design Mug functionality
       const cosmicMugProduct = {

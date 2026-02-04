@@ -1117,6 +1117,19 @@ const products = [
     printfulVariants: {
       "One Size": "697c0a161b4606"
     }
+  },
+  {
+    id: 246,
+    name: "Virgo Round Mousepad",
+    price: 24.99,
+    category: "mousepad",
+    zodiac: "virgo",
+    image: "/images/products/virgo-mousepad-1.jpg",
+    description: "The Virgo workspace necessity. Clean lines. Perfect alignment. A mousepad that stays exactly where you put it. No chaos allowed—just organized excellence and the maiden's quiet precision.",
+    sizes: ["One Size"],
+    printfulVariants: {
+      "One Size": "697c0c6089091f6"
+    }
   }
 ];
 
