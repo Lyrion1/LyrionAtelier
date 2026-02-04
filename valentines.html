@@ -505,6 +505,49 @@
       </div>
     </div>
   </section>
+
+  <!-- Mercury Retrograde Hoodie - Trending Product -->
+  <section class="valentines-bundle" style="background: rgba(255, 107, 157, 0.08);">
+    <div class="bundle-header">
+      <span class="bundle-badge" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">Trending</span>
+      <h2>Mercury Retrograde Ruined My Love Life Hoodie</h2>
+      <p class="muted">When Mercury goes retrograde, plans derail and love goes sideways.</p>
+    </div>
+    
+    <div class="bundle-grid" style="grid-template-columns: 1fr;">
+      <div class="bundle-item" data-product="mercury-retrograde-hoodie" style="max-width: 500px; margin: 0 auto;">
+        <div class="product-gallery-mini">
+          <img src="/images/products/mercury-retrograde-hoodie-1.jpg" alt="Mercury Retrograde Ruined My Love Life Hoodie" loading="lazy" class="main-image" id="mercury-main-image">
+          <div class="thumbnail-row" data-gallery="mercury">
+            <img src="/images/products/mercury-retrograde-hoodie-1.jpg" alt="Mercury view 1" loading="lazy">
+            <img src="/images/products/mercury-retrograde-hoodie-2.jpg" alt="Mercury view 2" loading="lazy">
+            <img src="/images/products/mercury-retrograde-hoodie-3.jpg" alt="Mercury view 3" loading="lazy">
+            <img src="/images/products/mercury-retrograde-hoodie-4.jpg" alt="Mercury view 4" loading="lazy">
+            <img src="/images/products/mercury-retrograde-hoodie-5.jpg" alt="Mercury view 5" loading="lazy">
+            <img src="/images/products/mercury-retrograde-hoodie-6.jpg" alt="Mercury view 6" loading="lazy">
+          </div>
+        </div>
+        <h3>Mercury Retrograde Ruined My Love Life Hoodie</h3>
+        <p class="product-description">For those who've survived Mercury's chaos and lived to laugh about it. Military green hoodie perfect for blaming the cosmos for your love life.</p>
+        <p class="price" id="mercury-price">$66.50</p>
+        <div class="selector-group">
+          <label for="mercury-size">Size</label>
+          <select id="mercury-size">
+            <option value="S" data-price="66.50" data-variant="697ba455db1785">S - $66.50</option>
+            <option value="M" data-price="66.50" data-variant="697ba455db17f3" selected>M - $66.50</option>
+            <option value="L" data-price="66.50" data-variant="697ba455db1844">L - $66.50</option>
+            <option value="XL" data-price="66.50" data-variant="697ba455db1891">XL - $66.50</option>
+            <option value="2XL" data-price="67.50" data-variant="697ba455db18d2">2XL - $67.50</option>
+            <option value="3XL" data-price="69.50" data-variant="697ba455db1926">3XL - $69.50</option>
+            <option value="4XL" data-price="69.50" data-variant="697ba455db1975">4XL - $69.50</option>
+            <option value="5XL" data-price="72.00" data-variant="697ba455db19b8">5XL - $72.00</option>
+          </select>
+        </div>
+        <button type="button" class="buy-set-btn" id="buy-mercury-btn" style="margin-top: 1rem;">Add to Cart</button>
+        <a href="/shop/mercury-retrograde-hoodie.html" style="display: block; text-align: center; margin-top: 0.5rem; color: var(--gold-primary);">View Full Details</a>
+      </div>
+    </div>
+  </section>
 </main>
 
   <footer class="footer">
@@ -966,6 +1009,93 @@
       cosmicMugSizeSelect.addEventListener('change', updateCosmicMugPrice);
       buyCosmicMugBtn.addEventListener('click', addCosmicMugToCart);
       updateCosmicMugPrice();
+
+      // Mercury Retrograde Hoodie functionality
+      const mercuryProduct = {
+        id: 'mercury-retrograde-hoodie',
+        slug: 'mercury-retrograde-hoodie',
+        name: 'Mercury Retrograde Ruined My Love Life Hoodie',
+        basePrice: 66.50,
+        category: "Unisex / Cosmic Collection",
+        collection: 'Cosmic Collection',
+        image: '/images/products/mercury-retrograde-hoodie-1.jpg',
+        type: 'physical',
+        variants: {
+          'S': { variantId: '697ba455db1785', price: 66.50 },
+          'M': { variantId: '697ba455db17f3', price: 66.50 },
+          'L': { variantId: '697ba455db1844', price: 66.50 },
+          'XL': { variantId: '697ba455db1891', price: 66.50 },
+          '2XL': { variantId: '697ba455db18d2', price: 67.50 },
+          '3XL': { variantId: '697ba455db1926', price: 69.50 },
+          '4XL': { variantId: '697ba455db1975', price: 69.50 },
+          '5XL': { variantId: '697ba455db19b8', price: 72.00 }
+        }
+      };
+
+      const mercurySizeSelect = document.getElementById('mercury-size');
+      const mercuryPriceEl = document.getElementById('mercury-price');
+      const buyMercuryBtn = document.getElementById('buy-mercury-btn');
+
+      function updateMercuryPrice() {
+        const selectedOption = mercurySizeSelect.options[mercurySizeSelect.selectedIndex];
+        const price = parseFloat(selectedOption.dataset.price) || mercuryProduct.basePrice;
+        if (mercuryPriceEl) mercuryPriceEl.textContent = `$${price.toFixed(2)}`;
+      }
+
+      function addMercuryToCart() {
+        const selectedOption = mercurySizeSelect.options[mercurySizeSelect.selectedIndex];
+        const size = mercurySizeSelect.value;
+        const variantId = selectedOption.dataset.variant;
+        const price = parseFloat(selectedOption.dataset.price);
+
+        if (!variantId) {
+          alert('Please select a size.');
+          return;
+        }
+
+        const cartPayload = {
+          id: mercuryProduct.id,
+          slug: mercuryProduct.slug,
+          name: mercuryProduct.name,
+          price: price,
+          size: size,
+          image: mercuryProduct.image,
+          category: mercuryProduct.category,
+          printfulVariantId: variantId,
+          variantId: variantId,
+          type: 'physical'
+        };
+
+        const variantPayload = {
+          id: variantId,
+          printfulVariantId: variantId,
+          size: size,
+          price: price
+        };
+
+        if (typeof addToCart === 'function') {
+          addToCart(
+            mercuryProduct.slug,
+            size,
+            1,
+            cartPayload,
+            variantPayload
+          );
+        } else {
+          console.error('addToCart function not available');
+        }
+      }
+
+      mercurySizeSelect.addEventListener('change', updateMercuryPrice);
+      buyMercuryBtn.addEventListener('click', addMercuryToCart);
+      updateMercuryPrice();
+
+      // Mercury thumbnail gallery click handlers
+      document.querySelectorAll('.thumbnail-row[data-gallery="mercury"] img').forEach(thumb => {
+        thumb.addEventListener('click', function() {
+          document.getElementById('mercury-main-image').src = this.src;
+        });
+      });
     })();
   </script>
 </body>
