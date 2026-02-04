@@ -662,10 +662,8 @@ p {
 }
 
 #featured-grid .product-image img {
-  max-height: 100%;
-  max-width: 100%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -776,14 +774,11 @@ p {
 .product-card .image img,
 .product-card__media img,
 .product-image img {
-  width: auto;
-  max-width: 100%;
-  height: auto;
-  max-height: var(--product-card-media-height);
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   display: block;
   image-rendering: auto;
-  margin: 0 auto;
 }
 
 .product-card,
@@ -818,7 +813,7 @@ p {
 .product-card__media{aspect-ratio:1/1;display:flex;overflow:hidden;background:#ffffff;align-items:center;justify-content:center;padding:20px;box-sizing:border-box}
 .product-card__media-grid{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:1fr;gap:6px;height:100%}
 .product-card__media-grid.product-card__media-grid--single{grid-template-columns:1fr;grid-auto-rows:1fr;gap:0;display:block}
-.product-card__media img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;opacity:0;transition:opacity .3s ease;margin:0 auto}
+.product-card__media img{width:100%;height:100%;object-fit:contain;display:block;opacity:0;transition:opacity .3s ease}
 .product-card.media-ready .product-card__media img{opacity:1}
 .product-card__body{padding:var(--product-card-padding)}
 .product-card__title{margin:0 0 .25rem 0;font-weight:600}
@@ -827,14 +822,11 @@ p {
 .product-card--highlight{outline:2px solid var(--accent, #c7b1ff);box-shadow:0 0 0 4px rgba(199,177,255,0.28),var(--shadow);transition:box-shadow .3s ease,outline-color .3s ease}
 
 .product-card-image {
-  width: auto;
-  max-width: 100%;
-  height: auto;
-  max-height: 220px;
+  width: 100%;
+  height: 220px;
   object-fit: contain;
   display: block;
   border-radius: 12px;
-  margin: 0 auto;
   padding: 20px;
   background: #ffffff;
   box-sizing: border-box;
@@ -3495,10 +3487,8 @@ RESPONSIVE DESIGN
 }
 
 .shop-products-section .product-image img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   transition: transform 0.3s ease;
 }
@@ -3630,12 +3620,9 @@ RESPONSIVE DESIGN
 }
 
 .modal-image img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  margin: 0 auto;
 }
 
 .modal-details h2 {
@@ -5455,10 +5442,9 @@ body {
 }
 
 .product-gallery img {
-  width: auto;
-  max-width: 100%;
+  width: 100%;
+  max-width: 500px;
   height: auto;
-  max-height: 500px;
   object-fit: contain;
   background: #fff;
   padding: 20px;
