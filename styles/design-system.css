@@ -288,6 +288,10 @@ a[style],
  width: 100% !important;
  height: 100% !important;
  display: block !important;
+}
+
+/* Apply white background and padding to images that are direct children of product-card (no wrapper) */
+.product-card > img {
  background: #ffffff !important;
  padding: 20px !important;
  box-sizing: border-box !important;
