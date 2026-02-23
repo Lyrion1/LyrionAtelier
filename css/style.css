@@ -6334,13 +6334,17 @@ button,
     cursor: pointer !important;
     min-width: 44px !important;
     min-height: 44px !important;
+    width: fit-content !important;
     z-index: 10001 !important;
+    position: fixed !important;
+    top: 16px !important;
+    right: 16px !important;
   }
 
   .nav-toggle.active {
     position: fixed !important;
-    top: 15px !important;
-    right: 15px !important;
+    top: 16px !important;
+    right: 16px !important;
   }
 
   .nav-links {
