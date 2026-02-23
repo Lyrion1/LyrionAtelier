@@ -6,6 +6,7 @@
     "build:images": "node scripts/build-images-map.mjs",
     "prepare:catalog": "node tools/prepare-catalog-images.mjs",
     "build": "npm run prepare:catalog && npm run build:images",
+    "optimize:images": "node scripts/optimize-images.mjs",
     "test:shop": "playwright test tests",
     "fetch-printful": "node scripts/fetch-printful-variants.js"
   },

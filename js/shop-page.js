@@ -411,11 +411,16 @@ import { formatPrice } from './price-utils.js';
 
     const coverImage = galleryImages.find(isUsableImage) || resolvedImage || FALLBACK;
     const img = document.createElement('img');
-    img.src = coverImage || FALLBACK;
+    const webpCoverImage = (typeof toWebPSrc === 'function') ? toWebPSrc(coverImage || FALLBACK) : (coverImage || FALLBACK);
+    img.src = webpCoverImage;
     img.alt = `${p.title || p.name || 'Product image'}`;
     img.loading = 'lazy';
     img.decoding = 'async';
     img.onerror = () => {
+      if (img.src === webpCoverImage && webpCoverImage !== (coverImage || FALLBACK)) {
+        img.src = coverImage || FALLBACK;
+        return;
+      }
       if (img.src !== FALLBACK) {
         img.src = FALLBACK;
       }

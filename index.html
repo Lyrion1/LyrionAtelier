@@ -18,6 +18,9 @@
   <meta property="og:url" content="https://lyrionatelier.com">
   <meta name="twitter:card" content="summary_large_image">
   <title>Lyrīon Atelier | Celestial Boutique</title>
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://js.stripe.com">
+  <link rel="preload" as="image" href="/images/lyrion-logo.webp" type="image/webp">
   <link rel="stylesheet" href="/styles/design-system.css">
   <link rel="icon" type="image/png" href="images/favicon/favicon.png">
   <link rel="stylesheet" href="css/style.css">
@@ -29,7 +32,10 @@
 <header class="site-header" data-nav-version="nav-v4">
  <nav class="main-nav" aria-label="Main navigation">
  <a href="/" class="logo-link">
- <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
+ <picture>
+   <source srcset="/images/lyrion-logo.webp" type="image/webp">
+   <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img" loading="eager" fetchpriority="high">
+  </picture>
  <span class="brand-name">LYRĪON ATELIER</span>
  </a>
  
@@ -97,7 +103,10 @@
       <div class="oracle-studio-grid">
         <div class="reading-card">
           <div class="reading-image">
-            <img src="/oracle-images/2026-written-for-you.png" alt="What 2026 Has Written for You" loading="lazy" decoding="async">
+            <picture>
+              <source srcset="/oracle-images/2026-written-for-you.webp" type="image/webp">
+              <img src="/oracle-images/2026-written-for-you.png" alt="What 2026 Has Written for You" loading="lazy" decoding="async">
+            </picture>
           </div>
           <div class="card-header">
             <h3 class="reading-title">What 2026 Has Written for You</h3>
@@ -117,7 +126,10 @@
 
         <div class="reading-card">
           <div class="reading-image">
-            <img src="oracle-images/life-path-reading.jpg" alt="Celestial illustration for the Life Path Reading" loading="lazy" decoding="async">
+            <picture>
+              <source srcset="oracle-images/life-path-reading.webp" type="image/webp">
+              <img src="oracle-images/life-path-reading.jpg" alt="Celestial illustration for the Life Path Reading" loading="lazy" decoding="async">
+            </picture>
           </div>
           <div class="card-header">
             <h3 class="reading-title">Life Path Reading</h3>
@@ -380,9 +392,9 @@
   <script src="js/products.js" defer></script>
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
-  <script src="js/checkout-handler.js"></script>
-  <script src="js/oracle-checkout.js"></script>
-  <script src="js/oracle-widget.js"></script>
+  <script src="js/checkout-handler.js" defer></script>
+  <script src="js/oracle-checkout.js" defer></script>
+  <script src="js/oracle-widget.js" defer></script>
   <script src="js/crystal-gateway.js" defer></script>
   <script src="js/spinning-wheel.js" defer></script>
   <script defer src="/assets/index.js"></script>

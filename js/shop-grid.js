@@ -75,9 +75,12 @@ function renderCard(product) {
   img.loading = 'lazy';
   img.decoding = 'async';
   img.alt = `${altText}`;
-  img.src = coverImage;
+  const webpCover = (typeof toWebPSrc === 'function') ? toWebPSrc(coverImage) : coverImage;
+  img.src = webpCover;
   img.onerror = () => {
-    if (img.src !== FALLBACK) {
+    if (img.src === webpCover && webpCover !== coverImage) {
+      img.src = coverImage;
+    } else if (img.src !== FALLBACK) {
       img.src = FALLBACK;
     }
   };

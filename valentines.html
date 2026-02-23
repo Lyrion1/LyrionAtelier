@@ -1225,7 +1225,10 @@
 <header class="site-header" data-nav-version="nav-v4">
  <nav class="main-nav" aria-label="Main navigation">
  <a href="/" class="logo-link">
- <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
+ <picture>
+   <source srcset="/images/lyrion-logo.webp" type="image/webp">
+   <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img" loading="eager" fetchpriority="high">
+  </picture>
  <span class="brand-name">LYRĪON ATELIER</span>
  </a>
  
@@ -1933,8 +1936,8 @@
   <script src="js/products.js" defer></script>
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
-  <script src="js/checkout-handler.js"></script>
-  <script src="js/shop-checkout.js"></script>
+  <script src="js/checkout-handler.js" defer></script>
+  <script src="js/shop-checkout.js" defer></script>
   <script defer src="/assets/checkout-bridge.js"></script>
   <script defer src="/assets/promotions-ui.js"></script>
   
