@@ -210,7 +210,28 @@ button[disabled],
 }
 
 /* ===========================================
-   SECTION 8: OUTLINE VARIANT BUTTONS
+   SECTION 8: BUTTON SPACING
+   Ensure 8px minimum gap between adjacent buttons
+   =========================================== */
+
+/* Button group containers use gap for spacing */
+.button-row,
+.btn-group,
+.promo-cta-group,
+.card-actions,
+.product-card__actions {
+  gap: 8px !important;
+}
+
+/* Adjacent buttons inside product cards get vertical spacing */
+.product-card button + button,
+.product-card .add-to-cart-btn + .view-product-btn,
+.product-card .view-product-btn + .add-to-cart-btn {
+  margin-top: 8px !important;
+}
+
+/* ===========================================
+   SECTION 9: OUTLINE VARIANT BUTTONS
    Secondary/outline style buttons
    =========================================== */
 
