@@ -5,6 +5,37 @@ const slugify = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+
 if (typeof window !== 'undefined') {
   window.slugify = window.slugify || slugify;
 }
+
+/**
+ * Convert a jpg/jpeg/png image URL to its WebP equivalent.
+ * Falls back to the original src if the WebP fails to load.
+ */
+function toWebPSrc(src) {
+  if (typeof src !== 'string' || src.startsWith('data:')) return src;
+  return src.replace(/\.(jpe?g|png)(\?.*)?$/i, '.webp$2');
+}
+
+/**
+ * Set an img element's src to the WebP version, falling back to the
+ * original src if the WebP cannot be loaded.
+ */
+function setWebPSrc(imgEl, src) {
+  if (!imgEl || !src) return;
+  const webpSrc = toWebPSrc(src);
+  if (webpSrc === src) {
+    imgEl.src = src;
+    return;
+  }
+  imgEl.src = webpSrc;
+  imgEl.onerror = function () {
+    this.onerror = null;
+    this.src = src;
+  };
+}
+if (typeof window !== 'undefined') {
+  window.toWebPSrc = toWebPSrc;
+  window.setWebPSrc = setWebPSrc;
+}
 function resolveProductImage(p = {}, imageMap = {}) {
   const asString = (img) => {
     if (!img) return null;
@@ -1505,7 +1536,7 @@ function displayProducts(productsToShow = products) {
       productCard.style.animationDelay = `${index * 0.05}s`;
       productCard.innerHTML = `
         <div class="product-image">
-          ${product.image ? `<img src="${product.image}" alt="${product.name}" loading="lazy">` : `<div class="placeholder-image">📦</div>`}
+          ${product.image ? `<img src="${toWebPSrc(product.image)}" alt="${product.name}" loading="lazy" decoding="async" onerror="if(this.src!='${product.image}'){this.src='${product.image}';}">` : `<div class="placeholder-image">📦</div>`}
           ${!product.image ? `<span class="placeholder-text">Product Image</span>` : ''}
         </div>
         <div class="product-info">

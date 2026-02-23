@@ -21,7 +21,10 @@
 <header class="site-header" data-nav-version="nav-v4">
  <nav class="main-nav" aria-label="Main navigation">
  <a href="/" class="logo-link">
- <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
+ <picture>
+   <source srcset="/images/lyrion-logo.webp" type="image/webp">
+   <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img" loading="eager" fetchpriority="high">
+  </picture>
  <span class="brand-name">LYRĪON ATELIER</span>
  </a>
  
@@ -46,7 +49,7 @@
     <section class="reading-hero">
       <div class="reading-container">
         <div class="reading-image">
-          <img src="/images/oracle/past-life-reading-oracle-card.webp" alt="Lunar Nodes Reading">
+          <img src="/images/oracle/past-life-reading-oracle-card.webp" alt="Lunar Nodes Reading" loading="lazy" decoding="async">
         </div>
         <div class="reading-details">
           <h1>Lunar Nodes Reading</h1>
@@ -93,7 +96,7 @@
   </footer>
 
   <script src="/js/main.js" defer></script>
-  <script src="/js/checkout-handler.js"></script>
-  <script src="/js/service-checkout.js"></script>
+  <script src="/js/checkout-handler.js" defer></script>
+  <script src="/js/service-checkout.js" defer></script>
 </body>
 </html>

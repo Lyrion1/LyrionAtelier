@@ -30,7 +30,10 @@
 <header class="site-header" data-nav-version="nav-v4">
  <nav class="main-nav" aria-label="Main navigation">
  <a href="/" class="logo-link">
- <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
+ <picture>
+   <source srcset="/images/lyrion-logo.webp" type="image/webp">
+   <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img" loading="eager" fetchpriority="high">
+  </picture>
  <span class="brand-name">LYRĪON ATELIER</span>
  </a>
  
@@ -94,7 +97,10 @@
             <!-- What 2026 Has Written for You - $124 -->
             <a href="/oracle/2026-reading" class="reading-card-link">
               <div class="oracle-card">
+                <picture>
+                <source srcset="/oracle-images/2026-written-for-you.webp" type="image/webp">
                 <img src="/oracle-images/2026-written-for-you.png" class="oracle-card-image" alt="What 2026 Has Written for You" loading="lazy" decoding="async">
+              </picture>
                 <div class="oracle-card-content">
                   <h3 class="oracle-card-title">What 2026 Has Written for You</h3>
                   <div class="oracle-card-price">$124</div>
@@ -111,7 +117,10 @@
             <!-- Life Path Reading - $50 -->
             <a href="/oracle/life-path-reading" class="reading-card-link">
               <div class="oracle-card" data-product="life-path-reading">
+                <picture>
+                <source srcset="oracle-images/life-path-reading.webp" type="image/webp">
                 <img src="oracle-images/life-path-reading.jpg" class="oracle-card-image" alt="Celestial illustration for the Life Path Reading" loading="lazy" decoding="async">
+              </picture>
                 <div class="oracle-card-content">
                   <h3 class="oracle-card-title">Life Path Reading</h3>
                   <div class="oracle-card-price">$50</div>
@@ -155,7 +164,10 @@
             <!-- Natal Chart Blueprint - $70 -->
             <a href="/oracle/natal-chart-blueprint" class="reading-card-link">
               <div class="oracle-card">
+                <picture>
+                <source srcset="/images/oracle/natal-chart-blueprint.webp" type="image/webp">
                 <img src="/images/oracle/natal-chart-blueprint.png" class="oracle-card-image" alt="Natal Chart Blueprint" loading="lazy" decoding="async">
+              </picture>
                 <div class="oracle-card-content">
                   <h3 class="oracle-card-title">Natal Chart Blueprint</h3>
                   <div class="oracle-card-price">$70</div>
@@ -265,7 +277,10 @@
             <!-- Chiron Wound Healing - $68 -->
             <a href="/oracle/chiron-wound-healing" class="reading-card-link">
               <div class="oracle-card" data-product="chiron-wound-healing">
+                <picture>
+                <source srcset="oracle-images/chiron-wound-healing.webp" type="image/webp">
                 <img src="oracle-images/chiron-wound-healing.jpg" class="oracle-card-image" alt="Celestial healing light for Chiron Wound Healing" loading="lazy" decoding="async">
+              </picture>
                 <div class="oracle-card-content">
                   <h3 class="oracle-card-title">Chiron Wound Healing</h3>
                   <div class="oracle-card-price">$68</div>
@@ -736,8 +751,8 @@
   </footer>
 
   <script src="js/main.js" defer></script>
-  <script src="js/checkout-handler.js"></script>
-  <script src="js/oracle-checkout.js"></script>
+  <script src="js/checkout-handler.js" defer></script>
+  <script src="js/oracle-checkout.js" defer></script>
   <script src="js/oracle-conversation.js" defer></script>
   <script defer src="/assets/shop-oracle.js"></script>
 

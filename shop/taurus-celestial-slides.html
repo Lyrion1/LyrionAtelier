@@ -100,7 +100,10 @@
 <header class="site-header" data-nav-version="nav-v4">
  <nav class="main-nav" aria-label="Main navigation">
  <a href="/" class="logo-link">
- <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
+ <picture>
+   <source srcset="/images/lyrion-logo.webp" type="image/webp">
+   <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img" loading="eager" fetchpriority="high">
+  </picture>
  <span class="brand-name">LYRĪON ATELIER</span>
  </a>
  
