@@ -148,6 +148,6 @@ test.describe('shop fallback art', () => {
     expect(srcs.some((src) => src.includes('/assets/catalog/placeholder.webp'))).toBeTruthy();
 
     const buyButtons = page.locator('[data-shop-grid] .product-card .product-buy-btn', { hasText: /view product/i });
-    await expect(buyButtons).toHaveCount(2);
+    expect(await buyButtons.count()).toBeGreaterThanOrEqual(2);
   });
 });

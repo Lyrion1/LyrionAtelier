@@ -50,41 +50,34 @@ function renderFeaturedProducts() {
     return 0;
   };
   const pickFeatured = (pool) => {
-    // Specific Valentine's Day homepage products in exact order
-    const valentinesSlugs = [
-      'heartbeat-hoodie-his',
-      'heartbeat-hoodie-hers',
-      'cosmic-curiosity-box',
-      'zodiac-mystery-vault',
-      'lovers-fate-box',
-      'mercury-retrograde-hoodie',
-      'gemini-love-language-hoodie',
-      'single-cosmic-design-mug',
-      'virgo-round-mousepad'
+    const featuredSlugs = [
+      'taurus-organic-tee',
+      'aquarius-crop-hoodie',
+      'fisherman-beanie',
+      'taurus-pyjama-top'
     ];
-    
+    const eligiblePool = pool.filter((product) => !(typeof isSeasonalProduct === 'function' && isSeasonalProduct(product)));
+    const eligibleCatalog = catalog.filter((product) => !(typeof isSeasonalProduct === 'function' && isSeasonalProduct(product)));
     const selections = [];
     const slugMap = new Map();
-    
-    // Build a map of slug -> product for quick lookup
-    for (const product of pool) {
+
+    for (const product of eligiblePool) {
       const slug = productSlug(product);
       if (slug) slugMap.set(slug, product);
     }
-    
-    // Also check the full catalog for products not in the filtered pool
-    for (const product of catalog) {
+
+    for (const product of eligibleCatalog) {
       const slug = productSlug(product);
       if (slug && !slugMap.has(slug)) slugMap.set(slug, product);
     }
-    
-    // Pick products in the exact order specified
-    for (const slug of valentinesSlugs) {
+
+    for (const slug of featuredSlugs) {
       const product = slugMap.get(slug);
       if (product) selections.push(product);
     }
-    
-    return selections;
+
+    if (selections.length) return selections;
+    return eligiblePool.slice(0, 4);
   };
   const featured = pickFeatured(primary);
   const grid = document.getElementById('featured-grid');
@@ -126,17 +119,23 @@ function renderFeaturedProducts() {
     
     const coverImage = images.find(Boolean) || '/assets/catalog/placeholder.webp';
     const img = document.createElement('img');
-    img.src = coverImage;
     img.alt = `${title} image`;
     img.loading = 'lazy';
     img.decoding = 'async';
+    img.width = 1200;
+    img.height = 1500;
+    if (typeof setProductImageSource === 'function') {
+      setProductImageSource(img, coverImage, title);
+    } else {
+      img.src = coverImage;
+      img.onerror = () => {
+        if (img.src !== '/assets/catalog/placeholder.webp') {
+          img.src = '/assets/catalog/placeholder.webp';
+        }
+      };
+    }
     img.className = 'product-card-image';
-    img.onerror = () => {
-      if (img.src !== '/assets/catalog/placeholder.webp') {
-        img.src = '/assets/catalog/placeholder.webp';
-      }
-    };
-    
+     
     imageContainer.appendChild(img);
     
     // Add Best Seller badge if present
@@ -157,7 +156,7 @@ function renderFeaturedProducts() {
     desc.textContent = description;
     const price = document.createElement('p');
     price.className = 'product-card-price product-card__price price';
-    price.textContent = Number.isFinite(displayPrice) ? `$${displayPrice.toFixed(2)}` : 'Price unavailable';
+    price.textContent = Number.isFinite(displayPrice) ? `£${displayPrice.toFixed(2)}` : 'Price unavailable';
     
     // Add scarcity badge if present
     if (product.scarcityBadge) {

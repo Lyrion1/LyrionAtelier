@@ -40,7 +40,7 @@
   --text:        var(--ink);
   --muted:       #6D627E;
   --border:      rgba(91, 75, 122, 0.18);
-  --card-bg:     #FFFFFF;
+  --card-bg:     var(--cream);
   --card-shadow: 0 4px 24px rgba(43, 36, 64, 0.10);
 
   /* Spacing rhythm */
@@ -75,8 +75,11 @@
    2. REMOVE DARK-THEME STAR EFFECT & BODY BACKGROUND
 ═══════════════════════════════════════════════════ */
 
-html {
+html,
+body {
   background: var(--cream) !important;
+  max-width: 100%;
+  overflow-x: clip !important;
 }
 
 body {
@@ -84,6 +87,26 @@ body {
   color: var(--ink) !important;
   font-size: 1.0625rem !important;
   line-height: 1.6 !important;
+}
+
+@supports not (overflow: clip) {
+  html,
+  body {
+    overflow-x: hidden !important;
+  }
+}
+
+.container,
+.product-page,
+.product-grid,
+.product-detail-card {
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+.product-page > *,
+.product-grid > * {
+  min-width: 0 !important;
 }
 
 body::before,
@@ -172,7 +195,7 @@ footer p {
 
 .nav-links a {
   color: var(--ink) !important;
-  transition: color var(--transition), background var(--transition) !important;
+  transition: color var(--transition), background var(--transition), transform var(--transition) !important;
 }
 
 .nav-links a:hover,
@@ -181,6 +204,55 @@ footer p {
 .nav-links a[aria-current="page"] {
   color: var(--plum) !important;
   background: rgba(91, 75, 122, 0.08) !important;
+  transform: translateY(-2px) !important;
+}
+
+
+.nav-links a,
+.dropdown-toggle {
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.spin-wheel-header h2,
+.spin-wheel-prize h3,
+.spin-wheel-code-text {
+  color: var(--plum) !important;
+  text-shadow: none !important;
+}
+
+.spin-wheel-header p,
+.spin-wheel-prize .prize-details,
+.spin-wheel-expiry {
+  color: var(--ink) !important;
+}
+
+.spin-wheel-prize,
+.spin-wheel-code {
+  background: var(--cream) !important;
+  border-color: var(--border) !important;
+}
+
+.spin-wheel-btn,
+.spin-wheel-claim-btn,
+.spin-wheel-copy-btn {
+  background: var(--apricot) !important;
+  color: var(--ink) !important;
+  border-color: var(--gold) !important;
+  box-shadow: 0 4px 14px rgba(240, 168, 104, 0.26) !important;
+}
+
+.spin-wheel-btn:hover:not(:disabled),
+.spin-wheel-claim-btn:hover,
+.spin-wheel-copy-btn:hover {
+  background: #e0955a !important;
+  color: var(--ink) !important;
+}
+
+.spin-wheel-container {
+  width: min(280px, calc(100vw - 120px)) !important;
+  height: min(280px, calc(100vw - 120px)) !important;
 }
 
 /* Hamburger toggle */
@@ -200,6 +272,11 @@ footer p {
 
 /* Mobile full-screen nav overlay */
 @media (max-width: 768px) {
+  .product-page,
+  .product-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
   .nav-links {
     background: rgba(253, 248, 240, 0.98) !important;
   }
@@ -348,7 +425,7 @@ main > section,
 
 /* Newsletter form */
 .newsletter-form input[type="email"] {
-  background: #fff !important;
+  background: var(--cream) !important;
   border-color: var(--border) !important;
   color: var(--ink) !important;
   font-size: 16px !important;
@@ -363,7 +440,7 @@ main > section,
 ═══════════════════════════════════════════════════ */
 
 .card {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--card-shadow) !important;
@@ -383,7 +460,7 @@ main > section,
 
 /* Free oracle card */
 .free-oracle-card {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--card-shadow) !important;
@@ -395,7 +472,7 @@ main > section,
 
 .product-card,
 .product {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--card-shadow) !important;
@@ -432,7 +509,7 @@ main > section,
 ═══════════════════════════════════════════════════ */
 
 .oracle-card {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--card-shadow) !important;
@@ -473,7 +550,7 @@ main > section,
 ═══════════════════════════════════════════════════ */
 
 .compat-card {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--card-shadow) !important;
@@ -677,7 +754,7 @@ a.button:hover,
 input,
 select,
 textarea {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: 10px !important;
   color: var(--ink) !important;
@@ -704,7 +781,7 @@ label {
 
 /* Contact form */
 .contact-form-wrap {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--card-shadow) !important;
@@ -725,7 +802,7 @@ label {
 .contact-form .form-group input,
 .contact-form .form-group select,
 .contact-form .form-group textarea {
-  background: #faf7f3 !important;
+  background: var(--cream) !important;
   border-color: var(--border) !important;
   color: var(--ink) !important;
 }
@@ -735,7 +812,7 @@ label {
 .contact-form .form-group textarea:focus {
   border-color: var(--gold) !important;
   box-shadow: 0 0 0 3px rgba(201, 146, 43, 0.15) !important;
-  background: #fff !important;
+  background: var(--cream) !important;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -747,7 +824,7 @@ label {
 }
 
 .modal-content {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: 0 24px 80px rgba(43, 36, 64, 0.25) !important;
@@ -775,7 +852,7 @@ label {
 
 /* Reading cards inside modal */
 .reading-card {
-  background: #faf7f3 !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: 12px !important;
   transition: transform var(--transition), box-shadow var(--transition) !important;
@@ -800,7 +877,7 @@ label {
 
 /* Cosmic input inside modal */
 .cosmic-input {
-  background: #faf7f3 !important;
+  background: var(--cream) !important;
   border-color: var(--border) !important;
   color: var(--ink) !important;
 }
@@ -815,7 +892,7 @@ label {
 }
 
 .spin-wheel-popup {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: 0 24px 80px rgba(43, 36, 64, 0.25) !important;
@@ -842,6 +919,17 @@ label {
     max-height: 92dvh !important;
     padding: 20px 16px !important;
   }
+
+  .spin-wheel-container {
+    width: min(220px, calc(100vw - 128px)) !important;
+    height: min(220px, calc(100vw - 128px)) !important;
+    margin-bottom: 20px !important;
+  }
+
+  .spin-wheel-btn {
+    width: 72px !important;
+    height: 72px !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════════
@@ -850,7 +938,7 @@ label {
 
 #oracle-panel,
 .oracle-widget-panel {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: 0 16px 60px rgba(43, 36, 64, 0.20) !important;
@@ -873,7 +961,7 @@ label {
 }
 
 .oracle-input {
-  background: #faf7f3 !important;
+  background: var(--cream) !important;
   border-color: var(--border) !important;
   color: var(--ink) !important;
   font-size: 16px !important;
@@ -885,7 +973,7 @@ label {
 
 .cosmic-orb-left,
 .cosmic-orb-right {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1.5px solid var(--gold) !important;
   box-shadow: var(--card-shadow) !important;
   transition: transform var(--transition), box-shadow var(--transition) !important;
@@ -946,7 +1034,7 @@ label {
 ═══════════════════════════════════════════════════ */
 
 .toast {
-  background: #fff !important;
+  background: var(--cream) !important;
   color: var(--ink) !important;
   border-color: var(--border) !important;
   box-shadow: var(--card-shadow) !important;
@@ -1020,7 +1108,7 @@ label {
 ═══════════════════════════════════════════════════ */
 
 .cart-summary {
-  background: #fff !important;
+  background: var(--cream) !important;
   border-color: var(--border) !important;
 }
 
@@ -1078,7 +1166,7 @@ label {
 .size-option {
   border-color: var(--border) !important;
   color: var(--ink) !important;
-  background: #fff !important;
+  background: var(--cream) !important;
   transition: background var(--transition), border-color var(--transition) !important;
 }
 
@@ -1193,7 +1281,7 @@ label {
 }
 
 .trust-badge {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   padding: 1.5rem 1rem !important;
@@ -1211,7 +1299,7 @@ label {
 ═══════════════════════════════════════════════════ */
 
 .event-card {
-  background: #fff !important;
+  background: var(--cream) !important;
   border-color: var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--card-shadow) !important;
@@ -1258,7 +1346,7 @@ label {
 ═══════════════════════════════════════════════════ */
 
 .tier {
-  background: #fff !important;
+  background: var(--cream) !important;
   border-color: var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--card-shadow) !important;
@@ -1347,7 +1435,7 @@ img {
 }
 
 .relationship-card {
-  background: #fff !important;
+  background: var(--cream) !important;
   border-color: var(--border) !important;
   border-radius: var(--radius-card) !important;
 }
@@ -1373,7 +1461,7 @@ img {
 }
 
 .couple-bundle-card {
-  background: #fff !important;
+  background: var(--cream) !important;
   border-color: var(--border) !important;
   border-radius: var(--radius-card) !important;
 }
@@ -1396,7 +1484,7 @@ img {
 }
 
 .bundle-item .selector-group select {
-  background: #fff !important;
+  background: var(--cream) !important;
   border-color: var(--border) !important;
   color: var(--ink) !important;
 }
@@ -1477,7 +1565,7 @@ img {
 
 .shop-filters,
 .filters-section {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
 }
@@ -1508,7 +1596,7 @@ img {
 }
 
 .codex-card {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--card-shadow) !important;
@@ -1531,7 +1619,7 @@ img {
 
 .gift-card,
 .curated-card {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--card-shadow) !important;
@@ -1549,7 +1637,7 @@ img {
 
 .success-container,
 .contact-success-container {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--card-shadow) !important;
@@ -1564,7 +1652,7 @@ img {
 }
 
 .cart-item {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: 12px !important;
 }
@@ -1579,7 +1667,7 @@ img {
 
 .checkout-section,
 .checkout-form-section {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
 }
@@ -1613,7 +1701,7 @@ body[class*="success"] {
 .stars { display: none !important; }
 
 .success-container {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--gold) !important;
   box-shadow: 0 8px 32px rgba(91, 75, 122, 0.12) !important;
   color: var(--ink) !important;
@@ -1712,7 +1800,7 @@ body[class*="success"] {
 }
 
 .contact-form-section {
-  background: #fff !important;
+  background: var(--cream) !important;
   border-radius: var(--radius-card) !important;
   border: 1px solid var(--border) !important;
 }
@@ -1744,7 +1832,7 @@ body[class*="success"] {
 .reading-purchase-card,
 .purchase-card,
 .product-purchase-section {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--card-shadow) !important;
@@ -1762,7 +1850,7 @@ body[class*="success"] {
 
 .reading-feature,
 .feature-item {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: 12px !important;
 }
@@ -1778,7 +1866,7 @@ body[class*="success"] {
 
 .reading-testimonial,
 .testimonial-card {
-  background: #fff !important;
+  background: var(--cream) !important;
   border: 1px solid var(--border) !important;
   border-radius: 12px !important;
 }

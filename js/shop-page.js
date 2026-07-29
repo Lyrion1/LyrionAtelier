@@ -357,10 +357,12 @@ import { formatPrice } from './price-utils.js';
       if (Array.isArray(local) && local.length) {
         window.LyrionAtelier = window.LyrionAtelier || {};
         window.LyrionAtelier.products = local;
-        return local.map(normalizeSyncProduct);
-      }
+        return local
+          .map(normalizeSyncProduct)
+          .filter((product) => !(typeof isSeasonalProduct === 'function' && isSeasonalProduct(product)));
+        }
     } catch (err) {
-      console.warn('[shop] failed to load catalog from /data/all-products.json', err);
+        console.warn('[shop] failed to load catalog from /data/all-products.json', err);
     }
     return [];
   }
@@ -411,37 +413,57 @@ import { formatPrice } from './price-utils.js';
 
     const coverImage = galleryImages.find(isUsableImage) || resolvedImage || FALLBACK;
     const img = document.createElement('img');
-    const webpCoverImage = (typeof toWebPSrc === 'function') ? toWebPSrc(coverImage || FALLBACK) : (coverImage || FALLBACK);
-    img.src = webpCoverImage;
+    if (typeof setProductImageSource === 'function') {
+      setProductImageSource(img, coverImage || FALLBACK, p.title || p.name || 'Lyrīon Atelier');
+    } else {
+      const webpCoverImage = (typeof toWebPSrc === 'function') ? toWebPSrc(coverImage || FALLBACK) : (coverImage || FALLBACK);
+      img.src = webpCoverImage;
+      img.onerror = () => {
+        if (img.src === webpCoverImage && webpCoverImage !== (coverImage || FALLBACK)) {
+          img.src = coverImage || FALLBACK;
+          return;
+        }
+        if (img.src !== FALLBACK) {
+          img.src = FALLBACK;
+        }
+        hideLoader();
+      };
+    }
     img.alt = `${p.title || p.name || 'Product image'}`;
     img.loading = 'lazy';
     img.decoding = 'async';
-    img.onerror = () => {
-      if (img.src === webpCoverImage && webpCoverImage !== (coverImage || FALLBACK)) {
-        img.src = coverImage || FALLBACK;
-        return;
-      }
-      if (img.src !== FALLBACK) {
-        img.src = FALLBACK;
-      }
-      hideLoader();
-    };
+    img.width = 1200;
+    img.height = 1500;
     img.onload = hideLoader;
 
+    img.className = 'product-card-image';
+
+    const body = document.createElement('div');
+    body.className = 'product-card-content product-card__body';
+
     const heading = document.createElement('h3');
+    heading.className = 'product-card-title product-card__title';
     heading.textContent = p.title || p.name || 'Celestial Piece';
 
+    const desc = document.createElement('p');
+    desc.className = 'product-card-description';
+    desc.textContent = p.description || p.desc || '';
+
     const priceEl = document.createElement('p');
-    priceEl.className = 'price';
+    priceEl.className = 'product-card-price product-card__price price';
     const priceDisplay = formatPrice(Number.isFinite(priceCents) ? priceCents : priceValue, fallbackLabel);
     priceEl.textContent = priceDisplay === PRICE_UNAVAILABLE_LABEL ? PRICE_UNAVAILABLE_LABEL : `From ${priceDisplay}`;
 
+    const actions = document.createElement('div');
+    actions.className = 'product-card-buttons product-card__actions';
     const viewLink = document.createElement('a');
-    viewLink.className = 'view-product-btn';
+    viewLink.className = 'view-product-btn view-product-button product-buy-btn';
     viewLink.textContent = 'View Product';
     viewLink.href = viewUrl;
 
-    card.append(img, heading, priceEl, viewLink);
+    actions.append(viewLink);
+    body.append(heading, desc, priceEl, actions);
+    card.append(img, body);
     return card;
   };
 

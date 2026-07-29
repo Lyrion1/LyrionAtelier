@@ -3,7 +3,7 @@ export const PRICE_FALLBACK = '—';
 export function currencySymbol(code = 'USD') {
   const upper = String(code || 'USD').toUpperCase();
   if (upper === 'EUR') return '€';
-  return '$';
+  return '£';
 }
 
 export function priceNumber(source = {}) {
@@ -24,7 +24,7 @@ export function centsFrom(value) {
 
 export function formatPrice(value, fallback = PRICE_FALLBACK) {
   const cents = centsFrom(value);
-  return cents !== null ? `$${(cents / 100).toFixed(2)}` : fallback;
+  return cents !== null ? `£${(cents / 100).toFixed(2)}` : fallback;
 }
 
 export function formatPriceWithCurrency(value, currency = 'USD', fallback = PRICE_FALLBACK) {

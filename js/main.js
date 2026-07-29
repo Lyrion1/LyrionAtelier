@@ -1,6 +1,6 @@
 // Lyrīon Atelier - Main JavaScript
 
-const NAV_VERSION = 'nav-v4';
+const NAV_VERSION = 'nav-v5';
 const SITE_ORIGIN = 'https://lyrionatelier.com';
 const OG_IMAGE = `${SITE_ORIGIN}/images/og-image.jpg`;
 const SEO_KEYWORDS = 'astrology, zodiac, luxury apparel, oracle readings, birth chart, horoscope, cosmic fashion, spiritual guidance';
@@ -101,9 +101,12 @@ const SEO_TEMPLATES = {
 document.addEventListener('DOMContentLoaded', function() {
   document.body.classList.add('loaded');
   applySharedLayout();
+  removeSeasonalCampaignElements();
   ensureSeoMetadata();
   ensureAnalytics();
   enhanceImages();
+  localizeDisplayedPrices();
+  setTimeout(() => localizeDisplayedPrices(), 600);
   
   // Mobile menu is initialized in applySharedLayout via initInlineNavToggle
   
@@ -244,7 +247,6 @@ function buildSiteHeader() {
         <a href="/shop?zodiac=pisces">Pisces</a>
       </div>
     </div>
-    <a href="/valentines">Valentine's 💕</a>
     <a href="/curated-for-gifting">Curated for Gifting</a>
     <a href="/oracle">Oracle</a>
     <a href="/compatibility">Compatibility</a>
@@ -473,6 +475,42 @@ function initMobileDropdowns(container) {
   });
 }
 
+function removeSeasonalCampaignElements() {
+  document.querySelectorAll('a[href="/valentines"], a[href="/valentines.html"], a[href*="/valentines.html#"], a[href*="/valentines#"]').forEach((link) => {
+    link.remove();
+  });
+  document.querySelectorAll('.valentines-banner, .valentines-guarantee-banner, .badge-anti').forEach((node) => {
+    node.remove();
+  });
+}
+
+function localizeDisplayedPrices(root = document.body) {
+  if (!root) return;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      const parent = node.parentElement;
+      if (!parent) return NodeFilter.FILTER_REJECT;
+      if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEXTAREA'].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+      const value = node.textContent || '';
+      return /\$[\d,]+(?:\.\d{1,2})?|\bUSD\s*[\d,]+(?:\.\d{1,2})?/i.test(value)
+        ? NodeFilter.FILTER_ACCEPT
+        : NodeFilter.FILTER_REJECT;
+    }
+  });
+  const updates = [];
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    const value = node.textContent || '';
+    const nextValue = value
+      .replace(/\bUSD\s*([\d,]+(?:\.\d{1,2})?)/gi, '£$1')
+      .replace(/\$([\d,]+(?:\.\d{1,2})?)/g, '£$1');
+    if (nextValue !== value) updates.push([node, nextValue]);
+  }
+  updates.forEach(([node, value]) => {
+    node.textContent = value;
+  });
+}
+
 function ensureJsonLd(id, data) {
   if (!data) return;
   const head = document.head || document.body;
@@ -577,7 +615,7 @@ function ensureSeoMetadata() {
       "offers": {
         "@type": "Offer",
         "price": price,
-        "priceCurrency": "USD",
+        "priceCurrency": "GBP",
         "availability": "https://schema.org/InStock",
         "url": canonicalHref
       }
@@ -590,6 +628,17 @@ function enhanceImages() {
   images.forEach((img) => {
     if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
     if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+    if (!img.dataset.fallbackBound) {
+      img.dataset.fallbackBound = '1';
+      img.addEventListener('error', () => {
+        if (img.dataset.fallbackApplied === '1') return;
+        img.dataset.fallbackApplied = '1';
+        const fallbackLabel = img.getAttribute('alt') || document.title || 'Lyrīon Atelier';
+        img.src = typeof buildProductPlaceholder === 'function'
+          ? buildProductPlaceholder(fallbackLabel)
+          : '/assets/catalog/placeholder.webp';
+      });
+    }
     const applyDimensions = () => {
       if (!img.getAttribute('width') && img.naturalWidth) img.setAttribute('width', img.naturalWidth.toString());
       if (!img.getAttribute('height') && img.naturalHeight) img.setAttribute('height', img.naturalHeight.toString());
