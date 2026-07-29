@@ -22,30 +22,30 @@
 <style>
 /* Valentine's Special Styles for Compatibility Page */
 .valentines-banner {
-  background: linear-gradient(135deg, rgba(255, 107, 157, 0.15), rgba(212, 175, 55, 0.1), rgba(139, 69, 109, 0.15));
-  border-bottom: 2px solid rgba(255, 107, 157, 0.3);
+  background: linear-gradient(135deg, rgba(232, 160, 168, 0.15), rgba(201, 146, 43, 0.10), rgba(91, 75, 122, 0.10));
+  border-bottom: 2px solid rgba(232, 160, 168, 0.35);
   text-align: center;
   padding: 20px 15px;
 }
 .valentines-banner h2 {
-  color: #ff6b9d;
+  color: var(--rose, #E8A0A8);
   font-size: 1.5rem;
   margin: 0 0 8px 0;
   font-weight: 700;
 }
 .valentines-banner p {
-  color: var(--white-80, rgba(255,255,255,0.8));
+  color: var(--ink, #2B2440);
   margin: 0;
   font-size: 1rem;
 }
 .hero-compatibility {
-  background: linear-gradient(180deg, rgba(255, 107, 157, 0.08) 0%, rgba(139, 69, 109, 0.05) 50%, transparent 100%);
+  background: linear-gradient(180deg, rgba(232,160,168, 0.10) 0%, rgba(91, 75, 122, 0.05) 50%, transparent 100%);
 }
 
 /* Testimonials Section */
 .testimonials-section {
   padding: 60px 20px;
-  background: rgba(139, 69, 109, 0.08);
+  background: rgba(91, 75, 122, 0.05);
   border-radius: 16px;
   margin: 40px 15px;
 }
@@ -54,7 +54,7 @@
   margin-bottom: 40px;
 }
 .testimonials-section .section-header h2 {
-  color: var(--gold-primary, #d4af37);
+  color: var(--plum, #5B4B7A);
   font-size: 2rem;
   margin-bottom: 15px;
 }
@@ -62,7 +62,7 @@
   width: 80%;
   max-width: 300px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold-primary, #d4af37), transparent);
+  background: linear-gradient(90deg, transparent, var(--gold, #C9922B), transparent);
   margin: 0 auto;
 }
 .testimonials-grid {
@@ -87,31 +87,31 @@
   }
 }
 .testimonial-card {
-  background: rgba(10, 8, 32, 0.7);
-  border: 2px solid rgba(255, 107, 157, 0.2);
-  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(91, 75, 122, 0.18);
+  border-radius: 16px;
   padding: 25px 20px;
-  transition: all 0.3s ease;
+  transition: transform 250ms ease, box-shadow 250ms ease;
 }
 .testimonial-card:hover {
-  border-color: rgba(255, 107, 157, 0.5);
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(255, 107, 157, 0.15);
+  border-color: var(--rose, #E8A0A8);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(91, 75, 122, 0.12);
 }
 .testimonial-text {
-  color: var(--white-80, rgba(255,255,255,0.8));
+  color: var(--ink, #2B2440);
   font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 15px;
   font-style: italic;
 }
 .testimonial-author {
-  color: #ff6b9d;
+  color: var(--plum, #5B4B7A);
   font-size: 0.9rem;
   font-weight: 600;
 }
 .testimonial-stars {
-  color: #fbbf24;
+  color: var(--gold, #C9922B);
   font-size: 0.85rem;
   margin-top: 5px;
 }
@@ -119,18 +119,18 @@
 /* Upsell Section */
 .upsell-section {
   padding: 50px 20px;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(255, 107, 157, 0.08));
+  background: rgba(248, 240, 230, 0.8);
   border-radius: 16px;
   margin: 40px 15px;
   text-align: center;
 }
 .upsell-section h3 {
-  color: var(--gold-primary, #d4af37);
+  color: var(--plum, #5B4B7A);
   font-size: 1.8rem;
   margin-bottom: 15px;
 }
 .upsell-section .upsell-intro {
-  color: var(--white-80, rgba(255,255,255,0.8));
+  color: var(--ink, #2B2440);
   font-size: 1.05rem;
   margin-bottom: 25px;
   max-width: 700px;
@@ -144,7 +144,7 @@
   padding: 0 20px;
 }
 .upsell-features li {
-  color: var(--white-80, rgba(255,255,255,0.8));
+  color: var(--ink, #2B2440);
   font-size: 1rem;
   margin-bottom: 12px;
   padding-left: 8px;
@@ -174,37 +174,38 @@
 .upsell-btn-primary {
   display: inline-block;
   padding: 16px 30px;
-  background: linear-gradient(135deg, #ff6b9d, #ff4081);
-  color: white;
+  background: var(--apricot, #F0A868);
+  color: var(--ink, #2B2440);
   font-size: 1.1rem;
   font-weight: 700;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: background 250ms ease, transform 250ms ease;
   border: none;
   cursor: pointer;
   width: 100%;
 }
 .upsell-btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+  background: #e0955a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(240, 168, 104, 0.30);
 }
 .upsell-btn-secondary {
   display: inline-block;
   padding: 14px 28px;
   background: transparent;
-  color: var(--gold-primary, #d4af37);
+  color: var(--plum, #5B4B7A);
   font-size: 1rem;
   font-weight: 600;
-  border-radius: 8px;
-  border: 2px solid var(--gold-primary, #d4af37);
+  border-radius: 10px;
+  border: 2px solid var(--gold, #C9922B);
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: background 250ms ease, transform 250ms ease;
   width: 100%;
 }
 .upsell-btn-secondary:hover {
-  background: var(--gold-primary, #d4af37);
-  color: var(--navy-darkest, #0a0820);
+  background: rgba(201, 146, 43, 0.08);
+  transform: translateY(-2px);
 }
 @media (min-width: 600px) {
   .upsell-btn-primary, .upsell-btn-secondary {
@@ -220,10 +221,11 @@
 
 /* Preview result CTA enhancement */
 .preview-cta-text {
-  color: #ff6b9d !important;
+  color: var(--plum, #5B4B7A) !important;
   font-weight: 600;
 }
 </style>
+  <link rel="stylesheet" href="/css/polish.css">
 </head>
 <body>
 <header class="site-header" data-nav-version="nav-v4">
@@ -231,7 +233,7 @@
  <a href="/" class="logo-link">
  <picture>
    <source srcset="/images/lyrion-logo.webp" type="image/webp">
-   <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img" loading="eager" fetchpriority="high">
+   <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img" loading="eager" fetchpriority="high" width="580" height="613">
   </picture>
  <span class="brand-name">LYRĪON ATELIER</span>
  </a>
@@ -273,7 +275,10 @@
 
 <!-- Card 1: Digital Certificate -->
 <div class="compatibility-card">
-<img src="/compatibility-images/digital-certificate.png" alt="Digital Certificate">
+<picture>
+  <source srcset="/compatibility-images/digital-certificate.webp" type="image/webp">
+  <img src="/compatibility-images/digital-certificate.png" alt="Digital Compatibility Certificate" loading="lazy" decoding="async" width="1024" height="683">
+</picture>
 <h3>Digital Certificate</h3>
 <p class="price">$39</p>
 <a href="/compatibility/digital-certificate.html" class="learn-more-btn">Learn More</a>
@@ -281,7 +286,10 @@
 
 <!-- Card 2: Luxury Print -->
 <div class="compatibility-card">
-<img src="/compatibility-images/luxury-print.png" alt="Luxury Print">
+<picture>
+  <source srcset="/compatibility-images/luxury-print.webp" type="image/webp">
+  <img src="/compatibility-images/luxury-print.png" alt="Luxury Print Compatibility Certificate" loading="lazy" decoding="async" width="1024" height="683">
+</picture>
 <h3>Luxury Print</h3>
 <p class="price">$149</p>
 <a href="/compatibility/luxury-print.html" class="learn-more-btn">Learn More</a>
@@ -289,7 +297,10 @@
 
 <!-- Card 3: Museum Framed -->
 <div class="compatibility-card">
-<img src="/compatibility-images/museum-framed.png" alt="Museum Framed">
+<picture>
+  <source srcset="/compatibility-images/museum-framed.webp" type="image/webp">
+  <img src="/compatibility-images/museum-framed.png" alt="Museum Framed Compatibility Certificate" loading="lazy" decoding="async" width="1024" height="683">
+</picture>
 <h3>Museum Framed</h3>
 <p class="price">$349</p>
 <a href="/compatibility/museum-framed.html" class="learn-more-btn">Learn More</a>
@@ -297,7 +308,10 @@
 
 <!-- Card 4: Twin Flames -->
 <div class="compatibility-card">
-<img src="/compatibility-images/twin-flames.png" alt="Twin Flames">
+<picture>
+  <source srcset="/compatibility-images/twin-flames.webp" type="image/webp">
+  <img src="/compatibility-images/twin-flames.png" alt="Twin Flames Compatibility Certificate" loading="lazy" decoding="async" width="1024" height="683">
+</picture>
 <h3>Twin Flames</h3>
 <p class="price">$449</p>
 <a href="/compatibility/twin-flames.html" class="learn-more-btn">Learn More</a>

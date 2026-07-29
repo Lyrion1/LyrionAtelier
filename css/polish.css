@@ -1,0 +1,1286 @@
+/*
+ * LYRĪON ATELIER — VISUAL POLISH
+ * Palette, aesthetics, typography, mobile & performance.
+ * This file loads last and overrides the dark navy/gold theme.
+ *
+ * New palette:
+ *   --cream:   #FDF8F0  page background
+ *   --ink:     #2B2440  body text
+ *   --plum:    #5B4B7A  headings
+ *   --apricot: #F0A868  primary buttons & accents
+ *   --rose:    #E8A0A8  secondary accent
+ *   --sage:    #8FB09A  tertiary accent
+ *   --gold:    #C9922B  fine line detail only
+ *
+ * WCAG AA pairs (≥4.5:1) corrected in this pass:
+ *   ink (#2B2440)    on cream  (#FDF8F0) — ~12.4:1
+ *   plum (#5B4B7A)   on cream  (#FDF8F0) —  ~7.3:1
+ *   ink (#2B2440)    on apricot(#F0A868) —  ~6.5:1  [buttons]
+ *   ink (#2B2440)    on rose   (#E8A0A8) —  ~6.8:1
+ *   plum (#5B4B7A)   on rose   (#E8A0A8) —  ~3.7:1 — avoided
+ *   gold (#C9922B)   on cream  (#FDF8F0) —  ~4.5:1  [borders only]
+ */
+
+/* ═══════════════════════════════════════════════════
+   1. CSS CUSTOM PROPERTIES
+═══════════════════════════════════════════════════ */
+
+:root {
+  /* New brand palette */
+  --cream:   #FDF8F0;
+  --ink:     #2B2440;
+  --plum:    #5B4B7A;
+  --apricot: #F0A868;
+  --rose:    #E8A0A8;
+  --sage:    #8FB09A;
+  --gold:    #C9922B;
+
+  /* Semantic aliases */
+  --bg:          var(--cream);
+  --text:        var(--ink);
+  --muted:       #6D627E;
+  --border:      rgba(91, 75, 122, 0.18);
+  --card-bg:     #FFFFFF;
+  --card-shadow: 0 4px 24px rgba(43, 36, 64, 0.10);
+
+  /* Spacing rhythm */
+  --section-padding: clamp(2.5rem, 6vw, 5rem);
+  --radius-card: 16px;
+  --transition: 250ms ease;
+}
+
+/* ═══════════════════════════════════════════════════
+   2. REMOVE DARK-THEME STAR EFFECT & BODY BACKGROUND
+═══════════════════════════════════════════════════ */
+
+html {
+  background: var(--cream) !important;
+}
+
+body {
+  background: var(--cream) !important;
+  color: var(--ink) !important;
+  font-size: 1.0625rem !important;
+  line-height: 1.6 !important;
+}
+
+body::before,
+body::after {
+  display: none !important;
+}
+
+/* Subtle plum constellation motif — SVG inline as background */
+body::before {
+  display: block !important;
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(91,75,122,0.28), transparent 55%),
+    radial-gradient(1px 1px at 38% 42%, rgba(91,75,122,0.20), transparent 55%),
+    radial-gradient(1.5px 1.5px at 62% 22%, rgba(201,146,43,0.22), transparent 55%),
+    radial-gradient(1px 1px at 84% 58%, rgba(91,75,122,0.18), transparent 55%),
+    radial-gradient(1px 1px at 24% 76%, rgba(201,146,43,0.18), transparent 55%),
+    radial-gradient(1px 1px at 50% 88%, rgba(91,75,122,0.15), transparent 55%),
+    radial-gradient(1.5px 1.5px at 76% 12%, rgba(91,75,122,0.22), transparent 55%),
+    radial-gradient(1px 1px at 18% 52%, rgba(201,146,43,0.14), transparent 55%),
+    radial-gradient(1px 1px at 92% 34%, rgba(91,75,122,0.18), transparent 55%);
+  background-size: 280px 280px, 340px 340px, 420px 420px, 500px 500px,
+                   600px 600px, 700px 700px, 820px 820px, 960px 960px, 1100px 1100px;
+  background-repeat: repeat;
+  opacity: 0.7 !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   3. TYPOGRAPHY
+═══════════════════════════════════════════════════ */
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--plum) !important;
+  text-shadow: none !important;
+  font-family: 'Cormorant Garamond', 'Cinzel', serif !important;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem) !important; }
+h2 { font-size: clamp(1.6rem, 4vw, 2.8rem) !important; }
+h3 { font-size: clamp(1.2rem, 3vw, 1.8rem) !important; }
+h4 { font-size: clamp(1rem, 2.5vw, 1.4rem) !important; }
+
+p {
+  color: var(--ink) !important;
+  text-shadow: none !important;
+  max-width: 34rem;
+}
+
+/* Un-constrain paragraphs inside flex/grid cells that need full width */
+.section-title p,
+.hero p,
+.hero-content p,
+.free-oracle-copy p,
+.promo-description,
+.compatibility-promo-section p,
+.trust-badge p,
+footer p {
+  max-width: none;
+}
+
+/* ═══════════════════════════════════════════════════
+   4. SITE HEADER & NAVIGATION
+═══════════════════════════════════════════════════ */
+
+.site-header {
+  background: rgba(253, 248, 240, 0.96) !important;
+  border-bottom: 1px solid var(--border) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.logo-link,
+.logo-link:hover {
+  color: var(--ink) !important;
+}
+
+.brand-name {
+  color: var(--plum) !important;
+  text-shadow: none !important;
+  font-size: clamp(1rem, 3vw, 1.4rem) !important;
+}
+
+.nav-links a {
+  color: var(--ink) !important;
+  transition: color var(--transition), background var(--transition) !important;
+}
+
+.nav-links a:hover,
+.nav-links a:focus,
+.nav-links a.active,
+.nav-links a[aria-current="page"] {
+  color: var(--plum) !important;
+  background: rgba(91, 75, 122, 0.08) !important;
+}
+
+/* Hamburger toggle */
+.nav-toggle {
+  background: rgba(91, 75, 122, 0.10) !important;
+  border: 1.5px solid rgba(91, 75, 122, 0.35) !important;
+  color: var(--plum) !important;
+  border-radius: 8px !important;
+  transition: background var(--transition), border-color var(--transition) !important;
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus {
+  background: rgba(91, 75, 122, 0.18) !important;
+  border-color: var(--plum) !important;
+}
+
+/* Mobile full-screen nav overlay */
+@media (max-width: 768px) {
+  .nav-links {
+    background: rgba(253, 248, 240, 0.98) !important;
+  }
+
+  .nav-links a {
+    color: var(--ink) !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus {
+    color: var(--plum) !important;
+    background: rgba(91, 75, 122, 0.08) !important;
+  }
+
+  .dropdown-toggle {
+    color: var(--ink) !important;
+    background: transparent !important;
+    border: none !important;
+  }
+
+  .dropdown-toggle:hover,
+  .dropdown-toggle:focus {
+    color: var(--plum) !important;
+    background: rgba(91, 75, 122, 0.08) !important;
+    outline: none !important;
+  }
+
+  .dropdown-content {
+    background: rgba(253, 248, 240, 0.98) !important;
+  }
+
+  .dropdown-content a {
+    color: var(--ink) !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+}
+
+/* Mobile dropdown on desktop */
+.mobile-dropdown .dropdown-toggle {
+  color: var(--ink) !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   5. HERO SECTION
+═══════════════════════════════════════════════════ */
+
+.hero {
+  background: linear-gradient(135deg, rgba(253,248,240,1) 0%, rgba(248,240,230,1) 100%) !important;
+  color: var(--ink) !important;
+}
+
+.hero h1,
+.hero h2 {
+  color: var(--plum) !important;
+}
+
+.hero p {
+  color: var(--ink) !important;
+}
+
+.eyebrow {
+  color: var(--gold) !important;
+  font-weight: 700 !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   6. SECTIONS & BACKGROUNDS
+═══════════════════════════════════════════════════ */
+
+.section,
+.products-section,
+.free-oracle-entry,
+main > section,
+.customer-favourites,
+.featured-products,
+[class*="favourites"],
+[class*="featured"] {
+  background: var(--cream) !important;
+  padding-block: var(--section-padding) !important;
+}
+
+.section-title h2 {
+  color: var(--plum) !important;
+}
+
+.section-title .muted,
+.muted {
+  color: var(--muted) !important;
+}
+
+.pill {
+  background: rgba(91, 75, 122, 0.10) !important;
+  color: var(--plum) !important;
+}
+
+/* Trust section */
+.trust-section,
+.trust-signals {
+  background: rgba(91, 75, 122, 0.04) !important;
+  border-top: 1px solid var(--border) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.trust-badge-title,
+.trust-item .stat {
+  color: var(--plum) !important;
+  text-shadow: none !important;
+}
+
+.trust-badge-subtext,
+.trust-item .label {
+  color: var(--muted) !important;
+}
+
+/* Light-lamp / newsletter */
+.light-lamp-section,
+.newsletter-section {
+  background: rgba(248, 240, 230, 0.8) !important;
+  border-color: var(--border) !important;
+}
+
+.light-lamp-title,
+.newsletter-container h2 {
+  color: var(--plum) !important;
+}
+
+.light-lamp-description,
+.newsletter-container > p {
+  color: var(--ink) !important;
+}
+
+.light-lamp-button {
+  border-color: var(--gold) !important;
+  color: var(--plum) !important;
+  background: transparent !important;
+}
+
+.light-lamp-button:hover {
+  background: rgba(201, 146, 43, 0.1) !important;
+  border-color: var(--gold) !important;
+}
+
+/* Newsletter form */
+.newsletter-form input[type="email"] {
+  background: #fff !important;
+  border-color: var(--border) !important;
+  color: var(--ink) !important;
+  font-size: 16px !important;
+}
+
+.newsletter-form input[type="email"]::placeholder {
+  color: var(--muted) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   7. CARDS
+═══════════════════════════════════════════════════ */
+
+.card {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: var(--card-shadow) !important;
+  color: var(--ink) !important;
+  padding: 1.5rem !important;
+  transition: transform var(--transition), box-shadow var(--transition) !important;
+}
+
+.card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 32px rgba(43, 36, 64, 0.15) !important;
+}
+
+.card h3 {
+  color: var(--plum) !important;
+}
+
+/* Free oracle card */
+.free-oracle-card {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   8. PRODUCT CARDS
+═══════════════════════════════════════════════════ */
+
+.product-card,
+.product {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: var(--card-shadow) !important;
+  transition: transform var(--transition), box-shadow var(--transition) !important;
+}
+
+.product-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 32px rgba(43, 36, 64, 0.14) !important;
+}
+
+.product-card-title,
+.product-card__title {
+  color: var(--plum) !important;
+}
+
+.product-card-price,
+.product-card__price {
+  color: var(--ink) !important;
+}
+
+/* Product image: cream background, no dark frame */
+.product-card .media,
+.product-card .image,
+.product-card__media,
+.product-image,
+.product-card-image-container,
+.card__image {
+  background: var(--cream) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   9. ORACLE CARDS
+═══════════════════════════════════════════════════ */
+
+.oracle-card {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: var(--card-shadow) !important;
+  transition: transform var(--transition), box-shadow var(--transition) !important;
+}
+
+.oracle-card:hover {
+  transform: translateY(-2px) !important;
+  border-color: var(--plum) !important;
+  box-shadow: 0 8px 32px rgba(91, 75, 122, 0.18) !important;
+}
+
+.oracle-card-title {
+  color: var(--plum) !important;
+}
+
+.oracle-card-price {
+  color: var(--ink) !important;
+}
+
+.oracle-card-description {
+  color: var(--ink) !important;
+}
+
+.oracle-card-button {
+  border-color: var(--apricot) !important;
+  color: var(--ink) !important;
+  background: transparent !important;
+}
+
+.oracle-card-button:hover {
+  background: var(--apricot) !important;
+  color: var(--ink) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   10. COMPATIBILITY CARDS
+═══════════════════════════════════════════════════ */
+
+.compat-card {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: var(--card-shadow) !important;
+  transition: transform var(--transition), box-shadow var(--transition) !important;
+}
+
+.compat-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 32px rgba(91, 75, 122, 0.15) !important;
+}
+
+.compat-card__body {
+  background: transparent !important;
+  color: var(--ink) !important;
+}
+
+/* Compatibility promo section */
+.compatibility-promo-section {
+  background: var(--cream) !important;
+}
+
+.promo-cta-primary {
+  background: var(--apricot) !important;
+  color: var(--ink) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  transition: background var(--transition), transform var(--transition) !important;
+}
+
+.promo-cta-primary:hover {
+  background: #e0955a !important;
+  transform: translateY(-2px) !important;
+}
+
+.promo-cta-secondary {
+  background: transparent !important;
+  border: 2px solid var(--gold) !important;
+  color: var(--plum) !important;
+}
+
+.promo-cta-secondary:hover {
+  background: rgba(201, 146, 43, 0.08) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Hero pages */
+.hero-compatibility {
+  background: linear-gradient(135deg, rgba(253,248,240,1), rgba(244,235,225,1)) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.hero-main-title,
+.hero-compatibility h1,
+.hero-compatibility h2 {
+  color: var(--plum) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   11. BUTTONS
+═══════════════════════════════════════════════════ */
+
+/* Primary buttons — apricot background, ink text */
+.btn-primary,
+.button-primary,
+.modal-primary-btn,
+.oracle-submit,
+.oracle-cta-btn,
+.book-reading-btn,
+.purchase-button,
+.purchase-reading-button,
+.add-to-cart-btn,
+.add-to-cart-button,
+.add-cart-button,
+.buy-set-btn,
+.submit-btn,
+button[class*="add-to-cart"],
+button[class*="add-cart"],
+button[class*="buy"],
+button[class*="submit"] {
+  background: var(--apricot) !important;
+  color: var(--ink) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(240, 168, 104, 0.25) !important;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition) !important;
+}
+
+.btn-primary:hover,
+.modal-primary-btn:hover,
+.oracle-submit:hover,
+.oracle-cta-btn:hover,
+.book-reading-btn:hover,
+.purchase-button:hover,
+.purchase-reading-button:hover,
+.add-to-cart-btn:hover,
+.add-to-cart-button:hover,
+.buy-set-btn:hover,
+.submit-btn:hover {
+  background: #e0955a !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 14px rgba(240, 168, 104, 0.35) !important;
+}
+
+/* Generic .btn */
+.btn {
+  background: var(--apricot) !important;
+  color: var(--ink) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  transition: background var(--transition), transform var(--transition) !important;
+}
+
+.btn:hover {
+  background: #e0955a !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Outline / secondary buttons */
+.btn-outline,
+.view-product-btn,
+.view-button,
+.view-product-button,
+.continue-shopping-button,
+.reveal-btn,
+.light-lamp-button,
+.oracle-card-button {
+  background: transparent !important;
+  border: 2px solid var(--gold) !important;
+  color: var(--plum) !important;
+  box-shadow: none !important;
+  transition: background var(--transition), transform var(--transition), border-color var(--transition) !important;
+}
+
+.btn-outline:hover,
+.view-product-btn:hover,
+.view-button:hover,
+.view-product-button:hover,
+.continue-shopping-button:hover,
+.reveal-btn:hover {
+  background: rgba(201, 146, 43, 0.08) !important;
+  border-color: var(--gold) !important;
+  transform: translateY(-2px) !important;
+  color: var(--ink) !important;
+}
+
+/* Override the nuclear button-fixes.css for inline-styled elements */
+button[style],
+a[style].btn,
+.btn[style] {
+  background: var(--apricot) !important;
+  color: var(--ink) !important;
+  border: none !important;
+}
+
+/* Disabled buttons */
+button:disabled,
+button[disabled],
+.btn:disabled,
+.button:disabled {
+  background: #e8d4c0 !important;
+  color: #a0948a !important;
+  cursor: not-allowed !important;
+  opacity: 0.75 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Nav/CTA buttons that are anchors */
+a.btn,
+a.button,
+.promo-cta-primary {
+  background: var(--apricot) !important;
+  color: var(--ink) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  transition: background var(--transition), transform var(--transition) !important;
+}
+
+a.btn:hover,
+a.button:hover,
+.promo-cta-primary:hover {
+  background: #e0955a !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   12. FOCUS RINGS (accessibility)
+═══════════════════════════════════════════════════ */
+
+*:focus-visible {
+  outline: 2px solid var(--gold) !important;
+  outline-offset: 3px !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   13. FORMS & INPUTS
+═══════════════════════════════════════════════════ */
+
+input,
+select,
+textarea {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  color: var(--ink) !important;
+  font-size: 16px !important;  /* prevent iOS zoom on focus */
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--gold) !important;
+  outline-offset: 0 !important;
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 3px rgba(201, 146, 43, 0.15) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted) !important;
+}
+
+label {
+  color: var(--plum) !important;
+}
+
+/* Contact form */
+.contact-form-wrap {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+.contact-form-wrap::after {
+  display: none !important;
+}
+
+.contact-form-wrap h2 {
+  color: var(--plum) !important;
+}
+
+.contact-form .form-group label {
+  color: var(--plum) !important;
+}
+
+.contact-form .form-group input,
+.contact-form .form-group select,
+.contact-form .form-group textarea {
+  background: #faf7f3 !important;
+  border-color: var(--border) !important;
+  color: var(--ink) !important;
+}
+
+.contact-form .form-group input:focus,
+.contact-form .form-group select:focus,
+.contact-form .form-group textarea:focus {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 3px rgba(201, 146, 43, 0.15) !important;
+  background: #fff !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   14. MODALS
+═══════════════════════════════════════════════════ */
+
+.cosmic-modal {
+  background: rgba(43, 36, 64, 0.5) !important;
+}
+
+.modal-content {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: 0 24px 80px rgba(43, 36, 64, 0.25) !important;
+  color: var(--ink) !important;
+}
+
+.modal-title {
+  color: var(--plum) !important;
+}
+
+.modal-subtitle {
+  color: var(--muted) !important;
+}
+
+.modal-close {
+  color: var(--plum) !important;
+  background: transparent !important;
+  border: none !important;
+  font-size: 1.5rem !important;
+}
+
+.modal-close:hover {
+  color: var(--ink) !important;
+}
+
+/* Reading cards inside modal */
+.reading-card {
+  background: #faf7f3 !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  transition: transform var(--transition), box-shadow var(--transition) !important;
+}
+
+.reading-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(91, 75, 122, 0.12) !important;
+}
+
+.reading-title {
+  color: var(--plum) !important;
+}
+
+.reading-price {
+  color: var(--ink) !important;
+}
+
+.reading-description {
+  color: var(--muted) !important;
+}
+
+/* Cosmic input inside modal */
+.cosmic-input {
+  background: #faf7f3 !important;
+  border-color: var(--border) !important;
+  color: var(--ink) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   15. FORTUNE / SPINNING WHEEL MODAL
+   Visual only — logic untouched
+═══════════════════════════════════════════════════ */
+
+.spin-wheel-overlay {
+  background: rgba(43, 36, 64, 0.55) !important;
+}
+
+.spin-wheel-popup {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: 0 24px 80px rgba(43, 36, 64, 0.25) !important;
+  max-height: 92vh !important;
+  overflow-y: auto !important;
+}
+
+.spin-wheel-close {
+  background: rgba(91, 75, 122, 0.10) !important;
+  border-color: var(--border) !important;
+  color: var(--plum) !important;
+}
+
+.spin-wheel-close:hover {
+  background: rgba(91, 75, 122, 0.18) !important;
+  border-color: var(--plum) !important;
+}
+
+/* Mobile: wheel fits the viewport */
+@media (max-width: 768px) {
+  .spin-wheel-popup {
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    max-height: 92dvh !important;
+    padding: 20px 16px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   16. ORACLE WIDGET PANEL
+═══════════════════════════════════════════════════ */
+
+#oracle-panel,
+.oracle-widget-panel {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: 0 16px 60px rgba(43, 36, 64, 0.20) !important;
+  color: var(--ink) !important;
+}
+
+.oracle-header {
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.oracle-header h3 {
+  color: var(--plum) !important;
+}
+
+.oracle-close,
+#oracle-close-btn {
+  color: var(--plum) !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.oracle-input {
+  background: #faf7f3 !important;
+  border-color: var(--border) !important;
+  color: var(--ink) !important;
+  font-size: 16px !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   17. COSMIC ORBS (homepage overlays)
+═══════════════════════════════════════════════════ */
+
+.cosmic-orb-left,
+.cosmic-orb-right {
+  background: #fff !important;
+  border: 1.5px solid var(--gold) !important;
+  box-shadow: var(--card-shadow) !important;
+  transition: transform var(--transition), box-shadow var(--transition) !important;
+}
+
+.cosmic-orb-left:hover,
+.cosmic-orb-right:hover {
+  transform: scale(1.05) translateY(-2px) !important;
+  box-shadow: 0 8px 28px rgba(201, 146, 43, 0.22) !important;
+}
+
+.conversion-orb__label,
+.conversion-orb__glyph {
+  color: var(--plum) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   18. FOOTER
+═══════════════════════════════════════════════════ */
+
+.footer {
+  background: rgba(248, 240, 230, 0.9) !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+.footer-content p {
+  color: var(--muted) !important;
+}
+
+.footer-links a {
+  color: var(--muted) !important;
+  transition: color var(--transition) !important;
+}
+
+.footer-links a:hover {
+  color: var(--plum) !important;
+}
+
+.footer-social__link {
+  border-color: var(--border) !important;
+  color: var(--muted) !important;
+  background: rgba(91, 75, 122, 0.06) !important;
+  transition: color var(--transition), border-color var(--transition), background var(--transition) !important;
+}
+
+.footer-social__link:hover {
+  color: var(--plum) !important;
+  border-color: var(--plum) !important;
+  background: rgba(91, 75, 122, 0.12) !important;
+}
+
+.footer-social__icon {
+  fill: currentColor !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   19. TOASTS & BADGES
+═══════════════════════════════════════════════════ */
+
+.toast {
+  background: #fff !important;
+  color: var(--ink) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+.badge {
+  background: rgba(91, 75, 122, 0.10) !important;
+  color: var(--plum) !important;
+}
+
+.product-badge--bestseller {
+  background: linear-gradient(135deg, var(--apricot), #f8c490) !important;
+  color: var(--ink) !important;
+}
+
+.product-badge--scarcity {
+  color: var(--gold) !important;
+  border-color: rgba(201, 146, 43, 0.4) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   20. NAV LINKS - HERO PRIMARY CTA CLARITY
+   One prominent CTA, secondary visibly lighter
+═══════════════════════════════════════════════════ */
+
+/* The primary Shop button should stand out */
+.hero .btn-primary,
+.hero a.btn-primary {
+  background: var(--apricot) !important;
+  color: var(--ink) !important;
+  font-size: 1.05rem !important;
+  padding: 0.85rem 1.6rem !important;
+  box-shadow: 0 4px 18px rgba(240, 168, 104, 0.30) !important;
+}
+
+/* The secondary oracle button is lighter */
+.hero .btn-outline,
+.hero a.btn-outline {
+  background: transparent !important;
+  border: 1.5px solid var(--gold) !important;
+  color: var(--plum) !important;
+  padding: 0.8rem 1.5rem !important;
+}
+
+.hero .btn-outline:hover,
+.hero a.btn-outline:hover {
+  background: rgba(201, 146, 43, 0.08) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   21. COMPATIBILITY PROMO SECTION MOCKUP
+═══════════════════════════════════════════════════ */
+
+.certificate-mockup .mockup-frame {
+  background: linear-gradient(145deg, #fdf8f0, #f0e8da) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+}
+
+.certificate-mockup .mockup-content .mockup-title {
+  color: var(--plum) !important;
+}
+
+.certificate-mockup .mockup-content .score-big {
+  color: var(--apricot) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   22. CART / CHECKOUT
+═══════════════════════════════════════════════════ */
+
+.cart-summary {
+  background: #fff !important;
+  border-color: var(--border) !important;
+}
+
+.cart-table th,
+.cart-table td {
+  border-color: var(--border) !important;
+  color: var(--ink) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   23. LOADING OVERLAY & SPINNER
+═══════════════════════════════════════════════════ */
+
+.loading-overlay {
+  background: rgba(253, 248, 240, 0.95) !important;
+}
+
+.loading-spinner {
+  border-color: rgba(240, 168, 104, 0.25) !important;
+  border-top-color: var(--apricot) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   24. SKIP TO CONTENT LINK
+═══════════════════════════════════════════════════ */
+
+.skip-to-content {
+  background: var(--plum) !important;
+  color: #fff !important;
+  border-color: var(--gold) !important;
+  box-shadow: var(--card-shadow) !important;
+  text-shadow: none !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   25. ORACLE PAGE HERO
+═══════════════════════════════════════════════════ */
+
+.oracle-hero,
+.oracle-page-hero {
+  background: linear-gradient(135deg, rgba(253,248,240,1), rgba(244,235,225,1)) !important;
+  color: var(--ink) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   26. PRODUCT DETAIL / SHOP PRODUCT
+═══════════════════════════════════════════════════ */
+
+.product-detail,
+.product-detail-section,
+.shop-product-page {
+  background: var(--cream) !important;
+}
+
+.size-option {
+  border-color: var(--border) !important;
+  color: var(--ink) !important;
+  background: #fff !important;
+  transition: background var(--transition), border-color var(--transition) !important;
+}
+
+.size-option.active,
+.size-option:hover {
+  border-color: var(--plum) !important;
+  background: rgba(91, 75, 122, 0.08) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   27. MOBILE RESPONSIVE FIXES
+═══════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  /* No horizontal scroll */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+
+  /* All images must stay in container */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Buttons: full width, min 44px tap target */
+  .btn,
+  .button,
+  a.btn,
+  a.button,
+  .btn-primary,
+  .btn-outline,
+  .add-to-cart-btn,
+  .purchase-button,
+  .purchase-reading-button,
+  .book-reading-btn,
+  .oracle-submit,
+  .oracle-cta-btn {
+    width: 100% !important;
+    min-height: 44px !important;
+    font-size: 1rem !important;
+  }
+
+  /* Product grid: 1 column at 375px */
+  .product-grid,
+  #featured-grid,
+  .oracle-products-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Hero: ensure nothing overlaps */
+  .hero {
+    height: auto !important;
+    padding: 2.5rem 1rem !important;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Cosmic orbs: don't absolutely position on mobile */
+  .cosmic-orb-left,
+  .cosmic-orb-right {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    margin: 0.75rem auto !important;
+    width: 140px !important;
+    height: 140px !important;
+  }
+
+  /* Section padding */
+  section {
+    padding-block: clamp(2rem, 5vw, 3.5rem) !important;
+    padding-inline: 1rem !important;
+  }
+
+  .container {
+    padding-inline: 1rem !important;
+    max-width: 100% !important;
+  }
+}
+
+/* 2-column product grid at 768px */
+@media (min-width: 768px) {
+  .product-grid,
+  #featured-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* 3-column at 1024px+ */
+@media (min-width: 1024px) {
+  .product-grid,
+  #featured-grid,
+  .oracle-products-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   28. TRUST BADGES (homepage)
+═══════════════════════════════════════════════════ */
+
+.trust-badges-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+  gap: 1.5rem !important;
+}
+
+.trust-badge {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  padding: 1.5rem 1rem !important;
+  text-align: center !important;
+  box-shadow: var(--card-shadow) !important;
+  transition: transform var(--transition) !important;
+}
+
+.trust-badge:hover {
+  transform: translateY(-2px) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   29. EVENT CARDS
+═══════════════════════════════════════════════════ */
+
+.event-card {
+  background: #fff !important;
+  border-color: var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: var(--card-shadow) !important;
+  transition: transform var(--transition), box-shadow var(--transition) !important;
+}
+
+.event-card:hover {
+  border-color: var(--plum) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 28px rgba(91, 75, 122, 0.14) !important;
+}
+
+.event-card h3 {
+  color: var(--plum) !important;
+}
+
+.event-card .event-date {
+  background: rgba(91, 75, 122, 0.08) !important;
+  border-color: var(--border) !important;
+}
+
+.event-date .month {
+  color: var(--plum) !important;
+}
+
+.event-date .day {
+  color: var(--ink) !important;
+}
+
+.event-btn {
+  border-color: var(--gold) !important;
+  color: var(--plum) !important;
+  background: transparent !important;
+  transition: background var(--transition), transform var(--transition) !important;
+}
+
+.event-btn:hover {
+  background: rgba(201, 146, 43, 0.08) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   30. TIERS / PRICING CARDS
+═══════════════════════════════════════════════════ */
+
+.tier {
+  background: #fff !important;
+  border-color: var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: var(--card-shadow) !important;
+  transition: transform var(--transition), box-shadow var(--transition) !important;
+}
+
+.tier:hover {
+  border-color: var(--plum) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 28px rgba(91, 75, 122, 0.14) !important;
+}
+
+.tier h3 {
+  color: var(--plum) !important;
+}
+
+.tier .price {
+  color: var(--ink) !important;
+}
+
+.tier ul li {
+  color: var(--ink) !important;
+  border-color: var(--border) !important;
+}
+
+.tier .badge {
+  background: var(--apricot) !important;
+  color: var(--ink) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   31. IMAGES — PERFORMANCE & CONTAINMENT
+═══════════════════════════════════════════════════ */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Product images on cream, no dark frame */
+.product-card img,
+.oracle-card img,
+.compat-card img,
+.reading-card img {
+  background: var(--cream) !important;
+}
