@@ -47,6 +47,28 @@
   --section-padding: clamp(2.5rem, 6vw, 5rem);
   --radius-card: 16px;
   --transition: 250ms ease;
+
+  /* Remap legacy dark-theme variables used by page-level inline styles */
+  --gold-primary: var(--gold);
+  --gold-light:   #dcac5a;
+  --gold-dark:    #a67724;
+  --purple-deep:  var(--plum);
+  --purple-dark:  var(--plum);
+  --navy-darkest: var(--cream);
+  --navy-dark:    var(--cream);
+  --white:        var(--cream);
+  --white-80:     var(--ink);
+  --white-60:     var(--muted);
+  --brand-gold:   var(--gold);
+
+  /* Valentines page variables */
+  --val-gold:     var(--gold);
+  --val-pink:     var(--rose);
+  --val-dark-purple: rgba(91, 75, 122, 0.15);
+  --val-navy:     var(--cream);
+  --val-white:    var(--ink);
+  --val-white-80: var(--ink);
+  --val-white-60: var(--muted);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -1283,4 +1305,487 @@ img {
 .compat-card img,
 .reading-card img {
   background: var(--cream) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   32. PAGE-SPECIFIC DARK CLASS OVERRIDES
+   (valentines, codex, policy pages, etc.)
+═══════════════════════════════════════════════════ */
+
+/* Valentines page */
+.valentines-hero {
+  background: linear-gradient(180deg, rgba(232,160,168,0.12) 0%, transparent 100%) !important;
+}
+
+.valentines-badge {
+  background: var(--apricot) !important;
+  color: var(--ink) !important;
+}
+
+.valentines-hero h1 {
+  color: var(--plum) !important;
+}
+
+.compatibility-tool-section {
+  background: rgba(91, 75, 122, 0.05) !important;
+}
+
+.compatibility-cta-btn,
+.relationship-card-btn,
+.upsell-btn-primary,
+.bundle-summary .buy-set-btn {
+  background: var(--apricot) !important;
+  color: var(--ink) !important;
+  animation: none !important;
+}
+
+.compatibility-cta-btn:hover,
+.relationship-card-btn:hover,
+.upsell-btn-primary:hover,
+.bundle-summary .buy-set-btn:hover {
+  background: #e0955a !important;
+}
+
+.relationship-card {
+  background: #fff !important;
+  border-color: var(--border) !important;
+  border-radius: var(--radius-card) !important;
+}
+
+.relationship-card-image {
+  background: var(--cream) !important;
+}
+
+.relationship-card h3 {
+  color: var(--plum) !important;
+}
+
+.relationship-card p {
+  color: var(--ink) !important;
+}
+
+.couples-collection-section {
+  background: rgba(248, 240, 230, 0.6) !important;
+}
+
+.couples-collection-section::before {
+  display: none !important;
+}
+
+.couple-bundle-card {
+  background: #fff !important;
+  border-color: var(--border) !important;
+  border-radius: var(--radius-card) !important;
+}
+
+.couple-bundle-card h3 {
+  color: var(--plum) !important;
+}
+
+.bundle-item {
+  background: rgba(253, 248, 240, 0.7) !important;
+}
+
+.bundle-item h4 {
+  color: var(--plum) !important;
+}
+
+.bundle-item .product-description,
+.bundle-item .selector-group label {
+  color: var(--ink) !important;
+}
+
+.bundle-item .selector-group select {
+  background: #fff !important;
+  border-color: var(--border) !important;
+  color: var(--ink) !important;
+}
+
+.bundle-item .thumbnail-row img:hover {
+  border-color: var(--gold) !important;
+}
+
+.bundle-summary {
+  background: rgba(253, 248, 240, 0.8) !important;
+  border-color: var(--gold) !important;
+  border-radius: 12px !important;
+}
+
+.bundle-summary .save-badge {
+  background: var(--rose) !important;
+  color: var(--ink) !important;
+}
+
+.bundle-summary .original-price {
+  color: var(--muted) !important;
+}
+
+.bundle-summary .bundle-price {
+  color: var(--plum) !important;
+}
+
+.bundle-summary .savings {
+  color: var(--rose) !important;
+}
+
+.bundle-summary .buy-individual-link {
+  color: var(--plum) !important;
+}
+
+.mystery-magic-section {
+  background: rgba(248, 240, 230, 0.4) !important;
+}
+
+/* Testimonials on dark-bg pages */
+.testimonial-snippet {
+  color: var(--muted) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   33. POLICY / LEGAL PAGES
+   (privacy, terms, refund, success, contact-success)
+═══════════════════════════════════════════════════ */
+
+/* These pages often have minimal structure so polish.css body
+   background + text colors already handle them adequately */
+
+.policy-hero,
+.legal-hero,
+.success-hero {
+  background: var(--cream) !important;
+  color: var(--ink) !important;
+}
+
+.policy-section,
+.legal-section {
+  background: var(--cream) !important;
+}
+
+.policy-section h2,
+.legal-section h2 {
+  color: var(--plum) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   34. SHOP PAGE INLINE / FILTER STYLES
+═══════════════════════════════════════════════════ */
+
+.shop-header,
+.shop-hero {
+  background: var(--cream) !important;
+}
+
+.shop-filters,
+.filters-section {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+}
+
+.filter-btn,
+.filter-chip,
+.filter-option {
+  background: rgba(91, 75, 122, 0.08) !important;
+  color: var(--plum) !important;
+  border-color: var(--border) !important;
+  transition: background var(--transition) !important;
+}
+
+.filter-btn.active,
+.filter-chip.active,
+.filter-option.active {
+  background: var(--plum) !important;
+  color: #fff !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   35. CODEX PAGE
+═══════════════════════════════════════════════════ */
+
+.codex-hero,
+.codex-section {
+  background: var(--cream) !important;
+}
+
+.codex-card {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: var(--card-shadow) !important;
+  transition: transform var(--transition), box-shadow var(--transition) !important;
+}
+
+.codex-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 28px rgba(91, 75, 122, 0.14) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   36. CURATED FOR GIFTING PAGE
+═══════════════════════════════════════════════════ */
+
+.gifts-hero,
+.gifts-section {
+  background: var(--cream) !important;
+}
+
+.gift-card,
+.curated-card {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: var(--card-shadow) !important;
+  transition: transform var(--transition) !important;
+}
+
+.gift-card:hover,
+.curated-card:hover {
+  transform: translateY(-2px) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   37. SUCCESS & CONTACT SUCCESS PAGES
+═══════════════════════════════════════════════════ */
+
+.success-container,
+.contact-success-container {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   38. CART PAGE
+═══════════════════════════════════════════════════ */
+
+.cart-container {
+  background: var(--cream) !important;
+}
+
+.cart-item {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   39. CHECKOUT PAGE
+═══════════════════════════════════════════════════ */
+
+.checkout-container {
+  background: var(--cream) !important;
+}
+
+.checkout-section,
+.checkout-form-section {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+}
+
+/* Stripe elements will retain their own styling */
+
+/* ═══════════════════════════════════════════════════
+   40. OVERRIDE REMAINING HARD-CODED DARK BG PATTERNS
+   These catch any element not addressed by section classes
+═══════════════════════════════════════════════════ */
+
+/* Any section with linear-gradient using dark values */
+[style*="background: rgba(10"],
+[style*="background:rgba(10"],
+[style*="background: linear-gradient(135deg, #0f"],
+[style*="background: linear-gradient(180deg, #0a"] {
+  background: var(--cream) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   41. SUCCESS PAGE (success.html)
+═══════════════════════════════════════════════════ */
+
+body.success-page,
+body[class*="success"] {
+  background: var(--cream) !important;
+  color: var(--ink) !important;
+}
+
+/* Hide the animated star divs — they're invisible on cream anyway */
+.stars { display: none !important; }
+
+.success-container {
+  background: #fff !important;
+  border: 1px solid var(--gold) !important;
+  box-shadow: 0 8px 32px rgba(91, 75, 122, 0.12) !important;
+  color: var(--ink) !important;
+}
+
+.success-container h1 {
+  color: var(--plum) !important;
+}
+
+.success-container .subtitle {
+  color: var(--muted) !important;
+}
+
+.success-container .message {
+  color: var(--ink) !important;
+}
+
+.success-container .divider {
+  background: linear-gradient(90deg, transparent, var(--gold), transparent) !important;
+}
+
+.success-container .email-notice {
+  background: rgba(201, 146, 43, 0.08) !important;
+  border-left-color: var(--gold) !important;
+  color: var(--ink) !important;
+}
+
+.success-container .email-notice p {
+  color: var(--ink) !important;
+}
+
+.success-container .email-notice strong {
+  color: var(--gold) !important;
+}
+
+.success-container .cta-button {
+  background: var(--apricot) !important;
+  color: var(--ink) !important;
+  box-shadow: 0 4px 14px rgba(240, 168, 104, 0.4) !important;
+}
+
+.success-container .cta-button:hover {
+  background: #e0955a !important;
+  box-shadow: 0 8px 20px rgba(240, 168, 104, 0.5) !important;
+}
+
+.success-container .oracle-link {
+  color: var(--plum) !important;
+}
+
+.success-container .oracle-link:hover {
+  border-bottom-color: var(--plum) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   42. LEGAL / POLICY PAGES (privacy, terms, refund)
+═══════════════════════════════════════════════════ */
+
+.legal-container {
+  color: var(--ink) !important;
+}
+
+.legal-container h1 {
+  color: var(--plum) !important;
+}
+
+.legal-container h2 {
+  color: var(--plum) !important;
+}
+
+.legal-container p,
+.legal-container li {
+  color: var(--ink) !important;
+  line-height: 1.8 !important;
+}
+
+.legal-container .last-updated {
+  color: var(--muted) !important;
+}
+
+.legal-container a {
+  color: var(--plum) !important;
+}
+
+.legal-container a:hover {
+  color: var(--gold) !important;
+}
+
+.legal-container strong {
+  color: var(--plum) !important;
+}
+
+/* Contact page */
+.contact-hero {
+  background: var(--cream) !important;
+}
+
+.contact-form-section {
+  background: #fff !important;
+  border-radius: var(--radius-card) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   43. ORACLE READING PAGES (styles/main.css classes)
+═══════════════════════════════════════════════════ */
+
+.reading-hero {
+  background: var(--cream) !important;
+  color: var(--ink) !important;
+}
+
+.reading-hero h1,
+.reading-hero .reading-title {
+  color: var(--plum) !important;
+}
+
+.reading-hero .reading-subtitle,
+.reading-hero .reading-tagline {
+  color: var(--muted) !important;
+}
+
+.reading-image img {
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 4px 16px rgba(91, 75, 122, 0.10) !important;
+}
+
+.reading-purchase-card,
+.purchase-card,
+.product-purchase-section {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+.reading-purchase-card h2,
+.purchase-card h2 {
+  color: var(--plum) !important;
+}
+
+.reading-sections,
+.reading-features {
+  background: var(--cream) !important;
+}
+
+.reading-feature,
+.feature-item {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+}
+
+.feature-icon {
+  color: var(--apricot) !important;
+}
+
+.reading-testimonials,
+.testimonials-section {
+  background: rgba(248, 240, 230, 0.6) !important;
+}
+
+.reading-testimonial,
+.testimonial-card {
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+}
+
+/* Sample excerpt / preview blocks */
+.reading-preview,
+.sample-section {
+  background: rgba(91, 75, 122, 0.05) !important;
+  border-left: 3px solid var(--plum) !important;
 }
