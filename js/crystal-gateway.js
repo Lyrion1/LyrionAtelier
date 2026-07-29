@@ -48,6 +48,13 @@
       });
     });
 
+    // Close any open cosmic modal on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.cosmic-modal.active').forEach(m => m.classList.remove('active'));
+      }
+    });
+
     const birthDateForm = document.getElementById('birthDateForm');
     if (birthDateForm) {
       birthDateForm.addEventListener('submit', async (e) => {
