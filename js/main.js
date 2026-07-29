@@ -37,7 +37,7 @@ const PRICE_TOKEN_TEST_REGEX = /\bUSD\s*([\d,]+(?:\.\d{1,2})?)|\$([\d,]+(?:\.\d{
 const CURRENCY_RATES = {
   USD: 1,
   EUR: 0.93,
-  GBP: 0.79,
+  GBP: 1,
   CAD: 1.37,
   AUD: 1.53,
   NZD: 1.67,
@@ -415,6 +415,7 @@ function initInlineNavToggle(header) {
     backdrop.className = 'nav-drawer-backdrop';
     backdrop.setAttribute('aria-label', 'Close navigation menu');
     backdrop.setAttribute('aria-hidden', 'true');
+    backdrop.style.pointerEvents = 'none';
     document.body.appendChild(backdrop);
   }
 
@@ -432,9 +433,11 @@ function initInlineNavToggle(header) {
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-label', 'Open navigation menu');
     navLinks.setAttribute('aria-hidden', 'true');
+    navLinks.style.pointerEvents = 'none';
     navToggle.textContent = '☰';
     document.body.style.overflow = '';
     document.body.classList.remove('nav-open');
+    backdrop.style.pointerEvents = 'none';
   };
 
   const openMenu = () => {
@@ -446,10 +449,12 @@ function initInlineNavToggle(header) {
     navToggle.setAttribute('aria-expanded', 'true');
     navToggle.setAttribute('aria-label', 'Close navigation menu');
     navLinks.setAttribute('aria-hidden', 'false');
+    navLinks.style.pointerEvents = 'auto';
     navToggle.textContent = '☰';
     document.body.style.overflow = 'hidden';
     document.body.classList.add('nav-open');
     closeButton.focus();
+    backdrop.style.pointerEvents = 'auto';
   };
 
   const toggleMenu = () => {
@@ -507,6 +512,7 @@ function initInlineNavToggle(header) {
 
   // Initialize mobile dropdown toggles
   initMobileDropdowns(header);
+  closeMenu();
 }
 
 /**
@@ -595,12 +601,8 @@ function localizeDisplayedPrices(root = document.body) {
 }
 
 function detectCountryCode() {
-  const languages = [navigator.language, ...(navigator.languages || [])].filter(Boolean);
-  for (const language of languages) {
-    const parts = String(language).split(/[-_]/);
-    if (parts[1] && parts[1].length === 2) return parts[1].toUpperCase();
-  }
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+  if (/America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Adak|Detroit|Indiana|Boise)/i.test(timezone)) return 'US';
   if (/Europe\/London/i.test(timezone)) return 'GB';
   if (/Europe\/(Paris|Berlin|Madrid|Rome|Amsterdam|Brussels|Lisbon)/i.test(timezone)) return 'FR';
   if (/America\/Toronto|America\/Vancouver|America\/Edmonton|America\/Montreal|America\/Halifax/i.test(timezone)) return 'CA';
@@ -608,7 +610,12 @@ function detectCountryCode() {
   if (/Pacific\/Auckland/i.test(timezone)) return 'NZ';
   if (/Asia\/Tokyo/i.test(timezone)) return 'JP';
   if (/Europe\/Zurich/i.test(timezone)) return 'CH';
-  return 'US';
+  const languages = [navigator.language, ...(navigator.languages || [])].filter(Boolean);
+  for (const language of languages) {
+    const parts = String(language).split(/[-_]/);
+    if (parts[1] && parts[1].length === 2) return parts[1].toUpperCase();
+  }
+  return 'GB';
 }
 
 function normalizeLanguage(language = 'en') {
@@ -623,7 +630,9 @@ function normalizeCurrency(currency = 'USD') {
 
 function readLocalizationPreferences() {
   try {
-    const data = JSON.parse(localStorage.getItem(LOCALIZATION_STORAGE_KEY) || '{}');
+    const raw = localStorage.getItem(LOCALIZATION_STORAGE_KEY);
+    if (!raw) return null;
+    const data = JSON.parse(raw);
     if (!data || typeof data !== 'object') return null;
     return {
       language: normalizeLanguage(data.language),
@@ -647,6 +656,9 @@ function detectDefaultLocalization() {
   const preferences = readLocalizationPreferences();
   if (preferences) return preferences;
   const language = normalizeLanguage(navigator.language || 'en');
+  if (/^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname)) {
+    return { language, currency: 'GBP' };
+  }
   const country = detectCountryCode();
   return {
     language,
@@ -711,6 +723,7 @@ async function refreshExchangeRates() {
     const payload = await response.json();
     if (!payload || payload.result !== 'success' || typeof payload.rates !== 'object') return;
     CURRENCY_OPTIONS.forEach((currency) => {
+      if (currency === 'GBP') return;
       const nextRate = Number(payload.rates[currency]);
       if (Number.isFinite(nextRate) && nextRate > 0) CURRENCY_RATES[currency] = nextRate;
     });

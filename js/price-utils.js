@@ -3,7 +3,7 @@ const SUPPORTED_CURRENCIES = new Set(['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'NZD', 
 const BASE_RATES = {
   USD: 1,
   EUR: 0.93,
-  GBP: 0.79,
+  GBP: 1,
   CAD: 1.37,
   AUD: 1.53,
   NZD: 1.67,
@@ -45,7 +45,9 @@ export function formatPrice(value, fallback = PRICE_FALLBACK) {
 export function formatPriceWithCurrency(value, currency = 'USD', fallback = PRICE_FALLBACK, language = 'en') {
   const cents = centsFrom(value);
   if (cents === null) return fallback;
-  const targetCurrency = SUPPORTED_CURRENCIES.has(String(currency).toUpperCase()) ? String(currency).toUpperCase() : 'USD';
+  const localizationCurrency = typeof window !== 'undefined' ? window.__lyrionLocalization?.currency : null;
+  const targetCurrencyRaw = localizationCurrency || currency;
+  const targetCurrency = SUPPORTED_CURRENCIES.has(String(targetCurrencyRaw).toUpperCase()) ? String(targetCurrencyRaw).toUpperCase() : 'USD';
   const converted = (cents / 100) * (BASE_RATES[targetCurrency] || 1);
   try {
     return new Intl.NumberFormat(language || 'en', {
