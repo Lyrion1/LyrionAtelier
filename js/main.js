@@ -628,6 +628,17 @@ function enhanceImages() {
   images.forEach((img) => {
     if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
     if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+    if (!img.dataset.fallbackBound) {
+      img.dataset.fallbackBound = '1';
+      img.addEventListener('error', () => {
+        if (img.dataset.fallbackApplied === '1') return;
+        img.dataset.fallbackApplied = '1';
+        const fallbackLabel = img.getAttribute('alt') || document.title || 'Lyrīon Atelier';
+        img.src = typeof buildProductPlaceholder === 'function'
+          ? buildProductPlaceholder(fallbackLabel)
+          : '/assets/catalog/placeholder.webp';
+      });
+    }
     const applyDimensions = () => {
       if (!img.getAttribute('width') && img.naturalWidth) img.setAttribute('width', img.naturalWidth.toString());
       if (!img.getAttribute('height') && img.naturalHeight) img.setAttribute('height', img.naturalHeight.toString());
