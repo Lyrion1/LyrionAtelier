@@ -1,6 +1,6 @@
 // Lyrīon Atelier - Main JavaScript
 
-const NAV_VERSION = 'nav-v5';
+const NAV_VERSION = 'nav-v6';
 const SITE_ORIGIN = 'https://lyrionatelier.com';
 const OG_IMAGE = `${SITE_ORIGIN}/images/og-image.jpg`;
 const SEO_KEYWORDS = 'astrology, zodiac, luxury apparel, oracle readings, birth chart, horoscope, cosmic fashion, spiritual guidance';
@@ -30,6 +30,33 @@ const SEO_TEMPLATES = {
     description: 'Reach the Lyrīon Atelier team for oracle readings, order support, and cosmic concierge assistance.'
   }
 };
+const LOCALIZATION_STORAGE_KEY = 'lyrion_locale_preferences';
+const PRICE_TEXT_CACHE = new WeakMap();
+const PRICE_TOKEN_REGEX = /\bUSD\s*([\d,]+(?:\.\d{1,2})?)|\$([\d,]+(?:\.\d{1,2})?)/gi;
+const PRICE_TOKEN_TEST_REGEX = /\bUSD\s*([\d,]+(?:\.\d{1,2})?)|\$([\d,]+(?:\.\d{1,2})?)/i;
+const CURRENCY_RATES = {
+  USD: 1,
+  EUR: 0.93,
+  GBP: 1,
+  CAD: 1.37,
+  AUD: 1.53,
+  NZD: 1.67,
+  JPY: 156,
+  CHF: 0.88
+};
+const COUNTRY_TO_CURRENCY = {
+  US: 'USD', GB: 'GBP', IE: 'EUR', FR: 'EUR', DE: 'EUR', IT: 'EUR', ES: 'EUR', NL: 'EUR', BE: 'EUR', PT: 'EUR',
+  CA: 'CAD', AU: 'AUD', NZ: 'NZD', JP: 'JPY', CH: 'CHF'
+};
+const LANGUAGE_OPTIONS = [
+  { code: 'en', label: 'English' },
+  { code: 'fr', label: 'Français' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'es', label: 'Español' },
+  { code: 'it', label: 'Italiano' }
+];
+const CURRENCY_OPTIONS = ['USD', 'GBP', 'EUR', 'CAD', 'AUD', 'NZD', 'JPY', 'CHF'];
+let activeLocalization = null;
 
 // Inject the shop auto-loader once globally (idempotent)
 (function injectShopAutoLoader() {
@@ -105,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
   ensureSeoMetadata();
   ensureAnalytics();
   enhanceImages();
-  localizeDisplayedPrices();
+  initLocalizationSystem();
   setTimeout(() => localizeDisplayedPrices(), 600);
   
   // Mobile menu is initialized in applySharedLayout via initInlineNavToggle
@@ -224,9 +251,10 @@ function buildSiteHeader() {
     <span class="brand-name">LYRĪON ATELIER</span>
     </a>
     
-    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation" aria-controls="primary-nav">☰</button>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Open navigation menu" aria-controls="primary-nav">☰</button>
     
     <div class="nav-links" id="primary-nav" aria-hidden="true">
+    <button class="nav-drawer-close" type="button" aria-label="Close navigation menu">×</button>
     <a href="/">Home</a>
     <a href="/shop">Shop All</a>
     <div class="mobile-dropdown">
@@ -252,6 +280,27 @@ function buildSiteHeader() {
     <a href="/compatibility">Compatibility</a>
     <a href="/codex">Codex</a>
     <a href="/contact">Contact</a>
+    <div class="nav-locale-switcher" role="group" aria-label="Language and currency">
+      <label class="sr-only" for="locale-language">Language</label>
+      <select id="locale-language" class="locale-select locale-language" data-locale-language>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="es">Español</option>
+        <option value="it">Italiano</option>
+      </select>
+      <label class="sr-only" for="locale-currency">Currency</label>
+      <select id="locale-currency" class="locale-select locale-currency" data-locale-currency>
+        <option value="USD">USD</option>
+        <option value="GBP">GBP</option>
+        <option value="EUR">EUR</option>
+        <option value="CAD">CAD</option>
+        <option value="AUD">AUD</option>
+        <option value="NZD">NZD</option>
+        <option value="JPY">JPY</option>
+        <option value="CHF">CHF</option>
+      </select>
+    </div>
     <a href="/cart" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a>
     </div>
     </nav>`;
@@ -357,7 +406,18 @@ function getSeoTemplate(pathname) {
 function initInlineNavToggle(header) {
   const navToggle = header?.querySelector('.nav-toggle');
   const navLinks = header?.querySelector('.nav-links');
-  if (!navToggle || !navLinks) return;
+  const closeButton = header?.querySelector('.nav-drawer-close');
+  if (!navToggle || !navLinks || !closeButton) return;
+  let backdrop = document.querySelector('.nav-drawer-backdrop');
+  if (!backdrop) {
+    backdrop = document.createElement('button');
+    backdrop.type = 'button';
+    backdrop.className = 'nav-drawer-backdrop';
+    backdrop.setAttribute('aria-label', 'Close navigation menu');
+    backdrop.setAttribute('aria-hidden', 'true');
+    backdrop.style.pointerEvents = 'none';
+    document.body.appendChild(backdrop);
+  }
 
   const getFocusables = () => [
     navToggle,
@@ -367,21 +427,34 @@ function initInlineNavToggle(header) {
   const closeMenu = () => {
     navLinks.classList.remove('active');
     navToggle.classList.remove('active');
+    header.classList.remove('nav-open');
+    backdrop?.classList.remove('active');
+    backdrop?.setAttribute('aria-hidden', 'true');
     navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Open navigation menu');
     navLinks.setAttribute('aria-hidden', 'true');
+    navLinks.style.pointerEvents = 'none';
     navToggle.textContent = '☰';
     document.body.style.overflow = '';
+    document.body.classList.remove('nav-open');
+    backdrop.style.pointerEvents = 'none';
   };
 
   const openMenu = () => {
     navLinks.classList.add('active');
     navToggle.classList.add('active');
+    header.classList.add('nav-open');
+    backdrop?.classList.add('active');
+    backdrop?.setAttribute('aria-hidden', 'false');
     navToggle.setAttribute('aria-expanded', 'true');
+    navToggle.setAttribute('aria-label', 'Close navigation menu');
     navLinks.setAttribute('aria-hidden', 'false');
-    navToggle.textContent = '×';
+    navLinks.style.pointerEvents = 'auto';
+    navToggle.textContent = '☰';
     document.body.style.overflow = 'hidden';
-    const firstLink = navLinks.querySelector('a');
-    firstLink?.focus();
+    document.body.classList.add('nav-open');
+    closeButton.focus();
+    backdrop.style.pointerEvents = 'auto';
   };
 
   const toggleMenu = () => {
@@ -393,6 +466,8 @@ function initInlineNavToggle(header) {
   };
 
   navToggle.addEventListener('click', toggleMenu);
+  closeButton.addEventListener('click', closeMenu);
+  backdrop?.addEventListener('click', closeMenu);
 
   navToggle.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -437,6 +512,7 @@ function initInlineNavToggle(header) {
 
   // Initialize mobile dropdown toggles
   initMobileDropdowns(header);
+  closeMenu();
 }
 
 /**
@@ -485,14 +561,17 @@ function removeSeasonalCampaignElements() {
 }
 
 function localizeDisplayedPrices(root = document.body) {
-  if (!root) return;
+  if (!root || !activeLocalization) return;
+  const locale = activeLocalization.language || 'en';
+  const currency = activeLocalization.currency || 'USD';
+  const formatAmount = (amount) => formatLocalizedPrice(amount, currency, locale);
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
     acceptNode(node) {
       const parent = node.parentElement;
       if (!parent) return NodeFilter.FILTER_REJECT;
       if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEXTAREA'].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
       const value = node.textContent || '';
-      return /\$[\d,]+(?:\.\d{1,2})?|\bUSD\s*[\d,]+(?:\.\d{1,2})?/i.test(value)
+      return PRICE_TOKEN_TEST_REGEX.test(value)
         ? NodeFilter.FILTER_ACCEPT
         : NodeFilter.FILTER_REJECT;
     }
@@ -500,15 +579,178 @@ function localizeDisplayedPrices(root = document.body) {
   const updates = [];
   while (walker.nextNode()) {
     const node = walker.currentNode;
-    const value = node.textContent || '';
-    const nextValue = value
-      .replace(/\bUSD\s*([\d,]+(?:\.\d{1,2})?)/gi, '£$1')
-      .replace(/\$([\d,]+(?:\.\d{1,2})?)/g, '£$1');
-    if (nextValue !== value) updates.push([node, nextValue]);
+    const current = node.textContent || '';
+    const original = PRICE_TEXT_CACHE.get(node) || current;
+    PRICE_TEXT_CACHE.set(node, original);
+    const nextValue = original.replace(PRICE_TOKEN_REGEX, (_, usdA, usdB) => {
+      const raw = usdA || usdB;
+      const amount = Number.parseFloat(String(raw || '').replace(/,/g, ''));
+      if (!Number.isFinite(amount)) return raw || '';
+      return formatAmount(amount);
+    });
+    if (nextValue !== current) updates.push([node, nextValue]);
   }
-  updates.forEach(([node, value]) => {
-    node.textContent = value;
+  updates.forEach(([node, next]) => {
+    node.textContent = next;
   });
+
+  root.querySelectorAll('[data-price-display]').forEach((node) => {
+    const raw = Number.parseFloat(node.getAttribute('data-price-display') || '');
+    if (Number.isFinite(raw)) node.textContent = formatAmount(raw);
+  });
+}
+
+function detectCountryCode() {
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+  if (/America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Adak|Detroit|Indiana|Boise)/i.test(timezone)) return 'US';
+  if (/Europe\/London/i.test(timezone)) return 'GB';
+  if (/Europe\/(Paris|Berlin|Madrid|Rome|Amsterdam|Brussels|Lisbon)/i.test(timezone)) return 'FR';
+  if (/America\/Toronto|America\/Vancouver|America\/Edmonton|America\/Montreal|America\/Halifax/i.test(timezone)) return 'CA';
+  if (/Australia\//i.test(timezone)) return 'AU';
+  if (/Pacific\/Auckland/i.test(timezone)) return 'NZ';
+  if (/Asia\/Tokyo/i.test(timezone)) return 'JP';
+  if (/Europe\/Zurich/i.test(timezone)) return 'CH';
+  const languages = [navigator.language, ...(navigator.languages || [])].filter(Boolean);
+  for (const language of languages) {
+    const parts = String(language).split(/[-_]/);
+    if (parts[1] && parts[1].length === 2) return parts[1].toUpperCase();
+  }
+  return 'GB';
+}
+
+function normalizeLanguage(language = 'en') {
+  const code = String(language || 'en').split(/[-_]/)[0].toLowerCase();
+  return LANGUAGE_OPTIONS.some((item) => item.code === code) ? code : 'en';
+}
+
+function normalizeCurrency(currency = 'USD') {
+  const code = String(currency || 'USD').toUpperCase();
+  return CURRENCY_OPTIONS.includes(code) ? code : 'USD';
+}
+
+function readLocalizationPreferences() {
+  try {
+    const raw = localStorage.getItem(LOCALIZATION_STORAGE_KEY);
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    if (!data || typeof data !== 'object') return null;
+    return {
+      language: normalizeLanguage(data.language),
+      currency: normalizeCurrency(data.currency)
+    };
+  } catch {
+    return null;
+  }
+}
+
+function saveLocalizationPreferences(localization) {
+  try {
+    localStorage.setItem(LOCALIZATION_STORAGE_KEY, JSON.stringify({
+      language: normalizeLanguage(localization.language),
+      currency: normalizeCurrency(localization.currency)
+    }));
+  } catch {}
+}
+
+function detectDefaultLocalization() {
+  const preferences = readLocalizationPreferences();
+  if (preferences) return preferences;
+  const language = normalizeLanguage(navigator.language || 'en');
+  if (/^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname)) {
+    return { language, currency: 'GBP' };
+  }
+  const country = detectCountryCode();
+  return {
+    language,
+    currency: normalizeCurrency(COUNTRY_TO_CURRENCY[country] || 'USD')
+  };
+}
+
+function syncLocalizationControls() {
+  const languageControl = document.querySelector('[data-locale-language]');
+  const currencyControl = document.querySelector('[data-locale-currency]');
+  if (languageControl) languageControl.value = activeLocalization?.language || 'en';
+  if (currencyControl) currencyControl.value = activeLocalization?.currency || 'USD';
+}
+
+function convertUsdToCurrency(usdAmount, currency) {
+  const amount = Number(usdAmount);
+  if (!Number.isFinite(amount)) return null;
+  const rate = CURRENCY_RATES[currency] || 1;
+  return amount * rate;
+}
+
+function formatLocalizedPrice(usdAmount, currency = 'USD', language = 'en') {
+  const converted = convertUsdToCurrency(usdAmount, currency);
+  if (!Number.isFinite(converted)) return '—';
+  try {
+    return new Intl.NumberFormat(`${language}-${detectCountryCode()}`, {
+      style: 'currency',
+      currency,
+      maximumFractionDigits: currency === 'JPY' ? 0 : 2
+    }).format(converted);
+  } catch {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(Number(usdAmount) || 0);
+  }
+}
+
+function applyLocalization(localization, { persist = false } = {}) {
+  activeLocalization = {
+    language: normalizeLanguage(localization?.language),
+    currency: normalizeCurrency(localization?.currency)
+  };
+  document.documentElement.lang = activeLocalization.language;
+  window.__lyrionLocalization = { ...activeLocalization };
+  if (persist) saveLocalizationPreferences(activeLocalization);
+  syncLocalizationControls();
+  localizeDisplayedPrices(document.body);
+  setTimeout(() => localizeDisplayedPrices(document.body), 350);
+}
+
+async function refreshExchangeRates() {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 1800);
+    const response = await fetch('https://open.er-api.com/v6/latest/USD', {
+      signal: controller.signal,
+      cache: 'no-store'
+    });
+    clearTimeout(timeout);
+    if (!response.ok) return;
+    const payload = await response.json();
+    if (!payload || payload.result !== 'success' || typeof payload.rates !== 'object') return;
+    CURRENCY_OPTIONS.forEach((currency) => {
+      if (currency === 'GBP') return;
+      const nextRate = Number(payload.rates[currency]);
+      if (Number.isFinite(nextRate) && nextRate > 0) CURRENCY_RATES[currency] = nextRate;
+    });
+    localizeDisplayedPrices(document.body);
+  } catch {}
+}
+
+function initLocalizationSystem() {
+  const initial = detectDefaultLocalization();
+  applyLocalization(initial, { persist: false });
+  const languageControl = document.querySelector('[data-locale-language]');
+  const currencyControl = document.querySelector('[data-locale-currency]');
+  languageControl?.addEventListener('change', () => {
+    applyLocalization({
+      language: languageControl.value,
+      currency: activeLocalization?.currency || 'USD'
+    }, { persist: true });
+  });
+  currencyControl?.addEventListener('change', () => {
+    applyLocalization({
+      language: activeLocalization?.language || 'en',
+      currency: currencyControl.value
+    }, { persist: true });
+  });
+  const observer = new MutationObserver(() => localizeDisplayedPrices(document.body));
+  observer.observe(document.body, { childList: true, subtree: true });
+  refreshExchangeRates();
 }
 
 function ensureJsonLd(id, data) {
