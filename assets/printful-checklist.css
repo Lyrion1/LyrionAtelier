@@ -1,3 +1,8 @@
+body{margin:0}
+.site-header,.main-nav{width:100%;box-sizing:border-box}
+.logo-link{display:flex;align-items:center;gap:12px;min-width:0}
+.logo-img{display:block;height:min(50px,12vw);width:auto;max-width:100%}
+.brand-name{font-size:clamp(1rem,4vw,1.35rem)}
 .pf-wrap{max-width:1100px;margin:32px auto;padding:0 16px;font-family:system-ui,Arial,sans-serif}
 .pf-head{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap}
 .pf-btn{padding:10px 14px;border:1px solid rgba(0,0,0,.2);border-radius:10px;text-decoration:none}
@@ -20,5 +25,5 @@
 .badge{font-size:.8rem;border:1px solid rgba(0,0,0,.2);border-radius:999px;padding:3px 8px;background:#fafafa}
 .badge.ok{border-color:#27ae60;background:#ecf9f1}
 .badge.miss{border-color:#c0392b;background:#fdecea}
-.copyfield{display:flex;gap:6px;align-items:center}
-.copyfield input{flex:1;padding:8px 10px;border:1px solid rgba(0,0,0,.2);border-radius:10px}
+.copyfield{display:flex;gap:6px;align-items:center;min-width:0}
+.copyfield input{flex:1;min-width:0;width:100%;max-width:100%;padding:8px 10px;border:1px solid rgba(0,0,0,.2);border-radius:10px}

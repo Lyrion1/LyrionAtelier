@@ -75,8 +75,11 @@
    2. REMOVE DARK-THEME STAR EFFECT & BODY BACKGROUND
 ═══════════════════════════════════════════════════ */
 
-html {
+html,
+body {
   background: var(--cream) !important;
+  max-width: 100%;
+  overflow-x: clip !important;
 }
 
 body {
@@ -84,6 +87,26 @@ body {
   color: var(--ink) !important;
   font-size: 1.0625rem !important;
   line-height: 1.6 !important;
+}
+
+@supports not (overflow: clip) {
+  html,
+  body {
+    overflow-x: hidden !important;
+  }
+}
+
+.container,
+.product-page,
+.product-grid,
+.product-detail-card {
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+.product-page > *,
+.product-grid > * {
+  min-width: 0 !important;
 }
 
 body::before,
@@ -249,6 +272,11 @@ footer p {
 
 /* Mobile full-screen nav overlay */
 @media (max-width: 768px) {
+  .product-page,
+  .product-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
   .nav-links {
     background: rgba(253, 248, 240, 0.98) !important;
   }
