@@ -6,6 +6,42 @@ if (typeof window !== 'undefined') {
   window.slugify = window.slugify || slugify;
 }
 
+function escapeSvgText(value = '') {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function buildProductPlaceholder(label = 'Lyrīon Atelier') {
+  const title = escapeSvgText(String(label || 'Lyrīon Atelier').trim().slice(0, 56) || 'Lyrīon Atelier');
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-label="${title}"><rect width="1200" height="1500" rx="48" fill="#FDF8F0"/><rect x="38" y="38" width="1124" height="1424" rx="36" fill="none" stroke="#5B4B7A" stroke-width="4"/><circle cx="600" cy="420" r="122" fill="none" stroke="#C9922B" stroke-width="8"/><path d="M600 260v320M440 420h320M492 312c52 34 164 34 216 0M492 528c52-34 164-34 216 0" fill="none" stroke="#5B4B7A" stroke-width="8" stroke-linecap="round" opacity=".75"/><text x="600" y="780" text-anchor="middle" fill="#5B4B7A" font-family="Georgia, 'Times New Roman', serif" font-size="68" letter-spacing="10">LYRĪON</text><foreignObject x="170" y="860" width="860" height="300"><div xmlns="http://www.w3.org/1999/xhtml" style="height:300px;display:flex;align-items:flex-start;justify-content:center;text-align:center;color:#2B2440;font-family:Georgia,'Times New Roman',serif;font-size:54px;line-height:1.25;padding:0 24px;">${title}</div></foreignObject></svg>`;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+function isSeasonalProduct(product = {}) {
+  const values = [
+    product.slug,
+    product.link,
+    product.collection,
+    product.category,
+    product.description,
+    product.seoTitle,
+    product.seoDescription,
+    ...(Array.isArray(product.tags) ? product.tags : [])
+  ]
+    .flatMap((value) => Array.isArray(value) ? value : [value])
+    .filter(Boolean)
+    .map((value) => String(value).toLowerCase());
+  return values.some((value) =>
+    value.includes('valentine') ||
+    value.includes('anti-valentine') ||
+    value.includes('/valentines')
+  );
+}
+
 /**
  * Convert a jpg/jpeg/png image URL to its WebP equivalent.
  * Falls back to the original src if the WebP fails to load.
@@ -32,9 +68,32 @@ function setWebPSrc(imgEl, src) {
     this.src = src;
   };
 }
+
+function setProductImageSource(imgEl, src, label = 'Lyrīon Atelier') {
+  if (!imgEl) return;
+  const originalSrc = typeof src === 'string' && src.trim() ? src.trim() : PRODUCT_FALLBACK;
+  const webpSrc = toWebPSrc(originalSrc);
+  const placeholderSrc = buildProductPlaceholder(label);
+  let stage = webpSrc !== originalSrc ? 'webp' : 'original';
+  imgEl.src = stage === 'webp' ? webpSrc : originalSrc;
+  imgEl.onerror = function () {
+    if (stage === 'webp') {
+      stage = 'original';
+      this.src = originalSrc;
+      return;
+    }
+    if (stage !== 'placeholder') {
+      stage = 'placeholder';
+      this.src = placeholderSrc;
+    }
+  };
+}
 if (typeof window !== 'undefined') {
   window.toWebPSrc = toWebPSrc;
   window.setWebPSrc = setWebPSrc;
+  window.buildProductPlaceholder = buildProductPlaceholder;
+  window.isSeasonalProduct = isSeasonalProduct;
+  window.setProductImageSource = setProductImageSource;
 }
 function resolveProductImage(p = {}, imageMap = {}) {
   const asString = (img) => {
@@ -62,7 +121,7 @@ const products = [
   {
     id: "heartbeat-hoodie-his",
     slug: "heartbeat-hoodie-his",
-    link: "/valentines.html#couples-section",
+    link: "/shop",
     name: "Heartbeat Edition - His",
     title: "Heartbeat Edition - His",
     price: 57.50,
@@ -71,7 +130,7 @@ const products = [
     zodiac: "all",
     element: "all",
     gender: "unisex",
-    collection: "Valentine's Collection",
+    collection: "Signature Collection",
     image: "/images/products/heartbeat-hoodie-his-3.jpg",
     images: [
       "/images/products/heartbeat-hoodie-his-1.jpg",
@@ -99,7 +158,7 @@ const products = [
       "Heartbeat half design",
       "Ribbed cuffs and hem",
       "Soft brushed interior",
-      "Perfect Valentine's gift",
+      "Gift-ready celestial staple",
       "Pairs with Hers edition"
     ],
     careInstructions: "Machine wash cold, tumble dry low.",
@@ -113,7 +172,7 @@ const products = [
   {
     id: "heartbeat-hoodie-hers",
     slug: "heartbeat-hoodie-hers",
-    link: "/valentines.html#couples-section",
+    link: "/shop",
     name: "Heartbeat Edition - Hers",
     title: "Heartbeat Edition - Hers",
     price: 59.50,
@@ -122,7 +181,7 @@ const products = [
     zodiac: "all",
     element: "all",
     gender: "women",
-    collection: "Valentine's Collection",
+    collection: "Signature Collection",
     image: "/images/products/heartbeat-hoodie-hers-4.jpg",
     images: [
       "/images/products/heartbeat-hoodie-hers-1.jpg",
@@ -151,7 +210,7 @@ const products = [
       "Heartbeat half design",
       "Ribbed cuffs and hem",
       "Soft brushed interior",
-      "Perfect Valentine's gift",
+      "Gift-ready celestial staple",
       "Pairs with His edition"
     ],
     careInstructions: "Machine wash cold, tumble dry low.",
@@ -1122,7 +1181,7 @@ const products = [
     zodiac: "all",
     element: "all",
     gender: "unisex",
-    collection: "Valentine's Collection",
+    collection: "Signature Collection",
     image: "/images/products/mercury-retrograde-hoodie-1.jpg",
     images: [
       "/images/products/mercury-retrograde-hoodie-1.jpg",
@@ -1147,7 +1206,7 @@ const products = [
   {
     id: "single-cosmic-design-mug",
     slug: "single-cosmic-design-mug",
-    link: "/valentines.html#singles-section",
+    link: "/shop",
     name: "Single by Cosmic Design Mug",
     title: "Single by Cosmic Design Mug",
     price: 16.95,
@@ -1156,7 +1215,7 @@ const products = [
     zodiac: "all",
     element: "all",
     gender: "unisex",
-    collection: "Valentine's Collection",
+    collection: "Signature Collection",
     image: "/images/products/single-cosmic-design-mug-1.jpg",
     images: [
       "/images/products/single-cosmic-design-mug-1.jpg",

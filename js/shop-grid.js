@@ -75,15 +75,21 @@ function renderCard(product) {
   img.loading = 'lazy';
   img.decoding = 'async';
   img.alt = `${altText}`;
-  const webpCover = (typeof toWebPSrc === 'function') ? toWebPSrc(coverImage) : coverImage;
-  img.src = webpCover;
-  img.onerror = () => {
-    if (img.src === webpCover && webpCover !== coverImage) {
-      img.src = coverImage;
-    } else if (img.src !== FALLBACK) {
-      img.src = FALLBACK;
-    }
-  };
+  img.width = 1200;
+  img.height = 1500;
+  if (typeof setProductImageSource === 'function') {
+    setProductImageSource(img, coverImage, altText);
+  } else {
+    const webpCover = (typeof toWebPSrc === 'function') ? toWebPSrc(coverImage) : coverImage;
+    img.src = webpCover;
+    img.onerror = () => {
+      if (img.src === webpCover && webpCover !== coverImage) {
+        img.src = coverImage;
+      } else if (img.src !== FALLBACK) {
+        img.src = FALLBACK;
+      }
+    };
+  }
   img.onload = () => {};
   img.className = 'product-card-image';
 
@@ -184,11 +190,18 @@ function renderGrid(items){
     const imageWrapper = document.createElement('div');
     imageWrapper.className = 'card__image';
     const img = document.createElement('img');
-    img.src = pickImage(p, __IMAGE_MAP || {});
+    const source = pickImage(p, __IMAGE_MAP || {});
+    if (typeof setProductImageSource === 'function') {
+      setProductImageSource(img, source, p.name || 'Lyrīon Atelier');
+    } else {
+      img.src = source;
+      img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
+    }
     img.alt = p.name || 'Lyrion piece';
     img.loading = 'lazy';
     img.decoding = 'async';
-    img.onerror = () => { if (img.src !== FALLBACK) img.src = FALLBACK; };
+    img.width = 1200;
+    img.height = 1500;
     imageWrapper.appendChild(img);
 
     const infoWrapper = document.createElement('div');

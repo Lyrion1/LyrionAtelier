@@ -128,20 +128,26 @@ function renderImages(images = [], productTitle = 'Product') {
   sources.forEach((src, idx) => {
     if (!src) return;
     const img = document.createElement('img');
-    const webpSrc = (typeof toWebPSrc === 'function') ? toWebPSrc(src) : src;
-    img.src = webpSrc;
     img.alt = `${productTitle} image ${idx + 1}`;
     img.loading = 'lazy';
     img.decoding = 'async';
-    img.onerror = () => {
-      if (img.src === webpSrc && webpSrc !== src) {
-        img.src = src;
-        return;
-      }
-      if (img.dataset.fallbackApplied === '1') return;
-      img.dataset.fallbackApplied = '1';
-      img.src = FALLBACK_IMAGE;
-    };
+    img.width = 1200;
+    img.height = 1500;
+    if (typeof setProductImageSource === 'function') {
+      setProductImageSource(img, src, productTitle);
+    } else {
+      const webpSrc = (typeof toWebPSrc === 'function') ? toWebPSrc(src) : src;
+      img.src = webpSrc;
+      img.onerror = () => {
+        if (img.src === webpSrc && webpSrc !== src) {
+          img.src = src;
+          return;
+        }
+        if (img.dataset.fallbackApplied === '1') return;
+        img.dataset.fallbackApplied = '1';
+        img.src = FALLBACK_IMAGE;
+      };
+    }
     gallery.appendChild(img);
   });
 }

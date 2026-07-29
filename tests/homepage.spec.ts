@@ -78,19 +78,19 @@ test('shows Aquarius Crop Hoodie in featured grid with Best Seller badge', async
   await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
   const featuredCard = page.locator('#featured-grid .product-card', { hasText: 'Aquarius Crop Hoodie' });
   await expect(featuredCard).toBeVisible();
-  await expect(featuredCard.locator('.price')).toContainText('$64.99');
+  await expect(featuredCard.locator('.price')).toContainText('£64.99');
   await expect(featuredCard.locator('.product-badge--bestseller')).toContainText('BEST SELLER');
 
   const images = featuredCard.locator('img');
   await expect(images).toHaveCount(1);
-  await expect(images.first()).toHaveAttribute('src', /aquarius-crop-hoodie\/aquarius-crop-hoodie-front1\.jpg/i);
+  await expect(images.first()).toHaveAttribute('src', /aquarius-crop-hoodie\/aquarius-crop-hoodie-front1\.(webp|jpg)/i);
 });
 
   test('shows Taurus Constellation Pyjama Top with BEST SELLER badge in featured grid', async ({ page }) => {
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
     const featuredCard = page.locator('#featured-grid .product-card', { hasText: 'Taurus Constellation Pyjama Top' });
     await expect(featuredCard).toBeVisible();
-    await expect(featuredCard.locator('.price')).toContainText('$44.99');
+    await expect(featuredCard.locator('.price')).toContainText('£44.99');
     await expect(featuredCard.locator('.product-badge--bestseller')).toContainText('BEST SELLER');
     const images = featuredCard.locator('img');
     await expect(images).toHaveCount(1);
@@ -101,7 +101,7 @@ test('shows Aquarius Crop Hoodie in featured grid with Best Seller badge', async
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
     const thirdCard = page.locator('#featured-grid .product-card').nth(2);
     await expect(thirdCard).toContainText('Fisherman Beanie');
-    await expect(thirdCard.locator('.price')).toContainText('$30.00');
+    await expect(thirdCard.locator('.price')).toContainText('£30.00');
     await expect(thirdCard.locator('.product-badge--bestseller')).toContainText('Best Seller');
     const images = thirdCard.locator('img');
     await expect(images).toHaveCount(1);
@@ -122,11 +122,11 @@ test('shows Aquarius Crop Hoodie in featured grid with Best Seller badge', async
     await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
     const firstCard = page.locator('#featured-grid .product-card').first();
     await expect(firstCard).toContainText('Taurus Unisex Organic Ribbed Neck T-Shirt');
-    await expect(firstCard.locator('.price')).toContainText('$54.00');
+    await expect(firstCard.locator('.price')).toContainText('£54.00');
     await expect(firstCard.locator('.product-badge--bestseller')).toContainText('Best Seller');
     const images = firstCard.locator('img');
     await expect(images).toHaveCount(1);
-    await expect(images.first()).toHaveAttribute('src', /taurus-organic-tee-lifestyle-4\.jpg/i);
+    await expect(images.first()).toHaveAttribute('src', /taurus-organic-tee-lifestyle-4\.(webp|jpg)/i);
   });
 
   test('opens Taurus Pyjama Top details from homepage view action', async ({ page }) => {
