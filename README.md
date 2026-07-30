@@ -191,7 +191,7 @@ Stripe keys are loaded from Netlify environment variables and never hardcoded in
    - `STRIPE_PUBLISHABLE_KEY`
    - `STRIPE_SECRET_KEY`
    - `STRIPE_WEBHOOK_SECRET`
-3. The frontend reads the publishable key from `/data/site.json`.
+3. The frontend reads the publishable key from `/public/data/site.json`.
 4. Netlify functions use the secret keys directly from the environment for Checkout and webhooks.
 
 ## 🌐 Netlify Deployment

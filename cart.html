@@ -127,7 +127,7 @@
   <script defer src="/assets/promotions-ui.js"></script>
   <script src="https://js.stripe.com/v3/"></script>
   <script>
-    fetch('/data/site.json')
+    fetch('/public/data/site.json')
       .then(res => res.json())
       .then(data => {
         if (!data?.stripePublishableKey) {

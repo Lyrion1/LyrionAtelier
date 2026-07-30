@@ -91,7 +91,7 @@
    const DEFAULT_PRICE_ID = 'price_1ShjdBE6FRwoxLBfyUvK1ark';
    let publishableKey;
    let stripeMode = 'test';
-   const stripePromise = fetch('/data/site.json')
+   const stripePromise = fetch('/public/data/site.json')
      .then(res => res.json())
      .then(data => {
        if (!data?.stripePublishableKey) {
