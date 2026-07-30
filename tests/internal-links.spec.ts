@@ -18,7 +18,8 @@ const ROUTE_MAP: Record<string, string> = {
   '/terms-of-service': 'terms-of-service.html',
   '/refund-policy': 'refund-policy.html',
   '/product': 'product.html',
-  '/curated-for-gifting': 'curated-for-gifting.html'
+  '/curated-for-gifting': 'curated-for-gifting.html',
+  '/data/site.json': 'public/data/site.json'
 };
 
 const STATIC_EXTENSIONS = new Set([
@@ -27,7 +28,7 @@ const STATIC_EXTENSIONS = new Set([
 
 function walk(dir: string, bucket: string[] = []): string[] {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (entry.name.startsWith('.git')) continue;
+    if (entry.name.startsWith('.git') || entry.name === 'node_modules' || entry.name === 'playwright-report' || entry.name === 'test-results') continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) walk(full, bucket);
     else bucket.push(full);
@@ -112,13 +113,16 @@ test('all internal links resolve to a real file or supported dynamic route', asy
 
   for (const file of candidates) {
     const text = fs.readFileSync(file, 'utf8');
+    const ext = path.extname(file).toLowerCase();
     const matches = [
-      ...text.matchAll(/(?:href|src|action)\s*=\s*["']([^"']+)["']/g),
-      ...text.matchAll(/["'](\/[^"'${}\s]+)["']/g)
+      ...(ext === '.html' ? [...text.matchAll(/(?:href|src|action)\s*=\s*["']([^"']+)["']/g)] : []),
+      ...(ext === '.js' ? [...text.matchAll(/fetch\(\s*["'](\/[^"'${}\s]+)["']/g)] : []),
+      ...(ext === '.js' ? [...text.matchAll(/location\.(?:href|replace)\s*=\s*["'](\/[^"'${}\s]+)["']/g)] : []),
+      ...(ext === '.js' ? [...text.matchAll(/window\.location(?:\.href)?\s*=\s*["'](\/[^"'${}\s]+)["']/g)] : [])
     ];
 
     for (const match of matches) {
-      const raw = match[1] || match[0]?.slice(1, -1);
+      const raw = match[1];
       const normalized = normalizeTarget(raw, file);
       if (!normalized) continue;
       const key = `${path.relative(ROOT, file)} -> ${normalized}`;

@@ -7,13 +7,13 @@
  * Discount code is read from localStorage (key: lyrion_wheel_discount).
  *
  * Requires: Stripe.js loaded from https://js.stripe.com/v3/
- * Stripe publishable key is fetched from /data/site.json — never hardcoded.
+ * Stripe publishable key is fetched from /public/data/site.json — never hardcoded.
  */
 
 (function () {
   'use strict';
 
-  const SUPABASE_FUNCTIONS_BASE = 'https://YOUR_PROJECT_REF.supabase.co/functions/v1';
+  const SUPABASE_FUNCTIONS_BASE = 'https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1';
   const CART_KEY = 'lyrion_cart';
   const DISCOUNT_KEY = 'lyrion_wheel_discount';
 
@@ -44,9 +44,9 @@
     }
   }
 
-  /** Load the Stripe publishable key from /data/site.json */
+  /** Load the Stripe publishable key from /public/data/site.json */
   async function loadStripeKey() {
-    const resp = await fetch('/data/site.json');
+    const resp = await fetch('/public/data/site.json');
     if (!resp.ok) throw new Error('Could not load site.json');
     const data = await resp.json();
     if (!data.stripePublishableKey || data.stripePublishableKey === 'pk_live_REPLACE_ME') {

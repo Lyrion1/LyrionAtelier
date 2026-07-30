@@ -12,7 +12,7 @@ import { formatPrice } from './price-utils.js';
   const FALLBACK = '/assets/catalog/placeholder.webp';
   const PRICE_UNAVAILABLE_LABEL = '—';
   const LOADER_TIMEOUT_MS = 1800;
-  const PRODUCT_PRIORITY = ['taurus-tank-top', 'taurus-baseball-jersey', 'taurus-crop-tee', 'taurus-pyjama-top'];
+  const PRODUCT_PRIORITY = ['fisherman-beanie', 'taurus-tank-top', 'taurus-baseball-jersey', 'taurus-crop-tee', 'taurus-pyjama-top'];
   const FEATURED_PRODUCTS = [
     {
       slug: 'taurus-tank-top',
