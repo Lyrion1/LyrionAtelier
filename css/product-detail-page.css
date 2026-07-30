@@ -62,17 +62,18 @@
 @media (min-width: 1024px) {
   [data-page="product"] .product-detail {
     display: grid !important;
-    grid-template-columns: 58fr 42fr !important;
+    grid-template-columns: 55fr 45fr !important;
     gap: 3rem !important;
     align-items: start !important;
     max-width: none !important;
+    width: 100% !important;
   }
 
   [data-page="product"] .product-detail__info {
     position: sticky !important;
     top: 2rem !important;
     max-width: 100% !important;
-    min-width: 0 !important;
+    min-width: 380px !important;
   }
 }
 
@@ -178,7 +179,6 @@
   display: flex !important;
   flex-direction: column !important;
   gap: 1rem !important;
-  min-width: 0 !important;
 }
 
 /* ─── COLLECTION PILL ──────────────────────────────────── */
@@ -211,7 +211,9 @@
   margin: 0 !important;
   line-height: 1.65 !important;
   color: var(--muted) !important;
-  font-size: 1rem !important;
+  font-size: 1.0625rem !important;
+  max-width: none !important;
+  min-width: 0 !important;
 }
 
 /* ─── SIZE SELECTOR / COLOR OPTIONS ───────────────────── */

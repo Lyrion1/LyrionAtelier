@@ -19,10 +19,10 @@
       "ready": true,
       "published": true
     },
-    "price": 65.50,
+    "price": 65.5,
     "price_range": {
-      "min": 65.50,
-      "max": 66.50,
+      "min": 65.5,
+      "max": 66.5,
       "currency": "USD"
     },
     "currency": "USD",
@@ -50,7 +50,7 @@
       {
         "size": "XS",
         "printfulVariantId": "6970bd2c23d913",
-        "price": 65.50,
+        "price": 65.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-ARIES-DIAMOND-HOODIE-XS"
@@ -58,7 +58,7 @@
       {
         "size": "S",
         "printfulVariantId": "6970bd2c23d983",
-        "price": 65.50,
+        "price": 65.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-ARIES-DIAMOND-HOODIE-S"
@@ -66,7 +66,7 @@
       {
         "size": "M",
         "printfulVariantId": "6970bd2c23d9d7",
-        "price": 65.50,
+        "price": 65.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-ARIES-DIAMOND-HOODIE-M"
@@ -74,7 +74,7 @@
       {
         "size": "L",
         "printfulVariantId": "6970bd2c23da15",
-        "price": 65.50,
+        "price": 65.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-ARIES-DIAMOND-HOODIE-L"
@@ -82,7 +82,7 @@
       {
         "size": "XL",
         "printfulVariantId": "6970bd2c23da61",
-        "price": 65.50,
+        "price": 65.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-ARIES-DIAMOND-HOODIE-XL"
@@ -90,7 +90,7 @@
       {
         "size": "2XL",
         "printfulVariantId": "6970bd2c23daa1",
-        "price": 66.50,
+        "price": 66.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-ARIES-DIAMOND-HOODIE-2XL"
@@ -1423,7 +1423,7 @@
         "size": "One Size",
         "printfulVariantId": "6948ab6e63d308",
         "id": "6948ab6e63d308",
-        "price": 30.00,
+        "price": 30.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-BEANIE-FISH-TREE",
@@ -1468,7 +1468,7 @@
     "launchDate": "2025-01-15",
     "isBestseller": true,
     "showOnHomepage": true,
-    "price": 30.00,
+    "price": 30.0,
     "currency": "USD",
     "featured": false,
     "bestSellerBadge": "Best Seller",
@@ -2066,7 +2066,7 @@
       {
         "size": "S/M",
         "printfulVariantId": "694dd3418487b8",
-        "price": 34.00,
+        "price": 34.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-SOCKS-SM"
@@ -2074,7 +2074,7 @@
       {
         "size": "L/XL",
         "printfulVariantId": "694dd341848814",
-        "price": 34.00,
+        "price": 34.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-SOCKS-LXL"
@@ -2177,19 +2177,19 @@
       {
         "size": "3XL",
         "printfulVariantId": "694ab7d2e5ac97",
-        "price": 70.00,
+        "price": 70.0,
         "currency": "USD",
         "inStock": true
       }
     ],
     "price": {
       "min": 64.99,
-      "max": 70.00,
+      "max": 70.0,
       "currency": "USD"
     },
     "price_range": {
       "min": 64.99,
-      "max": 70.00,
+      "max": 70.0,
       "currency": "USD"
     },
     "currency": "USD",
@@ -2250,7 +2250,7 @@
     "mainImage": "/pisces-intuition-hoodie/pisces-intuition-hoodie-front.jpg",
     "price": {
       "min": 55.99,
-      "max": 60.00,
+      "max": 60.0,
       "currency": "USD"
     },
     "currency": "USD",
@@ -2358,7 +2358,7 @@
         "options": {
           "size": "5XL"
         },
-        "price": 60.00,
+        "price": 60.0,
         "printfulVariantId": "694d5eae117098",
         "sku": "LYR-PISC-INTUIT-5XL",
         "inStock": true,
@@ -2451,13 +2451,13 @@
       "/aries-denim-bucket-hat/aries-bucket-hat-girl-side.jpg"
     ],
     "mainImage": "/aries-denim-bucket-hat/aries-bucket-hat-girl-headshot.jpg",
-    "price": 35.50,
+    "price": 35.5,
     "currency": "USD",
     "variants": [
       {
         "size": "One Size",
         "printfulVariantId": "694f1219bafde5",
-        "price": 35.50,
+        "price": 35.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-ARIES-BUCKET-DENIM"
@@ -3212,10 +3212,10 @@
       "ready": true,
       "published": true
     },
-    "price": 75.00,
+    "price": 75.0,
     "price_range": {
-      "min": 75.00,
-      "max": 79.00,
+      "min": 75.0,
+      "max": 79.0,
       "currency": "USD"
     },
     "currency": "USD",
@@ -3246,7 +3246,7 @@
       {
         "size": "S",
         "printfulVariantId": "69652e9a3966c2",
-        "price": 75.00,
+        "price": 75.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-TAUR-RAM-HOOD-S"
@@ -3254,7 +3254,7 @@
       {
         "size": "M",
         "printfulVariantId": "69652e9a396769",
-        "price": 75.00,
+        "price": 75.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-TAUR-RAM-HOOD-M"
@@ -3262,7 +3262,7 @@
       {
         "size": "L",
         "printfulVariantId": "69652e9a3967f1",
-        "price": 75.00,
+        "price": 75.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-TAUR-RAM-HOOD-L"
@@ -3270,7 +3270,7 @@
       {
         "size": "XL",
         "printfulVariantId": "69652e9a396882",
-        "price": 75.00,
+        "price": 75.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-TAUR-RAM-HOOD-XL"
@@ -3278,7 +3278,7 @@
       {
         "size": "2XL",
         "printfulVariantId": "69652e9a396905",
-        "price": 77.00,
+        "price": 77.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-TAUR-RAM-HOOD-2XL"
@@ -3286,7 +3286,7 @@
       {
         "size": "3XL",
         "printfulVariantId": "69652e9a396987",
-        "price": 79.00,
+        "price": 79.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-TAUR-RAM-HOOD-3XL"
@@ -3349,9 +3349,9 @@
       "ready": true,
       "published": true
     },
-    "price": 54.00,
+    "price": 54.0,
     "price_range": {
-      "min": 54.00,
+      "min": 54.0,
       "max": 56.64,
       "currency": "USD"
     },
@@ -3383,7 +3383,7 @@
       {
         "size": "S",
         "printfulVariantId": "69653de7ef42f3",
-        "price": 54.00,
+        "price": 54.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-TAUR-ORG-TEE-S"
@@ -3391,7 +3391,7 @@
       {
         "size": "M",
         "printfulVariantId": "69653de7ef4361",
-        "price": 54.00,
+        "price": 54.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-TAUR-ORG-TEE-M"
@@ -3399,7 +3399,7 @@
       {
         "size": "L",
         "printfulVariantId": "69653de7ef43c4",
-        "price": 54.00,
+        "price": 54.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-TAUR-ORG-TEE-L"
@@ -3407,7 +3407,7 @@
       {
         "size": "XL",
         "printfulVariantId": "69653de7ef4429",
-        "price": 54.00,
+        "price": 54.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-TAUR-ORG-TEE-XL"
@@ -3616,10 +3616,10 @@
       "ready": true,
       "published": true
     },
-    "price": 66.50,
+    "price": 66.5,
     "price_range": {
-      "min": 66.50,
-      "max": 72.00,
+      "min": 66.5,
+      "max": 72.0,
       "currency": "USD"
     },
     "currency": "USD",
@@ -3650,7 +3650,7 @@
       {
         "size": "S",
         "printfulVariantId": "697ba455db1785",
-        "price": 66.50,
+        "price": 66.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-MERC-RETRO-S"
@@ -3658,7 +3658,7 @@
       {
         "size": "M",
         "printfulVariantId": "697ba455db17f3",
-        "price": 66.50,
+        "price": 66.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-MERC-RETRO-M"
@@ -3666,7 +3666,7 @@
       {
         "size": "L",
         "printfulVariantId": "697ba455db1844",
-        "price": 66.50,
+        "price": 66.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-MERC-RETRO-L"
@@ -3674,7 +3674,7 @@
       {
         "size": "XL",
         "printfulVariantId": "697ba455db1891",
-        "price": 66.50,
+        "price": 66.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-MERC-RETRO-XL"
@@ -3682,7 +3682,7 @@
       {
         "size": "2XL",
         "printfulVariantId": "697ba455db18d2",
-        "price": 67.50,
+        "price": 67.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-MERC-RETRO-2XL"
@@ -3690,7 +3690,7 @@
       {
         "size": "3XL",
         "printfulVariantId": "697ba455db1926",
-        "price": 69.50,
+        "price": 69.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-MERC-RETRO-3XL"
@@ -3698,7 +3698,7 @@
       {
         "size": "4XL",
         "printfulVariantId": "697ba455db1975",
-        "price": 69.50,
+        "price": 69.5,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-MERC-RETRO-4XL"
@@ -3706,7 +3706,7 @@
       {
         "size": "5XL",
         "printfulVariantId": "697ba455db19b8",
-        "price": 72.00,
+        "price": 72.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-MERC-RETRO-5XL"
@@ -3749,7 +3749,6 @@
   {
     "id": 238,
     "slug": "single-cosmic-design-mug",
-    "link": "/shop/single-cosmic-design-mug.html",
     "name": "Single by Cosmic Design Mug",
     "title": "Single by Cosmic Design Mug",
     "collection": "Cosmic Collection",
@@ -3837,7 +3836,6 @@
   {
     "id": 239,
     "slug": "saturn-return-hoodie",
-    "link": "/shop/saturn-return-hoodie.html",
     "name": "My Saturn Return Took My Relationship Hoodie",
     "title": "My Saturn Return Took My Relationship Hoodie",
     "collection": "Cosmic Collection",
@@ -3952,7 +3950,6 @@
   {
     "id": 240,
     "slug": "premium-polo-his",
-    "link": "/shop/premium-polo-his.html",
     "name": "Lovers' Galaxies Premium Polo - His",
     "title": "Lovers' Galaxies Premium Polo - His",
     "collection": "Couples Collection",
@@ -4355,7 +4352,6 @@
   },
   {
     "slug": "leo-love-language-tee",
-    "link": "/shop/leo-love-language-tee.html",
     "name": "Leo Love Language Tee - Public Adoration",
     "title": "Leo Love Language Tee - Public Adoration",
     "collection": "Leo Collection",
@@ -4475,7 +4471,6 @@
   {
     "id": 244,
     "slug": "libra-scale-tote",
-    "link": "/shop/libra-scale-tote.html",
     "name": "Libra All Over Print Tote Bag",
     "title": "Libra All Over Print Tote Bag",
     "collection": "Libra Collection",
@@ -4557,7 +4552,6 @@
   {
     "id": 245,
     "slug": "aries-weekender-bag",
-    "link": "/shop/aries-weekender-bag.html",
     "name": "Aries Oversized Weekender Bag",
     "title": "Aries Oversized Weekender Bag",
     "collection": "Aries Collection",
@@ -4639,7 +4633,6 @@
   {
     "id": 246,
     "slug": "virgo-mousepad",
-    "link": "/shop/virgo-mousepad.html",
     "name": "Virgo Round Mousepad",
     "title": "Virgo Round Mousepad",
     "collection": "Virgo Collection",
@@ -4721,7 +4714,6 @@
   {
     "id": 247,
     "slug": "virgo-bandana",
-    "link": "/shop/virgo-bandana.html",
     "name": "Virgo All-Over Print Bandana",
     "title": "Virgo All-Over Print Bandana",
     "collection": "Virgo Collection",
@@ -4844,8 +4836,8 @@
       "ready": true,
       "published": true
     },
-    "price": 65.00,
-    "priceUSD": 65.00,
+    "price": 65.0,
+    "priceUSD": 65.0,
     "currency": "USD",
     "image": "/images/products/saturn-return-white-hoodie-1.jpg",
     "images": [
@@ -4859,12 +4851,19 @@
     ],
     "mainImage": "/images/products/saturn-return-white-hoodie-1.jpg",
     "description": "Saturn Return hits different. When the planet completes its 29-year orbit and reality checks every choice you've made. Relationships transform. Foundations rebuild. This hoodie speaks to cosmic reckonings, necessary endings, and the clarity that comes after chaos. White colorway for fresh starts.",
-    "sizes": ["S", "M", "L", "XL", "2XL", "3XL"],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ],
     "variants": [
       {
         "size": "S",
         "printfulVariantId": "697c0e9b30b4c3",
-        "price": 65.00,
+        "price": 65.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-SATURN-WHITE-HOODIE-S"
@@ -4872,7 +4871,7 @@
       {
         "size": "M",
         "printfulVariantId": "697c0e9b30b525",
-        "price": 65.00,
+        "price": 65.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-SATURN-WHITE-HOODIE-M"
@@ -4880,7 +4879,7 @@
       {
         "size": "L",
         "printfulVariantId": "697c0e9b30b579",
-        "price": 65.00,
+        "price": 65.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-SATURN-WHITE-HOODIE-L"
@@ -4888,7 +4887,7 @@
       {
         "size": "XL",
         "printfulVariantId": "697c0e9b30b5c1",
-        "price": 65.00,
+        "price": 65.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-SATURN-WHITE-HOODIE-XL"
@@ -4949,8 +4948,8 @@
     "slug": "cosmic-curiosity-box",
     "name": "Cosmic Curiosity Box",
     "title": "Cosmic Curiosity Box",
-    "price": 45.00,
-    "priceUSD": 45.00,
+    "price": 45.0,
+    "priceUSD": 45.0,
     "currency": "USD",
     "category": "mystery",
     "zodiac": "all",
@@ -4964,12 +4963,14 @@
     "mainImage": "/images/products/mystery-box-curiosity.png",
     "description": "Value $60-80. Surprise zodiac item curated by the stars. Could be apparel, accessories, or cosmic essentials. Your sign influences what you receive. Every box is different.",
     "mysticalCopy": "Trust the stars. Receive your cosmic gift.",
-    "sizes": ["One Size"],
+    "sizes": [
+      "One Size"
+    ],
     "variants": [
       {
         "size": "One Size",
         "printfulVariantId": "manual-fulfillment",
-        "price": 45.00,
+        "price": 45.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-MYSTERY-CURIOSITY-ONE"
@@ -5003,8 +5004,8 @@
     "slug": "zodiac-mystery-vault",
     "name": "Zodiac Mystery Vault",
     "title": "Zodiac Mystery Vault",
-    "price": 89.00,
-    "priceUSD": 89.00,
+    "price": 89.0,
+    "priceUSD": 89.0,
     "currency": "USD",
     "category": "mystery",
     "zodiac": "all",
@@ -5018,12 +5019,14 @@
     "mainImage": "/images/products/mystery-box-vault.png",
     "description": "Value $120-150. Premium zodiac surprise. Hoodie, tee, tote, or accessories chosen for you. What will you discover? Open your vault and reveal your cosmic gift.",
     "mysticalCopy": "Open your vault. Discover your destiny.",
-    "sizes": ["One Size"],
+    "sizes": [
+      "One Size"
+    ],
     "variants": [
       {
         "size": "One Size",
         "printfulVariantId": "manual-fulfillment",
-        "price": 89.00,
+        "price": 89.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-MYSTERY-VAULT-ONE"
@@ -5058,8 +5061,8 @@
     "slug": "lovers-fate-box",
     "name": "Lovers' Fate Box",
     "title": "Lovers' Fate Box",
-    "price": 149.00,
-    "priceUSD": 149.00,
+    "price": 149.0,
+    "priceUSD": 149.0,
     "currency": "USD",
     "category": "mystery",
     "zodiac": "all",
@@ -5073,12 +5076,14 @@
     "mainImage": "/images/products/mystery-box-lovers.png",
     "description": "Value $200+. His & Hers surprise items cosmically curated for your connection. Two products chosen by the stars, one cosmic bond. Perfect for couples.",
     "mysticalCopy": "Two souls. One cosmic bond. Trust the universe.",
-    "sizes": ["One Size"],
+    "sizes": [
+      "One Size"
+    ],
     "variants": [
       {
         "size": "One Size",
         "printfulVariantId": "manual-fulfillment",
-        "price": 149.00,
+        "price": 149.0,
         "currency": "USD",
         "inStock": true,
         "sku": "LYR-MYSTERY-LOVERS-ONE"

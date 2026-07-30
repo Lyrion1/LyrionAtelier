@@ -46,11 +46,13 @@ const derivePrice = (product = {}, size = null, variant = null) => {
 };
 
 function getSlug() {
+  const params = new URLSearchParams(location.search);
+  if (params.has('slug')) return params.get('slug');
   const normalize = (val) => (val || '').replace(/\.html$/i, '');
   const parts = location.pathname.split('/').filter(Boolean);
   const shopIndex = parts.indexOf('shop');
   if (shopIndex > -1 && parts[shopIndex + 1]) return decodeURIComponent(normalize(parts[shopIndex + 1]));
-  if (parts[0]) return decodeURIComponent(normalize(parts[parts.length - 1]));
+  if (parts[0] && parts[parts.length - 1] !== 'product') return decodeURIComponent(normalize(parts[parts.length - 1]));
   return null;
 }
 

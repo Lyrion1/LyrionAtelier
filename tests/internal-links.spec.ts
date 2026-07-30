@@ -90,14 +90,14 @@ function normalizeTarget(raw: string, sourceFile: string): string | null {
   return `/${rel}`;
 }
 
-function targetExists(target: string, dynamicShopSlugs: Set<string>): boolean {
+function targetExists(target: string): boolean {
   const ext = path.extname(target);
   const relative = target.replace(/^\//, '');
   if (target in ROUTE_MAP) return fs.existsSync(path.join(ROOT, ROUTE_MAP[target]));
   if (STATIC_EXTENSIONS.has(ext)) return fs.existsSync(path.join(ROOT, relative));
   if (target.startsWith('/shop/')) {
     const slug = target.replace(/^\/shop\//, '').replace(/\.html$/, '');
-    return fs.existsSync(path.join(ROOT, 'shop', `${slug}.html`)) || dynamicShopSlugs.has(slug);
+    return fs.existsSync(path.join(ROOT, 'shop', `${slug}.html`));
   }
   if (target.startsWith('/oracle/') || target.startsWith('/compatibility/')) {
     return fs.existsSync(path.join(ROOT, `${relative}.html`)) || fs.existsSync(path.join(ROOT, relative));
@@ -107,7 +107,6 @@ function targetExists(target: string, dynamicShopSlugs: Set<string>): boolean {
 
 test('all internal links resolve to a real file or supported dynamic route', async () => {
   const candidates = walk(ROOT).filter((file) => /\.(html|js|json)$/i.test(file));
-  const dynamicShopSlugs = loadDynamicShopSlugs();
   const checked = new Set<string>();
   const broken: string[] = [];
 
@@ -121,6 +120,25 @@ test('all internal links resolve to a real file or supported dynamic route', asy
       ...(ext === '.js' ? [...text.matchAll(/window\.location(?:\.href)?\s*=\s*["'](\/[^"'${}\s]+)["']/g)] : [])
     ];
 
+    // For products catalog JSON, also check every explicit "link" field value
+    if (file.endsWith('all-products.json') || file.endsWith('products.json')) {
+      try {
+        const parsed = JSON.parse(text);
+        const visit = (value: any) => {
+          if (!value) return;
+          if (Array.isArray(value)) return value.forEach(visit);
+          if (typeof value === 'object') {
+            const link = value['link'];
+            if (typeof link === 'string' && link.trim().startsWith('/')) {
+              matches.push([link, link] as unknown as RegExpMatchArray);
+            }
+            Object.values(value).forEach(visit);
+          }
+        };
+        visit(parsed);
+      } catch {}
+    }
+
     for (const match of matches) {
       const raw = match[1];
       const normalized = normalizeTarget(raw, file);
@@ -128,7 +146,7 @@ test('all internal links resolve to a real file or supported dynamic route', asy
       const key = `${path.relative(ROOT, file)} -> ${normalized}`;
       if (checked.has(key)) continue;
       checked.add(key);
-      if (!targetExists(normalized, dynamicShopSlugs)) {
+      if (!targetExists(normalized)) {
         broken.push(key);
       }
     }
