@@ -2291,6 +2291,11 @@ main > section,
 
 /* keep mobile behavior intact */
 @media (max-width: 900px) {
+  .nav-toggle {
+    display: inline-flex !important;
+    margin-left: auto !important;
+  }
+
   .hero {
     min-height: auto !important;
     max-height: none !important;
