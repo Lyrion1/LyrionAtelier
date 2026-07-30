@@ -43,7 +43,7 @@ async function buyCompatibilityCertificate(productName, price, evt) {
     } else {
       console.error('initiateCheckout function not found');
 
-      const response = await fetch('/.netlify/functions/create-checkout-session', {
+      const response = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/create-checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ async function generatePreview() {
   try {
     console.log('Calling cosmic-compatibility function...');
 
-    const response = await fetch('/.netlify/functions/cosmic-compatibility', {
+    const response = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/cosmic-compatibility', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -4,7 +4,7 @@ export async function loadCatalog(){
   const sources = [];
   // a) Netlify function (preferred)
   try {
-    const r = await fetch('/.netlify/functions/printful-sync', { method:'GET' });
+    const r = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/printful-sync', { method:'GET' });
     if (r.ok) sources.push(await r.json());
   } catch {}
   // b) Local JSON seed (if present)

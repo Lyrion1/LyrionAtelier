@@ -1,7 +1,7 @@
 import { centsFrom, currencySymbol, formatPriceWithCurrency, priceNumber } from './price-utils.js';
 
 const FALLBACK_IMAGE = '/assets/catalog/placeholder.webp';
-const CHECKOUT_ENDPOINT = '/.netlify/functions/create-checkout-session';
+const CHECKOUT_ENDPOINT = 'https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/create-checkout';
 const EXTENDED_SIZE = /^([2-9]?xl)$/i;
 const PRICE_FALLBACK = '—';
 const fullRes = (u) => (u || '').replace('_thumb', '');

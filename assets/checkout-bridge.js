@@ -4,7 +4,7 @@
   async function start(items) {
     const origin = window.location.origin;
     try {
-      const res = await fetch('/.netlify/functions/checkout', {
+      const res = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/create-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ origin, items })

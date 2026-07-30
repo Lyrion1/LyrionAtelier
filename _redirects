@@ -2,8 +2,7 @@
 # This file enables clean URLs and SPA-like routing
 
 # API and Functions - must be first
-/.netlify/functions/* /.netlify/functions/:splat 200!
-/api/*               /.netlify/functions/:splat 200!
+/api/*               https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/:splat 200!
 
 # Taurus Constellation Pyjama Top static page
 /shop/taurus-pyjama-top /shop/taurus-pyjama-top.html 200

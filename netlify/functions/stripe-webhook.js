@@ -6,7 +6,7 @@
 // - Comprehensive error handling and logging
 // - Serverless-optimized (no file system dependencies)
 //
-// Webhook URL: https://lyrionatelier.com/.netlify/functions/stripe-webhook
+// Webhook URL: https://lyrionatelier.comhttps://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/stripe-webhook
 // Alternate URL: https://lyrionatelier.com/api/stripe-webhook
 //
 // Required Environment Variables:

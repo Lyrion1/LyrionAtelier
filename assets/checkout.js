@@ -16,6 +16,28 @@ function buildLineItemsFromCart() {
 }
 
 window.buildLineItems = window.buildLineItems || buildLineItemsFromCart;
+const SUPABASE_CHECKOUT_URL = 'https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/create-checkout';
+
+function getCheckoutErrorElement() {
+  return document.getElementById('checkout-error');
+}
+
+function setCheckoutError(message) {
+  const errorEl = getCheckoutErrorElement();
+  if (!errorEl) return;
+  errorEl.textContent = message;
+  errorEl.style.display = message ? 'block' : 'none';
+}
+
+async function parseCheckoutError(response) {
+  try {
+    const data = await response.clone().json();
+    return data?.error || data?.message || `Checkout failed (${response.status})`;
+  } catch {
+    const text = await response.text().catch(() => '');
+    return text || `Checkout failed (${response.status})`;
+  }
+}
 
 function resolveBundlePayload(cart = []) {
   if (typeof window.evaluateBundleDiscount === 'function') {
@@ -33,41 +55,46 @@ const checkoutBtn = document.getElementById('checkoutBtn');
 checkoutBtn?.addEventListener('click', async () => {
 const cart = JSON.parse(localStorage.getItem('cart')) || [];
 const lineItems = window.buildLineItems(); // implement or replace
+  setCheckoutError('');
   if (!lineItems || lineItems.length === 0) {
-    alert('Your cart is empty.');
+    setCheckoutError('Your cart is empty.');
     return;
   }
   const bundle = resolveBundlePayload(cart);
   let res;
   try {
-    res = await fetch('/.netlify/functions/create-checkout-session', {
+    res = await fetch(SUPABASE_CHECKOUT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        lineItems,
+        basket: cart,
         bundle,
         successUrl: window.location.origin + '/success',
         cancelUrl: window.location.origin + '/cart'
       })
     });
   } catch (fetchErr) {
-    alert(fetchErr.message || 'Failed to reach checkout service.');
+    setCheckoutError(fetchErr.message || 'Failed to reach checkout service.');
     return;
   }
 
   if (!res.ok) {
-    alert('Failed to create checkout session.');
+    setCheckoutError(await parseCheckoutError(res));
     return;
   }
 
   try {
     const { url, error } = await res.json();
     if (error) {
-      alert(error);
+      setCheckoutError(error);
+      return;
+    }
+    if (!url) {
+      setCheckoutError('Checkout service did not return a redirect URL.');
       return;
     }
     window.location = url;
   } catch (parseErr) {
-    alert('Unexpected response from checkout service.');
+    setCheckoutError('Unexpected response from checkout service.');
   }
 });

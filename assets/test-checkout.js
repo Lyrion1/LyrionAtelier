@@ -1,7 +1,7 @@
 // /assets/test-checkout.js
 document.getElementById('testCheckoutBtn').addEventListener('click', async () => {
   try {
-    const res = await fetch('/.netlify/functions/create-test-session', {
+    const res = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/create-test-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ origin: window.location.origin })

@@ -1,4 +1,4 @@
-// /.netlify/functions/printful-health.js
+// https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/printful-health.js
 export async function handler() {
 try {
 const token = process.env.PRINTFUL_OAUTH_TOKEN; // <-- must exist in Netlify

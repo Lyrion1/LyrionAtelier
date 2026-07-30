@@ -91,13 +91,13 @@
    const DEFAULT_PRICE_ID = 'price_1ShjdBE6FRwoxLBfyUvK1ark';
    let publishableKey;
    let stripeMode = 'test';
-   const stripePromise = fetch('/.netlify/functions/get-stripe-key')
+   const stripePromise = fetch('/data/site.json')
      .then(res => res.json())
      .then(data => {
-       if (!data?.publishableKey) {
+       if (!data?.stripePublishableKey) {
          throw new Error('Missing Stripe publishable key');
        }
-       publishableKey = data.publishableKey;
+       publishableKey = data.stripePublishableKey;
        window.STRIPE_PUBLISHABLE_KEY = publishableKey;
        const isStripeKey = typeof publishableKey === 'string' && publishableKey.startsWith('pk_');
        stripeMode = isStripeKey && publishableKey.includes('_live_') ? 'live' : 'test';
@@ -123,7 +123,7 @@
           throw new Error('Stripe unavailable');
         }
         // Call backend to create checkout session
-        const response = await fetch('/.netlify/functions/create-checkout', {
+        const response = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/create-checkout', {
           method: 'POST',
            headers: {
              'Content-Type': 'application/json',

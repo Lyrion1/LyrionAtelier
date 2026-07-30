@@ -127,7 +127,7 @@ test.describe('product detail page', () => {
     );
 
     let checkoutPayload: any = null;
-    await page.route('**/.netlify/functions/create-checkout-session', (route) => {
+    await page.route('**/functions/v1/create-checkout', (route) => {
       checkoutPayload = route.request().postDataJSON();
       route.fulfill({
         status: 200,
