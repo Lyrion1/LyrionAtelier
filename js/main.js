@@ -265,53 +265,37 @@ function buildSiteHeader() {
     
     <div class="nav-links" id="primary-nav" aria-hidden="true">
     <button class="nav-drawer-close" type="button" aria-label="Close navigation menu">×</button>
-    <a href="/">Home</a>
-    <a href="/shop">Shop All</a>
-    <div class="mobile-dropdown">
-      <button class="dropdown-toggle" type="button" aria-expanded="false">Shop Categories ▼</button>
-      <div class="dropdown-content" aria-hidden="true">
-        <a href="/shop">All Products</a>
-        <a href="/shop?zodiac=aries">Aries</a>
-        <a href="/shop?zodiac=taurus">Taurus</a>
-        <a href="/shop?zodiac=gemini">Gemini</a>
-        <a href="/shop?zodiac=cancer">Cancer</a>
-        <a href="/shop?zodiac=leo">Leo</a>
-        <a href="/shop?zodiac=virgo">Virgo</a>
-        <a href="/shop?zodiac=libra">Libra</a>
-        <a href="/shop?zodiac=scorpio">Scorpio</a>
-        <a href="/shop?zodiac=sagittarius">Sagittarius</a>
-        <a href="/shop?zodiac=capricorn">Capricorn</a>
-        <a href="/shop?zodiac=aquarius">Aquarius</a>
-        <a href="/shop?zodiac=pisces">Pisces</a>
-      </div>
-    </div>
-    <a href="/curated-for-gifting">Curated for Gifting</a>
-    <a href="/oracle">Oracle</a>
-    <a href="/compatibility">Compatibility</a>
+    <a href="/shop">Shop</a>
+    <a href="/oracle">Readings</a>
+    <a href="/curated-for-gifting">Gifts</a>
     <a href="/codex">Codex</a>
+    <a href="/">About</a>
     <a href="/contact">Contact</a>
-    <div class="nav-locale-switcher" role="group" aria-label="Language and currency">
-      <label class="sr-only" for="locale-language">Language</label>
-      <select id="locale-language" class="locale-select locale-language" data-locale-language>
-        <option value="en">English</option>
-        <option value="fr">Français</option>
-        <option value="de">Deutsch</option>
-        <option value="es">Español</option>
-        <option value="it">Italiano</option>
-      </select>
-      <label class="sr-only" for="locale-currency">Currency</label>
-      <select id="locale-currency" class="locale-select locale-currency" data-locale-currency>
-        <option value="USD">USD</option>
-        <option value="GBP">GBP</option>
-        <option value="EUR">EUR</option>
-        <option value="CAD">CAD</option>
-        <option value="AUD">AUD</option>
-        <option value="NZD">NZD</option>
-        <option value="JPY">JPY</option>
-        <option value="CHF">CHF</option>
-      </select>
+    <div class="nav-utility">
+      <div class="nav-locale-switcher" role="group" aria-label="Language and currency">
+        <label class="sr-only" for="locale-language">Language</label>
+        <select id="locale-language" class="locale-select locale-language" data-locale-language>
+          <option value="en">EN</option>
+          <option value="fr">FR</option>
+          <option value="de">DE</option>
+          <option value="es">ES</option>
+          <option value="it">IT</option>
+        </select>
+        <span class="locale-divider" aria-hidden="true">/</span>
+        <label class="sr-only" for="locale-currency">Currency</label>
+        <select id="locale-currency" class="locale-select locale-currency" data-locale-currency>
+          <option value="USD">USD</option>
+          <option value="GBP">GBP</option>
+          <option value="EUR">EUR</option>
+          <option value="CAD">CAD</option>
+          <option value="AUD">AUD</option>
+          <option value="NZD">NZD</option>
+          <option value="JPY">JPY</option>
+          <option value="CHF">CHF</option>
+        </select>
+      </div>
+      <a href="/cart" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a>
     </div>
-    <a href="/cart" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a>
     </div>
     </nav>`;
   return header;
