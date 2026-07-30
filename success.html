@@ -328,7 +328,7 @@ body.success-page #main-content {
       refLine.append(label, strong);
       target.appendChild(refLine);
     }
-    fetch(`/.netlify/functions/get-checkout-session?session_id=${encodeURIComponent(sessionId)}`)
+    fetch(`https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/get-checkout-session?session_id=${encodeURIComponent(sessionId)}`)
       .then((res) => res.ok ? res.json() : null)
       .then((data) => {
         if (data?.payment_status === 'paid') {

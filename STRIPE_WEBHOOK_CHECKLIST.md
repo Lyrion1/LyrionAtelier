@@ -3,7 +3,7 @@
 ## ✅ CORRECT Webhook URL
 **Add this URL to Stripe Dashboard:**
 ```
-https://lyrionatelier.com/.netlify/functions/stripe-webhook
+https://lyrionatelier.comhttps://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/stripe-webhook
 ```
 
 Alternative URL (also works):
@@ -16,7 +16,7 @@ https://lyrionatelier.com/api/stripe-webhook
 ### 1. Stripe Dashboard Configuration
 - [ ] Go to: Stripe Dashboard → Developers → Webhooks
 - [ ] Webhook endpoint exists
-- [ ] URL is: `https://lyrionatelier.com/.netlify/functions/stripe-webhook`
+- [ ] URL is: `https://lyrionatelier.comhttps://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/stripe-webhook`
 - [ ] Event `checkout.session.completed` is selected
 - [ ] Webhook status shows "Active" (green)
 - [ ] Copy signing secret (starts with `whsec_`)
@@ -109,7 +109,7 @@ See `WEBHOOK_SETUP.md` for complete setup instructions and troubleshooting guide
 
 ### Test webhook locally:
 ```bash
-stripe listen --forward-to localhost:8888/.netlify/functions/stripe-webhook
+stripe listen --forward-to localhost:8888https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/stripe-webhook
 stripe trigger checkout.session.completed
 ```
 

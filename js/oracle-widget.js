@@ -78,7 +78,7 @@ async function getOracleReading() {
  if (resultEl) resultEl.style.display = 'none';
  
  try {
- const response = await fetch('/.netlify/functions/oracle-ai', {
+ const response = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/oracle-ai', {
  method: 'POST',
  headers: { 'Content-Type': 'application/json' },
  body: JSON.stringify({ birthDate: isoDate })

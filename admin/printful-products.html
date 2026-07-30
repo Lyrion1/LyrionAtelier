@@ -88,7 +88,7 @@
 
     async function loadProducts() {
       try {
-        const res = await fetch('/.netlify/functions/printful-products');
+        const res = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/printful-products');
         const data = await res.json().catch(() => ({}));
 
         if (!res.ok || !data.ok) {

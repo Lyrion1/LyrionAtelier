@@ -124,7 +124,7 @@ These must be set in Netlify Dashboard → Site Settings → Environment Variabl
 ## Webhook Configuration
 
 **Correct Webhook URL (choose one):**
-- Primary: `https://lyrionatelier.com/.netlify/functions/stripe-webhook`
+- Primary: `https://lyrionatelier.comhttps://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/stripe-webhook`
 - Alternate: `https://lyrionatelier.com/api/stripe-webhook` (redirects to primary)
 
 **Event to Listen For:**
@@ -142,7 +142,7 @@ These must be set in Netlify Dashboard → Site Settings → Environment Variabl
 
 ### 2. Test with Stripe CLI
 ```bash
-stripe listen --forward-to https://lyrionatelier.com/.netlify/functions/stripe-webhook
+stripe listen --forward-to https://lyrionatelier.comhttps://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/stripe-webhook
 stripe trigger checkout.session.completed
 ```
 

@@ -22,7 +22,7 @@ The Stripe webhook handles automatic order processing when customers complete ch
 Go to: **Stripe Dashboard → Developers → Webhooks**
 
 1. Click "Add endpoint"
-2. Enter webhook URL: `https://lyrionatelier.com/.netlify/functions/stripe-webhook`
+2. Enter webhook URL: `https://lyrionatelier.comhttps://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/stripe-webhook`
 3. Select events to send:
    - ✅ `checkout.session.completed`
 4. Click "Add endpoint"
@@ -48,7 +48,7 @@ Add these variables:
 
 #### Option A: Test with Stripe CLI
 ```bash
-stripe listen --forward-to localhost:8888/.netlify/functions/stripe-webhook
+stripe listen --forward-to localhost:8888https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/stripe-webhook
 stripe trigger checkout.session.completed
 ```
 
@@ -116,7 +116,7 @@ Products containing these keywords are sent to Printful:
 
 ### Webhook Signature Verification Failed
 1. Verify `STRIPE_WEBHOOK_SECRET` matches Stripe dashboard
-2. Ensure webhook URL is exactly: `https://lyrionatelier.com/.netlify/functions/stripe-webhook`
+2. Ensure webhook URL is exactly: `https://lyrionatelier.comhttps://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/stripe-webhook`
 3. Redeploy Netlify site after updating environment variables
 
 ### How to Check Logs

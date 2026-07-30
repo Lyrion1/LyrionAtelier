@@ -47,7 +47,7 @@ async function initiateCheckout(productData) {
   }
   
   try {
-    const response = await fetch('/.netlify/functions/create-checkout-session', {
+    const response = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/create-checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

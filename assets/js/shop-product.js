@@ -335,7 +335,7 @@ function renderProduct(product) {
       });
     } else {
       try {
-        const res = await fetch('/.netlify/functions/checkout', {
+        const res = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/create-checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ origin: window.location.origin, items: [payload] })

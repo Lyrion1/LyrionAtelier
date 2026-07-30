@@ -9,7 +9,7 @@
   }
 
   try {
-    const response = await fetch(`/.netlify/functions/get-session?session_id=${encodeURIComponent(sessionId)}`);
+    const response = await fetch(`https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/get-session?session_id=${encodeURIComponent(sessionId)}`);
     const data = await response.json();
 
     if (!response.ok || data.error) {

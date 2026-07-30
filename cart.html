@@ -106,6 +106,7 @@
             <button class="btn btn-outline" type="button" id="clear-cart-button">Clear cart</button>
           </div>
         </div>
+        <p id="checkout-error" class="muted" style="display:none; color:#fca5a5; margin-top:0.75rem;"></p>
       </div>
     </div>
   </main>
@@ -126,20 +127,24 @@
   <script defer src="/assets/promotions-ui.js"></script>
   <script src="https://js.stripe.com/v3/"></script>
   <script>
-    fetch('/.netlify/functions/get-stripe-key')
+    fetch('/public/data/site.json')
       .then(res => res.json())
       .then(data => {
-        if (!data?.publishableKey) {
+        if (!data?.stripePublishableKey) {
           throw new Error('Missing Stripe publishable key');
         }
-        const stripe = Stripe(data.publishableKey);
+        const stripe = Stripe(data.stripePublishableKey);
         window.stripe = stripe;
-        window.STRIPE_PUBLISHABLE_KEY = data.publishableKey;
+        window.STRIPE_PUBLISHABLE_KEY = data.stripePublishableKey;
         initializeCart(stripe);
       })
       .catch(err => {
         console.error('Failed to load Stripe key:', err);
-        alert('Payment system unavailable. Please try again later.');
+        const errorEl = document.getElementById('checkout-error');
+        if (errorEl) {
+          errorEl.textContent = 'Payment system unavailable. Please try again later.';
+          errorEl.style.display = 'block';
+        }
       });
     
     function initializeCart(stripe) {

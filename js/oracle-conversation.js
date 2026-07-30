@@ -69,7 +69,7 @@
     }
     try {
       const payload = { tier, email: emailInput?.value || undefined };
-      const res = await fetch('/.netlify/functions/oracle-subscribe', {
+      const res = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/oracle-subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -109,7 +109,7 @@
     };
 
     try {
-      const res = await fetch('/.netlify/functions/oracle-conversation', {
+      const res = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/oracle-conversation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

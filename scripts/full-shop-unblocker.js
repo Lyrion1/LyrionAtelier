@@ -3,7 +3,7 @@
 // - Seeds adult unisex tee products for each image (S–2XL, Black)
 // - Guarantees product.state and variant.state exist
 // - Builds data/all-products.json + data/index.json
-// - Adds /.netlify/functions/printful-sync that serves these products
+// - Adds https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/printful-sync that serves these products
 // Idempotent. If products already exist, it repairs and serves them.
 
 const fs = require('fs'), p = require('path'), cp = require('child_process');
