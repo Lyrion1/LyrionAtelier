@@ -39,13 +39,32 @@
  <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation" aria-controls="primary-nav">☰</button>
  
  <div class="nav-links" id="primary-nav" aria-hidden="true">
- <a href="/">Home</a>
- <a href="/shop">Shop</a>
- <a href="/curated-for-gifting">Curated for Gifting</a>
- <a href="/oracle">Oracle</a>
- <a href="/compatibility">Compatibility</a>
- <a href="/codex">Codex</a>
- <a href="/contact">Contact</a>
+ <div class="mobile-dropdown">
+   <button class="dropdown-toggle" type="button" aria-expanded="false">Shop ▼</button>
+   <div class="dropdown-content" aria-hidden="true">
+     <a href="/shop?collection=essentials">Lyrīon Essentials</a>
+     <a href="/shop?collection=zodiac">Zodiac Apparel</a>
+     <a href="/shop?collection=accessories">Accessories &amp; Home</a>
+     <a href="/shop?collection=mystery">Mystery &amp; Curated Boxes</a>
+   </div>
+ </div>
+ <div class="mobile-dropdown">
+   <button class="dropdown-toggle" type="button" aria-expanded="false">Readings &amp; Certificates ▼</button>
+   <div class="dropdown-content" aria-hidden="true">
+     <a href="/compatibility">Compatibility Certificates</a>
+     <a href="/oracle">Personalized Readings</a>
+     <a href="/oracle#free">Free Reading</a>
+   </div>
+ </div>
+ <div class="mobile-dropdown">
+   <button class="dropdown-toggle" type="button" aria-expanded="false">Gifts ▼</button>
+   <div class="dropdown-content" aria-hidden="true">
+     <a href="/curated-for-gifting?for=couples">For Couples</a>
+     <a href="/curated-for-gifting?for=self">For Self</a>
+     <a href="/curated-for-gifting?for=birthday">Birthday &amp; Milestone</a>
+   </div>
+ </div>
+ <a href="/codex">About / Journal</a>
  <a href="/cart" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a>
  </div>
  </nav>

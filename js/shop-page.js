@@ -497,7 +497,14 @@ import { formatPrice } from './price-utils.js';
 
   const hydrateGlobal = (catalog, imageMap, zodiacMap) => {
     window.LyrionAtelier = window.LyrionAtelier || {};
-    window.LyrionAtelier.shopState = window.LyrionAtelier.shopState || {};
+    // Pre-populate shopState from URL params (collection, zodiac)
+    const urlParams = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
+    const urlCollection = urlParams.get('collection') || '';
+    const urlZodiac = urlParams.get('zodiac') || '';
+    const fromUrl = {};
+    if (urlCollection) fromUrl.collection = urlCollection.toLowerCase();
+    if (urlZodiac) fromUrl.zodiac = urlZodiac.toLowerCase();
+    window.LyrionAtelier.shopState = { ...(window.LyrionAtelier.shopState || {}), ...fromUrl };
     if (!window.LyrionAtelier.products || catalog.length > (window.LyrionAtelier.products?.length || 0)) {
       window.LyrionAtelier.products = catalog;
     }
