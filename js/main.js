@@ -173,7 +173,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initialize navigation loading overlay
   initNavigationLoading();
+
+  // Dynamic copyright year
+  updateCopyrightYear();
 });
+
+function updateCopyrightYear() {
+  const year = new Date().getFullYear();
+  document.querySelectorAll('footer p, .footer-content p').forEach(el => {
+    el.innerHTML = el.innerHTML.replace(/© \d{4}/, `© ${year}`);
+  });
+}
 
 function applySharedLayout() {
   const body = document.body;
