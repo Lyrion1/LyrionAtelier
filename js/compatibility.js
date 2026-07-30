@@ -1,5 +1,15 @@
 console.log('Compatibility page script loaded');
 const SUPPORT_EMAIL = 'admin@lyrionatelier.com';
+const reportCompatibility = (message, type = 'error') => {
+  const status = document.querySelector('.form-status');
+  if (status) {
+    status.textContent = message;
+    status.style.display = message ? 'block' : 'none';
+  }
+  if (typeof window.showToast === 'function') {
+    window.showToast(message, type);
+  }
+};
 
 // Format date input as user types
 function formatDateInput(inputId) {
@@ -69,7 +79,7 @@ async function buyCompatibilityCertificate(productName, price, evt) {
     }
   } catch (error) {
     console.error('Checkout error:', error);
-    alert('Unable to start checkout. Please try again or contact ' + SUPPORT_EMAIL);
+    reportCompatibility('Unable to start checkout. Please try again or contact ' + SUPPORT_EMAIL);
     if (button) {
       button.textContent = originalText;
       button.disabled = false;
@@ -88,7 +98,7 @@ async function generatePreview() {
 
   if (!name1 || !date1 || !name2 || !date2) {
     console.error('Form elements not found');
-    alert('Form error. Please refresh the page.');
+    reportCompatibility('Form error. Please refresh the page.');
     return;
   }
 
@@ -100,13 +110,13 @@ async function generatePreview() {
   console.log('Form values:', { name1Val, date1Val, name2Val, date2Val });
 
   if (!name1Val || !date1Val || !name2Val || !date2Val) {
-    alert('Please fill in all fields');
+    reportCompatibility('Please fill in all fields', 'info');
     return;
   }
 
   const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
   if (!dateRegex.test(date1Val) || !dateRegex.test(date2Val)) {
-    alert('Please enter dates in MM/DD/YYYY format (e.g., 03/15/1990)');
+    reportCompatibility('Please enter dates in MM/DD/YYYY format (e.g., 03/15/1990)', 'info');
     return;
   }
 
@@ -189,7 +199,7 @@ async function generatePreview() {
   } catch (error) {
     console.error('Preview generation error:', error);
     if (loadingEl) loadingEl.style.display = 'none';
-    alert('Unable to generate preview. Please try again.\n\nError: ' + error.message);
+    reportCompatibility(`Unable to generate preview. ${error.message}`);
   }
 }
 

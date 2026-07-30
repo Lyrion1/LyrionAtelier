@@ -20,6 +20,17 @@ let stripePublishableKey = window?.STRIPE_PUBLISHABLE_KEY_LIVE || window?.STRIPE
 let stripe = (typeof Stripe === 'function' && stripePublishableKey)
   ? Stripe(stripePublishableKey)
   : null;
+function reportCheckoutMessage(message) {
+  if (typeof window.showToast === 'function') {
+    window.showToast(message, 'error');
+    return;
+  }
+  const errorEl = document.getElementById('checkout-error');
+  if (errorEl) {
+    errorEl.textContent = message;
+    errorEl.style.display = message ? 'block' : 'none';
+  }
+}
 if (!stripe) {
   if (!location.pathname.startsWith('/shop')) {
     console.warn('Stripe publishable key missing; skipping client initialization.');
@@ -42,7 +53,7 @@ async function initiateCheckout(productData) {
   
   if (!name || !price) {
     console.error('Missing required product data');
-    alert('Error: Product information missing. Please refresh and try again.');
+    reportCheckoutMessage('Product information is missing. Please refresh and try again.');
     return false;
   }
   
@@ -98,7 +109,7 @@ async function initiateCheckout(productData) {
     
   } catch (error) {
     console.error('Checkout error:', error);
-    alert('Unable to start checkout. Please try again or contact admin@lyrionatelier.com\n\nError: ' + error.message);
+    reportCheckoutMessage(`Unable to start checkout. ${error.message}`);
     return false;
   }
 }

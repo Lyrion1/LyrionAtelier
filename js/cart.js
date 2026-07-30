@@ -1,14 +1,6 @@
 // Lyrīon Atelier - Shopping Cart Functionality
 
 const CART_KEY = 'cart';
-const BUNDLE_KEY = 'lyrion_bundle';
-const BUNDLE_LABELS = {
-  duo: 'Duo (2 adult pieces)',
-  family: 'Family (adult + youth same sign)',
-  poster: 'Poster add-on',
-  trinity: 'Trinity (3+ pieces)'
-};
-
 const notify = (message, type = 'info') => {
   if (typeof showToast === 'function') {
     showToast(message, type);
@@ -42,23 +34,6 @@ const writeCart = (cart = []) => {
   localStorage.setItem(CART_KEY, JSON.stringify(cart));
   const event = new CustomEvent('cart:updated', { detail: { cart } });
   document.dispatchEvent(event);
-};
-
-const storedBundle = () => {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(BUNDLE_KEY) || 'null');
-    return parsed && typeof parsed === 'object' ? parsed : null;
-  } catch {
-    return null;
-  }
-};
-
-const saveBundle = (bundle) => {
-  if (!bundle) {
-    localStorage.removeItem(BUNDLE_KEY);
-    return;
-  }
-  localStorage.setItem(BUNDLE_KEY, JSON.stringify(bundle));
 };
 
 const inferAudience = (product = {}) => {
@@ -247,151 +222,19 @@ function updateQuantity(productId, size, newQuantity) {
   }
 }
 
-const computeBundleOptions = (cart = []) => {
-  // Single-pass computation to avoid multiple reduce/filter operations
-  let subtotalCents = 0;
-  let totalQty = 0;
-  let adultCents = 0;
-  let adultQty = 0;
-  let postersCents = 0;
-  let cheapestCents = Infinity;
-  
-  const adultBySign = new Map();
-  const youthBySign = new Map();
-  
-  const bump = (map, key, cents, qty) => {
-    const current = map.get(key) || { cents: 0, qty: 0 };
-    map.set(key, { cents: current.cents + cents, qty: current.qty + qty });
-  };
-  
-  // Single iteration over cart items
-  for (const item of cart) {
-    const price = toNumber(item.price) || 0;
-    const qty = Number.isFinite(item.quantity) ? item.quantity : 1;
-    const itemCents = Math.round(price * 100);
-    const lineCents = itemCents * qty;
-    
-    subtotalCents += lineCents;
-    totalQty += qty;
-    
-    // Track cheapest unit price for trinity bundle (15% off cheapest item)
-    // Uses unit price not line total to match original behavior
-    if (itemCents > 0 && itemCents < cheapestCents) {
-      cheapestCents = itemCents;
-    }
-    
-    // Determine audience once per item
-    const audience = item.audience || inferAudience(item);
-    const isYouth = audience === 'youth';
-    
-    if (!isYouth) {
-      adultCents += lineCents;
-      adultQty += qty;
-    }
-    
-    if (item.poster) {
-      postersCents += lineCents;
-    }
-    
-    // Track by zodiac sign for family bundles
-    const sign = item.zodiac || inferSign(item);
-    if (sign) {
-      if (isYouth) {
-        bump(youthBySign, sign, lineCents, qty);
-      } else {
-        bump(adultBySign, sign, lineCents, qty);
-      }
-    }
-  }
-
-  const bundles = [];
-  if (adultQty >= 2 && adultCents > 0) {
-    bundles.push({ id: 'duo', label: BUNDLE_LABELS.duo, savingsCents: Math.round(adultCents * 0.1) });
-  }
-  youthBySign.forEach((youth, sign) => {
-    const adult = adultBySign.get(sign);
-    if (adult && adult.qty > 0 && youth.qty > 0) {
-      const subtotal = youth.cents + adult.cents;
-      bundles.push({
-        id: 'family',
-        label: `${BUNDLE_LABELS.family}`,
-        savingsCents: Math.round(subtotal * 0.15),
-        sign
-      });
-    }
-  });
-  if (postersCents > 0 && subtotalCents - postersCents > 0) {
-    bundles.push({ id: 'poster', label: BUNDLE_LABELS.poster, savingsCents: Math.round(postersCents * 0.2) });
-  }
-  if (totalQty >= 3 && cheapestCents !== Infinity) {
-    bundles.push({ id: 'trinity', label: BUNDLE_LABELS.trinity, savingsCents: Math.round(cheapestCents * 0.15) });
-  }
-  return { bundles, subtotalCents };
-};
-
 function evaluateBundleDiscount(cart = readCart()) {
-  const { bundles, subtotalCents } = computeBundleOptions(cart);
-  if (!bundles.length) {
-    saveBundle(null);
-    return { selectedBundle: null, savingsCents: 0, eligibleBundles: [], subtotalCents };
-  }
-  const preferred = storedBundle();
-  const eligibleMatch = preferred ? bundles.find((b) => b.id === preferred.id) : null;
-  const best = bundles.reduce((winner, current) =>
-    current.savingsCents > (winner?.savingsCents || 0) ? current : winner,
-    eligibleMatch || null
-  );
-  if (best) saveBundle(best);
-  return { selectedBundle: best, savingsCents: best?.savingsCents || 0, eligibleBundles: bundles, subtotalCents };
+  const subtotalCents = (cart || []).reduce((sum, item) => {
+    const price = toNumber(item?.price) || 0;
+    const qty = Number.isFinite(item?.quantity) ? item.quantity : 1;
+    return sum + Math.round(price * 100) * qty;
+  }, 0);
+  return { selectedBundle: null, savingsCents: 0, eligibleBundles: [], subtotalCents };
 }
 
 const formatMoney = (amount) => `$${amount.toFixed(2)}`;
 
-const syncBundleChips = (eligible = [], selected = null) => {
-  const chips = document.querySelectorAll('.promobar .pill[data-bundle]');
-  chips.forEach((chip) => {
-    const id = chip.dataset.bundle;
-    const isEligible = eligible.some((b) => b.id === id);
-    chip.classList.toggle('disabled', !isEligible);
-    chip.setAttribute('aria-disabled', isEligible ? 'false' : 'true');
-    const isSelected = selected && selected.id === id;
-    chip.classList.toggle('active', isSelected);
-    chip.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
-  });
-};
-
-const bindBundleChips = () => {
-  const chips = document.querySelectorAll('.promobar .pill');
-  chips.forEach((chip) => {
-    if (chip.dataset.bundleBound === '1') return;
-    chip.dataset.bundleBound = '1';
-    const text = (chip.textContent || '').toLowerCase();
-    if (text.includes('duo')) chip.dataset.bundle = 'duo';
-    else if (text.includes('family')) chip.dataset.bundle = 'family';
-    else if (text.includes('poster')) chip.dataset.bundle = 'poster';
-    else if (text.includes('trinity') || text.includes('3')) chip.dataset.bundle = 'trinity';
-    const bundleId = chip.dataset.bundle;
-    if (!bundleId) return;
-    chip.setAttribute('role', 'button');
-    chip.tabIndex = 0;
-    chip.addEventListener('click', () => {
-      const cart = readCart();
-      const evalResult = evaluateBundleDiscount(cart);
-      const match = evalResult.eligibleBundles.find((b) => b.id === bundleId);
-      if (match) {
-        saveBundle(match);
-        syncBundleChips(evalResult.eligibleBundles, match);
-        displayCart();
-      }
-    });
-    chip.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        chip.click();
-      }
-    });
-  });
-};
+const syncBundleChips = () => {};
+const bindBundleChips = () => {};
 
 /**
  * Display Cart Items
@@ -470,18 +313,17 @@ function displayCart() {
   // Calculate and update order summary
   const subtotal = cart.reduce((sum, item) => sum + ((toNumber(item.price) || 0) * (item.quantity || 1)), 0);
   const shipping = subtotal > 50 ? 0 : 5.99;
-  const { selectedBundle, savingsCents, eligibleBundles } = evaluateBundleDiscount(cart);
+  const { savingsCents } = evaluateBundleDiscount(cart);
   const discount = (savingsCents || 0) / 100;
   const total = subtotal - discount + shipping;
-  updateOrderSummary(subtotal, shipping, total, discount, selectedBundle?.label);
-  syncBundleChips(eligibleBundles, selectedBundle);
+  updateOrderSummary(subtotal, shipping, total, discount);
 }
 
 /**
  * Update Order Summary
  * Updates the order summary display with current totals
  */
-function updateOrderSummary(subtotal, shipping, total, discount = 0, bundleLabel = '') {
+function updateOrderSummary(subtotal, shipping, total, discount = 0) {
   const subtotalElement = document.getElementById('cart-subtotal');
   const shippingElement = document.getElementById('cart-shipping');
   const totalElement = document.getElementById('cart-total');
@@ -492,8 +334,6 @@ function updateOrderSummary(subtotal, shipping, total, discount = 0, bundleLabel
     if (discount > 0) {
       discountRow.textContent = `-${formatMoney(discount)}`;
       discountRow.parentElement.style.display = '';
-      const label = discountRow.parentElement.querySelector('.discount-label');
-      if (label) label.textContent = bundleLabel || 'Bundle Savings';
     } else {
       discountRow.parentElement.style.display = 'none';
     }
@@ -508,7 +348,6 @@ function updateOrderSummary(subtotal, shipping, total, discount = 0, bundleLabel
 function clearCart() {
   if (confirm('Are you sure you want to clear your cart?')) {
     localStorage.removeItem(CART_KEY);
-    localStorage.removeItem(BUNDLE_KEY);
     displayCart();
     updateCartCount();
     notify('Cart cleared', 'info');
@@ -576,7 +415,7 @@ function displayCheckoutSummary() {
   
   const subtotal = cart.reduce((sum, item) => sum + ((toNumber(item.price) || 0) * (item.quantity || 1)), 0);
   const shipping = subtotal > 50 ? 0 : 5.99;
-  const { selectedBundle, savingsCents } = evaluateBundleDiscount(cart);
+  const { savingsCents } = evaluateBundleDiscount(cart);
   const discount = (savingsCents || 0) / 100;
   const total = subtotal - discount + shipping;
   
@@ -586,7 +425,7 @@ function displayCheckoutSummary() {
       <span>$${subtotal.toFixed(2)}</span>
     </div>
     ${discount > 0 ? `<div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-      <span>${selectedBundle?.label || 'Bundle Savings'}:</span>
+      <span>Discount:</span>
       <span>- $${discount.toFixed(2)}</span>
     </div>` : ''}
     <div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
@@ -637,11 +476,7 @@ document.addEventListener('DOMContentLoaded', function() {
       addToCart(parsedProductId, null, quantity);
     });
   }
-  bindBundleChips();
-  const { eligibleBundles, selectedBundle } = evaluateBundleDiscount(readCart());
-  syncBundleChips(eligibleBundles, selectedBundle);
 });
-document.addEventListener('promobar:ready', bindBundleChips);
 
 // expose helpers for checkout payloads
 window.evaluateBundleDiscount = window.evaluateBundleDiscount || evaluateBundleDiscount;

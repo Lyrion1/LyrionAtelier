@@ -1,5 +1,16 @@
 (function () {
   const hasOwn = typeof window.initiateCheckout === 'function' || typeof window.buildLineItems === 'function';
+  const notify = (message, type = 'error') => {
+    if (typeof window.showToast === 'function') {
+      window.showToast(message, type);
+      return;
+    }
+    const errorEl = document.getElementById('checkout-error');
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.style.display = message ? 'block' : 'none';
+    }
+  };
 
   async function start(items) {
     const origin = window.location.origin;
@@ -14,9 +25,9 @@
         location.href = data.url;
         return;
       }
-      alert(data?.error || 'Could not start checkout.');
+      notify(data?.error || 'Could not start checkout.');
     } catch (e) {
-      alert('Network error.');
+      notify('Network error.');
     }
   }
 
@@ -55,7 +66,7 @@
       e.preventDefault();
       const items = readCart();
       if (!items.length) {
-        alert('Cart is empty.');
+        notify('Cart is empty.', 'info');
         return;
       }
       start(items);

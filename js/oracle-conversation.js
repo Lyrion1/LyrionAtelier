@@ -12,6 +12,11 @@
   let nameInput;
   let emailInput;
   let isSending = false;
+  const notify = (message, type = 'error') => {
+    if (typeof window.showToast === 'function') {
+      window.showToast(message, type);
+    }
+  };
 
   function appendMessage(text, role = 'oracle') {
     if (!messages) return null;
@@ -64,7 +69,7 @@
 
   async function sendSubscription(tier) {
     if (!emailInput?.value) {
-      alert('Please add an email so the Oracle can keep the channel open.');
+      notify('Please add an email so the Oracle can keep the channel open.', 'info');
       return;
     }
     try {
@@ -78,11 +83,11 @@
       if (data?.url) {
         window.location.href = data.url;
       } else {
-        alert('Unable to start subscription. Please try again.');
+        notify('Unable to start subscription. Please try again.');
       }
     } catch (err) {
       console.error('Subscription error', err);
-      alert('Unable to start subscription at the moment.');
+      notify('Unable to start subscription at the moment.');
     }
   }
 

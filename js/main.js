@@ -1,6 +1,6 @@
 // Lyrīon Atelier - Main JavaScript
 
-const NAV_VERSION = 'nav-v6';
+const NAV_VERSION = 'nav-v7';
 const SITE_ORIGIN = 'https://lyrionatelier.com';
 const OG_IMAGE = `${SITE_ORIGIN}/images/og-image.jpg`;
 const SEO_KEYWORDS = 'astrology, zodiac, luxury apparel, oracle readings, birth chart, horoscope, cosmic fashion, spiritual guidance';
@@ -74,6 +74,14 @@ let activeLocalization = null;
   const head = document.head;
   if (!head) return;
 
+  const ensureStylesheet = (href) => {
+    if (!href || head.querySelector(`link[rel="stylesheet"][href="${href}"]`)) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    head.appendChild(link);
+  };
+
    const ensureMeta = (attributes) => {
     const selector = Object.entries(attributes)
       .map(([key, value]) => `[${key.toLowerCase()}="${value}"]`)
@@ -118,6 +126,7 @@ let activeLocalization = null;
     }
   });
 
+  ensureStylesheet('/css/restoration.css');
   ensureAnalytics();
 })();
 
@@ -127,6 +136,7 @@ let activeLocalization = null;
  */
 document.addEventListener('DOMContentLoaded', function() {
   document.body.classList.add('loaded');
+  setPageType();
   applySharedLayout();
   removeSeasonalCampaignElements();
   ensureSeoMetadata();
@@ -245,6 +255,18 @@ function applySharedLayout() {
   body.dataset.layoutApplied = 'true';
 }
 
+function setPageType() {
+  const body = document.body;
+  if (!body) return;
+  const path = normalizePathname(window.location.pathname);
+  if (path === '/shop' || path === '/shop.html') body.dataset.page = 'collection';
+  else if (path.startsWith('/shop/')) body.dataset.page = 'product';
+  else if (path.startsWith('/oracle/')) body.dataset.page = 'product';
+  else if (path === '/oracle' || path === '/compatibility' || path === '/curated-for-gifting') body.dataset.page = 'collection';
+  else if (['/cart', '/checkout', '/success', '/contact-success', '/404'].includes(path)) body.dataset.page = 'utility';
+  else body.dataset.page = 'content';
+}
+
 function ensureSkipToContent() {
   initSkipToContent();
   return document.querySelector('.skip-to-content');
@@ -257,7 +279,7 @@ function buildSiteHeader() {
   header.innerHTML = `
     <nav class="main-nav" aria-label="Main navigation">
     <a href="/" class="logo-link">
-    <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img">
+    <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img" width="580" height="613">
     <span class="brand-name">LYRĪON ATELIER</span>
     </a>
     
@@ -269,33 +291,9 @@ function buildSiteHeader() {
     <a href="/oracle">Readings</a>
     <a href="/curated-for-gifting">Gifts</a>
     <a href="/codex">Codex</a>
-    <a href="/">About</a>
+    <a href="/#about">About</a>
     <a href="/contact">Contact</a>
-    <div class="nav-utility">
-      <div class="nav-locale-switcher" role="group" aria-label="Language and currency">
-        <label class="sr-only" for="locale-language">Language</label>
-        <select id="locale-language" class="locale-select locale-language" data-locale-language>
-          <option value="en">EN</option>
-          <option value="fr">FR</option>
-          <option value="de">DE</option>
-          <option value="es">ES</option>
-          <option value="it">IT</option>
-        </select>
-        <span class="locale-divider" aria-hidden="true">/</span>
-        <label class="sr-only" for="locale-currency">Currency</label>
-        <select id="locale-currency" class="locale-select locale-currency" data-locale-currency>
-          <option value="USD">USD</option>
-          <option value="GBP">GBP</option>
-          <option value="EUR">EUR</option>
-          <option value="CAD">CAD</option>
-          <option value="AUD">AUD</option>
-          <option value="NZD">NZD</option>
-          <option value="JPY">JPY</option>
-          <option value="CHF">CHF</option>
-        </select>
-      </div>
-      <a href="/cart" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a>
-    </div>
+    <a href="/cart" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a>
     </div>
     </nav>`;
   return header;
@@ -549,8 +547,12 @@ function removeSeasonalCampaignElements() {
   document.querySelectorAll('a[href="/valentines"], a[href="/valentines.html"], a[href*="/valentines.html#"], a[href*="/valentines#"]').forEach((link) => {
     link.remove();
   });
-  document.querySelectorAll('.valentines-banner, .valentines-guarantee-banner, .badge-anti').forEach((node) => {
+  document.querySelectorAll('.valentines-banner, .valentines-guarantee-banner, .badge-anti, .promobar, .bundle-strip, .promo-strip, .sale-badge, [data-bundle], [data-promo], .discount-banner').forEach((node) => {
     node.remove();
+  });
+  document.querySelectorAll('.discount-label').forEach((label) => {
+    const row = label.closest('.price-row');
+    if (row) row.remove();
   });
 }
 
@@ -916,9 +918,11 @@ function buildSiteFooter() {
       ${socialLinks}
       <div class="footer-links">
         <a href="/shop">Shop</a>
-        <a href="/oracle">Oracle Readings</a>
-        <a href="/compatibility">Compatibility Certificates</a>
+        <a href="/oracle">Readings</a>
+        <a href="/curated-for-gifting">Gifts</a>
         <a href="/codex">Codex</a>
+        <a href="/#about">About</a>
+        <a href="/contact">Contact</a>
         <a href="/privacy-policy">Privacy Policy</a>
         <a href="/terms-of-service">Terms of Service</a>
         <a href="/refund-policy">Refund Policy</a>

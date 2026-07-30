@@ -1,5 +1,17 @@
 console.log('Oracle widget loading...');
 
+function notifyOracle(message, type = 'error') {
+ if (typeof window.showToast === 'function') {
+ window.showToast(message, type);
+ return;
+ }
+ const fallback = document.getElementById('gateway-toast');
+ if (fallback) {
+ fallback.textContent = message;
+ fallback.classList.add('visible');
+ }
+}
+
 function openOracleWidget() {
  console.log('Opening oracle panel');
  const panel = document.getElementById('oracle-panel');
@@ -45,26 +57,26 @@ async function getOracleReading() {
  
  const birthDateInput = document.getElementById('birth-date');
  if (!birthDateInput) {
- alert('Form error. Please refresh.');
+ notifyOracle('Form error. Please refresh.');
  return;
  }
  
  const birthDate = birthDateInput.value.trim();
  
  if (!birthDate) {
- alert('Please enter your birth date in MM/DD/YYYY format');
+ notifyOracle('Please enter your birth date in MM/DD/YYYY format', 'info');
  return;
  }
  
  const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
  if (!dateRegex.test(birthDate)) {
- alert('Please enter date in MM/DD/YYYY format (e.g., 03/15/1990)');
+ notifyOracle('Please enter date in MM/DD/YYYY format (e.g., 03/15/1990)', 'info');
  return;
  }
  
  const parts = birthDate.split('/');
  if (parts.length !== 3) {
- alert('Please enter date in MM/DD/YYYY format (e.g., 03/15/1990)');
+ notifyOracle('Please enter date in MM/DD/YYYY format (e.g., 03/15/1990)', 'info');
  return;
  }
  const isoDate = parts[2] + '-' + parts[0] + '-' + parts[1];
@@ -129,7 +141,7 @@ async function getOracleReading() {
  
  } catch (error) {
  console.error('Oracle error:', error);
- alert('Unable to get reading. Please try again.');
+ notifyOracle('Unable to get reading. Please try again.');
  if (loadingEl) loadingEl.style.display = 'none';
  if (introEl) introEl.style.display = 'block';
  }
@@ -156,8 +168,8 @@ function shareReading() {
  }).catch(err => console.log('Share failed:', err));
  } else {
  navigator.clipboard.writeText(shareText + ' ' + window.location.href)
- .then(() => alert('Reading copied!'))
- .catch(() => alert(shareText));
+ .then(() => notifyOracle('Reading copied!', 'success'))
+ .catch(() => notifyOracle(shareText, 'info'));
  }
 }
 

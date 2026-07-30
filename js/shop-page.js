@@ -12,7 +12,7 @@ import { formatPrice } from './price-utils.js';
   const FALLBACK = '/assets/catalog/placeholder.webp';
   const PRICE_UNAVAILABLE_LABEL = '—';
   const LOADER_TIMEOUT_MS = 1800;
-  const PRODUCT_PRIORITY = ['taurus-tank-top', 'taurus-baseball-jersey', 'taurus-crop-tee', 'taurus-pyjama-top'];
+  const PRODUCT_PRIORITY = ['fisherman-beanie', 'taurus-tank-top', 'taurus-baseball-jersey', 'taurus-crop-tee', 'taurus-pyjama-top'];
   const FEATURED_PRODUCTS = [
     {
       slug: 'taurus-tank-top',
@@ -49,6 +49,8 @@ import { formatPrice } from './price-utils.js';
   ];
   // Values above this threshold are treated as cents and converted to dollars.
   const PRICE_CENTS_THRESHOLD = 200;
+  const CATALOG_CACHE_KEY = 'lyrion_catalog_cache_v1';
+  const INITIAL_PRODUCT_BATCH = 12;
   const ZODIAC_SIGNS = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'];
   const ZODIAC_ORDER = ZODIAC_SIGNS.map((z) => z.charAt(0).toUpperCase() + z.slice(1));
   const CATEGORY_ORDER = ['Men', 'Women', 'Unisex', 'Youth', 'Accessories', 'Rituals'];
@@ -351,10 +353,20 @@ import { formatPrice } from './price-utils.js';
 
   async function getCatalog() {
     try {
+      const cached = sessionStorage.getItem(CATALOG_CACHE_KEY);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length) return parsed;
+      }
+    } catch {}
+    try {
       const local = await fetch('/data/all-products.json', { cache: 'no-store' })
         .then((r) => (r.ok ? r.json() : []))
         .catch(() => []);
       if (Array.isArray(local) && local.length) {
+        try {
+          sessionStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(local));
+        } catch {}
         window.LyrionAtelier = window.LyrionAtelier || {};
         window.LyrionAtelier.products = local;
         return local
@@ -483,15 +495,26 @@ import { formatPrice } from './price-utils.js';
   };
 
   const renderCards = (items) => {
-    if (typeof mountGrid === 'function') {
-      mountGrid(items);
-      highlightFromQuery();
-      return;
-    }
     if (!grid) return;
     grid.innerHTML = '';
     grid.style.display = '';
-    (items || []).forEach((p) => grid.append(createCard(p)));
+    const allItems = Array.isArray(items) ? items : [];
+    const initial = allItems.slice(0, INITIAL_PRODUCT_BATCH);
+    const remaining = allItems.slice(INITIAL_PRODUCT_BATCH);
+    initial.forEach((p) => grid.append(createCard(p)));
+    if (remaining.length) {
+      const sentinel = document.createElement('div');
+      sentinel.className = 'shop-grid-sentinel';
+      sentinel.setAttribute('aria-hidden', 'true');
+      grid.append(sentinel);
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        sentinel.remove();
+        remaining.forEach((p) => grid.append(createCard(p)));
+      }, { rootMargin: '200px 0px' });
+      observer.observe(sentinel);
+    }
     highlightFromQuery();
   };
 
