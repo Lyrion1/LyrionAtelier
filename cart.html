@@ -107,7 +107,8 @@
             <button class="btn btn-outline" type="button" id="clear-cart-button">Clear cart</button>
           </div>
         </div>
-        <p id="checkout-error" class="muted" style="display:none; color:#fca5a5; margin-top:0.75rem;"></p>
+        <div id="checkout-error" class="card" style="display:none; margin-top:1rem; padding:0.9rem 1rem; border:1px solid rgba(244,114,182,0.35); background:rgba(251,207,232,0.28); color:#9f1239;"></div>
+        <div id="embedded-checkout" style="display:none; min-height:500px; margin-top:1.5rem;"></div>
       </div>
     </div>
   </main>
@@ -123,36 +124,7 @@
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
   <script defer src="/assets/cart.js"></script>
-  <script defer src="/assets/checkout.js"></script>
-  <script defer src="/assets/checkout-bridge.js"></script>
   <script src="https://js.stripe.com/v3/"></script>
-  <script>
-    fetch('/public/data/site.json')
-      .then(res => res.json())
-      .then(data => {
-        if (!data?.stripePublishableKey) {
-          throw new Error('Missing Stripe publishable key');
-        }
-        const stripe = Stripe(data.stripePublishableKey);
-        window.stripe = stripe;
-        window.STRIPE_PUBLISHABLE_KEY = data.stripePublishableKey;
-        initializeCart(stripe);
-      })
-      .catch(err => {
-        console.error('Failed to load Stripe key:', err);
-        const errorEl = document.getElementById('checkout-error');
-        if (errorEl) {
-          errorEl.textContent = 'Payment system unavailable. Please try again later.';
-          errorEl.style.display = 'block';
-        }
-      });
-    
-    function initializeCart(stripe) {
-      const checkoutBtn = document.getElementById('checkoutBtn');
-      if (checkoutBtn) {
-        checkoutBtn.dataset.stripeReady = 'true';
-      }
-    }
-  </script>
+  <script src="js/checkout-embed.js" defer></script>
 </body>
 </html>

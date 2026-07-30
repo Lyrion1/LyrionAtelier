@@ -2,7 +2,7 @@
 
 Celestial oracle readings and astrological guidance for the US market - Lyrīon Atelier's digital storefront.
 
-A modern, accessible e-commerce website featuring astrology-themed clothing and oracle reading services, built with vanilla JavaScript, HTML, and CSS. Optimized for performance and ready for deployment on Netlify with Stripe payment integration.
+A modern, accessible e-commerce website featuring astrology-themed clothing and oracle reading services, built with vanilla JavaScript, HTML, and CSS.
 
 ## ✨ Features
 
@@ -83,11 +83,9 @@ A modern, accessible e-commerce website featuring astrology-themed clothing and 
 - robots.txt for search engine crawling
 - Sitemap.xml for indexing
 
-### 🌐 Netlify Ready
-- netlify.toml configuration
-- _redirects for clean URLs
-- Netlify Forms integration
-- Security headers configured
+### 🌐 Deployment Ready
+- Clean URLs
+- Security headers
 - Cache control policies
 
 ## 📦 Products
@@ -110,14 +108,14 @@ Plus 8 oracle reading services ($44 - $75) including:
 ## 🛰️ Shop Data Flow
 
 - The shop reads from the globally exposed `window.LyrionAtelier.products` catalog first (populated by the Printful sync pipeline).
-- If that catalog is missing or empty, the client fetches `/netlify/functions/printful-sync` and then `/api/printful-catalog` as a fallback to hydrate the grid with the latest Printful products and preview images.
+- If that catalog is missing or empty, the client fetches the Supabase Printful sync function and then `/api/printful-catalog` as a fallback to hydrate the grid with the latest Printful products and preview images.
 - Oracle or event items are excluded from `/shop` (they live on Oracle/Codex), and any missing product art resolves via `/data/image-map.json` before falling back to `/assets/catalog/placeholder.webp`.
 
 ## 🖼️ Catalog art & image map
 
 - Source artwork lives in `public/assets/raw-art/**` (zodiac, youth/adult, brand marks).
 - Run `npm run prepare:catalog` to export optimized 1200px WebP assets into `assets/catalog/` and rebuild `data/image-map.json`.
-- Netlify deploys and the `image-ingest` GitHub Action both run this step, so adding or updating art is idempotent—drop a new file into `public/assets/raw-art/` and the map will include both the full filename slug and its leading zodiac token.
+- The `image-ingest` GitHub Action also runs this step, so adding or updating art is idempotent—drop a new file into `public/assets/raw-art/` and the map will include both the full filename slug and its leading zodiac token.
 - The shared placeholder is served from `/assets/catalog/placeholder.webp`.
 - Shop image resolution order: `product.images[0].src` → `product.images[0].thumbnail` → `product.mockup_url` → zodiac fallback art → `/assets/catalog/placeholder.webp`. Zodiac fallbacks are auto-discovered from filenames containing the sign name and can be placed at `/assets/catalog/zodiac/<sign>.webp|png`.
 
@@ -184,55 +182,12 @@ To add a new product to the shop:
 
 ## 💳 Stripe Configuration
 
-Stripe keys are loaded from Netlify environment variables and never hardcoded in the repository.
+Stripe keys are loaded at runtime and should never be hardcoded in the repository.
 
 1. Sign up for Stripe and obtain your API keys.
-2. In Netlify **Site settings → Environment variables**, set:
-   - `STRIPE_PUBLISHABLE_KEY`
-   - `STRIPE_SECRET_KEY`
-   - `STRIPE_WEBHOOK_SECRET`
+2. Store your Stripe keys in your active hosting platform or backend configuration.
 3. The frontend reads the publishable key from `/public/data/site.json`.
-4. Netlify functions use the secret keys directly from the environment for Checkout and webhooks.
-
-## 🌐 Netlify Deployment
-
-### One-Click Deploy
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Lyrion1/LyrionAtelier)
-
-### Manual Deployment
-
-1. **Connect to GitHub**
-   - Log in to [Netlify](https://app.netlify.com)
-   - Click "New site from Git"
-   - Choose GitHub and select this repository
-
-2. **Configure Build Settings**
-   - Build command: (leave empty)
-   - Publish directory: `.` (root)
-   - Click "Deploy site"
-
-3. **Set Environment Variables**
-- Go to Site settings > Environment variables
-- Add your Stripe live keys:
-     - `STRIPE_PUBLISHABLE_KEY_LIVE` (or `STRIPE_PUBLISHABLE_KEY`)
-     - `STRIPE_SECRET_KEY_LIVE` (or `STRIPE_SECRET_KEY`)
-
-4. **Configure Domain**
-   - Go to Domain settings
-   - Add your custom domain (optional)
-   - Netlify will automatically provision SSL certificate
-
-5. **Enable Forms**
-   - Forms are automatically detected via `data-netlify="true"`
-   - View submissions in Netlify Dashboard > Forms
-
-### Netlify Features Enabled
-- ✅ Clean URLs (no .html extension)
-- ✅ HTTPS redirect
-- ✅ Security headers
-- ✅ Cache control
-- ✅ Form handling
-- ✅ 404 page
+4. Checkout and webhook handlers should read secret keys from environment configuration.
 
 ## 📁 Project Structure
 
@@ -242,8 +197,7 @@ LyrionAtelier/
 ├── shop.html               # Product listing page
 ├── product.html            # Individual product page
 ├── cart.html               # Shopping cart
-├── checkout.html           # Checkout with Stripe
-├── contact.html            # Contact form (Netlify Forms)
+├── contact.html            # Contact form
 ├── oracle.html             # Oracle readings
 ├── codex.html              # Astrology information
 ├── css/
@@ -252,7 +206,6 @@ LyrionAtelier/
 │   ├── main.js            # Core functionality
 │   ├── products.js        # Product data & display
 │   └── cart.js            # Shopping cart logic
-├── netlify.toml           # Netlify configuration
 ├── _redirects             # URL rewrites
 ├── robots.txt             # Search engine directives
 ├── sitemap.xml            # SEO sitemap

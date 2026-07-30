@@ -1,7 +1,6 @@
 import { centsFrom, currencySymbol, formatPriceWithCurrency, priceNumber } from './price-utils.js';
 
 const FALLBACK_IMAGE = '/assets/catalog/placeholder.webp';
-const CHECKOUT_ENDPOINT = 'https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/create-checkout';
 const EXTENDED_SIZE = /^([2-9]?xl)$/i;
 const PRICE_FALLBACK = '—';
 const fullRes = (u) => (u || '').replace('_thumb', '');
@@ -187,80 +186,6 @@ function showError(message) {
         <a class="btn btn-primary" href="/shop">Back to shop</a>
       </div>
     </div>`;
-}
-
-async function startCheckout(variant, product, selection, btnEl = $('#add-to-cart-btn')) {
-  const btn = btnEl;
-  if (!variant) {
-    showError('This variant is unavailable.');
-    return;
-  }
-  const resolvedPrice = derivePrice(product, selection.size, variant);
-  const storeVariantId = getStoreVariantId(variant);
-  const variantId =
-    storeVariantId ||
-    variant?.printfulVariantId ||
-    variant?.printful_variant_id ||
-    variant?.variant_id ||
-    variant?.id ||
-    product?.pf?.variants?.[selection.size] ||
-    null;
-  const unitAmount = centsFrom(variant?.price ?? variant?.priceCents ?? resolvedPrice);
-  if (!Number.isFinite(unitAmount)) {
-    showError('Price unavailable for this variant.');
-    return;
-  }
-  const color = selection.color ? ` • ${selection.color}` : '';
-  const size = selection.size ? ` • ${selection.size}` : '';
-  const metadata = {
-    sku: variant.sku || variantId || '',
-    size: selection.size || '',
-    color: selection.color || '',
-    product: product.title || ''
-  };
-  if (variantId) metadata.pf_variant_id = variantId;
-  if (storeVariantId) {
-    metadata.store_variant_id = storeVariantId;
-  }
-  if (product.slug) metadata.slug = product.slug;
-  const lineItems = [
-    {
-      quantity: 1,
-      price_data: {
-        currency: 'usd',
-        unit_amount: unitAmount,
-        product_data: {
-          name: `${product.title}${color}${size}`,
-          metadata
-        }
-      }
-    }
-  ];
-  btn && (btn.disabled = true);
-  try {
-    const res = await fetch(CHECKOUT_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        lineItems,
-        productType: 'merchandise',
-        successUrl: `${location.origin}/success`,
-        cancelUrl: `${location.origin}/shop`
-      })
-    });
-    const data = await res.json();
-    if (data?.skipRedirect === true) return;
-    if (data?.url) {
-      location.href = data.url;
-      return;
-    }
-    throw new Error(data?.error || 'Could not start checkout.');
-  } catch (err) {
-    console.error('[checkout] failed', err);
-    showError(err.message || 'Unable to start checkout.');
-  } finally {
-    btn && (btn.disabled = false);
-  }
 }
 
 async function hydrateProductPage() {
@@ -475,6 +400,23 @@ async function hydrateProductPage() {
         addBtn.textContent = originalText;
       }, 1200);
     }
+  });
+
+  const buyBtn = $('#buy-now-btn');
+  buyBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const selection = currentSelection();
+    const result =
+      typeof addToCart === 'function'
+        ? addToCart(product.id || product.slug, selection.size, 1, product, activeVariant)
+        : { ok: false };
+
+    if (!result?.ok) {
+      showError('Unable to add this item to your cart.');
+      return;
+    }
+
+    window.location.href = '/cart';
   });
 
   updateVariant();

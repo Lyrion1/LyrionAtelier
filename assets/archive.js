@@ -17,7 +17,7 @@ function card(p) {
     <div class="vault-meta">
       <div class="vault-title">${p.title}</div>
       <div class="vault-tag">Archive</div>
-      <form name="vault-waitlist" data-product="${p.slug}" method="POST" data-netlify="true" netlify>
+      <form name="vault-waitlist" data-product="${p.slug}" method="POST">
         <input type="hidden" name="product" value="${p.slug}">
         <input type="email" name="email" placeholder="Your email" required>
         <button type="submit">Request restock</button>

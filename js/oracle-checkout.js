@@ -1,10 +1,22 @@
-console.log('Oracle checkout script loaded');
-
+const CART_KEY = 'cart';
 const reportOracleCheckout = (message) => {
   if (typeof window.showToast === 'function') {
     window.showToast(message, 'error');
   }
 };
+
+function queueOracleItem(item) {
+  try {
+    const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+    const nextCart = Array.isArray(cart) ? cart : [];
+    nextCart.push(item);
+    localStorage.setItem(CART_KEY, JSON.stringify(nextCart));
+    return true;
+  } catch (error) {
+    console.error('[oracle-checkout] unable to store cart item', error);
+    return false;
+  }
+}
 
 async function bookOracleReading(event = null) {
   const evt = event || (typeof window !== 'undefined' ? window.event : null);
@@ -20,16 +32,6 @@ async function bookOracleReading(event = null) {
     button.disabled = true;
   }
 
-  if (typeof window.initiateCheckout !== 'function') {
-    console.error('Checkout handler missing');
-    reportOracleCheckout('Payment system is temporarily unavailable. Please refresh and try again or contact admin@lyrionatelier.com.');
-    if (button && originalText) {
-      button.textContent = originalText;
-      button.disabled = false;
-    }
-    return;
-  }
-
   if (!readingName || !readingPrice) {
     console.error('Missing reading data', { readingName, readingPrice });
     reportOracleCheckout('Unable to start checkout. Please refresh and try again or contact admin@lyrionatelier.com.');
@@ -40,20 +42,21 @@ async function bookOracleReading(event = null) {
     return;
   }
 
-  const success = await window.initiateCheckout({
+  const queued = queueOracleItem({
+    id: readingId || readingName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    slug: readingId || null,
     name: readingName,
-    price: readingPrice,
-    type: 'oracle_reading',
-    readingId,
-    productId: readingId
+    price: Number(readingPrice),
+    size: 'Standard',
+    quantity: 1,
+    category: 'oracle_reading',
+    image: null
   });
 
-  if (!success && button && originalText) {
+  if (!queued && button && originalText) {
     button.textContent = originalText;
     button.disabled = false;
+    return;
   }
+  window.location.href = '/cart';
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Oracle checkout ready');
-});
