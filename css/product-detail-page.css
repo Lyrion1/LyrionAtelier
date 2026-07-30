@@ -62,7 +62,7 @@
 @media (min-width: 1024px) {
   [data-page="product"] .product-detail {
     display: grid !important;
-    grid-template-columns: 55fr 45fr !important;
+    grid-template-columns: 55% 45% !important;
     gap: 3rem !important;
     align-items: start !important;
     max-width: none !important;
@@ -72,8 +72,9 @@
   [data-page="product"] .product-detail__info {
     position: sticky !important;
     top: 2rem !important;
-    max-width: 100% !important;
+    max-width: none !important;
     min-width: 380px !important;
+    width: 100% !important;
   }
 }
 

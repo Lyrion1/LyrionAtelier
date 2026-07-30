@@ -7747,6 +7747,7 @@ section,
   width: 100%;
   height: 100%;
   border: 0;
+  display: none;
   opacity: 0;
   pointer-events: none !important;
   background: rgba(5, 7, 16, 0.58);
@@ -7756,6 +7757,7 @@ section,
 }
 
 .nav-drawer-backdrop.active {
+  display: block;
   opacity: 1;
   pointer-events: auto !important;
 }

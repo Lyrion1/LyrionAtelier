@@ -5,9 +5,10 @@
     "brand:images": "node scripts/attach-images.mjs",
     "build:images": "node scripts/build-images-map.mjs",
     "prepare:catalog": "node tools/prepare-catalog-images.mjs",
-    "build": "npm run prepare:catalog && npm run build:images",
+    "build": "npm run prepare:catalog && npm run build:images && npm run test:images",
     "optimize:images": "node scripts/optimize-images.mjs",
     "test:shop": "playwright test tests",
+    "test:images": "node tests/validate-image-references.mjs",
     "fetch-printful": "node scripts/fetch-printful-variants.js"
   },
   "dependencies": {

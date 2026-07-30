@@ -261,6 +261,7 @@ function setPageType() {
   const path = normalizePathname(window.location.pathname);
   if (path === '/shop' || path === '/shop.html') body.dataset.page = 'collection';
   else if (path.startsWith('/shop/')) body.dataset.page = 'product';
+  else if (path === '/product' || path === '/product.html') body.dataset.page = 'product';
   else if (path.startsWith('/oracle/')) body.dataset.page = 'product';
   else if (path === '/oracle' || path === '/compatibility' || path === '/curated-for-gifting') body.dataset.page = 'collection';
   else if (['/cart', '/checkout', '/success', '/contact-success', '/404'].includes(path)) body.dataset.page = 'utility';
@@ -407,7 +408,7 @@ function initInlineNavToggle(header) {
     backdrop.className = 'nav-drawer-backdrop';
     backdrop.setAttribute('aria-label', 'Close navigation menu');
     backdrop.setAttribute('aria-hidden', 'true');
-    backdrop.style.pointerEvents = 'none';
+    backdrop.style.display = 'none';
     document.body.appendChild(backdrop);
   }
 
@@ -429,7 +430,7 @@ function initInlineNavToggle(header) {
     navToggle.textContent = '☰';
     document.body.style.overflow = '';
     document.body.classList.remove('nav-open');
-    backdrop.style.pointerEvents = 'none';
+    backdrop.style.display = 'none';
   };
 
   const openMenu = () => {
@@ -446,7 +447,7 @@ function initInlineNavToggle(header) {
     document.body.style.overflow = 'hidden';
     document.body.classList.add('nav-open');
     closeButton.focus();
-    backdrop.style.pointerEvents = 'auto';
+    backdrop.style.display = 'block';
   };
 
   const toggleMenu = () => {
