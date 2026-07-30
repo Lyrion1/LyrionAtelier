@@ -1877,3 +1877,135 @@ body[class*="success"] {
   background: rgba(91, 75, 122, 0.05) !important;
   border-left: 3px solid var(--plum) !important;
 }
+
+/* =====================================================
+   DESKTOP NAV DROPDOWNS (added for new nav structure)
+   ===================================================== */
+@media (min-width: 769px) {
+  .mobile-dropdown {
+    display: block;
+    position: relative;
+  }
+
+  .mobile-dropdown .dropdown-toggle {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .mobile-dropdown .dropdown-toggle:hover,
+  .mobile-dropdown .dropdown-toggle:focus {
+    color: #d4af37;
+    outline: none;
+  }
+
+  .mobile-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 220px;
+    background: rgba(10, 8, 32, 0.98);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 10px;
+    padding: 8px 0;
+    z-index: 1000;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .mobile-dropdown:hover .dropdown-content,
+  .mobile-dropdown .dropdown-content.active {
+    display: block;
+  }
+
+  .mobile-dropdown .dropdown-content a {
+    display: block;
+    padding: 10px 18px;
+    color: rgba(255, 255, 255, 0.88);
+    text-decoration: none;
+    font-size: 0.92rem;
+    border-bottom: none;
+    transition: color 0.2s ease, background 0.2s ease;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-dropdown .dropdown-content a:hover,
+  .mobile-dropdown .dropdown-content a:focus {
+    color: #d4af37;
+    background: rgba(212, 175, 55, 0.1);
+  }
+}
+
+/* Footer social icon sizing and hover */
+.footer-social {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.footer-social__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.25s ease, background 0.25s ease;
+  text-decoration: none;
+}
+
+.footer-social__link:hover,
+.footer-social__link:focus {
+  color: #d4af37;
+  background: rgba(212, 175, 55, 0.12);
+  outline: none;
+}
+
+.footer-social__icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* =====================================================
+   LYRĪON ESSENTIALS SECTION
+   ===================================================== */
+.essentials-section {
+  background: rgba(248, 240, 230, 0.04);
+}
+
+.essentials-coming-soon {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.coming-soon-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  max-width: 480px;
+}
+
+.coming-soon-icon {
+  font-size: 2rem;
+  color: #d4af37;
+  margin-bottom: 1rem;
+}
+
+.coming-soon-text {
+  color: rgba(244, 239, 230, 0.8);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}

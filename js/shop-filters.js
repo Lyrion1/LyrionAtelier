@@ -92,7 +92,31 @@ export function apply(products, incomingState) {
           ...toList(meta.collection || p?.collection),
           ...toList(p?.metadata?.collection)
         ].map(cachedNormalize);
-        if (!productCollections.includes(collection)) return false;
+        const productCategoriesLower = productCategories.map(cachedNormalize);
+        const productTags = toList(p?.tags || p?.metadata?.tags).map(cachedNormalize);
+        
+        let collectionMatch = productCollections.includes(collection);
+        if (!collectionMatch) {
+          // Map new nav collection slugs to product data
+          if (collection === 'zodiac') {
+            // Match zodiac apparel (products tagged as zodiac or with a zodiac sign)
+            collectionMatch = productCollections.some(c => c.includes('zodiac')) ||
+              Boolean(meta.zodiac && cachedNormalize(meta.zodiac) !== 'none') ||
+              productTags.some(t => ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'].includes(t));
+          } else if (collection === 'accessories') {
+            // Match accessories and home
+            collectionMatch = productCategoriesLower.some(c => c.includes('accessor')) ||
+              productTags.includes('accessories') || productTags.includes('home');
+          } else if (collection === 'mystery') {
+            // Match mystery boxes and curated gifts
+            collectionMatch = productTags.some(t => t.includes('mystery') || t.includes('curated') || t.includes('gift-box') || t.includes('bundle'));
+          } else if (collection === 'essentials') {
+            // Match essentials collection (upcoming)
+            collectionMatch = productCollections.some(c => c.includes('essential')) ||
+              productTags.includes('essentials');
+          }
+        }
+        if (!collectionMatch) return false;
       }
       
       // Check size filter
