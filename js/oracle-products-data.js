@@ -9,91 +9,91 @@ const ORACLE_PRODUCTS = {
     id: 'aries-crewneck',
     name: 'Aries Crewneck',
     price: 69.99,
-    image: '/images/products/aries-crewneck/aries-crewneck-front.jpg',
+    image: '/images/products/aries-love-language-hoodie-1.jpg',
     mysticalCopy: 'The pioneer. The warrior. For those who lead the charge.'
   },
   'cancer-hoodie': {
     id: 'cancer-hoodie',
     name: 'Cancer Hoodie',
     price: 84.99,
-    image: '/images/products/cancer-hoodie/cancer-hoodie-front.jpg',
+    image: '/images/products/saturn-return-white-hoodie-1.jpg',
     mysticalCopy: 'The protector of the heart. For deep feelers who create sanctuary.'
   },
   'libra-tee': {
     id: 'libra-tee',
     name: 'Libra Tee',
     price: 49.99,
-    image: '/images/products/libra-tee/libra-tee-front.jpg',
+    image: '/images/products/libra-scale-tote-1.jpg',
     mysticalCopy: 'The diplomat. The artist. For souls seeking harmony.'
   },
   'capricorn-crewneck': {
     id: 'capricorn-crewneck',
     name: 'Capricorn Crewneck',
     price: 69.99,
-    image: '/images/products/capricorn-crewneck/capricorn-crewneck-front.jpg',
+    image: '/images/capricorn-verdant-sweatshirt-girl-front.jpg',
     mysticalCopy: 'The architect of empires. For those climbing invisible mountains.'
   },
   'logo-hoodie-black': {
     id: 'logo-hoodie-black',
     name: 'Premium Black Hoodie',
     price: 84.99,
-    image: '/images/products/logo-hoodie-black/logo-hoodie-black-front.jpg',
+    image: '/images/products/saturn-return-white-hoodie-2.jpg',
     mysticalCopy: 'The Tree of Life roots you while reaching skyward.'
   },
   'oversized-black-tee': {
     id: 'oversized-black-tee',
     name: 'Oversized Black Tee',
     price: 54,
-    image: '/images/products/logo-tee-black/logo-tee-black-front.jpg',
+    image: '/images/products/leo-love-language-tee-1.jpg',
     mysticalCopy: 'Sacred symbols worn close to the heart. Everyday alchemy.'
   },
   'corduroy-cap-tan': {
     id: 'corduroy-cap-tan',
     name: 'Corduroy Cap',
     price: 39,
-    image: '/images/products/logo-cap-tan/logo-cap-tan-front.jpg',
+    image: '/images/lyrion-logo.png',
     mysticalCopy: 'Crown your consciousness. For fire signs and those meant to be seen.'
   },
   'embroidered-beanie-black': {
     id: 'embroidered-beanie-black',
     name: 'Embroidered Beanie',
     price: 34,
-    image: '/images/products/logo-beanie-black/logo-beanie-black-front.jpg',
+    image: '/images/logo.png',
     mysticalCopy: 'For deep thinkers and winter mystics. Protection for the crown chakra.'
   },
   'organic-tote-black': {
     id: 'organic-tote-black',
     name: 'Organic Tote',
     price: 34,
-    image: '/images/products/organic-tote-black/organic-tote-black-front.jpg',
+    image: '/images/products/libra-scale-tote-2.jpg',
     mysticalCopy: 'Sacred objects deserve sacred vessels. For the everyday mystic.'
   },
   'aromatherapy-candle': {
     id: 'aromatherapy-candle',
     name: 'Aromatherapy Candle',
     price: 38,
-    image: '/images/products/aromatherapy-candle/candle-white-front.jpg',
+    image: '/images/products/Cosmic Curiosity Box.jpg',
     mysticalCopy: 'Light transforms darkness. For souls in deep transition.'
   },
   'aries-youth-tee-black': {
     id: 'aries-youth-tee-black',
     name: 'Aries Youth Tee',
     price: 29,
-    image: '/images/products/aries-youth-tee/aries-youth-black-front.jpg',
+    image: '/images/youth-aries-fire-tee-boy.jpg.png',
     mysticalCopy: 'Little warriors. Bold hearts. For fearless young fire signs.'
   },
   'leo-youth-tee-black': {
     id: 'leo-youth-tee-black',
     name: 'Leo Youth Tee',
     price: 29,
-    image: '/images/products/leo-youth-tee/leo-youth-black-front.jpg',
+    image: '/images/products/leo-love-language-tee-3.jpg',
     mysticalCopy: 'Born to shine. For young lions who already know they\'re royalty.'
   },
   'aquarius-youth-tee-white': {
     id: 'aquarius-youth-tee-white',
     name: 'Aquarius Youth Tee',
     price: 29,
-    image: '/images/products/aquarius-youth-tee/aquarius-youth-white-front.jpg',
+    image: '/images/products/pisces-tote-lifestyle-1.jpg',
     mysticalCopy: 'The future belongs to the weird ones. For young visionaries.'
   }
 };
