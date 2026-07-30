@@ -21,9 +21,8 @@
     const price = button.dataset.price;
     const productType = button.dataset.productType || 'oracle_reading';
     const readingId = button.dataset.readingId || null;
-    const certificateTier = button.dataset.certificateTier || null;
-    const productId = button.dataset.productId || readingId || certificateTier || null;
-    const successUrl = `${window.location.origin}/success`;
+    const productId = button.dataset.productId || readingId || null;
+    const normalizedId = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
     const originalText = button.textContent;
     button.disabled = true;
@@ -35,8 +34,8 @@
       }
 
       const queued = window.queueCheckoutItem({
-        id: productId || name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-        slug: productId || readingId || certificateTier || null,
+        id: productId || normalizedId,
+        slug: productId || readingId || normalizedId,
         name,
         price: Number(price),
         size: 'Standard',
