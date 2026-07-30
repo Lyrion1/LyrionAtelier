@@ -24,8 +24,9 @@
     <link rel="stylesheet" href="/assets/product-selector.css">
     <link rel="stylesheet" href="/css/button-fixes.css?v=2">
      <link rel="stylesheet" href="/css/polish.css">
+     <link rel="stylesheet" href="/css/product-detail-page.css">
 </head>
-<body>
+<body data-page="product">
 <header class="site-header" data-nav-version="nav-v4">
  <nav class="main-nav" aria-label="Main navigation">
  <a href="/" class="logo-link">
@@ -73,7 +74,7 @@
   <a class="skip-to-content" href="#main-content">Skip to main content</a>
 <main id="main-content" class="section">
     <div class="container">
-      <div class="card product-detail-card" id="product-wrapper">
+      <div id="product-wrapper">
         <div class="product-detail">
           <div class="product-detail__media">
             <div class="product-media-frame">
@@ -83,8 +84,8 @@
           <div class="product-detail__info">
             <p class="pill" id="product-pill"></p>
             <h1 id="product-name" class="product-title">Product</h1>
-            <p id="product-description" class="muted product-description"></p>
             <p class="price product-price" id="product-price"></p>
+            <p id="product-description" class="muted product-description"></p>
 
             <div class="form-group" id="color-options"></div>
 
@@ -94,6 +95,12 @@
                 <option value="">Select size</option>
               </select>
             </div>
+
+            <div class="product-actions">
+              <button class="btn btn-primary" type="button" id="add-to-cart-btn">Add to cart</button>
+            </div>
+
+            <p class="fulfilment-note muted">Made to order · ships in 5–10 business days via Printful</p>
 
             <div class="product-meta">
               <div class="product-meta__section">
@@ -108,10 +115,7 @@
 
             <div id="product-selector" data-slug=""></div>
 
-            <div class="product-actions">
-              <button class="btn btn-primary btn-full" type="button" id="add-to-cart-btn">Add to cart</button>
-             <a class="btn btn-outline" href="/shop">Back to shop</a>
-            </div>
+            <a class="btn btn-outline" href="/shop">← Back to shop</a>
           </div>
         </div>
       </div>
