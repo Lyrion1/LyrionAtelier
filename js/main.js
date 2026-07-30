@@ -264,7 +264,7 @@ function setPageType() {
   else if (path === '/product' || path === '/product.html') body.dataset.page = 'product';
   else if (path.startsWith('/oracle/')) body.dataset.page = 'product';
   else if (path === '/oracle' || path === '/compatibility' || path === '/curated-for-gifting') body.dataset.page = 'collection';
-  else if (['/cart', '/checkout', '/success', '/contact-success', '/404'].includes(path)) body.dataset.page = 'utility';
+  else if (['/cart', '/success', '/contact-success', '/404'].includes(path)) body.dataset.page = 'utility';
   else body.dataset.page = 'content';
 }
 

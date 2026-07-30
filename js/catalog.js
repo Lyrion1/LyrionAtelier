@@ -2,7 +2,7 @@ import { ZS } from '../shared/zodiac.mjs';
 
 export async function loadCatalog(){
   const sources = [];
-  // a) Netlify function (preferred)
+  // a) Supabase catalog function
   try {
     const r = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/printful-sync', { method:'GET' });
     if (r.ok) sources.push(await r.json());

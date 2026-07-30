@@ -8,7 +8,7 @@
 - /codex.html
 - /contact.html
 - /cart.html
-- /checkout.html
+- /cart.html
 - /compatibility/luxury-print.html
 - /compatibility/museum-framed.html
 - /compatibility/twin-flames.html
@@ -24,7 +24,7 @@
 
 ### CRITICAL (Must fix before launch):
 - Mobile navigation hamburger does not open; all nav links (Home/Shop/Oracle/Compatibility/Codex/Contact) remain hidden on tap, and cart icon stays hidden on mobile across pages.
-- /checkout.html returns 404 (missing checkout page).
+- Embedded checkout now lives on /cart.html.
 - Multiple product detail pages linked from homepage and shop grid return 404 (e.g., /shop/leo-zodiac-hoodie, /shop/youth-aries-heavy-blend-hoodie, /shop/gemini-starlight-tee). Only Taurus product pages load; most other apparel pages lack product detail HTML.
 
 ### HIGH PRIORITY (Should fix before launch):

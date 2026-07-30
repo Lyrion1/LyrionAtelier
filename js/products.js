@@ -1885,7 +1885,7 @@ function addOracleReadingToCart(readingKey) {
     return;
   }
   addToCart(product.id, 1, 'Standard', product);
-  window.location.href = '/checkout';
+  window.location.href = '/cart';
 }
 
 /**

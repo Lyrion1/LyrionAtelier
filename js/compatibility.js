@@ -1,4 +1,3 @@
-console.log('Compatibility page script loaded');
 const SUPPORT_EMAIL = 'admin@lyrionatelier.com';
 const reportCompatibility = (message, type = 'error') => {
   const status = document.querySelector('.form-status');
@@ -32,8 +31,6 @@ function formatDateInput(inputId) {
 
 // Buy Compatibility Certificate
 async function buyCompatibilityCertificate(productName, price, evt) {
-  console.log('Buy button clicked:', productName, price);
-
   const button = (evt && evt.currentTarget instanceof HTMLButtonElement) ? evt.currentTarget : null;
   const priceValue = parseFloat(price);
   const originalText = button ? button.textContent : null;
@@ -44,39 +41,25 @@ async function buyCompatibilityCertificate(productName, price, evt) {
   }
 
   try {
-    if (typeof window.initiateCheckout === 'function') {
-      await window.initiateCheckout({
-        name: productName,
-        price: priceValue,
-        type: 'compatibility_certificate'
-      });
-    } else {
-      console.error('initiateCheckout function not found');
-
-      const response = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/create-checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          productName: productName,
-          productPrice: priceValue,
-          productType: 'compatibility_certificate'
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error('Checkout failed');
-      }
-
-      const data = await response.json();
-
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error('No checkout URL received');
-      }
+    if (typeof window.queueCheckoutItem !== 'function') {
+      throw new Error('Cart unavailable');
     }
+
+    const queued = window.queueCheckoutItem({
+      id: productName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      slug: productName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      name: productName,
+      price: priceValue,
+      size: 'Standard',
+      quantity: 1,
+      category: 'compatibility_certificate',
+      image: null
+    });
+
+    if (!queued?.ok) {
+      throw new Error('Unable to queue cart item');
+    }
+    window.location.href = '/cart';
   } catch (error) {
     console.error('Checkout error:', error);
     reportCompatibility('Unable to start checkout. Please try again or contact ' + SUPPORT_EMAIL);
@@ -209,16 +192,11 @@ window.generatePreview = generatePreview;
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded, initializing compatibility page');
-
   formatDateInput('date1');
   formatDateInput('date2');
 
   const generateBtn = document.querySelector('.generate-btn');
   if (generateBtn) {
-    console.log('Generate button found, attaching listener');
     generateBtn.onclick = generatePreview;
-  } else {
-    console.error('Generate button not found');
   }
 });

@@ -292,7 +292,6 @@ function renderProduct(product) {
   buy = document.createElement('button');
   buy.id = 'buy-now-btn';
   buy.className = 'btn btn-primary';
-  const buyUrl = pickBuyUrl(product);
   buy.textContent = 'Buy Now';
   buy.type = 'button';
   const initialSize = state.selectedSize || primarySize;
@@ -309,47 +308,25 @@ function renderProduct(product) {
     const priceValue = priceForSize(state.selectedSize);
     const priceCents = toCents(priceValue ?? basePrice);
     if (!Number.isFinite(priceCents)) return;
-    const quantity = 1;
-    const payload = {
-      title: product.title || product.name || 'Product',
+    const cartItem = {
+      id: product.id || product.slug || variantId,
       slug: product.slug || slugify(product.title || product.name || ''),
-      sku: variant.sku || variantId,
-      pf_variant_id: variantId,
-      store_variant_id: storeVariantId || null,
-      size: state.selectedSize || variant?.size || null,
-      quantity,
-      qty: quantity, // legacy alias for handlers expecting { sku, qty }
-      price: priceCents,
-      image: imageSrc
+      name: product.title || product.name || 'Product',
+      price: priceCents / 100,
+      size: state.selectedSize || variant?.size || 'Default',
+      quantity: 1,
+      image: imageSrc,
+      category: product.category || 'merchandise',
+      printfulVariantId: variantId,
+      variantId: storeVariantId || null
     };
-    try {
-      document.dispatchEvent(new CustomEvent('cart:checkout', { detail: { items: [payload] } }));
-    } catch (_) {}
-    if (typeof window.initiateCheckout === 'function') {
-      await window.initiateCheckout({
-        name: payload.title,
-        price: priceCents ? priceCents / 100 : basePrice,
-        type: 'merchandise',
-        variantId,
-        quantity
-      });
-    } else {
-      try {
-        const res = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/create-checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ origin: window.location.origin, items: [payload] })
-        });
-        const data = await res.json();
-        if (data?.url) {
-          window.location.href = data.url;
-          return;
-        }
-      } catch (_) {}
-      if (buyUrl) {
-        window.open(buyUrl, '_blank', 'noopener,noreferrer');
-      }
+    if (typeof window.queueCheckoutItem !== 'function') {
+      console.error('[shop-product] queueCheckoutItem is unavailable');
+      return;
     }
+    const result = window.queueCheckoutItem(cartItem);
+    if (!result?.ok) return;
+    window.location.href = '/cart';
   });
   const back = document.createElement('a');
   back.href = '/shop';

@@ -21,32 +21,33 @@
     const price = button.dataset.price;
     const productType = button.dataset.productType || 'oracle_reading';
     const readingId = button.dataset.readingId || null;
-    const certificateTier = button.dataset.certificateTier || null;
-    const productId = button.dataset.productId || readingId || certificateTier || null;
-    const successUrl = `${window.location.origin}/success`;
+    const productId = button.dataset.productId || readingId || null;
+    const normalizedId = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
     const originalText = button.textContent;
     button.disabled = true;
     button.textContent = 'Processing...';
 
     try {
-      if (typeof window.initiateCheckout !== 'function') {
-        throw new Error('Checkout unavailable');
+      if (typeof window.queueCheckoutItem !== 'function') {
+        throw new Error('Cart unavailable');
       }
 
-      const ok = await window.initiateCheckout({
+      const queued = window.queueCheckoutItem({
+        id: productId || normalizedId,
+        slug: productId || readingId || normalizedId,
         name,
-        price,
-        type: productType,
-        readingId,
-        certificateTier,
-        productId,
-        successUrl
+        price: Number(price),
+        size: 'Standard',
+        quantity: 1,
+        category: productType,
+        image: null
       });
 
-      if (!ok) {
-        throw new Error('Checkout failed to start');
+      if (!queued?.ok) {
+        throw new Error('Unable to queue cart item');
       }
+      window.location.href = '/cart';
     } catch (error) {
       console.error('[service-checkout] unable to start purchase', error);
       reportError('Unable to start checkout. Please try again or contact ' + SUPPORT_EMAIL);

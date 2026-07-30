@@ -1,5 +1,3 @@
-console.log('Oracle checkout script loaded');
-
 const reportOracleCheckout = (message) => {
   if (typeof window.showToast === 'function') {
     window.showToast(message, 'error');
@@ -20,16 +18,6 @@ async function bookOracleReading(event = null) {
     button.disabled = true;
   }
 
-  if (typeof window.initiateCheckout !== 'function') {
-    console.error('Checkout handler missing');
-    reportOracleCheckout('Payment system is temporarily unavailable. Please refresh and try again or contact admin@lyrionatelier.com.');
-    if (button && originalText) {
-      button.textContent = originalText;
-      button.disabled = false;
-    }
-    return;
-  }
-
   if (!readingName || !readingPrice) {
     console.error('Missing reading data', { readingName, readingPrice });
     reportOracleCheckout('Unable to start checkout. Please refresh and try again or contact admin@lyrionatelier.com.');
@@ -40,20 +28,30 @@ async function bookOracleReading(event = null) {
     return;
   }
 
-  const success = await window.initiateCheckout({
+  if (typeof window.queueCheckoutItem !== 'function') {
+    reportOracleCheckout('Payment system is temporarily unavailable. Please refresh and try again or contact admin@lyrionatelier.com.');
+    if (button && originalText) {
+      button.textContent = originalText;
+      button.disabled = false;
+    }
+    return;
+  }
+
+  const queued = window.queueCheckoutItem({
+    id: readingId || readingName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    slug: readingId || null,
     name: readingName,
-    price: readingPrice,
-    type: 'oracle_reading',
-    readingId,
-    productId: readingId
+    price: Number(readingPrice),
+    size: 'Standard',
+    quantity: 1,
+    category: 'oracle_reading',
+    image: null
   });
 
-  if (!success && button && originalText) {
+  if (!queued?.ok && button && originalText) {
     button.textContent = originalText;
     button.disabled = false;
+    return;
   }
+  window.location.href = '/cart';
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Oracle checkout ready');
-});
