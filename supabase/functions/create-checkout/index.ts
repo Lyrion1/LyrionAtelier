@@ -18,7 +18,13 @@ function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), { status, headers: corsHeaders });
 }
 
-interface BasketItem { id: string; qty: number; size?: string; }
+interface BasketItem {
+  id: string;
+  qty?: number;
+  quantity?: number;
+  size?: string;
+}
+
 interface Product {
   id: string;
   name: string;
@@ -52,6 +58,11 @@ async function loadProducts(): Promise<Product[]> {
   throw new Error(`Could not load products.json. Tried: ${tried.join(' | ')}`);
 }
 
+function qtyOf(item: BasketItem): number {
+  const n = Number(item.qty ?? item.quantity ?? 1);
+  return Number.isFinite(n) && n > 0 ? Math.floor(n) : 1;
+}
+
 function parseDiscountCode(code: string): { type: 'percent' | 'fixed' | null; value: number } {
   if (!code) return { type: null, value: 0 };
   const pctMatch = code.match(/[-_](\d+)$/);
@@ -74,8 +85,15 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
-    const body = await req.json() as { basket: BasketItem[]; discountCode?: string };
-    const { basket, discountCode } = body;
+    const body = await req.json() as {
+      basket?: BasketItem[];
+      items?: BasketItem[];
+      cart?: BasketItem[];
+      discountCode?: string;
+    };
+
+    const basket = body.basket ?? body.items ?? body.cart;
+    const discountCode = body.discountCode;
 
     if (!Array.isArray(basket) || basket.length === 0) {
       return json({ error: 'Empty basket' }, 400);
@@ -93,16 +111,18 @@ Deno.serve(async (req: Request) => {
 
       const productName = item.size ? `${product.name} (${item.size})` : product.name;
 
+      const images = product.image
+        ? [product.image.startsWith('/') ? `${SITE_URL}${product.image}` : product.image]
+        : [];
+
       lineItems.push({
-        quantity: item.qty,
+        quantity: qtyOf(item),
         price_data: {
           currency: 'gbp',
           unit_amount: product.priceGBP,
           product_data: {
             name: productName,
-            images: product.image?.startsWith('/')
-              ? [`${SITE_URL}${product.image}`]
-              : (product.image ? [product.image] : []),
+            ...(images.length ? { images } : {}),
           },
         },
       });
@@ -113,12 +133,17 @@ Deno.serve(async (req: Request) => {
       const { type, value } = parseDiscountCode(discountCode);
       if (type === 'percent' && value > 0) {
         const coupon = await stripe.coupons.create({
-          percent_off: value, duration: 'once', name: discountCode,
+          percent_off: value,
+          duration: 'once',
+          name: discountCode,
         });
         discounts = [{ coupon: coupon.id }];
       } else if (type === 'fixed' && value > 0) {
         const coupon = await stripe.coupons.create({
-          amount_off: value, currency: 'gbp', duration: 'once', name: discountCode,
+          amount_off: value,
+          currency: 'gbp',
+          duration: 'once',
+          name: discountCode,
         });
         discounts = [{ coupon: coupon.id }];
       }
@@ -127,7 +152,7 @@ Deno.serve(async (req: Request) => {
     const basketMeta = JSON.stringify(
       basket.map((item) => ({
         id: item.id,
-        qty: item.qty,
+        qty: qtyOf(item),
         size: item.size ?? null,
         printfulVariantId: productMap.get(item.id)?.printfulVariantId ?? null,
       })),
