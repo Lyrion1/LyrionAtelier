@@ -320,15 +320,13 @@ function renderProduct(product) {
       printfulVariantId: variantId,
       variantId: storeVariantId || null
     };
-    try {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const nextCart = Array.isArray(cart) ? cart : [];
-      nextCart.push(cartItem);
-      localStorage.setItem('cart', JSON.stringify(nextCart));
-      window.location.href = '/cart';
-    } catch (error) {
-      console.error('[shop-product] unable to store cart item', error);
+    if (typeof window.queueCheckoutItem !== 'function') {
+      console.error('[shop-product] queueCheckoutItem is unavailable');
+      return;
     }
+    const result = window.queueCheckoutItem(cartItem);
+    if (!result?.ok) return;
+    window.location.href = '/cart';
   });
   const back = document.createElement('a');
   back.href = '/shop';

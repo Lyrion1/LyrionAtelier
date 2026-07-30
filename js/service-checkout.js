@@ -1,6 +1,5 @@
 (() => {
   const SUPPORT_EMAIL = 'admin@lyrionatelier.com';
-  const CART_KEY = 'cart';
   const reportError = (message) => {
     if (typeof window.showToast === 'function') {
       window.showToast(message, 'error');
@@ -10,19 +9,6 @@
     if (status) {
       status.textContent = message;
       status.style.display = 'block';
-    }
-  };
-
-  const queueItem = (item) => {
-    try {
-      const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-      const nextCart = Array.isArray(cart) ? cart : [];
-      nextCart.push(item);
-      localStorage.setItem(CART_KEY, JSON.stringify(nextCart));
-      return true;
-    } catch (error) {
-      console.error('[service-checkout] unable to store cart item', error);
-      return false;
     }
   };
 
@@ -44,7 +30,11 @@
     button.textContent = 'Processing...';
 
     try {
-      const queued = queueItem({
+      if (typeof window.queueCheckoutItem !== 'function') {
+        throw new Error('Cart unavailable');
+      }
+
+      const queued = window.queueCheckoutItem({
         id: productId || name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
         slug: productId || readingId || certificateTier || null,
         name,
@@ -55,8 +45,8 @@
         image: null
       });
 
-      if (!queued) {
-        throw new Error('Cart unavailable');
+      if (!queued?.ok) {
+        throw new Error('Unable to queue cart item');
       }
       window.location.href = '/cart';
     } catch (error) {

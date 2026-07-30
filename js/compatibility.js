@@ -1,5 +1,4 @@
 const SUPPORT_EMAIL = 'admin@lyrionatelier.com';
-const CART_KEY = 'cart';
 const reportCompatibility = (message, type = 'error') => {
   const status = document.querySelector('.form-status');
   if (status) {
@@ -8,19 +7,6 @@ const reportCompatibility = (message, type = 'error') => {
   }
   if (typeof window.showToast === 'function') {
     window.showToast(message, type);
-  }
-};
-
-const queueCompatibilityItem = (item) => {
-  try {
-    const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-    const nextCart = Array.isArray(cart) ? cart : [];
-    nextCart.push(item);
-    localStorage.setItem(CART_KEY, JSON.stringify(nextCart));
-    return true;
-  } catch (error) {
-    console.error('[compatibility] unable to store cart item', error);
-    return false;
   }
 };
 
@@ -55,7 +41,11 @@ async function buyCompatibilityCertificate(productName, price, evt) {
   }
 
   try {
-    const queued = queueCompatibilityItem({
+    if (typeof window.queueCheckoutItem !== 'function') {
+      throw new Error('Cart unavailable');
+    }
+
+    const queued = window.queueCheckoutItem({
       id: productName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
       slug: productName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
       name: productName,
@@ -66,8 +56,8 @@ async function buyCompatibilityCertificate(productName, price, evt) {
       image: null
     });
 
-    if (!queued) {
-      throw new Error('Cart unavailable');
+    if (!queued?.ok) {
+      throw new Error('Unable to queue cart item');
     }
     window.location.href = '/cart';
   } catch (error) {
