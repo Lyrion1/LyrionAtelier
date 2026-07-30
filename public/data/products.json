@@ -1,0 +1,691 @@
+[
+  {
+    "id": "aries-love-language-hoodie",
+    "name": "Aries Love Language Hoodie",
+    "priceGBP": 5060,
+    "image": "/images/products/aries-love-language-hoodie-1.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL"
+    ],
+    "printfulVariantId": [
+      "6973fd61a6ab49",
+      "6973fd61a6abd4",
+      "6973fd61a6ac52",
+      "6973fd61a6acc4",
+      "6973fd61a6ad32",
+      "6973fd61a6ada2",
+      "6973fd61a6ae15",
+      "6973fd61a6ae89"
+    ]
+  },
+  {
+    "id": "youth-aries-heavy-blend-hoodie",
+    "name": "Youth Aries Heavy Blend Hoodie",
+    "priceGBP": 3395,
+    "image": "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-lifestyle.jpg",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "printfulVariantId": [
+      "694ed9706ecda1",
+      "694ed9706ece08",
+      "694ed9706ece51",
+      "694ed9706ecea1",
+      "694ed9706ecee2"
+    ]
+  },
+  {
+    "id": "capricorn-verdant-sweatshirt",
+    "name": "Capricorn Verdant Relief Sweatshirt",
+    "priceGBP": 3790,
+    "image": "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-boy-sitting.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL"
+    ],
+    "printfulVariantId": [
+      "694c1247f214e9",
+      "694c1247f21558",
+      "694c1247f215a7",
+      "694c1247f215f5",
+      "694c1247f21649",
+      "694c1247f21691",
+      "694c1247f216d4",
+      "694c1247f21712"
+    ]
+  },
+  {
+    "id": "cosmic-crewneck-pisces",
+    "name": "Cosmic Crewneck - Pisces",
+    "priceGBP": 4425,
+    "image": "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-ghost.jpg",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "printfulVariantId": [
+      "694b39d6493ff5",
+      "694b39d6494068",
+      "694b39d64940c4",
+      "694b39d6494116",
+      "694b39d6494168",
+      "694b39d64941a6"
+    ]
+  },
+  {
+    "id": "gemini-starlight-tee",
+    "name": "Gemini Starlight Tee",
+    "priceGBP": 3395,
+    "image": "/gemini-starlight-tee/gemini-starlight-tee-ghost.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "printfulVariantId": [
+      "694d9579acfff1",
+      "694d9579ad00a5",
+      "694d9579ad0139",
+      "694d9579ad01d1",
+      "694d9579ad0252",
+      "694d9579ad02e2",
+      "694d9579ad0373"
+    ]
+  },
+  {
+    "id": "fisherman-beanie",
+    "name": "Lyr\u012bon Fisherman Beanie",
+    "priceGBP": 2370,
+    "image": "/fisherman-beanie/fisherman-beanie-front.jpg",
+    "sizes": [
+      "One Size"
+    ],
+    "printfulVariantId": "6948ab6e63d308"
+  },
+  {
+    "id": "pisces-hoodie",
+    "name": "Pisces Hoodie",
+    "priceGBP": 4345,
+    "image": "/images/pisces-hoodie-new-ghost.png",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL"
+    ],
+    "printfulVariantId": [
+      "694da2910d2079",
+      "694da2910d20e9",
+      "694da2910d2134",
+      "694da2910d2187",
+      "694da2910d21d6",
+      "694da2910d2222",
+      "694da2910d2273",
+      "694da2910d22c1"
+    ]
+  },
+  {
+    "id": "lyrion-pique-polo",
+    "name": "Lyr\u012bon Pique Polo Shirt",
+    "priceGBP": 3555,
+    "image": "/lyrion-pique-polo/lyrion-pique-polo-girl-front.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "printfulVariantId": [
+      "694dba199bfc65",
+      "694dba199bfcc2",
+      "694dba199bfd21",
+      "694dba199bfd71",
+      "694dba199bfdb3",
+      "694dba199bfe02",
+      "694dba199bfe43",
+      "694dba199bfe93",
+      "694dba199bfed9",
+      "694dba199bff26",
+      "694dba199bff64",
+      "694dba199bffb3",
+      "694dba199bfff2",
+      "694dba199c0035"
+    ]
+  },
+  {
+    "id": "corduroy-cap-sun-crest",
+    "name": "Lyr\u012bon Corduroy Cap",
+    "priceGBP": 3555,
+    "image": "/corduroy-cap-sun-crest/corduroy-cap-sun-crest-front.jpg",
+    "sizes": [
+      "One Size"
+    ],
+    "printfulVariantId": "6948a81b91a8b1"
+  },
+  {
+    "id": "aries-oversized-heavyweight-sweatshirt",
+    "name": "Aries Oversized Heavyweight Sweatshirt",
+    "priceGBP": 4265,
+    "image": "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-01-hero.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ],
+    "printfulVariantId": [
+      "694f2f2cb54069",
+      "694f2f2cb540d9",
+      "694f2f2cb54126",
+      "694f2f2cb54164",
+      "694f2f2cb541b5",
+      "694f2f2cb54208"
+    ]
+  },
+  {
+    "id": "lyrion-sun-crest-socks",
+    "name": "Lyr\u012bon Sun Crest Socks",
+    "priceGBP": 2685,
+    "image": "/lyrion-sun-crest-socks/lyrion-socks-pair.jpg",
+    "sizes": [
+      "S/M",
+      "L/XL"
+    ],
+    "printfulVariantId": [
+      "694dd3418487b8",
+      "694dd341848814"
+    ]
+  },
+  {
+    "id": "pisces-hoodie-black",
+    "name": "Pisces Oversized Black Hoodie",
+    "priceGBP": 5135,
+    "image": "/images/products/pisces-hoodie/pisces-hoodie-black-front.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ],
+    "printfulVariantId": [
+      "694ab7d2e5aae1",
+      "694ab7d2e5ab58",
+      "694ab7d2e5abb8",
+      "694ab7d2e5abf3",
+      "694ab7d2e5ac45",
+      "694ab7d2e5ac97"
+    ]
+  },
+  {
+    "id": "pisces-intuition-hoodie",
+    "name": "Pisces Intuition Hoodie",
+    "priceGBP": 4425,
+    "image": "/pisces-intuition-hoodie/pisces-intuition-hoodie-front.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL"
+    ],
+    "printfulVariantId": [
+      "694d5eae116cb7",
+      "694d5eae116d62",
+      "694d5eae116de7",
+      "694d5eae116e72",
+      "694d5eae116f01",
+      "694d5eae116f86",
+      "694d5eae117019",
+      "694d5eae117098"
+    ]
+  },
+  {
+    "id": "aries-denim-bucket-hat",
+    "name": "Aries Denim Bucket Hat",
+    "priceGBP": 2805,
+    "image": "/aries-denim-bucket-hat/aries-bucket-hat-girl-headshot.jpg",
+    "sizes": [
+      "One Size"
+    ],
+    "printfulVariantId": "694f1219bafde5"
+  },
+  {
+    "id": "taurus-pyjama-top",
+    "name": "Taurus Constellation Pyjama Top",
+    "priceGBP": 3555,
+    "image": "/shop-images/taurus-pyjamas/taurus-pyjamas-back.jpg",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "printfulVariantId": [
+      "6951f0e5ede708",
+      "6951f0e5ede7b3",
+      "6951f0e5ede838",
+      "6951f0e5ede8b2",
+      "6951f0e5ede948",
+      "6951f0e5ede9c2"
+    ]
+  },
+  {
+    "id": "taurus-celestial-slides",
+    "name": "Taurus Celestial Slides",
+    "priceGBP": 4345,
+    "image": "/images/products/taurus-slides-lifestyle.jpg",
+    "sizes": [
+      "6.5",
+      "7",
+      "8",
+      "8.5",
+      "9.5",
+      "10",
+      "11",
+      "11.5"
+    ],
+    "printfulVariantId": [
+      "695dd0eb3db803",
+      "695dd0eb3db895",
+      "695dd0eb3db918",
+      "695dd0eb3db991",
+      "695dd0eb3dba01",
+      "695dd0eb3dba81",
+      "695dd0eb3dbb19",
+      "695dd0eb3dbb94"
+    ]
+  },
+  {
+    "id": "pisces-luxury-mousepad",
+    "name": "Pisces Luxury Mouse Pad",
+    "priceGBP": 2920,
+    "image": "/images/products/pisces-mousepad-lifestyle-1.jpg",
+    "sizes": [
+      "One Size"
+    ],
+    "printfulVariantId": "69600a547890d5"
+  },
+  {
+    "id": "pisces-cropped-windbreaker",
+    "name": "Pisces Cropped Windbreaker",
+    "priceGBP": 6870,
+    "image": "/images/products/pisces-windbreaker-lifestyle-1.jpg",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "printfulVariantId": [
+      "6960112a067091",
+      "6960112a0670f3",
+      "6960112a067149",
+      "6960112a067193",
+      "6960112a0671d2",
+      "6960112a067227"
+    ]
+  },
+  {
+    "id": "taurus-luxury-pillow",
+    "name": "Taurus Luxury Throw Pillow",
+    "priceGBP": 2685,
+    "image": "/images/products/taurus-pillow-lifestyle-1.jpg",
+    "sizes": [
+      "20\u2033\u00d712\u2033",
+      "18\u2033\u00d718\u2033",
+      "22\u2033\u00d722\u2033"
+    ],
+    "printfulVariantId": [
+      "69601af7eb63e1",
+      "69601af7eb6342",
+      "69601af7eb6461"
+    ]
+  },
+  {
+    "id": "pisces-clear-tote-bag",
+    "name": "Pisces Clear Tote Bag",
+    "priceGBP": 3635,
+    "image": "/images/products/pisces-tote-lifestyle-1.jpg",
+    "sizes": [
+      "One Size"
+    ],
+    "printfulVariantId": "6960171c551b37"
+  },
+  {
+    "id": "taurus-ram-hoodie",
+    "name": "Taurus Ram Head Unisex Hoodie",
+    "priceGBP": 5925,
+    "image": "/images/products/taurus-ram-hoodie-lifestyle-1.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ],
+    "printfulVariantId": [
+      "69652e9a3966c2",
+      "69652e9a396769",
+      "69652e9a3967f1",
+      "69652e9a396882",
+      "69652e9a396905",
+      "69652e9a396987"
+    ]
+  },
+  {
+    "id": "taurus-organic-tee",
+    "name": "Taurus Unisex Organic Ribbed Neck T-Shirt",
+    "priceGBP": 4265,
+    "image": "/images/products/taurus-organic-tee-lifestyle-4.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "printfulVariantId": [
+      "69653de7ef42f3",
+      "69653de7ef4361",
+      "69653de7ef43c4",
+      "69653de7ef4429",
+      "69653de7ef4474"
+    ]
+  },
+  {
+    "id": "gemini-love-language-hoodie",
+    "name": "Gemini Love Language Hoodie",
+    "priceGBP": 6560,
+    "image": "/images/products/gemini-love-language-hoodie-1.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ],
+    "printfulVariantId": [
+      "697bb788231124",
+      "697bb7882311c2",
+      "697bb788231256",
+      "697bb7882312d9",
+      "697bb788231366",
+      "697bb7882313d7"
+    ]
+  },
+  {
+    "id": "mercury-retrograde-hoodie",
+    "name": "Mercury Retrograde Ruined My Love Life Hoodie",
+    "priceGBP": 5255,
+    "image": "/images/products/mercury-retrograde-hoodie-1.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL"
+    ],
+    "printfulVariantId": [
+      "697ba455db1785",
+      "697ba455db17f3",
+      "697ba455db1844",
+      "697ba455db1891",
+      "697ba455db18d2",
+      "697ba455db1926",
+      "697ba455db1975",
+      "697ba455db19b8"
+    ]
+  },
+  {
+    "id": "238",
+    "name": "Single by Cosmic Design Mug",
+    "priceGBP": 1340,
+    "image": "/images/products/single-cosmic-design-mug-1.jpg",
+    "sizes": [
+      "11oz",
+      "15oz"
+    ],
+    "printfulVariantId": [
+      "697ba95a591694",
+      "697ba95a591743"
+    ]
+  },
+  {
+    "id": "239",
+    "name": "My Saturn Return Took My Relationship Hoodie",
+    "priceGBP": 6765,
+    "image": "/images/products/saturn-return-hoodie-1.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "printfulVariantId": [
+      "697bac34ec7015",
+      "697bac34ec70c8",
+      "697bac34ec7153",
+      "697bac34ec71e6",
+      "697bac34ec7265"
+    ]
+  },
+  {
+    "id": "240",
+    "name": "Lovers' Galaxies Premium Polo - His",
+    "priceGBP": 4030,
+    "image": "/images/products/premium-polo-his-1.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL"
+    ],
+    "printfulVariantId": [
+      "697bb1ac69d002",
+      "697bb1ac69d068",
+      "697bb1ac69d0c2",
+      "697bb1ac69d105",
+      "697bb1ac69d142",
+      "697bb1ac69d183",
+      "697bb1ac69d1d2",
+      "697bb1ac69d218"
+    ]
+  },
+  {
+    "id": "241",
+    "name": "Lovers' Galaxies Premium Polo - Hers",
+    "priceGBP": 4030,
+    "image": "/images/products/premium-polo-hers-1.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL"
+    ],
+    "printfulVariantId": [
+      "697bb4f40d65e5",
+      "697bb4f40d6649",
+      "697bb4f40d66a7",
+      "697bb4f40d66f9",
+      "697bb4f40d6744",
+      "697bb4f40d6792",
+      "697bb4f40d67e8",
+      "697bb4f40d6836"
+    ]
+  },
+  {
+    "id": "242",
+    "name": "Gemini Windbreaker - My Love Song is in Gemini",
+    "priceGBP": 4425,
+    "image": "/images/products/gemini-windbreaker-1.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ],
+    "printfulVariantId": [
+      "697bba6106f234",
+      "697bba6106f2d5",
+      "697bba6106f355",
+      "697bba6106f3c6",
+      "697bba6106f433"
+    ]
+  },
+  {
+    "id": "244",
+    "name": "Libra All Over Print Tote Bag",
+    "priceGBP": 3160,
+    "image": "/images/products/libra-scale-tote-1.jpg",
+    "sizes": [
+      "One Size"
+    ],
+    "printfulVariantId": "697c09e3136474"
+  },
+  {
+    "id": "245",
+    "name": "Aries Oversized Weekender Bag",
+    "priceGBP": 3950,
+    "image": "/images/products/aries-weekender-bag-1.jpg",
+    "sizes": [
+      "One Size"
+    ],
+    "printfulVariantId": "697c0a161b4606"
+  },
+  {
+    "id": "246",
+    "name": "Virgo Round Mousepad",
+    "priceGBP": 1975,
+    "image": "/images/products/virgo-mousepad-1.jpg",
+    "sizes": [
+      "One Size"
+    ],
+    "printfulVariantId": "697c0c6089091f6"
+  },
+  {
+    "id": "247",
+    "name": "Virgo All-Over Print Bandana",
+    "priceGBP": 2055,
+    "image": "/images/products/virgo-bandana-1.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "printfulVariantId": [
+      "697c1335c39ee7",
+      "697c1335c39f42",
+      "697c1335c39fa3"
+    ]
+  },
+  {
+    "id": "248",
+    "name": "My Saturn Return Took My Relationship Hoodie - White",
+    "priceGBP": 5135,
+    "image": "/images/products/saturn-return-white-hoodie-1.jpg",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ],
+    "printfulVariantId": [
+      "697c0e9b30b4c3",
+      "697c0e9b30b525",
+      "697c0e9b30b579",
+      "697c0e9b30b5c1",
+      "697c0e9b30b612",
+      "697c0e9b30b656"
+    ]
+  },
+  {
+    "id": "249",
+    "name": "Cosmic Curiosity Box",
+    "priceGBP": 3555,
+    "image": "/images/products/mystery-box-curiosity.png",
+    "sizes": [
+      "One Size"
+    ],
+    "printfulVariantId": "manual-fulfillment"
+  },
+  {
+    "id": "250",
+    "name": "Zodiac Mystery Vault",
+    "priceGBP": 7030,
+    "image": "/images/products/mystery-box-vault.png",
+    "sizes": [
+      "One Size"
+    ],
+    "printfulVariantId": "manual-fulfillment"
+  },
+  {
+    "id": "251",
+    "name": "Lovers' Fate Box",
+    "priceGBP": 11770,
+    "image": "/images/products/mystery-box-lovers.png",
+    "sizes": [
+      "One Size"
+    ],
+    "printfulVariantId": "manual-fulfillment"
+  }
+]
