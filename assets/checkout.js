@@ -39,18 +39,6 @@ async function parseCheckoutError(response) {
   }
 }
 
-function resolveBundlePayload(cart = []) {
-  if (typeof window.evaluateBundleDiscount === 'function') {
-    const result = window.evaluateBundleDiscount(cart);
-    return {
-      id: result?.selectedBundle?.id || null,
-      label: result?.selectedBundle?.label || null,
-      savingsCents: result?.savingsCents || 0
-    };
-  }
-  return { id: null, label: null, savingsCents: 0 };
-}
-
 const checkoutBtn = document.getElementById('checkoutBtn');
 checkoutBtn?.addEventListener('click', async () => {
 const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -60,7 +48,6 @@ const lineItems = window.buildLineItems(); // implement or replace
     setCheckoutError('Your cart is empty.');
     return;
   }
-  const bundle = resolveBundlePayload(cart);
   let res;
   try {
     res = await fetch(SUPABASE_CHECKOUT_URL, {
@@ -68,7 +55,6 @@ const lineItems = window.buildLineItems(); // implement or replace
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         basket: cart,
-        bundle,
         successUrl: window.location.origin + '/success',
         cancelUrl: window.location.origin + '/cart'
       })

@@ -1,5 +1,16 @@
 (() => {
   const SUPPORT_EMAIL = 'admin@lyrionatelier.com';
+  const reportError = (message) => {
+    if (typeof window.showToast === 'function') {
+      window.showToast(message, 'error');
+      return;
+    }
+    const status = document.querySelector('.form-status, #checkout-error');
+    if (status) {
+      status.textContent = message;
+      status.style.display = 'block';
+    }
+  };
 
   async function startPurchase(event) {
     event?.preventDefault?.();
@@ -38,7 +49,7 @@
       }
     } catch (error) {
       console.error('[service-checkout] unable to start purchase', error);
-      alert('Unable to start checkout. Please try again or contact ' + SUPPORT_EMAIL);
+      reportError('Unable to start checkout. Please try again or contact ' + SUPPORT_EMAIL);
       button.disabled = false;
       button.textContent = originalText;
     }

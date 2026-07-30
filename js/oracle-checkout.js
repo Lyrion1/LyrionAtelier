@@ -1,5 +1,11 @@
 console.log('Oracle checkout script loaded');
 
+const reportOracleCheckout = (message) => {
+  if (typeof window.showToast === 'function') {
+    window.showToast(message, 'error');
+  }
+};
+
 async function bookOracleReading(event = null) {
   const evt = event || (typeof window !== 'undefined' ? window.event : null);
   const button = evt?.currentTarget || evt?.target || null;
@@ -16,7 +22,7 @@ async function bookOracleReading(event = null) {
 
   if (typeof window.initiateCheckout !== 'function') {
     console.error('Checkout handler missing');
-    alert('Payment system is temporarily unavailable. Please refresh and try again or contact admin@lyrionatelier.com.');
+    reportOracleCheckout('Payment system is temporarily unavailable. Please refresh and try again or contact admin@lyrionatelier.com.');
     if (button && originalText) {
       button.textContent = originalText;
       button.disabled = false;
@@ -26,7 +32,7 @@ async function bookOracleReading(event = null) {
 
   if (!readingName || !readingPrice) {
     console.error('Missing reading data', { readingName, readingPrice });
-    alert('Unable to start checkout. Please refresh and try again or contact admin@lyrionatelier.com.');
+    reportOracleCheckout('Unable to start checkout. Please refresh and try again or contact admin@lyrionatelier.com.');
     if (button && originalText) {
       button.textContent = originalText;
       button.disabled = false;

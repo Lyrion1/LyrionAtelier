@@ -103,6 +103,7 @@
   ]
 }
 </script>
+  <link rel="stylesheet" href="/css/restoration.css">
 </head>
 <body>
 <header class="site-header" data-nav-version="nav-v4">
@@ -261,65 +262,17 @@
         </div>
         <div class="hero-globes">
           <button class="globe-btn" type="button" onclick="openFreeReading()" aria-label="Start a free personalized reading">
-            <svg class="globe-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs>
-                <radialGradient id="gFR" cx="38%" cy="32%" r="68%">
-                  <stop offset="0%" stop-color="#f4bf93" stop-opacity=".92"/>
-                  <stop offset="56%" stop-color="#b081a5" stop-opacity=".9"/>
-                  <stop offset="100%" stop-color="#8b6b98" stop-opacity=".94"/>
-                </radialGradient>
-                <clipPath id="cFR"><circle cx="50" cy="50" r="44"/></clipPath>
-              </defs>
-              <circle cx="50" cy="50" r="44" fill="url(#gFR)"/>
-              <g clip-path="url(#cFR)" fill="none" stroke="#c9922b" stroke-opacity=".42" stroke-width=".85" stroke-linecap="round">
-                <line x1="29" y1="34" x2="45" y2="43"/>
-                <line x1="45" y1="43" x2="64" y2="38"/>
-                <line x1="37" y1="58" x2="51" y2="51"/>
-                <line x1="51" y1="51" x2="67" y2="61"/>
-                <line x1="32" y1="70" x2="46" y2="62"/>
-              </g>
-              <g clip-path="url(#cFR)" fill="#fff9eb">
-                <circle cx="29" cy="34" r="1.2" opacity=".78"/>
-                <circle cx="45" cy="43" r=".95" opacity=".76"/>
-                <circle cx="64" cy="38" r="1.05" opacity=".72"/>
-                <circle cx="37" cy="58" r="1.1" opacity=".75"/>
-                <circle cx="51" cy="51" r=".9" opacity=".8"/>
-                <circle cx="67" cy="61" r="1.1" opacity=".74"/>
-                <circle cx="32" cy="70" r=".85" opacity=".7"/>
-              </g>
-              <ellipse cx="36" cy="34" rx="12" ry="8" fill="#fff5dc" fill-opacity=".18" transform="rotate(-20 36 34)"/>
-            </svg>
+            <span class="crystal-orb" aria-hidden="true">
+              <span class="crystal-orb__nebula"></span>
+              <span class="crystal-orb__stars"></span>
+            </span>
             <span class="globe-caption">Free Reading</span>
           </button>
           <button class="globe-btn" type="button" onclick="openOracleStudio()" aria-label="Book a personalized reading">
-            <svg class="globe-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs>
-                <radialGradient id="gPR" cx="40%" cy="34%" r="68%">
-                  <stop offset="0%" stop-color="#f6c8a0" stop-opacity=".93"/>
-                  <stop offset="52%" stop-color="#aa7da2" stop-opacity=".9"/>
-                  <stop offset="100%" stop-color="#866796" stop-opacity=".94"/>
-                </radialGradient>
-                <clipPath id="cPR"><circle cx="50" cy="50" r="44"/></clipPath>
-              </defs>
-              <circle cx="50" cy="50" r="44" fill="url(#gPR)"/>
-              <g clip-path="url(#cPR)" fill="none" stroke="#c9922b" stroke-opacity=".42" stroke-width=".85" stroke-linecap="round">
-                <line x1="31" y1="29" x2="46" y2="39"/>
-                <line x1="46" y1="39" x2="63" y2="35"/>
-                <line x1="30" y1="56" x2="47" y2="49"/>
-                <line x1="47" y1="49" x2="66" y2="57"/>
-                <line x1="39" y1="67" x2="55" y2="62"/>
-              </g>
-              <g clip-path="url(#cPR)" fill="#fff9eb">
-                <circle cx="31" cy="29" r="1.05" opacity=".78"/>
-                <circle cx="46" cy="39" r=".95" opacity=".74"/>
-                <circle cx="63" cy="35" r="1" opacity=".72"/>
-                <circle cx="30" cy="56" r="1.12" opacity=".76"/>
-                <circle cx="47" cy="49" r=".9" opacity=".8"/>
-                <circle cx="66" cy="57" r="1.08" opacity=".74"/>
-                <circle cx="39" cy="67" r=".9" opacity=".7"/>
-              </g>
-              <ellipse cx="38" cy="35" rx="12" ry="8" fill="#fff5dc" fill-opacity=".18" transform="rotate(-15 38 35)"/>
-            </svg>
+            <span class="crystal-orb" aria-hidden="true">
+              <span class="crystal-orb__nebula"></span>
+              <span class="crystal-orb__stars"></span>
+            </span>
             <span class="globe-caption">Personalised Readings</span>
           </button>
         </div>
@@ -327,7 +280,7 @@
     </section>
 
     <!-- Feature row: Why Lyrion Atelier (4 items, no card/border) -->
-    <section class="feature-row-section">
+    <section class="feature-row-section" id="about">
       <div class="container">
         <div class="feature-row">
           <div class="feature-item">

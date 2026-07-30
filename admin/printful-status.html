@@ -1,46 +1,27 @@
-name: Normalize Brand Assets
-
-on:
-workflow_dispatch:
-schedule:
-- cron: '15 3 * * *' # daily 03:15 UTC
-
-permissions:
-contents: write
-
-jobs:
-normalize:
-runs-on: ubuntu-latest
-steps:
-- name: Checkout
-uses: actions/checkout@v4
-
-- name: Setup Node
-uses: actions/setup-node@v4
-with:
-node-version: '20'
-cache: 'npm'
-
-- name: Install deps
-run: |
-npm ci || npm i
-npm i --no-save sharp fast-glob
-
-- name: Normalize brand marks
-run: node scripts/normalize-brand.mjs
-
-- name: Build neck label (optional)
-run: node scripts/build-neck-label.mjs
-continue-on-error: true
-
-- name: Commit changes (if any)
-run: |
-git config user.name "lyrion-bot"
-git config user.email "bot@users.noreply.github.com"
-git add -A
-if git diff --cached --quiet; then
-echo "No changes"
-else
-git commit -m "chore(assets): normalize brand assets"
-git push
-fi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Printful Status | Lyrīon Atelier</title>
+  <link rel="stylesheet" href="/styles/design-system.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/restoration.css">
+</head>
+<body>
+  <main id="main-content" class="section">
+    <div class="container">
+      <div class="card" style="padding:1.5rem;">
+        <p class="pill">Admin</p>
+        <h1>Printful status</h1>
+        <p class="muted">This utility page has been restored as a valid HTML document. Use the product sync tools below for the latest fulfillment status.</p>
+        <div class="button-row">
+          <a class="btn btn-primary" href="/admin/printful-products">Open product sync</a>
+          <a class="btn btn-outline" href="/tools/printful">Open Printful assistant</a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="/js/main.js" defer></script>
+</body>
+</html>
