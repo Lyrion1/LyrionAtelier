@@ -1,0 +1,288 @@
+/* ═══════════════════════════════════════════════════════════
+   PRODUCT DETAIL PAGE — LAYOUT REBUILD
+   All rules scoped with [data-page="product"] so they never
+   bleed onto any other page.
+   Breakpoints: ≥1024px = desktop two-column, <1024px = mobile.
+═══════════════════════════════════════════════════════════ */
+
+/* ─── PROMOBAR: slim band below header ─────────────────── */
+[data-page="product"] .promobar {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 0.5rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0.4rem 1rem !important;
+  margin: 0 !important;
+  background: var(--cream) !important;
+  border-radius: 0 !important;
+  border: none !important;
+  border-top: 1px solid var(--gold) !important;
+  border-bottom: 1px solid var(--gold) !important;
+  font-size: 0.8rem !important;
+  color: var(--plum) !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
+
+[data-page="product"] .promobar .lead {
+  font-weight: 600 !important;
+  color: var(--plum) !important;
+  opacity: 1 !important;
+  flex-shrink: 0 !important;
+  font-size: 0.8rem !important;
+}
+
+[data-page="product"] .promobar .pill {
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  font-size: 0.8rem !important;
+  color: var(--plum) !important;
+  white-space: nowrap !important;
+}
+
+[data-page="product"] .promobar .pill::before {
+  content: "·";
+  margin-right: 0.4rem;
+  opacity: 0.55;
+}
+
+/* ─── REMOVE CARD WRAPPER ──────────────────────────────── */
+[data-page="product"] #product-wrapper {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+/* ─── DESKTOP TWO-COLUMN LAYOUT (≥1024px) ─────────────── */
+@media (min-width: 1024px) {
+  [data-page="product"] .product-detail {
+    display: grid !important;
+    grid-template-columns: 58fr 42fr !important;
+    gap: 3rem !important;
+    align-items: start !important;
+    max-width: none !important;
+  }
+
+  [data-page="product"] .product-detail__info {
+    position: sticky !important;
+    top: 2rem !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+/* ─── IMAGE COLUMN ─────────────────────────────────────── */
+[data-page="product"] .product-detail__media {
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  box-shadow: none !important;
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+[data-page="product"] .product-media-frame {
+  width: 100% !important;
+  display: block !important;
+}
+
+[data-page="product"] #product-gallery {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  align-items: stretch !important;
+  width: 100% !important;
+}
+
+/* Main image: 4:5 ratio, object-fit cover, 12px radius */
+[data-page="product"] .product-gallery__main {
+  width: 100% !important;
+  aspect-ratio: 4 / 5 !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  border-radius: 12px !important;
+  display: block !important;
+  max-width: none !important;
+  max-height: none !important;
+  height: auto !important;
+  padding: 0 !important;
+  background: #f0ebe5 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+/* Thumbnail row */
+[data-page="product"] .product-gallery__thumbs {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 0.5rem !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  padding-bottom: 2px !important;
+}
+
+[data-page="product"] .product-gallery__thumbs::-webkit-scrollbar {
+  display: none !important;
+}
+
+[data-page="product"] .product-gallery__thumb {
+  width: 80px !important;
+  min-width: 80px !important;
+  height: 80px !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  border: 2px solid transparent !important;
+  transition: border-color 200ms ease !important;
+  max-width: none !important;
+  max-height: none !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+[data-page="product"] .product-gallery__thumb.active,
+[data-page="product"] .product-gallery__thumb:hover {
+  border-color: var(--plum) !important;
+  outline: none !important;
+}
+
+/* Override old gallery img rules that constrain image size */
+[data-page="product"] #product-gallery > img:not(.product-gallery__main):not(.product-gallery__thumb),
+[data-page="product"] #product-gallery .product-gallery img {
+  /* safety net for any stray images */
+  max-width: none !important;
+  max-height: none !important;
+}
+
+/* Ensure max-height / max-width overrides from design-system.css don't clip the main image */
+[data-page="product"] .product-gallery__main,
+[data-page="product"] #product-gallery img.product-gallery__main {
+  max-height: none !important;
+  max-width: 100% !important;
+}
+
+/* ─── DETAILS / INFO COLUMN ────────────────────────────── */
+[data-page="product"] .product-detail__info {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+  min-width: 0 !important;
+}
+
+/* ─── COLLECTION PILL ──────────────────────────────────── */
+[data-page="product"] #product-pill {
+  margin: 0 !important;
+}
+
+/* ─── PRODUCT NAME ─────────────────────────────────────── */
+[data-page="product"] .product-title,
+[data-page="product"] #product-name {
+  font-size: clamp(2rem, 3vw, 2.75rem) !important;
+  color: var(--plum) !important;
+  letter-spacing: -0.02em !important;
+  margin: 0 !important;
+  line-height: 1.15 !important;
+}
+
+/* ─── PRICE ────────────────────────────────────────────── */
+[data-page="product"] .product-price,
+[data-page="product"] #product-price {
+  font-size: 1.3rem !important;
+  color: var(--plum) !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+}
+
+/* ─── DESCRIPTION ──────────────────────────────────────── */
+[data-page="product"] .product-description,
+[data-page="product"] #product-description {
+  margin: 0 !important;
+  line-height: 1.65 !important;
+  color: var(--muted) !important;
+  font-size: 1rem !important;
+}
+
+/* ─── SIZE SELECTOR / COLOR OPTIONS ───────────────────── */
+[data-page="product"] .size-selector {
+  margin: 0 !important;
+}
+
+[data-page="product"] .input-select {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* ─── ADD TO CART: full width, min 52px ────────────────── */
+[data-page="product"] .product-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+  width: 100% !important;
+}
+
+[data-page="product"] #add-to-cart-btn {
+  width: 100% !important;
+  min-height: 52px !important;
+  padding: 0 1.5rem !important;
+  font-size: 1.05rem !important;
+  max-width: none !important;
+}
+
+/* ─── FULFILMENT NOTE ──────────────────────────────────── */
+[data-page="product"] .fulfilment-note {
+  font-size: 0.875rem !important;
+  color: var(--muted) !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+}
+
+/* ─── FEATURES (materials + care) ─────────────────────── */
+[data-page="product"] .product-meta {
+  margin: 0 !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   MOBILE LAYOUT — below 1024px
+══════════════════════════════════════════════════════════ */
+@media (max-width: 1023px) {
+  [data-page="product"] .product-detail {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  [data-page="product"] .product-detail__media {
+    order: -1 !important;
+    width: 100% !important;
+  }
+
+  [data-page="product"] .product-detail__info {
+    position: static !important;
+  }
+
+  [data-page="product"] #add-to-cart-btn {
+    width: 100% !important;
+    min-height: 52px !important;
+  }
+
+  [data-page="product"] .promobar {
+    white-space: normal !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+
+  [data-page="product"] .promobar .pill {
+    white-space: normal !important;
+  }
+}
