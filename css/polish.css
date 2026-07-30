@@ -168,7 +168,9 @@ p {
 .promo-description,
 .compatibility-promo-section p,
 .trust-badge p,
-footer p {
+footer p,
+[data-page="product"] .product-detail__info p,
+[data-page="product"] #product-description {
   max-width: none;
 }
 

@@ -269,78 +269,88 @@ textarea:focus-visible {
 
 .globe-svg,
 .crystal-orb {
-  width: 200px !important;
-  height: 200px !important;
+  width: 180px !important;
+  height: 180px !important;
 }
 
+/* Crystal-ball orb: deep violet-to-plum sphere with visible stand, like 🔮 */
 .crystal-orb {
   position: relative;
+  display: inline-block;
   border-radius: 50%;
   overflow: visible;
+  /* Deep violet to plum radial gradient, lighter upper-left */
   background:
-    radial-gradient(circle at 32% 28%, rgba(255,255,255,0.92) 0 8%, rgba(255,255,255,0.22) 8% 16%, transparent 17%),
-    radial-gradient(circle at 55% 58%, rgba(233, 160, 168, 0.42), transparent 32%),
-    radial-gradient(circle at 48% 42%, rgba(91, 75, 122, 0.18), transparent 45%),
-    radial-gradient(circle at 50% 50%, #6A4B93 0 22%, #4A326A 42%, #241A31 72%, rgba(253,248,240,0.92) 100%);
+    radial-gradient(circle at 30% 26%, rgba(255,255,255,0.72) 0 5%, rgba(220,200,255,0.18) 6% 14%, transparent 15%),
+    radial-gradient(circle at 62% 62%, rgba(160, 90, 200, 0.30), transparent 30%),
+    radial-gradient(circle at 38% 50%, rgba(130, 80, 180, 0.22), transparent 40%),
+    radial-gradient(circle at 50% 50%, #8A52B8 0%, #5E328C 28%, #3A1A60 58%, #1C0A35 88%);
   box-shadow:
-    inset -18px -24px 36px rgba(255,255,255,0.22),
-    inset 20px 18px 28px rgba(255,255,255,0.14),
-    0 28px 28px rgba(58, 46, 51, 0.12);
+    inset -16px -22px 32px rgba(255,255,255,0.18),
+    inset 18px 16px 26px rgba(255,255,255,0.12),
+    0 6px 18px rgba(20, 8, 40, 0.50);
 }
 
-.crystal-orb::before,
-.crystal-orb::after {
+/* Bright specular highlight at upper-left */
+.crystal-orb::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 50%;
-}
-
-.crystal-orb::before {
   background:
-    radial-gradient(circle at 30% 24%, rgba(255,255,255,0.96) 0 8%, rgba(255,255,255,0.18) 9% 22%, transparent 23%),
-    radial-gradient(circle at 40% 38%, rgba(240, 168, 104, 0.22), transparent 40%);
+    radial-gradient(circle at 28% 22%, rgba(255,255,255,0.96) 0 7%, rgba(255,255,255,0.20) 8% 20%, transparent 21%),
+    radial-gradient(circle at 38% 36%, rgba(210, 180, 255, 0.18), transparent 32%);
   mix-blend-mode: screen;
 }
 
+/* Dark plum crescent base / stand — sits beneath the sphere like the 🔮 emoji */
 .crystal-orb::after {
-  inset: auto 22px -10px 22px;
-  height: 18px;
+  content: "";
+  position: absolute;
+  /* Overlap the bottom edge of the sphere by ~12px so it looks attached */
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56%;
+  height: 30px;
+  background: radial-gradient(ellipse at 50% 38%, #4A2272 0%, #2C1254 55%, #170930 100%);
   border-radius: 50%;
-  background: rgba(58, 46, 51, 0.16);
-  filter: blur(8px);
+  box-shadow: 0 6px 16px rgba(16, 6, 32, 0.55);
 }
 
 .crystal-orb__nebula,
 .crystal-orb__stars {
   position: absolute;
-  inset: 16px;
+  inset: 14px;
   border-radius: 50%;
 }
 
+/* Faint nebula swirl inside the glass */
 .crystal-orb__nebula {
   background:
-    radial-gradient(circle at 34% 62%, rgba(232,160,168,0.28), transparent 26%),
-    radial-gradient(circle at 68% 44%, rgba(143,176,154,0.25), transparent 24%),
-    radial-gradient(circle at 54% 34%, rgba(255,255,255,0.14), transparent 14%);
+    radial-gradient(circle at 36% 60%, rgba(200, 130, 240, 0.22), transparent 28%),
+    radial-gradient(circle at 66% 42%, rgba(130, 160, 220, 0.18), transparent 26%),
+    radial-gradient(circle at 52% 32%, rgba(255,255,255,0.10), transparent 16%);
   filter: blur(2px);
 }
 
+/* Small stars inside the glass */
 .crystal-orb__stars {
   background:
     radial-gradient(circle at 18% 24%, rgba(255,255,255,0.95) 0 1.2px, transparent 1.3px),
-    radial-gradient(circle at 72% 28%, rgba(255,255,255,0.9) 0 1px, transparent 1.1px),
-    radial-gradient(circle at 58% 68%, rgba(255,255,255,0.9) 0 1.1px, transparent 1.2px),
-    radial-gradient(circle at 26% 72%, rgba(255,255,255,0.85) 0 0.95px, transparent 1px),
-    radial-gradient(circle at 78% 58%, rgba(255,255,255,0.88) 0 1px, transparent 1.1px);
+    radial-gradient(circle at 72% 28%, rgba(255,255,255,0.90) 0 1px, transparent 1.1px),
+    radial-gradient(circle at 58% 68%, rgba(255,255,255,0.88) 0 1.1px, transparent 1.2px),
+    radial-gradient(circle at 26% 72%, rgba(255,255,255,0.84) 0 0.95px, transparent 1px),
+    radial-gradient(circle at 80% 56%, rgba(255,255,255,0.86) 0 1px, transparent 1.1px),
+    radial-gradient(circle at 44% 48%, rgba(255,255,255,0.70) 0 0.8px, transparent 0.9px);
 }
 
 .globe-btn:hover .crystal-orb {
   box-shadow:
-    inset -18px -24px 36px rgba(255,255,255,0.22),
-    inset 20px 18px 28px rgba(255,255,255,0.14),
-    0 28px 28px rgba(58, 46, 51, 0.12),
-    0 0 28px rgba(201, 146, 43, 0.25);
+    inset -16px -22px 32px rgba(255,255,255,0.18),
+    inset 18px 16px 26px rgba(255,255,255,0.12),
+    0 6px 18px rgba(20, 8, 40, 0.50),
+    0 0 32px rgba(160, 100, 220, 0.40);
 }
 
 @keyframes restoration-float {
