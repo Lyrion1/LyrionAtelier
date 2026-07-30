@@ -160,9 +160,9 @@ Deno.serve(async (req: Request) => {
 
     const session = await stripe.checkout.sessions.create({
       ui_mode: 'embedded',
+      mode: 'payment',
       payment_method_types: ['card'],
       line_items: lineItems,
-      mode: 'payment',
       return_url: `${SITE_URL}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
       shipping_address_collection: {
         allowed_countries: [
