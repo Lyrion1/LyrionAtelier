@@ -181,7 +181,7 @@ Deno.serve(async (req: Request) => {
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error('[create-checkout]', message);
-    return new Response(JSON.stringify({ error: message }), {
+    return new Response(JSON.stringify({ error: 'Checkout creation failed. Please try again.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
