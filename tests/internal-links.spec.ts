@@ -118,7 +118,7 @@ test('all internal links resolve to a real file or supported dynamic route', asy
     ];
 
     for (const match of matches) {
-      const raw = match[1];
+      const raw = match[1] || match[0]?.slice(1, -1);
       const normalized = normalizeTarget(raw, file);
       if (!normalized) continue;
       const key = `${path.relative(ROOT, file)} -> ${normalized}`;
