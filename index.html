@@ -249,198 +249,223 @@
   </div>
 
   <main id="main-content">
-    <section class="hero">
-      <div class="container hero-content">
-        <div class="hero-copy">
-          <p class="eyebrow">Premium astrology lifestyle</p>
-          <h1>Thoughtful astrology gifts & personalized readings</h1>
-          <p class="hero-subcopy">Astrology-inspired apparel and personalised readings—perfect for birthdays, milestones, and meaningful self-care.</p>
-          <div class="button-row">
-            <a class="btn btn-primary" href="/shop">Shop collection</a>
-            <a class="btn btn-link hero-secondary-link" href="/oracle">Get a reading →</a>
-          </div>
-        </div>
-        <div class="hero-globes">
-          <button class="globe-btn" type="button" onclick="openFreeReading()" aria-label="Start a free personalized reading">
-            <span class="crystal-orb" aria-hidden="true">
-              <span class="crystal-orb__nebula"></span>
-              <span class="crystal-orb__stars"></span>
-            </span>
-            <span class="globe-caption">Free Reading</span>
-          </button>
-          <button class="globe-btn" type="button" onclick="openOracleStudio()" aria-label="Book a personalized reading">
-            <span class="crystal-orb" aria-hidden="true">
-              <span class="crystal-orb__nebula"></span>
-              <span class="crystal-orb__stars"></span>
-            </span>
-            <span class="globe-caption">Personalised Readings</span>
-          </button>
+
+    <!-- Hero — full-bleed lifestyle image, overlay copy + CTAs (Soho hero pattern) -->
+    <section class="soho-hero">
+      <div class="soho-hero__media">
+        <img src="/leo-zodiac-hoodie/leo-zodiac-hoodie-lifestyle.jpg" alt="Model wearing the Leo zodiac hoodie" loading="eager" fetchpriority="high">
+      </div>
+      <div class="soho-hero__content">
+        <p class="soho-eyebrow">Premium Astrology Lifestyle</p>
+        <h1 class="soho-heading">Wear your cosmic identity</h1>
+        <p>Zodiac-inspired apparel and personalized oracle readings, crafted for birthdays, milestones and meaningful self-care.</p>
+        <div class="soho-hero__actions">
+          <a class="soho-btn soho-btn--light" href="/shop">Shop Collection</a>
+          <button class="soho-btn soho-btn--outline" type="button" onclick="openFreeReading()">Free Reading</button>
         </div>
       </div>
     </section>
 
-    <!-- Feature row: Why Lyrion Atelier (4 items, no card/border) -->
-    <section class="feature-row-section" id="about">
-      <div class="container">
-        <div class="feature-row">
-          <div class="feature-item">
-            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 0v18M3 12h18M5.3 5.3C7 7.7 9.4 9.4 12 10.5c2.6-1.1 5-2.8 6.7-5.2M5.3 18.7C7 16.3 9.4 14.6 12 13.5c2.6 1.1 5 2.8 6.7 5.2"/>
-            </svg>
-            <span>Beautifully designed zodiac apparel with constellation details</span>
+    <!-- Marquee band -->
+    <div class="soho-marquee" aria-hidden="true">
+      <div class="soho-marquee__track">
+        <span>Free Shipping Over $50</span>
+        <span>Personalized Oracle Readings</span>
+        <span>Lyrīon Essentials — Coming Soon</span>
+        <span>30-Day Returns</span>
+        <span>Free Shipping Over $50</span>
+        <span>Personalized Oracle Readings</span>
+        <span>Lyrīon Essentials — Coming Soon</span>
+        <span>30-Day Returns</span>
+      </div>
+    </div>
+
+    <!-- Collection split -->
+    <section id="about">
+      <div class="soho-split">
+        <a class="soho-split__panel" href="/shop?collection=zodiac">
+          <img src="/gemini-starlight-tee/gemini-starlight-tee-model-front.jpg" alt="Zodiac apparel collection" loading="lazy">
+          <div class="soho-split__body">
+            <p class="soho-eyebrow">Apparel</p>
+            <h3>Wear Your Sign</h3>
+            <span class="soho-link-arrow">Shop Zodiac Apparel</span>
           </div>
-          <div class="feature-item">
-            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-            </svg>
-            <span>Thoughtfully crafted readings by professional astrologers</span>
+        </a>
+        <a class="soho-split__panel" href="/oracle">
+          <img src="/pisces-hoodie/pisces-hoodie-couple.jpg" alt="Oracle reading experience" loading="lazy">
+          <div class="soho-split__body">
+            <p class="soho-eyebrow">Readings</p>
+            <h3>Know Your Stars</h3>
+            <span class="soho-link-arrow">Explore Readings</span>
           </div>
-          <div class="feature-item">
-            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-            </svg>
-            <span>Premium quality, delivered with care</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Featured / new arrivals grid -->
+    <section class="soho-section">
+      <div class="soho-container">
+        <div class="soho-section-head">
+          <div>
+            <p class="soho-eyebrow">Featured</p>
+            <h2 class="soho-heading">Customer Favorites</h2>
+            <p>A handful of pieces and readings to explore first.</p>
           </div>
-          <div class="feature-item">
-            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
-            </svg>
-            <span>Free shipping over £50 & a seamless shopping experience</span>
+          <a class="soho-link-arrow" href="/shop">View All</a>
+        </div>
+        <div class="soho-product-grid grid product-grid" id="featured-grid" data-featured-grid></div>
+      </div>
+    </section>
+
+    <!-- Video section — variant A: full-bleed cinematic -->
+    <section class="soho-video soho-video--full soho-kenburns">
+      <img src="/cosmic-crewneck-pisces/cosmic-crewneck-pisces-guy-side.jpg" alt="Crafting the Lyrīon collection" loading="lazy">
+      <div class="soho-video__caption">
+        <p class="soho-eyebrow">Behind The Design</p>
+        <h2 class="soho-heading" style="max-width:22ch;font-size:clamp(1.8rem,3.4vw,2.8rem);">Every piece carries its own constellation</h2>
+      </div>
+    </section>
+
+    <!-- Lookbook / shop-the-style -->
+    <section class="soho-section soho-section--alt">
+      <div class="soho-container">
+        <div class="soho-section-head">
+          <div>
+            <p class="soho-eyebrow">Shop The Style</p>
+            <h2 class="soho-heading">The Celestial Edit</h2>
+            <p>Tap the marks to shop pieces from this look.</p>
           </div>
+        </div>
+        <div class="soho-lookbook">
+          <img src="/leo-zodiac-hoodie/leo-zodiac-hoodie-lifestyle.jpg" alt="Celestial Edit lookbook" loading="lazy">
+          <button type="button" class="soho-hotspot" style="top:28%;left:38%;" aria-label="Shop Leo Zodiac Hoodie" data-hotspot="leo-hoodie">+</button>
+          <div class="soho-hotspot-card" style="top:34%;left:44%;" data-hotspot-card="leo-hoodie">
+            <img src="/leo-zodiac-hoodie/leo-zodiac-hoodie-flat.jpg" alt="Leo Zodiac Hoodie" loading="lazy">
+            <strong>Leo Zodiac Hoodie</strong>
+            <span>Shop the sign</span>
+          </div>
+          <a class="soho-hotspot" style="top:62%;left:60%;" href="/shop?zodiac=leo" aria-label="Shop all Leo pieces">+</a>
         </div>
       </div>
     </section>
 
-    
-    <!-- Cosmic Compatibility Certificates Section -->
-<section class="compatibility-promo-section">
-      <div class="compatibility-promo-container">
-        <div class="promo-content">
-          <span class="promo-badge">NEW</span>
-          <h2>Cosmic Compatibility Certificates</h2>
-          <p class="promo-subtitle">Your connection, written in the stars</p>
-          <p class="promo-description">
-            Explore your astrological compatibility with personalized insights.
-            Transform your connection into a beautiful certificate—from digital keepsakes to
-            museum-quality framed art. The perfect anniversary or wedding gift.
-          </p>
-
-          <div class="promo-features">
-            <div class="promo-feature">
-              <span class="feature-icon"></span>
-              <span class="feature-text">Personalized Analysis</span>
-            </div>
-            <div class="promo-feature">
-              <span class="feature-icon"></span>
-              <span class="feature-text">4 Luxury Formats</span>
-            </div>
-            <div class="promo-feature">
-              <span class="feature-icon"></span>
-              <span class="feature-text">Perfect Gift</span>
-            </div>
-          </div>
-
-          <div class="promo-cta-group">
-            <a href="/compatibility" class="promo-cta-primary">Explore Certificates</a>
-            <a href="/compatibility#preview" class="promo-cta-secondary">Try Free Preview</a>
+    <!-- Video section — variant C: three-up elemental montage -->
+    <section class="soho-section">
+      <div class="soho-container">
+        <div class="soho-section-head">
+          <div>
+            <p class="soho-eyebrow">By Element</p>
+            <h2 class="soho-heading">Shop By Element</h2>
           </div>
         </div>
-
-        <div class="promo-visual">
-          <div class="certificate-mockup">
-            <div class="mockup-frame">
-              <div class="mockup-content">
-                <div class="mockup-zodiac"></div>
-                <div class="mockup-title">Cosmic Compatibility</div>
-                <div class="mockup-score">
-                  <span class="score-big">95</span>
-                  <span class="score-label">Perfect Match</span>
-                </div>
-                <div class="mockup-text-lines">
-                  <div class="text-line"></div>
-                  <div class="text-line"></div>
-                  <div class="text-line"></div>
-                </div>
-              </div>
-            </div>
-            <div class="mockup-glow"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-<section class="section products-section">
-      <div class="container">
-
-        <!-- Products content -->
-        <div class="section-title">
-          <p class="pill">Featured</p>
-          <h2>Customer favorites</h2>
-          <p class="muted">A handful of pieces and readings to explore first.</p>
-        </div>
-        <div class="grid product-grid" id="featured-grid"></div>
-      </div>
-    </section>
-    <!-- Lyrīon Essentials Section -->
-    <section class="section essentials-section" aria-labelledby="essentials-heading">
-      <div class="container">
-        <div class="section-title">
-          <p class="pill">Signature Basics</p>
-          <h2 id="essentials-heading">Lyrīon Essentials</h2>
-          <p class="muted">Clean, elevated basics infused with celestial energy. Our signature black and white collection — launching soon.</p>
-        </div>
-        <div class="essentials-coming-soon">
-          <div class="coming-soon-card">
-            <div class="coming-soon-icon" aria-hidden="true">✦</div>
-            <p class="coming-soon-text">Our signature essentials collection is being crafted with intention. Be the first to know.</p>
-            <a href="/shop?collection=essentials" class="btn btn-outline" aria-label="Browse the Lyrīon Essentials collection">Explore Essentials</a>
-          </div>
+        <div class="soho-video-trio">
+          <figure>
+            <div class="soho-video soho-kenburns"><a href="/shop?zodiac=aries"><img src="/gemini-starlight-tee/gemini-starlight-tee-model-side.jpg" alt="Fire sign apparel" loading="lazy"></a></div>
+            <figcaption>Fire Signs</figcaption>
+          </figure>
+          <figure>
+            <div class="soho-video soho-kenburns"><a href="/shop?zodiac=pisces"><img src="/pisces-hoodie/pisces-hoodie-female.jpg" alt="Water sign apparel" loading="lazy"></a></div>
+            <figcaption>Water Signs</figcaption>
+          </figure>
+          <figure>
+            <div class="soho-video soho-kenburns"><a href="/shop?zodiac=gemini"><img src="/leo-zodiac-hoodie/leo-zodiac-hoodie-girl.jpg" alt="Air sign apparel" loading="lazy"></a></div>
+            <figcaption>Air Signs</figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-
-    <section class="section free-oracle-entry">
-      <div class="container free-oracle-card">
-        <div class="free-oracle-grid">
-          <div class="free-oracle-copy">
-            <p class="pill">Try It Free - Personalized Reading</p>
-            <h2>Discover your astrological profile with a complimentary reading</h2>
-            <p class="muted">Enter your birth details to explore personalized insights about your unique chart. Ready for more depth? Browse our full reading collection.</p>
-            <div class="button-row">
-              <button class="btn btn-primary btn-compact" type="button" onclick="openOracleWidget()">Get free reading</button>
-              <a class="btn btn-outline btn-compact" href="/oracle" aria-label="Browse our full reading collection">Explore All Readings</a>
-            </div>
+    <!-- Video section — variant B: split copy + visual (Compatibility Certificates) -->
+    <section class="soho-section soho-section--dark">
+      <div class="soho-container soho-video-split">
+        <div>
+          <p class="soho-eyebrow">New</p>
+          <h2 class="soho-heading" style="font-size:clamp(1.9rem,3vw,2.6rem);">Cosmic Compatibility Certificates</h2>
+          <p style="margin:1rem 0 1.75rem;color:var(--soho-on-midnight-soft) !important;max-width:46ch;">Your connection, written in the stars. Transform your astrological compatibility into a beautiful certificate — from digital keepsakes to museum-quality framed art. The perfect anniversary or wedding gift.</p>
+          <div class="soho-hero__actions">
+            <a class="soho-btn soho-btn--gold" href="/compatibility">Explore Certificates</a>
+            <a class="soho-btn soho-btn--outline" href="/compatibility#preview">Try Free Preview</a>
           </div>
+        </div>
+        <div class="soho-video">
+          <img src="/black-frame-with-certificate.jpg" alt="Cosmic Compatibility Certificate" loading="lazy">
         </div>
       </div>
     </section>
 
-    <!-- Trust Section -->
-    <section class="trust-section">
-      <div class="trust-badges-grid">
-        <div class="trust-badge">
-          <span class="trust-badge-icon">✨</span>
-          <div class="trust-badge-title">Join 874+ Customers</div>
-          <div class="trust-badge-subtext">Growing community of cosmic souls</div>
+    <!-- Journal / editorial preview -->
+    <section class="soho-section">
+      <div class="soho-container">
+        <div class="soho-section-head">
+          <div>
+            <p class="soho-eyebrow">Journal</p>
+            <h2 class="soho-heading">From The Codex</h2>
+            <p>Cosmic guidance, rituals and the stories behind our zodiac-inspired pieces.</p>
+          </div>
+          <a class="soho-link-arrow" href="/codex">Read The Codex</a>
         </div>
-        <div class="trust-badge">
-          <span class="trust-badge-icon">🔒</span>
-          <div class="trust-badge-title">Secure Checkout</div>
-          <div class="trust-badge-subtext">256-bit SSL encryption via Stripe</div>
+        <div class="soho-journal-grid">
+          <a class="soho-journal-card" href="/codex">
+            <div class="soho-journal-card__media"><img src="/oracle-images/2026-written-for-you.png" alt="What 2026 Has Written For You" loading="lazy"></div>
+            <p class="soho-eyebrow">Codex</p>
+            <h3>What 2026 Has Written For You</h3>
+            <p>The themes and opportunities the year ahead holds for your sign.</p>
+          </a>
+          <a class="soho-journal-card" href="/compatibility">
+            <div class="soho-journal-card__media"><img src="/images/oracle/solar-return-reading-cover.webp" alt="Compatibility, decoded" loading="lazy"></div>
+            <p class="soho-eyebrow">Guidance</p>
+            <h3>Compatibility, Decoded</h3>
+            <p>How to read the language of connection through the stars.</p>
+          </a>
+          <a class="soho-journal-card" href="/oracle">
+            <div class="soho-journal-card__media"><img src="/images/oracle/the-oracles-lantern-cover.webp" alt="Rituals for the modern mystic" loading="lazy"></div>
+            <p class="soho-eyebrow">Ritual</p>
+            <h3>Rituals For The Modern Mystic</h3>
+            <p>Small daily practices to stay aligned with your chart.</p>
+          </a>
         </div>
-        <div class="trust-badge">
-          <span class="trust-badge-icon">↩️</span>
-          <div class="trust-badge-title">30-Day Returns</div>
-          <div class="trust-badge-subtext">No questions asked guarantee</div>
+      </div>
+    </section>
+
+    <!-- Free reading CTA banner -->
+    <section class="soho-section soho-section--tight soho-section--dark" style="text-align:center;">
+      <div class="soho-container">
+        <p class="soho-eyebrow">Try It Free — Personalized Reading</p>
+        <h2 class="soho-heading" style="max-width:32ch;margin:0 auto;font-size:clamp(1.8rem,3vw,2.4rem);">Discover your astrological profile with a complimentary reading</h2>
+        <p style="max-width:48ch;margin:1rem auto 1.75rem;color:var(--soho-on-midnight-soft) !important;">Enter your birth details to explore personalized insights about your unique chart. Ready for more depth? Browse our full reading collection.</p>
+        <div class="soho-hero__actions" style="justify-content:center;">
+          <button class="soho-btn soho-btn--gold" type="button" onclick="openOracleWidget()">Get Free Reading</button>
+          <a class="soho-btn soho-btn--outline" href="/oracle">Explore All Readings</a>
         </div>
-        <div class="trust-badge">
-          <span class="trust-badge-icon">🌿</span>
-          <div class="trust-badge-title">Premium Materials</div>
-          <div class="trust-badge-subtext">Ethically sourced, quality crafted</div>
+      </div>
+    </section>
+
+    <!-- Promo tiles (trust) -->
+    <section class="soho-section soho-section--tight">
+      <div class="soho-container">
+        <div class="soho-tiles soho-tiles--quad">
+          <div class="soho-tile">
+            <h4>Join 874+ Customers</h4>
+            <p>Growing community of cosmic souls</p>
+          </div>
+          <div class="soho-tile">
+            <h4>Secure Checkout</h4>
+            <p>256-bit SSL encryption via Stripe</p>
+          </div>
+          <div class="soho-tile">
+            <h4>30-Day Returns</h4>
+            <p>No questions asked guarantee</p>
+          </div>
+          <div class="soho-tile">
+            <h4>Premium Materials</h4>
+            <p>Ethically sourced, quality crafted</p>
+          </div>
         </div>
       </div>
     </section>
   </main>
+
+  <script type="module" src="/js/featured-grid.js"></script>
 
   <footer class="footer">
     <div class="footer-content">

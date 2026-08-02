@@ -71,44 +71,46 @@
 </header>
 
   <a class="skip-to-content" href="#main-content">Skip to main content</a>
-<main id="main-content" class="section">
-    <div class="container">
+<main id="main-content" class="section soho-cart-page">
+    <div class="soho-container">
       <div class="section-title">
-        <p class="pill">Your cart</p>
-        <h1>Review your picks</h1>
+        <p class="pill soho-eyebrow">Your Cart</p>
+        <h1 class="soho-heading">Review Your Picks</h1>
         <p class="muted">Adjust quantities or proceed to checkout.</p>
       </div>
 
-      <div class="card">
-        <table class="cart-table">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-        <p id="empty-cart-message" class="muted" style="display:none;">Your cart is empty. <a href="/shop">Find something magical</a>.</p>
-        <div class="button-row space-between mt-1 gap-1">
-          <div class="cart-summary">
-            <div class="price-row"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
-            <div class="price-row" style="display:none;"><span class="discount-label">Bundle Savings</span><strong id="cart-discount">$0.00</strong></div>
-            <div class="price-row"><span>Shipping</span><strong id="cart-shipping">$0.00</strong></div>
-            <div class="price-row"><span>Total</span><strong id="cart-total">$0.00</strong></div>
-          </div>
-          <div class="button-row align-end">
-            <button class="btn continue-shopping-button" type="button" onclick="window.location.href='/shop'">Continue shopping</button>
-            <button class="btn btn-primary" type="button" id="checkoutBtn">Checkout</button>
-            <button class="btn btn-outline" type="button" id="clear-cart-button">Clear cart</button>
-          </div>
+      <div class="soho-cart-layout">
+        <div class="card">
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <p id="empty-cart-message" class="muted" style="display:none;">Your cart is empty. <a href="/shop">Find something magical</a>.</p>
         </div>
-        <div id="checkout-error" class="card" style="display:none; margin-top:1rem; padding:0.9rem 1rem; border:1px solid rgba(244,114,182,0.35); background:rgba(251,207,232,0.28); color:#9f1239;"></div>
-        <div id="embedded-checkout" style="display:none; min-height:500px; margin-top:1.5rem;"></div>
+
+        <div class="soho-cart-summary">
+          <h2>Order Summary</h2>
+          <div class="soho-cart-summary-row"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+          <div class="soho-cart-summary-row" style="display:none;"><span class="discount-label">Bundle Savings</span><strong id="cart-discount">$0.00</strong></div>
+          <div class="soho-cart-summary-row"><span>Shipping</span><strong id="cart-shipping">$0.00</strong></div>
+          <div class="soho-cart-summary-row soho-cart-summary-row--total"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+          <div class="soho-pdp__actions" style="flex-direction:column;margin-top:1.5rem;">
+            <button class="btn btn-primary soho-btn soho-btn--dark soho-btn--full" type="button" id="checkoutBtn">Checkout</button>
+            <button class="btn continue-shopping-button soho-btn soho-btn--ghost soho-btn--full" type="button" onclick="window.location.href='/shop'">Continue Shopping</button>
+            <button class="btn btn-outline soho-btn soho-btn--ghost soho-btn--full" type="button" id="clear-cart-button">Clear Cart</button>
+          </div>
+          <div id="checkout-error" class="card" style="display:none; margin-top:1rem; padding:0.9rem 1rem; border:1px solid rgba(244,114,182,0.35); background:rgba(251,207,232,0.28); color:#9f1239;"></div>
+          <div id="embedded-checkout" style="display:none; min-height:500px; margin-top:1.5rem;"></div>
+        </div>
       </div>
     </div>
   </main>
