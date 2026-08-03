@@ -54,6 +54,31 @@
     return data.stripePublishableKey;
   }
 
+  /**
+   * Stripe.js loads with `async`, so it may not be ready the instant the
+   * checkout button is clicked. Poll briefly rather than assuming
+   * window.Stripe exists, and fail with a clear message (not a raw
+   * TypeError, not a silent hang) if it genuinely never arrives.
+   */
+  function waitForStripe(timeoutMs = 8000) {
+    if (typeof window.Stripe === 'function') return Promise.resolve(window.Stripe);
+    return new Promise((resolve, reject) => {
+      const start = Date.now();
+      const check = () => {
+        if (typeof window.Stripe === 'function') {
+          resolve(window.Stripe);
+          return;
+        }
+        if (Date.now() - start >= timeoutMs) {
+          reject(new Error('Payment system failed to load. Please refresh the page and try again, or disable any ad blocker for this site.'));
+          return;
+        }
+        setTimeout(check, 150);
+      };
+      check();
+    });
+  }
+
   async function startEmbeddedCheckout() {
     const checkoutButton = document.getElementById('checkoutBtn');
     const mountPoint = document.getElementById('embedded-checkout');
@@ -100,8 +125,8 @@
         throw new Error('Missing client secret.');
       }
 
-      const publishableKey = await loadPublishableKey();
-      const stripe = window.Stripe(publishableKey);
+      const [publishableKey, Stripe] = await Promise.all([loadPublishableKey(), waitForStripe()]);
+      const stripe = Stripe(publishableKey);
       embeddedCheckout = await stripe.initEmbeddedCheckout({ clientSecret: data.clientSecret });
 
       mountPoint.style.display = 'block';

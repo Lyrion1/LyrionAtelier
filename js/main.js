@@ -93,6 +93,23 @@ let activeLocalization = null;
     head.appendChild(link);
   };
 
+  // soho-theme.css loads asynchronously (appended below, not a blocking <link>
+  // in the HTML source), so on a slow or congested connection it can still be
+  // loading by the time buildSiteHeader() creates the mega menu panels later
+  // in this script. Without this rule, those panels briefly render with no
+  // opacity/visibility override at all (their un-themed default: fully
+  // visible, in normal flow), then visibly animate closed the moment the
+  // stylesheet's transition rule finally applies, a real flash of a dropdown
+  // panel over the hero photo. Setting the same closed values here first,
+  // synchronously, means the value never changes when the stylesheet lands,
+  // so no transition ever triggers on load.
+  if (!head.querySelector('style[data-critical="mega-panel"]')) {
+    const criticalStyle = document.createElement('style');
+    criticalStyle.setAttribute('data-critical', 'mega-panel');
+    criticalStyle.textContent = '.soho-mega-panel{opacity:0;visibility:hidden}';
+    head.appendChild(criticalStyle);
+  }
+
    const ensureMeta = (attributes) => {
     const selector = Object.entries(attributes)
       .map(([key, value]) => `[${key.toLowerCase()}="${value}"]`)
@@ -298,7 +315,7 @@ function buildZodiacMegaColumn() {
   return `
     <div class="soho-mega-col soho-mega-col--zodiac">
       <h4>Shop by Sign</h4>
-      <ul class="soho-zodiac-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:0.65rem 1rem;">${items}</ul>
+      <ul class="soho-zodiac-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:0.65rem 1rem;position:static;">${items}</ul>
     </div>`;
 }
 
