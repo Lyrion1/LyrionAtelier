@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17836603744"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17836603744');
-</script>
+<script src="/js/analytics.js"></script>
   <meta charset="UTF-8">
+  <meta name="google-site-verification" content="REPLACE_WITH_SEARCH_CONSOLE_CODE">
   <meta name="description" content="Browse luxury zodiac apparel, accessories, mystery boxes, and astrology-inspired gifts at Lyrīon Atelier. Premium celestial pieces for every sign.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta property="og:title" content="Shop Zodiac Apparel & Astrology Gifts | Lyrīon Atelier">
@@ -263,6 +256,26 @@
   <script type="module" src="js/shop-page.js"></script>
   <script src="js/shop-checkout.js" defer></script>
   <script defer src="/assets/shop-oracle.js"></script>
-
-</body>
-</html>
+  <script>
+    /* GA4 view_item_list - fires after products render */
+    document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () {
+        try {
+          var cards = document.querySelectorAll('[data-product-id], .product-card, [data-slug]');
+          if (!cards.length || typeof window.la_track_view_item_list !== 'function') return;
+          var items = [];
+          cards.forEach(function (card, idx) {
+            items.push({
+              id: card.getAttribute('data-product-id') || card.getAttribute('data-slug') || '',
+              name: (card.querySelector('.product-name, h2, h3') || {}).textContent || '',
+              category: card.getAttribute('data-category') || '',
+              price: parseFloat(card.getAttribute('data-price') || '0'),
+              quantity: 1,
+              index: idx
+            });
+          });
+          window.la_track_view_item_list(items, 'Shop');
+        } catch (e) {}
+      }, 800);
+    });
+  </script>
