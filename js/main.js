@@ -415,7 +415,7 @@ function buildSiteHeader() {
 function initMegaMenu(header) {
   const items = Array.from(header.querySelectorAll('.nav-item[data-mega]'));
   if (!items.length) return;
-  const isDesktop = () => window.matchMedia('(min-width: 981px)').matches;
+  const isDesktop = () => window.matchMedia('(min-width: 1025px)').matches;
   let hoverTimer = null;
 
   const closeItem = (item) => {

@@ -165,14 +165,46 @@
   text-transform: uppercase;
 }
 
+/* Top-level nav is a flat row of .nav-item (Shop/Readings/Gifts, each a
+   div wrapping a trigger button + mega panel) and plain <a> tags
+   (Codex/About/Contact), followed by .cart-icon which is deliberately
+   NOT part of this list (own margin, own pill treatment, never gets a
+   divider). No `gap` here on purpose — inter-item spacing comes entirely
+   from each item's own horizontal padding so the divider can sit exactly
+   on the seam between two items via `left: 0`. */
 .site-header .nav-links {
   display: flex;
   align-items: center;
-  gap: clamp(1.5rem, 2.6vw, 2.5rem);
+  gap: 0;
   margin: 0 0 0 clamp(1rem, 4vw, 3.5rem);
 }
 
-.site-header .main-nav > .nav-links > a,
+.site-header .nav-links > .nav-item,
+.site-header .main-nav > .nav-links > a:not(.cart-icon) {
+  position: relative;
+  padding: 0 20px;
+}
+.site-header .nav-links > .nav-item:first-child,
+.site-header .main-nav > .nav-links > a:not(.cart-icon):first-child {
+  padding-left: 0;
+}
+
+/* Muted 1px divider between top-level items only — never before the
+   first item, never adjacent to Cart (which is excluded from the
+   selectors above entirely). ~35% opacity of the nav text color. */
+.site-header .nav-links > .nav-item:not(:first-child)::before,
+.site-header .main-nav > .nav-links > a:not(.cart-icon):not(:first-child)::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 16px;
+  background: rgba(244, 236, 216, 0.35);
+}
+
+.site-header .main-nav > .nav-links > a:not(.cart-icon),
 .site-header .nav-item-trigger {
   font-family: var(--soho-font-body) !important;
   color: rgba(244, 236, 216, 0.8) !important;
@@ -181,7 +213,6 @@
   text-transform: uppercase;
   text-decoration: none;
   font-weight: 600 !important;
-  padding: 0.5rem 0 !important;
   border: none !important;
   border-bottom: 1px solid transparent !important;
   border-radius: 0 !important;
@@ -192,8 +223,10 @@
   cursor: pointer;
   white-space: nowrap;
 }
-.site-header .main-nav > .nav-links > a:hover,
-.site-header .main-nav > .nav-links > a[aria-current="page"],
+.site-header .main-nav > .nav-links > a:not(.cart-icon) { padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; }
+.site-header .nav-item-trigger { padding: 0.5rem 0 !important; }
+.site-header .main-nav > .nav-links > a:not(.cart-icon):hover,
+.site-header .main-nav > .nav-links > a:not(.cart-icon)[aria-current="page"],
 .site-header .nav-item-trigger:hover,
 .site-header .nav-item.soho-mega-open > .nav-item-trigger {
   color: var(--soho-on-midnight) !important;
@@ -201,7 +234,7 @@
 }
 
 .site-header .nav-links > .cart-icon {
-  margin-left: clamp(0.5rem, 2vw, 1.5rem);
+  margin-left: clamp(0.75rem, 2.4vw, 2rem);
   display: inline-flex !important;
   align-items: center;
   gap: 0.4rem;
@@ -209,6 +242,20 @@
   border: 1px solid var(--soho-midnight-line) !important;
   border-radius: 999px;
   padding: 0.5rem 1rem !important;
+}
+
+/* 1024–1280px: still a horizontal nav, just tighter, per spec — collapse
+   to the drawer only below 1024px. */
+@media (max-width: 1280px) and (min-width: 1025px) {
+  .site-header .nav-links > .nav-item,
+  .site-header .main-nav > .nav-links > a:not(.cart-icon) {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .site-header .nav-links > .nav-item:first-child,
+  .site-header .main-nav > .nav-links > a:not(.cart-icon):first-child {
+    padding-left: 0;
+  }
 }
 .site-header .nav-links > .cart-icon:hover { border-color: var(--soho-gold) !important; }
 .site-header .cart-count {
@@ -330,7 +377,7 @@
    the same `.nav-links`/`.active` class names. Every property that rule
    sets must be re-declared here with `!important` too, or the legacy
    version wins (importance beats specificity/source order on ties). */
-@media (max-width: 980px) {
+@media (max-width: 1024px) {
   .site-header .nav-toggle { display: inline-flex !important; align-items: center; justify-content: center; }
   .site-header .nav-links {
     display: flex !important;
@@ -342,10 +389,10 @@
     flex-direction: column !important;
     align-items: flex-start !important;
     justify-content: flex-start !important;
-    gap: 0 !important;
+    gap: 16px !important;
     margin: 0 !important;
     background: var(--soho-midnight) !important;
-    padding: 5.5rem 1.75rem 2rem !important;
+    padding: calc(5.5rem + env(safe-area-inset-top)) 1.75rem 2rem !important;
     transform: translateX(100%) !important;
     transition: transform 320ms var(--soho-ease), visibility 320ms, opacity 320ms !important;
     overflow-y: auto !important;
@@ -361,19 +408,27 @@
     opacity: 1 !important;
     pointer-events: auto !important;
   }
-  .site-header .main-nav > .nav-links > a,
-  .site-header .nav-item { width: 100% !important; }
-  .site-header .main-nav > .nav-links > a,
+  /* Drawer items stack vertically with no dividers — the desktop
+     vertical-bar dividers are disabled below. */
+  .site-header .nav-links > .nav-item::before,
+  .site-header .main-nav > .nav-links > a:not(.cart-icon)::before {
+    content: none !important;
+  }
+  .site-header .main-nav > .nav-links > a:not(.cart-icon),
+  .site-header .nav-item { width: 100% !important; padding: 0 !important; }
+  .site-header .main-nav > .nav-links > a:not(.cart-icon),
   .site-header .nav-item-trigger {
     width: 100% !important;
-    padding: 0.95rem 0 !important;
-    border-bottom: 1px solid var(--soho-midnight-line) !important;
-    font-size: 0.95rem !important;
+    min-height: 44px !important;
+    padding: 0.6rem 0 !important;
+    border-bottom: none !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.06em !important;
     display: flex !important;
     align-items: center;
     justify-content: space-between;
   }
-  .site-header .nav-links > .cart-icon { margin: 1.25rem 0 0 !important; width: auto !important; }
+  .site-header .nav-links > .cart-icon { margin: 0.5rem 0 0 !important; width: auto !important; min-height: 44px !important; }
   .site-header .nav-drawer-close {
     position: absolute !important;
     top: 1.5rem !important;
