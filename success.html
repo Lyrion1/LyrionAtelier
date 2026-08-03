@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17836603744"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17836603744');
-</script>
+<script src="/js/analytics.js"></script>
  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="REPLACE_WITH_SEARCH_CONSOLE_CODE">
  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
  <title>Order Confirmed - Lyrīon Atelier</title>
  <link rel="stylesheet" href="/styles/design-system.css">
@@ -337,6 +330,20 @@ body.success-page #main-content {
           paidLine.style.marginTop = '8px';
           paidLine.textContent = 'Payment confirmed.';
           target?.appendChild(paidLine);
+        }
+        /* GA4 purchase event - fires once per session_id, guarded against double-fire */
+        if (typeof window.la_track_purchase === 'function') {
+          const orderValue = data?.amount_total ? data.amount_total / 100 : 0;
+          const lineItems = Array.isArray(data?.line_items)
+            ? data.line_items.map((li, idx) => ({
+                id: li.price?.product || String(idx),
+                name: li.description || li.price?.product || '',
+                category: '',
+                price: li.price?.unit_amount ? li.price.unit_amount / 100 : 0,
+                quantity: li.quantity || 1
+              }))
+            : [];
+          window.la_track_purchase(sessionId, orderValue, lineItems);
         }
       })
       .catch((err) => console.warn('Unable to verify session', err));

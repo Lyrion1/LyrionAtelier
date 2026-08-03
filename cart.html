@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17836603744"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17836603744');
-</script>
+<script src="/js/analytics.js"></script>
   <meta charset="UTF-8">
+  <meta name="google-site-verification" content="REPLACE_WITH_SEARCH_CONSOLE_CODE">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta property="og:title" content="Lyrion Atelier - Celestial Guidance & Astrology">
   <meta property="og:description" content="Professional oracle readings and astrology-inspired fashion. Discover your cosmic signature.">
@@ -128,5 +121,23 @@
   <script defer src="/assets/cart.js"></script>
   <script src="https://js.stripe.com/v3/"></script>
   <script src="js/checkout-embed.js" defer></script>
+  <script>
+    /* view_cart fires when the cart page loads */
+    document.addEventListener('DOMContentLoaded', function () {
+      try {
+        var cart = typeof window.readCart === 'function' ? window.readCart() : JSON.parse(localStorage.getItem('cart') || '[]');
+        if (typeof window.la_track_view_cart === 'function') window.la_track_view_cart(cart);
+      } catch (e) {}
+    });
+    /* begin_checkout fires when checkout button is clicked */
+    document.addEventListener('click', function (e) {
+      var btn = e.target && e.target.closest && e.target.closest('#checkoutBtn');
+      if (!btn) return;
+      try {
+        var cart = typeof window.readCart === 'function' ? window.readCart() : JSON.parse(localStorage.getItem('cart') || '[]');
+        if (typeof window.la_track_begin_checkout === 'function') window.la_track_begin_checkout(cart);
+      } catch (e) {}
+    });
+  </script>
 </body>
 </html>

@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17836603744"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17836603744');
-</script>
+<script src="/js/analytics.js"></script>
   <meta charset="UTF-8">
+  <meta name="google-site-verification" content="REPLACE_WITH_SEARCH_CONSOLE_CODE">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Aries Diamond Women's Relaxed Hoodie | Zodiac Outerwear | Lyrīon Atelier</title>
   <meta name="description" content="Premium relaxed-fit hoodie featuring the Aries diamond birthstone in striking pink detail. Perfect gift for Aries (March 21 - April 19).">
@@ -122,6 +115,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Aries Diamond Women's Relaxed Hoodie",
+  "sku": "LA-ADH-001",
   "description": "Premium relaxed-fit hoodie featuring the Aries diamond birthstone in striking pink detail. Perfect gift for Aries (March 21 - April 19).",
   "image": "https://lyrionatelier.com/images/products/aries-diamond-hoodie-lifestyle-1.jpg",
   "brand": {
@@ -416,6 +410,29 @@
       }
     });
   })();
+</script>
+<script>
+  /* GA4 view_item - reads product data from structured data */
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      var scripts = document.querySelectorAll('script[type="application/ld+json"]');
+      var product = null;
+      scripts.forEach(function (s) {
+        try {
+          var obj = JSON.parse(s.textContent);
+          if (obj['@type'] === 'Product') product = obj;
+        } catch (e) {}
+      });
+      if (product && typeof window.la_track_view_item === 'function') {
+        window.la_track_view_item({
+          id: (product.sku || product.url || '').split('/').pop() || '',
+          name: product.name || '',
+          category: (product.category || ''),
+          price: product.offers ? parseFloat(product.offers.price) || 0 : 0
+        });
+      }
+    } catch (e) {}
+  });
 </script>
 </body>
 </html>
