@@ -1189,6 +1189,26 @@ body.nav-open { overflow: hidden; }
 .soho-cart-summary-row--total { font-weight: 600; font-size: 1.05rem; border-bottom: none; padding-top: 1rem; }
 
 /* =========================================================================
+   COMPATIBILITY PAGE — legacy fix
+   .generator-form / .step were designed as semi-transparent glass cards
+   for the old dark-navy page background (rgba(15,23,42,x) reads as a
+   dark panel against a dark page). The page background is now light
+   cream, so those same rules render as a flat, clashing gray box. Text
+   inside is already forced legible by the sitewide ink-color override;
+   only the container backgrounds need to match the current light palette.
+   ========================================================================= */
+.generator-form {
+  background: var(--soho-paper) !important;
+  border: 1px solid var(--soho-line) !important;
+  box-shadow: 0 20px 45px rgba(28, 20, 32, 0.08);
+}
+.step {
+  background: var(--soho-paper) !important;
+  border: 1px solid var(--soho-line) !important;
+}
+.generator-container h2 { color: var(--soho-plum) !important; }
+
+/* =========================================================================
    RESPONSIVE — global section padding tightening
    ========================================================================= */
 @media (max-width: 640px) {
