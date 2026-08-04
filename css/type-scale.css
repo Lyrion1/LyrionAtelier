@@ -1,8 +1,8 @@
 /* ═══════════════════════════════════════════════════════════
    LYRION ATELIER - MASTER TYPE SCALE
-   Single source of truth for all typography on the site.
-   No font-size, font-weight, letter-spacing, or line-height
-   may be declared anywhere else in the codebase.
+   Single source of truth for typography tokens on the site.
+   Prefer using these tokens for font-size, font-weight,
+   letter-spacing, and line-height over declaring raw values.
    Two font families only:
      Display/headings: Cormorant Garamond (serif)
      Body/UI: Inter (sans-serif)
