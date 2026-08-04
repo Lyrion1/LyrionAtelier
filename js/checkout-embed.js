@@ -53,20 +53,30 @@
    * Turn the ids the server could not price back into the names the customer
    * actually recognises, using the cart they are looking at.
    */
-  function describeUnavailable(unavailable, cart) {
+  function namesForUnavailable(unavailable, cart) {
     const nameFor = (id) => {
       const match = cart.find((item) => resolveCheckoutProductId(item) === id);
       return (match && (match.name || match.title)) || id;
     };
-    const names = (unavailable || [])
+    return (unavailable || [])
       .map((entry) => nameFor(typeof entry === 'string' ? entry : entry?.id))
       .filter(Boolean);
+  }
+
+  function listNames(names) {
+    if (names.length <= 1) return names[0] || '';
+    return `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+  }
+
+  /**
+   * Only for the partial-success case, where the order really does continue
+   * without these items.
+   */
+  function describeUnavailable(unavailable, cart) {
+    const names = namesForUnavailable(unavailable, cart);
     if (!names.length) return '';
-    const list = names.length === 1
-      ? names[0]
-      : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
-    const verb = names.length === 1 ? 'is' : 'are';
-    return `${list} ${verb} unavailable right now and ${verb === 'is' ? 'was' : 'were'} not included. Everything else in your basket is ready to check out.`;
+    const one = names.length === 1;
+    return `${listNames(names)} ${one ? 'is' : 'are'} unavailable right now and ${one ? 'was' : 'were'} not included. Everything else in your basket is ready to check out.`;
   }
 
   function setInlineNotice(message = '') {
@@ -152,6 +162,9 @@
     checkoutButton.disabled = true;
     checkoutButton.textContent = 'Loading…';
     setInlineError('');
+    // Clear the notice too, or a "such and such was left out" message from a
+    // previous attempt stays on screen next to a fresh, unrelated error.
+    setInlineNotice('');
 
     try {
       const cart = readCart();
@@ -190,8 +203,13 @@
       console.log('[checkout-embed] create-checkout response', data);
 
       if (!response.ok) {
-        const detail = describeUnavailable(data?.unavailable, cart);
-        throw new Error(detail || data?.error || `Checkout request failed (${response.status})`);
+        // The server's message leads on a hard failure. describeUnavailable()
+        // ends with "everything else in your basket is ready to check out",
+        // which is plainly wrong when nothing could be priced, so it is only
+        // ever extra context here, never the whole message.
+        const names = namesForUnavailable(data?.unavailable, cart);
+        const base = data?.error || `Checkout request failed (${response.status})`;
+        throw new Error(names.length ? `${base} Affected: ${listNames(names)}.` : base);
       }
 
       if (data?.error) {

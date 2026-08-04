@@ -49,6 +49,29 @@ for (const product of listed) {
   if (!(product.name || product.title)) {
     errors.push(`"${slug}" is listed for sale but has no name`);
   }
+
+  // Catalog prices are plain GBP amounts. A variant carrying a minor-unit
+  // figure (3499 rather than 34.99) reads as a different price depending on
+  // which code path renders it, because centsFrom() treats anything at or
+  // above 200 as pence. This is what a units mix-up looks like from here.
+  for (const [i, variant] of (Array.isArray(product.variants) ? product.variants : []).entries()) {
+    const vp = Number(variant?.price);
+    if (!Number.isFinite(vp)) continue;
+    if (vp >= 200) {
+      errors.push(
+        `"${slug}" variant ${i} has price ${vp}, which looks like pence rather than pounds`
+      );
+      continue;
+    }
+    const range = product.price_range || (typeof product.price === 'object' ? product.price : null);
+    const min = Number(range?.min);
+    const max = Number(range?.max);
+    if (Number.isFinite(min) && Number.isFinite(max) && (vp < min - 0.011 || vp > max + 0.011)) {
+      errors.push(
+        `"${slug}" variant ${i} price ${vp} falls outside its own price range ${min} to ${max}`
+      );
+    }
+  }
 }
 
 // The committed map must equal what the generator would produce right now.
