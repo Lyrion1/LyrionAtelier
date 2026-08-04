@@ -1047,9 +1047,12 @@ body.nav-open { overflow: hidden; }
 }
 .footer .footer-links a:hover { color: var(--soho-gold) !important; }
 /* Footer links are a stacked list on a phone, where a 16px tall link is not
-   a realistic thumb target. Pad to 44px without changing the type size. */
+   a realistic thumb target. Pad to 44px without changing the type size.
+   inline-flex rather than min-height alone: min-height does nothing on a
+   plain inline box, which is why these stayed 16px tall. */
 @media (max-width: 768px) {
-  .footer .footer-links a {
+  .footer .footer-links a,
+  #empty-cart-message a {
     display: inline-flex !important;
     align-items: center !important;
     min-height: 44px !important;

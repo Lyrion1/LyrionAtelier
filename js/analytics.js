@@ -231,7 +231,10 @@
       'box-shadow:0 -4px 24px rgba(0,0,0,.55);',
       '}',
       '#la-consent-banner p{margin:0;flex:1 1 200px;line-height:1.5;}',
-      '#la-consent-banner a{color:#c9a84c;text-underline-offset:3px;}',
+      // inline-block so the 44px touch height actually applies: min-height
+      // is ignored on a plain inline box, which left this link 16px tall.
+      '#la-consent-banner a{color:#c9a84c;text-underline-offset:3px;',
+      'display:inline-block;min-height:44px;line-height:44px;}',
       '#la-consent-banner a:hover{color:#f0e6c8;}',
       '.la-consent-btns{display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap;}',
       '.la-consent-btns button{',
