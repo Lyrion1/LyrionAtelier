@@ -107,8 +107,8 @@ test.describe('product detail page', () => {
     await expect(productDetail).toHaveCSS('border-radius', '24px');
     await expect(storyGrid).toHaveCSS('display', 'grid');
     await expect(loveNote).toBeVisible();
-    await expect(featuresGroup.locator('.product-tag')).toHaveCount(3);
-    await expect(perfectForGroup.locator('.product-tag')).toHaveCount(3);
+    await expect(featuresGroup.locator('.product-tag')).toHaveCount(5);
+    await expect(perfectForGroup).toHaveCount(0);
 
     const [detailBox, mediaBox, infoBox, thumbsBox] = await Promise.all([
       productDetail.boundingBox(),
