@@ -133,6 +133,36 @@ function applyImgSrc(img, src, productTitle) {
   }
 }
 
+function openImageLightbox(src, alt) {
+  let lightbox = document.getElementById('soho-image-lightbox');
+  if (!lightbox) {
+    lightbox = document.createElement('div');
+    lightbox.id = 'soho-image-lightbox';
+    lightbox.className = 'soho-lightbox';
+    lightbox.innerHTML = `
+      <button type="button" class="soho-lightbox__close" aria-label="Close zoomed image">&times;</button>
+      <img class="soho-lightbox__img" src="" alt="">
+    `;
+    document.body.appendChild(lightbox);
+    const close = () => {
+      lightbox.classList.remove('is-open');
+      document.body.classList.remove('soho-lightbox-open');
+    };
+    lightbox.querySelector('.soho-lightbox__close').addEventListener('click', close);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('is-open')) close();
+    });
+  }
+  const img = lightbox.querySelector('.soho-lightbox__img');
+  img.src = src;
+  img.alt = alt;
+  lightbox.classList.add('is-open');
+  document.body.classList.add('soho-lightbox-open');
+}
+
 function renderImages(images = [], productTitle = 'Product') {
   const gallery = $('#product-gallery');
   if (!gallery) return;
@@ -140,7 +170,15 @@ function renderImages(images = [], productTitle = 'Product') {
   const normalized = Array.isArray(images) ? images.filter(Boolean).map(fullRes) : [];
   const base = normalized.length ? normalized : [FALLBACK_IMAGE];
 
-  // Main display image
+  // Main display image: tap/click enlarges it in a full-screen lightbox. The
+  // lightbox itself doesn't implement pinch-zoom (the site's viewport meta
+  // already allows user-scalable pinch-zoom, so the browser's native gesture
+  // works on the enlarged image without any extra JS).
+  const mainButton = document.createElement('button');
+  mainButton.type = 'button';
+  mainButton.className = 'product-gallery__main-zoom';
+  mainButton.setAttribute('aria-label', `Zoom in on ${productTitle}`);
+
   const mainImg = document.createElement('img');
   mainImg.className = 'product-gallery__main';
   mainImg.alt = productTitle;
@@ -149,7 +187,9 @@ function renderImages(images = [], productTitle = 'Product') {
   mainImg.width = 1200;
   mainImg.height = 1500;
   applyImgSrc(mainImg, base[0], productTitle);
-  gallery.appendChild(mainImg);
+  mainButton.appendChild(mainImg);
+  mainButton.addEventListener('click', () => openImageLightbox(mainImg.src, mainImg.alt));
+  gallery.appendChild(mainButton);
 
   // Thumbnail row (only when there are multiple distinct images)
   if (base.length > 1) {

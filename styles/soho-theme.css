@@ -169,9 +169,9 @@
    div wrapping a trigger button + mega panel) and plain <a> tags
    (Codex/About/Contact), followed by .cart-icon which is deliberately
    NOT part of this list (own margin, own pill treatment, never gets a
-   divider). No `gap` here on purpose — inter-item spacing comes entirely
-   from each item's own horizontal padding so the divider can sit exactly
-   on the seam between two items via `left: 0`. */
+   divider). No `gap` here on purpose, inter-item spacing comes entirely
+   from each item's own horizontal padding, and the border-left divider
+   below sits exactly on the seam between two items as a result. */
 .site-header .nav-links {
   display: flex;
   align-items: center;
@@ -179,29 +179,29 @@
   margin: 0 0 0 clamp(1rem, 4vw, 3.5rem);
 }
 
+/* Dividers use border-left, not an absolutely positioned pseudo-element,
+   on purpose: this class (.nav-item) is also the parent of the mega
+   menu panel, which is positioned with left:0/right:0 to span the full
+   nav width. Giving .nav-item its own `position: relative` (needed for
+   an absolute-positioned divider) would make IT the containing block
+   for that panel instead of the header, shrinking the panel down to
+   the width of a single nav item. border-left needs no positioning
+   context at all, so it cannot cause that failure mode. Muted divider
+   color is about 35% opacity of the nav text color, never before the
+   first item, never adjacent to Cart (excluded from these selectors). */
 .site-header .nav-links > .nav-item,
 .site-header .main-nav > .nav-links > a:not(.cart-icon) {
-  position: relative;
   padding: 0 20px;
+  border-left: 1px solid transparent;
 }
 .site-header .nav-links > .nav-item:first-child,
 .site-header .main-nav > .nav-links > a:not(.cart-icon):first-child {
   padding-left: 0;
+  border-left: none;
 }
-
-/* Muted 1px divider between top-level items only — never before the
-   first item, never adjacent to Cart (which is excluded from the
-   selectors above entirely). ~35% opacity of the nav text color. */
-.site-header .nav-links > .nav-item:not(:first-child)::before,
-.site-header .main-nav > .nav-links > a:not(.cart-icon):not(:first-child)::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1px;
-  height: 16px;
-  background: rgba(244, 236, 216, 0.35);
+.site-header .nav-links > .nav-item:not(:first-child),
+.site-header .main-nav > .nav-links > a:not(.cart-icon):not(:first-child) {
+  border-left-color: rgba(244, 236, 216, 0.35);
 }
 
 .site-header .main-nav > .nav-links > a:not(.cart-icon),
@@ -307,7 +307,7 @@
   left: 0;
   right: 0;
   top: 100%;
-  background: var(--soho-paper);
+  background: var(--soho-midnight);
   border-top: 1px solid var(--soho-gold);
   box-shadow: 0 30px 60px rgba(10, 6, 18, 0.35);
   opacity: 0;
@@ -331,24 +331,42 @@
   gap: clamp(1.5rem, 3vw, 3rem);
 }
 
+/* Solid dark navy panel, no transparency over the hero photo behind it.
+   Gold headers and off-white links, measured against --soho-midnight:
+   h4 gold 8.33:1, links 7.80:1, featured column 16.25:1. All pass WCAG AA. */
 .soho-mega-col h4 {
   font-family: var(--soho-font-eyebrow) !important;
   font-size: 0.68rem !important;
   font-weight: 600 !important;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--soho-plum-deep) !important;
+  color: var(--soho-gold) !important;
   margin: 0 0 1rem !important;
 }
-.soho-mega-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.65rem; }
+/* position: static beats a long-unused legacy rule, css/style.css's
+   `@media (max-width: 768px) { nav ul { position: absolute; ... } }` from
+   an older simple dropdown nav. Nothing else here declares `position`, so
+   without this override that rule silently pulls these lists out of flow
+   on mobile, letting them float over and overlap the drawer items below. */
+.soho-mega-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.65rem; position: static; }
 .soho-mega-col a {
-  color: var(--soho-ink-soft);
+  color: var(--soho-on-midnight-soft) !important;
   text-decoration: none;
   font-size: 0.92rem;
   transition: color 180ms ease;
 }
-.soho-mega-col a:hover { color: var(--soho-plum); }
-.soho-mega-col--featured a { color: var(--soho-ink); font-weight: 600; }
+.soho-mega-col a:hover,
+.soho-mega-col a:focus { color: var(--soho-gold-soft) !important; }
+.soho-mega-col--featured a { color: var(--soho-on-midnight) !important; font-weight: 600; }
+/* css/polish.css has `[class*="featured"] { background: var(--cream)
+   !important; }` meant for homepage sections. It also matches this
+   column because the selector matches any class attribute containing
+   the substring "featured", so it silently painted a cream box behind
+   this text over the dark panel. Beat it with higher specificity, not
+   just !important, so load order cannot flip this back. */
+.soho-mega-panel .soho-mega-col--featured {
+  background: transparent !important;
+}
 
 .soho-mega-visual {
   position: relative;
@@ -408,11 +426,11 @@
     opacity: 1 !important;
     pointer-events: auto !important;
   }
-  /* Drawer items stack vertically with no dividers — the desktop
+  /* Drawer items stack vertically with no dividers, the desktop
      vertical-bar dividers are disabled below. */
-  .site-header .nav-links > .nav-item::before,
-  .site-header .main-nav > .nav-links > a:not(.cart-icon)::before {
-    content: none !important;
+  .site-header .nav-links > .nav-item,
+  .site-header .main-nav > .nav-links > a:not(.cart-icon) {
+    border-left: none !important;
   }
   .site-header .main-nav > .nav-links > a:not(.cart-icon),
   .site-header .nav-item { width: 100% !important; padding: 0 !important; }
@@ -434,8 +452,11 @@
     top: 1.5rem !important;
     right: 1.75rem !important;
     left: auto !important;
-    width: 2.5rem !important;
-    height: 2.5rem !important;
+    width: 44px !important;
+    height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   .soho-mega-panel {
     position: static;
@@ -461,7 +482,12 @@
     inset: 0 !important;
     background: rgba(10, 6, 18, 0.5) !important;
     border: none !important;
-    z-index: 200 !important;
+    /* Must stay below .site-header's z-index (200): with an equal value the
+       backdrop, appended later in the DOM, would win the tie and sit on top
+       of the open drawer's own stacking context, silently swallowing every
+       tap on the drawer's nav items (a tap would hit the backdrop and just
+       close the menu instead of opening Shop/Readings). */
+    z-index: 190 !important;
   }
 }
 
@@ -840,6 +866,15 @@ body.nav-open { overflow: hidden; }
   cursor: pointer;
   animation: soho-hotspot-pulse 2.6s ease-in-out infinite;
 }
+/* Keep the visible pulsing dot at its designed 30px, but give it a real
+   44x44 tap target: an invisible ::before extends the hit area without
+   changing how the marker looks. */
+.soho-hotspot::before {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+}
 @keyframes soho-hotspot-pulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.55); }
   50% { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
@@ -1084,12 +1119,106 @@ body.nav-open { overflow: hidden; }
 }
 @media (max-width: 900px) { .soho-pdp { grid-template-columns: 1fr; } }
 
-.product-gallery__main { border-radius: var(--soho-radius); overflow: hidden; background: var(--soho-canvas-alt); aspect-ratio: 4/5; }
-.product-gallery__main img { width: 100%; height: 100%; object-fit: cover; transition: opacity 250ms ease; }
+.product-gallery__main { border-radius: var(--soho-radius); overflow: hidden; background: var(--soho-canvas-alt); aspect-ratio: 4/5; width: 100%; height: 100%; object-fit: cover; transition: opacity 250ms ease; display: block; }
 .product-gallery__thumbs { display: flex; gap: 0.65rem; margin-top: 0.85rem; flex-wrap: wrap; }
 .product-gallery__thumb { width: 76px; height: 92px; border-radius: 2px; overflow: hidden; border: 1px solid var(--soho-line); cursor: pointer; padding: 0; background: none; }
 .product-gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
 .product-gallery__thumb.active { border-color: var(--soho-ink); }
+
+/* Tap or click the main product image to open it full screen. !important
+   throughout: css/restoration.css has a broad generic button rule
+   (`.btn, button, input[type="submit"], ... { background: var(--apricot)
+   !important; border: 1px solid transparent !important; ... }`) that
+   otherwise paints an orange box around the product photo, since this is
+   a plain <button> element. */
+.product-gallery__main-zoom {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  border: none !important;
+  background: none !important;
+  color: inherit !important;
+  box-shadow: none !important;
+  cursor: zoom-in;
+  border-radius: var(--soho-radius) !important;
+}
+.product-gallery__main-zoom:focus-visible {
+  outline: 2px solid var(--soho-gold);
+  outline-offset: 3px;
+}
+.product-gallery__main-zoom::after {
+  content: '';
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(20, 11, 31, 0.72);
+  pointer-events: none;
+  z-index: 2;
+}
+.product-gallery__main-zoom::before {
+  content: '';
+  position: absolute;
+  right: 1.35rem;
+  bottom: 1.35rem;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--soho-on-midnight);
+  border-radius: 50%;
+  box-shadow: 9px 9px 0 -6px var(--soho-on-midnight);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.soho-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(20, 11, 31, 0.94);
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 3rem);
+}
+.soho-lightbox.is-open { display: flex; }
+.soho-lightbox__img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  touch-action: pinch-zoom;
+}
+/* !important throughout: css/style.css has `@media (max-width: 768px) {
+   button, .button { width: 100% !important; padding: 15px !important;
+   font-size: 1rem !important; } }`, a bare-element mobile reset meant for
+   form/CTA buttons that would otherwise stretch this circular close button
+   to the full viewport width. */
+.soho-lightbox__close {
+  position: fixed !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(244, 236, 216, 0.4) !important;
+  background: rgba(20, 11, 31, 0.85) !important;
+  color: var(--soho-on-midnight) !important;
+  font-size: 1.6rem !important;
+  line-height: 1 !important;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 501;
+}
+body.soho-lightbox-open { overflow: hidden; }
 
 .soho-pdp__info { position: sticky; top: 100px; }
 .soho-pdp__info #product-pill { color: var(--soho-gold) !important; }
@@ -1182,6 +1311,28 @@ body.nav-open { overflow: hidden; }
 .soho-scope .quantity-btn { background: none !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; min-height: 0 !important; padding: 0 !important; font-size: 1rem; cursor: pointer; width: 24px; }
 .soho-scope .quantity-input { width: 2.4rem; text-align: center; border: none; background: none; font-family: var(--soho-font-body); }
 .soho-scope .remove-item { background: none !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; min-height: 0 !important; padding: 0 !important; color: var(--soho-ink-soft) !important; font-size: 0.78rem; text-decoration: underline; cursor: pointer; }
+
+/* The compact quantity stepper and "Remove" link above are sized for a
+   mouse cursor. Below 768px, give each a real 44x44 tap target without
+   changing how big they look, using padding to grow the hit area around
+   the same visual glyph/text rather than resizing the glyph itself. */
+@media (max-width: 768px) {
+  .soho-scope .quantity-btn {
+    width: 44px !important;
+    height: 44px !important;
+    flex-shrink: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .soho-scope .remove-item {
+    min-height: 44px !important;
+    padding: 0.5rem !important;
+    margin: -0.5rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+}
 
 .soho-cart-summary { border: 1px solid var(--soho-line); border-radius: var(--soho-radius); padding: 1.75rem; }
 .soho-cart-summary h2 { font-family: var(--soho-font-eyebrow); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 1.25rem; }
