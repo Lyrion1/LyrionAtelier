@@ -95,6 +95,37 @@ test.describe('product detail page', () => {
     const imgWidth = await page.locator('#product-gallery img').first().evaluate((img) => (img as HTMLImageElement).naturalWidth);
     expect(imgWidth).toBeGreaterThan(50);
 
+    const productDetail = page.locator('.product-detail');
+    const media = page.locator('.product-detail__media');
+    const info = page.locator('.product-detail__info');
+    const storyGrid = page.locator('.product-detail__story-grid');
+    const loveNote = page.locator('#product-love-note');
+    const featuresGroup = page.locator('.product-tag-group', { hasText: 'Features' });
+    const perfectForGroup = page.locator('.product-tag-group', { hasText: 'Perfect For' });
+    const thumbs = page.locator('.product-gallery__thumbs');
+
+    await expect(productDetail).toHaveCSS('border-radius', '24px');
+    await expect(storyGrid).toHaveCSS('grid-template-columns', /.+/);
+    await expect(loveNote).toBeVisible();
+    await expect(featuresGroup.locator('.product-tag')).toHaveCount(3);
+    await expect(perfectForGroup.locator('.product-tag')).toHaveCount(3);
+
+    const [detailBox, mediaBox, infoBox, thumbsBox] = await Promise.all([
+      productDetail.boundingBox(),
+      media.boundingBox(),
+      info.boundingBox(),
+      thumbs.boundingBox()
+    ]);
+
+    expect(detailBox).not.toBeNull();
+    expect(mediaBox).not.toBeNull();
+    expect(infoBox).not.toBeNull();
+    expect(thumbsBox).not.toBeNull();
+
+    expect(mediaBox!.x).toBeLessThan(infoBox!.x);
+    expect(Math.abs(mediaBox!.y - infoBox!.y)).toBeLessThan(80);
+    expect(thumbsBox!.width).toBeGreaterThan(thumbsBox!.height);
+
     await page.screenshot({ path: 'product-detail-pass.png', fullPage: true });
   });
 
