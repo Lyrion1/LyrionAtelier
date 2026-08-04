@@ -173,7 +173,7 @@
 [data-page="product"] .pdp-gallery__thumb.active,
 [data-page="product"] .pdp-gallery__thumb:hover {
   opacity: 1;
-  border-color: var(--gold, #C9922B);
+  border-color: var(--pdp-gold);
 }
 
 /* ----------------------------------------------------------------
@@ -286,6 +286,8 @@
   color: var(--pdp-ivory) !important;
 }
 
+/* Needs !important to override the base CTA background (also !important);
+   otherwise the ink fill remains on hover. */
 [data-page="product"] .pdp-wrapper button.pdp-atb-btn:hover {
   background: var(--plum, #5B4B7A) !important;
   background-color: var(--plum, #5B4B7A) !important;
@@ -449,7 +451,10 @@
 /* A plain text link, not a control. No fill, no border, no radius, no
    padding box: just underlined ink. */
 [data-page="product"] .pdp-desc__read-more {
-  display: inline;
+  /* inline-block, not inline: margin-top is ignored on an inline box, and
+     the link needs to clear the paragraph above it. It carries no padding,
+     border or fill, so it still reads as running text. */
+  display: inline-block;
   margin-top: 0.6rem;
   font-size: var(--text-sm, 0.875rem);
   color: var(--pdp-ink) !important;
