@@ -124,7 +124,7 @@ test.describe('product detail page', () => {
 
     expect(mediaBox!.x).toBeLessThan(infoBox!.x);
     expect(Math.abs(mediaBox!.y - infoBox!.y)).toBeLessThan(80);
-    expect(thumbsBox!.width).toBeGreaterThan(thumbsBox!.height);
+    expect(thumbsBox!.height).toBeGreaterThan(thumbsBox!.width);
 
     await page.screenshot({ path: 'product-detail-pass.png', fullPage: true });
   });
