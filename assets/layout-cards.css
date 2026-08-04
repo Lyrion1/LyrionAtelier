@@ -47,9 +47,9 @@
 .card__price{ font-weight:700; font-size:24px; color:var(--plum, #5B4B7A); margin-bottom:12px; }
 .card__actions{ display:flex; gap:8px; padding:0; margin-top:auto; }
 .card__actions button,
-.card__actions a{ width:100%; height:44px; min-height:44px; background:#d4af37; color:#0f0c29; border:none; border-radius:6px; font-size:16px; font-weight:600; display:flex; align-items:center; justify-content:center; text-decoration:none; cursor:pointer; transition:all 0.3s ease; }
+.card__actions a{ width:100%; height:44px; min-height:44px; background:#C9922B; color:#0f0c29; border:none; border-radius:6px; font-size:16px; font-weight:600; display:flex; align-items:center; justify-content:center; text-decoration:none; cursor:pointer; transition:all 0.3s ease; }
 .card__actions button:hover,
-.card__actions a:hover{ background:#e5c245; transform:translateY(-2px); }
+.card__actions a:hover{ background:#C9922B; transform:translateY(-2px); }
 .skeleton{ background:linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.14), rgba(255,255,255,.06));
  background-size:200% 100%; animation:shimmer 1.5s infinite; }
 @keyframes shimmer{ to{ background-position-x:-200%; } }

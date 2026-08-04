@@ -56,7 +56,7 @@
 
   /* Remap legacy dark-theme variables used by page-level inline styles */
   --gold-primary: var(--gold);
-  --gold-light:   #dcac5a;
+  --gold-light:   #C9922B;
   --gold-dark:    #a67724;
   --purple-deep:  var(--plum);
   --purple-dark:  var(--plum);
@@ -1931,7 +1931,7 @@ body[class*="success"] {
     left: 0;
     min-width: 220px;
     background: rgba(10, 8, 32, 0.98);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border: 1px solid rgba(201, 146, 43, 0.3);
     border-radius: 10px;
     padding: 8px 0;
     z-index: 1000;
@@ -1959,7 +1959,7 @@ body[class*="success"] {
   .mobile-dropdown .dropdown-content a:hover,
   .mobile-dropdown .dropdown-content a:focus {
     color: var(--plum, #5B4B7A);
-    background: rgba(212, 175, 55, 0.1);
+    background: rgba(201, 146, 43, 0.1);
   }
 }
 
@@ -1986,7 +1986,7 @@ body[class*="success"] {
 .footer-social__link:hover,
 .footer-social__link:focus {
   color: var(--plum, #5B4B7A);
-  background: rgba(212, 175, 55, 0.12);
+  background: rgba(201, 146, 43, 0.12);
   outline: none;
 }
 
@@ -2010,7 +2010,7 @@ body[class*="success"] {
 
 .coming-soon-card {
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  border: 1px solid rgba(201, 146, 43, 0.25);
   border-radius: 16px;
   padding: 3rem 2.5rem;
   text-align: center;
@@ -2348,7 +2348,7 @@ main > section,
 
 /* ═══════════════════════════════════════════════════
    Gold is a line, badge and border colour on this site, never a text
-   colour: #C9922B is 2.60:1 on the ivory ground and the legacy #D4AF37
+   colour: #C9922B is 2.60:1 on the ivory ground and the legacy #C9922B
    is 2.10:1, both below AA. These labels inherited gold from older
    dark-theme rules, so they are stated in plum (7.2:1) here.
 ═══════════════════════════════════════════════════ */

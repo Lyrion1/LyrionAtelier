@@ -4,10 +4,15 @@
  ═══════════════════════════════════════════════════════════ */
 
 :root {
- /* OFFICIAL BRAND COLORS - NEVER CHANGE */
- --gold-primary: #d4af37;
+ /* Brand golds. --gold-light was #f0c659, a yellow-orange that did not
+    belong to the palette; it now holds the brand gold #C9922B, which is
+    the single gold used across the site. --gold-primary and --gold-dark
+    are legacy values kept for rules that have not been migrated; new work
+    should read #C9922B. Gold is a line, badge and border colour only: it
+    is 2.6:1 on the ivory ground and cannot carry text. */
+ --gold-primary: #C9922B;
  --gold-light: #C9922B;
- --gold-dark: #b8941f;
+ --gold-dark: #A67724;
  
  --purple-deep: #302b63;
  --purple-dark: #24243e;
@@ -104,7 +109,7 @@
 /* ═══════════════════════════════════════════════════════════
  BUTTONS - EXACT SPECIFICATIONS
  Width: 100%, Height: 44px
- Background: Gold (#d4af37), Color: Navy (#0f0c29)
+ Background: Gold (#C9922B), Color: Navy (#0f0c29)
  Border-radius: 6px, Font-size: 16px, Font-weight: 600
  ═══════════════════════════════════════════════════════════ */
 
@@ -123,7 +128,7 @@ a[class*="view"] {
  width: 100% !important;
  height: 44px !important;
  min-height: 44px !important;
- background: #d4af37 !important;
+ background: #C9922B !important;
  border: none !important;
  color: #0f0c29 !important;
  border-radius: 6px !important;
@@ -140,7 +145,7 @@ a[class*="view"] {
 
 .view-product-button:hover,
 .view-button:hover {
- background: #e5c245 !important;
+ background: #C9922B !important;
  transform: translateY(-2px) !important;
 }
 
@@ -152,7 +157,7 @@ button[class*="add-cart"] {
  width: 100% !important;
  height: 44px !important;
  min-height: 44px !important;
- background: #d4af37 !important;
+ background: #C9922B !important;
  border: none !important;
  color: #0f0c29 !important;
  border-radius: 6px !important;
@@ -169,7 +174,7 @@ button[class*="add-cart"] {
 
 .add-to-cart-button:hover,
 .add-cart-button:hover {
- background: #e5c245 !important;
+ background: #C9922B !important;
  transform: translateY(-2px) !important;
 }
 
@@ -255,7 +260,7 @@ button[style*="orange"],
 button[style],
 a[style],
 .btn[style] {
- background: #d4af37 !important;
+ background: #C9922B !important;
  color: #0f0c29 !important;
  border: none !important;
 }

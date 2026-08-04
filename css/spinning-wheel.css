@@ -25,7 +25,7 @@
 .spin-wheel-popup {
   position: relative;
   background: linear-gradient(145deg, #0f0c29 0%, #24243e 50%, #302b63 100%);
-  border: 2px solid rgba(212, 175, 55, 0.4);
+  border: 2px solid rgba(201, 146, 43, 0.4);
   border-radius: 20px;
   padding: 30px;
   max-width: 500px;
@@ -33,7 +33,7 @@
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-              0 0 40px rgba(212, 175, 55, 0.2);
+              0 0 40px rgba(201, 146, 43, 0.2);
   animation: popup-entrance 0.4s ease-out;
 }
 
@@ -54,7 +54,7 @@
   top: 15px;
   right: 15px;
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(201, 146, 43, 0.3);
   color: #fff;
   width: 36px;
   height: 36px;
@@ -69,8 +69,8 @@
 }
 
 .spin-wheel-close:hover {
-  background: rgba(212, 175, 55, 0.2);
-  border-color: #d4af37;
+  background: rgba(201, 146, 43, 0.2);
+  border-color: #C9922B;
 }
 
 /* Logo */
@@ -99,9 +99,9 @@
 .spin-wheel-header h2 {
   font-family: 'Cinzel', serif;
   font-size: 1.6rem;
-  color: #d4af37;
+  color: #C9922B;
   margin: 0 0 8px 0;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  text-shadow: 0 0 20px rgba(201, 146, 43, 0.3);
 }
 
 .spin-wheel-header p {
@@ -129,7 +129,7 @@
   height: 0;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
-  border-top: 30px solid #d4af37;
+  border-top: 30px solid #C9922B;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
@@ -138,7 +138,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3),
+  box-shadow: 0 0 20px rgba(201, 146, 43, 0.3),
               inset 0 0 30px rgba(0, 0, 0, 0.3);
 }
 
@@ -151,7 +151,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #d4af37, #b8941f);
+  background: linear-gradient(145deg, #C9922B, #A67724);
   border: 3px solid #C9922B;
   color: #0f0c29;
   font-family: 'Cinzel', serif;
@@ -161,14 +161,14 @@
   transition: all 0.2s ease;
   text-transform: uppercase;
   line-height: 1.2;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 4px 15px rgba(201, 146, 43, 0.4);
   z-index: 10;
   padding: 8px;
 }
 
 .spin-wheel-btn:hover:not(:disabled) {
   transform: translate(-50%, -50%) scale(1.05);
-  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+  box-shadow: 0 6px 25px rgba(201, 146, 43, 0.6);
 }
 
 .spin-wheel-btn:disabled {
@@ -190,8 +190,8 @@
   display: none;
   text-align: center;
   padding: 20px;
-  background: rgba(212, 175, 55, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: rgba(201, 146, 43, 0.1);
+  border: 1px solid rgba(201, 146, 43, 0.3);
   border-radius: 12px;
   margin-bottom: 20px;
 }
@@ -215,7 +215,7 @@
 .spin-wheel-prize h3 {
   font-family: 'Cinzel', serif;
   font-size: 1.4rem;
-  color: #d4af37;
+  color: #C9922B;
   margin: 0 0 10px 0;
 }
 
@@ -233,7 +233,7 @@
 /* Discount Code Display */
 .spin-wheel-code {
   background: rgba(0, 0, 0, 0.3);
-  border: 2px dashed rgba(212, 175, 55, 0.5);
+  border: 2px dashed rgba(201, 146, 43, 0.5);
   border-radius: 8px;
   padding: 12px 15px;
   margin: 15px 0;
@@ -252,9 +252,9 @@
 }
 
 .spin-wheel-copy-btn {
-  background: rgba(212, 175, 55, 0.2);
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  color: #d4af37;
+  background: rgba(201, 146, 43, 0.2);
+  border: 1px solid rgba(201, 146, 43, 0.4);
+  color: #C9922B;
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 0.8rem;
@@ -263,7 +263,7 @@
 }
 
 .spin-wheel-copy-btn:hover {
-  background: rgba(212, 175, 55, 0.3);
+  background: rgba(201, 146, 43, 0.3);
 }
 
 .spin-wheel-copy-btn.copied {
@@ -276,7 +276,7 @@
 .spin-wheel-claim-btn {
   width: 100%;
   padding: 14px 24px;
-  background: linear-gradient(145deg, #d4af37, #b8941f);
+  background: linear-gradient(145deg, #C9922B, #A67724);
   border: none;
   border-radius: 10px;
   color: #0f0c29;
@@ -291,7 +291,7 @@
 
 .spin-wheel-claim-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 6px 20px rgba(201, 146, 43, 0.4);
 }
 
 /* Expiry Text */
@@ -307,7 +307,7 @@
   text-align: center;
   margin-top: 20px;
   padding-top: 20px;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-top: 1px solid rgba(201, 146, 43, 0.2);
 }
 
 .spin-wheel-share p {
@@ -342,7 +342,7 @@
 /* Free Reading Link */
 .spin-wheel-reading-link {
   display: inline-block;
-  color: #d4af37;
+  color: #C9922B;
   text-decoration: underline;
   font-weight: 600;
   transition: color 0.2s ease;

@@ -752,7 +752,7 @@ body.nav-open { overflow: hidden; }
   gap: 0.3rem !important;
 }
 /* css/shop-fixes.css forces `.product-card h3, .product-card .title, ...`
-   to legacy gold #d4af37 !important, which is 2.1:1 on a white card. The
+   to legacy gold #C9922B !important, which is 2.1:1 on a white card. The
    gifting grid renders bare h3 and .price rather than the .product-card-title
    class the rest of the site uses, so it slipped past the rules below. */
 .soho-scope .product-card h3,
