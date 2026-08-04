@@ -515,11 +515,14 @@
         margin-bottom: 20px;
       }
 
+      /* !important because css/restoration.css sets `span { color:
+         var(--ink) !important }` for body copy on cream, which would
+         otherwise leave this label near-black on a near-black button. */
       .wardrobe-shop-button {
         width: 100%;
         padding: 16px;
         background: #1a1a1a;
-        color: #ffffff;
+        color: #ffffff !important;
         border: none;
         border-radius: 12px;
         font-size: 1rem;

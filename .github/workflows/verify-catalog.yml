@@ -1,0 +1,34 @@
+name: Verify catalog
+
+# A product listed for sale must be buyable. This fails the build if the
+# catalog and the checkout price map disagree, which is what let
+# "Unknown product: aquarius-crop-hoodie" reach a real customer.
+on:
+  push:
+    paths:
+      - 'data/all-products.json'
+      - 'public/data/products.json'
+      - 'scripts/lib/catalog.mjs'
+      - 'scripts/build-checkout-catalog.mjs'
+      - 'scripts/verify-catalog.mjs'
+      - '.github/workflows/verify-catalog.yml'
+  pull_request:
+    paths:
+      - 'data/all-products.json'
+      - 'public/data/products.json'
+      - 'scripts/lib/catalog.mjs'
+      - 'scripts/build-checkout-catalog.mjs'
+      - 'scripts/verify-catalog.mjs'
+      - '.github/workflows/verify-catalog.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Every listed product must have a price
+        run: node scripts/verify-catalog.mjs

@@ -49,6 +49,43 @@
       .filter((item) => item.id);
   }
 
+  /**
+   * Turn the ids the server could not price back into the names the customer
+   * actually recognises, using the cart they are looking at.
+   */
+  function namesForUnavailable(unavailable, cart) {
+    const nameFor = (id) => {
+      const match = cart.find((item) => resolveCheckoutProductId(item) === id);
+      return (match && (match.name || match.title)) || id;
+    };
+    return (unavailable || [])
+      .map((entry) => nameFor(typeof entry === 'string' ? entry : entry?.id))
+      .filter(Boolean);
+  }
+
+  function listNames(names) {
+    if (names.length <= 1) return names[0] || '';
+    return `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+  }
+
+  /**
+   * Only for the partial-success case, where the order really does continue
+   * without these items.
+   */
+  function describeUnavailable(unavailable, cart) {
+    const names = namesForUnavailable(unavailable, cart);
+    if (!names.length) return '';
+    const one = names.length === 1;
+    return `${listNames(names)} ${one ? 'is' : 'are'} unavailable right now and ${one ? 'was' : 'were'} not included. Everything else in your basket is ready to check out.`;
+  }
+
+  function setInlineNotice(message = '') {
+    const noticeEl = document.getElementById('checkout-notice');
+    if (!noticeEl) return;
+    noticeEl.textContent = message;
+    noticeEl.style.display = message ? 'block' : 'none';
+  }
+
   function setInlineError(message = '') {
     const errorEl = document.getElementById('checkout-error');
     if (!errorEl) return;
@@ -56,28 +93,38 @@
     errorEl.style.display = message ? 'block' : 'none';
   }
 
+  // site.json lives at /public/data/site.json in this repo, but this used to
+  // request /data/site.json only, which 404s in production. That made the
+  // publishable key unreachable, so checkout could not start even once the
+  // basket resolved. Both locations are tried, same idiom the checkout Edge
+  // Function already uses for products.json.
+  const SITE_CONFIG_URLS = ['/public/data/site.json', '/data/site.json'];
+
   async function loadPublishableKey() {
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 5000);
-    let response;
-    try {
-      response = await fetch('/data/site.json', { cache: 'no-store', signal: ctrl.signal });
-    } catch (err) {
-      clearTimeout(timer);
-      if (err.name === 'AbortError') {
-        throw new Error('Configuration request timed out. Please try again.');
+    let lastStatus = null;
+    for (const url of SITE_CONFIG_URLS) {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 5000);
+      let response;
+      try {
+        response = await fetch(url, { cache: 'no-store', signal: ctrl.signal });
+      } catch (err) {
+        clearTimeout(timer);
+        if (err.name === 'AbortError') {
+          throw new Error('Configuration request timed out. Please try again.');
+        }
+        continue;
       }
-      throw new Error('Network error loading configuration. Please check your connection and try again.');
+      clearTimeout(timer);
+      if (!response.ok) {
+        lastStatus = response.status;
+        continue;
+      }
+      const data = await response.json().catch(() => ({}));
+      if (data?.stripePublishableKey) return data.stripePublishableKey;
+      lastStatus = 'missing key';
     }
-    clearTimeout(timer);
-    if (!response.ok) {
-      throw new Error(`Failed to load configuration (${response.status}).`);
-    }
-    const data = await response.json().catch(() => ({}));
-    if (!data?.stripePublishableKey) {
-      throw new Error('Missing Stripe publishable key.');
-    }
-    return data.stripePublishableKey;
+    throw new Error(`Failed to load payment configuration (${lastStatus ?? 'unreachable'}).`);
   }
 
   /**
@@ -115,9 +162,13 @@
     checkoutButton.disabled = true;
     checkoutButton.textContent = 'Loading…';
     setInlineError('');
+    // Clear the notice too, or a "such and such was left out" message from a
+    // previous attempt stays on screen next to a fresh, unrelated error.
+    setInlineNotice('');
 
     try {
-      const basket = buildBasket(readCart());
+      const cart = readCart();
+      const basket = buildBasket(cart);
       if (!basket.length) {
         throw new Error('Your cart is empty.');
       }
@@ -152,7 +203,13 @@
       console.log('[checkout-embed] create-checkout response', data);
 
       if (!response.ok) {
-        throw new Error(data?.error || `Checkout request failed (${response.status})`);
+        // The server's message leads on a hard failure. describeUnavailable()
+        // ends with "everything else in your basket is ready to check out",
+        // which is plainly wrong when nothing could be priced, so it is only
+        // ever extra context here, never the whole message.
+        const names = namesForUnavailable(data?.unavailable, cart);
+        const base = data?.error || `Checkout request failed (${response.status})`;
+        throw new Error(names.length ? `${base} Affected: ${listNames(names)}.` : base);
       }
 
       if (data?.error) {
@@ -162,6 +219,10 @@
       if (!data?.clientSecret) {
         throw new Error('Missing client secret.');
       }
+
+      // Some lines could not be priced, but the rest of the order is valid:
+      // name them for the customer and carry on to payment.
+      setInlineNotice(describeUnavailable(data?.unavailable, cart));
 
       const [publishableKey, Stripe] = await Promise.all([loadPublishableKey(), waitForStripe()]);
       const stripe = Stripe(publishableKey);
