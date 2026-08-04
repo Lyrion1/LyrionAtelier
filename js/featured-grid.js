@@ -54,7 +54,14 @@ async function loadFeaturedProducts() {
   const grid = document.querySelector(GRID_SELECTOR);
   if (!grid) return;
   try {
-    const response = await fetch('/data/all-products.json', { cache: 'force-cache' });
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 5000);
+    let response;
+    try {
+      response = await fetch('/data/all-products.json', { cache: 'force-cache', signal: ctrl.signal });
+    } finally {
+      clearTimeout(timer);
+    }
     if (!response.ok) return;
     const catalog = await response.json();
     const items = Array.isArray(catalog) ? catalog : [];

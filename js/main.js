@@ -1451,6 +1451,30 @@ function initNavigationLoading() {
   const links = document.querySelectorAll('a');
   const overlay = createLoadingOverlay();
 
+  // Safety timeout: overlay must never block the page for more than 5 seconds.
+  let safetyTimer = null;
+  function clearOverlay() {
+    overlay.classList.remove('active');
+    if (safetyTimer) { clearTimeout(safetyTimer); safetyTimer = null; }
+  }
+  function showOverlay() {
+    overlay.classList.add('active');
+    if (safetyTimer) clearTimeout(safetyTimer);
+    safetyTimer = setTimeout(clearOverlay, 5000);
+  }
+
+  // Always clear on page show (handles bfcache restore and normal load).
+  window.addEventListener('pageshow', clearOverlay);
+  // Dismiss on click, Escape, or keyboard activation.
+  overlay.setAttribute('role', 'button');
+  overlay.setAttribute('tabindex', '0');
+  overlay.setAttribute('aria-label', 'Dismiss loading overlay');
+  overlay.addEventListener('click', clearOverlay);
+  overlay.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') clearOverlay();
+  });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') clearOverlay(); });
+
   function shouldShowOverlay(link, event) {
     const href = link.getAttribute('href');
     const target = link.getAttribute('target');
@@ -1463,14 +1487,12 @@ function initNavigationLoading() {
   links.forEach(link => {
     link.addEventListener('click', function(e) {
       if (shouldShowOverlay(link, e)) {
-        overlay.classList.add('active');
+        showOverlay();
       }
     });
   });
 
-  window.addEventListener('beforeunload', function() {
-    overlay.classList.add('active');
-  });
+  window.addEventListener('beforeunload', showOverlay);
 }
 
 function createLoadingOverlay() {

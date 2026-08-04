@@ -1,15 +1,22 @@
 import { ZS } from '../shared/zodiac.mjs';
 
+function withTimeout(ms) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ms);
+  ctrl.signal.addEventListener('abort', () => clearTimeout(timer), { once: true });
+  return ctrl.signal;
+}
+
 export async function loadCatalog(){
   const sources = [];
   // a) Supabase catalog function
   try {
-    const r = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/printful-sync', { method:'GET' });
+    const r = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/printful-sync', { method:'GET', signal: withTimeout(5000) });
     if (r.ok) sources.push(await r.json());
   } catch {}
   // b) Local JSON seed (if present)
   try {
-    const r = await fetch('/data/all-products.json', { cache: 'no-cache' });
+    const r = await fetch('/data/all-products.json', { cache: 'no-cache', signal: withTimeout(5000) });
     if (r.ok) sources.push(await r.json());
   } catch {}
   // c) Globals exposed by Copilot fix
@@ -23,7 +30,7 @@ export async function loadCatalog(){
   const mapCandidates = ['/data/images-map.json', '/public/data/images-map.json'];
   for (const url of mapCandidates) {
     try {
-      const r = await fetch(url, { cache: 'no-cache' });
+      const r = await fetch(url, { cache: 'no-cache', signal: withTimeout(5000) });
       if (r.ok) { imgMap = await r.json(); break; }
     } catch {}
   }
