@@ -4,6 +4,19 @@ const FALLBACK_IMAGE = '/assets/catalog/placeholder.webp';
 const EXTENDED_SIZE = /^([2-9]?xl)$/i;
 const PRICE_FALLBACK = '—';
 const SITE_ORIGIN = 'https://lyrionatelier.com';
+const EMOJI_POOL = ['✨', '🔥', '💖', '🦁', '🌟', '💪', '🌙', '⚡'];
+const AFFIRMATIONS = [
+  'You lead with fire 🔥',
+  'Bold moves look good on you',
+  'Your courage is magnetic',
+  'Soft heart, fierce spirit',
+  'Main character energy unlocked',
+  'The universe sees your bravery',
+  'Protective energy activated',
+  'Step into your power ✨',
+  'I love you means stepping into the fire',
+  'You’re already enough — and still rising'
+];
 const fullRes = (u) => (u || '').replace('_thumb', '');
 
 const $ = (sel) => document.querySelector(sel);
@@ -242,6 +255,165 @@ function showError(message) {
     </div>`;
 }
 
+function pickRandom(list = []) {
+  return list[Math.floor(Math.random() * list.length)] || '';
+}
+
+function extractLoveLanguageText(product = {}) {
+  const sources = [
+    product.loveLanguage,
+    product.love_language,
+    product.copy?.loveLanguage,
+    product.copy?.quote,
+    product.quote,
+    product.copy?.notes,
+    product.description
+  ].filter(Boolean);
+
+  for (const source of sources) {
+    const lines = String(source)
+      .split(/\n+/)
+      .map((line) => line.replace(/^[•\-]\s*/, '').trim())
+      .filter(Boolean);
+
+    const match =
+      lines.find((line) => /love language/i.test(line)) ||
+      lines.find((line) => /quote|means|heart|fire|courage/i.test(line));
+    if (match) return match;
+  }
+
+  return '';
+}
+
+function normalizeList(value) {
+  if (!Array.isArray(value)) return [];
+  return value.map((item) => String(item || '').trim()).filter(Boolean);
+}
+
+function buildTagGroup(title, items = []) {
+  if (!items.length) return null;
+  const group = document.createElement('section');
+  group.className = 'product-tag-group';
+  group.innerHTML = `<h2 class="product-tag-group__title">${title}</h2><div class="product-tag-list"></div>`;
+  const list = group.querySelector('.product-tag-list');
+  items.forEach((item) => {
+    const tag = document.createElement('span');
+    tag.className = 'product-tag';
+    tag.textContent = item;
+    list.appendChild(tag);
+  });
+  return group;
+}
+
+function renderDetailTags(product = {}) {
+  const tagsWrap = $('#product-detail-tags');
+  if (!tagsWrap) return;
+  tagsWrap.innerHTML = '';
+
+  const features = normalizeList(product.features);
+  const perfectFor = normalizeList(product.perfectFor || product.perfect_for || product.perfect_for_list);
+
+  const featureGroup = buildTagGroup('Features', features);
+  const perfectForGroup = buildTagGroup('Perfect For', perfectFor);
+
+  [featureGroup, perfectForGroup].filter(Boolean).forEach((group) => tagsWrap.appendChild(group));
+  tagsWrap.classList.toggle('is-visible', tagsWrap.children.length > 0);
+}
+
+function renderLoveLanguage(product = {}) {
+  const wrap = $('#product-love-note');
+  const textEl = $('#product-love-note-text');
+  if (!wrap || !textEl) return;
+  const text = extractLoveLanguageText(product);
+  if (!text) {
+    wrap.classList.remove('is-visible');
+    textEl.textContent = '';
+    return;
+  }
+  textEl.textContent = text;
+  wrap.classList.add('is-visible');
+}
+
+function initProductMagic() {
+  if (document.querySelector('.product-affirmation-layer')) return;
+  const layer = document.createElement('div');
+  layer.className = 'product-affirmation-layer';
+  layer.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(layer);
+
+  let dropsCreated = 0;
+  const maxDrops = 10;
+  const timers = [];
+
+  const pulseButton = () => {
+    const addBtn = $('#add-to-cart-btn');
+    if (!addBtn) return;
+    addBtn.classList.remove('product-button-glow');
+    void addBtn.offsetWidth;
+    addBtn.classList.add('product-button-glow');
+    window.setTimeout(() => addBtn.classList.remove('product-button-glow'), 1100);
+  };
+
+  const showAffirmation = (x, y) => {
+    const bubble = document.createElement('div');
+    bubble.className = 'product-affirmation';
+    bubble.textContent = pickRandom(AFFIRMATIONS);
+    bubble.style.left = `${Math.max(72, Math.min(window.innerWidth - 72, x))}px`;
+    bubble.style.top = `${Math.max(96, Math.min(window.innerHeight - 96, y))}px`;
+    layer.appendChild(bubble);
+    pulseButton();
+    window.setTimeout(() => bubble.remove(), 3500);
+  };
+
+  const spawnEmoji = () => {
+    if (dropsCreated >= maxDrops) return;
+    dropsCreated += 1;
+
+    const emoji = document.createElement('button');
+    emoji.type = 'button';
+    emoji.className = 'product-emoji-drop';
+    emoji.textContent = pickRandom(EMOJI_POOL);
+    emoji.style.left = `${8 + Math.random() * 80}vw`;
+    emoji.style.setProperty('--drift-mid', `${(Math.random() - 0.5) * 40}px`);
+    emoji.style.setProperty('--drift-end', `${(Math.random() - 0.5) * 70}px`);
+    const duration = 4.8 + Math.random() * 2.1;
+    emoji.style.setProperty('--fall-duration', `${duration}s`);
+
+    let affirmationShown = false;
+    const trigger = () => {
+      if (affirmationShown) return;
+      affirmationShown = true;
+      const rect = emoji.getBoundingClientRect();
+      showAffirmation(rect.left + rect.width / 2, rect.top);
+    };
+
+    emoji.addEventListener('click', () => {
+      trigger();
+      emoji.remove();
+    });
+
+    const midpointTimer = window.setTimeout(trigger, duration * 500);
+    const cleanupTimer = window.setTimeout(() => {
+      emoji.remove();
+    }, duration * 1000);
+
+    emoji.addEventListener('animationend', () => {
+      window.clearTimeout(midpointTimer);
+      emoji.remove();
+    }, { once: true });
+
+    layer.appendChild(emoji);
+    timers.push(midpointTimer, cleanupTimer);
+
+    if (dropsCreated < maxDrops) {
+      const nextDelay = 4000 + Math.random() * 3000;
+      timers.push(window.setTimeout(spawnEmoji, nextDelay));
+    }
+  };
+
+  timers.push(window.setTimeout(spawnEmoji, 1800));
+}
+
 async function hydrateProductPage() {
   const slug = getSlug();
   if (!slug) return showError('Product not found.');
@@ -293,6 +465,8 @@ async function hydrateProductPage() {
     materialsEl.appendChild(frag);
   }
   if (careEl) careEl.textContent = care;
+  renderLoveLanguage(product);
+  renderDetailTags(product);
 
   const sizes = unique(
     (product.options?.sizes || [])
@@ -314,6 +488,10 @@ async function hydrateProductPage() {
   sizeButtonsWrap.setAttribute('role', 'group');
   sizeButtonsWrap.setAttribute('aria-label', 'Select size');
   if (sizeContainer) {
+    const sizeLabel = document.createElement('div');
+    sizeLabel.className = 'product-option-label';
+    sizeLabel.textContent = 'Size';
+    sizeContainer.appendChild(sizeLabel);
     sizeContainer.appendChild(sizeButtonsWrap);
   }
   if (sizeSelect) {
@@ -496,6 +674,8 @@ async function hydrateProductPage() {
       url: `${SITE_ORIGIN}${canonicalPath}`
     }
   });
+
+  initProductMagic();
 }
 
 if (document.readyState !== 'loading') hydrateProductPage();
