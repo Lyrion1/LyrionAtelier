@@ -286,8 +286,9 @@
   color: var(--pdp-ivory) !important;
 }
 
-[data-page="product"] .pdp-atb-btn:hover {
-  background: var(--plum, #5B4B7A);
+[data-page="product"] .pdp-wrapper button.pdp-atb-btn:hover {
+  background: var(--plum, #5B4B7A) !important;
+  background-color: var(--plum, #5B4B7A) !important;
 }
 
 [data-page="product"] .pdp-atb-btn:focus-visible {
