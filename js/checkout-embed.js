@@ -28,10 +28,21 @@
     }
   }
 
+  function resolveCheckoutProductId(item) {
+    const candidates = [
+      item?.slug,
+      item?.id,
+      item?.productId
+    ];
+    return candidates
+      .map((value) => (value == null ? '' : String(value).trim()))
+      .find(Boolean) || '';
+  }
+
   function buildBasket(cart) {
     return cart
       .map((item) => ({
-        id: item.id || item.productId || item.slug || '',
+        id: resolveCheckoutProductId(item),
         qty: Number.isFinite(item.quantity) ? item.quantity : Number(item.qty) || 1,
         size: item.size || item.selectedSize || 'Default'
       }))
@@ -112,13 +123,12 @@
       const data = await response.json().catch(() => ({}));
       console.log('[checkout-embed] create-checkout response', data);
 
-      if (data?.error) {
-        setInlineError(data.error);
-        return;
+      if (!response.ok) {
+        throw new Error(data?.error || `Checkout request failed (${response.status})`);
       }
 
-      if (!response.ok) {
-        throw new Error(`Checkout request failed (${response.status})`);
+      if (data?.error) {
+        throw new Error(data.error);
       }
 
       if (!data?.clientSecret) {

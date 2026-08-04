@@ -5,7 +5,6 @@ gtag('config', 'G-XXXXXXXXXX');
 
 document.addEventListener('DOMContentLoaded', () => {
   updateCartCount();
-  displayCart();
   bindCartActions();
 });
 
