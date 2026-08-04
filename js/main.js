@@ -1465,8 +1465,14 @@ function initNavigationLoading() {
 
   // Always clear on page show (handles bfcache restore and normal load).
   window.addEventListener('pageshow', clearOverlay);
-  // Dismiss on click or Escape.
+  // Dismiss on click, Escape, or keyboard activation.
+  overlay.setAttribute('role', 'button');
+  overlay.setAttribute('tabindex', '0');
+  overlay.setAttribute('aria-label', 'Dismiss loading overlay');
   overlay.addEventListener('click', clearOverlay);
+  overlay.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') clearOverlay();
+  });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') clearOverlay(); });
 
   function shouldShowOverlay(link, event) {
