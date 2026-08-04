@@ -79,9 +79,9 @@ h1, h2, h3, h4, h5, h6,
   color: var(--plum) !important;
 }
 
-h1 { font-size: clamp(2.25rem, 4vw, 3.25rem) !important; letter-spacing: -0.02em !important; }
-h2 { font-size: clamp(1.75rem, 3vw, 2.25rem) !important; }
-h3 { font-size: clamp(1.25rem, 2.25vw, 1.5rem) !important; }
+h1 { font-size: var(--text-5xl) !important; letter-spacing: var(--tracking-tight) !important; }
+h2 { font-size: var(--text-4xl) !important; }
+h3 { font-size: var(--text-3xl) !important; }
 
 p, li, dd, dt, span, small, label, input, select, textarea, th, td, .muted, .product-card-description, .product-card-price, .product-price, .reading-description {
   color: var(--ink) !important;
