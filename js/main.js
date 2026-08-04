@@ -34,15 +34,25 @@ const LOCALIZATION_STORAGE_KEY = 'lyrion_locale_preferences';
 const PRICE_TEXT_CACHE = new WeakMap();
 const PRICE_TOKEN_REGEX = /\bUSD\s*([\d,]+(?:\.\d{1,2})?)|\$([\d,]+(?:\.\d{1,2})?)/gi;
 const PRICE_TOKEN_TEST_REGEX = /\bUSD\s*([\d,]+(?:\.\d{1,2})?)|\$([\d,]+(?:\.\d{1,2})?)/i;
+/**
+ * Catalog prices are stored in GBP and Stripe settles in GBP, so GBP is the
+ * base and its rate is exactly 1. That is what makes the price on the tag the
+ * price on the card: for a GBP shopper no conversion happens at all, and every
+ * other currency is one multiplication away from the same canonical figure.
+ * Previously the base was USD while GBP was pinned at 1, so pound shoppers saw
+ * dollar amounts wearing a pound sign and were then charged a different,
+ * separately converted figure at checkout.
+ */
+const BASE_CURRENCY = 'GBP';
 const CURRENCY_RATES = {
-  USD: 1,
-  EUR: 0.93,
   GBP: 1,
-  CAD: 1.37,
-  AUD: 1.53,
-  NZD: 1.67,
-  JPY: 156,
-  CHF: 0.88
+  USD: 1.27,
+  EUR: 1.17,
+  CAD: 1.74,
+  AUD: 1.94,
+  NZD: 2.12,
+  JPY: 198,
+  CHF: 1.12
 };
 const COUNTRY_TO_CURRENCY = {
   US: 'USD', GB: 'GBP', IE: 'EUR', FR: 'EUR', DE: 'EUR', IT: 'EUR', ES: 'EUR', NL: 'EUR', BE: 'EUR', PT: 'EUR',
@@ -85,8 +95,25 @@ let activeLocalization = null;
   const head = document.head;
   if (!head) return;
 
+  /**
+   * Append a stylesheet, and if the page already links it, move that link to
+   * the end of head instead of doing nothing.
+   *
+   * The theme layer beats the older stylesheets by source order, not by
+   * specificity: several of its rules and theirs are both `!important` on the
+   * same bare class, so whichever comes last wins. A page that helpfully adds
+   * its own early `<link>` to the theme therefore demotes it below the legacy
+   * sheets. That is exactly what turned the cart page header cream, leaving
+   * off-white nav text on a near-white bar at about 1.1:1. Relocating keeps
+   * the theme last wherever it is declared.
+   */
   const ensureStylesheet = (href) => {
-    if (!href || head.querySelector(`link[rel="stylesheet"][href="${href}"]`)) return;
+    if (!href) return;
+    const existing = head.querySelector(`link[rel="stylesheet"][href="${href}"]`);
+    if (existing) {
+      if (existing !== head.lastElementChild) head.appendChild(existing);
+      return;
+    }
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = href;
@@ -694,7 +721,7 @@ function removeSeasonalCampaignElements() {
 function localizeDisplayedPrices(root = document.body) {
   if (!root || !activeLocalization) return;
   const locale = activeLocalization.language || 'en';
-  const currency = activeLocalization.currency || 'USD';
+  const currency = activeLocalization.currency || BASE_CURRENCY;
   const formatAmount = (amount) => formatLocalizedPrice(amount, currency, locale);
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
     acceptNode(node) {
@@ -754,9 +781,9 @@ function normalizeLanguage(language = 'en') {
   return LANGUAGE_OPTIONS.some((item) => item.code === code) ? code : 'en';
 }
 
-function normalizeCurrency(currency = 'USD') {
-  const code = String(currency || 'USD').toUpperCase();
-  return CURRENCY_OPTIONS.includes(code) ? code : 'USD';
+function normalizeCurrency(currency = BASE_CURRENCY) {
+  const code = String(currency || BASE_CURRENCY).toUpperCase();
+  return CURRENCY_OPTIONS.includes(code) ? code : BASE_CURRENCY;
 }
 
 function readLocalizationPreferences() {
@@ -793,7 +820,7 @@ function detectDefaultLocalization() {
   const country = detectCountryCode();
   return {
     language,
-    currency: normalizeCurrency(COUNTRY_TO_CURRENCY[country] || 'USD')
+    currency: normalizeCurrency(COUNTRY_TO_CURRENCY[country] || BASE_CURRENCY)
   };
 }
 
@@ -801,18 +828,33 @@ function syncLocalizationControls() {
   const languageControl = document.querySelector('[data-locale-language]');
   const currencyControl = document.querySelector('[data-locale-currency]');
   if (languageControl) languageControl.value = activeLocalization?.language || 'en';
-  if (currencyControl) currencyControl.value = activeLocalization?.currency || 'USD';
+  if (currencyControl) currencyControl.value = activeLocalization?.currency || BASE_CURRENCY;
 }
 
-function convertUsdToCurrency(usdAmount, currency) {
-  const amount = Number(usdAmount);
+/**
+ * Round a converted amount to a retail-looking figure so a shopper in a
+ * non-base currency sees 63.99 rather than the raw 64.0713 that falls out of
+ * the multiplication. The base currency is never rounded, because there its
+ * stored price is already the exact amount that will be charged.
+ */
+function retailRound(amount) {
+  const n = Number(amount);
+  if (!Number.isFinite(n) || n <= 0) return n;
+  return Math.max(0.99, Math.round(n) - 0.01);
+}
+
+function convertBaseToCurrency(baseAmount, currency) {
+  const amount = Number(baseAmount);
   if (!Number.isFinite(amount)) return null;
-  const rate = CURRENCY_RATES[currency] || 1;
-  return amount * rate;
+  if (currency === BASE_CURRENCY) return amount;
+  const rate = CURRENCY_RATES[currency];
+  if (!Number.isFinite(rate) || rate <= 0) return amount;
+  if (currency === 'JPY') return Math.round(amount * rate);
+  return retailRound(amount * rate);
 }
 
-function formatLocalizedPrice(usdAmount, currency = 'USD', language = 'en') {
-  const converted = convertUsdToCurrency(usdAmount, currency);
+function formatLocalizedPrice(baseAmount, currency = BASE_CURRENCY, language = 'en') {
+  const converted = convertBaseToCurrency(baseAmount, currency);
   if (!Number.isFinite(converted)) return '—';
   try {
     return new Intl.NumberFormat(`${language}-${detectCountryCode()}`, {
@@ -821,10 +863,10 @@ function formatLocalizedPrice(usdAmount, currency = 'USD', language = 'en') {
       maximumFractionDigits: currency === 'JPY' ? 0 : 2
     }).format(converted);
   } catch {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-GB', {
       style: 'currency',
-      currency: 'USD'
-    }).format(Number(usdAmount) || 0);
+      currency: BASE_CURRENCY
+    }).format(Number(baseAmount) || 0);
   }
 }
 
@@ -835,6 +877,9 @@ function applyLocalization(localization, { persist = false } = {}) {
   };
   document.documentElement.lang = activeLocalization.language;
   window.__lyrionLocalization = { ...activeLocalization };
+  // Publish the rates so js/price-utils.js (an ES module, which cannot import
+  // from this classic script) converts through exactly the same numbers.
+  window.__lyrionRates = { ...CURRENCY_RATES };
   if (persist) saveLocalizationPreferences(activeLocalization);
   syncLocalizationControls();
   localizeDisplayedPrices(document.body);
@@ -845,7 +890,7 @@ async function refreshExchangeRates() {
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 1800);
-    const response = await fetch('https://open.er-api.com/v6/latest/USD', {
+    const response = await fetch(`https://open.er-api.com/v6/latest/${BASE_CURRENCY}`, {
       signal: controller.signal,
       cache: 'no-store'
     });
@@ -854,7 +899,10 @@ async function refreshExchangeRates() {
     const payload = await response.json();
     if (!payload || payload.result !== 'success' || typeof payload.rates !== 'object') return;
     CURRENCY_OPTIONS.forEach((currency) => {
-      if (currency === 'GBP') return;
+      // The base currency is the price as stored and as charged. It must stay
+      // exactly 1 whatever the rate feed says, or displayed prices would drift
+      // away from what Stripe actually takes.
+      if (currency === BASE_CURRENCY) return;
       const nextRate = Number(payload.rates[currency]);
       if (Number.isFinite(nextRate) && nextRate > 0) CURRENCY_RATES[currency] = nextRate;
     });
@@ -870,7 +918,7 @@ function initLocalizationSystem() {
   languageControl?.addEventListener('change', () => {
     applyLocalization({
       language: languageControl.value,
-      currency: activeLocalization?.currency || 'USD'
+      currency: activeLocalization?.currency || BASE_CURRENCY
     }, { persist: true });
   });
   currencyControl?.addEventListener('change', () => {

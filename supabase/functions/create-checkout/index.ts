@@ -103,11 +103,21 @@ Deno.serve(async (req: Request) => {
     const productMap = new Map(products.map((p) => [p.id, p]));
 
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
+    // A single unresolvable line must never block an entire order. Collect the
+    // ones we cannot price, charge for everything else, and tell the client
+    // exactly which items were left out so it can name them to the customer.
+    const unavailable: { id: string; reason: string }[] = [];
 
     for (const item of basket) {
       const product = productMap.get(item.id);
-      if (!product) return json({ error: `Unknown product: ${item.id}` }, 400);
-      if (!product.priceGBP) return json({ error: `No price for product: ${item.id}` }, 400);
+      if (!product) {
+        unavailable.push({ id: item.id, reason: 'not-found' });
+        continue;
+      }
+      if (!product.priceGBP) {
+        unavailable.push({ id: item.id, reason: 'no-price' });
+        continue;
+      }
 
       const productName = item.size ? `${product.name} (${item.size})` : product.name;
 
@@ -126,6 +136,14 @@ Deno.serve(async (req: Request) => {
           },
         },
       });
+    }
+
+    // Only a basket with nothing purchasable in it is a hard failure.
+    if (!lineItems.length) {
+      return json({
+        error: 'None of the items in your basket are available to purchase right now.',
+        unavailable,
+      }, 400);
     }
 
     let discounts: Stripe.Checkout.SessionCreateParams.Discount[] | undefined;
@@ -178,7 +196,10 @@ Deno.serve(async (req: Request) => {
       },
     });
 
-    return json({ clientSecret: session.client_secret }, 200);
+    return json({
+      clientSecret: session.client_secret,
+      ...(unavailable.length ? { unavailable } : {}),
+    }, 200);
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error('[create-checkout]', message);

@@ -34,6 +34,10 @@
   /* ---- Brand accents ---- */
   --soho-gold: #c6a76b;
   --soho-gold-soft: #ddc48c;
+  /* Same antique gold, dark enough to be legible ON light backgrounds.
+     The brand gold is 2.17:1 on cream, which fails AA for small text; this
+     is 4.61:1. Bright gold stays in use anywhere the background is dark. */
+  --soho-gold-ink: #8a6d2f;
   --soho-plum: #6d4c86;
   --soho-plum-deep: #4a2f61;
 
@@ -76,7 +80,10 @@
   font-size: 0.72rem !important;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--soho-gold) !important;
+  /* Eyebrows sit on the cream page background by default, so they use the
+     darker gold. Dark sections, the hero and the split panels override this
+     back to the bright gold below. */
+  color: var(--soho-gold-ink) !important;
   font-weight: 600;
   display: inline-block;
   margin: 0 0 0.9rem !important;
@@ -507,6 +514,9 @@ body.nav-open { overflow: hidden; }
   width: max-content;
   animation: soho-marquee-scroll 32s linear infinite;
 }
+/* css/restoration.css has a blanket `p, li, span, ... { color: var(--ink)
+   !important }` intended for body copy on cream. It also hits these spans,
+   which sit on the dark marquee band, dropping them to about 1.4:1. */
 .soho-marquee__track span {
   font-family: var(--soho-font-eyebrow);
   font-size: 0.72rem;
@@ -514,6 +524,7 @@ body.nav-open { overflow: hidden; }
   text-transform: uppercase;
   padding: 0.85rem 2.5rem;
   white-space: nowrap;
+  color: var(--soho-on-midnight) !important;
 }
 @keyframes soho-marquee-scroll {
   from { transform: translateX(0); }
@@ -668,8 +679,26 @@ body.nav-open { overflow: hidden; }
 }
 .soho-split__panel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--soho-ease); }
 .soho-split__panel:hover img { transform: scale(1.045); }
-.soho-split__panel::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(20,11,31,0.75)); }
+/* The scrim has to guarantee legibility over an arbitrary photograph, not
+   just over the ones currently in the slots. The previous ramp was still
+   fully transparent where the eyebrow sits, so gold text landed on whatever
+   the image happened to be, measured at 1.16:1 over a pale shoulder. This
+   ramp is dark enough across the whole text block to hold AA regardless. */
+.soho-split__panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 11, 31, 0) 0%,
+    rgba(20, 11, 31, 0.45) 42%,
+    rgba(20, 11, 31, 0.88) 78%,
+    rgba(20, 11, 31, 0.94) 100%
+  );
+}
 .soho-split__body { position: relative; z-index: 2; padding: clamp(1.75rem, 3vw, 3rem); }
+/* Lighter gold reads better than the base gold once it is over photography. */
+.soho-split__body .soho-eyebrow { color: var(--soho-gold-soft) !important; }
 .soho-split__body h3 { font-size: clamp(1.6rem, 2.6vw, 2.4rem) !important; color: #fff !important; font-family: var(--soho-font-display) !important; margin: 0 0 1rem !important; }
 @media (max-width: 760px) { .soho-split { grid-template-columns: 1fr; } .soho-split__panel { min-height: 52vh; } }
 
@@ -721,6 +750,18 @@ body.nav-open { overflow: hidden; }
   display: flex !important;
   flex-direction: column !important;
   gap: 0.3rem !important;
+}
+/* css/shop-fixes.css forces `.product-card h3, .product-card .title, ...`
+   to legacy gold #d4af37 !important, which is 2.1:1 on a white card. The
+   gifting grid renders bare h3 and .price rather than the .product-card-title
+   class the rest of the site uses, so it slipped past the rules below. */
+.soho-scope .product-card h3,
+.soho-scope .product-card .title {
+  color: var(--soho-ink) !important;
+}
+.soho-scope .product-card .price,
+.soho-scope .product-card .product-price {
+  color: var(--soho-ink-soft) !important;
 }
 .soho-scope .product-card-title,
 .soho-scope .card__title {
@@ -1005,6 +1046,15 @@ body.nav-open { overflow: hidden; }
   transition: color 180ms ease;
 }
 .footer .footer-links a:hover { color: var(--soho-gold) !important; }
+/* Footer links are a stacked list on a phone, where a 16px tall link is not
+   a realistic thumb target. Pad to 44px without changing the type size. */
+@media (max-width: 768px) {
+  .footer .footer-links a {
+    display: inline-flex !important;
+    align-items: center !important;
+    min-height: 44px !important;
+  }
+}
 
 .footer > .footer-content > p,
 .footer .footer-bottom {
