@@ -105,7 +105,7 @@ test.describe('product detail page', () => {
     const thumbs = page.locator('.product-gallery__thumbs');
 
     await expect(productDetail).toHaveCSS('border-radius', '24px');
-    await expect(storyGrid).toHaveCSS('grid-template-columns', /.+/);
+    await expect(storyGrid).toHaveCSS('display', 'grid');
     await expect(loveNote).toBeVisible();
     await expect(featuresGroup.locator('.product-tag')).toHaveCount(3);
     await expect(perfectForGroup.locator('.product-tag')).toHaveCount(3);
