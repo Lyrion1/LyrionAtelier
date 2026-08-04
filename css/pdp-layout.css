@@ -7,6 +7,105 @@
 ═══════════════════════════════════════════════════════════ */
 
 /* ----------------------------------------------------------------
+   Palette for this page: ivory ground, ink text, gold as a fine
+   accent only. No orange or tan.
+
+   css/restoration.css applies `background: var(--apricot) !important;
+   border-radius: var(--radius) !important` to the bare `button`
+   selector, which painted every control on this page apricot #F0A868
+   with a 12px radius, including the accordion rows and the read more
+   link. That sheet is shared with pages outside this brief, so rather
+   than editing it the orange is neutralised here, scoped to the
+   product page.
+----------------------------------------------------------------- */
+[data-page="product"] {
+  --pdp-ink: #2B2440;
+  --pdp-ivory: #FDF8F0;
+  --pdp-gold: #C9922B;
+  --pdp-hairline: rgba(43, 36, 64, 0.14);
+}
+
+/* Nothing on this page carries a fill, a radius or a shadow unless a
+   rule below deliberately gives it one. */
+[data-page="product"] .pdp-wrapper button,
+[data-page="product"] .pdp-wrapper .btn {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--pdp-ink) !important;
+}
+
+[data-page="product"] .pdp-wrapper button:hover,
+[data-page="product"] .pdp-wrapper .btn:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* styles/soho-theme.css already clears these two header controls, but it is
+   injected by script, so the apricot from restoration.css paints them for the
+   first frames of every load. pdp-layout.css is a plain <link>, so restating
+   the settled values here removes that orange flash on this page. The values
+   match soho-theme.css exactly; when it lands nothing moves. */
+[data-page="product"] .site-header .nav-item-trigger,
+[data-page="product"] .site-header .nav-drawer-close {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* The cookie consent banner is injected by js/analytics.js and sits outside
+   .pdp-wrapper, so the reset above does not reach it. Its own stylesheet
+   already asks for gold (#C9A84C) on both controls; the apricot from
+   restoration.css was winning only because that sheet marks the bare
+   `button` rule !important. Restated here with the same weight and scoped
+   to this page, so the banner reads in brand gold rather than orange.
+   Other pages keep whatever they had. */
+[data-page="product"] #la-consent-accept {
+  background: #C9A84C !important;
+  background-color: #C9A84C !important;
+  color: #0A1628 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+
+[data-page="product"] #la-consent-accept:hover {
+  background: #E2B959 !important;
+  background-color: #E2B959 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+[data-page="product"] #la-consent-reject {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #C9A84C !important;
+  border: 1.5px solid #C9A84C !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+
+[data-page="product"] #la-consent-reject:hover {
+  background: rgba(201, 168, 76, 0.1) !important;
+  background-color: rgba(201, 168, 76, 0.1) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* The banner sets its own cream body text; a blanket `p, li, span` rule in
+   an older sheet was repainting it near-black on the navy ground. Put the
+   intended colour back, on this page only. */
+[data-page="product"] #la-consent-banner p,
+[data-page="product"] #la-consent-banner p span {
+  color: #F0E6C8 !important;
+}
+
+/* ----------------------------------------------------------------
    Page wrapper
 ----------------------------------------------------------------- */
 [data-page="product"] .pdp-wrapper {
@@ -18,26 +117,36 @@
 }
 
 /* ----------------------------------------------------------------
-   Gallery - full width, single column
+   Gallery - contained column, never full bleed
+
+   The image sits in its own column capped at 640px and is centred
+   inside the wrapper. object-fit is `contain`, not `cover`: the
+   source photography is square, so cropping it to a 4:5 box cut the
+   bottom off the garment. Contain shows the whole product in frame.
 ----------------------------------------------------------------- */
 [data-page="product"] .pdp-gallery {
   width: 100%;
-  margin-bottom: 2.5rem;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
 }
 
 [data-page="product"] .pdp-gallery__main {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: center top;
+  max-width: 640px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  object-position: center center;
   display: block;
-  border-radius: 4px;
+  margin: 0 auto;
+  border-radius: 0;
+  background: transparent;
 }
 
 [data-page="product"] .pdp-gallery__thumbs {
   display: flex;
-  gap: 0.6rem;
-  margin-top: 0.75rem;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -47,22 +156,24 @@
 }
 
 [data-page="product"] .pdp-gallery__thumb {
-  flex: 0 0 72px;
-  width: 72px;
-  height: 72px;
-  object-fit: cover;
-  object-position: center top;
-  border-radius: 2px;
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  object-position: center center;
+  border-radius: 0;
   border: 1px solid transparent;
+  background: transparent;
   cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.55;
   transition: opacity 160ms ease, border-color 160ms ease;
 }
 
+/* Gold only as a fine accent, on the selected thumb. */
 [data-page="product"] .pdp-gallery__thumb.active,
 [data-page="product"] .pdp-gallery__thumb:hover {
   opacity: 1;
-  border-color: var(--plum, #5B4B7A);
+  border-color: var(--gold, #C9922B);
 }
 
 /* ----------------------------------------------------------------
@@ -144,7 +255,10 @@
   padding: 1.25rem 0;
 }
 
-[data-page="product"] .pdp-atb-btn {
+/* The one deliberate fill on this page: the primary CTA, in brand ink.
+   Selector carries .pdp-wrapper so it out-specifies the page-wide
+   button reset above, which would otherwise strip this fill too. */
+[data-page="product"] .pdp-wrapper button.pdp-atb-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,10 +266,10 @@
   width: 100%;
   min-height: 56px;
   padding: 0 1.5rem;
-  background: var(--ink, #2B2440);
-  color: var(--cream, #FDF8F0);
+  background: var(--pdp-ink) !important;
+  color: var(--pdp-ivory) !important;
   border: none;
-  border-radius: 2px;
+  border-radius: 2px !important;
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.8rem;
   font-weight: 700;
@@ -163,6 +277,14 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: background 200ms ease;
+}
+
+/* restoration.css paints every `span` with `color: var(--ink) !important`,
+   which left this label near-black on the ink fill. The label belongs to the
+   button, so it takes the button's own foreground. */
+[data-page="product"] .pdp-wrapper button.pdp-atb-btn .pdp-atb-label,
+[data-page="product"] .pdp-wrapper button.pdp-atb-btn span {
+  color: var(--pdp-ivory) !important;
 }
 
 [data-page="product"] .pdp-atb-btn:hover {
@@ -324,18 +446,29 @@
   -webkit-line-clamp: 3;
 }
 
+/* A plain text link, not a control. No fill, no border, no radius, no
+   padding box: just underlined ink. */
 [data-page="product"] .pdp-desc__read-more {
-  display: inline-block;
+  display: inline;
   margin-top: 0.6rem;
   font-size: var(--text-sm, 0.875rem);
-  color: var(--plum, #5B4B7A);
-  background: none;
-  border: none;
-  padding: 0;
+  color: var(--pdp-ink) !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  min-height: 0 !important;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: underline !important;
   text-underline-offset: 2px;
   font-family: inherit;
+}
+
+[data-page="product"] .pdp-desc__read-more:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
 }
 
 /* ----------------------------------------------------------------
@@ -345,8 +478,15 @@
   padding: 0;
 }
 
+/* A single pale hairline along the TOP of each row, nothing else. The
+   rows carry no fill, no radius and no shadow, so they read as thin
+   rules until you actually read the label. */
 [data-page="product"] .pdp-accordion-item {
-  border-bottom: 1px solid var(--border, rgba(91,75,122,0.18));
+  border: none;
+  border-top: 1px solid var(--pdp-hairline) !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 [data-page="product"] .pdp-accordion-item:last-child {
@@ -359,17 +499,28 @@
   justify-content: space-between;
   width: 100%;
   min-height: 56px;
-  padding: 1rem 0;
-  background: none;
-  border: none;
+  /* generous vertical padding so the rows breathe */
+  padding: 1.4rem 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   cursor: pointer;
   text-align: left;
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: var(--text-sm, 0.875rem);
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink, #2B2440);
+  color: var(--pdp-ink) !important;
+}
+
+/* The global button rule adds a lift and a shadow on hover. Neither
+   belongs on a row that is meant to look like a rule. */
+[data-page="product"] .pdp-accordion__trigger:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
 }
 
 [data-page="product"] .pdp-accordion__trigger:focus-visible {
@@ -377,11 +528,16 @@
   outline-offset: -2px;
 }
 
+/* Chevron: same ink as the label, right aligned, thin stroke. */
 [data-page="product"] .pdp-accordion__chevron {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
-  color: var(--muted, #6D627E);
+  margin-left: auto;
+  color: var(--pdp-ink) !important;
+  stroke: currentColor;
+  stroke-width: 1.25;
+  fill: none;
   transition: transform 200ms ease;
 }
 
@@ -438,9 +594,16 @@
     letter-spacing: 0.14em;
   }
 
+  /* The gallery fills the content column and no more. The wrapper keeps
+     its horizontal padding, so the image never runs edge to edge. */
+  [data-page="product"] .pdp-gallery,
+  [data-page="product"] .pdp-gallery__main {
+    max-width: 100%;
+  }
+
   [data-page="product"] .pdp-gallery__thumb {
-    flex: 0 0 60px;
-    width: 60px;
-    height: 60px;
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
   }
 }
