@@ -57,7 +57,7 @@
   }
 
   async function loadPublishableKey() {
-    const response = await fetch('/public/data/site.json', { cache: 'no-store' });
+    const response = await fetch('/data/site.json', { cache: 'no-store' });
     const data = await response.json().catch(() => ({}));
     if (!response.ok || !data?.stripePublishableKey) {
       throw new Error('Missing Stripe publishable key');
