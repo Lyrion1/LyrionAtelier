@@ -1,8 +1,3 @@
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-XXXXXXXXXX');
-
 const FORM_SUBMIT_TIMEOUT = 10000;
 
 function setStatus(statusEl, type, message, subline) {

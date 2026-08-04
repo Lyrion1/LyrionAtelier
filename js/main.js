@@ -156,7 +156,6 @@ let activeLocalization = null;
 
   ensureStylesheet('/css/restoration.css');
   ensureStylesheet('/styles/soho-theme.css');
-  ensureAnalytics();
 })();
 
 /**
@@ -169,7 +168,6 @@ document.addEventListener('DOMContentLoaded', function() {
   applySharedLayout();
   removeSeasonalCampaignElements();
   ensureSeoMetadata();
-  ensureAnalytics();
   enhanceImages();
   initLocalizationSystem();
   setTimeout(() => localizeDisplayedPrices(), 600);
@@ -509,48 +507,6 @@ function setActiveNavLink(header) {
   links.forEach(link => link.removeAttribute('aria-current'));
   if (bestMatch.link) {
     bestMatch.link.setAttribute('aria-current', 'page');
-  }
-}
-
-function ensureAnalytics() {
-  const head = document.head || document.body;
-  if (!head) return;
-
-  if (!document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
-    const gtagScript = document.createElement('script');
-    gtagScript.async = true;
-    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
-    head.appendChild(gtagScript);
-  }
-
-  if (!document.querySelector('script[data-gtag-inline]')) {
-    const inline = document.createElement('script');
-    inline.setAttribute('data-gtag-inline', 'true');
-    inline.textContent = `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    `;
-    head.appendChild(inline);
-  }
-
-  if (!document.querySelector('script[data-fb-pixel]')) {
-    const fb = document.createElement('script');
-    fb.setAttribute('data-fb-pixel', 'true');
-    fb.textContent = `
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'YOUR_PIXEL_ID');
-      fbq('track', 'PageView');
-    `;
-    head.appendChild(fb);
   }
 }
 
@@ -1014,7 +970,17 @@ function ensureSeoMetadata() {
     });
   }
 
-  if (pathname.startsWith('/shop/')) {
+  const hasAuthoredProductSchema = Array.from(
+    document.querySelectorAll('script[type="application/ld+json"]:not(#ldjson-product)')
+  ).some((el) => {
+    try {
+      return JSON.parse(el.textContent || '')['@type'] === 'Product';
+    } catch {
+      return false;
+    }
+  });
+
+  if (pathname.startsWith('/shop/') && !hasAuthoredProductSchema) {
     const name = (document.querySelector('#product-name')?.textContent || 'Zodiac Apparel').trim();
     const description = (document.querySelector('#product-description')?.textContent || seo.description).trim();
     const image = document.querySelector('#product-gallery img')?.src || OG_IMAGE;
