@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17836603744"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17836603744');
-</script>
+<script src="/js/analytics.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>What 2026 Has Written for You - Lyrīon Atelier</title>
@@ -118,5 +110,29 @@
   <script src="/js/main.js" defer></script>
   <script src="/js/cart.js" defer></script>
   <script src="/js/service-checkout.js" defer></script>
+<script>
+  /* GA4 reading events - observer only, does not modify checkout */
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.purchase-reading-button, [data-reading-id]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var readingName = btn.getAttribute('data-name') || btn.getAttribute('data-reading-id') || '';
+        if (typeof window.la_track_reading_started === 'function') {
+          window.la_track_reading_started(readingName);
+        }
+      }, { once: false });
+    });
+    /* Fire view reading event on page load */
+    var btn = document.querySelector('[data-reading-id]');
+    var name = btn ? (btn.getAttribute('data-name') || btn.getAttribute('data-reading-id') || '') : document.title;
+    if (typeof window.la_track_view_item === 'function' && btn) {
+      window.la_track_view_item({
+        id: btn.getAttribute('data-reading-id') || '',
+        name: name,
+        category: 'Oracle Reading',
+        price: parseFloat(btn.getAttribute('data-price') || '0')
+      });
+    }
+  });
+</script>
 </body>
 </html>

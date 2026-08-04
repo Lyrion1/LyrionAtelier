@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17836603744"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17836603744');
-</script>
+<script src="/js/analytics.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Taurus Ram Head Unisex Hoodie - Bold Cosmic Statement | Lyrīon Atelier</title>
@@ -20,7 +12,7 @@
   <meta property="og:type" content="product">
   <meta property="og:title" content="Taurus Ram Head Unisex Hoodie">
   <meta property="og:description" content="Bold cosmic statement piece. Premium unisex hoodie featuring the Taurus ram head in striking pink detail.">
-  <meta property="og:image" content="https://lyrionatelier.com/images/products/taurus-ram-hoodie-lifestyle-1.jpg">
+  <meta property="og:image" content="https://lyrionatelier.com/images/products/taurus-ram-hoodie-lifestyle-1-crop.jpg">
 
   <link rel="stylesheet" href="/styles/design-system.css">
   <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
@@ -119,6 +111,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Taurus Ram Head Unisex Hoodie - Bold Cosmic Statement",
+  "sku": "LA-TRH-001",
   "description": "Bold cosmic statement piece. Premium unisex hoodie featuring the Taurus ram head in striking pink detail. For those born under the sign of strength and determination.",
   "image": "https://lyrionatelier.com/images/products/taurus-ram-hoodie-lifestyle-1.jpg",
   "brand": {
@@ -229,6 +222,7 @@
 
     <div class="product-grid">
       <div class="product-gallery">
+        <img src="/images/products/taurus-ram-hoodie-lifestyle-1-crop.jpg" alt="Taurus Ram Head Unisex Hoodie, cropped to show the ram head graphic" loading="eager">
         <img src="/images/products/taurus-ram-hoodie-lifestyle-1.jpg" alt="Taurus Ram Head Unisex Hoodie lifestyle view" loading="lazy">
         <img src="/images/products/taurus-ram-hoodie-lifestyle-2.jpg" alt="Taurus Ram Head Unisex Hoodie second lifestyle view" loading="lazy">
         <img src="/images/products/taurus-ram-hoodie-lifestyle-3.jpg" alt="Taurus Ram Head Unisex Hoodie third lifestyle view" loading="lazy">
@@ -447,6 +441,29 @@
       });
     }
   })();
+</script>
+<script>
+  /* GA4 view_item - reads product data from structured data */
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      var scripts = document.querySelectorAll('script[type="application/ld+json"]');
+      var product = null;
+      scripts.forEach(function (s) {
+        try {
+          var obj = JSON.parse(s.textContent);
+          if (obj['@type'] === 'Product') product = obj;
+        } catch (e) {}
+      });
+      if (product && typeof window.la_track_view_item === 'function') {
+        window.la_track_view_item({
+          id: (product.sku || product.url || '').split('/').pop() || '',
+          name: product.name || '',
+          category: (product.category || ''),
+          price: product.offers ? parseFloat(product.offers.price) || 0 : 0
+        });
+      }
+    } catch (e) {}
+  });
 </script>
 </body>
 </html>

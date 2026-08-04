@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17836603744"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17836603744');
-</script>
+<script src="/js/analytics.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta property="og:title" content="Lyrion Atelier - Celestial Guidance & Astrology">
@@ -74,49 +66,75 @@
 
   <a class="skip-to-content" href="#main-content">Skip to main content</a>
 <main id="main-content" class="section">
-    <div class="container">
+    <div class="soho-container">
       <div id="product-wrapper">
-        <div class="product-detail">
+        <div class="product-detail soho-pdp">
           <div class="product-detail__media">
             <div class="product-media-frame">
               <div id="product-gallery" class="product-gallery"></div>
             </div>
           </div>
-          <div class="product-detail__info">
-            <p class="pill" id="product-pill"></p>
-            <h1 id="product-name" class="product-title">Product</h1>
-            <p class="price product-price" id="product-price"></p>
-            <p id="product-description" class="muted product-description"></p>
-
-            <div class="form-group" id="color-options"></div>
-
-            <div class="size-selector" id="size-selector">
-              <label for="size-select" class="muted">Size</label>
-              <select id="size-select" class="input-select">
-                <option value="">Select size</option>
-              </select>
+          <div class="product-detail__info soho-pdp__info">
+            <div class="product-detail__header">
+              <div class="product-detail__heading">
+                <p class="pill soho-eyebrow" id="product-pill"></p>
+                <h1 id="product-name" class="product-title soho-heading">Product</h1>
+              </div>
+              <p class="price product-price" id="product-price"></p>
             </div>
 
-            <div class="product-actions">
-              <button class="btn btn-primary" type="button" id="add-to-cart-btn">Add to cart</button>
+            <div class="product-detail__story">
+              <p id="product-description" class="muted product-description"></p>
+              <div class="product-love-note" id="product-love-note" aria-live="polite">
+                <span class="product-love-note__label">Love Language</span>
+                <span class="product-love-note__text" id="product-love-note-text"></span>
+              </div>
+            </div>
+
+            <div class="product-detail__selectors">
+              <div class="form-group" id="color-options"></div>
+
+              <div class="size-selector" id="size-selector">
+                <label for="size-select" class="muted sr-only">Size</label>
+                <select id="size-select" class="input-select" style="display:none;">
+                  <option value="">Select size</option>
+                </select>
+              </div>
+
+              <div class="product-actions soho-pdp__actions">
+                <button class="btn btn-primary soho-btn soho-btn--dark" type="button" id="add-to-cart-btn">Add to Cart</button>
+                <button class="soho-btn soho-btn--ghost" type="button" id="buy-now-btn">Buy Now</button>
+              </div>
             </div>
 
             <p class="fulfilment-note muted">Made to order · ships in 5–10 business days via Printful</p>
 
-            <div class="product-meta">
-              <div class="product-meta__section">
-                <h3>Materials</h3>
-                <p id="product-materials" class="muted"></p>
+            <div class="product-detail__tags" id="product-detail-tags"></div>
+
+            <div class="soho-accordion">
+              <div class="soho-accordion__item">
+                <button type="button" class="soho-accordion__trigger" aria-expanded="false">Materials <span class="soho-accordion__icon">+</span></button>
+                <div class="soho-accordion__panel">
+                  <p id="product-materials" class="muted"></p>
+                </div>
               </div>
-              <div class="product-meta__section">
-                <h3>Care</h3>
-                <p id="product-care" class="muted"></p>
+              <div class="soho-accordion__item">
+                <button type="button" class="soho-accordion__trigger" aria-expanded="false">Care <span class="soho-accordion__icon">+</span></button>
+                <div class="soho-accordion__panel">
+                  <p id="product-care" class="muted"></p>
+                </div>
+              </div>
+              <div class="soho-accordion__item">
+                <button type="button" class="soho-accordion__trigger" aria-expanded="false">Shipping &amp; Returns <span class="soho-accordion__icon">+</span></button>
+                <div class="soho-accordion__panel">
+                  <p>Made to order and shipped via Printful in 5–10 business days. Free shipping on orders over $50. 30-day returns on unworn items.</p>
+                </div>
               </div>
             </div>
 
             <div id="product-selector" data-slug=""></div>
 
-            <a class="btn btn-outline" href="/shop">← Back to shop</a>
+            <p class="soho-pdp__meta"><a class="soho-link-arrow" href="/shop">&larr; Back to Shop</a></p>
           </div>
         </div>
       </div>

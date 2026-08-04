@@ -28,10 +28,21 @@
     }
   }
 
+  function resolveCheckoutProductId(item) {
+    const candidates = [
+      item?.slug,
+      item?.id,
+      item?.productId
+    ];
+    return candidates
+      .map((value) => (value == null ? '' : String(value).trim()))
+      .find(Boolean) || '';
+  }
+
   function buildBasket(cart) {
     return cart
       .map((item) => ({
-        id: item.id || item.productId || item.slug || '',
+        id: resolveCheckoutProductId(item),
         qty: Number.isFinite(item.quantity) ? item.quantity : Number(item.qty) || 1,
         size: item.size || item.selectedSize || 'Default'
       }))
@@ -52,6 +63,31 @@
       throw new Error('Missing Stripe publishable key');
     }
     return data.stripePublishableKey;
+  }
+
+  /**
+   * Stripe.js loads with `async`, so it may not be ready the instant the
+   * checkout button is clicked. Poll briefly rather than assuming
+   * window.Stripe exists, and fail with a clear message (not a raw
+   * TypeError, not a silent hang) if it genuinely never arrives.
+   */
+  function waitForStripe(timeoutMs = 8000) {
+    if (typeof window.Stripe === 'function') return Promise.resolve(window.Stripe);
+    return new Promise((resolve, reject) => {
+      const start = Date.now();
+      const check = () => {
+        if (typeof window.Stripe === 'function') {
+          resolve(window.Stripe);
+          return;
+        }
+        if (Date.now() - start >= timeoutMs) {
+          reject(new Error('Payment system failed to load. Please refresh the page and try again, or disable any ad blocker for this site.'));
+          return;
+        }
+        setTimeout(check, 150);
+      };
+      check();
+    });
   }
 
   async function startEmbeddedCheckout() {
@@ -87,21 +123,20 @@
       const data = await response.json().catch(() => ({}));
       console.log('[checkout-embed] create-checkout response', data);
 
-      if (data?.error) {
-        setInlineError(data.error);
-        return;
+      if (!response.ok) {
+        throw new Error(data?.error || `Checkout request failed (${response.status})`);
       }
 
-      if (!response.ok) {
-        throw new Error(`Checkout request failed (${response.status})`);
+      if (data?.error) {
+        throw new Error(data.error);
       }
 
       if (!data?.clientSecret) {
         throw new Error('Missing client secret.');
       }
 
-      const publishableKey = await loadPublishableKey();
-      const stripe = window.Stripe(publishableKey);
+      const [publishableKey, Stripe] = await Promise.all([loadPublishableKey(), waitForStripe()]);
+      const stripe = Stripe(publishableKey);
       embeddedCheckout = await stripe.initEmbeddedCheckout({ clientSecret: data.clientSecret });
 
       mountPoint.style.display = 'block';

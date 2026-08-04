@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17836603744"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17836603744');
-</script>
+<script src="/js/analytics.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Taurus Unisex Organic Ribbed Neck T-Shirt | Lyrīon Atelier</title>
@@ -20,7 +12,7 @@
   <meta property="og:type" content="product">
   <meta property="og:title" content="Taurus Unisex Organic Ribbed Neck T-Shirt">
   <meta property="og:description" content="Sustainable luxury meets cosmic style. Premium organic cotton tee with ribbed neckline featuring the Taurus constellation.">
-  <meta property="og:image" content="https://lyrionatelier.com/images/products/taurus-organic-tee-lifestyle-1.jpg">
+  <meta property="og:image" content="https://lyrionatelier.com/images/products/taurus-organic-tee-lifestyle-4-crop.jpg">
 
   <link rel="stylesheet" href="/styles/design-system.css">
   <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
@@ -119,6 +111,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Taurus Unisex Organic Ribbed Neck T-Shirt",
+  "sku": "LA-TOT-001",
   "description": "Sustainable luxury meets cosmic style. Premium organic cotton tee with ribbed neckline featuring the Taurus constellation. Perfect gift for Taurus (April 20 - May 20).",
   "image": "https://lyrionatelier.com/images/products/taurus-organic-tee-lifestyle-1.jpg",
   "brand": {
@@ -230,6 +223,7 @@
 
     <div class="product-grid">
       <div class="product-gallery">
+        <img src="/images/products/taurus-organic-tee-lifestyle-4-crop.jpg" alt="Taurus Unisex Organic Ribbed Neck T-Shirt, cropped to show the ram head chest print" loading="eager">
         <img src="/images/products/taurus-organic-tee-lifestyle-1.jpg" alt="Taurus Organic Ribbed Neck T-Shirt lifestyle view" loading="lazy">
         <img src="/images/products/taurus-organic-tee-lifestyle-2.jpg" alt="Taurus Organic Ribbed Neck T-Shirt second lifestyle view" loading="lazy">
         <img src="/images/products/taurus-organic-tee-lifestyle-3.jpg" alt="Taurus Organic Ribbed Neck T-Shirt third lifestyle view" loading="lazy">
@@ -446,6 +440,29 @@
       });
     }
   })();
+</script>
+<script>
+  /* GA4 view_item - reads product data from structured data */
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      var scripts = document.querySelectorAll('script[type="application/ld+json"]');
+      var product = null;
+      scripts.forEach(function (s) {
+        try {
+          var obj = JSON.parse(s.textContent);
+          if (obj['@type'] === 'Product') product = obj;
+        } catch (e) {}
+      });
+      if (product && typeof window.la_track_view_item === 'function') {
+        window.la_track_view_item({
+          id: (product.sku || product.url || '').split('/').pop() || '',
+          name: product.name || '',
+          category: (product.category || ''),
+          price: product.offers ? parseFloat(product.offers.price) || 0 : 0
+        });
+      }
+    } catch (e) {}
+  });
 </script>
 </body>
 </html>

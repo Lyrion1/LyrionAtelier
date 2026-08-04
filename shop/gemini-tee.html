@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17836603744"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17836603744');
-</script>
+<script src="/js/analytics.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Gemini Starlight Tee | Zodiac Apparel | Lyrīon Atelier</title>
@@ -18,7 +10,7 @@
   <meta property="og:type" content="product">
   <meta property="og:title" content="Gemini Starlight Tee">
   <meta property="og:description" content="Gemini twin insignia on a premium heavyweight tee.">
-  <meta property="og:image" content="https://lyrionatelier.com/gemini-starlight-tee/gemini-starlight-tee-ghost.jpg">
+  <meta property="og:image" content="https://lyrionatelier.com/gemini-starlight-tee/gemini-starlight-tee-ghost-crop.jpg">
 
   <link rel="stylesheet" href="/styles/design-system.css">
   <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
@@ -51,6 +43,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Gemini Starlight Tee",
+  "sku": "LA-GT-001",
   "description": "Premium heavyweight Gemini Starlight Tee for cosmic communicators. Built for quick minds and duality.",
   "image": "https://lyrionatelier.com/gemini-starlight-tee/gemini-starlight-tee-ghost.jpg",
   "brand": {
@@ -156,6 +149,7 @@
 
     <div class="product-grid">
       <div class="product-gallery" id="product-gallery">
+        <img src="/gemini-starlight-tee/gemini-starlight-tee-ghost-crop.jpg" alt="Gemini Starlight Tee, cropped to show the gold Gemini symbol" loading="eager">
         <img src="/gemini-starlight-tee/gemini-starlight-tee-ghost.jpg" alt="Gemini Starlight Tee ghosted front view" loading="lazy">
         <img src="/gemini-starlight-tee/gemini-starlight-tee-model-front.jpg" alt="Gemini Starlight Tee front on model" loading="lazy">
         <img src="/gemini-starlight-tee/gemini-starlight-tee-model-back.jpg" alt="Gemini Starlight Tee back on model" loading="lazy">
@@ -357,6 +351,29 @@
       });
     }
   })();
+</script>
+<script>
+  /* GA4 view_item - reads product data from structured data */
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      var scripts = document.querySelectorAll('script[type="application/ld+json"]');
+      var product = null;
+      scripts.forEach(function (s) {
+        try {
+          var obj = JSON.parse(s.textContent);
+          if (obj['@type'] === 'Product') product = obj;
+        } catch (e) {}
+      });
+      if (product && typeof window.la_track_view_item === 'function') {
+        window.la_track_view_item({
+          id: (product.sku || product.url || '').split('/').pop() || '',
+          name: product.name || '',
+          category: (product.category || ''),
+          price: product.offers ? parseFloat(product.offers.price) || 0 : 0
+        });
+      }
+    } catch (e) {}
+  });
 </script>
 </body>
 </html>

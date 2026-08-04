@@ -69,6 +69,17 @@ let activeLocalization = null;
   document.head.appendChild(script);
 })();
 
+// Inject the slide-out cart drawer once globally (idempotent)
+(function injectCartDrawer() {
+  const src = '/js/cart-drawer.js';
+  const scripts = Array.from(document.getElementsByTagName('script'));
+  if (scripts.some(tag => tag.getAttribute('src') === src)) return;
+  const script = document.createElement('script');
+  script.defer = true;
+  script.src = src;
+  document.body.appendChild(script);
+})();
+
 // Ensure mobile performance head tags exist
 (function ensureMobilePerformanceHead() {
   const head = document.head;
@@ -81,6 +92,23 @@ let activeLocalization = null;
     link.href = href;
     head.appendChild(link);
   };
+
+  // soho-theme.css loads asynchronously (appended below, not a blocking <link>
+  // in the HTML source), so on a slow or congested connection it can still be
+  // loading by the time buildSiteHeader() creates the mega menu panels later
+  // in this script. Without this rule, those panels briefly render with no
+  // opacity/visibility override at all (their un-themed default: fully
+  // visible, in normal flow), then visibly animate closed the moment the
+  // stylesheet's transition rule finally applies, a real flash of a dropdown
+  // panel over the hero photo. Setting the same closed values here first,
+  // synchronously, means the value never changes when the stylesheet lands,
+  // so no transition ever triggers on load.
+  if (!head.querySelector('style[data-critical="mega-panel"]')) {
+    const criticalStyle = document.createElement('style');
+    criticalStyle.setAttribute('data-critical', 'mega-panel');
+    criticalStyle.textContent = '.soho-mega-panel{opacity:0;visibility:hidden}';
+    head.appendChild(criticalStyle);
+  }
 
    const ensureMeta = (attributes) => {
     const selector = Object.entries(attributes)
@@ -127,7 +155,7 @@ let activeLocalization = null;
   });
 
   ensureStylesheet('/css/restoration.css');
-  ensureAnalytics();
+  ensureStylesheet('/styles/soho-theme.css');
 })();
 
 /**
@@ -135,12 +163,11 @@ let activeLocalization = null;
  * Sets up all interactive features and event listeners
  */
 document.addEventListener('DOMContentLoaded', function() {
-  document.body.classList.add('loaded');
+  document.body.classList.add('loaded', 'soho-scope');
   setPageType();
   applySharedLayout();
   removeSeasonalCampaignElements();
   ensureSeoMetadata();
-  ensureAnalytics();
   enhanceImages();
   initLocalizationSystem();
   setTimeout(() => localizeDisplayedPrices(), 600);
@@ -174,6 +201,12 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Initialize scroll-triggered fade-in animations
   initScrollAnimations();
+
+  // Initialize shoppable lookbook hotspots
+  initLookbookHotspots();
+
+  // Initialize product detail accordions
+  initAccordions();
   
   // Initialize form validation
   initFormValidation();
@@ -273,31 +306,174 @@ function ensureSkipToContent() {
   return document.querySelector('.skip-to-content');
 }
 
+const ZODIAC_SIGNS = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
+
+function buildZodiacMegaColumn() {
+  const items = ZODIAC_SIGNS.map((sign) => `<a href="/shop?zodiac=${sign.toLowerCase()}">${sign}</a>`).join('');
+  return `
+    <div class="soho-mega-col soho-mega-col--zodiac">
+      <h4>Shop by Sign</h4>
+      <ul class="soho-zodiac-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:0.65rem 1rem;position:static;">${items}</ul>
+    </div>`;
+}
+
+function buildShopMegaPanel() {
+  return `
+    <div class="soho-mega-panel" role="menu">
+      <div class="soho-mega-panel__inner">
+        <div class="soho-mega-col soho-mega-col--featured">
+          <h4>Featured</h4>
+          <ul>
+            <li><a href="/shop">New Arrivals</a></li>
+            <li><a href="/shop?collection=zodiac">Zodiac Apparel</a></li>
+            <li><a href="/shop?collection=essentials">Lyrīon Essentials</a></li>
+            <li><a href="/shop?collection=mystery">Mystery &amp; Curated Boxes</a></li>
+          </ul>
+        </div>
+        <div class="soho-mega-col">
+          <h4>Category</h4>
+          <ul>
+            <li><a href="/shop?category=hoodie">Hoodies &amp; Sweatshirts</a></li>
+            <li><a href="/shop?category=tee">Tees &amp; Polos</a></li>
+            <li><a href="/shop?collection=accessories">Accessories &amp; Home</a></li>
+            <li><a href="/shop">Shop All</a></li>
+          </ul>
+        </div>
+        ${buildZodiacMegaColumn()}
+        <figure class="soho-mega-visual">
+          <img src="/leo-zodiac-hoodie/leo-zodiac-hoodie-lifestyle.jpg" alt="The Celestial Edit lookbook" loading="lazy">
+          <figcaption>The Celestial Edit</figcaption>
+        </figure>
+      </div>
+    </div>`;
+}
+
+function buildSimpleMegaPanel({ links, image, caption }) {
+  const listItems = links.map(({ href, label }) => `<li><a href="${href}">${label}</a></li>`).join('');
+  return `
+    <div class="soho-mega-panel soho-mega-panel--simple" role="menu">
+      <div class="soho-mega-panel__inner" style="grid-template-columns: 1fr 1fr;">
+        <div class="soho-mega-col soho-mega-col--featured">
+          <h4>&nbsp;</h4>
+          <ul>${listItems}</ul>
+        </div>
+        <figure class="soho-mega-visual">
+          <img src="${image}" alt="${caption}" loading="lazy">
+          <figcaption>${caption}</figcaption>
+        </figure>
+      </div>
+    </div>`;
+}
+
 function buildSiteHeader() {
   const header = document.createElement('header');
   header.className = 'site-header';
   header.dataset.navVersion = NAV_VERSION;
+
+  const readingsPanel = buildSimpleMegaPanel({
+    links: [
+      { href: '/compatibility', label: 'Compatibility Certificates' },
+      { href: '/oracle', label: 'Personalized Readings' },
+      { href: '/oracle#free', label: 'Free Reading' }
+    ],
+    image: '/pisces-hoodie/pisces-hoodie-couple.jpg',
+    caption: 'Readings &amp; Certificates'
+  });
+
+  const giftsPanel = buildSimpleMegaPanel({
+    links: [
+      { href: '/curated-for-gifting?for=couples', label: 'For Couples' },
+      { href: '/curated-for-gifting?for=self', label: 'For Self' },
+      { href: '/curated-for-gifting?for=birthday', label: 'Birthday &amp; Milestone' }
+    ],
+    image: '/gemini-starlight-tee/gemini-starlight-tee-model-front.jpg',
+    caption: 'Curated Gifting'
+  });
+
   header.innerHTML = `
     <nav class="main-nav" aria-label="Main navigation">
     <a href="/" class="logo-link">
     <img src="/images/lyrion-logo.png" alt="Lyrīon Atelier" class="logo-img" width="580" height="613">
     <span class="brand-name">LYRĪON ATELIER</span>
     </a>
-    
+
     <button class="nav-toggle" aria-expanded="false" aria-label="Open navigation menu" aria-controls="primary-nav">☰</button>
-    
+
     <div class="nav-links" id="primary-nav" aria-hidden="true">
     <button class="nav-drawer-close" type="button" aria-label="Close navigation menu">×</button>
-    <a href="/shop">Shop</a>
-    <a href="/oracle">Readings</a>
-    <a href="/curated-for-gifting">Gifts</a>
+    <div class="nav-item" data-mega="shop">
+      <button type="button" class="nav-item-trigger" aria-expanded="false" aria-haspopup="true">Shop</button>
+      ${buildShopMegaPanel()}
+    </div>
+    <div class="nav-item" data-mega="readings">
+      <button type="button" class="nav-item-trigger" aria-expanded="false" aria-haspopup="true">Readings &amp; Certificates</button>
+      ${readingsPanel}
+    </div>
+    <div class="nav-item" data-mega="gifts">
+      <button type="button" class="nav-item-trigger" aria-expanded="false" aria-haspopup="true">Gifts</button>
+      ${giftsPanel}
+    </div>
     <a href="/codex">Codex</a>
     <a href="/#about">About</a>
     <a href="/contact">Contact</a>
     <a href="/cart" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a>
     </div>
     </nav>`;
+  initMegaMenu(header);
   return header;
+}
+
+/**
+ * Desktop hover/click mega-menu + mobile accordion behaviour for
+ * .nav-item[data-mega] blocks built by buildSiteHeader().
+ */
+function initMegaMenu(header) {
+  const items = Array.from(header.querySelectorAll('.nav-item[data-mega]'));
+  if (!items.length) return;
+  const isDesktop = () => window.matchMedia('(min-width: 1025px)').matches;
+  let hoverTimer = null;
+
+  const closeItem = (item) => {
+    item.classList.remove('soho-mega-open');
+    item.querySelector('.nav-item-trigger')?.setAttribute('aria-expanded', 'false');
+  };
+  const closeAll = (except) => items.forEach((item) => item !== except && closeItem(item));
+  const openItem = (item) => {
+    closeAll(item);
+    item.classList.add('soho-mega-open');
+    item.querySelector('.nav-item-trigger')?.setAttribute('aria-expanded', 'true');
+  };
+
+  items.forEach((item) => {
+    const trigger = item.querySelector('.nav-item-trigger');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (item.classList.contains('soho-mega-open')) {
+        closeItem(item);
+      } else {
+        openItem(item);
+      }
+    });
+
+    item.addEventListener('mouseenter', () => {
+      if (!isDesktop()) return;
+      clearTimeout(hoverTimer);
+      openItem(item);
+    });
+    item.addEventListener('mouseleave', () => {
+      if (!isDesktop()) return;
+      hoverTimer = setTimeout(() => closeItem(item), 160);
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!header.contains(event.target)) closeAll();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeAll();
+  });
 }
 
 function setActiveNavLink(header) {
@@ -331,48 +507,6 @@ function setActiveNavLink(header) {
   links.forEach(link => link.removeAttribute('aria-current'));
   if (bestMatch.link) {
     bestMatch.link.setAttribute('aria-current', 'page');
-  }
-}
-
-function ensureAnalytics() {
-  const head = document.head || document.body;
-  if (!head) return;
-
-  if (!document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
-    const gtagScript = document.createElement('script');
-    gtagScript.async = true;
-    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
-    head.appendChild(gtagScript);
-  }
-
-  if (!document.querySelector('script[data-gtag-inline]')) {
-    const inline = document.createElement('script');
-    inline.setAttribute('data-gtag-inline', 'true');
-    inline.textContent = `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    `;
-    head.appendChild(inline);
-  }
-
-  if (!document.querySelector('script[data-fb-pixel]')) {
-    const fb = document.createElement('script');
-    fb.setAttribute('data-fb-pixel', 'true');
-    fb.textContent = `
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'YOUR_PIXEL_ID');
-      fbq('track', 'PageView');
-    `;
-    head.appendChild(fb);
   }
 }
 
@@ -836,7 +970,17 @@ function ensureSeoMetadata() {
     });
   }
 
-  if (pathname.startsWith('/shop/')) {
+  const hasAuthoredProductSchema = Array.from(
+    document.querySelectorAll('script[type="application/ld+json"]:not(#ldjson-product)')
+  ).some((el) => {
+    try {
+      return JSON.parse(el.textContent || '')['@type'] === 'Product';
+    } catch {
+      return false;
+    }
+  });
+
+  if (pathname.startsWith('/shop/') && !hasAuthoredProductSchema) {
     const name = (document.querySelector('#product-name')?.textContent || 'Zodiac Apparel').trim();
     const description = (document.querySelector('#product-description')?.textContent || seo.description).trim();
     const image = document.querySelector('#product-gallery img')?.src || OG_IMAGE;
@@ -916,17 +1060,37 @@ function buildSiteFooter() {
     </div>`;
   footer.innerHTML = `
     <div class="footer-content">
-      ${socialLinks}
-      <div class="footer-links">
-        <a href="/shop">Shop</a>
-        <a href="/oracle">Readings</a>
-        <a href="/curated-for-gifting">Gifts</a>
-        <a href="/codex">Codex</a>
-        <a href="/#about">About</a>
-        <a href="/contact">Contact</a>
-        <a href="/privacy-policy">Privacy Policy</a>
-        <a href="/terms-of-service">Terms of Service</a>
-        <a href="/refund-policy">Refund Policy</a>
+      <div class="footer-brand">
+        <h3>Lyrīon Atelier</h3>
+        <p>Luxury zodiac apparel and personalized oracle readings for the celestial soul.</p>
+        ${socialLinks}
+      </div>
+      <div class="footer-col">
+        <h5 class="soho-footer-col-title">Shop</h5>
+        <div class="footer-links">
+          <a href="/shop?collection=zodiac">Zodiac Apparel</a>
+          <a href="/shop?collection=essentials">Lyrīon Essentials</a>
+          <a href="/shop?collection=accessories">Accessories &amp; Home</a>
+          <a href="/curated-for-gifting">Gifts</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5 class="soho-footer-col-title">Discover</h5>
+        <div class="footer-links">
+          <a href="/oracle">Readings</a>
+          <a href="/compatibility">Compatibility</a>
+          <a href="/codex">Codex</a>
+          <a href="/#about">About</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5 class="soho-footer-col-title">Support</h5>
+        <div class="footer-links">
+          <a href="/contact">Contact</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-of-service">Terms of Service</a>
+          <a href="/refund-policy">Refund Policy</a>
+        </div>
       </div>
       <p>&copy; 2024 Lyrion Atelier. All rights reserved.</p>
     </div>`;
@@ -1507,6 +1671,51 @@ function hydrateCodexCards() {
  * Scroll-Triggered Fade-In Animations
  * Elements with 'fade-in-on-scroll' class fade in when scrolled into view
  */
+/**
+ * Product detail accordion (Materials / Care / Shipping).
+ */
+function initAccordions() {
+  document.querySelectorAll('.soho-accordion__trigger').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.soho-accordion__item');
+      if (!item) return;
+      const isOpen = item.classList.contains('is-open');
+      item.classList.toggle('is-open', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+}
+
+/**
+ * Shoppable lookbook hotspots — click a marker to reveal its product card.
+ */
+function initLookbookHotspots() {
+  const triggers = document.querySelectorAll('[data-hotspot]');
+  if (!triggers.length) return;
+
+  const closeAll = (except) => {
+    document.querySelectorAll('.soho-hotspot-card.is-active').forEach((card) => {
+      if (card !== except) card.classList.remove('is-active');
+    });
+  };
+
+  triggers.forEach((trigger) => {
+    const id = trigger.getAttribute('data-hotspot');
+    const card = document.querySelector(`[data-hotspot-card="${id}"]`);
+    if (!card) return;
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      const isOpen = card.classList.contains('is-active');
+      closeAll();
+      card.classList.toggle('is-active', !isOpen);
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('[data-hotspot], .soho-hotspot-card')) closeAll();
+  });
+}
+
 function initScrollAnimations() {
   const fadeElements = document.querySelectorAll('.fade-in-on-scroll');
   

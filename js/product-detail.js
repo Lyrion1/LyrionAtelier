@@ -3,9 +3,36 @@ import { centsFrom, currencySymbol, formatPriceWithCurrency, priceNumber } from 
 const FALLBACK_IMAGE = '/assets/catalog/placeholder.webp';
 const EXTENDED_SIZE = /^([2-9]?xl)$/i;
 const PRICE_FALLBACK = '—';
+const SITE_ORIGIN = 'https://lyrionatelier.com';
+const EMOJI_POOL = ['✨', '🔥', '💖', '🦁', '🌟', '💪', '🌙', '⚡'];
+const AFFIRMATIONS = [
+  'You lead with fire 🔥',
+  'Bold moves look good on you',
+  'Your courage is magnetic',
+  'Soft heart, fierce spirit',
+  'Main character energy unlocked',
+  'The universe sees your bravery',
+  'Protective energy activated',
+  'Step into your power ✨',
+  'I love you means stepping into the fire',
+  'You’re already enough — and still rising'
+];
 const fullRes = (u) => (u || '').replace('_thumb', '');
 
 const $ = (sel) => document.querySelector(sel);
+
+function ensureProductJsonLd(data) {
+  const head = document.head || document.body;
+  if (!head || !data) return;
+  let script = document.getElementById('ldjson-product');
+  if (!script) {
+    script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'ldjson-product';
+    head.appendChild(script);
+  }
+  script.textContent = JSON.stringify(data);
+}
 
 const getStoreVariantId = (variant = {}) => variant?.store_variant_id || variant?.storeVariantId || null;
 
@@ -133,6 +160,36 @@ function applyImgSrc(img, src, productTitle) {
   }
 }
 
+function openImageLightbox(src, alt) {
+  let lightbox = document.getElementById('soho-image-lightbox');
+  if (!lightbox) {
+    lightbox = document.createElement('div');
+    lightbox.id = 'soho-image-lightbox';
+    lightbox.className = 'soho-lightbox';
+    lightbox.innerHTML = `
+      <button type="button" class="soho-lightbox__close" aria-label="Close zoomed image">&times;</button>
+      <img class="soho-lightbox__img" src="" alt="">
+    `;
+    document.body.appendChild(lightbox);
+    const close = () => {
+      lightbox.classList.remove('is-open');
+      document.body.classList.remove('soho-lightbox-open');
+    };
+    lightbox.querySelector('.soho-lightbox__close').addEventListener('click', close);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('is-open')) close();
+    });
+  }
+  const img = lightbox.querySelector('.soho-lightbox__img');
+  img.src = src;
+  img.alt = alt;
+  lightbox.classList.add('is-open');
+  document.body.classList.add('soho-lightbox-open');
+}
+
 function renderImages(images = [], productTitle = 'Product') {
   const gallery = $('#product-gallery');
   if (!gallery) return;
@@ -140,7 +197,15 @@ function renderImages(images = [], productTitle = 'Product') {
   const normalized = Array.isArray(images) ? images.filter(Boolean).map(fullRes) : [];
   const base = normalized.length ? normalized : [FALLBACK_IMAGE];
 
-  // Main display image
+  // Main display image: tap/click enlarges it in a full-screen lightbox. The
+  // lightbox itself doesn't implement pinch-zoom (the site's viewport meta
+  // already allows user-scalable pinch-zoom, so the browser's native gesture
+  // works on the enlarged image without any extra JS).
+  const mainButton = document.createElement('button');
+  mainButton.type = 'button';
+  mainButton.className = 'product-gallery__main-zoom';
+  mainButton.setAttribute('aria-label', `Zoom in on ${productTitle}`);
+
   const mainImg = document.createElement('img');
   mainImg.className = 'product-gallery__main';
   mainImg.alt = productTitle;
@@ -149,7 +214,9 @@ function renderImages(images = [], productTitle = 'Product') {
   mainImg.width = 1200;
   mainImg.height = 1500;
   applyImgSrc(mainImg, base[0], productTitle);
-  gallery.appendChild(mainImg);
+  mainButton.appendChild(mainImg);
+  mainButton.addEventListener('click', () => openImageLightbox(mainImg.src, mainImg.alt));
+  gallery.appendChild(mainButton);
 
   // Thumbnail row (only when there are multiple distinct images)
   if (base.length > 1) {
@@ -186,6 +253,165 @@ function showError(message) {
         <a class="btn btn-primary" href="/shop">Back to shop</a>
       </div>
     </div>`;
+}
+
+function pickRandom(list = []) {
+  return list[Math.floor(Math.random() * list.length)] || '';
+}
+
+function extractLoveLanguageText(product = {}) {
+  const sources = [
+    product.loveLanguage,
+    product.love_language,
+    product.copy?.loveLanguage,
+    product.copy?.quote,
+    product.quote,
+    product.copy?.notes,
+    product.description
+  ].filter(Boolean);
+
+  for (const source of sources) {
+    const lines = String(source)
+      .split(/\n+/)
+      .map((line) => line.replace(/^[•\-]\s*/, '').trim())
+      .filter(Boolean);
+
+    const match =
+      lines.find((line) => /love language/i.test(line)) ||
+      lines.find((line) => /quote|means|heart|fire|courage/i.test(line));
+    if (match) return match;
+  }
+
+  return '';
+}
+
+function normalizeList(value) {
+  if (!Array.isArray(value)) return [];
+  return value.map((item) => String(item || '').trim()).filter(Boolean);
+}
+
+function buildTagGroup(title, items = []) {
+  if (!items.length) return null;
+  const group = document.createElement('section');
+  group.className = 'product-tag-group';
+  group.innerHTML = `<h2 class="product-tag-group__title">${title}</h2><div class="product-tag-list"></div>`;
+  const list = group.querySelector('.product-tag-list');
+  items.forEach((item) => {
+    const tag = document.createElement('span');
+    tag.className = 'product-tag';
+    tag.textContent = item;
+    list.appendChild(tag);
+  });
+  return group;
+}
+
+function renderDetailTags(product = {}) {
+  const tagsWrap = $('#product-detail-tags');
+  if (!tagsWrap) return;
+  tagsWrap.innerHTML = '';
+
+  const features = normalizeList(product.features);
+  const perfectFor = normalizeList(product.perfectFor || product.perfect_for || product.perfect_for_list);
+
+  const featureGroup = buildTagGroup('Features', features);
+  const perfectForGroup = buildTagGroup('Perfect For', perfectFor);
+
+  [featureGroup, perfectForGroup].filter(Boolean).forEach((group) => tagsWrap.appendChild(group));
+  tagsWrap.classList.toggle('is-visible', tagsWrap.children.length > 0);
+}
+
+function renderLoveLanguage(product = {}) {
+  const wrap = $('#product-love-note');
+  const textEl = $('#product-love-note-text');
+  if (!wrap || !textEl) return;
+  const text = extractLoveLanguageText(product);
+  if (!text) {
+    wrap.classList.remove('is-visible');
+    textEl.textContent = '';
+    return;
+  }
+  textEl.textContent = text;
+  wrap.classList.add('is-visible');
+}
+
+function initProductMagic() {
+  if (document.querySelector('.product-affirmation-layer')) return;
+  const layer = document.createElement('div');
+  layer.className = 'product-affirmation-layer';
+  layer.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(layer);
+
+  let dropsCreated = 0;
+  const maxDrops = 10;
+  const timers = [];
+
+  const pulseButton = () => {
+    const addBtn = $('#add-to-cart-btn');
+    if (!addBtn) return;
+    addBtn.classList.remove('product-button-glow');
+    void addBtn.offsetWidth;
+    addBtn.classList.add('product-button-glow');
+    window.setTimeout(() => addBtn.classList.remove('product-button-glow'), 1100);
+  };
+
+  const showAffirmation = (x, y) => {
+    const bubble = document.createElement('div');
+    bubble.className = 'product-affirmation';
+    bubble.textContent = pickRandom(AFFIRMATIONS);
+    bubble.style.left = `${Math.max(72, Math.min(window.innerWidth - 72, x))}px`;
+    bubble.style.top = `${Math.max(96, Math.min(window.innerHeight - 96, y))}px`;
+    layer.appendChild(bubble);
+    pulseButton();
+    window.setTimeout(() => bubble.remove(), 3500);
+  };
+
+  const spawnEmoji = () => {
+    if (dropsCreated >= maxDrops) return;
+    dropsCreated += 1;
+
+    const emoji = document.createElement('button');
+    emoji.type = 'button';
+    emoji.className = 'product-emoji-drop';
+    emoji.textContent = pickRandom(EMOJI_POOL);
+    emoji.style.left = `${8 + Math.random() * 80}vw`;
+    emoji.style.setProperty('--drift-mid', `${(Math.random() - 0.5) * 40}px`);
+    emoji.style.setProperty('--drift-end', `${(Math.random() - 0.5) * 70}px`);
+    const duration = 4.8 + Math.random() * 2.1;
+    emoji.style.setProperty('--fall-duration', `${duration}s`);
+
+    let affirmationShown = false;
+    const trigger = () => {
+      if (affirmationShown) return;
+      affirmationShown = true;
+      const rect = emoji.getBoundingClientRect();
+      showAffirmation(rect.left + rect.width / 2, rect.top);
+    };
+
+    emoji.addEventListener('click', () => {
+      trigger();
+      emoji.remove();
+    });
+
+    const midpointTimer = window.setTimeout(trigger, duration * 500);
+    const cleanupTimer = window.setTimeout(() => {
+      emoji.remove();
+    }, duration * 1000);
+
+    emoji.addEventListener('animationend', () => {
+      window.clearTimeout(midpointTimer);
+      emoji.remove();
+    }, { once: true });
+
+    layer.appendChild(emoji);
+    timers.push(midpointTimer, cleanupTimer);
+
+    if (dropsCreated < maxDrops) {
+      const nextDelay = 4000 + Math.random() * 3000;
+      timers.push(window.setTimeout(spawnEmoji, nextDelay));
+    }
+  };
+
+  timers.push(window.setTimeout(spawnEmoji, 1800));
 }
 
 async function hydrateProductPage() {
@@ -239,6 +465,8 @@ async function hydrateProductPage() {
     materialsEl.appendChild(frag);
   }
   if (careEl) careEl.textContent = care;
+  renderLoveLanguage(product);
+  renderDetailTags(product);
 
   const sizes = unique(
     (product.options?.sizes || [])
@@ -260,6 +488,10 @@ async function hydrateProductPage() {
   sizeButtonsWrap.setAttribute('role', 'group');
   sizeButtonsWrap.setAttribute('aria-label', 'Select size');
   if (sizeContainer) {
+    const sizeLabel = document.createElement('div');
+    sizeLabel.className = 'product-option-label';
+    sizeLabel.textContent = 'Size';
+    sizeContainer.appendChild(sizeLabel);
     sizeContainer.appendChild(sizeButtonsWrap);
   }
   if (sizeSelect) {
@@ -420,6 +652,30 @@ async function hydrateProductPage() {
   });
 
   updateVariant();
+
+  const canonicalPath = `/product?slug=${encodeURIComponent(product.slug || slug)}`;
+  const schemaImage = galleryImages[0] || FALLBACK_IMAGE;
+  const schemaPrice = derivePrice(product, currentSelection().size, activeVariant) ?? activeVariant?.price ?? 0;
+  ensureProductJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: title,
+    description: description || title,
+    image: schemaImage.startsWith('http') ? schemaImage : `${SITE_ORIGIN}${schemaImage}`,
+    brand: {
+      '@type': 'Brand',
+      name: 'Lyrīon Atelier'
+    },
+    offers: {
+      '@type': 'Offer',
+      price: Number.isFinite(schemaPrice) ? schemaPrice.toFixed(2) : '0.00',
+      priceCurrency: currency,
+      availability: activeVariant ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      url: `${SITE_ORIGIN}${canonicalPath}`
+    }
+  });
+
+  initProductMagic();
 }
 
 if (document.readyState !== 'loading') hydrateProductPage();

@@ -5721,6 +5721,15 @@ html {
 body {
   opacity: 0;
   overscroll-behavior-y: contain;
+  /* Safety net: the fade-in is normally removed by JS adding .loaded.
+     If any script on the page ever fails to run for any reason, this
+     forces the page visible on its own after 2.5s rather than staying
+     blank forever. Pure CSS, no JS dependency. */
+  animation: force-page-visible 0s 2.5s forwards;
+}
+
+@keyframes force-page-visible {
+  to { opacity: 1; }
 }
 
 body.loaded {

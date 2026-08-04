@@ -27,13 +27,14 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/aries-diamond-hoodie-lifestyle-1-crop.jpg",
       "/images/products/aries-diamond-hoodie-lifestyle-1.jpg",
       "/images/products/aries-diamond-hoodie-lifestyle-2.jpg",
       "/images/products/aries-diamond-hoodie-lifestyle-3.jpg",
       "/images/products/aries-diamond-hoodie-lifestyle-4.jpg",
       "/images/products/aries-diamond-hoodie-lifestyle-5.jpg"
     ],
-    "mainImage": "/images/products/aries-diamond-hoodie-lifestyle-1.jpg",
+    "mainImage": "/images/products/aries-diamond-hoodie-lifestyle-1-crop.jpg",
     "description": "Aries Diamond Women's Relaxed Hoodie\n\nBorn to lead. Designed to conquer.\n\nThis isn't just a hoodie, it's your cosmic armor. Premium relaxed-fit design featuring the Aries diamond birthstone in striking pink detail.\n\nLeft sleeve carries your power statement: \"Water is life, I am water\" a reminder that even fire signs flow with unstoppable force.\n\n• Premium heavyweight fleece\n• Relaxed feminine fit\n• Diamond birthstone design\n• Ribbed cuffs and hem\n• Soft brushed interior\n• Inspirational sleeve quote\n\nFor the Aries woman who leads with both strength and grace.\n\nMarch 21 - April 19\n\n$65.50\n\nLimited stock. Your birthright awaits.",
     "mysticalCopy": "For the Aries woman who leads with both strength and grace.",
     "options": {
@@ -163,13 +164,14 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/aries-love-language-hoodie-4-crop.jpg",
       "/images/products/aries-love-language-hoodie-1.jpg",
       "/images/products/aries-love-language-hoodie-2.jpg",
       "/images/products/aries-love-language-hoodie-3.jpg",
       "/images/products/aries-love-language-hoodie-4.jpg",
       "/images/products/aries-love-language-hoodie-5.jpg"
     ],
-    "mainImage": "/images/products/aries-love-language-hoodie-1.jpg",
+    "mainImage": "/images/products/aries-love-language-hoodie-4-crop.jpg",
     "description": "For the Aries who shows love through bravery. Bold moves. Fearless protection. Standing up when it matters. Premium hoodie for those who lead with courage.",
     "mysticalCopy": "Love Language: Acts of Courage",
     "options": {
@@ -321,11 +323,12 @@
     },
     "currency": "USD",
     "images": [
+      "/youth-aries-fire-tee/youth-aries-fire-tee-boy-crop.jpg",
       "/youth-aries-fire-tee/youth-aries-fire-tee-lifestyle.jpg",
       "/youth-aries-fire-tee/youth-aries-fire-tee-boy.jpg",
       "/youth-aries-fire-tee/youth-aries-fire-tee-girl.jpg"
     ],
-    "mainImage": "/youth-aries-fire-tee/youth-aries-fire-tee-lifestyle.jpg",
+    "mainImage": "/youth-aries-fire-tee/youth-aries-fire-tee-boy-crop.jpg",
     "brand_marks": {
       "back_neck_favicon": true,
       "inside_label": true,
@@ -720,13 +723,14 @@
     },
     "currency": "USD",
     "images": [
+      "/leo-zodiac-hoodie/leo-zodiac-hoodie-boy-crop.jpg",
       "/leo-zodiac-hoodie/leo-zodiac-hoodie-text.jpg",
       "/leo-zodiac-hoodie/leo-zodiac-hoodie-lifestyle.jpg",
       "/leo-zodiac-hoodie/leo-zodiac-hoodie-flat.jpg",
       "/leo-zodiac-hoodie/leo-zodiac-hoodie-boy.jpg",
       "/leo-zodiac-hoodie/leo-zodiac-hoodie-girl.jpg"
     ],
-    "mainImage": "/leo-zodiac-hoodie/leo-zodiac-hoodie-text.jpg",
+    "mainImage": "/leo-zodiac-hoodie/leo-zodiac-hoodie-boy-crop.jpg",
     "options": {
       "size": [
         "S",
@@ -1012,12 +1016,13 @@
     },
     "currency": "USD",
     "images": [
+      "/gemini-starlight-tee/gemini-starlight-tee-ghost-crop.jpg",
       "/gemini-starlight-tee/gemini-starlight-tee-ghost.jpg",
       "/gemini-starlight-tee/gemini-starlight-tee-model-front.jpg",
       "/gemini-starlight-tee/gemini-starlight-tee-model-back.jpg",
       "/gemini-starlight-tee/gemini-starlight-tee-model-side.jpg"
     ],
-    "mainImage": "/gemini-starlight-tee/gemini-starlight-tee-ghost.jpg",
+    "mainImage": "/gemini-starlight-tee/gemini-starlight-tee-ghost-crop.jpg",
     "options": {
       "size": [
         "S",
@@ -1192,12 +1197,13 @@
     },
     "currency": "USD",
     "images": [
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1-crop.jpg",
       "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
       "/aquarius-crop-hoodie/aquarius-crop-hoodie-front2.jpg",
       "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
       "/aquarius-crop-hoodie/aquarius-crop-hoodie-side.jpg"
     ],
-    "mainImage": "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+    "mainImage": "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1-crop.jpg",
     "options": {
       "color": [
         "Military Green",
@@ -1397,13 +1403,14 @@
       "published": true
     },
     "images": [
+      "/fisherman-beanie/fisherman-beanie-front-crop.jpg",
       "/fisherman-beanie/fisherman-beanie-front.jpg",
       "/fisherman-beanie/fisherman-beanie-ghost.jpg",
       "/fisherman-beanie/fisherman-beanie-male-model.jpg",
       "/fisherman-beanie/fisherman-beanie-female-model.jpg"
     ],
     "image": "/fisherman-beanie/fisherman-beanie-front.jpg",
-    "mainImage": "/fisherman-beanie/fisherman-beanie-front.jpg",
+    "mainImage": "/fisherman-beanie/fisherman-beanie-front-crop.jpg",
     "brand_marks": {
       "back_neck_favicon": false,
       "inside_label": false,
@@ -1514,12 +1521,13 @@
       "published": true
     },
     "images": [
+      "/images/pisces-hoodie-new-ghost-crop.jpg",
       "/images/pisces-hoodie-new-ghost.png",
       "/images/pisces-hoodie-new-male.png",
       "/images/pisces-hoodie-new-female.png",
       "/images/pisces-hoodie-new-couple.png"
     ],
-    "mainImage": "/images/pisces-hoodie-new-ghost.png",
+    "mainImage": "/images/pisces-hoodie-new-ghost-crop.jpg",
     "price": 54.99,
     "price_range": {
       "min": 54.99,
@@ -1664,13 +1672,14 @@
       "published": true
     },
     "images": [
+      "/lyrion-pique-polo/lyrion-pique-polo-girl-front-crop.jpg",
       "/lyrion-pique-polo/lyrion-pique-polo-girl-front.jpg",
       "/lyrion-pique-polo/lyrion-pique-polo-boy-front.jpg",
       "/lyrion-pique-polo/lyrion-pique-polo-boy-back.jpg",
       "/lyrion-pique-polo/lyrion-pique-polo-front-flat.jpg",
       "/lyrion-pique-polo/lyrion-pique-polo-back-flat.jpg"
     ],
-    "mainImage": "/lyrion-pique-polo/lyrion-pique-polo-girl-front.jpg",
+    "mainImage": "/lyrion-pique-polo/lyrion-pique-polo-girl-front-crop.jpg",
     "price": 44.99,
     "price_range": {
       "min": 44.99,
@@ -1931,13 +1940,14 @@
       "published": true
     },
     "images": [
+      "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-02-front-crop.jpg",
       "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-01-hero.jpg",
       "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-02-front.jpg",
       "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-03-back.jpg",
       "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-04-detail.jpg",
       "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-05-lifestyle.jpg"
     ],
-    "mainImage": "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-01-hero.jpg",
+    "mainImage": "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-02-front-crop.jpg",
     "price": 53.99,
     "price_range": {
       "min": 53.99,
@@ -2242,12 +2252,13 @@
     "manifestationText": "Intuition",
     "manifestationPlacement": "chest-or-sleeve",
     "images": [
+      "/pisces-intuition-hoodie/pisces-intuition-hoodie-back-crop.jpg",
       "/pisces-intuition-hoodie/pisces-intuition-hoodie-front.jpg",
       "/pisces-intuition-hoodie/pisces-intuition-hoodie-back.jpg",
       "/pisces-intuition-hoodie/pisces-intuition-hoodie-ghost.jpg",
       "/pisces-intuition-hoodie/pisces-intuition-hoodie-lifestyle.jpg"
     ],
-    "mainImage": "/pisces-intuition-hoodie/pisces-intuition-hoodie-front.jpg",
+    "mainImage": "/pisces-intuition-hoodie/pisces-intuition-hoodie-back-crop.jpg",
     "price": {
       "min": 55.99,
       "max": 60.0,
@@ -2529,12 +2540,13 @@
     },
     "currency": "USD",
     "images": [
+      "/shop-images/taurus-pyjamas/taurus-pyjamas-front-crop.jpg",
       "/shop-images/taurus-pyjamas/taurus-pyjamas-lifestyle.jpg",
       "/shop-images/taurus-pyjamas/taurus-pyjamas-back.jpg",
       "/shop-images/taurus-pyjamas/taurus-pyjamas-front.jpg",
       "/shop-images/taurus-pyjamas/taurus-pyjamas-detail.jpg"
     ],
-    "mainImage": "/shop-images/taurus-pyjamas/taurus-pyjamas-back.jpg",
+    "mainImage": "/shop-images/taurus-pyjamas/taurus-pyjamas-front-crop.jpg",
     "description": "Sleep under your stars. This isn't just sleepwear—it's a celestial statement. The Taurus constellation is delicately mapped across the back, connecting the stars that ruled the night sky when Taurus season began.",
     "mysticalCopy": "The bull doesn't settle. Neither should your sleepwear.",
     "options": {
@@ -2668,12 +2680,13 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/taurus-slides-flat-crop.jpg",
       "/images/products/taurus-slides-lifestyle.jpg",
       "/images/products/taurus-slides-front.jpg",
       "/images/products/taurus-slides-side.jpg",
       "/images/products/taurus-slides-flat.jpg"
     ],
-    "mainImage": "/images/products/taurus-slides-lifestyle.jpg",
+    "mainImage": "/images/products/taurus-slides-flat-crop.jpg",
     "description": "Ground your cosmic energy in luxury. Premium slides featuring the Taurus bull constellation and Lyrīon Atelier signature. Designed for those who move through the world with intention and comfort.",
     "mysticalCopy": "April 20 - May 20. Walk with the earth's grounded strength beneath your feet.",
     "options": {
@@ -2897,13 +2910,14 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/pisces-windbreaker-lifestyle-3-crop.jpg",
       "/images/products/pisces-windbreaker-lifestyle-1.jpg",
       "/images/products/pisces-windbreaker-lifestyle-2.jpg",
       "/images/products/pisces-windbreaker-lifestyle-3.jpg",
       "/images/products/pisces-windbreaker-lifestyle-4.jpg",
       "/images/products/pisces-windbreaker-lifestyle-5.jpg"
     ],
-    "mainImage": "/images/products/pisces-windbreaker-lifestyle-1.jpg",
+    "mainImage": "/images/products/pisces-windbreaker-lifestyle-3-crop.jpg",
     "description": "Pisces Cropped Windbreaker\n\nEthereal style meets cosmic protection. Premium cropped windbreaker featuring the dreamy Pisces twin fish in vibrant detail.\n\n• Water-resistant fabric\n• Adjustable drawstring hood\n• Elastic cuffs and hem\n• Front zip closure\n• Cropped silhouette\n\nFor the Pisces who moves between worlds with grace.\n\nFebruary 19 - March 20",
     "mysticalCopy": "For the Pisces who moves between worlds with grace.",
     "options": {
@@ -3129,13 +3143,14 @@
     "description": "Pisces Clear Tote Bag\n\nCarry your cosmic energy with transparency. Premium clear tote featuring the ethereal Pisces twin fish design.\n\n• Durable clear PVC material\n• Spacious interior\n• Comfortable handles\n• Water-resistant\n• Stadium-approved\n\nFor the Pisces who moves through the world with grace and authenticity.\n\nFebruary 19 - March 20",
     "mysticalCopy": "Carry your cosmic energy with transparency.",
     "images": [
+      "/images/products/pisces-tote-lifestyle-1-crop.jpg",
       "/images/products/pisces-tote-lifestyle-1.jpg",
       "/images/products/pisces-tote-lifestyle-2.jpg",
       "/images/products/pisces-tote-lifestyle-3.jpg",
       "/images/products/pisces-tote-lifestyle-4.jpg",
       "/images/products/pisces-tote-lifestyle-5.jpg"
     ],
-    "mainImage": "/images/products/pisces-tote-lifestyle-1.jpg",
+    "mainImage": "/images/products/pisces-tote-lifestyle-1-crop.jpg",
     "price": 45.99,
     "price_range": {
       "min": 45.99,
@@ -3220,6 +3235,7 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/taurus-ram-hoodie-lifestyle-1-crop.jpg",
       "/images/products/taurus-ram-hoodie-lifestyle-1.jpg",
       "/images/products/taurus-ram-hoodie-lifestyle-2.jpg",
       "/images/products/taurus-ram-hoodie-lifestyle-3.jpg",
@@ -3229,7 +3245,7 @@
       "/images/products/taurus-ram-hoodie-lifestyle-7.jpg",
       "/images/products/taurus-ram-hoodie-lifestyle-8.jpg"
     ],
-    "mainImage": "/images/products/taurus-ram-hoodie-lifestyle-1.jpg",
+    "mainImage": "/images/products/taurus-ram-hoodie-lifestyle-1-crop.jpg",
     "description": "Bold cosmic statement piece. Premium unisex hoodie featuring the Taurus ram head in striking pink detail. For those born under the sign of strength and determination.",
     "mysticalCopy": "April 20 - May 20. For those born under the sign of strength and determination.",
     "options": {
@@ -3358,6 +3374,7 @@
     "currency": "USD",
     "image": "/images/products/taurus-organic-tee-lifestyle-4.jpg",
     "images": [
+      "/images/products/taurus-organic-tee-lifestyle-4-crop.jpg",
       "/images/products/taurus-organic-tee-lifestyle-1.jpg",
       "/images/products/taurus-organic-tee-lifestyle-2.jpg",
       "/images/products/taurus-organic-tee-lifestyle-3.jpg",
@@ -3367,7 +3384,7 @@
       "/images/products/taurus-organic-tee-lifestyle-7.jpg",
       "/images/products/taurus-organic-tee-lifestyle-8.jpg"
     ],
-    "mainImage": "/images/products/taurus-organic-tee-lifestyle-4.jpg",
+    "mainImage": "/images/products/taurus-organic-tee-lifestyle-4-crop.jpg",
     "description": "Sustainable luxury meets cosmic style. Premium organic cotton tee with ribbed neckline featuring the Taurus constellation. For the Earth sign who values quality and sustainability.",
     "mysticalCopy": "April 20 - May 20. For the Earth sign who values quality and sustainability.",
     "options": {
@@ -3488,6 +3505,7 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/gemini-love-language-hoodie-2-crop.jpg",
       "/images/products/gemini-love-language-hoodie-1.jpg",
       "/images/products/gemini-love-language-hoodie-2.jpg",
       "/images/products/gemini-love-language-hoodie-3.jpg",
@@ -3495,7 +3513,7 @@
       "/images/products/gemini-love-language-hoodie-5.jpg",
       "/images/products/gemini-love-language-hoodie-6.jpg"
     ],
-    "mainImage": "/images/products/gemini-love-language-hoodie-1.jpg",
+    "mainImage": "/images/products/gemini-love-language-hoodie-2-crop.jpg",
     "description": "For the Gemini who finds intimacy in intellectual connection. Late-night conversations about everything and nothing. Premium box hoodie for those who speak love through words.",
     "mysticalCopy": "Love Language: 3AM Conversations",
     "options": {
@@ -3624,6 +3642,7 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/mercury-retrograde-hoodie-1-crop.jpg",
       "/images/products/mercury-retrograde-hoodie-1.jpg",
       "/images/products/mercury-retrograde-hoodie-2.jpg",
       "/images/products/mercury-retrograde-hoodie-3.jpg",
@@ -3631,7 +3650,7 @@
       "/images/products/mercury-retrograde-hoodie-5.jpg",
       "/images/products/mercury-retrograde-hoodie-6.jpg"
     ],
-    "mainImage": "/images/products/mercury-retrograde-hoodie-1.jpg",
+    "mainImage": "/images/products/mercury-retrograde-hoodie-1-crop.jpg",
     "description": "When Mercury goes retrograde, plans derail and love goes sideways. The Beetle that won't start. The flowers that arrived too late. This hoodie captures every missed connection, every 'we need to talk' text that never sent, every relationship that ended because the cosmos said so. For those who've survived Mercury's chaos and lived to laugh about it. Military green. Unisex fit. Cosmic humor meets streetwear.",
     "mysticalCopy": "Survived Mercury Retrograde (barely).",
     "options": {
@@ -3774,9 +3793,10 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/single-cosmic-design-mug-1-crop.jpg",
       "/images/products/single-cosmic-design-mug-1.jpg"
     ],
-    "mainImage": "/images/products/single-cosmic-design-mug-1.jpg",
+    "mainImage": "/images/products/single-cosmic-design-mug-1-crop.jpg",
     "description": "For those choosing themselves. Black glossy mug celebrating solo cosmic energy.",
     "mysticalCopy": "Embrace your cosmic independence.",
     "options": {
@@ -3861,9 +3881,10 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/saturn-return-hoodie-1-crop.jpg",
       "/images/products/saturn-return-hoodie-1.jpg"
     ],
-    "mainImage": "/images/products/saturn-return-hoodie-1.jpg",
+    "mainImage": "/images/products/saturn-return-hoodie-1-crop.jpg",
     "description": "For the 28-30 year olds who lost everything during their Saturn Return. Cosmic reckoning. Necessary endings. Premium organic hoodie with side pockets.",
     "mysticalCopy": "Saturn teaches through loss. You emerged stronger.",
     "options": {
@@ -3975,9 +3996,10 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/premium-polo-his-1-crop.jpg",
       "/images/products/premium-polo-his-1.jpg"
     ],
-    "mainImage": "/images/products/premium-polo-his-1.jpg",
+    "mainImage": "/images/products/premium-polo-his-1-crop.jpg",
     "description": "When two galaxies collide, stars are born. His side of the cosmic connection. Premium pique polo featuring celestial lovers meeting across the universe. Incomplete without Hers.",
     "mysticalCopy": "When two galaxies collide, stars are born.",
     "options": {
@@ -4117,9 +4139,10 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/premium-polo-hers-1-crop.jpg",
       "/images/products/premium-polo-hers-1.jpg"
     ],
-    "mainImage": "/images/products/premium-polo-hers-1.jpg",
+    "mainImage": "/images/products/premium-polo-hers-1-crop.jpg",
     "description": "When two galaxies collide, stars are born. Her side of the cosmic connection. Premium pique polo featuring celestial lovers meeting across the universe. Incomplete without His.",
     "mysticalCopy": "When two galaxies collide, stars are born.",
     "options": {
@@ -4259,9 +4282,10 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/gemini-windbreaker-1-crop.jpg",
       "/images/products/gemini-windbreaker-1.jpg"
     ],
-    "mainImage": "/images/products/gemini-windbreaker-1.jpg",
+    "mainImage": "/images/products/gemini-windbreaker-1-crop.jpg",
     "description": "For the Gemini who speaks love through words, lyrics, and late-night playlists. Every conversation is a verse. Every text is a chorus. Premium windbreaker for those whose love language lives in Gemini season.",
     "mysticalCopy": "For the Gemini who speaks love through words, lyrics, and late-night playlists.",
     "options": {
@@ -4377,9 +4401,10 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/leo-love-language-tee-1-crop.jpg",
       "/images/products/leo-love-language-tee-1.jpg"
     ],
-    "mainImage": "/images/products/leo-love-language-tee-1.jpg",
+    "mainImage": "/images/products/leo-love-language-tee-1-crop.jpg",
     "description": "Love Language: Public Adoration. The Leo who needs their person to shout it from the rooftops. Hand-holding in crowded rooms. Instagram stories. Being claimed, celebrated, shown off. Premium organic tee that says what Leos need to hear: You're mine and everyone should know it.",
     "mysticalCopy": "Love Language: Public Adoration. For the Leo who needs to be celebrated.",
     "options": {
@@ -4496,9 +4521,10 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/libra-scale-tote-1-crop.jpg",
       "/images/products/libra-scale-tote-1.jpg"
     ],
-    "mainImage": "/images/products/libra-scale-tote-1.jpg",
+    "mainImage": "/images/products/libra-scale-tote-1-crop.jpg",
     "description": "The Libra who carries balance wherever they go. All-over celestial print featuring the scales of justice and cosmic harmony. Everything in its right place—beauty, function, aesthetic equilibrium. Premium tote for the sign that refuses to compromise on either style or substance.",
     "mysticalCopy": "Balance, beauty, and cosmic harmony in every carry.",
     "options": {
@@ -4577,9 +4603,10 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/aries-weekender-bag-1-crop.jpg",
       "/images/products/aries-weekender-bag-1.jpg"
     ],
-    "mainImage": "/images/products/aries-weekender-bag-1.jpg",
+    "mainImage": "/images/products/aries-weekender-bag-1-crop.jpg",
     "description": "The Aries who runs toward adventure, not away from it. Oversized weekender for spontaneous escapes and bold moves. Ram symbol declaring: I go where I want, when I want. Premium bag built for the sign that never asks permission.",
     "mysticalCopy": "For the Aries who runs toward adventure, not away from it.",
     "options": {
@@ -4739,6 +4766,7 @@
     },
     "currency": "USD",
     "images": [
+      "/images/products/virgo-bandana-2-crop.jpg",
       "/images/products/virgo-bandana-1.jpg",
       "/images/products/virgo-bandana-2.jpg",
       "/images/products/virgo-bandana-3.jpg",
@@ -4746,7 +4774,7 @@
       "/images/products/virgo-bandana-5.jpg",
       "/images/products/virgo-bandana-6.jpg"
     ],
-    "mainImage": "/images/products/virgo-bandana-1.jpg",
+    "mainImage": "/images/products/virgo-bandana-2-crop.jpg",
     "description": "Practical meets celestial. The Virgo bandana that serves a purpose—hair control, neck protection, pocket square precision. All-over maiden print for the sign that believes accessories should work as hard as they do.",
     "mysticalCopy": "Accessories should work as hard as you do.",
     "options": {
@@ -4841,6 +4869,7 @@
     "currency": "USD",
     "image": "/images/products/saturn-return-white-hoodie-1.jpg",
     "images": [
+      "/images/products/saturn-return-white-hoodie-1-crop.jpg",
       "/images/products/saturn-return-white-hoodie-1.jpg",
       "/images/products/saturn-return-white-hoodie-2.jpg",
       "/images/products/saturn-return-white-hoodie-3.jpg",
@@ -4849,7 +4878,7 @@
       "/images/products/saturn-return-white-hoodie-6.jpg",
       "/images/products/saturn-return-white-hoodie-7.jpg"
     ],
-    "mainImage": "/images/products/saturn-return-white-hoodie-1.jpg",
+    "mainImage": "/images/products/saturn-return-white-hoodie-1-crop.jpg",
     "description": "Saturn Return hits different. When the planet completes its 29-year orbit and reality checks every choice you've made. Relationships transform. Foundations rebuild. This hoodie speaks to cosmic reckonings, necessary endings, and the clarity that comes after chaos. White colorway for fresh starts.",
     "sizes": [
       "S",
