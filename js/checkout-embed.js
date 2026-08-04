@@ -62,12 +62,20 @@
     let response;
     try {
       response = await fetch('/data/site.json', { cache: 'no-store', signal: ctrl.signal });
-    } finally {
+    } catch (err) {
       clearTimeout(timer);
+      if (err.name === 'AbortError') {
+        throw new Error('Configuration request timed out. Please try again.');
+      }
+      throw new Error('Network error loading configuration. Please check your connection and try again.');
+    }
+    clearTimeout(timer);
+    if (!response.ok) {
+      throw new Error(`Failed to load configuration (${response.status}).`);
     }
     const data = await response.json().catch(() => ({}));
-    if (!response.ok || !data?.stripePublishableKey) {
-      throw new Error('Missing Stripe publishable key');
+    if (!data?.stripePublishableKey) {
+      throw new Error('Missing Stripe publishable key.');
     }
     return data.stripePublishableKey;
   }
@@ -131,9 +139,14 @@
           body: JSON.stringify(payload),
           signal: ctrl.signal
         });
-      } finally {
+      } catch (err) {
         clearTimeout(timer);
+        if (err.name === 'AbortError') {
+          throw new Error('Checkout request timed out. Please try again.');
+        }
+        throw new Error('Network error during checkout. Please check your connection and try again.');
       }
+      clearTimeout(timer);
 
       const data = await response.json().catch(() => ({}));
       console.log('[checkout-embed] create-checkout response', data);
