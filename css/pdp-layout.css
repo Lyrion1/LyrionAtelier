@@ -612,3 +612,21 @@
     height: 56px;
   }
 }
+
+
+/* ----------------------------------------------------------------
+   Touch targets
+
+   The service links and the read more control render 18px tall, under the
+   24px WCAG 2.5.8 minimum for a standalone target. Vertical padding lifts
+   the hit area to 44px. They keep no fill, no border and no radius, so
+   they still read as plain text, not as controls.
+----------------------------------------------------------------- */
+[data-page="product"] .pdp-service__label,
+[data-page="product"] .pdp-desc__read-more {
+  padding-top: 0.8rem !important;
+  padding-bottom: 0.8rem !important;
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}

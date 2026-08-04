@@ -47,7 +47,7 @@ button[class*="submit"],
 .relationship-card-btn,
 .promo-cta-primary,
 .promo-cta-secondary {
-  background: #d4af37 !important;
+  background: #C9922B !important;
   color: #0f0c29 !important;
   font-size: 16px !important;
   font-weight: 600 !important;
@@ -56,7 +56,7 @@ button[class*="submit"],
   padding: 14px 28px !important;
   min-height: 48px !important;
   cursor: pointer !important;
-  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3) !important;
+  box-shadow: 0 2px 8px rgba(201, 146, 43, 0.3) !important;
   transition: all 0.3s ease !important;
   text-align: center !important;
   text-decoration: none !important;
@@ -104,9 +104,9 @@ button[class*="buy"]:hover,
 .relationship-card-btn:hover,
 .promo-cta-primary:hover,
 .promo-cta-secondary:hover {
-  background: #e5c245 !important;
+  background: #C9922B !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4) !important;
+  box-shadow: 0 4px 12px rgba(201, 146, 43, 0.4) !important;
   opacity: 1 !important;
 }
 
@@ -121,7 +121,7 @@ button[class*="buy"]:hover,
 .btn:active,
 a.button:active,
 .button:active {
-  background: #c9a030 !important;
+  background: #A67724 !important;
   transform: translateY(0) !important;
 }
 
@@ -164,10 +164,10 @@ button:disabled,
 button[disabled],
 .btn:disabled,
 .button:disabled {
-  background: #b8941f !important;
-  color: #0f0c29 !important;
+  background: #A67724;
+  color: #0f0c29;
   cursor: not-allowed !important;
-  opacity: 0.75 !important;
+  opacity: 0.75;
   pointer-events: auto !important;
   visibility: visible !important;
 }
@@ -238,13 +238,13 @@ button[disabled],
 .btn-outline,
 .promo-cta-secondary {
   background: transparent !important;
-  border: 2px solid #d4af37 !important;
-  color: #d4af37 !important;
+  border: 2px solid #C9922B !important;
+  color: #C9922B !important;
 }
 
 .btn-outline:hover,
 .promo-cta-secondary:hover {
-  background: rgba(212, 175, 55, 0.1) !important;
-  border-color: #e5c245 !important;
-  color: #e5c245 !important;
+  background: rgba(201, 146, 43, 0.1) !important;
+  border-color: #C9922B !important;
+  color: #C9922B !important;
 }

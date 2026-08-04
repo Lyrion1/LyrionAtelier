@@ -29,7 +29,7 @@
   --soho-midnight-alt: #1d1129;
   --soho-midnight-line: rgba(247, 231, 196, 0.14);
   --soho-on-midnight: #f4ecd8;
-  --soho-on-midnight-soft: rgba(244, 236, 216, 0.68);
+  --soho-on-midnight-soft: rgba(244, 236, 216, 0.86); /* 0.68 read 3.54:1 on midnight, under AA */
 
   /* ---- Brand accents ---- */
   --soho-gold: #c6a76b;
@@ -83,7 +83,7 @@
   /* Eyebrows sit on the cream page background by default, so they use the
      darker gold. Dark sections, the hero and the split panels override this
      back to the bright gold below. */
-  color: var(--soho-gold-ink) !important;
+  color: var(--soho-ink-soft) !important;
   font-weight: 600;
   display: inline-block;
   margin: 0 0 0.9rem !important;
@@ -285,7 +285,7 @@
   border: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  min-height: 0 !important;
+  min-height: 44px !important; /* 0 left it 43px tall, under the touch floor */
   color: var(--soho-on-midnight) !important;
   font-size: 1.4rem;
   cursor: pointer;
@@ -752,7 +752,7 @@ body.nav-open { overflow: hidden; }
   gap: 0.3rem !important;
 }
 /* css/shop-fixes.css forces `.product-card h3, .product-card .title, ...`
-   to legacy gold #d4af37 !important, which is 2.1:1 on a white card. The
+   to legacy gold #C9922B !important, which is 2.1:1 on a white card. The
    gifting grid renders bare h3 and .price rather than the .product-card-title
    class the rest of the site uses, so it slipped past the rules below. */
 .soho-scope .product-card h3,
@@ -1274,7 +1274,9 @@ body.nav-open { overflow: hidden; }
 body.soho-lightbox-open { overflow: hidden; }
 
 .soho-pdp__info { position: sticky; top: 100px; }
-.soho-pdp__info #product-pill { color: var(--soho-gold) !important; }
+/* --soho-gold (#C6A76B) is 1.87:1 on the ivory panel this sits on.
+   --soho-gold-ink is the darker gold the theme keeps for gold text. */
+.soho-pdp__info #product-pill { color: var(--soho-ink-soft) !important; }
 .soho-pdp__info h1#product-name { font-family: var(--soho-font-display) !important; font-size: clamp(1.8rem, 3vw, 2.5rem) !important; color: var(--soho-ink) !important; margin: 0.5rem 0 0.75rem !important; }
 .soho-pdp__info #product-price { font-size: 1.15rem !important; color: var(--soho-ink-soft) !important; opacity: 1 !important; margin: 0 0 1.5rem !important; }
 .soho-pdp__info #product-description { font-size: 0.95rem !important; line-height: 1.7; color: var(--soho-ink-soft) !important; opacity: 1 !important; margin: 0 0 1.75rem !important; }

@@ -67,7 +67,7 @@
   transition: transform 250ms ease, box-shadow 250ms ease;
 }
 .testimonial-card:hover {
-  border-color: var(--rose, #E8A0A8);
+  border-color: var(--gold, #C9922B);
   transform: translateY(-2px);
   box-shadow: 0 8px 28px rgba(91, 75, 122, 0.12);
 }
@@ -83,8 +83,11 @@
   font-size: 0.9rem;
   font-weight: 600;
 }
+/* Gold reads 2.6:1 on the ivory ground, below AA. These are emoji stars,
+   which paint their own colour, but the declared colour is what a text
+   fallback would use, so it takes plum (7.2:1). */
 .testimonial-stars {
-  color: var(--gold, #C9922B);
+  color: var(--plum, #5B4B7A);
   font-size: 0.85rem;
   margin-top: 5px;
 }
@@ -147,8 +150,8 @@
 .upsell-btn-primary {
   display: inline-block;
   padding: 16px 30px;
-  background: var(--apricot, #F0A868);
-  color: var(--ink, #2B2440);
+  background: var(--cta, #2B2440);
+  color: var(--cta-ink, #FDF8F0);
   font-size: 1.1rem;
   font-weight: 700;
   border-radius: 10px;
@@ -159,9 +162,9 @@
   width: 100%;
 }
 .upsell-btn-primary:hover {
-  background: #e0955a;
+  background: var(--cta-hover, #5B4B7A);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(240, 168, 104, 0.30);
+  box-shadow: 0 6px 20px rgba(43, 36, 64, 0.22);
 }
 .upsell-btn-secondary {
   display: inline-block;

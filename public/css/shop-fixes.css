@@ -204,7 +204,7 @@
    PRODUCT TITLE - EXACT SPECIFICATIONS
    Font-size: 18px
    Font-weight: 600
-   Color: Gold (#d4af37)
+   Color: Gold (#C9922B)
    Margin-bottom: 8px
    Line-height: 1.3
    Max-height: 48px (2 lines max)
@@ -220,7 +220,7 @@
 .shop-title {
   font-size: 18px !important;
   font-weight: 600 !important;
-  color: #d4af37 !important;
+  color: var(--plum, #5B4B7A) !important;
   margin: 0 0 8px 0 !important;
   line-height: 1.3 !important;
   max-height: 48px !important;
@@ -235,7 +235,7 @@
    PRICE - EXACT SPECIFICATIONS
    Font-size: 24px
    Font-weight: bold
-   Color: Gold (#d4af37)
+   Color: Gold (#C9922B)
    Margin-bottom: 12px
    =========================================== */
 
@@ -246,7 +246,7 @@
 .shop-price {
   font-size: 24px !important;
   font-weight: bold !important;
-  color: #d4af37 !important;
+  color: var(--plum, #5B4B7A) !important;
   margin: 0 0 12px 0 !important;
 }
 
@@ -254,7 +254,7 @@
    BUTTON - EXACT SPECIFICATIONS
    Width: 100%
    Height: 44px
-   Background: Gold (#d4af37)
+   Background: Gold (#C9922B)
    Color: Navy (#0f0c29)
    Border-radius: 6px
    Font-size: 16px
@@ -272,7 +272,7 @@
   width: 100% !important;
   height: 44px !important;
   min-height: 44px !important;
-  background: #d4af37 !important;
+  background: #C9922B !important;
   color: #0f0c29 !important;
   border-radius: 6px !important;
   font-size: 16px !important;
@@ -291,7 +291,7 @@
 .product-card .add-to-cart-btn:hover,
 .product-card-buttons .view-button:hover,
 .product-card-buttons .add-to-cart-button:hover {
-  background: #e5c245 !important;
+  background: #C9922B !important;
   transform: translateY(-2px) !important;
 }
 

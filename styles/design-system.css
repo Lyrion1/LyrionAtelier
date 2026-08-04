@@ -4,10 +4,15 @@
  ═══════════════════════════════════════════════════════════ */
 
 :root {
- /* OFFICIAL BRAND COLORS - NEVER CHANGE */
- --gold-primary: #d4af37;
- --gold-light: #f0c659;
- --gold-dark: #b8941f;
+ /* Brand golds. --gold-light was #f0c659, a yellow-orange that did not
+    belong to the palette; it now holds the brand gold #C9922B, which is
+    the single gold used across the site. --gold-primary and --gold-dark
+    are legacy values kept for rules that have not been migrated; new work
+    should read #C9922B. Gold is a line, badge and border colour only: it
+    is 2.6:1 on the ivory ground and cannot carry text. */
+ --gold-primary: #C9922B;
+ --gold-light: #C9922B;
+ --gold-dark: #A67724;
  
  --purple-deep: #302b63;
  --purple-dark: #24243e;
@@ -79,7 +84,7 @@
 
 .product-card-title {
  font-size: 18px !important;
- color: #d4af37 !important;
+ color: var(--plum, #5B4B7A) !important;
  margin-bottom: 8px !important;
  font-weight: 600 !important;
  line-height: 1.3 !important;
@@ -96,7 +101,7 @@
 
 .product-card-price {
  font-size: 24px !important;
- color: #d4af37 !important;
+ color: var(--plum, #5B4B7A) !important;
  font-weight: 700 !important;
  margin-bottom: 12px !important;
 }
@@ -104,7 +109,7 @@
 /* ═══════════════════════════════════════════════════════════
  BUTTONS - EXACT SPECIFICATIONS
  Width: 100%, Height: 44px
- Background: Gold (#d4af37), Color: Navy (#0f0c29)
+ Background: Gold (#C9922B), Color: Navy (#0f0c29)
  Border-radius: 6px, Font-size: 16px, Font-weight: 600
  ═══════════════════════════════════════════════════════════ */
 
@@ -123,7 +128,7 @@ a[class*="view"] {
  width: 100% !important;
  height: 44px !important;
  min-height: 44px !important;
- background: #d4af37 !important;
+ background: #C9922B !important;
  border: none !important;
  color: #0f0c29 !important;
  border-radius: 6px !important;
@@ -140,7 +145,7 @@ a[class*="view"] {
 
 .view-product-button:hover,
 .view-button:hover {
- background: #e5c245 !important;
+ background: #C9922B !important;
  transform: translateY(-2px) !important;
 }
 
@@ -152,7 +157,7 @@ button[class*="add-cart"] {
  width: 100% !important;
  height: 44px !important;
  min-height: 44px !important;
- background: #d4af37 !important;
+ background: #C9922B !important;
  border: none !important;
  color: #0f0c29 !important;
  border-radius: 6px !important;
@@ -169,7 +174,7 @@ button[class*="add-cart"] {
 
 .add-to-cart-button:hover,
 .add-cart-button:hover {
- background: #e5c245 !important;
+ background: #C9922B !important;
  transform: translateY(-2px) !important;
 }
 
@@ -188,7 +193,7 @@ button[style*="orange"],
 .btn-warning {
  background: transparent !important;
  border: 2px solid var(--gold-primary) !important;
- color: var(--gold-primary) !important;
+ color: var(--plum, #5B4B7A) !important;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -242,7 +247,7 @@ button[style*="orange"],
 .customer-favourites h2,
 .featured-products h2 {
  font-size: var(--text-4xl, 2.25rem) !important;
- color: var(--gold-primary) !important;
+ color: var(--plum, #5B4B7A) !important;
  text-align: center !important;
  margin-bottom: 50px !important;
  letter-spacing: var(--tracking-wider, 0.05em) !important;
@@ -255,7 +260,7 @@ button[style*="orange"],
 button[style],
 a[style],
 .btn[style] {
- background: #d4af37 !important;
+ background: #C9922B !important;
  color: #0f0c29 !important;
  border: none !important;
 }
