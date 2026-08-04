@@ -432,7 +432,11 @@
       const formatted = Number(base).toFixed(2);
       if (priceDisplay) priceDisplay.textContent = `$${formatted}`;
       if (startingPriceEl) startingPriceEl.textContent = `Starting at $${formatted}`;
-      if (addBtnLabel) addBtnLabel.textContent = `Add to Cart - $${formatted}`;
+      if (addBtnLabel) {
+        const label = `Add to Cart - $${formatted}`;
+        addBtnLabel.textContent = label;
+        if (addBtn) addBtn.setAttribute('aria-label', label);
+      }
     };
 
     initializePrice();
