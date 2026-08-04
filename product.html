@@ -75,26 +75,41 @@
             </div>
           </div>
           <div class="product-detail__info soho-pdp__info">
-            <p class="pill soho-eyebrow" id="product-pill"></p>
-            <h1 id="product-name" class="product-title soho-heading">Product</h1>
-            <p class="price product-price" id="product-price"></p>
-            <p id="product-description" class="muted product-description"></p>
-
-            <div class="form-group" id="color-options"></div>
-
-            <div class="size-selector" id="size-selector">
-              <label for="size-select" class="muted sr-only">Size</label>
-              <select id="size-select" class="input-select" style="display:none;">
-                <option value="">Select size</option>
-              </select>
+            <div class="product-detail__header">
+              <div class="product-detail__heading">
+                <p class="pill soho-eyebrow" id="product-pill"></p>
+                <h1 id="product-name" class="product-title soho-heading">Product</h1>
+              </div>
+              <p class="price product-price" id="product-price"></p>
             </div>
 
-            <div class="product-actions soho-pdp__actions">
-              <button class="btn btn-primary soho-btn soho-btn--dark" type="button" id="add-to-cart-btn">Add to Cart</button>
-              <button class="soho-btn soho-btn--ghost" type="button" id="buy-now-btn">Buy Now</button>
+            <div class="product-detail__story">
+              <p id="product-description" class="muted product-description"></p>
+              <div class="product-love-note" id="product-love-note" aria-live="polite">
+                <span class="product-love-note__label">Love Language</span>
+                <span class="product-love-note__text" id="product-love-note-text"></span>
+              </div>
+            </div>
+
+            <div class="product-detail__selectors">
+              <div class="form-group" id="color-options"></div>
+
+              <div class="size-selector" id="size-selector">
+                <label for="size-select" class="muted sr-only">Size</label>
+                <select id="size-select" class="input-select" style="display:none;">
+                  <option value="">Select size</option>
+                </select>
+              </div>
+
+              <div class="product-actions soho-pdp__actions">
+                <button class="btn btn-primary soho-btn soho-btn--dark" type="button" id="add-to-cart-btn">Add to Cart</button>
+                <button class="soho-btn soho-btn--ghost" type="button" id="buy-now-btn">Buy Now</button>
+              </div>
             </div>
 
             <p class="fulfilment-note muted">Made to order · ships in 5–10 business days via Printful</p>
+
+            <div class="product-detail__tags" id="product-detail-tags"></div>
 
             <div class="soho-accordion">
               <div class="soho-accordion__item">
