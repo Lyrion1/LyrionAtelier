@@ -22,5 +22,8 @@
   "devDependencies": {
     "@playwright/test": "^1.57.0",
     "sharp": "^0.33.5"
+  },
+  "allowScripts": {
+    "sharp@0.33.5": true
   }
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   --bg: #0f172a;
@@ -52,9 +52,6 @@
     max-width: 100% !important;
   }
 
-  h1 { font-size: 2rem !important; }
-  h2 { font-size: 1.6rem !important; }
-  h3 { font-size: 1.3rem !important; }
 
   .hero-section { padding: 60px 20px !important; }
 
@@ -96,7 +93,7 @@
 
 body {
   margin: 0;
-  font-family: 'Source Serif 4', 'Inter', system-ui, -apple-system, serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--gradient);
   color: var(--text);
   min-height: 100vh;
