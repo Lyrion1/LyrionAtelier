@@ -421,7 +421,9 @@
       const formatted = price.toFixed(2);
       priceDisplay.textContent = `$${formatted}`;
       if (addBtnLabel) {
-        addBtnLabel.textContent = `Add to Cart - $${formatted}`;
+        const label = `Add to Cart - $${formatted}`;
+        addBtnLabel.textContent = label;
+        if (addBtn) addBtn.setAttribute('aria-label', label);
       }
     };
 
