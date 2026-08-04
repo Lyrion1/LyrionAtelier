@@ -159,7 +159,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
           </svg>
-          ADD TO BAG
+          <span class="pdp-atb-label">ADD TO BAG</span>
         </button>
       </div>
 
@@ -403,6 +403,7 @@
     const sizeSelect = document.getElementById('size-select');
     const priceDisplay = document.getElementById('price-display');
     const addBtn = document.getElementById('add-to-cart-btn');
+    const addBtnLabel = addBtn && addBtn.querySelector('.pdp-atb-label');
     const startingPriceEl = document.getElementById('starting-price');
 
     const getCurrentVariant = () => variantById[sizeSelect.value] || defaultVariant;
@@ -413,8 +414,8 @@
       const price = Number(variant.price || product.price || 0);
       const formatted = price.toFixed(2);
       priceDisplay.textContent = `$${formatted}`;
-      if (addBtn) {
-        addBtn.textContent = `Add to Cart - $${formatted}`;
+      if (addBtnLabel) {
+        addBtnLabel.textContent = `Add to Cart - $${formatted}`;
       }
     };
 
@@ -423,7 +424,7 @@
       const formatted = Number(base).toFixed(2);
       if (priceDisplay) priceDisplay.textContent = `$${formatted}`;
       if (startingPriceEl) startingPriceEl.textContent = `Starting at $${formatted}`;
-      if (addBtn) addBtn.textContent = `Add to Cart - $${formatted}`;
+      if (addBtnLabel) addBtnLabel.textContent = `Add to Cart - $${formatted}`;
     };
 
     initializePrice();
