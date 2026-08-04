@@ -57,7 +57,14 @@
   }
 
   async function loadPublishableKey() {
-    const response = await fetch('/data/site.json', { cache: 'no-store' });
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 5000);
+    let response;
+    try {
+      response = await fetch('/data/site.json', { cache: 'no-store', signal: ctrl.signal });
+    } finally {
+      clearTimeout(timer);
+    }
     const data = await response.json().catch(() => ({}));
     if (!response.ok || !data?.stripePublishableKey) {
       throw new Error('Missing Stripe publishable key');
@@ -112,13 +119,21 @@
         discountCode: readDiscountCode()
       };
 
-      const response = await fetch(CREATE_CHECKOUT_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      });
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 5000);
+      let response;
+      try {
+        response = await fetch(CREATE_CHECKOUT_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload),
+          signal: ctrl.signal
+        });
+      } finally {
+        clearTimeout(timer);
+      }
 
       const data = await response.json().catch(() => ({}));
       console.log('[checkout-embed] create-checkout response', data);
