@@ -3,9 +3,23 @@ import { centsFrom, currencySymbol, formatPriceWithCurrency, priceNumber } from 
 const FALLBACK_IMAGE = '/assets/catalog/placeholder.webp';
 const EXTENDED_SIZE = /^([2-9]?xl)$/i;
 const PRICE_FALLBACK = '—';
+const SITE_ORIGIN = 'https://lyrionatelier.com';
 const fullRes = (u) => (u || '').replace('_thumb', '');
 
 const $ = (sel) => document.querySelector(sel);
+
+function ensureProductJsonLd(data) {
+  const head = document.head || document.body;
+  if (!head || !data) return;
+  let script = document.getElementById('ldjson-product');
+  if (!script) {
+    script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'ldjson-product';
+    head.appendChild(script);
+  }
+  script.textContent = JSON.stringify(data);
+}
 
 const getStoreVariantId = (variant = {}) => variant?.store_variant_id || variant?.storeVariantId || null;
 
@@ -460,6 +474,28 @@ async function hydrateProductPage() {
   });
 
   updateVariant();
+
+  const canonicalPath = `/product?slug=${encodeURIComponent(product.slug || slug)}`;
+  const schemaImage = galleryImages[0] || FALLBACK_IMAGE;
+  const schemaPrice = derivePrice(product, currentSelection().size, activeVariant) ?? activeVariant?.price ?? 0;
+  ensureProductJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: title,
+    description: description || title,
+    image: schemaImage.startsWith('http') ? schemaImage : `${SITE_ORIGIN}${schemaImage}`,
+    brand: {
+      '@type': 'Brand',
+      name: 'Lyrīon Atelier'
+    },
+    offers: {
+      '@type': 'Offer',
+      price: Number.isFinite(schemaPrice) ? schemaPrice.toFixed(2) : '0.00',
+      priceCurrency: currency,
+      availability: activeVariant ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      url: `${SITE_ORIGIN}${canonicalPath}`
+    }
+  });
 }
 
 if (document.readyState !== 'loading') hydrateProductPage();
