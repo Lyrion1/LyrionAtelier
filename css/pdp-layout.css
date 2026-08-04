@@ -251,6 +251,11 @@
 /* Service row with expand toggle */
 [data-page="product"] .pdp-service--expand .pdp-service__label {
   cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  text-align: left;
   display: flex;
   align-items: center;
   justify-content: space-between;

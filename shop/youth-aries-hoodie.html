@@ -159,7 +159,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
           </svg>
-          <span id="add-to-cart-label">ADD TO BAG</span>
+          <span class="pdp-atb-label">ADD TO BAG</span>
         </button>
       </div>
 
@@ -280,6 +280,10 @@
   var thumbs = document.querySelectorAll('.pdp-gallery__thumb');
   var mainImg = document.getElementById('pdp-main-image');
   thumbs.forEach(function(thumb) {
+    // role and tabindex are on the markup itself, so a thumb is focusable
+    // and announced as a button even before this script runs. Both click and
+    // Enter/Space activate it: making a thumb focusable without a key handler
+    // would let a keyboard user reach it but never use it.
     function activateThumb() {
       if (mainImg) { mainImg.src = thumb.src; mainImg.alt = thumb.alt; }
       thumbs.forEach(function(t) { t.classList.remove('active'); });
@@ -405,7 +409,7 @@
     const sizeSelect = document.getElementById('size-select');
     const priceDisplay = document.getElementById('price-display');
     const addBtn = document.getElementById('add-to-cart-btn');
-    const addBtnLabel = document.getElementById('add-to-cart-label');
+    const addBtnLabel = addBtn && addBtn.querySelector('.pdp-atb-label');
     const startingPriceEl = document.getElementById('starting-price');
 
     const getCurrentVariant = () => variantById[sizeSelect.value] || defaultVariant;
