@@ -286,8 +286,8 @@
   color: var(--pdp-ivory) !important;
 }
 
-/* Same selector weight and the same !important as the base rule above, or
-   the ink fill wins the tie and the button never changes on hover. */
+/* Needs !important to override the base CTA background (also !important);
+   otherwise the ink fill remains on hover. */
 [data-page="product"] .pdp-wrapper button.pdp-atb-btn:hover {
   background: var(--plum, #5B4B7A) !important;
   background-color: var(--plum, #5B4B7A) !important;
