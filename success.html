@@ -24,9 +24,8 @@ html {
 
 body {
  font-family: Georgia, serif;
- background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
  min-height: 100vh;
- color: #ffffff;
+ color: var(--ink, #2B2440);
  padding: 20px;
  position: relative;
  overflow: auto !important;
@@ -113,7 +112,7 @@ body.success-page #main-content {
 
  .subtitle {
  font-size: 1.2rem;
- color: rgba(255, 255, 255, 0.8);
+ color: var(--ink, #2B2440);
  margin-bottom: 40px;
  font-style: italic;
  line-height: 1.6;
@@ -122,20 +121,20 @@ body.success-page #main-content {
  .divider {
  width: 100px;
  height: 2px;
- background: linear-gradient(90deg, transparent, #d4af37, transparent);
+ background: linear-gradient(90deg, transparent, var(--gold, #C9922B), transparent);
  margin: 30px auto;
  }
 
  .message {
  font-size: 1rem;
- color: rgba(255, 255, 255, 0.9);
+ color: var(--ink, #2B2440);
  margin-bottom: 15px;
  line-height: 1.8;
  }
 
  .email-notice {
- background: rgba(212, 175, 55, 0.1);
- border-left: 4px solid #d4af37;
+ background: rgba(201, 146, 43, 0.10);
+ border-left: 4px solid var(--gold, #C9922B);
  padding: 20px;
  margin: 30px 0;
  text-align: left;
@@ -144,7 +143,7 @@ body.success-page #main-content {
  .email-notice p {
  font-size: 0.95rem;
  line-height: 1.6;
- color: rgba(255, 255, 255, 0.9);
+ color: var(--ink, #2B2440);
  }
 
  .email-notice strong {

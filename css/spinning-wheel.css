@@ -152,7 +152,7 @@
   height: 80px;
   border-radius: 50%;
   background: linear-gradient(145deg, #d4af37, #b8941f);
-  border: 3px solid #f0c659;
+  border: 3px solid #C9922B;
   color: #0f0c29;
   font-family: 'Cinzel', serif;
   font-size: 0.65rem;
@@ -247,7 +247,7 @@
   font-family: 'Courier New', monospace;
   font-size: 1.2rem;
   font-weight: 700;
-  color: #f0c659;
+  color: #C9922B;
   letter-spacing: 2px;
 }
 
@@ -311,14 +311,14 @@
 }
 
 .spin-wheel-share p {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--ink, #2B2440);
   font-size: 0.85rem;
   margin: 0;
   line-height: 1.5;
 }
 
 .spin-wheel-share strong {
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
 }
 
 /* Better Luck Meme */
@@ -349,7 +349,7 @@
 }
 
 .spin-wheel-reading-link:hover {
-  color: #f0c659;
+  color: #C9922B;
 }
 
 /* Mobile Responsiveness */

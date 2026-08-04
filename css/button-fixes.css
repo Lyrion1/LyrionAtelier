@@ -164,10 +164,10 @@ button:disabled,
 button[disabled],
 .btn:disabled,
 .button:disabled {
-  background: #b8941f !important;
-  color: #0f0c29 !important;
+  background: #b8941f;
+  color: #0f0c29;
   cursor: not-allowed !important;
-  opacity: 0.75 !important;
+  opacity: 0.75;
   pointer-events: auto !important;
   visibility: visible !important;
 }

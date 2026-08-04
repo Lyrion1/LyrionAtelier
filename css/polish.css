@@ -1,5 +1,5 @@
 /*
- * LYRĪON ATELIER — VISUAL POLISH
+ * LYRĪON ATELIER  VISUAL POLISH
  * Palette, aesthetics, typography, mobile & performance.
  * This file loads last and overrides the dark navy/gold theme.
  *
@@ -7,18 +7,20 @@
  *   --cream:   #FDF8F0  page background
  *   --ink:     #2B2440  body text
  *   --plum:    #5B4B7A  headings
- *   --apricot: #F0A868  primary buttons & accents
- *   --rose:    #E8A0A8  secondary accent
- *   --sage:    #8FB09A  tertiary accent
- *   --gold:    #C9922B  fine line detail only
+ *   --cta:     #2B2440  primary control fill
+ *   --cta-ink: #FDF8F0  label on that fill
+ *   --gold:    #C9922B  fine line detail and decorative badges only
  *
- * WCAG AA pairs (≥4.5:1) corrected in this pass:
- *   ink (#2B2440)    on cream  (#FDF8F0) — ~12.4:1
- *   plum (#5B4B7A)   on cream  (#FDF8F0) —  ~7.3:1
- *   ink (#2B2440)    on apricot(#F0A868) —  ~6.5:1  [buttons]
- *   ink (#2B2440)    on rose   (#E8A0A8) —  ~6.8:1
- *   plum (#5B4B7A)   on rose   (#E8A0A8) —  ~3.7:1 — avoided
- *   gold (#C9922B)   on cream  (#FDF8F0) —  ~4.5:1  [borders only]
+ * Retired in this pass: --apricot #F0A868, --rose #E8A0A8, --sage #8FB09A.
+ * None were in the brand palette, which is ivory ground, ink text and gold
+ * as a fine accent. Controls now fill with ink and label in ivory.
+ *
+ * WCAG AA pairs:
+ *   ink (#2B2440)    on cream  (#FDF8F0)  12.4:1
+ *   plum (#5B4B7A)   on cream  (#FDF8F0)   7.2:1
+ *   cream (#FDF8F0)  on ink    (#2B2440)  12.4:1  [filled controls]
+ *   ink (#2B2440)    on gold   (#C9922B)   4.9:1  [badges]
+ *   gold (#C9922B)   on cream  (#FDF8F0)   2.6:1  [never text, lines only]
  */
 
 /* ═══════════════════════════════════════════════════
@@ -30,9 +32,13 @@
   --cream:   #FDF8F0;
   --ink:     #2B2440;
   --plum:    #5B4B7A;
-  --apricot: #F0A868;
-  --rose:    #E8A0A8;
-  --sage:    #8FB09A;
+  /* Retired: --apricot #F0A868, --rose #E8A0A8, --sage #8FB09A. None were
+     in the brand palette (ivory ground, ink text, gold as a fine accent),
+     and rose scored 1.96:1 as a text colour on cream. Left undefined on
+     purpose so a stray reference fails visibly instead of painting orange. */
+  --cta:       #2B2440;
+  --cta-ink:   #FDF8F0;
+  --cta-hover: #5B4B7A;
   --gold:    #C9922B;
 
   /* Semantic aliases */
@@ -63,7 +69,7 @@
 
   /* Valentines page variables */
   --val-gold:     var(--gold);
-  --val-pink:     var(--rose);
+  --val-pink:     var(--gold);
   --val-dark-purple: rgba(91, 75, 122, 0.15);
   --val-navy:     var(--cream);
   --val-white:    var(--ink);
@@ -77,14 +83,14 @@
 
 html,
 body {
-  background: var(--cream) !important;
+  background: var(--cream);
   max-width: 100%;
   overflow-x: clip !important;
 }
 
 body {
-  background: var(--cream) !important;
-  color: var(--ink) !important;
+  background: var(--cream);
+  color: var(--ink);
 }
 
 @supports not (overflow: clip) {
@@ -112,7 +118,7 @@ body::after {
   display: none !important;
 }
 
-/* Subtle plum constellation motif — SVG inline as background */
+/* Subtle plum constellation motif  SVG inline as background */
 body::before {
   display: block !important;
   content: "" !important;
@@ -133,7 +139,7 @@ body::before {
   background-size: 280px 280px, 340px 340px, 420px 420px, 500px 500px,
                    600px 600px, 700px 700px, 820px 820px, 960px 960px, 1100px 1100px;
   background-repeat: repeat;
-  opacity: 0.7 !important;
+  opacity: 0.7;
   animation: none !important;
 }
 
@@ -142,8 +148,8 @@ body::before {
 ═══════════════════════════════════════════════════ */
 
 h1, h2, h3, h4, h5, h6 {
-  color: var(--plum) !important;
-  text-shadow: none !important;
+  color: var(--plum);
+  text-shadow: none;
   font-family: var(--font-display, 'Cormorant Garamond', serif) !important;
 }
 
@@ -152,9 +158,11 @@ h2 { font-size: var(--text-4xl) !important; }
 h3 { font-size: var(--text-3xl) !important; }
 h4 { font-size: var(--text-2xl) !important; }
 
+/* No colour here: paragraphs inherit ink from body on light ground, and
+   stating it again overrode the cream that dark sections set for their
+   own text. */
 p {
-  color: var(--ink) !important;
-  text-shadow: none !important;
+  text-shadow: none;
   max-width: 34rem;
 }
 
@@ -176,11 +184,8 @@ footer p,
    4. SITE HEADER & NAVIGATION
 ═══════════════════════════════════════════════════ */
 
-.site-header {
-  background: rgba(253, 248, 240, 0.96) !important;
-  border-bottom: 1px solid var(--border) !important;
-  backdrop-filter: blur(12px) !important;
-}
+/* Header ground removed for the same reason as in restoration.css: one
+   sheet owns it, and that sheet is soho-theme.css. */
 
 .logo-link,
 .logo-link:hover {
@@ -193,8 +198,10 @@ footer p,
   font-size: clamp(1rem, 3vw, 1.4rem) !important;
 }
 
+/* No colour here: the header is midnight in the current theme and
+   soho-theme.css sets the link colour to suit it. Forcing ink read at
+   1.44:1 against that ground. */
 .nav-links a {
-  color: var(--ink) !important;
   transition: color var(--transition), background var(--transition), transform var(--transition) !important;
 }
 
@@ -237,17 +244,17 @@ footer p,
 .spin-wheel-btn,
 .spin-wheel-claim-btn,
 .spin-wheel-copy-btn {
-  background: var(--apricot) !important;
-  color: var(--ink) !important;
+  background: var(--cta) !important;
+  color: var(--cta-ink) !important;
   border-color: var(--gold) !important;
-  box-shadow: 0 4px 14px rgba(240, 168, 104, 0.26) !important;
+  box-shadow: 0 4px 14px rgba(43, 36, 64, 0.26) !important;
 }
 
 .spin-wheel-btn:hover:not(:disabled),
 .spin-wheel-claim-btn:hover,
 .spin-wheel-copy-btn:hover {
-  background: #e0955a !important;
-  color: var(--ink) !important;
+  background: var(--cta-hover) !important;
+  color: var(--cta-ink) !important;
 }
 
 .spin-wheel-container {
@@ -262,6 +269,10 @@ footer p,
   color: var(--plum) !important;
   border-radius: 8px !important;
   transition: background var(--transition), border-color var(--transition) !important;
+  /* Standalone control: measured 48x43 at 375 and 390, one pixel under
+     the 44px floor, so state it here where nothing later overrides. */
+  min-width: 44px !important;
+  min-height: 44px !important;
 }
 
 .nav-toggle:hover,
@@ -302,7 +313,6 @@ footer p,
   .dropdown-toggle:focus {
     color: var(--plum) !important;
     background: rgba(91, 75, 122, 0.08) !important;
-    outline: none !important;
   }
 
   .dropdown-content {
@@ -342,7 +352,7 @@ footer p,
 }
 
 .eyebrow {
-  color: var(--gold) !important;
+  color: var(--plum, #5B4B7A) !important;
   font-weight: 700 !important;
 }
 
@@ -535,14 +545,14 @@ main > section,
 }
 
 .oracle-card-button {
-  border-color: var(--apricot) !important;
+  border-color: var(--plum) !important;
   color: var(--ink) !important;
   background: transparent !important;
 }
 
 .oracle-card-button:hover {
-  background: var(--apricot) !important;
-  color: var(--ink) !important;
+  background: var(--cta) !important;
+  color: var(--cta-ink) !important;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -573,15 +583,15 @@ main > section,
 }
 
 .promo-cta-primary {
-  background: var(--apricot) !important;
-  color: var(--ink) !important;
+  background: var(--cta) !important;
+  color: var(--cta-ink) !important;
   border: none !important;
   border-radius: 10px !important;
   transition: background var(--transition), transform var(--transition) !important;
 }
 
 .promo-cta-primary:hover {
-  background: #e0955a !important;
+  background: var(--cta-hover) !important;
   transform: translateY(-2px) !important;
 }
 
@@ -612,7 +622,7 @@ main > section,
    11. BUTTONS
 ═══════════════════════════════════════════════════ */
 
-/* Primary buttons — apricot background, ink text */
+/* Primary buttons: ink fill, ivory label. */
 .btn-primary,
 .button-primary,
 .modal-primary-btn,
@@ -630,13 +640,13 @@ button[class*="add-to-cart"],
 button[class*="add-cart"],
 button[class*="buy"],
 button[class*="submit"] {
-  background: var(--apricot) !important;
-  color: var(--ink) !important;
+  background: var(--cta) !important;
+  color: var(--cta-ink) !important;
   border: none !important;
   border-radius: 10px !important;
   font-size: 1rem !important;
   font-weight: 600 !important;
-  box-shadow: 0 2px 8px rgba(240, 168, 104, 0.25) !important;
+  box-shadow: 0 2px 8px rgba(43, 36, 64, 0.25) !important;
   transition: background var(--transition), transform var(--transition), box-shadow var(--transition) !important;
 }
 
@@ -651,22 +661,22 @@ button[class*="submit"] {
 .add-to-cart-button:hover,
 .buy-set-btn:hover,
 .submit-btn:hover {
-  background: #e0955a !important;
+  background: var(--cta-hover) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 4px 14px rgba(240, 168, 104, 0.35) !important;
+  box-shadow: 0 4px 14px rgba(43, 36, 64, 0.35) !important;
 }
 
 /* Generic .btn */
 .btn {
-  background: var(--apricot) !important;
-  color: var(--ink) !important;
+  background: var(--cta) !important;
+  color: var(--cta-ink) !important;
   border: none !important;
   border-radius: 10px !important;
   transition: background var(--transition), transform var(--transition) !important;
 }
 
 .btn:hover {
-  background: #e0955a !important;
+  background: var(--cta-hover) !important;
   transform: translateY(-2px) !important;
 }
 
@@ -702,8 +712,8 @@ button[class*="submit"] {
 button[style],
 a[style].btn,
 .btn[style] {
-  background: var(--apricot) !important;
-  color: var(--ink) !important;
+  background: var(--cta) !important;
+  color: var(--cta-ink) !important;
   border: none !important;
 }
 
@@ -712,20 +722,20 @@ button:disabled,
 button[disabled],
 .btn:disabled,
 .button:disabled {
-  background: #e8d4c0 !important;
-  color: #a0948a !important;
+  background: rgba(43, 36, 64, 0.10);
+  color: var(--muted);
   cursor: not-allowed !important;
-  opacity: 0.75 !important;
+  opacity: 0.75;
   transform: none !important;
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* Nav/CTA buttons that are anchors */
 a.btn,
 a.button,
 .promo-cta-primary {
-  background: var(--apricot) !important;
-  color: var(--ink) !important;
+  background: var(--cta) !important;
+  color: var(--cta-ink) !important;
   border: none !important;
   border-radius: 10px !important;
   transition: background var(--transition), transform var(--transition) !important;
@@ -734,7 +744,7 @@ a.button,
 a.btn:hover,
 a.button:hover,
 .promo-cta-primary:hover {
-  background: #e0955a !important;
+  background: var(--cta-hover) !important;
   transform: translateY(-2px) !important;
 }
 
@@ -754,29 +764,29 @@ a.button:hover,
 input,
 select,
 textarea {
-  background: var(--cream) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 10px !important;
-  color: var(--ink) !important;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--ink);
   font-size: 16px !important;  /* prevent iOS zoom on focus */
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  outline: 2px solid var(--gold) !important;
+  outline: 2px solid var(--gold);
   outline-offset: 0 !important;
-  border-color: var(--gold) !important;
-  box-shadow: 0 0 0 3px rgba(201, 146, 43, 0.15) !important;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 146, 43, 0.15);
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: var(--muted) !important;
+  color: var(--muted);
 }
 
 label {
-  color: var(--plum) !important;
+  color: var(--plum);
 }
 
 /* Contact form */
@@ -864,15 +874,15 @@ label {
 }
 
 .reading-title {
-  color: var(--plum) !important;
+  color: var(--plum);
 }
 
 .reading-price {
-  color: var(--ink) !important;
+  color: var(--ink);
 }
 
 .reading-description {
-  color: var(--muted) !important;
+  color: var(--muted);
 }
 
 /* Cosmic input inside modal */
@@ -884,7 +894,7 @@ label {
 
 /* ═══════════════════════════════════════════════════
    15. FORTUNE / SPINNING WHEEL MODAL
-   Visual only — logic untouched
+   Visual only  logic untouched
 ═══════════════════════════════════════════════════ */
 
 .spin-wheel-overlay {
@@ -1004,7 +1014,9 @@ label {
 }
 
 .footer-links a {
-  color: var(--muted) !important;
+  /* The footer is midnight; --muted read 3.37:1 on it. Same value as
+     soho-theme.css so first paint and settled state agree. */
+  color: rgba(244, 236, 216, 0.86) !important;
   transition: color var(--transition) !important;
 }
 
@@ -1046,12 +1058,12 @@ label {
 }
 
 .product-badge--bestseller {
-  background: linear-gradient(135deg, var(--apricot), #f8c490) !important;
+  background: var(--gold) !important;
   color: var(--ink) !important;
 }
 
 .product-badge--scarcity {
-  color: var(--gold) !important;
+  color: var(--plum, #5B4B7A) !important;
   border-color: rgba(201, 146, 43, 0.4) !important;
 }
 
@@ -1063,11 +1075,11 @@ label {
 /* The primary Shop button should stand out */
 .hero .btn-primary,
 .hero a.btn-primary {
-  background: var(--apricot) !important;
-  color: var(--ink) !important;
+  background: var(--cta) !important;
+  color: var(--cta-ink) !important;
   font-size: 1.05rem !important;
   padding: 0.85rem 1.6rem !important;
-  box-shadow: 0 4px 18px rgba(240, 168, 104, 0.30) !important;
+  box-shadow: 0 4px 18px rgba(43, 36, 64, 0.30) !important;
 }
 
 /* The secondary oracle button is lighter */
@@ -1100,7 +1112,7 @@ label {
 }
 
 .certificate-mockup .mockup-content .score-big {
-  color: var(--apricot) !important;
+  color: var(--plum) !important;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -1127,8 +1139,8 @@ label {
 }
 
 .loading-spinner {
-  border-color: rgba(240, 168, 104, 0.25) !important;
-  border-top-color: var(--apricot) !important;
+  border-color: rgba(201, 146, 43, 0.25) !important;
+  border-top-color: var(--gold) !important;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -1373,12 +1385,12 @@ label {
 }
 
 .tier .badge {
-  background: var(--apricot) !important;
+  background: var(--gold) !important;
   color: var(--ink) !important;
 }
 
 /* ═══════════════════════════════════════════════════
-   31. IMAGES — PERFORMANCE & CONTAINMENT
+   31. IMAGES  PERFORMANCE & CONTAINMENT
 ═══════════════════════════════════════════════════ */
 
 img {
@@ -1406,7 +1418,7 @@ img {
 }
 
 .valentines-badge {
-  background: var(--apricot) !important;
+  background: var(--gold) !important;
   color: var(--ink) !important;
 }
 
@@ -1422,8 +1434,8 @@ img {
 .relationship-card-btn,
 .upsell-btn-primary,
 .bundle-summary .buy-set-btn {
-  background: var(--apricot) !important;
-  color: var(--ink) !important;
+  background: var(--cta) !important;
+  color: var(--cta-ink) !important;
   animation: none !important;
 }
 
@@ -1431,7 +1443,7 @@ img {
 .relationship-card-btn:hover,
 .upsell-btn-primary:hover,
 .bundle-summary .buy-set-btn:hover {
-  background: #e0955a !important;
+  background: var(--cta-hover) !important;
 }
 
 .relationship-card {
@@ -1500,7 +1512,7 @@ img {
 }
 
 .bundle-summary .save-badge {
-  background: var(--rose) !important;
+  background: var(--gold) !important;
   color: var(--ink) !important;
 }
 
@@ -1513,7 +1525,7 @@ img {
 }
 
 .bundle-summary .savings {
-  color: var(--rose) !important;
+  color: var(--plum) !important;
 }
 
 .bundle-summary .buy-individual-link {
@@ -1697,7 +1709,7 @@ body[class*="success"] {
   color: var(--ink) !important;
 }
 
-/* Hide the animated star divs — they're invisible on cream anyway */
+/* Hide the animated star divs  they're invisible on cream anyway */
 .stars { display: none !important; }
 
 .success-container {
@@ -1734,18 +1746,18 @@ body[class*="success"] {
 }
 
 .success-container .email-notice strong {
-  color: var(--gold) !important;
+  color: var(--plum) !important;
 }
 
 .success-container .cta-button {
-  background: var(--apricot) !important;
-  color: var(--ink) !important;
-  box-shadow: 0 4px 14px rgba(240, 168, 104, 0.4) !important;
+  background: var(--cta) !important;
+  color: var(--cta-ink) !important;
+  box-shadow: 0 4px 14px rgba(43, 36, 64, 0.4) !important;
 }
 
 .success-container .cta-button:hover {
-  background: #e0955a !important;
-  box-shadow: 0 8px 20px rgba(240, 168, 104, 0.5) !important;
+  background: var(--cta-hover) !important;
+  box-shadow: 0 8px 20px rgba(43, 36, 64, 0.5) !important;
 }
 
 .success-container .oracle-link {
@@ -1786,8 +1798,15 @@ body[class*="success"] {
   color: var(--plum) !important;
 }
 
+/* ...but not the CTA, which is a filled control and keeps its own label
+   colour. Without this it inherited plum onto the ink fill at 1.91:1. */
+.legal-container a.btn,
+.legal-container a.button {
+  color: var(--cta-ink) !important;
+}
+
 .legal-container a:hover {
-  color: var(--gold) !important;
+  color: var(--plum, #5B4B7A) !important;
 }
 
 .legal-container strong {
@@ -1816,7 +1835,7 @@ body[class*="success"] {
 
 .reading-hero h1,
 .reading-hero .reading-title {
-  color: var(--plum) !important;
+  color: var(--plum);
 }
 
 .reading-hero .reading-subtitle,
@@ -1856,7 +1875,7 @@ body[class*="success"] {
 }
 
 .feature-icon {
-  color: var(--apricot) !important;
+  color: var(--plum) !important;
 }
 
 .reading-testimonials,
@@ -1901,7 +1920,7 @@ body[class*="success"] {
 
   .mobile-dropdown .dropdown-toggle:hover,
   .mobile-dropdown .dropdown-toggle:focus {
-    color: #d4af37;
+    color: var(--plum, #5B4B7A);
     outline: none;
   }
 
@@ -1939,7 +1958,7 @@ body[class*="success"] {
 
   .mobile-dropdown .dropdown-content a:hover,
   .mobile-dropdown .dropdown-content a:focus {
-    color: #d4af37;
+    color: var(--plum, #5B4B7A);
     background: rgba(212, 175, 55, 0.1);
   }
 }
@@ -1966,7 +1985,7 @@ body[class*="success"] {
 
 .footer-social__link:hover,
 .footer-social__link:focus {
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   background: rgba(212, 175, 55, 0.12);
   outline: none;
 }
@@ -2000,7 +2019,7 @@ body[class*="success"] {
 
 .coming-soon-icon {
   font-size: 2rem;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   margin-bottom: 1rem;
 }
 
@@ -2093,7 +2112,7 @@ main > section,
   background: transparent !important;
   border: none !important;
   border-radius: 0 !important;
-  color: var(--ink) !important;
+  /* No colour: the header is midnight, so ink read at 1.44:1 here. */
   padding: 0.55rem 0.7rem !important;
   text-decoration: none !important;
 }
@@ -2324,4 +2343,27 @@ main > section,
   .locale-select {
     flex: 1 1 auto !important;
   }
+}
+
+
+/* ═══════════════════════════════════════════════════
+   Gold is a line, badge and border colour on this site, never a text
+   colour: #C9922B is 2.60:1 on the ivory ground and the legacy #D4AF37
+   is 2.10:1, both below AA. These labels inherited gold from older
+   dark-theme rules, so they are stated in plum (7.2:1) here.
+═══════════════════════════════════════════════════ */
+.eyebrow,
+.section-title,
+.reading-title,
+.subscription-card .reading-title,
+.whats-included h3,
+.error-code {
+  color: var(--plum) !important;
+}
+
+/* The oracle subtitle sits on a mid-grey band (measured rgb(181,180,180) by
+   sampling the rendered pixels), where plum is 3.74:1. Ink clears AA at
+   6.6:1 on that ground and 12.4:1 on ivory. */
+.section-subtitle {
+  color: var(--ink) !important;
 }

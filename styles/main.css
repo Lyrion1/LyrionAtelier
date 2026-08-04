@@ -37,7 +37,7 @@
 
 .reading-details h1 {
   font-size: 2.5rem;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   margin-bottom: 10px;
 }
 
@@ -50,7 +50,7 @@
 
 .reading-price {
   font-size: 2rem;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   font-weight: 700;
   margin-bottom: 30px;
 }
@@ -69,7 +69,7 @@
 }
 
 .whats-included h3 {
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   margin-bottom: 20px;
 }
 
@@ -88,7 +88,7 @@
   content: "✦";
   position: absolute;
   left: 0;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
 }
 
 .purchase-reading-button {
@@ -105,7 +105,7 @@
 }
 
 .purchase-reading-button:hover {
-  background: #f0c659;
+  background: #C9922B;
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
 }
@@ -188,7 +188,7 @@
 
 .price {
   font-size: 2rem;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   font-weight: 700;
   margin-top: 10px;
 }
@@ -212,7 +212,7 @@
 .what-youll-discover h2 {
   text-align: center;
   font-size: 2.5rem;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   margin-bottom: 60px;
 }
 
@@ -246,7 +246,7 @@
 }
 
 .discovery-card h3 {
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   font-size: 1.3rem;
   margin-bottom: 15px;
 }
@@ -263,7 +263,7 @@
 .certificate-preview h2 {
   text-align: center;
   font-size: 2.5rem;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   margin-bottom: 60px;
 }
 
@@ -276,7 +276,7 @@
 }
 
 .detail-item h3 {
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   font-size: 1.4rem;
   margin-bottom: 15px;
 }
@@ -294,7 +294,7 @@
 .why-matters h2 {
   text-align: center;
   font-size: 2.5rem;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   margin-bottom: 40px;
 }
 
@@ -317,7 +317,7 @@
 }
 
 .matters-content strong {
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
 }
 
 .perfect-for {
@@ -327,7 +327,7 @@
 .perfect-for h2 {
   text-align: center;
   font-size: 2.5rem;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   margin-bottom: 60px;
 }
 
@@ -348,7 +348,7 @@
 }
 
 .perfect-card h3 {
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   font-size: 1.2rem;
   margin-bottom: 15px;
 }
@@ -377,13 +377,13 @@
 }
 
 .author {
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   font-weight: 600;
   font-size: 0.95rem;
 }
 
 .stars {
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   font-size: 1.1rem;
   margin-top: 10px;
 }
@@ -396,7 +396,7 @@
 .how-it-works h2 {
   text-align: center;
   font-size: 2.5rem;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   margin-bottom: 60px;
 }
 
@@ -419,7 +419,7 @@
   background: rgba(212, 175, 55, 0.2);
   border: 2px solid #d4af37;
   border-radius: 50%;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   font-size: 1.8rem;
   font-weight: 700;
   line-height: 56px;
@@ -427,7 +427,7 @@
 }
 
 .step h3 {
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   font-size: 1.3rem;
   margin-bottom: 15px;
 }
@@ -439,7 +439,7 @@
 .faq h2 {
   text-align: center;
   font-size: 2.5rem;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   margin-bottom: 60px;
 }
 
@@ -455,7 +455,7 @@
 }
 
 .faq-item h3 {
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   font-size: 1.2rem;
   margin-bottom: 15px;
 }
@@ -473,7 +473,7 @@
 
 .final-cta h2 {
   font-size: 3rem;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   margin-bottom: 20px;
 }
 
@@ -497,7 +497,7 @@
 }
 
 .purchase-button:hover {
-  background: #f0c659;
+  background: #C9922B;
   transform: translateY(-3px);
   box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
 }
@@ -527,7 +527,7 @@
 .when-to-gift h2 {
   text-align: center;
   font-size: 2.3rem;
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   margin-bottom: 30px;
 }
 
@@ -580,7 +580,7 @@
 .reason h3,
 .display-idea h3,
 .occasion h3 {
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   margin-bottom: 12px;
 }
 
@@ -608,7 +608,7 @@
 }
 
 .twin-flames-concept h3 {
-  color: #d4af37;
+  color: var(--plum, #5B4B7A);
   margin: 25px 0 15px;
 }
 

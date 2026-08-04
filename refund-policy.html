@@ -15,8 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #ffffff;
+      color: var(--ink, #2B2440);
     }
     .legal-container {
       max-width: 900px;
@@ -24,14 +23,14 @@
       padding: 120px 40px 80px 40px;
     }
     h1 {
-      color: #fbbf24;
+      color: var(--plum, #5B4B7A);
       font-size: 48px;
       font-family: 'Cinzel', serif;
       text-align: center;
       margin-bottom: 8px;
     }
     .last-updated {
-      color: rgba(255, 255, 255, 0.6);
+      color: var(--muted, #6D627E);
       font-style: italic;
       text-align: center;
       font-size: 14px;
@@ -39,14 +38,14 @@
       display: block;
     }
     h2 {
-      color: #fbbf24;
+      color: var(--plum, #5B4B7A);
       font-size: 28px;
       font-family: 'Cinzel', serif;
       margin-top: 48px;
       margin-bottom: 12px;
     }
-    p, li {
-      color: rgba(255, 255, 255, 0.9);
+    .legal-container p, .legal-container li {
+      color: var(--ink, #2B2440);
       line-height: 1.8;
       font-size: 16px;
     }
@@ -54,19 +53,19 @@
       margin-left: 24px;
     }
     a {
-      color: #a78bfa;
-      text-decoration: none;
+      color: var(--plum, #5B4B7A);
+      text-decoration: underline;
     }
     a:hover {
-      color: #fbbf24;
+      color: var(--ink, #2B2440);
     }
     strong {
-      color: #fbbf24;
+      color: var(--plum, #5B4B7A);
       font-weight: 600;
     }
     .highlight-box {
       background: rgba(139, 92, 246, 0.15);
-      border-left: 4px solid #fbbf24;
+      border-left: 4px solid var(--gold, #C9922B);
       padding: 20px 24px;
       border-radius: 8px;
       margin: 32px 0;
