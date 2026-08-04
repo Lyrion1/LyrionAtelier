@@ -127,10 +127,10 @@
            alt="Youth Aries hoodie lifestyle look"
            loading="eager" width="800" height="1000">
       <div class="pdp-gallery__thumbs" id="pdp-thumbs">
-        <img class="pdp-gallery__thumb active" src="/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-lifestyle.jpg" alt="Youth Aries hoodie lifestyle look" loading="lazy" width="120" height="150">
-        <img class="pdp-gallery__thumb" src="/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-girl-front.jpg" alt="Youth Aries hoodie front view" loading="lazy" width="120" height="150">
-        <img class="pdp-gallery__thumb" src="/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-girl-back.jpg" alt="Youth Aries hoodie back view" loading="lazy" width="120" height="150">
-        <img class="pdp-gallery__thumb" src="/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-flat-ghost.jpg" alt="Youth Aries hoodie flat lay" loading="lazy" width="120" height="150">
+        <img class="pdp-gallery__thumb active" src="/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-lifestyle.jpg" alt="Youth Aries hoodie lifestyle look" loading="lazy" width="120" height="150" role="button" tabindex="0">
+        <img class="pdp-gallery__thumb" src="/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-girl-front.jpg" alt="Youth Aries hoodie front view" loading="lazy" width="120" height="150" role="button" tabindex="0">
+        <img class="pdp-gallery__thumb" src="/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-girl-back.jpg" alt="Youth Aries hoodie back view" loading="lazy" width="120" height="150" role="button" tabindex="0">
+        <img class="pdp-gallery__thumb" src="/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-flat-ghost.jpg" alt="Youth Aries hoodie flat lay" loading="lazy" width="120" height="150" role="button" tabindex="0">
       </div>
     </div>
 
@@ -280,12 +280,18 @@
   var thumbs = document.querySelectorAll('.pdp-gallery__thumb');
   var mainImg = document.getElementById('pdp-main-image');
   thumbs.forEach(function(thumb) {
-    thumb.setAttribute('role', 'button');
-    thumb.setAttribute('tabindex', '0');
-    thumb.addEventListener('click', function() {
+    // role and tabindex are on the markup itself, so a thumb is focusable
+    // and announced as a button even before this script runs. Both click and
+    // Enter/Space activate it: making a thumb focusable without a key handler
+    // would let a keyboard user reach it but never use it.
+    function activateThumb() {
       if (mainImg) { mainImg.src = thumb.src; mainImg.alt = thumb.alt; }
       thumbs.forEach(function(t) { t.classList.remove('active'); });
       thumb.classList.add('active');
+    }
+    thumb.addEventListener('click', activateThumb);
+    thumb.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activateThumb(); }
     });
   });
 
@@ -415,7 +421,9 @@
       const formatted = price.toFixed(2);
       priceDisplay.textContent = `$${formatted}`;
       if (addBtnLabel) {
-        addBtnLabel.textContent = `Add to Cart - $${formatted}`;
+        const label = `Add to Cart - $${formatted}`;
+        addBtnLabel.textContent = label;
+        if (addBtn) addBtn.setAttribute('aria-label', label);
       }
     };
 
@@ -424,7 +432,11 @@
       const formatted = Number(base).toFixed(2);
       if (priceDisplay) priceDisplay.textContent = `$${formatted}`;
       if (startingPriceEl) startingPriceEl.textContent = `Starting at $${formatted}`;
-      if (addBtnLabel) addBtnLabel.textContent = `Add to Cart - $${formatted}`;
+      if (addBtnLabel) {
+        const label = `Add to Cart - $${formatted}`;
+        addBtnLabel.textContent = label;
+        if (addBtn) addBtn.setAttribute('aria-label', label);
+      }
     };
 
     initializePrice();
