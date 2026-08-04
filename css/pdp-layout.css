@@ -282,8 +282,7 @@
 /* restoration.css paints every `span` with `color: var(--ink) !important`,
    which left this label near-black on the ink fill. The label belongs to the
    button, so it takes the button's own foreground. */
-[data-page="product"] .pdp-wrapper button.pdp-atb-btn .pdp-atb-label,
-[data-page="product"] .pdp-wrapper button.pdp-atb-btn span {
+[data-page="product"] .pdp-wrapper button.pdp-atb-btn .pdp-atb-label {
   color: var(--pdp-ivory) !important;
 }
 
