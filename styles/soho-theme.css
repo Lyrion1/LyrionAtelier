@@ -583,7 +583,6 @@ body.nav-open { overflow: hidden; }
   width: 100%;
   max-width: var(--soho-container);
   margin: clamp(1.25rem, 3vw, 2.25rem) auto 0;
-  padding: 0 var(--soho-gutter);
   min-height: clamp(420px, 66vh, 700px);
   display: flex;
   align-items: flex-end;
@@ -651,7 +650,6 @@ body.nav-open { overflow: hidden; }
   padding-bottom: clamp(2rem, 4.5vw, 3.25rem);
 }
 .soho-hero__content h1 { max-width: 12ch; }
-.soho-hero__content p { max-width: 34ch; }
 .soho-hero__content .soho-eyebrow { color: var(--soho-gold-soft) !important; }
 .soho-hero__content h1 {
   font-size: clamp(2.6rem, 6vw, 5.2rem) !important;
@@ -661,7 +659,7 @@ body.nav-open { overflow: hidden; }
 }
 .soho-hero__content p {
   margin: 1.25rem 0 2rem;
-  max-width: 48ch;
+  max-width: 34ch;
   font-size: 1.05rem !important;
   color: rgba(255, 255, 255, 0.82) !important;
   opacity: 1 !important;
