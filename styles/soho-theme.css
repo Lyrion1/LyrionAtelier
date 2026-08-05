@@ -649,7 +649,6 @@ body.nav-open { overflow: hidden; }
   padding-right: clamp(1.5rem, 3vw, 2.75rem);
   padding-bottom: clamp(2rem, 4.5vw, 3.25rem);
 }
-.soho-hero__content h1 { max-width: 12ch; }
 .soho-hero__content .soho-eyebrow { color: var(--soho-gold-soft) !important; }
 .soho-hero__content h1 {
   font-size: clamp(2.6rem, 6vw, 5.2rem) !important;
@@ -1497,8 +1496,8 @@ body.soho-lightbox-open { overflow: hidden; }
      than gold does. */
   .soho-hero__media::after {
     background: linear-gradient(180deg,
-      rgba(20, 11, 31, 0.34) 0%,
-      rgba(20, 11, 31, 0.44) 34%,
+      rgba(20, 11, 31, 0.46) 0%,
+      rgba(20, 11, 31, 0.54) 34%,
       rgba(20, 11, 31, 0.78) 64%,
       rgba(20, 11, 31, 0.92) 100%);
   }
