@@ -574,36 +574,82 @@ body.nav-open { overflow: hidden; }
 /* =========================================================================
    HERO
    ========================================================================= */
+/* Contained band, not full bleed. The hero sits in the same content column as
+   every other section, with the same gutter, and takes about two thirds of the
+   viewport rather than filling it. The copy stays overlaid at the lower left
+   where it was; only the frame changed. */
 .soho-hero {
   position: relative;
-  min-height: min(92vh, 900px);
+  width: 100%;
+  max-width: var(--soho-container);
+  margin: clamp(1.25rem, 3vw, 2.25rem) auto 0;
+  min-height: clamp(420px, 66vh, 700px);
   display: flex;
   align-items: flex-end;
   color: #fff !important;
-  background: var(--soho-midnight) !important;
-  overflow: hidden;
+  background: transparent !important;
 }
-.soho-hero__media { position: absolute; inset: 0; }
+/* Inset by the gutter so the picture lines up with the text column rather
+   than running to the browser edge. */
+.soho-hero__media {
+  position: absolute;
+  inset: 0 var(--soho-gutter);
+  overflow: hidden;
+  border-radius: var(--soho-radius, 4px);
+  background: var(--soho-midnight);
+}
+/* !important on the size: two mobile rules in css/style.css set
+   `img { height: auto !important }` under 768px. Without this the hero
+   picture collapsed to its own square aspect inside the band, leaving the
+   lower third of the frame empty and pushing the buttons out onto the page
+   background, where their white labels were invisible. */
 .soho-hero__media img,
 .soho-hero__media video {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   object-fit: cover;
+  /* Hold the printed design in frame. The photography is square, so a wide
+     short band can only show part of it; 38% keeps the garment print and the
+     model's face inside the crop instead of centring on the waist. */
+  object-position: 50% 38%;
 }
+/* Scrim, weighted to the side the copy sits on rather than laid flat over
+   the whole frame. The garment print is the thing being sold, so the right
+   of the picture stays bright and the left carries the headline. A light
+   bottom wash keeps the buttons legible without greying the image. */
 .soho-hero__media::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(20, 11, 31, 0.15) 0%, rgba(20, 11, 31, 0.15) 45%, rgba(20, 11, 31, 0.82) 100%);
+  background:
+    linear-gradient(96deg,
+      rgba(20, 11, 31, 0.86) 0%,
+      rgba(20, 11, 31, 0.72) 26%,
+      rgba(20, 11, 31, 0.30) 52%,
+      rgba(20, 11, 31, 0.06) 72%,
+      rgba(20, 11, 31, 0) 100%),
+    linear-gradient(180deg,
+      rgba(20, 11, 31, 0.20) 0%,
+      rgba(20, 11, 31, 0) 40%,
+      rgba(20, 11, 31, 0.34) 100%);
 }
 .soho-hero__content {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: var(--soho-container);
-  margin: 0 auto;
-  padding: 0 var(--soho-gutter) clamp(3rem, 7vw, 5.5rem);
+  /* Held to the left of the frame so the headline clears the garment.
+     Without this the copy ran straight across the print. */
+  max-width: 47%;
+  /* The left inset carries the gutter itself rather than inheriting it from
+     the section's padding. Legacy sheets mark `section { padding: ... }`
+     !important, which zeroes the horizontal padding here, and the copy then
+     started 13px outside the picture frame: white text on the ivory page,
+     with the first character of each line invisible. */
+  padding-left: calc(var(--soho-gutter) + clamp(1.5rem, 3vw, 2.75rem));
+  padding-right: clamp(1.5rem, 3vw, 2.75rem);
+  padding-bottom: clamp(2rem, 4.5vw, 3.25rem);
 }
+.soho-hero__content h1 { max-width: 12ch; }
 .soho-hero__content .soho-eyebrow { color: var(--soho-gold-soft) !important; }
 .soho-hero__content h1 {
   font-size: clamp(2.6rem, 6vw, 5.2rem) !important;
@@ -613,7 +659,7 @@ body.nav-open { overflow: hidden; }
 }
 .soho-hero__content p {
   margin: 1.25rem 0 2rem;
-  max-width: 48ch;
+  max-width: 34ch;
   font-size: 1.05rem !important;
   color: rgba(255, 255, 255, 0.82) !important;
   opacity: 1 !important;
@@ -841,9 +887,24 @@ body.nav-open { overflow: hidden; }
 .soho-video video, .soho-video img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .soho-video a { display: block; width: 100%; height: 100%; }
 
-/* Variant A: full-bleed cinematic */
-.soho-video--full { min-height: 78vh; }
-.soho-video--full img, .soho-video--full video { position: absolute; inset: 0; }
+/* Variant A: contained cinematic band. Was full bleed at 78vh, which put a
+   second edge-to-edge picture directly under the hero. It now sits in the
+   same content column, with the same gutter, as every other section. */
+.soho-video--full {
+  min-height: clamp(360px, 56vh, 620px);
+  width: 100%;
+  max-width: var(--soho-container);
+  margin-inline: auto;
+  /* The gutter is applied as a margin rather than padding because legacy
+     sheets mark `section { padding: ... }` !important, which would zero it. */
+  width: calc(100% - (2 * var(--soho-gutter)));
+}
+.soho-video--full img, .soho-video--full video {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
 .soho-video--full .soho-video__caption {
   position: absolute; left: 0; right: 0; bottom: 0;
   padding: clamp(2rem, 5vw, 4rem);
@@ -1419,7 +1480,29 @@ body.soho-lightbox-open { overflow: hidden; }
    ========================================================================= */
 @media (max-width: 640px) {
   :root { --soho-section-y: clamp(3rem, 10vw, 4rem); }
-  .soho-hero { min-height: 84vh; }
+  /* Shorter band on phones, still contained inside the page gutter. */
+  .soho-hero { min-height: clamp(400px, 62vh, 560px); }
+  /* Raise the crop so the garment print falls in the lighter top half,
+     above the copy, instead of behind it. */
+  .soho-hero__media img { object-position: 50% 26% !important; }
+  /* No room for a side-by-side split at this width: the copy spans the
+     frame, so the scrim goes back to bottom-weighted. */
+  .soho-hero__content { max-width: 100%; }
+  .soho-hero__content h1 { max-width: 14ch; }
+  /* The copy spans the whole frame at this width rather than sitting beside
+     the garment, so the wash has to be heavier than desktop. Kept as light as
+     the 4.5:1 floor allows: a flat heavy scrim met the contrast rule but sank
+     the print, which is the thing being sold. The eyebrow drops from gold to
+     cream here for the same reason, since cream clears AA on a lighter wash
+     than gold does. */
+  .soho-hero__media::after {
+    background: linear-gradient(180deg,
+      rgba(20, 11, 31, 0.34) 0%,
+      rgba(20, 11, 31, 0.44) 34%,
+      rgba(20, 11, 31, 0.78) 64%,
+      rgba(20, 11, 31, 0.92) 100%);
+  }
+  .soho-hero__content .soho-eyebrow { color: var(--soho-on-midnight) !important; }
   .soho-video-split, .soho-video-trio { gap: 1rem; }
   .soho-tiles { gap: 1rem; }
 }
