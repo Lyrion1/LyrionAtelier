@@ -1,0 +1,440 @@
+[
+  {
+    "name": "shop-no-house",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "shop-no-house",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "shop-scorpio-on-show",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "shop-scorpio-on-show",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "shop-libra-last-chance",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "shop-libra-last-chance",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "shop-taurus-retired",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "shop-taurus-retired",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "shop-malformed-house",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "shop-malformed-house",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "home-scorpio-on-show campaign visible",
+    "width": 375,
+    "value": false
+  },
+  {
+    "name": "home-scorpio-on-show campaign visible",
+    "width": 1280,
+    "value": false
+  },
+  {
+    "name": "home-retrograde-campaign campaign visible",
+    "width": 375,
+    "value": true
+  },
+  {
+    "name": "home-retrograde-campaign campaign visible",
+    "width": 1280,
+    "value": true
+  },
+  {
+    "name": "home-no-house campaign visible",
+    "width": 375,
+    "value": false
+  },
+  {
+    "name": "home-no-house campaign visible",
+    "width": 1280,
+    "value": false
+  },
+  {
+    "name": "retired product page button",
+    "width": 375,
+    "value": {
+      "disabled": true,
+      "text": "Returns with the season"
+    }
+  },
+  {
+    "name": "retired product page button",
+    "width": 1280,
+    "value": {
+      "disabled": true,
+      "text": "Returns with the season"
+    }
+  },
+  {
+    "name": "gift-concierge",
+    "width": 320,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "gift-concierge",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "gift-concierge (dark)",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "gift-concierge",
+    "width": 430,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "gift-concierge",
+    "width": 768,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "gift-concierge",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "gift-concierge (dark)",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "birthday-book",
+    "width": 320,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "birthday-book",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "birthday-book (dark)",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "birthday-book",
+    "width": 430,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "birthday-book",
+    "width": 768,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "birthday-book",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "birthday-book (dark)",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "partners",
+    "width": 320,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "partners",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "partners (dark)",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "partners",
+    "width": 430,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "partners",
+    "width": 768,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "partners",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "partners (dark)",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "pet-chart",
+    "width": 320,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "pet-chart",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "pet-chart (dark)",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "pet-chart",
+    "width": 430,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "pet-chart",
+    "width": 768,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "pet-chart",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "pet-chart (dark)",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "newborn-chart",
+    "width": 320,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "newborn-chart",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "newborn-chart (dark)",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "newborn-chart",
+    "width": 430,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "newborn-chart",
+    "width": 768,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "newborn-chart",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "newborn-chart (dark)",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "gift-concierge set",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "gift-concierge set",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "cart details",
+    "width": 375,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  },
+  {
+    "name": "cart details",
+    "width": 1280,
+    "overflow": 0,
+    "targets": [],
+    "small": [],
+    "unsized": []
+  }
+]
