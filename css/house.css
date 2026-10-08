@@ -1,0 +1,302 @@
+/* Lyrīon house: labelled rows and labels driven by data/house.json.
+   Hairline rules and outlined text labels only: no filled bars, no rounded
+   cards. Colours come from the Soho theme tokens so the rows read on the
+   cream canvas and in the midnight sections alike. */
+
+/* Row headings sit in the shop grid itself and span every column. */
+html body .house-row__head,
+html body #products-grid-local > .house-row__head {
+  grid-column: 1 / -1 !important;
+  height: auto !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin-top: clamp(1rem, 3vw, 2rem);
+}
+html body #products-grid-local > .house-row__head:first-child { margin-top: 0; }
+
+.house-row__head {
+  border-top: 1px solid var(--soho-line, rgba(28, 20, 32, 0.12));
+  padding-top: 1.25rem;
+  margin-bottom: 1.5rem;
+  max-width: 100%;
+}
+.house-row__eyebrow {
+  font-family: var(--soho-font-eyebrow, 'Cinzel', serif);
+  font-size: max(14px, 0.875rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soho-gold-ink, #8a6d2f);
+  margin: 0 0 0.4rem;
+}
+.house-row__title {
+  font-family: var(--soho-font-display, 'Cormorant Garamond', serif) !important;
+  font-size: clamp(1.6rem, 3vw, 2.2rem) !important;
+  color: var(--soho-ink, #1c1420) !important;
+  margin: 0 !important;
+  line-height: 1.15;
+}
+.house-row__note {
+  margin: 0.5rem 0 0 !important;
+  font-size: max(15px, 0.9375rem);
+  line-height: 1.55;
+  color: var(--soho-ink-soft, #4a4152) !important;
+  max-width: 60ch;
+}
+.house-row__head--last { border-top-color: var(--soho-gold, #c6a76b) !important; }
+.house-row__head--retired .house-row__eyebrow { color: var(--soho-ink-soft, #4a4152) !important; }
+
+/* Card label: an outlined line of small capitals above the title. */
+.house-label {
+  display: inline-block;
+  margin: 0 0 0.5rem !important;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  background: transparent !important;
+  font-family: var(--soho-font-eyebrow, 'Cinzel', serif);
+  font-size: max(14px, 0.875rem);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--soho-gold-ink, #8a6d2f) !important;
+}
+.house-label--last-chance { color: var(--soho-plum-deep, #4a2f61) !important; }
+.house-label--retired { color: var(--soho-ink-soft, #4a4152) !important; }
+
+.product-card[data-house-state="retired"] .product-card-image,
+.product-card[data-house-state="retired"] img { opacity: 0.72 !important; }
+
+/* Midnight sections and dark devices */
+.soho-section--dark .house-label,
+.soho-section--dark .house-row__eyebrow { color: var(--soho-gold-soft, #ddc48c) !important; }
+.soho-section--dark .house-row__title { color: var(--soho-on-midnight, #f4ecd8) !important; }
+.soho-section--dark .house-row__note { color: var(--soho-on-midnight-soft, rgba(244, 236, 216, 0.86)) !important; }
+.soho-section--dark .house-row__head { border-top-color: var(--soho-midnight-line, rgba(247, 231, 196, 0.14)); }
+
+/* Product page notice for last-chance and resting pieces */
+.house-pdp-note {
+  border-top: 1px solid var(--soho-line, rgba(28, 20, 32, 0.12));
+  border-bottom: 1px solid var(--soho-line, rgba(28, 20, 32, 0.12));
+  padding: 0.75rem 0;
+  margin: 1rem 0;
+  font-size: max(15px, 0.9375rem);
+  line-height: 1.5;
+  color: var(--soho-ink, #1c1420);
+}
+.house-pdp-note strong {
+  display: block;
+  font-family: var(--soho-font-eyebrow, 'Cinzel', serif);
+  font-size: max(14px, 0.875rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--soho-gold-ink, #8a6d2f);
+  margin-bottom: 0.2rem;
+}
+button[data-house-retired],
+button[data-house-retired]:hover {
+  cursor: not-allowed !important;
+  opacity: 0.7 !important;
+}
+
+/* Campaign feature */
+.house-campaign__body { margin: 1rem 0 1.75rem; max-width: 46ch; }
+.house-campaign .soho-video img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 5; }
+
+/* Four elements: four across on desktop, two by two on phones */
+.soho-video-trio.soho-video-trio--four { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 760px) { .soho-video-trio.soho-video-trio--four { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .soho-video-trio.soho-video-trio--four { grid-template-columns: 1fr 1fr; } }
+
+/* Basket: birth details, gift note */
+.cart-details { margin-top: 2rem; }
+.cart-details__item {
+  border-top: 1px solid var(--soho-line, rgba(28, 20, 32, 0.12));
+  padding: 1.25rem 0;
+}
+.cart-details__item h3 {
+  font-family: var(--soho-font-display, 'Cormorant Garamond', serif);
+  font-size: 1.35rem;
+  margin: 0 0 0.35rem;
+}
+.cart-details__person {
+  border: 0;
+  border-left: 1px solid var(--soho-gold, #c6a76b);
+  margin: 1rem 0;
+  padding: 0 0 0 1rem;
+  min-width: 0;
+}
+.cart-details__person legend {
+  font-family: var(--soho-font-eyebrow, 'Cinzel', serif);
+  font-size: max(14px, 0.875rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--soho-gold-ink, #8a6d2f);
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+.cart-details__field { margin: 0 0 0.85rem; }
+.cart-details__field label,
+.house-form label {
+  display: block;
+  font-size: max(15px, 0.9375rem);
+  margin-bottom: 0.3rem;
+  color: var(--soho-ink, #1c1420);
+}
+.cart-details__field input,
+.cart-details__field textarea,
+.house-form input,
+.house-form select,
+.house-form textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: 48px;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--soho-ink, #1c1420);
+  background: var(--soho-paper, #fffdf9);
+  border: 1px solid var(--soho-line, rgba(28, 20, 32, 0.24));
+  border-radius: 0;
+}
+.house-form textarea, .cart-details__field textarea { min-height: 96px; }
+.cart-details__field input:focus,
+.cart-details__field textarea:focus,
+.house-form input:focus,
+.house-form select:focus,
+.house-form textarea:focus {
+  outline: 2px solid var(--soho-gold, #c6a76b);
+  outline-offset: 1px;
+}
+.cart-details__hint, .house-form .hint {
+  font-size: max(14px, 0.875rem);
+  color: var(--soho-ink-soft, #4a4152);
+  margin: 0.3rem 0 0;
+}
+.cart-details__stale {
+  border-top: 1px solid var(--soho-gold, #c6a76b);
+  padding-top: 0.75rem;
+  font-size: max(15px, 0.9375rem);
+}
+
+/* New pages: Gift Concierge, Birthday Book, Partners, keepsakes, approval */
+.house-page { overflow-x: hidden; }
+.house-narrow { max-width: 640px !important; }
+.house-lede { max-width: 60ch; font-size: 1rem; line-height: 1.65; }
+.house-form { display: block; margin-top: 1.5rem; }
+.house-form > label, .house-form > div > label { margin-top: 1rem; }
+.house-form .soho-btn { margin-top: 1.25rem; min-height: 48px; }
+.house-form select { appearance: auto; }
+.bb-date { display: grid; grid-template-columns: 1fr 1.6fr 1.2fr; gap: 0.75rem; }
+.bb-date label { margin-top: 1rem; }
+.house-consent {
+  display: flex !important;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-top: 1.25rem !important;
+  font-size: max(15px, 0.9375rem);
+  line-height: 1.5;
+  cursor: pointer;
+}
+.house-consent input { width: 24px !important; height: 24px; min-height: 24px !important; flex: 0 0 24px; margin: 0.1rem 0 0; accent-color: var(--soho-ink, #1c1420); }
+.house-honeypot { position: absolute !important; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.gc-error { color: #8a1f3d; font-size: max(15px, 0.9375rem); margin: 0.75rem 0 0; min-height: 1px; }
+
+.gc-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin: 0 0 2rem; }
+.gc-card { border-top: 1px solid var(--soho-line, rgba(28, 20, 32, 0.12)); padding-top: 1rem; min-width: 0; }
+.gc-card img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block; background: var(--soho-canvas-alt, #f1ebe0); }
+.gc-card__body h3 { font-family: var(--soho-font-display, serif); font-size: 1.3rem; margin: 0.25rem 0; }
+.gc-price { font-size: 1rem; margin: 0 0 0.5rem; }
+.gc-card select, .gc-card input { width: 100%; min-height: 48px; font-size: 1rem; border: 1px solid var(--soho-line, rgba(28, 20, 32, 0.24)); border-radius: 0; background: var(--soho-paper, #fffdf9); padding: 0 0.6rem; box-sizing: border-box; }
+.gc-include { display: flex; align-items: center; gap: 0.6rem; min-height: 48px; font-size: max(15px, 0.9375rem); cursor: pointer; }
+.gc-include input { width: 22px; height: 22px; min-height: 22px; accent-color: var(--soho-ink, #1c1420); }
+.gc-gift { max-width: 640px; }
+
+.partner-lanes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 2rem; margin-top: 2rem; }
+.partner-lane { border-top: 1px solid var(--soho-line, rgba(28, 20, 32, 0.12)); padding: 1.25rem 0; }
+.partner-lane h3 { font-family: var(--soho-font-display, serif); font-size: 1.35rem; margin: 0 0 0.4rem; }
+.partner-lane p { margin: 0; font-size: max(15px, 0.9375rem); line-height: 1.6; }
+.partner-samples { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.partner-sample { margin: 0; min-width: 0; }
+.partner-sample img { width: 100%; height: auto; aspect-ratio: 910 / 1287; display: block; border: 1px solid var(--soho-line, rgba(28, 20, 32, 0.12)); }
+.partner-sample figcaption { font-size: max(15px, 0.9375rem); line-height: 1.5; margin-top: 0.6rem; }
+.partner-sample figcaption a { display: inline-block; min-height: 44px; line-height: 44px; }
+
+.chart-product { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+.chart-product__media { margin: 0; }
+.chart-product__media img { width: 100%; height: auto; aspect-ratio: 910 / 1287; display: block; border: 1px solid var(--soho-line, rgba(28, 20, 32, 0.12)); }
+.chart-product__price { font-size: 1.35rem; margin: 0.5rem 0 1rem; }
+.chart-product__h { font-family: var(--soho-font-eyebrow, serif); font-size: max(15px, 0.9375rem) !important; letter-spacing: 0.12em; text-transform: uppercase; margin: 1.5rem 0 0.5rem; }
+.chart-product ul { padding-left: 1.1rem; line-height: 1.7; }
+.chart-product .soho-btn { min-height: 48px; margin-top: 1rem; }
+
+.ap-details { border-top: 1px solid var(--soho-line, rgba(28, 20, 32, 0.12)); border-bottom: 1px solid var(--soho-line, rgba(28, 20, 32, 0.12)); padding: 0.75rem 0; }
+.ap-details dt { font-size: max(14px, 0.875rem); color: var(--soho-ink-soft, #4a4152); }
+.ap-details dd { margin: 0 0 0.5rem; }
+#ap-text { min-height: 55vh; font-family: Georgia, serif; line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .gc-grid, .partner-lanes { grid-template-columns: minmax(0, 1fr); }
+  .partner-samples { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .chart-product { grid-template-columns: minmax(0, 1fr); }
+  .chart-product__media { max-width: 420px; }
+}
+@media (max-width: 380px) {
+  .bb-date { grid-template-columns: 1fr 1fr; }
+  .bb-date > div:last-child { grid-column: 1 / -1; }
+  .partner-samples { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Codex journal: articles published from the house engine's queue */
+.codex-journal { margin-top: clamp(2rem, 5vw, 3.5rem); }
+.codex-journal-heading {
+  border-top: 1px solid var(--soho-line, rgba(28, 20, 32, 0.12));
+  padding-top: 1.25rem;
+  font-family: var(--soho-font-display, serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin: 0 0 1.25rem;
+}
+.codex-entry .codex-event-title a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; display: inline-block; min-height: 44px; line-height: 1.3; padding-top: 0.2rem; }
+.codex-article-back a { display: inline-block; min-height: 44px; line-height: 44px; font-family: var(--soho-font-eyebrow, serif); font-size: max(14px, 0.875rem); letter-spacing: 0.14em; text-transform: uppercase; }
+.codex-article .codex-event-copy { font-size: 1.0625rem; line-height: 1.75; max-width: 66ch; }
+
+/* css/style.css hides any section holding an email field (aimed at old
+   newsletter blocks). The new pages' forms ask for email on purpose. */
+main.house-page section.soho-section { display: block !important; }
+
+/* Form labels on the new pages and in the basket read as body text. */
+main.house-page .house-form label,
+main.house-page label.house-consent,
+main.house-page label.gc-include,
+main.house-page .cart-details__field label,
+#cart-details .cart-details__field label {
+  font-size: max(15px, 0.9375rem) !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  font-family: var(--soho-font-body, Inter, sans-serif) !important;
+  font-weight: 500;
+}
+
+/* Basket controls: 44px touch targets at every width. */
+html body table.cart-table button.quantity-btn,
+html body table.cart-table button.remove-item,
+html body table.cart-table input.quantity-input {
+  min-width: 44px !important;
+  min-height: 44px !important;
+  height: 44px !important;
+  box-sizing: border-box;
+}
+html body table.cart-table button.remove-item { padding: 0 0.75rem !important; }
+
+/* Body text at 14px or more, controls at 44px, on the shop and the Codex. */
+html body .product-card .product-card-description,
+html body .product-card .product-card-price,
+html body .product-card .price,
+html body .soho-tile p { font-size: 14px !important; }
+html body .soho-shop-toolbar select,
+html body .soho-shop-toolbar input[type="search"],
+html body .soho-shop-toolbar button { min-height: 44px !important; }
+html body .codex-entry .codex-event-meta { font-size: 14px !important; }
+html body .house-campaign .soho-video,
+html body .house-campaign .soho-video img { border-radius: 0 !important; }

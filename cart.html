@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/styles/design-system.css">
   <link rel="stylesheet" href="/css/type-scale.css">
   <link rel="stylesheet" href="/styles/soho-theme.css">
+  <link rel="stylesheet" href="/css/house.css">
   <link rel="icon" type="image/png" href="images/favicon/favicon.png">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="/css/button-fixes.css?v=2">
@@ -56,6 +57,8 @@
      <a href="/curated-for-gifting?for=couples">For Couples</a>
      <a href="/curated-for-gifting?for=self">For Self</a>
      <a href="/curated-for-gifting?for=birthday">Birthday &amp; Milestone</a>
+     <a href="/gift-concierge">Gift Concierge</a>
+     <a href="/birthday-book">Birthday Book</a>
    </div>
  </div>
  <a href="/codex">About / Journal</a>
@@ -89,6 +92,7 @@
             <tbody></tbody>
           </table>
           <p id="empty-cart-message" class="muted">Your cart is empty. <a href="/shop">Find something magical</a>.</p>
+          <div id="cart-details" class="cart-details" hidden></div>
         </div>
 
         <div class="soho-cart-summary">
@@ -115,6 +119,7 @@
       <div><strong class="brand-name">Lyrīon Atelier</strong></div>
       <div class="muted"><a href="/contact">Need help?</a></div>
     </div>
+    <p class="footer-legal">&copy; <span data-year>2026</span> LYRION LTD. Lyr&#299;on Atelier is operated by LYRION LTD, company number 16904877, registered in England and Wales. Registered office: Flat 9 Centro, 399 South Row, Milton Keynes, MK9 2PG.</p>
   </footer>
 
   <script src="js/products.js" defer></script>
@@ -122,6 +127,8 @@
   <script src="js/main.js" defer></script>
   <script defer src="/assets/cart.js"></script>
   <script src="https://js.stripe.com/v3/" async></script>
+  <script src="/js/house.js"></script>
+  <script src="/js/cart-details.js" defer></script>
   <script src="js/checkout-embed.js" defer></script>
   <script>
     /* view_cart fires when the cart page loads */

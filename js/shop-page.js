@@ -12,44 +12,12 @@ import { formatPrice } from './price-utils.js';
   const FALLBACK = '/assets/catalog/placeholder.webp';
   const PRICE_UNAVAILABLE_LABEL = '—';
   const LOADER_TIMEOUT_MS = 1800;
+  // Order used when there is no house to follow, exactly as before the house existed.
   const PRODUCT_PRIORITY = ['fisherman-beanie', 'taurus-tank-top', 'taurus-baseball-jersey', 'taurus-crop-tee', 'taurus-pyjama-top'];
-  const FEATURED_PRODUCTS = [
-    {
-      slug: 'taurus-tank-top',
-      title: 'Taurus Micro-Rib Tank Top',
-      price: 32.99,
-      image: '/shop-images/taurus-tank-top/taurus-tank-top-lifestyle-front.jpg',
-      link: '/shop/taurus-tank-top.html',
-      meta: { zodiac: 'Taurus', collection: 'Zodiac' }
-    },
-    {
-      slug: 'taurus-baseball-jersey',
-      title: 'Taurus Recycled Baseball Jersey',
-      price: 49.99,
-      image: '/shop-images/taurus-baseball-jersey/taurus-baseball-jersey-back.png',
-      link: '/shop/taurus-baseball-jersey.html',
-      meta: { zodiac: 'Taurus', collection: 'Zodiac' }
-    },
-    {
-      slug: 'taurus-crop-tee',
-      title: 'Taurus All-Over Print Crop Tee',
-      price: 34.99,
-      image: '/shop-images/taurus-crop-tee/taurus-crop-tee-lifestyle-bicycle.jpg',
-      link: '/shop/taurus-crop-tee.html',
-      meta: { zodiac: 'Taurus', collection: 'Zodiac' }
-    },
-    {
-      slug: 'taurus-pyjama-top',
-      title: 'Taurus Constellation Pyjama Top',
-      price: 44.99,
-      image: '/shop-images/taurus-pyjamas/taurus-pyjamas-back.jpg',
-      link: '/shop/taurus-pyjama-top.html',
-      meta: { zodiac: 'Taurus', collection: 'Zodiac' }
-    }
-  ];
+  // Product types the shop grid sells. Readings and certificates have their own pages.
+  const SHOP_TYPES = ['apparel', 'accessory', 'home', 'mystery-box'];
   // Values above this threshold are treated as cents and converted to dollars.
   const PRICE_CENTS_THRESHOLD = 200;
-  const CATALOG_CACHE_KEY = 'lyrion_catalog_cache_v1';
   const INITIAL_PRODUCT_BATCH = 12;
   const ZODIAC_SIGNS = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'];
   const ZODIAC_ORDER = ZODIAC_SIGNS.map((z) => z.charAt(0).toUpperCase() + z.slice(1));
@@ -351,30 +319,24 @@ import { formatPrice } from './price-utils.js';
     };
   };
 
+  let houseCtx = { house: { valid: false }, products: [] };
+
   async function getCatalog() {
     try {
-      const cached = sessionStorage.getItem(CATALOG_CACHE_KEY);
-      if (cached) {
-        const parsed = JSON.parse(cached);
-        if (Array.isArray(parsed) && parsed.length) return parsed;
-      }
-    } catch {}
-    try {
-      const local = await fetch('/data/all-products.json', { cache: 'no-store' })
-        .then((r) => (r.ok ? r.json() : []))
-        .catch(() => []);
-      if (Array.isArray(local) && local.length) {
-        try {
-          sessionStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(local));
-        } catch {}
-        window.LyrionAtelier = window.LyrionAtelier || {};
-        window.LyrionAtelier.products = local;
-        return local
-          .map(normalizeSyncProduct)
-          .filter((product) => !(typeof isSeasonalProduct === 'function' && isSeasonalProduct(product)));
-        }
+      houseCtx = await window.LyrionHouse.load();
+      const local = houseCtx.products.filter((p) => SHOP_TYPES.includes(p.type));
+      window.LyrionAtelier = window.LyrionAtelier || {};
+      window.LyrionAtelier.products = local;
+      // The old Valentine's filter (isSeasonalProduct) still hides its pieces,
+      // except sign pieces while the house is live: then the house decides.
+      const valentineHidden = (product) =>
+        typeof isSeasonalProduct === 'function' && isSeasonalProduct(product) &&
+        !(houseCtx.house.valid && product.seasonal === true);
+      return local
+        .map(normalizeSyncProduct)
+        .filter((product) => !valentineHidden(product));
     } catch (err) {
-        console.warn('[shop] failed to load catalog from /data/all-products.json', err);
+      console.warn('[shop] failed to load the catalogue', err);
     }
     return [];
   }
@@ -629,6 +591,20 @@ import { formatPrice } from './price-utils.js';
       })
       .map((entry) => entry.item);
 
+  const urlParams = new URLSearchParams(location.search);
+  const elementFilter = (urlParams.get('element') || '').toLowerCase();
+  const campaignFilter = (urlParams.get('campaign') || '').toLowerCase();
+
+  // ?element=fire and ?campaign=<key> narrow the grid on top of the toolbar filters.
+  const matchesHouseFilters = (p = {}) => {
+    if (elementFilter && String(p.element || '').toLowerCase() !== elementFilter) return false;
+    if (campaignFilter) {
+      const live = window.LyrionHouse.liveCampaigns(houseCtx).find((c) => c.key === campaignFilter);
+      if (live && !window.LyrionHouse.inCampaign(p, live)) return false;
+    }
+    return true;
+  };
+
   const applyAndRender = (incomingState = {}) => {
     if (!normalizedCatalog.length) {
       renderEmpty();
@@ -636,9 +612,15 @@ import { formatPrice } from './price-utils.js';
     }
     const state = { ...(window.LyrionAtelier?.shopState || {}), ...gatherFilterState(), ...incomingState };
     window.LyrionAtelier.shopState = state;
-    const filtered = applyFilters(normalizedCatalog, state);
+    const filtered = applyFilters(normalizedCatalog, state).filter(matchesHouseFilters);
     if (!filtered.length) {
       renderEmpty();
+    } else if (houseCtx.house.valid) {
+      // The house is live: lead sign first, then on show, last chance, the
+      // core collection, and retired signs labelled at the end.
+      grid.style.display = '';
+      window.LyrionHouse.renderRows(grid, filtered, houseCtx, createCard);
+      highlightFromQuery();
     } else {
       const sorted = sortProducts(filtered);
       renderCards(sorted);
@@ -671,10 +653,9 @@ import { formatPrice } from './price-utils.js';
           (String(p.type || '').toLowerCase() !== 'event')
       );
       const normalized = catalog.map((p) => normalize(p, imageMap || {}, zodiacMap));
-      const manualNormalized = FEATURED_PRODUCTS.map((p) => normalize(p, imageMap || {}, zodiacMap));
       const deduped = [];
       const seen = new Set();
-      [...manualNormalized, ...normalized].forEach((item) => {
+      normalized.forEach((item) => {
         const key = (item.slug || item.id || '').toLowerCase();
         if (key && !seen.has(key)) {
           seen.add(key);

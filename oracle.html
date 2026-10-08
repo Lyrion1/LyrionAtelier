@@ -32,6 +32,7 @@
   "provider": {
     "@type": "Organization",
     "name": "Lyr\u012bon Atelier",
+    "legalName": "LYRION LTD",
     "url": "https://lyrionatelier.com"
   },
   "description": "Professional personalized astrology readings including life path, solar return, and annual forecast readings delivered within 48 hours.",
@@ -77,6 +78,8 @@
      <a href="/curated-for-gifting?for=couples">For Couples</a>
      <a href="/curated-for-gifting?for=self">For Self</a>
      <a href="/curated-for-gifting?for=birthday">Birthday &amp; Milestone</a>
+     <a href="/gift-concierge">Gift Concierge</a>
+     <a href="/birthday-book">Birthday Book</a>
    </div>
  </div>
  <a href="/codex">About / Journal</a>
@@ -96,27 +99,27 @@
       <section class="trust-signals">
         <div class="trust-container">
           <div class="trust-item">
-            <div class="icon">⭐</div>
-            <p class="stat">500+</p>
-            <p class="label">Readings Delivered</p>
+            <div class="icon">🔮</div>
+            <p class="stat">48 hours</p>
+            <p class="label">From order to your inbox</p>
+          </div>
+
+          <div class="trust-item">
+            <div class="icon">✍️</div>
+            <p class="stat">Read by us</p>
+            <p class="label">Every reading is checked before it is sent</p>
+          </div>
+
+          <div class="trust-item">
+            <div class="icon">📜</div>
+            <p class="stat">A4 PDF</p>
+            <p class="label">Yours to keep and print</p>
           </div>
 
           <div class="trust-item">
             <div class="icon">🌙</div>
-            <p class="stat">4.9/5</p>
-            <p class="label">Average Rating</p>
-          </div>
-
-          <div class="trust-item">
-            <div class="icon">🔮</div>
-            <p class="stat">24-48hr</p>
-            <p class="label">Typical Delivery</p>
-          </div>
-
-          <div class="trust-item">
-            <div class="icon">✨</div>
-            <p class="stat">100%</p>
-            <p class="label">Satisfaction Rate</p>
+            <p class="stat">For reflection</p>
+            <p class="label">Not a prediction, and not advice</p>
           </div>
         </div>
       </section>
@@ -181,7 +184,7 @@
                   <div class="oracle-card-price">$58</div>
                   <div class="oracle-card-description">
                     <ul>
-                      <li>Your personalized forecast for the year ahead</li>
+                      <li>Your year ahead, as themes to reflect on</li>
                       <li>Year ahead forecast</li>
                       <li>Key themes and lessons</li>
                       <li>4-5 page detailed report</li>
@@ -230,7 +233,7 @@
                     <ul>
                       <li>Career path guidance</li>
                       <li>Natural talents revealed</li>
-                      <li>Financial potential</li>
+                      <li>Ways of working your chart is linked with</li>
                       <li>5-6 page detailed report</li>
                     </ul>
                   </div>
@@ -320,7 +323,7 @@
                   <div class="oracle-card-description">
                     <ul>
                       <li>Core wound identification</li>
-                      <li>Healing pathway guidance</li>
+                      <li>Practices for reflection</li>
                       <li>Gifts from wounds</li>
                       <li>4-5 page detailed report</li>
                     </ul>
@@ -635,10 +638,15 @@
 
         const loadCatalog = async () => {
           try {
-            const res = await fetch('/data/all-products.json', { cache: 'no-store' });
+            const res = await fetch('/data/catalogue.json', { cache: 'no-store' });
             if (res.ok) {
               const data = await res.json();
-              if (Array.isArray(data)) return data;
+              // The one product list; shaped for this grid the way js/house.js shapes it.
+              if (Array.isArray(data?.products)) {
+                return data.products
+                  .filter((p) => p.listed && ['apparel', 'accessory', 'home'].includes(p.type))
+                  .map((p) => ({ ...p, name: p.title, zodiac: p.sign ? p.sign.toLowerCase() : null, price: p.price_gbp?.min, mainImage: p.images[0], image: p.images[0], state: { published: true, ready: true } }));
+              }
             } else {
               console.warn('[oracle] failed to load catalog', res.status, res.statusText);
             }
@@ -749,23 +757,23 @@
       <div class="trust-badges-grid">
         <div class="trust-badge">
           <span class="trust-badge-icon">✨</span>
-          <div class="trust-badge-title">Join 874+ Customers</div>
-          <div class="trust-badge-subtext">Growing community of cosmic souls</div>
+          <div class="trust-badge-title">Printed to order</div>
+          <div class="trust-badge-subtext">Each piece is made for you when you order it, by our production partner Printful.</div>
         </div>
         <div class="trust-badge">
           <span class="trust-badge-icon">🔒</span>
-          <div class="trust-badge-title">Secure Checkout</div>
-          <div class="trust-badge-subtext">256-bit SSL encryption via Stripe</div>
+          <div class="trust-badge-title">Secure checkout</div>
+          <div class="trust-badge-subtext">Payments are taken by Stripe; we never see your card details.</div>
         </div>
         <div class="trust-badge">
           <span class="trust-badge-icon">↩️</span>
-          <div class="trust-badge-title">30-Day Returns</div>
-          <div class="trust-badge-subtext">No questions asked guarantee</div>
+          <div class="trust-badge-title">14-day exchanges</div>
+          <div class="trust-badge-subtext">Size exchanges within 14 days of delivery. See our refund policy.</div>
         </div>
         <div class="trust-badge">
           <span class="trust-badge-icon">🌿</span>
-          <div class="trust-badge-title">Premium Materials</div>
-          <div class="trust-badge-subtext">Ethically sourced, quality crafted</div>
+          <div class="trust-badge-title">Readings within 48 hours</div>
+          <div class="trust-badge-subtext">Written from your birth details and read by us before they are sent.</div>
         </div>
       </div>
     </section>
@@ -796,7 +804,7 @@
         </a>
       </div>
 
-      <p>&copy; 2024 Lyrion Atelier. All rights reserved.</p>
+      <p class="footer-legal">&copy; <span data-year>2026</span> LYRION LTD. Lyr&#299;on Atelier is operated by LYRION LTD, company number 16904877, registered in England and Wales. Registered office: Flat 9 Centro, 399 South Row, Milton Keynes, MK9 2PG.</p>
       <div class="footer-links">
         <a href="/shop">Shop</a>
         <a href="/oracle">Personalized Readings</a>
@@ -807,6 +815,7 @@
         <a href="/privacy-policy">Privacy Policy</a>
         <a href="/terms-of-service">Terms of Service</a>
         <a href="/refund-policy">Refund Policy</a>
+        <a href="/partners">Partners</a>
       </div>
     </div>
   </footer>

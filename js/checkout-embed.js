@@ -15,16 +15,18 @@
     }
   }
 
-  function readDiscountCode() {
+  // The discount wheel's prize. The server accepts only the prizes the wheel
+  // can actually award, so this cannot be used to invent a discount.
+  function readDiscount() {
     try {
       const raw = localStorage.getItem(DISCOUNT_KEY);
-      if (!raw) return '';
+      if (!raw) return null;
       const prize = JSON.parse(raw);
-      if (!prize?.code) return '';
-      if (prize.expiry && new Date(prize.expiry) < new Date()) return '';
-      return prize.code;
+      if (!prize?.code) return null;
+      if (prize.expiry && new Date(prize.expiry) < new Date()) return null;
+      return { code: prize.code, prize: { type: prize.type, value: prize.value } };
     } catch {
-      return '';
+      return null;
     }
   }
 
@@ -44,7 +46,10 @@
       .map((item) => ({
         id: resolveCheckoutProductId(item),
         qty: Number.isFinite(item.quantity) ? item.quantity : Number(item.qty) || 1,
-        size: item.size || item.selectedSize || 'Default'
+        size: item.size || item.selectedSize || 'Default',
+        // The exact Printful variant chosen on the product page (size and colour).
+        variant: item.printfulVariantId || null,
+        ...(item.details ? { details: item.details } : {})
       }))
       .filter((item) => item.id);
   }
@@ -172,14 +177,23 @@
       if (!basket.length) {
         throw new Error('Your cart is empty.');
       }
+      const missing = window.LyrionCartDetails ? window.LyrionCartDetails.problems() : [];
+      if (missing.length) {
+        document.getElementById('cart-details')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        throw new Error(missing.join(' '));
+      }
 
+      const discount = readDiscount();
+      const gift = window.LyrionCartDetails ? window.LyrionCartDetails.gift() : {};
       const payload = {
         basket,
-        discountCode: readDiscountCode()
+        ...(discount ? { discountCode: discount.code, discountPrize: discount.prize } : {}),
+        ...(gift.note ? { giftNote: gift.note } : {}),
+        ...(gift.recipient ? { recipientEmail: gift.recipient } : {})
       };
 
       const ctrl = new AbortController();
-      const timer = setTimeout(() => ctrl.abort(), 5000);
+      const timer = setTimeout(() => ctrl.abort(), 15000);
       let response;
       try {
         response = await fetch(CREATE_CHECKOUT_URL, {
@@ -200,7 +214,6 @@
       clearTimeout(timer);
 
       const data = await response.json().catch(() => ({}));
-      console.log('[checkout-embed] create-checkout response', data);
 
       if (!response.ok) {
         // The server's message leads on a hard failure. describeUnavailable()

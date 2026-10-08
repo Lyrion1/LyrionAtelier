@@ -1,0 +1,9 @@
+{
+  "updated": "2026-06-25T06:00:00Z",
+  "written_by": "Lyrion house engine. Do not edit by hand.",
+  "lead_sign": "Cancer",
+  "on_show": ["Cancer", "Leo"],
+  "last_chance": ["Gemini"],
+  "retired_until_next_season": ["Taurus"],
+  "campaigns": [{ "key": "summer-solstice", "title": "The longest day", "start": "2026-06-21", "end": "2026-06-28" }]
+}

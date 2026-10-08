@@ -12,7 +12,7 @@ A modern, accessible e-commerce website featuring astrology-themed clothing and 
 - Quantity adjustment controls
 - Cart count badge with pulse animation
 - Toast notifications for user feedback
-- Free shipping on orders over $50
+- Free delivery on orders of £50 or more of posted pieces
 
 ### 🔍 Product Filtering
 - Filter by product type (T-shirts, Hoodies, Sweatshirts)
@@ -107,9 +107,9 @@ Plus 8 oracle reading services ($44 - $75) including:
 
 ## 🛰️ Shop Data Flow
 
-- The shop reads from the globally exposed `window.LyrionAtelier.products` catalog first (populated by the Printful sync pipeline).
-- If that catalog is missing or empty, the client fetches the Supabase Printful sync function and then `/api/printful-catalog` as a fallback to hydrate the grid with the latest Printful products and preview images.
-- Oracle or event items are excluded from `/shop` (they live on Oracle/Codex), and any missing product art resolves via `/data/image-map.json` before falling back to `/assets/catalog/placeholder.webp`.
+- `data/catalogue.json` is the one list of products. The shop, homepage, sign and element filters, gift pages, product pages and checkout all read it.
+- `data/house.json`, written by the house engine, decides what is on show, in its last week or resting, and which campaign runs. Without it the site shows everything as before.
+- See [docs/SHOPKEEPER.md](docs/SHOPKEEPER.md) for the engine contract, the catalogue fields, the order and reading pipeline, and every secret.
 
 ## 🖼️ Catalog art & image map
 

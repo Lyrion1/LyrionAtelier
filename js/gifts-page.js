@@ -156,14 +156,12 @@ import { formatPrice } from './price-utils.js';
 
   async function getCatalog() {
     try {
-      const local = await fetch('/data/all-products.json', { cache: 'no-store' })
-        .then((r) => (r.ok ? r.json() : []))
-        .catch(() => []);
-      if (Array.isArray(local) && local.length) {
-        return local;
-      }
+      // The catalogue arrives already ranked for the house: the lead sign
+      // first and resting signs last.
+      const ctx = await window.LyrionHouse.load();
+      return ctx.products.filter((p) => ['apparel', 'accessory', 'home', 'mystery-box'].includes(p.type));
     } catch (err) {
-      console.warn('[gifts] failed to load catalog from /data/all-products.json', err);
+      console.warn('[gifts] failed to load the catalogue', err);
     }
     return [];
   }
@@ -236,7 +234,7 @@ import { formatPrice } from './price-utils.js';
     if (!grid) return;
     grid.innerHTML = '';
     grid.style.display = '';
-    (items || []).forEach((p) => grid.append(createCard(p)));
+    (items || []).forEach((p) => grid.append(window.LyrionHouse.decorateCard(createCard(p), p)));
   };
 
   const swapProduct = (items, swap = {}) => {
@@ -289,7 +287,7 @@ import { formatPrice } from './price-utils.js';
       giftProducts = swapProduct(giftProducts, SWAP_SLUGS);
       
       // Skip the first PRODUCTS_TO_SKIP products to feature newer items (Pisces, Taurus) more prominently
-      // Products are ordered by their position in all-products.json (gift-tagged products preserve catalog order)
+      // Products keep the catalogue's order, as ranked for the house.
       if (giftProducts.length > PRODUCTS_TO_SKIP) {
         giftProducts = giftProducts.slice(PRODUCTS_TO_SKIP);
       }

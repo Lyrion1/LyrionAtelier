@@ -1,22 +1,24 @@
 name: Build Printful Packs
+
+# Manual only. The packs are built from the legacy per-product files in
+# data/products/, not from data/catalogue.json, so they are not rebuilt on
+# every push. This file was not valid YAML before and never ran.
 on:
-  push: {}
-  schedule: [ { cron: "30 3 * * *" } ]
   workflow_dispatch:
+
 permissions:
   contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with: { token: ${{ secrets.GITHUB_TOKEN }} }
       - uses: actions/setup-node@v4
-        with: { node-version: "20" }
+        with:
+          node-version: '20'
       - name: Install deps
-        run: |
-          npm init -y --silent || true
-          npm install sharp@0.33.2 fast-glob@3.3.2 archiver@6.0.1
+        run: npm install --no-save sharp@0.33.2 fast-glob@3.3.2 archiver@6.0.1
       - name: Build print packs
         run: node scripts/build-printful-packs.mjs
       - name: Commit packs

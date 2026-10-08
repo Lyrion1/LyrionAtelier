@@ -97,10 +97,8 @@ const slugCandidates = (product = {}) => {
 
 async function loadCatalog() {
   try {
-    const res = await fetch('/data/all-products.json', { cache: 'no-store' });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    return Array.isArray(data) ? data : [];
+    const ctx = await window.LyrionHouse.load();
+    return ctx.products;
   } catch (err) {
     console.error('[product] failed to load catalog', err);
     return [];
@@ -652,6 +650,8 @@ async function hydrateProductPage() {
   });
 
   updateVariant();
+  // The house decides whether this piece can be ordered today.
+  window.LyrionHouse?.guardProductPage(product, { buttons: [addBtn, buyBtn], anchor: addBtn?.closest('.soho-pdp__actions') || addBtn });
 
   const canonicalPath = `/product?slug=${encodeURIComponent(product.slug || slug)}`;
   const schemaImage = galleryImages[0] || FALLBACK_IMAGE;
@@ -670,7 +670,7 @@ async function hydrateProductPage() {
       '@type': 'Offer',
       price: Number.isFinite(schemaPrice) ? schemaPrice.toFixed(2) : '0.00',
       priceCurrency: currency,
-      availability: activeVariant ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      availability: activeVariant && product.purchasable !== false ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       url: `${SITE_ORIGIN}${canonicalPath}`
     }
   });

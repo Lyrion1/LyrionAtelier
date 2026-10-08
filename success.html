@@ -273,9 +273,9 @@ body.success-page #main-content {
  <div class="email-notice">
  <p><strong>What Happens Next</strong></p>
  <p style="margin-top: 10px;">
- • A confirmation email is manifesting in your inbox<br>
- • Your piece is being crafted with cosmic precision<br>
- • Tracking details will arrive within 3-5 business days
+ • Stripe emails your payment receipt<br>
+ • Clothing and homeware are printed to order by our production partner, and tracking follows by email once your parcel ships<br>
+ • Readings and certificates are written from the details you gave, read by us, and emailed within 48 hours
  </p>
  </div>
 
@@ -310,6 +310,12 @@ body.success-page #main-content {
 
   const sessionId = new URLSearchParams(window.location.search).get('session_id');
   if (sessionId) {
+    // The order is placed: empty the basket and its gift details so nothing is bought twice.
+    try {
+      localStorage.removeItem('cart');
+      localStorage.removeItem('lyrion_gift');
+      document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: [] } }));
+    } catch (e) {}
     const target = document.querySelector('.email-notice');
     if (target) {
       const refLine = document.createElement('p');
@@ -363,5 +369,6 @@ body.success-page #main-content {
   document.documentElement.style.overflow = 'auto';
   }
   </script>
+<footer class="footer footer--legal"><div class="footer-content"><p class="footer-legal">&copy; <span data-year>2026</span> LYRION LTD. Lyr&#299;on Atelier is operated by LYRION LTD, company number 16904877, registered in England and Wales. Registered office: Flat 9 Centro, 399 South Row, Milton Keynes, MK9 2PG.</p></div></footer>
 </body>
 </html>

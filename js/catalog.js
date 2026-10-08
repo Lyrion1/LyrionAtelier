@@ -16,8 +16,11 @@ export async function loadCatalog(){
   } catch {}
   // b) Local JSON seed (if present)
   try {
-    const r = await fetch('/data/all-products.json', { cache: 'no-cache', signal: withTimeout(5000) });
-    if (r.ok) sources.push(await r.json());
+    const r = await fetch('/data/catalogue.json', { cache: 'no-cache', signal: withTimeout(5000) });
+    if (r.ok) {
+      const data = await r.json();
+      if (Array.isArray(data?.products)) sources.push(data.products.map((p) => ({ ...p, name: p.title, state: { published: p.listed, ready: p.listed } })));
+    }
   } catch {}
   // c) Globals exposed by Copilot fix
   const g1 = window?.LyrionAtelier?.products;

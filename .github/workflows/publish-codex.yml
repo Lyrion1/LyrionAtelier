@@ -1,0 +1,52 @@
+name: Publish Codex articles
+
+# Turns the house engine's approved articles (data/codex-queue/) into Codex
+# pages, the Codex index entry and the sitemap entry. Runs when the engine
+# commits an article and once a day, so an article dated for later appears on
+# its day. A file it cannot read is skipped with a warning, never a failure.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/codex-queue/**'
+      - 'scripts/publish-codex.mjs'
+  schedule:
+    - cron: '7 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: house-commits
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Publish approved articles
+        run: node scripts/publish-codex.mjs
+      - name: Commit the pages
+        id: commit
+        run: |
+          git config user.name "lyrion-house[bot]"
+          git config user.email "lyrion-house@users.noreply.github.com"
+          git add codex codex.html sitemap.xml
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "codex: publish approved articles"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Rebuild the site
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "::notice::Pages rebuilds on its own after the push."

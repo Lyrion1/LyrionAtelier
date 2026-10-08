@@ -1,25 +1,13 @@
-name: Verify catalog
+name: Verify catalogue
 
-# A product listed for sale must be buyable. This fails the build if the
-# catalog and the checkout price map disagree, which is what let
-# "Unknown product: aquarius-crop-hoodie" reach a real customer.
+# One slug per product across the catalogue, the shop, the product pages, the
+# reading and certificate buttons, the checkout and Printful. Fails on a
+# malformed data/catalogue.json; never fails because of the house engine's
+# files (data/house.json, data/designs-queue.json, data/codex-queue/).
 on:
   push:
-    paths:
-      - 'data/all-products.json'
-      - 'public/data/products.json'
-      - 'scripts/lib/catalog.mjs'
-      - 'scripts/build-checkout-catalog.mjs'
-      - 'scripts/verify-catalog.mjs'
-      - '.github/workflows/verify-catalog.yml'
+    branches: [main]
   pull_request:
-    paths:
-      - 'data/all-products.json'
-      - 'public/data/products.json'
-      - 'scripts/lib/catalog.mjs'
-      - 'scripts/build-checkout-catalog.mjs'
-      - 'scripts/verify-catalog.mjs'
-      - '.github/workflows/verify-catalog.yml'
   workflow_dispatch:
 
 jobs:
@@ -30,5 +18,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Every listed product must have a price
+      - name: House rules, catalogue and design intake tests
+        run: node --test tests/house.test.mjs tests/design-intake.test.mjs
+      - name: Every listed product is buyable under one slug
         run: node scripts/verify-catalog.mjs
+
+  functions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Type-check the Edge Functions
+        working-directory: supabase/functions
+        run: deno check */index.ts
+      - name: Fulfilment tests (stand-in Printful API)
+        working-directory: supabase/functions
+        run: deno test --allow-net --allow-env --allow-read tests/

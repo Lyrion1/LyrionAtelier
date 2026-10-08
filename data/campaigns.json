@@ -1,0 +1,35 @@
+{
+  "written_by": "Site copy for each campaign key the house engine can switch on. The engine decides when a campaign runs (data/house.json); this file decides how it reads.",
+  "retrograde-edit": {
+    "eyebrow": "Mercury retrograde",
+    "body": "Mercury turns back through the sky. A small edit for the weeks when every message seems to arrive twice.",
+    "cta": "Shop the edit",
+    "image": "/images/products/mercury-retrograde-hoodie-1-crop.jpg",
+    "image_alt": "The Mercury Retrograde hoodie",
+    "products": ["mercury-retrograde-hoodie"]
+  },
+  "spring-equinox": {
+    "eyebrow": "Spring equinox",
+    "body": "Day and night stand level and the Sun crosses into Aries, the first sign of the zodiac.",
+    "cta": "Shop Aries",
+    "sign": "Aries"
+  },
+  "summer-solstice": {
+    "eyebrow": "Summer solstice",
+    "body": "The longest day of the year, and the Sun's turn into Cancer.",
+    "cta": "Shop Cancer",
+    "sign": "Cancer"
+  },
+  "autumn-equinox": {
+    "eyebrow": "Autumn equinox",
+    "body": "Day and night stand level again as the Sun enters Libra, the sign of the scales.",
+    "cta": "Shop Libra",
+    "sign": "Libra"
+  },
+  "winter-solstice": {
+    "eyebrow": "Winter solstice",
+    "body": "The shortest day of the year, and the Sun's turn into Capricorn.",
+    "cta": "Shop Capricorn",
+    "sign": "Capricorn"
+  }
+}

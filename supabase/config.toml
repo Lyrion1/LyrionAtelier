@@ -1,0 +1,23 @@
+# Supabase project settings for the Lyrīon functions.
+# These functions are called by browsers, Stripe, GitHub Actions or the house
+# engine, none of which hold a Supabase user session, so JWT checking is off
+# and each function authenticates its caller itself (Stripe signature, signed
+# link token, or a shared key header).
+
+[functions.create-checkout]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.delivery-approve]
+verify_jwt = false
+
+[functions.birthday-book]
+verify_jwt = false
+
+[functions.enquiry]
+verify_jwt = false
+
+[functions.house-cron]
+verify_jwt = false

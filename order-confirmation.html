@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Order Confirmed | Lyrīon Atelier</title>
+  <!-- Checkout sessions created before the success page moved return here.
+       Forward them, with their session id, to the order confirmation page. -->
+  <script>location.replace('/success' + location.search + location.hash);</script>
+  <noscript><meta http-equiv="refresh" content="0; url=/success"></noscript>
+</head>
+<body>
+  <p><a href="/success">Continue to your order confirmation</a></p>
+</body>
+</html>
