@@ -30,16 +30,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Build designs that have artwork
+      - name: Build designs that have artwork (skips building until PRINTFUL_API_KEY is set)
         env:
           PRINTFUL_API_KEY: ${{ secrets.PRINTFUL_API_KEY }}
           PRINTFUL_STORE_ID: ${{ secrets.PRINTFUL_STORE_ID }}
-        run: |
-          if [ -z "$PRINTFUL_API_KEY" ]; then
-            echo "::warning::PRINTFUL_API_KEY is not set; designs cannot be built."
-            exit 0
-          fi
-          node scripts/design-intake.mjs
+        run: node scripts/design-intake.mjs
       - name: Regenerate the checkout price map and check everything
         run: |
           node scripts/build-checkout-catalog.mjs
@@ -49,7 +44,7 @@ jobs:
         run: |
           git config user.name "lyrion-house[bot]"
           git config user.email "lyrion-house@users.noreply.github.com"
-          git add data/catalogue.json data/designs-built.json public/data/products.json images/products
+          git add data/catalogue.json data/designs-built.json public/data/products.json data/products.json images/products
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else

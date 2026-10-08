@@ -19,16 +19,31 @@ export interface PrintfulPayload {
 
 const MAX_PRINTFUL_ATTEMPTS = 12;
 
-/** Send the order to Printful. Returns true when Printful has it. */
+/**
+ * Send the order to Printful. Returns true when Printful has it, or when
+ * another delivery of the same payment is sending it right now.
+ *
+ * One payment can only ever become one Printful order:
+ *   1. a payment has one row in orders (stripe_session_id is unique),
+ *   2. only the worker that claims that row talks to Printful
+ *      (claim_printful_order, an atomic update in the database),
+ *   3. the Printful order carries the payment intent id as its external id,
+ *      and createConfirmedOrder looks that id up before creating anything.
+ */
 export async function fulfilPrintful(orderId: string): Promise<boolean> {
   const { data: order, error } = await db().from('orders').select('*').eq('id', orderId).single();
   if (error || !order) throw new Error(`order ${orderId} not found`);
   if (order.printful_status === 'created' || order.printful_status === 'none') return true;
+  const claim = await db().rpc('claim_printful_order', { p_id: orderId });
+  if (claim.error) throw new Error(`could not claim order ${orderId}: ${claim.error.message}`);
+  // Someone else holds it. They finish it, or house-cron retries if they fail.
+  if (claim.data !== true) return true;
   const payload = order.printful_payload as PrintfulPayload;
   try {
     const result = await createConfirmedOrder(payload);
     await db().from('orders').update({
       printful_status: 'created',
+      printful_claimed_at: null,
       printful_order_id: result.id,
       printful_last_error: null,
       printful_attempts: order.printful_attempts + 1,
@@ -40,6 +55,7 @@ export async function fulfilPrintful(orderId: string): Promise<boolean> {
     const attempts = order.printful_attempts + 1;
     await db().from('orders').update({
       printful_status: 'failed',
+      printful_claimed_at: null,
       printful_attempts: attempts,
       printful_last_error: message.slice(0, 1000),
       updated_at: new Date().toISOString(),

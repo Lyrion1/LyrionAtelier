@@ -14,6 +14,9 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = path.resolve(HERE, '..', '..');
 export const CATALOGUE_PATH = path.join(REPO_ROOT, 'data', 'catalogue.json');
 export const CHECKOUT_MAP_PATH = path.join(REPO_ROOT, 'public', 'data', 'products.json');
+// Read first by the checkout function deployed before the house automation
+// (it tries /data/products.json, then /public/data/products.json).
+export const LEGACY_CHECKOUT_MAP_PATH = path.join(REPO_ROOT, 'data', 'products.json');
 export const PRINTFUL_SNAPSHOT_PATH = path.join(REPO_ROOT, 'data', 'printful-sync.json');
 
 const require = createRequire(import.meta.url);
@@ -175,4 +178,21 @@ export function toCheckoutEntry(p) {
 
 export function buildCheckoutMap(catalogue) {
   return catalogue.products.filter(sellable).map(toCheckoutEntry);
+}
+
+/**
+ * The price map for the checkout function deployed before the house
+ * automation. That function charges priceGBP for every size and its webhook
+ * can only pass Printful pieces to Printful, so this map holds Printful pieces
+ * only: until the new functions are deployed, a reading or certificate cannot
+ * be paid for without anything to deliver it. The new functions never read
+ * this file, so it does nothing once they are live.
+ */
+export function buildLegacyCheckoutMap(catalogue) {
+  return catalogue.products
+    .filter((p) => sellable(p) && p.fulfilment === 'printful')
+    .map((p) => {
+      const { id, name, priceGBP, image, sizes, printfulVariantId } = toCheckoutEntry(p);
+      return { id, name, priceGBP, image, sizes, printfulVariantId };
+    });
 }

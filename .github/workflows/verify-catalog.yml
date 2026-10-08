@@ -19,12 +19,20 @@ jobs:
         with:
           node-version: '20'
       - name: House rules, catalogue and design intake tests
-        run: node --test tests/house.test.mjs tests/design-intake.test.mjs
+        run: node --test tests/house.test.mjs tests/design-intake.test.mjs tests/ci-scripts.test.mjs tests/engine-files.test.mjs
       - name: Every listed product is buyable under one slug
         run: node scripts/verify-catalog.mjs
 
   functions:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
     steps:
       - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v2
@@ -33,6 +41,8 @@ jobs:
       - name: Type-check the Edge Functions
         working-directory: supabase/functions
         run: deno check */index.ts
-      - name: Fulfilment tests (stand-in Printful API)
+      - name: Fulfilment and duplicate-order tests (real Postgres, stand-in Stripe and Printful)
         working-directory: supabase/functions
-        run: deno test --allow-net --allow-env --allow-read tests/
+        env:
+          TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+        run: tests/with-postgres.sh deno test --allow-all tests/

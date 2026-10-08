@@ -17,7 +17,7 @@
  * in data/garments.json; until then they are built but unlisted, and a later
  * run lists them as soon as the prices are there.
  *
- * Environment: PRINTFUL_API_KEY (required), PRINTFUL_STORE_ID (optional),
+ * Environment: PRINTFUL_API_KEY (without it, nothing is built), PRINTFUL_STORE_ID (optional),
  * ARTWORK_BASE_URL (where Printful can fetch the artwork; defaults to the
  * repository's raw files at the current commit), PRINTFUL_API_BASE (tests).
  */
@@ -143,14 +143,16 @@ export async function run() {
   const built = await readJSON(BUILT, []);
   const garments = (await readJSON(GARMENTS, { garments: {} })).garments;
   const catalogue = JSON.parse(await readFile(CATALOGUE, 'utf8'));
+  const before = JSON.stringify([catalogue, built]);
   const report = { built: 0, waiting: 0, failed: 0, listed: 0 };
 
   report.listed = applyPrices(catalogue, garments);
 
   if (!Array.isArray(queue)) {
     console.log('No usable data/designs-queue.json; nothing to build.');
+  } else if (!process.env.PRINTFUL_API_KEY) {
+    console.log('Skipped building designs: PRINTFUL_API_KEY is not set. Designs wait in the queue until it is.');
   } else {
-    if (!process.env.PRINTFUL_API_KEY) throw new Error('PRINTFUL_API_KEY is not set');
     const sha = process.env.GITHUB_SHA || 'main';
     const repo = process.env.GITHUB_REPOSITORY || 'Lyrion1/LyrionAtelier';
     const artworkBase = process.env.ARTWORK_BASE_URL || `https://raw.githubusercontent.com/${repo}/${sha}`;
@@ -258,8 +260,11 @@ export async function run() {
 
   const problems = validateCatalogue(catalogue, ROOT);
   if (problems.length) throw new Error(`refusing to write an invalid catalogue:\n  ${problems.join('\n  ')}`);
-  await writeFile(CATALOGUE, `${JSON.stringify(catalogue, null, 2)}\n`, 'utf8');
-  await writeFile(BUILT, `${JSON.stringify(built, null, 2)}\n`, 'utf8');
+  // Write only when something changed, so a quiet run leaves no commit behind.
+  if (JSON.stringify([catalogue, built]) !== before) {
+    await writeFile(CATALOGUE, `${JSON.stringify(catalogue, null, 2)}\n`, 'utf8');
+    await writeFile(BUILT, `${JSON.stringify(built, null, 2)}\n`, 'utf8');
+  }
   return report;
 }
 

@@ -18,16 +18,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Fetch the Printful store
+      - name: Fetch the Printful store (skips until PRINTFUL_API_KEY is set)
         env:
           PRINTFUL_API_KEY: ${{ secrets.PRINTFUL_API_KEY }}
           PRINTFUL_STORE_ID: ${{ secrets.PRINTFUL_STORE_ID }}
-        run: |
-          if [ -z "$PRINTFUL_API_KEY" ]; then
-            echo "::warning::PRINTFUL_API_KEY is not set, so no snapshot was taken."
-            exit 0
-          fi
-          node scripts/sync-printful.js
+        run: node scripts/sync-printful.js
       - name: Check the catalogue against it
         run: node scripts/verify-catalog.mjs
       - name: Commit the snapshot
