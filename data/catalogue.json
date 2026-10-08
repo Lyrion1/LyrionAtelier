@@ -1,0 +1,4607 @@
+{
+  "written_by": "Site catalogue. Edited by people and by the design intake workflow; the house engine never writes this file.",
+  "base_currency": "GBP",
+  "products": [
+    {
+      "slug": "aries-diamond-hoodie",
+      "title": "Aries Diamond Women's Relaxed Hoodie",
+      "sign": "Aries",
+      "element": "Fire",
+      "collection": "Aries Collection",
+      "category": "women",
+      "type": "apparel",
+      "description": "Aries Diamond Women's Relaxed Hoodie\n\nBorn to lead. Designed to conquer.\n\nThis isn't just a hoodie, it's your cosmic armor. Premium relaxed-fit design featuring the Aries diamond birthstone in striking pink detail.\n\nLeft sleeve carries your power statement: \"Water is life, I am water\" a reminder that even fire signs flow with unstoppable force.\n\n• Premium heavyweight fleece\n• Relaxed feminine fit\n• Diamond birthstone design\n• Ribbed cuffs and hem\n• Soft brushed interior\n• Inspirational sleeve quote\n\nFor the Aries woman who leads with both strength and grace.\n\nMarch 21 - April 19",
+      "images": [
+        "/images/products/aries-diamond-hoodie-lifestyle-1-crop.jpg",
+        "/images/products/aries-diamond-hoodie-lifestyle-1.jpg",
+        "/images/products/aries-diamond-hoodie-lifestyle-2.jpg",
+        "/images/products/aries-diamond-hoodie-lifestyle-3.jpg",
+        "/images/products/aries-diamond-hoodie-lifestyle-4.jpg",
+        "/images/products/aries-diamond-hoodie-lifestyle-5.jpg"
+      ],
+      "link": "/shop/aries-diamond-hoodie.html",
+      "price_gbp": {
+        "min": 51.99,
+        "max": 52.99
+      },
+      "variants": [
+        {
+          "size": "XS",
+          "price_gbp": 51.99,
+          "printful_variant_id": "6970bd2c23d913",
+          "sku": "LYR-ARIES-DIAMOND-HOODIE-XS"
+        },
+        {
+          "size": "S",
+          "price_gbp": 51.99,
+          "printful_variant_id": "6970bd2c23d983",
+          "sku": "LYR-ARIES-DIAMOND-HOODIE-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 51.99,
+          "printful_variant_id": "6970bd2c23d9d7",
+          "sku": "LYR-ARIES-DIAMOND-HOODIE-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 51.99,
+          "printful_variant_id": "6970bd2c23da15",
+          "sku": "LYR-ARIES-DIAMOND-HOODIE-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 51.99,
+          "printful_variant_id": "6970bd2c23da61",
+          "sku": "LYR-ARIES-DIAMOND-HOODIE-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 52.99,
+          "printful_variant_id": "6970bd2c23daa1",
+          "sku": "LYR-ARIES-DIAMOND-HOODIE-2XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Women's Relaxed Hoodie",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "women",
+      "features": [
+        "Premium heavyweight fleece",
+        "Relaxed feminine fit",
+        "Diamond birthstone design",
+        "Ribbed cuffs and hem",
+        "Soft brushed interior",
+        "Inspirational sleeve quote: \"Water is life, I am water\"",
+        "Perfect Aries birthday gift (March 21 - April 19)"
+      ],
+      "mysticalCopy": "For the Aries woman who leads with both strength and grace.",
+      "careInstructions": "Machine wash cold, tumble dry low. Your cosmic armor endures.",
+      "seoTitle": "Aries Diamond Women's Relaxed Hoodie | Zodiac Outerwear | Lyrīon Atelier",
+      "seoDescription": "Premium relaxed-fit hoodie featuring the Aries diamond birthstone in striking pink detail. Perfect gift for Aries (March 21 - April 19).",
+      "chartResonance": [
+        "aries-sun",
+        "aries-moon",
+        "aries-rising",
+        "mars-dominant",
+        "1st-house-emphasis",
+        "fire-dominant"
+      ],
+      "tags": [
+        "aries",
+        "fire-sign",
+        "zodiac",
+        "hoodie",
+        "women",
+        "cardinal",
+        "mars-ruled",
+        "diamond",
+        "birthstone",
+        "gift"
+      ],
+      "launchDate": "2025-01-21"
+    },
+    {
+      "slug": "aries-love-language-hoodie",
+      "title": "Aries Love Language Hoodie",
+      "sign": "Aries",
+      "element": "Fire",
+      "collection": "Aries Collection",
+      "category": "unisex",
+      "type": "apparel",
+      "description": "For the Aries who shows love through bravery. Bold moves. Fearless protection. Standing up when it matters. Premium hoodie for those who lead with courage.",
+      "images": [
+        "/images/products/aries-love-language-hoodie-4-crop.jpg",
+        "/images/products/aries-love-language-hoodie-1.jpg",
+        "/images/products/aries-love-language-hoodie-2.jpg",
+        "/images/products/aries-love-language-hoodie-3.jpg",
+        "/images/products/aries-love-language-hoodie-4.jpg",
+        "/images/products/aries-love-language-hoodie-5.jpg"
+      ],
+      "link": "/shop/aries-love-language-hoodie.html",
+      "price_gbp": {
+        "min": 50.99,
+        "max": 55.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 50.99,
+          "printful_variant_id": "6973fd61a6ab49",
+          "sku": "LYR-ARIES-LOVE-LANG-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 50.99,
+          "printful_variant_id": "6973fd61a6abd4",
+          "sku": "LYR-ARIES-LOVE-LANG-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 50.99,
+          "printful_variant_id": "6973fd61a6ac52",
+          "sku": "LYR-ARIES-LOVE-LANG-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 50.99,
+          "printful_variant_id": "6973fd61a6acc4",
+          "sku": "LYR-ARIES-LOVE-LANG-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 51.99,
+          "printful_variant_id": "6973fd61a6ad32",
+          "sku": "LYR-ARIES-LOVE-LANG-2XL"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 52.99,
+          "printful_variant_id": "6973fd61a6ada2",
+          "sku": "LYR-ARIES-LOVE-LANG-3XL"
+        },
+        {
+          "size": "4XL",
+          "price_gbp": 54.99,
+          "printful_variant_id": "6973fd61a6ae15",
+          "sku": "LYR-ARIES-LOVE-LANG-4XL"
+        },
+        {
+          "size": "5XL",
+          "price_gbp": 55.99,
+          "printful_variant_id": "6973fd61a6ae89",
+          "sku": "LYR-ARIES-LOVE-LANG-5XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Premium Hoodie",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium heavyweight fleece",
+        "Unisex fit",
+        "Adjustable drawstring hood",
+        "Front kangaroo pocket",
+        "Soft brushed interior",
+        "Aries constellation design",
+        "Perfect Aries birthday gift (March 21 - April 19)"
+      ],
+      "mysticalCopy": "Love Language: Acts of Courage",
+      "careInstructions": "Machine wash cold, tumble dry low. Your courage endures.",
+      "seoTitle": "Aries Love Language Hoodie | Acts of Courage | Lyrīon Atelier",
+      "seoDescription": "For the Aries who shows love through bravery. Bold moves. Fearless protection. Standing up when it matters. Premium hoodie for those who lead with courage. Perfect gift for Aries (March 21 - April 19).",
+      "chartResonance": [
+        "aries-sun",
+        "aries-moon",
+        "aries-rising",
+        "mars-dominant",
+        "1st-house-emphasis",
+        "fire-dominant"
+      ],
+      "tags": [
+        "aries",
+        "fire-sign",
+        "zodiac",
+        "hoodie",
+        "hoodies",
+        "unisex",
+        "cardinal",
+        "mars-ruled",
+        "love-language",
+        "gift",
+        "curated for gifting",
+        "valentines"
+      ],
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "youth-aries-fire-tee",
+      "title": "Aries Fire Tee (Youth)",
+      "sign": "Aries",
+      "element": "Fire",
+      "collection": "Youth Spark",
+      "category": "youth",
+      "type": "apparel",
+      "description": "",
+      "images": [
+        "/youth-aries-fire-tee/youth-aries-fire-tee-boy-crop.jpg",
+        "/youth-aries-fire-tee/youth-aries-fire-tee-lifestyle.jpg",
+        "/youth-aries-fire-tee/youth-aries-fire-tee-boy.jpg",
+        "/youth-aries-fire-tee/youth-aries-fire-tee-girl.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 27.99,
+        "max": 30.99
+      },
+      "variants": [
+        {
+          "size": "XS",
+          "color": "Lunar Sand",
+          "price_gbp": 27.99,
+          "printful_variant_id": "694615f9707d64",
+          "sku": "LYR-YTH-ARIES-FIRE-XS"
+        },
+        {
+          "size": "S",
+          "color": "Lunar Sand",
+          "price_gbp": 27.99,
+          "printful_variant_id": "694615f9707dd3",
+          "sku": "LYR-YTH-ARIES-FIRE-S"
+        },
+        {
+          "size": "M",
+          "color": "Lunar Sand",
+          "price_gbp": 27.99,
+          "printful_variant_id": "694615f9707e25",
+          "sku": "LYR-YTH-ARIES-FIRE-M"
+        },
+        {
+          "size": "L",
+          "color": "Lunar Sand",
+          "price_gbp": 28.99,
+          "printful_variant_id": "694615f9707e72",
+          "sku": "LYR-YTH-ARIES-FIRE-L"
+        },
+        {
+          "size": "XL",
+          "color": "Lunar Sand",
+          "price_gbp": 30.99,
+          "printful_variant_id": "694615f9707eb6",
+          "sku": "LYR-YTH-ARIES-FIRE-XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Youth Classic Tee",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium cotton blend for all-day comfort",
+        "Celestial Aries fire insignia centered on chest",
+        "Unisex sizing for fearless young souls",
+        "Sacred symbols that grow with them",
+        "Made for warriors, dreamers, and leaders-in-training"
+      ],
+      "careInstructions": "Machine wash cold, tumble dry low. The fire within never fades.",
+      "seoTitle": "Aries Fire Youth Tee | Celestial Kids Clothing | Lyrīon Atelier",
+      "seoDescription": "Empower young Aries with celestial fire symbolism. Premium unisex youth tee for fearless trailblazers born under the first fire sign.",
+      "chartResonance": [
+        "aries-sun",
+        "aries-moon",
+        "mars-dominant",
+        "1st-house-emphasis",
+        "fire-dominant",
+        "young-souls"
+      ],
+      "tags": [
+        "youth",
+        "aries",
+        "fire-sign",
+        "unisex",
+        "cardinal",
+        "courage",
+        "leadership",
+        "mars-ruled",
+        "gift"
+      ],
+      "palette": "Lunar Sand",
+      "launchDate": "2025-01-15",
+      "edition": "core",
+      "copy": {
+        "notes": "A celestial flame awakens. Born under the first fire sign, young Aries carry the spark of creation itself—bold, fearless, and unstoppable. This tee channels raw cosmic courage through sacred fire symbolism, empowering the next generation of trailblazers to burn bright and lead fearlessly into the unknown.",
+        "materials": "100% ring-spun cotton<br>Fabric weight: 4.5 oz/yd² (153 g/m²)<br>Pre-shrunk for perfect fit<br>Shoulder-to-shoulder taping",
+        "care": "Machine wash cold, tumble dry low. The fire within never fades.",
+        "mysticalCopy": "For young warriors who were born to ignite revolutions, not follow them."
+      }
+    },
+    {
+      "slug": "youth-aries-heavy-blend-hoodie",
+      "title": "Youth Aries Heavy Blend Hoodie",
+      "sign": "Aries",
+      "element": "Fire",
+      "collection": "Zodiac Hero",
+      "category": "zodiac-hero",
+      "type": "apparel",
+      "description": "The first flame, sized for young warriors. Born under Mars' fearless command, Aries children move through the world like fire incarnate—bold, unapologetic, impossible to ignore. This premium heavy blend hoodie carries the sacred Ram insignia, designed for the next generation of pioneers. Warm enough for winter adventures, soft enough for everyday wear, powerful enough to remind them who they are. For the young trailblazers who lead from the front and make no apologies. Let them wear their fire.",
+      "images": [
+        "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-lifestyle.jpg",
+        "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-girl-front.jpg",
+        "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-flat-ghost.jpg",
+        "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-ghost.jpg",
+        "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-girl-back.jpg"
+      ],
+      "link": "/shop/youth-aries-hoodie.html",
+      "price_gbp": {
+        "min": 33.99,
+        "max": 33.99
+      },
+      "variants": [
+        {
+          "size": "XS",
+          "price_gbp": 33.99,
+          "printful_variant_id": "694ed9706ecda1",
+          "sku": "LYR-ARIES-YOUTH-HOODIE-XS"
+        },
+        {
+          "size": "S",
+          "price_gbp": 33.99,
+          "printful_variant_id": "694ed9706ece08",
+          "sku": "LYR-ARIES-YOUTH-HOODIE-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 33.99,
+          "printful_variant_id": "694ed9706ece51",
+          "sku": "LYR-ARIES-YOUTH-HOODIE-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 33.99,
+          "printful_variant_id": "694ed9706ecea1",
+          "sku": "LYR-ARIES-YOUTH-HOODIE-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 33.99,
+          "printful_variant_id": "694ed9706ecee2",
+          "sku": "LYR-ARIES-YOUTH-HOODIE-XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Youth Heavy Blend Hoodie",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "youth",
+      "features": [
+        "Premium heavy blend fleece construction",
+        "Aries Ram insignia embroidered or printed on front",
+        "Warm and durable for active young warriors",
+        "Soft brushed interior for all-day comfort",
+        "Ribbed cuffs and waistband for secure fit",
+        "Youth sizes XS-XL (ages 5-14 approximately)",
+        "Built for pioneers, leaders, and first movers",
+        "Perfect for bold kids who blaze their own trails"
+      ],
+      "mysticalCopy": "The first fire. The boldest move. They were born to blaze trails, not follow them.",
+      "careInstructions": "Machine wash cold, tumble dry low. Their fire burns eternal.",
+      "seoTitle": "Youth Aries Heavy Blend Hoodie | Fire Sign Kids Apparel | Lyrīon Atelier",
+      "seoDescription": "Aries hoodie for young warriors. Premium heavy blend with Ram insignia. Bold design for kids who lead from the front. Ages 5-14.",
+      "chartResonance": [
+        "aries-sun",
+        "aries-moon",
+        "aries-rising",
+        "mars-dominant",
+        "1st-house-emphasis",
+        "fire-dominant"
+      ],
+      "tags": [
+        "aries",
+        "fire-sign",
+        "zodiac",
+        "youth",
+        "hoodie",
+        "kids",
+        "cardinal",
+        "mars-ruled",
+        "warrior",
+        "bold",
+        "gift"
+      ],
+      "materials": "50% cotton, 50% polyester<br>Fabric weight: 8.0 oz/yd² (271.25 g/m²)<br>Air-jet spun yarn with soft feel and reduced pilling<br>Classic fit with ribbed cuffs and waistband",
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "capricorn-verdant-sweatshirt",
+      "title": "Capricorn Verdant Relief Sweatshirt",
+      "sign": "Capricorn",
+      "element": "Earth",
+      "collection": "Zodiac Relief",
+      "category": "zodiac-relief",
+      "type": "apparel",
+      "description": "The mountain climber. Capricorns are architects of destiny—patient, disciplined, and built to endure what breaks lesser souls. Born under Saturn's ancient wisdom, they understand that true power is earned through steady ascent, not shortcuts. This premium sweatshirt channels earthbound ambition through sacred Capricorn verdant symbolism, wrapping strategic minds in cosmic comfort designed for the long game.",
+      "images": [
+        "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-boy-sitting.jpg",
+        "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-ghost.jpg",
+        "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-girl-front.jpg",
+        "/capricorn-verdant-sweatshirt/capricorn-verdant-sweatshirt-girl-back.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 37.99,
+        "max": 42.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 37.99,
+          "printful_variant_id": "694c1247f214e9",
+          "sku": "LYR-CAP-SWEAT-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 37.99,
+          "printful_variant_id": "694c1247f21558",
+          "sku": "LYR-CAP-SWEAT-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 37.99,
+          "printful_variant_id": "694c1247f215a7",
+          "sku": "LYR-CAP-SWEAT-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 37.99,
+          "printful_variant_id": "694c1247f215f5",
+          "sku": "LYR-CAP-SWEAT-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 41.99,
+          "printful_variant_id": "694c1247f21649",
+          "sku": "LYR-CAP-SWEAT-2XL"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 41.99,
+          "printful_variant_id": "694c1247f21691",
+          "sku": "LYR-CAP-SWEAT-3XL"
+        },
+        {
+          "size": "4XL",
+          "price_gbp": 42.99,
+          "printful_variant_id": "694c1247f216d4",
+          "sku": "LYR-CAP-SWEAT-4XL"
+        },
+        {
+          "size": "5XL",
+          "price_gbp": 42.99,
+          "printful_variant_id": "694c1247f21712",
+          "sku": "LYR-CAP-SWEAT-5XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Unisex Sweatshirt",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": false,
+      "gender": "unisex",
+      "features": [
+        "Premium mid-weight fleece for year-round comfort",
+        "Celestial Capricorn verdant relief design centered on chest",
+        "Unisex classic fit for timeless wearability",
+        "Ribbed cuffs and hem for structured durability",
+        "Earth-conscious construction honoring Capricorn values",
+        "Built to last—like everything Capricorns create"
+      ],
+      "mysticalCopy": "For those who build empires brick by brick while others chase mirages.",
+      "careInstructions": "Machine wash cold, tumble dry low. Your resilience endures.",
+      "seoTitle": "Capricorn Verdant Relief Sweatshirt | Earth Sign Apparel | Lyrīon Atelier",
+      "seoDescription": "Embrace Capricorn discipline with the Verdant Relief Sweatshirt. Premium unisex design for ambitious souls ruled by Saturn's ancient mastery.",
+      "chartResonance": [
+        "capricorn-sun",
+        "capricorn-moon",
+        "capricorn-rising",
+        "saturn-dominant",
+        "10th-house-emphasis",
+        "earth-dominant"
+      ],
+      "tags": [
+        "capricorn",
+        "earth-sign",
+        "zodiac",
+        "sweatshirt",
+        "unisex",
+        "cardinal",
+        "saturn-ruled",
+        "ambition",
+        "discipline",
+        "mastery"
+      ],
+      "materials": "50% cotton, 50% polyester<br>Fabric weight: 8.0 oz/yd² (271.25 g/m²)<br>Classic fit with ribbed collar, cuffs, and waistband<br>Soft brushed interior",
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "leo-zodiac-hoodie",
+      "title": "Leo Zodiac Hoodie",
+      "sign": "Leo",
+      "element": "Fire",
+      "collection": "Zodiac Hero",
+      "category": "zodiac-hero",
+      "type": "apparel",
+      "description": "The sovereign flame. Leos are celestial royalty—born with the Sun's radiance coursing through their spirit, commanding attention without uttering a word. This hoodie channels divine confidence through sacred lion symbolism, wrapping natural-born leaders in cosmic armor that declares: 'I was made to shine, and the universe bows to my light.'",
+      "images": [
+        "/leo-zodiac-hoodie/leo-zodiac-hoodie-boy-crop.jpg",
+        "/leo-zodiac-hoodie/leo-zodiac-hoodie-text.jpg",
+        "/leo-zodiac-hoodie/leo-zodiac-hoodie-lifestyle.jpg",
+        "/leo-zodiac-hoodie/leo-zodiac-hoodie-flat.jpg",
+        "/leo-zodiac-hoodie/leo-zodiac-hoodie-boy.jpg",
+        "/leo-zodiac-hoodie/leo-zodiac-hoodie-girl.jpg"
+      ],
+      "link": "/shop/leo-hoodie.html",
+      "price_gbp": {
+        "min": 46.99,
+        "max": 50.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 46.99,
+          "printful_variant_id": "694b0b7b4276f7",
+          "sku": "LYR-LEO-HOOD-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 46.99,
+          "printful_variant_id": "694b0b7b427766",
+          "sku": "LYR-LEO-HOOD-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 46.99,
+          "printful_variant_id": "694b0b7b4277b7",
+          "sku": "LYR-LEO-HOOD-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 48.99,
+          "printful_variant_id": "694b0b7b427801",
+          "sku": "LYR-LEO-HOOD-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 48.99,
+          "printful_variant_id": "694b0b7b427857",
+          "sku": "LYR-LEO-HOOD-2XL"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 50.99,
+          "printful_variant_id": "694b0b7b4278a6",
+          "sku": "LYR-LEO-HOOD-3XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Urban Hoodie",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium heavyweight fleece for sovereign comfort",
+        "Celestial Leo lion insignia commanding center placement",
+        "Unisex oversized fit for bold self-expression",
+        "Cosmic fire energy woven into every thread",
+        "For those who lead with heart and rule with light"
+      ],
+      "mysticalCopy": "For kings and queens who don't wear crowns—they ARE the crown.",
+      "careInstructions": "Machine wash cold inside out, tumble dry low. Your radiance never dims.",
+      "seoTitle": "Leo Zodiac Hoodie | Celestial Fire Sign Apparel | Lyrīon Atelier",
+      "seoDescription": "Channel your inner sovereign with the Leo Zodiac Hoodie. Premium unisex design for natural-born leaders ruled by the Sun's eternal flame.",
+      "chartResonance": [
+        "leo-sun",
+        "leo-moon",
+        "leo-rising",
+        "sun-dominant",
+        "5th-house-emphasis",
+        "fire-dominant"
+      ],
+      "tags": [
+        "leo",
+        "fire-sign",
+        "zodiac",
+        "hoodie",
+        "unisex",
+        "fixed",
+        "sun-ruled",
+        "confidence",
+        "leadership",
+        "royalty",
+        "gift"
+      ],
+      "launchDate": "2025-01-15",
+      "copy": {
+        "notes": "The sovereign flame. Leos are celestial royalty—born with the Sun's radiance coursing through their spirit, commanding attention without uttering a word. This hoodie channels divine confidence through sacred lion symbolism, wrapping natural-born leaders in cosmic armor that declares: 'I was made to shine, and the universe bows to my light.'",
+        "materials": "50% cotton, 50% polyester<br>Fabric weight: 8.0 oz/yd² (271.25 g/m²)<br>Air-jet spun yarn with soft feel and reduced pilling<br>Classic fit with ribbed cuffs and waistband",
+        "care": "Machine wash cold inside out, tumble dry low. Your radiance never dims.",
+        "mysticalCopy": "For kings and queens who don't wear crowns—they ARE the crown."
+      }
+    },
+    {
+      "slug": "cosmic-crewneck-pisces",
+      "title": "Cosmic Crewneck - Pisces",
+      "sign": "Pisces",
+      "element": "Water",
+      "collection": "Zodiac Hero",
+      "category": "zodiac-hero",
+      "type": "apparel",
+      "description": "The cosmic ocean. Pisces swim between worlds—one foot in reality, the other in dreams too vast for words. Born under Neptune's ethereal reign, they are the poets, the healers, the souls who feel everything the universe whispers. This organic raglan crewneck channels limitless empathy through sacred fish symbolism, wrapping sensitive spirits in cosmic comfort that honors their gift: to dissolve boundaries and unite all that exists.",
+      "images": [
+        "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-ghost.jpg",
+        "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-girl-front.jpg",
+        "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-girl-back.jpg",
+        "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-guy-side.jpg",
+        "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-guy-back.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 43.99,
+        "max": 46.99
+      },
+      "variants": [
+        {
+          "size": "XS",
+          "price_gbp": 43.99,
+          "printful_variant_id": "694b39d6493ff5",
+          "sku": "LYR-PISC-CREW-XS"
+        },
+        {
+          "size": "S",
+          "price_gbp": 43.99,
+          "printful_variant_id": "694b39d6494068",
+          "sku": "LYR-PISC-CREW-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 43.99,
+          "printful_variant_id": "694b39d64940c4",
+          "sku": "LYR-PISC-CREW-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 43.99,
+          "printful_variant_id": "694b39d6494116",
+          "sku": "LYR-PISC-CREW-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 45.99,
+          "printful_variant_id": "694b39d6494168",
+          "sku": "LYR-PISC-CREW-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 46.99,
+          "printful_variant_id": "694b39d64941a6",
+          "sku": "LYR-PISC-CREW-2XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Unisex Organic Raglan Sweatshirt",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "100% organic cotton for gentle, Earth-conscious comfort",
+        "Celestial Pisces dual fish insignia centered on chest",
+        "Raglan sleeves for fluid, unrestricted movement",
+        "Unisex relaxed fit honoring all forms of expression",
+        "Soft brushed interior—sanctuary for sensitive souls"
+      ],
+      "mysticalCopy": "For dreamers who see what others cannot, and feel what the world pretends isn't there.",
+      "careInstructions": "Machine wash cold with like colors, tumble dry low. Your oceanic spirit remains eternal.",
+      "seoTitle": "Cosmic Crewneck - Pisces | Organic Zodiac Apparel | Lyrīon Atelier",
+      "seoDescription": "Embrace your Piscean depths with the Cosmic Crewneck. Organic unisex design for empaths, dreamers, and cosmic souls ruled by Neptune's infinite ocean.",
+      "chartResonance": [
+        "pisces-sun",
+        "pisces-moon",
+        "pisces-rising",
+        "neptune-dominant",
+        "12th-house-emphasis",
+        "water-dominant"
+      ],
+      "tags": [
+        "pisces",
+        "water-sign",
+        "zodiac",
+        "crewneck",
+        "unisex",
+        "mutable",
+        "neptune-ruled",
+        "empathy",
+        "intuition",
+        "mysticism",
+        "organic",
+        "gift"
+      ],
+      "launchDate": "2025-01-15",
+      "copy": {
+        "notes": "The cosmic ocean. Pisces swim between worlds—one foot in reality, the other in dreams too vast for words. Born under Neptune's ethereal reign, they are the poets, the healers, the souls who feel everything the universe whispers. This organic raglan crewneck channels limitless empathy through sacred fish symbolism, wrapping sensitive spirits in cosmic comfort that honors their gift: to dissolve boundaries and unite all that exists.",
+        "materials": "50% cotton, 50% polyester<br>Fabric weight: 8.0 oz/yd² (271.25 g/m²)<br>Classic fit with ribbed collar, cuffs, and waistband<br>Soft brushed interior",
+        "care": "Machine wash cold with like colors, tumble dry low. Your oceanic spirit remains eternal.",
+        "mysticalCopy": "For dreamers who see what others cannot, and feel what the world pretends isn't there."
+      }
+    },
+    {
+      "slug": "gemini-starlight-tee",
+      "title": "Gemini Starlight Tee",
+      "sign": "Gemini",
+      "element": "Air",
+      "collection": "Zodiac Hero",
+      "category": "zodiac-hero",
+      "type": "apparel",
+      "description": "The cosmic communicator. Gemini doesn't just speak—they weave worlds with words, dance between dimensions, hold contradictions without breaking. Born under Mercury's quicksilver reign, they know that truth has many faces and curiosity is the highest form of intelligence. This premium heavyweight tee channels Geminian duality through sacred twin symbolism, wrapping sharp minds in comfort designed for those who live between worlds and thrive in the space where opposites meet.",
+      "images": [
+        "/gemini-starlight-tee/gemini-starlight-tee-ghost-crop.jpg",
+        "/gemini-starlight-tee/gemini-starlight-tee-ghost.jpg",
+        "/gemini-starlight-tee/gemini-starlight-tee-model-front.jpg",
+        "/gemini-starlight-tee/gemini-starlight-tee-model-back.jpg",
+        "/gemini-starlight-tee/gemini-starlight-tee-model-side.jpg"
+      ],
+      "link": "/shop/gemini-tee.html",
+      "price_gbp": {
+        "min": 33.99,
+        "max": 36.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 33.99,
+          "printful_variant_id": "694d9579acfff1",
+          "sku": "LYR-GEM-STAR-TEE-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 33.99,
+          "printful_variant_id": "694d9579ad00a5",
+          "sku": "LYR-GEM-STAR-TEE-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 33.99,
+          "printful_variant_id": "694d9579ad0139",
+          "sku": "LYR-GEM-STAR-TEE-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 33.99,
+          "printful_variant_id": "694d9579ad01d1",
+          "sku": "LYR-GEM-STAR-TEE-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 35.99,
+          "printful_variant_id": "694d9579ad0252",
+          "sku": "LYR-GEM-STAR-TEE-2XL"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 36.99,
+          "printful_variant_id": "694d9579ad02e2",
+          "sku": "LYR-GEM-STAR-TEE-3XL"
+        },
+        {
+          "size": "4XL",
+          "price_gbp": 36.99,
+          "printful_variant_id": "694d9579ad0373",
+          "sku": "LYR-GEM-STAR-TEE-4XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Men's Premium Heavyweight Tee",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "men",
+      "mysticalCopy": "Two minds, one soul. You contain multitudes—and that's your superpower.",
+      "careInstructions": "Machine wash cold, tumble dry low. Your duality never fades.",
+      "seoTitle": "Gemini Starlight Tee | Men & Boys Zodiac Tee | Lyrīon Atelier",
+      "seoDescription": "Channel Gemini duality with the Starlight Tee. Premium heavyweight design for quick minds ruled by Mercury. For men and young boys.",
+      "chartResonance": [
+        "gemini-sun",
+        "gemini-moon",
+        "gemini-rising",
+        "mercury-dominant",
+        "3rd-house-emphasis",
+        "air-dominant"
+      ],
+      "tags": [
+        "gemini",
+        "air-sign",
+        "zodiac",
+        "tee",
+        "men",
+        "boys",
+        "mutable",
+        "mercury-ruled",
+        "twins",
+        "communication",
+        "duality",
+        "gift"
+      ],
+      "launchDate": "2025-01-15",
+      "copy": {
+        "notes": "The cosmic communicator. Gemini doesn't just speak—they weave worlds with words, dance between dimensions, hold contradictions without breaking. Born under Mercury's quicksilver reign, they know that truth has many faces and curiosity is the highest form of intelligence. This premium heavyweight tee channels Geminian duality through sacred twin symbolism, wrapping sharp minds in comfort designed for those who live between worlds and thrive in the space where opposites meet.",
+        "materials": "100% ring-spun cotton<br>Fabric weight: 4.5 oz/yd² (153 g/m²)<br>Pre-shrunk for perfect fit<br>Shoulder-to-shoulder taping",
+        "care": "Machine wash cold, tumble dry low. Your duality never fades.",
+        "mysticalCopy": "Two minds, one soul. You contain multitudes—and that's your superpower."
+      }
+    },
+    {
+      "slug": "capricorn-verdant-relief-tee",
+      "title": "Capricorn Verdant Relief Tee",
+      "sign": "Capricorn",
+      "element": "Earth",
+      "collection": "eclipse-gilded",
+      "category": "tshirts",
+      "type": "apparel",
+      "description": "Premium oversized faded tee with verdant Capricorn sigil embroidery. Heavyweight cotton, relaxed drape.",
+      "images": [
+        "https://files.cdn.printful.com/files/000/00026420c67f2af4c4021ce3d829c0f7.png"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 57.99,
+        "max": 57.99
+      },
+      "variants": [],
+      "fulfilment": "printful",
+      "printful": {
+        "product": null,
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": false,
+      "gender": "men",
+      "palette": "Celestial Noir"
+    },
+    {
+      "slug": "aquarius-crop-hoodie",
+      "title": "Aquarius Crop Hoodie",
+      "sign": "Aquarius",
+      "element": "Air",
+      "collection": "Zodiac Hero",
+      "category": "zodiac-hero",
+      "type": "apparel",
+      "description": "The water bearer flows through you. Aquarius doesn't carry water—they ARE the water, the life force, the current that nourishes all of humanity. Born under Uranus' revolutionary reign, they understand that true change flows like a river: persistent, unstoppable, reshaping everything it touches. This cropped hoodie channels Aquarian defiance through sacred water symbolism, wrapping visionary souls in comfort designed for those who refuse to follow the current—they create it.",
+      "images": [
+        "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1-crop.jpg",
+        "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+        "/aquarius-crop-hoodie/aquarius-crop-hoodie-front2.jpg",
+        "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
+        "/aquarius-crop-hoodie/aquarius-crop-hoodie-side.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 50.99,
+        "max": 53.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "color": "Military Green",
+          "price_gbp": 50.99,
+          "printful_variant_id": "694c9c3fbcb066",
+          "sku": "LYR-AQU-CROP-MG-S"
+        },
+        {
+          "size": "M",
+          "color": "Military Green",
+          "price_gbp": 50.99,
+          "printful_variant_id": "694c9c3fbcb105",
+          "sku": "LYR-AQU-CROP-MG-M"
+        },
+        {
+          "size": "L",
+          "color": "Military Green",
+          "price_gbp": 50.99,
+          "printful_variant_id": "694c9c3fbcb198",
+          "sku": "LYR-AQU-CROP-MG-L"
+        },
+        {
+          "size": "XL",
+          "color": "Military Green",
+          "price_gbp": 50.99,
+          "printful_variant_id": "694c9c3fbcb21e",
+          "sku": "LYR-AQU-CROP-MG-XL"
+        },
+        {
+          "size": "2XL",
+          "color": "Military Green",
+          "price_gbp": 53.99,
+          "printful_variant_id": "694c9c3fbcb2a3",
+          "sku": "LYR-AQU-CROP-MG-2XL"
+        },
+        {
+          "size": "S",
+          "color": "Storm",
+          "price_gbp": 50.99,
+          "printful_variant_id": "694c9c3fbcb325",
+          "sku": "LYR-AQU-CROP-ST-S"
+        },
+        {
+          "size": "M",
+          "color": "Storm",
+          "price_gbp": 50.99,
+          "printful_variant_id": "694c9c3fbcb3a5",
+          "sku": "LYR-AQU-CROP-ST-M"
+        },
+        {
+          "size": "L",
+          "color": "Storm",
+          "price_gbp": 50.99,
+          "printful_variant_id": "694c9c3fbcb428",
+          "sku": "LYR-AQU-CROP-ST-L"
+        },
+        {
+          "size": "XL",
+          "color": "Storm",
+          "price_gbp": 50.99,
+          "printful_variant_id": "694c9c3fbcb4a5",
+          "sku": "LYR-AQU-CROP-ST-XL"
+        },
+        {
+          "size": "2XL",
+          "color": "Storm",
+          "price_gbp": 53.99,
+          "printful_variant_id": "694c9c3fbcb529",
+          "sku": "LYR-AQU-CROP-ST-2XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Crop Hoodie",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "women",
+      "features": [
+        "Premium cropped fit for modern style",
+        "Aquarius water bearer insignia centered on chest",
+        "'Water is life, I am water' manifestation text (hidden inner detail)",
+        "Drawstring hood for versatile styling",
+        "Soft fleece interior for all-day comfort",
+        "Available in Military Green and Storm colorways",
+        "Ribbed cuffs and hem for structured fit",
+        "Designed for rebels, visionaries, and future-builders"
+      ],
+      "mysticalCopy": "Water is life. I am water. I flow where others fear to tread.",
+      "careInstructions": "Machine wash cold, tumble dry low. Your revolutionary spirit never fades.",
+      "seoTitle": "Aquarius Crop Hoodie | Water Bearer Design | Lyrīon Atelier",
+      "seoDescription": "Channel Aquarian flow with the Crop Hoodie. Premium design for visionaries and revolutionaries ruled by Uranus. Water is life, I am water.",
+      "chartResonance": [
+        "aquarius-sun",
+        "aquarius-moon",
+        "aquarius-rising",
+        "uranus-dominant",
+        "11th-house-emphasis",
+        "air-dominant"
+      ],
+      "tags": [
+        "aquarius",
+        "air-sign",
+        "zodiac",
+        "crop-hoodie",
+        "women",
+        "fixed",
+        "uranus-ruled",
+        "water-bearer",
+        "visionary",
+        "revolutionary",
+        "gift"
+      ],
+      "launchDate": "2025-01-15",
+      "copy": {
+        "notes": "The water bearer flows through you. Aquarius doesn't carry water—they ARE the water, the life force, the current that nourishes all of humanity.",
+        "manifestationText": "Water is life, I am water",
+        "manifestationPlacement": "inner-hem",
+        "materials": "50% cotton, 50% polyester<br>Fabric weight: 8.0 oz/yd² (271.25 g/m²)<br>Air-jet spun yarn with soft feel and reduced pilling<br>Classic fit with ribbed cuffs and waistband",
+        "mysticalCopy": "Water is life. I am water. I flow where others fear to tread."
+      }
+    },
+    {
+      "slug": "fisherman-beanie",
+      "title": "Lyrīon Fisherman Beanie",
+      "sign": null,
+      "element": null,
+      "collection": "Logo Line",
+      "category": "logo-line",
+      "type": "accessory",
+      "description": "Crown your third eye. This classic fisherman beanie carries the sacred Tree of Life embroidered on the fold—a subtle reminder that wisdom grows from roots you cannot see. Heavyweight ribbed knit built for winter's harsh truths and life's coldest seasons. For those who understand that warmth isn't just physical—it's knowing who you are when the world goes dark and cold. Wear it low, wear it loose, wear it like the quiet confidence of someone who's survived their own winter.",
+      "images": [
+        "/fisherman-beanie/fisherman-beanie-front-crop.jpg",
+        "/fisherman-beanie/fisherman-beanie-front.jpg",
+        "/fisherman-beanie/fisherman-beanie-ghost.jpg",
+        "/fisherman-beanie/fisherman-beanie-male-model.jpg",
+        "/fisherman-beanie/fisherman-beanie-female-model.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 23.99,
+        "max": 23.99
+      },
+      "variants": [
+        {
+          "size": "One Size",
+          "price_gbp": 23.99,
+          "printful_variant_id": "6948ab6e63d308",
+          "sku": "LYR-BEANIE-FISH-TREE"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Fisherman Beanie",
+        "sync_product_id": null
+      },
+      "seasonal": false,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium heavyweight ribbed knit construction",
+        "Tree of Life embroidered on cuff fold",
+        "Classic fisherman beanie silhouette",
+        "Snug, comfortable fit for all-day wear",
+        "Unisex design—equally powerful on everyone",
+        "Durable enough for actual winters, styled for urban cosmic vibes",
+        "Pairs with everything, anchors any outfit"
+      ],
+      "mysticalCopy": "The coldest nights reveal who you really are. This keeps you warm through both.",
+      "careInstructions": "Hand wash cold, lay flat to dry. Like you, built to endure.",
+      "seoTitle": "Lyrīon Fisherman Beanie | Tree of Life | Premium Winter Headwear",
+      "seoDescription": "Classic fisherman beanie with Tree of Life embroidery. Premium heavyweight ribbed knit for winter warmth and quiet confidence. Unisex design.",
+      "chartResonance": [
+        "capricorn-emphasis",
+        "saturn-dominant",
+        "winter-souls",
+        "earth-signs",
+        "all-charts"
+      ],
+      "tags": [
+        "logo-line",
+        "beanie",
+        "unisex",
+        "fisherman-beanie",
+        "tree-of-life",
+        "winter",
+        "headwear",
+        "streetwear",
+        "cold-weather",
+        "gift"
+      ],
+      "palette": "winter-souls",
+      "launchDate": "2025-01-15",
+      "edition": "core",
+      "copy": {
+        "notes": "Crown your third eye with the Tree of Life fisherman beanie.",
+        "materials": "Premium heavyweight ribbed knit",
+        "care": "Hand wash cold, lay flat to dry.",
+        "manifestationText": "Rooted in wisdom, crowned in warmth",
+        "manifestationPlacement": "inner-label"
+      }
+    },
+    {
+      "slug": "pisces-hoodie",
+      "title": "Pisces Hoodie",
+      "sign": "Pisces",
+      "element": "Water",
+      "collection": "Zodiac Hero",
+      "category": "zodiac-hero",
+      "type": "apparel",
+      "description": "Swim between worlds. Pisces exists in the liminal space where dreams meet reality, where feeling becomes knowing, where souls recognize each other without words. Born under Neptune's oceanic depths, they are the dreamers, the artists, the healers who understand that the invisible is more real than what we touch. This premium hoodie channels Piscean fluidity through sacred dual fish symbolism, wrapping sensitive souls in comfort designed for those who feel everything—and transform it into beauty.",
+      "images": [
+        "/images/pisces-hoodie-new-ghost-crop.jpg",
+        "/images/pisces-hoodie-new-ghost.png",
+        "/images/pisces-hoodie-new-male.png",
+        "/images/pisces-hoodie-new-female.png",
+        "/images/pisces-hoodie-new-couple.png"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 42.99,
+        "max": 49.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 42.99,
+          "printful_variant_id": "694da2910d2079",
+          "sku": "LYR-PISC-HOOD-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 42.99,
+          "printful_variant_id": "694da2910d20e9",
+          "sku": "LYR-PISC-HOOD-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 42.99,
+          "printful_variant_id": "694da2910d2134",
+          "sku": "LYR-PISC-HOOD-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 42.99,
+          "printful_variant_id": "694da2910d2187",
+          "sku": "LYR-PISC-HOOD-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 44.99,
+          "printful_variant_id": "694da2910d21d6",
+          "sku": "LYR-PISC-HOOD-2XL"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 46.99,
+          "printful_variant_id": "694da2910d2222",
+          "sku": "LYR-PISC-HOOD-3XL"
+        },
+        {
+          "size": "4XL",
+          "price_gbp": 47.99,
+          "printful_variant_id": "694da2910d2273",
+          "sku": "LYR-PISC-HOOD-4XL"
+        },
+        {
+          "size": "5XL",
+          "price_gbp": 49.99,
+          "printful_variant_id": "694da2910d22c1",
+          "sku": "LYR-PISC-HOOD-5XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Unisex Hoodie",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium heavyweight fleece for sanctuary-level comfort",
+        "Pisces dual fish insignia centered on chest",
+        "Spacious kangaroo pocket for cosmic essentials",
+        "Drawstring hood for retreating from the noise",
+        "Unisex relaxed fit—flows on all bodies",
+        "Soft brushed interior feels like an embrace",
+        "Ribbed cuffs and hem for grounded structure",
+        "Designed for empaths, dreamers, and cosmic swimmers"
+      ],
+      "mysticalCopy": "You don't escape reality. You show others there are infinite realities beyond what they can see.",
+      "careInstructions": "Machine wash cold, tumble dry low. Your depth never fades.",
+      "seoTitle": "Pisces Hoodie | Dual Fish Design | Unisex Zodiac Apparel | Lyrīon Atelier",
+      "seoDescription": "Embrace Piscean depths with the Pisces Hoodie. Premium unisex design for dreamers and empaths ruled by Neptune's oceanic flow.",
+      "chartResonance": [
+        "pisces-sun",
+        "pisces-moon",
+        "pisces-rising",
+        "neptune-dominant",
+        "12th-house-emphasis",
+        "water-dominant"
+      ],
+      "tags": [
+        "pisces",
+        "water-sign",
+        "zodiac",
+        "hoodie",
+        "unisex",
+        "mutable",
+        "neptune-ruled",
+        "empathy",
+        "mysticism",
+        "dual-fish"
+      ],
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "lyrion-pique-polo",
+      "title": "Lyrīon Pique Polo Shirt",
+      "sign": null,
+      "element": null,
+      "collection": "Logo Line",
+      "category": "logo-line",
+      "type": "apparel",
+      "description": "Refined rebellion. This isn't your corporate polo—it's the Tree of Life embroidered on premium pique cotton, a subtle declaration that even classic style can carry cosmic weight. Structured enough for the world's expectations, elevated enough for your own standards. Available in timeless navy and crisp white, this polo speaks to those who understand that true luxury whispers. Wear it to the places that demand polish but deserve your authentic self underneath.",
+      "images": [
+        "/lyrion-pique-polo/lyrion-pique-polo-girl-front-crop.jpg",
+        "/lyrion-pique-polo/lyrion-pique-polo-girl-front.jpg",
+        "/lyrion-pique-polo/lyrion-pique-polo-boy-front.jpg",
+        "/lyrion-pique-polo/lyrion-pique-polo-boy-back.jpg",
+        "/lyrion-pique-polo/lyrion-pique-polo-front-flat.jpg",
+        "/lyrion-pique-polo/lyrion-pique-polo-back-flat.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 35.99,
+        "max": 39.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "color": "Navy",
+          "price_gbp": 35.99,
+          "printful_variant_id": "694dba199bfc65",
+          "sku": "LYR-POLO-NAVY-S"
+        },
+        {
+          "size": "M",
+          "color": "Navy",
+          "price_gbp": 35.99,
+          "printful_variant_id": "694dba199bfcc2",
+          "sku": "LYR-POLO-NAVY-M"
+        },
+        {
+          "size": "L",
+          "color": "Navy",
+          "price_gbp": 35.99,
+          "printful_variant_id": "694dba199bfd21",
+          "sku": "LYR-POLO-NAVY-L"
+        },
+        {
+          "size": "XL",
+          "color": "Navy",
+          "price_gbp": 35.99,
+          "printful_variant_id": "694dba199bfd71",
+          "sku": "LYR-POLO-NAVY-XL"
+        },
+        {
+          "size": "2XL",
+          "color": "Navy",
+          "price_gbp": 36.99,
+          "printful_variant_id": "694dba199bfdb3",
+          "sku": "LYR-POLO-NAVY-2XL"
+        },
+        {
+          "size": "3XL",
+          "color": "Navy",
+          "price_gbp": 38.99,
+          "printful_variant_id": "694dba199bfe02",
+          "sku": "LYR-POLO-NAVY-3XL"
+        },
+        {
+          "size": "4XL",
+          "color": "Navy",
+          "price_gbp": 39.99,
+          "printful_variant_id": "694dba199bfe43",
+          "sku": "LYR-POLO-NAVY-4XL"
+        },
+        {
+          "size": "S",
+          "color": "White",
+          "price_gbp": 35.99,
+          "printful_variant_id": "694dba199bfe93",
+          "sku": "LYR-POLO-WHITE-S"
+        },
+        {
+          "size": "M",
+          "color": "White",
+          "price_gbp": 35.99,
+          "printful_variant_id": "694dba199bfed9",
+          "sku": "LYR-POLO-WHITE-M"
+        },
+        {
+          "size": "L",
+          "color": "White",
+          "price_gbp": 35.99,
+          "printful_variant_id": "694dba199bff26",
+          "sku": "LYR-POLO-WHITE-L"
+        },
+        {
+          "size": "XL",
+          "color": "White",
+          "price_gbp": 35.99,
+          "printful_variant_id": "694dba199bff64",
+          "sku": "LYR-POLO-WHITE-XL"
+        },
+        {
+          "size": "2XL",
+          "color": "White",
+          "price_gbp": 36.99,
+          "printful_variant_id": "694dba199bffb3",
+          "sku": "LYR-POLO-WHITE-2XL"
+        },
+        {
+          "size": "3XL",
+          "color": "White",
+          "price_gbp": 38.99,
+          "printful_variant_id": "694dba199bfff2",
+          "sku": "LYR-POLO-WHITE-3XL"
+        },
+        {
+          "size": "4XL",
+          "color": "White",
+          "price_gbp": 39.99,
+          "printful_variant_id": "694dba199c0035",
+          "sku": "LYR-POLO-WHITE-4XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Unisex Pique Polo Shirt",
+        "sync_product_id": null
+      },
+      "seasonal": false,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium pique cotton for breathable comfort",
+        "Tree of Life embroidered on left chest",
+        "Classic three-button placket",
+        "Ribbed collar and sleeve cuffs for structure",
+        "Available in Navy and White colorways",
+        "Unisex fit—refined on every body",
+        "Side vents for movement and flow",
+        "Elevated basics that earn respect"
+      ],
+      "mysticalCopy": "Classic never means conventional. Carry your truth in every thread.",
+      "careInstructions": "Machine wash cold, tumble dry low. Elegance endures.",
+      "seoTitle": "Lyrīon Pique Polo Shirt | Tree of Life | Premium Unisex Polo",
+      "seoDescription": "Refined rebellion. Premium pique polo with Tree of Life embroidery. Available in Navy and White. Unisex classic style meets cosmic significance.",
+      "chartResonance": [
+        "libra-emphasis",
+        "venus-dominant",
+        "air-signs",
+        "all-charts",
+        "professional-mystics"
+      ],
+      "tags": [
+        "logo-line",
+        "polo",
+        "unisex",
+        "pique",
+        "tree-of-life",
+        "navy",
+        "white",
+        "classic",
+        "refined"
+      ],
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "corduroy-cap-sun-crest",
+      "title": "Lyrīon Corduroy Cap",
+      "sign": null,
+      "element": null,
+      "collection": "Logo Line",
+      "category": "logo-line",
+      "type": "accessory",
+      "description": "Crown your consciousness. This premium unstructured corduroy cap carries the sacred Sun Crest embroidered on front—a symbol of divine alignment—while 'FAITH' whispers along the side as your quiet declaration. Faith isn't blind belief; it's walking forward when the path ahead is dark, trusting the stars know what you cannot yet see. For those who lead with conviction and wear their truth close to their crown chakra.",
+      "images": [
+        "/corduroy-cap-sun-crest/corduroy-cap-sun-crest-front.jpg",
+        "/corduroy-cap-sun-crest/corduroy-cap-sun-crest-model-front.jpg",
+        "/corduroy-cap-sun-crest/corduroy-cap-sun-crest-side.jpg",
+        "/corduroy-cap-sun-crest/corduroy-cap-sun-crest-back.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 35.99,
+        "max": 35.99
+      },
+      "variants": [
+        {
+          "size": "One Size",
+          "price_gbp": 35.99,
+          "printful_variant_id": "6948a81b91a8b1",
+          "sku": "LYR-CAP-CORD-SUNCREST"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Corduroy Cap",
+        "sync_product_id": null
+      },
+      "seasonal": false,
+      "listed": false,
+      "gender": "unisex",
+      "features": [
+        "Premium unstructured corduroy for relaxed fit",
+        "Embroidered Sun Crest on front panel",
+        "'FAITH' embroidered along left side—your personal mantra",
+        "Adjustable brass buckle closure",
+        "Unisex design for universal appeal",
+        "Soft, vintage-inspired texture",
+        "Crown chakra protection meets street style"
+      ],
+      "mysticalCopy": "Faith is moving forward in the dark. The universe rewards those who believe before they see.",
+      "careInstructions": "Spot clean only. Your faith remains unshaken.",
+      "seoTitle": "Lyrīon Corduroy Cap | Sun Crest & Faith | Luxury Headwear | Lyrīon Atelier",
+      "seoDescription": "Crown your consciousness with the Lyrīon Corduroy Cap. Premium unstructured design featuring embroidered Sun Crest and 'FAITH' manifestation text. Unisex luxury headwear.",
+      "chartResonance": [
+        "leo-emphasis",
+        "sun-dominant",
+        "1st-house",
+        "5th-house",
+        "fire-dominant",
+        "all-signs"
+      ],
+      "tags": [
+        "logo-line",
+        "cap",
+        "unisex",
+        "corduroy",
+        "sun-crest",
+        "faith",
+        "manifestation",
+        "crown-chakra",
+        "headwear"
+      ],
+      "manifestationText": "Faith",
+      "manifestationPlacement": "side-embroidery",
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "aries-oversized-heavyweight-sweatshirt",
+      "title": "Aries Oversized Heavyweight Sweatshirt",
+      "sign": "Aries",
+      "element": "Fire",
+      "collection": "Zodiac Hero",
+      "category": "zodiac-hero",
+      "type": "apparel",
+      "description": "Aries doesn’t ask for permission. It moves first, then makes the world catch up. This oversized heavyweight sweatshirt uses a unisex silhouette sized for youth boys and men who lead with heat—but wear it with control. A structured drape, a warm interior, and a calm celestial finish designed to feel like armor without looking loud. Fire, refined.",
+      "images": [
+        "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-02-front-crop.jpg",
+        "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-01-hero.jpg",
+        "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-02-front.jpg",
+        "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-03-back.jpg",
+        "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-04-detail.jpg",
+        "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-05-lifestyle.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 42.99,
+        "max": 45.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 42.99,
+          "printful_variant_id": "694f2f2cb54069",
+          "sku": "LYR-ARIES-OSHW-SWEAT-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 42.99,
+          "printful_variant_id": "694f2f2cb540d9",
+          "sku": "LYR-ARIES-OSHW-SWEAT-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 42.99,
+          "printful_variant_id": "694f2f2cb54126",
+          "sku": "LYR-ARIES-OSHW-SWEAT-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 42.99,
+          "printful_variant_id": "694f2f2cb54164",
+          "sku": "LYR-ARIES-OSHW-SWEAT-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 43.99,
+          "printful_variant_id": "694f2f2cb541b5",
+          "sku": "LYR-ARIES-OSHW-SWEAT-2XL"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 45.99,
+          "printful_variant_id": "694f2f2cb54208",
+          "sku": "LYR-ARIES-OSHW-SWEAT-3XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Oversized Heavyweight Sweatshirt",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium heavyweight fleece with structured drape",
+        "Oversized fit built for confidence and comfort",
+        "Soft brushed interior for warmth",
+        "Ribbed cuffs and hem for clean structure",
+        "Designed for youth boys and men; unisex silhouette",
+        "Street-ready, ritual-ready — Aries fire in restraint",
+        "Durable construction for everyday rotation",
+        "Celestial Aries detailing (subtle, not loud)"
+      ],
+      "mysticalCopy": "You’re not here to fit in. You’re here to ignite the standard.",
+      "careInstructions": "Machine wash cold, inside out, gentle cycle. Mild detergent. Do not bleach. Tumble dry low or lay flat to preserve shape. Cool iron inside out if needed. Do not iron directly on print.",
+      "seoTitle": "Aries Oversized Heavyweight Sweatshirt | Fire Sign | Unisex Zodiac Apparel | Lyrīon Atelier",
+      "seoDescription": "Structured oversized heavyweight sweatshirt for Aries, Mars-ruled fire leaders—premium unisex fleece cut for youth boys and men.",
+      "chartResonance": [
+        "aries-sun",
+        "aries-moon",
+        "aries-rising",
+        "mars-dominant",
+        "1st-house-emphasis",
+        "fire-dominant"
+      ],
+      "tags": [
+        "aries",
+        "fire-sign",
+        "zodiac",
+        "sweatshirt",
+        "oversized",
+        "heavyweight",
+        "unisex",
+        "mars-ruled",
+        "youth",
+        "menswear"
+      ],
+      "materials": "Premium heavyweight cotton-poly fleece with structured drape",
+      "launchDate": "2025-12-27"
+    },
+    {
+      "slug": "lyrion-sun-crest-socks",
+      "title": "Lyrīon Sun Crest Socks",
+      "sign": null,
+      "element": null,
+      "collection": "Logo Line",
+      "category": "logo-line",
+      "type": "accessory",
+      "description": "Ground your energy from the feet up. These aren't just socks—they're the Tree of Life embroidered where most people never look, a quiet reminder that sacred symbols belong in the smallest rituals. Premium cotton blend with just enough stretch, designed for those who know that true luxury starts with what nobody sees. Walk through your day knowing the cosmic roots travel with you, one step at a time.",
+      "images": [
+        "/lyrion-sun-crest-socks/lyrion-socks-pair.jpg",
+        "/lyrion-sun-crest-socks/lyrion-socks-detail.jpg",
+        "/lyrion-sun-crest-socks/lyrion-socks-lifestyle.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 26.99,
+        "max": 26.99
+      },
+      "variants": [
+        {
+          "size": "S/M",
+          "price_gbp": 26.99,
+          "printful_variant_id": "694dd3418487b8",
+          "sku": "LYR-SOCKS-SM"
+        },
+        {
+          "size": "L/XL",
+          "price_gbp": 26.99,
+          "printful_variant_id": "694dd341848814",
+          "sku": "LYR-SOCKS-LXL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Embroidered Socks",
+        "sync_product_id": null
+      },
+      "seasonal": false,
+      "listed": false,
+      "gender": "unisex",
+      "features": [
+        "Premium cotton blend with stretch",
+        "Tree of Life sun crest embroidered detail",
+        "Ribbed arch support for all-day comfort",
+        "Reinforced heel and toe for durability",
+        "Unisex sizes: S/M and L/XL",
+        "Breathable weave keeps feet fresh",
+        "Luxury in the details nobody sees"
+      ],
+      "mysticalCopy": "The foundation matters most. Start from the ground and rise.",
+      "careInstructions": "Machine wash cold, tumble dry low. Your foundation stays solid.",
+      "seoTitle": "Lyrīon Sun Crest Socks | Embroidered Tree of Life | Premium Socks",
+      "seoDescription": "Ground your energy with Lyrīon Sun Crest Socks. Premium embroidered cotton blend with Tree of Life detail. Unisex luxury from the feet up.",
+      "chartResonance": [
+        "earth-signs",
+        "capricorn-emphasis",
+        "virgo-emphasis",
+        "grounded-souls",
+        "all-charts"
+      ],
+      "tags": [
+        "logo-line",
+        "socks",
+        "unisex",
+        "embroidered",
+        "sun-crest",
+        "tree-of-life",
+        "premium",
+        "basics"
+      ],
+      "materials": "80% cotton, 18% polyester, 2% spandex<br>Ribbed leg<br>Cushioned bottom<br>Reinforced heel and toe",
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "pisces-hoodie-black",
+      "title": "Pisces Oversized Black Hoodie",
+      "sign": "Pisces",
+      "element": "Water",
+      "collection": "zodiac-collection",
+      "category": "hoodies",
+      "type": "apparel",
+      "description": "Premium oversized hoodie with Lyrīon Pisces crest on left chest and upper left sleeve. Heavyweight comfort, luxury astrology.",
+      "images": [
+        "/images/products/pisces-hoodie/pisces-hoodie-black-front.jpg",
+        "/images/products/pisces-hoodie/pisces-hoodie-black-back.jpg",
+        "/images/products/pisces-hoodie/pisces-hoodie-black-lifestyle.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 50.99,
+        "max": 54.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 50.99,
+          "printful_variant_id": "694ab7d2e5aae1"
+        },
+        {
+          "size": "M",
+          "price_gbp": 50.99,
+          "printful_variant_id": "694ab7d2e5ab58"
+        },
+        {
+          "size": "L",
+          "price_gbp": 50.99,
+          "printful_variant_id": "694ab7d2e5abb8"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 52.99,
+          "printful_variant_id": "694ab7d2e5abf3"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 52.99,
+          "printful_variant_id": "694ab7d2e5ac45"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 54.99,
+          "printful_variant_id": "694ab7d2e5ac97"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Urban Hoodie",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": false
+    },
+    {
+      "slug": "pisces-intuition-hoodie",
+      "title": "Pisces Intuition Hoodie",
+      "sign": "Pisces",
+      "element": "Water",
+      "collection": "Intuition Line",
+      "category": "hoodies",
+      "type": "apparel",
+      "description": "Trust what you feel before you think. Pisces doesn't navigate by maps—they swim by currents only their soul can sense. Born under Neptune's cosmic depths, they know the truth before it speaks, feel the shift before it happens, see the invisible threads connecting all things. This heavyweight hoodie channels Piscean knowing through sacred fish symbolism and the single most powerful word for water signs: INTUITION. Wear this when the world demands logic but your gut whispers louder.",
+      "images": [
+        "/pisces-intuition-hoodie/pisces-intuition-hoodie-back-crop.jpg",
+        "/pisces-intuition-hoodie/pisces-intuition-hoodie-front.jpg",
+        "/pisces-intuition-hoodie/pisces-intuition-hoodie-back.jpg",
+        "/pisces-intuition-hoodie/pisces-intuition-hoodie-ghost.jpg",
+        "/pisces-intuition-hoodie/pisces-intuition-hoodie-lifestyle.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 43.99,
+        "max": 46.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 43.99,
+          "printful_variant_id": "694d5eae116cb7",
+          "sku": "LYR-PISC-INTUIT-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 43.99,
+          "printful_variant_id": "694d5eae116d62",
+          "sku": "LYR-PISC-INTUIT-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 43.99,
+          "printful_variant_id": "694d5eae116de7",
+          "sku": "LYR-PISC-INTUIT-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 43.99,
+          "printful_variant_id": "694d5eae116e72",
+          "sku": "LYR-PISC-INTUIT-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 45.99,
+          "printful_variant_id": "694d5eae116f01",
+          "sku": "LYR-PISC-INTUIT-2XL"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 45.99,
+          "printful_variant_id": "694d5eae116f86",
+          "sku": "LYR-PISC-INTUIT-3XL"
+        },
+        {
+          "size": "4XL",
+          "price_gbp": 46.99,
+          "printful_variant_id": "694d5eae117019",
+          "sku": "LYR-PISC-INTUIT-4XL"
+        },
+        {
+          "size": "5XL",
+          "price_gbp": 46.99,
+          "printful_variant_id": "694d5eae117098",
+          "sku": "LYR-PISC-INTUIT-5XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Unisex Hoodie",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium heavyweight fleece for deep comfort",
+        "Pisces dual fish insignia with 'INTUITION' declaration",
+        "Spacious kangaroo pocket for sacred treasures",
+        "Drawstring hood to retreat from the noise",
+        "Unisex relaxed fit—sanctuary for all bodies",
+        "Soft brushed interior feels like a cosmic hug",
+        "Ribbed cuffs and hem for grounded structure",
+        "Designed for empaths, dreamers, and deep feelers"
+      ],
+      "mysticalCopy": "Your intuition isn't a guess. It's your soul remembering what your mind forgot.",
+      "careInstructions": "Machine wash cold, tumble dry low. Your knowing never fades.",
+      "seoTitle": "Pisces Intuition Hoodie | Trust Your Gut | Lyrīon Atelier",
+      "seoDescription": "Channel Piscean knowing with the Intuition Hoodie. Premium unisex design for empaths and mystics who trust what they feel before they think.",
+      "chartResonance": [
+        "pisces-sun",
+        "pisces-moon",
+        "pisces-rising",
+        "neptune-dominant",
+        "12th-house-emphasis",
+        "water-dominant",
+        "intuitive-souls"
+      ],
+      "tags": [
+        "pisces",
+        "water-sign",
+        "zodiac",
+        "hoodie",
+        "unisex",
+        "intuition-line",
+        "mutable",
+        "neptune-ruled",
+        "empathy",
+        "psychic",
+        "mysticism"
+      ],
+      "manifestationText": "Intuition",
+      "manifestationPlacement": "chest-or-sleeve",
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "aries-denim-bucket-hat",
+      "title": "Aries Denim Bucket Hat",
+      "sign": "Aries",
+      "element": "Fire",
+      "collection": "Zodiac Hero",
+      "category": "zodiac-hero",
+      "type": "accessory",
+      "description": "Crown the warrior. Aries doesn't follow trends—they set them ablaze. Born under Mars' fearless command, they move through the world like fire incarnate: bold, unapologetic, impossible to ignore. This premium denim bucket hat carries the sacred Ram insignia embroidered with precision, a declaration that reads louder than words. Structured yet effortless, commanding yet cool. Wear it tilted, wear it low, wear it like the first flame that refuses to be extinguished. For those who lead from the front and make no apologies.",
+      "images": [
+        "/aries-denim-bucket-hat/aries-bucket-hat-girl-headshot.jpg",
+        "/aries-denim-bucket-hat/aries-bucket-hat-ghost.jpg",
+        "/aries-denim-bucket-hat/aries-bucket-hat-girl-full.jpg",
+        "/aries-denim-bucket-hat/aries-bucket-hat-girl-side.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 27.99,
+        "max": 27.99
+      },
+      "variants": [
+        {
+          "size": "One Size",
+          "price_gbp": 27.99,
+          "printful_variant_id": "694f1219bafde5",
+          "sku": "LYR-ARIES-BUCKET-DENIM"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Denim Bucket Hat",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": false,
+      "gender": "unisex",
+      "features": [
+        "Premium heavyweight denim construction",
+        "Aries Ram insignia embroidered on front",
+        "Classic bucket hat silhouette with modern edge",
+        "Unstructured crown for effortless style",
+        "Unisex fit—fire suits everyone",
+        "Wide brim for sun protection and statement presence",
+        "Durable stitching built for bold living",
+        "Designed for pioneers, leaders, and first movers"
+      ],
+      "mysticalCopy": "The first fire. The boldest move. You were born to blaze trails, not follow them.",
+      "careInstructions": "Spot clean with a damp cloth. Do not machine wash or dry clean.",
+      "seoTitle": "Aries Denim Bucket Hat | Fire Sign Headwear | Lyrīon Atelier",
+      "seoDescription": "Lead from the front. Premium denim bucket hat with Aries Ram embroidery. Bold unisex design for warriors ruled by Mars. Blaze your own trail.",
+      "chartResonance": [
+        "aries-sun",
+        "aries-moon",
+        "aries-rising",
+        "mars-dominant",
+        "1st-house-emphasis",
+        "fire-dominant"
+      ],
+      "tags": [
+        "aries",
+        "fire-sign",
+        "zodiac",
+        "bucket-hat",
+        "denim",
+        "unisex",
+        "cardinal",
+        "mars-ruled",
+        "warrior",
+        "bold"
+      ],
+      "materials": "100% cotton denim<br>Unstructured, six-panel design<br>100% cotton sweatband<br>Sewn eyelets for breathability",
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "taurus-pyjama-top",
+      "title": "Taurus Constellation Pyjama Top",
+      "sign": "Taurus",
+      "element": "Earth",
+      "collection": "Taurus Collection",
+      "category": "sleepwear",
+      "type": "apparel",
+      "description": "Sleep under your stars. This isn't just sleepwear—it's a celestial statement. The Taurus constellation is delicately mapped across the back, connecting the stars that ruled the night sky when Taurus season began.",
+      "images": [
+        "/shop-images/taurus-pyjamas/taurus-pyjamas-front-crop.jpg",
+        "/shop-images/taurus-pyjamas/taurus-pyjamas-lifestyle.jpg",
+        "/shop-images/taurus-pyjamas/taurus-pyjamas-back.jpg",
+        "/shop-images/taurus-pyjamas/taurus-pyjamas-front.jpg",
+        "/shop-images/taurus-pyjamas/taurus-pyjamas-detail.jpg"
+      ],
+      "link": "/shop/taurus-pyjama-top.html",
+      "price_gbp": {
+        "min": 35.99,
+        "max": 36.99
+      },
+      "variants": [
+        {
+          "size": "XS",
+          "price_gbp": 35.99,
+          "printful_variant_id": "6951f0e5ede708",
+          "sku": "LYR-TAUR-PJ-XS"
+        },
+        {
+          "size": "S",
+          "price_gbp": 35.99,
+          "printful_variant_id": "6951f0e5ede7b3",
+          "sku": "LYR-TAUR-PJ-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 35.99,
+          "printful_variant_id": "6951f0e5ede838",
+          "sku": "LYR-TAUR-PJ-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 35.99,
+          "printful_variant_id": "6951f0e5ede8b2",
+          "sku": "LYR-TAUR-PJ-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 35.99,
+          "printful_variant_id": "6951f0e5ede948",
+          "sku": "LYR-TAUR-PJ-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 36.99,
+          "printful_variant_id": "6951f0e5ede9c2",
+          "sku": "LYR-TAUR-PJ-2XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Women's Pyjama Top",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "women",
+      "features": [
+        "Your zodiac constellation, wearable",
+        "Luxuriously soft for Taurus-level comfort",
+        "Embroidered stars that won't fade or peel",
+        "Perfect Taurus birthday gift (April 20 - May 20)",
+        "Premium quality fabric"
+      ],
+      "mysticalCopy": "The bull doesn't settle. Neither should your sleepwear.",
+      "careInstructions": "Machine wash cold, tumble dry low. Your comfort endures.",
+      "seoTitle": "Taurus Constellation Pyjama Top | Zodiac Sleepwear | Lyrīon Atelier",
+      "seoDescription": "Luxe women's pyjama top with Taurus constellation embroidered on back. Perfect birthday gift for Taurus (April 20-May 20). Premium astrology sleepwear.",
+      "chartResonance": [
+        "taurus-sun",
+        "taurus-moon",
+        "taurus-rising",
+        "venus-dominant",
+        "2nd-house-emphasis",
+        "earth-dominant"
+      ],
+      "tags": [
+        "taurus",
+        "earth-sign",
+        "zodiac",
+        "sleepwear",
+        "pyjamas",
+        "women",
+        "fixed",
+        "venus-ruled",
+        "constellation",
+        "gift"
+      ],
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "taurus-celestial-slides",
+      "title": "Taurus Celestial Slides",
+      "sign": "Taurus",
+      "element": "Earth",
+      "collection": "Taurus Collection",
+      "category": "men",
+      "type": "accessory",
+      "description": "Ground your cosmic energy in luxury. Premium slides featuring the Taurus bull constellation and Lyrīon Atelier signature. Designed for those who move through the world with intention and comfort.",
+      "images": [
+        "/images/products/taurus-slides-flat-crop.jpg",
+        "/images/products/taurus-slides-lifestyle.jpg",
+        "/images/products/taurus-slides-front.jpg",
+        "/images/products/taurus-slides-side.jpg",
+        "/images/products/taurus-slides-flat.jpg"
+      ],
+      "link": "/shop/taurus-celestial-slides.html",
+      "price_gbp": {
+        "min": 42.99,
+        "max": 42.99
+      },
+      "variants": [
+        {
+          "size": "6.5",
+          "price_gbp": 42.99,
+          "printful_variant_id": "695dd0eb3db803",
+          "sku": "LYR-TAUR-SLIDES-6.5"
+        },
+        {
+          "size": "7",
+          "price_gbp": 42.99,
+          "printful_variant_id": "695dd0eb3db895",
+          "sku": "LYR-TAUR-SLIDES-7"
+        },
+        {
+          "size": "8",
+          "price_gbp": 42.99,
+          "printful_variant_id": "695dd0eb3db918",
+          "sku": "LYR-TAUR-SLIDES-8"
+        },
+        {
+          "size": "8.5",
+          "price_gbp": 42.99,
+          "printful_variant_id": "695dd0eb3db991",
+          "sku": "LYR-TAUR-SLIDES-8.5"
+        },
+        {
+          "size": "9.5",
+          "price_gbp": 42.99,
+          "printful_variant_id": "695dd0eb3dba01",
+          "sku": "LYR-TAUR-SLIDES-9.5"
+        },
+        {
+          "size": "10",
+          "price_gbp": 42.99,
+          "printful_variant_id": "695dd0eb3dba81",
+          "sku": "LYR-TAUR-SLIDES-10"
+        },
+        {
+          "size": "11",
+          "price_gbp": 42.99,
+          "printful_variant_id": "695dd0eb3dbb19",
+          "sku": "LYR-TAUR-SLIDES-11"
+        },
+        {
+          "size": "11.5",
+          "price_gbp": 42.99,
+          "printful_variant_id": "695dd0eb3dbb94",
+          "sku": "LYR-TAUR-SLIDES-11.5"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Slides",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Taurus bull constellation design",
+        "Lyrīon Atelier branding",
+        "Premium comfort construction",
+        "Lightweight, durable"
+      ],
+      "mysticalCopy": "April 20 - May 20. Walk with the earth's grounded strength beneath your feet.",
+      "careInstructions": "Wipe clean with damp cloth. Air dry. Your grounded steps endure.",
+      "seoTitle": "Taurus Celestial Slides | Zodiac Footwear | Lyrīon Atelier",
+      "seoDescription": "Premium slides featuring the Taurus bull constellation and Lyrīon Atelier signature. Ground your cosmic energy in luxury. April 20 - May 20.",
+      "chartResonance": [
+        "taurus-sun",
+        "taurus-moon",
+        "taurus-rising",
+        "venus-dominant",
+        "2nd-house-emphasis",
+        "earth-dominant"
+      ],
+      "tags": [
+        "taurus",
+        "earth-sign",
+        "zodiac",
+        "slides",
+        "men",
+        "youth",
+        "fixed",
+        "venus-ruled",
+        "footwear"
+      ],
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "pisces-luxury-mousepad",
+      "title": "Pisces Luxury Mouse Pad",
+      "sign": "Pisces",
+      "element": "Water",
+      "collection": "Accessories",
+      "category": "Accessories",
+      "type": "home",
+      "description": "Luxury Pisces Mouse Pad\n\nElevate your workspace with cosmic elegance. Premium mouse pad featuring the ethereal Pisces twin fish in stunning detail.\n\n• Smooth glide surface for precision\n• Non-slip rubber base\n• Vibrant, fade-resistant print\n• Generous size for comfort\n• Premium quality materials\n\nPerfect for the Pisces in your life (February 19 - March 20) or anyone who appreciates celestial design.",
+      "images": [
+        "/images/products/pisces-mousepad-lifestyle-1.jpg",
+        "/images/products/pisces-mousepad-lifestyle-2.jpg",
+        "/images/products/pisces-mousepad-lifestyle-3.jpg"
+      ],
+      "link": "/shop/pisces-luxury-mousepad.html",
+      "price_gbp": {
+        "min": 28.99,
+        "max": 28.99
+      },
+      "variants": [
+        {
+          "size": "One Size",
+          "price_gbp": 28.99,
+          "printful_variant_id": "69600a547890d5",
+          "sku": "LYR-PISC-MOUSEPAD"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Mouse Pad",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Smooth glide surface for precision",
+        "Non-slip rubber base",
+        "Vibrant, fade-resistant print",
+        "Generous size for comfort",
+        "Premium quality materials",
+        "Ethereal Pisces twin fish design"
+      ],
+      "mysticalCopy": "Let the twin fish guide your hand across the cosmos of creativity.",
+      "careInstructions": "Wipe clean with damp cloth. Your cosmic workspace endures.",
+      "seoTitle": "Pisces Luxury Mouse Pad | Celestial Desk Accessories | Lyrīon Atelier",
+      "seoDescription": "Elevate your workspace with cosmic elegance. Premium mouse pad featuring ethereal Pisces twin fish design. Perfect gift for Pisces (February 19 - March 20).",
+      "chartResonance": [
+        "pisces-aesthetic",
+        "water-lovers",
+        "all-charts",
+        "creative-souls"
+      ],
+      "tags": [
+        "accessories",
+        "gift",
+        "mousepad",
+        "pisces-design",
+        "workspace",
+        "desk",
+        "premium"
+      ],
+      "accessoriesOnly": true,
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "pisces-cropped-windbreaker",
+      "title": "Pisces Cropped Windbreaker",
+      "sign": "Pisces",
+      "element": "Water",
+      "collection": "Pisces Collection",
+      "category": "women",
+      "type": "apparel",
+      "description": "Pisces Cropped Windbreaker\n\nEthereal style meets cosmic protection. Premium cropped windbreaker featuring the dreamy Pisces twin fish in vibrant detail.\n\n• Water-resistant fabric\n• Adjustable drawstring hood\n• Elastic cuffs and hem\n• Front zip closure\n• Cropped silhouette\n\nFor the Pisces who moves between worlds with grace.\n\nFebruary 19 - March 20",
+      "images": [
+        "/images/products/pisces-windbreaker-lifestyle-3-crop.jpg",
+        "/images/products/pisces-windbreaker-lifestyle-1.jpg",
+        "/images/products/pisces-windbreaker-lifestyle-2.jpg",
+        "/images/products/pisces-windbreaker-lifestyle-3.jpg",
+        "/images/products/pisces-windbreaker-lifestyle-4.jpg",
+        "/images/products/pisces-windbreaker-lifestyle-5.jpg"
+      ],
+      "link": "/shop/pisces-cropped-windbreaker.html",
+      "price_gbp": {
+        "min": 68.99,
+        "max": 69.99
+      },
+      "variants": [
+        {
+          "size": "XS",
+          "price_gbp": 68.99,
+          "printful_variant_id": "6960112a067091",
+          "sku": "LYR-PISC-WIND-XS"
+        },
+        {
+          "size": "S",
+          "price_gbp": 68.99,
+          "printful_variant_id": "6960112a0670f3",
+          "sku": "LYR-PISC-WIND-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 68.99,
+          "printful_variant_id": "6960112a067149",
+          "sku": "LYR-PISC-WIND-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 68.99,
+          "printful_variant_id": "6960112a067193",
+          "sku": "LYR-PISC-WIND-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 68.99,
+          "printful_variant_id": "6960112a0671d2",
+          "sku": "LYR-PISC-WIND-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 69.99,
+          "printful_variant_id": "6960112a067227",
+          "sku": "LYR-PISC-WIND-2XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Women's Cropped Windbreaker",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "women",
+      "features": [
+        "Water-resistant fabric",
+        "Adjustable drawstring hood",
+        "Elastic cuffs and hem",
+        "Front zip closure",
+        "Cropped silhouette",
+        "Dreamy Pisces twin fish design"
+      ],
+      "mysticalCopy": "For the Pisces who moves between worlds with grace.",
+      "careInstructions": "Machine wash cold, hang dry. Your ethereal style endures.",
+      "seoTitle": "Pisces Cropped Windbreaker | Women's Zodiac Outerwear | Lyrīon Atelier",
+      "seoDescription": "Ethereal style meets cosmic protection. Premium cropped windbreaker featuring the dreamy Pisces twin fish. Perfect gift for Pisces (February 19 - March 20).",
+      "chartResonance": [
+        "pisces-sun",
+        "pisces-moon",
+        "pisces-rising",
+        "neptune-dominant",
+        "12th-house-emphasis",
+        "water-dominant"
+      ],
+      "tags": [
+        "pisces",
+        "water-sign",
+        "zodiac",
+        "windbreaker",
+        "women",
+        "mutable",
+        "neptune-ruled",
+        "outerwear",
+        "gift"
+      ],
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "taurus-luxury-pillow",
+      "title": "Taurus Luxury Throw Pillow",
+      "sign": "Taurus",
+      "element": "Earth",
+      "collection": "Taurus Collection",
+      "category": "accessories",
+      "type": "home",
+      "description": "Taurus Luxury Throw Pillow\n\nGround your space with celestial comfort. Premium throw pillow featuring the Taurus bull constellation and Lyrīon Atelier signature.\n\n• Soft fabric cover\n• Concealed zipper\n• Shape-retaining insert\n• Fade-resistant print\n• Multiple sizes\n\nApril 20 - May 20\n\nStarting at $33.99",
+      "images": [
+        "/images/products/taurus-pillow-lifestyle-1.jpg",
+        "/images/products/taurus-pillow-lifestyle-2.jpg",
+        "/images/products/taurus-pillow-lifestyle-3.jpg",
+        "/images/products/taurus-pillow-lifestyle-4.jpg"
+      ],
+      "link": "/shop/taurus-luxury-pillow.html",
+      "price_gbp": {
+        "min": 26.99,
+        "max": 31.99
+      },
+      "variants": [
+        {
+          "size": "20″×12″",
+          "price_gbp": 26.99,
+          "printful_variant_id": "69601af7eb63e1",
+          "sku": "LYR-TAUR-PILLOW-20x12"
+        },
+        {
+          "size": "18″×18″",
+          "price_gbp": 28.99,
+          "printful_variant_id": "69601af7eb6342",
+          "sku": "LYR-TAUR-PILLOW-18x18"
+        },
+        {
+          "size": "22″×22″",
+          "price_gbp": 31.99,
+          "printful_variant_id": "69601af7eb6461",
+          "sku": "LYR-TAUR-PILLOW-22x22"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Throw Pillow",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Soft fabric cover",
+        "Concealed zipper",
+        "Shape-retaining insert",
+        "Fade-resistant print",
+        "Multiple sizes",
+        "Taurus bull constellation design"
+      ],
+      "mysticalCopy": "Ground your space with celestial comfort.",
+      "careInstructions": "Spot clean or hand wash cover. Air dry. Your celestial comfort endures.",
+      "seoTitle": "Taurus Luxury Throw Pillow | Celestial Home Decor | Lyrīon Atelier",
+      "seoDescription": "Ground your space with celestial comfort. Premium throw pillow featuring the Taurus bull constellation. Perfect gift for Taurus (April 20 - May 20).",
+      "chartResonance": [
+        "taurus-sun",
+        "taurus-moon",
+        "taurus-rising",
+        "venus-dominant",
+        "2nd-house-emphasis",
+        "earth-dominant"
+      ],
+      "tags": [
+        "taurus",
+        "earth-sign",
+        "zodiac",
+        "pillow",
+        "accessories",
+        "fixed",
+        "venus-ruled",
+        "home-decor",
+        "gift"
+      ],
+      "accessoriesOnly": true,
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "pisces-clear-tote-bag",
+      "title": "Pisces Clear Tote Bag",
+      "sign": "Pisces",
+      "element": "Water",
+      "collection": "Accessories",
+      "category": "accessories",
+      "type": "accessory",
+      "description": "Pisces Clear Tote Bag\n\nCarry your cosmic energy with transparency. Premium clear tote featuring the ethereal Pisces twin fish design.\n\n• Durable clear PVC material\n• Spacious interior\n• Comfortable handles\n• Water-resistant\n• Stadium-approved\n\nFor the Pisces who moves through the world with grace and authenticity.\n\nFebruary 19 - March 20",
+      "images": [
+        "/images/products/pisces-tote-lifestyle-1-crop.jpg",
+        "/images/products/pisces-tote-lifestyle-1.jpg",
+        "/images/products/pisces-tote-lifestyle-2.jpg",
+        "/images/products/pisces-tote-lifestyle-3.jpg",
+        "/images/products/pisces-tote-lifestyle-4.jpg",
+        "/images/products/pisces-tote-lifestyle-5.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 35.99,
+        "max": 35.99
+      },
+      "variants": [
+        {
+          "size": "One Size",
+          "price_gbp": 35.99,
+          "printful_variant_id": "6960171c551b37",
+          "sku": "LYR-PISC-TOTE-CLEAR"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Clear Tote Bag",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Durable clear PVC material",
+        "Spacious interior",
+        "Comfortable handles",
+        "Water-resistant",
+        "Stadium-approved",
+        "Ethereal Pisces twin fish design"
+      ],
+      "mysticalCopy": "Carry your cosmic energy with transparency.",
+      "careInstructions": "Wipe clean with damp cloth. Your cosmic clarity endures.",
+      "seoTitle": "Pisces Clear Tote Bag | Celestial Accessories | Lyrīon Atelier",
+      "seoDescription": "Carry your cosmic energy with transparency. Premium clear tote featuring the ethereal Pisces twin fish design. Perfect gift for Pisces (February 19 - March 20).",
+      "chartResonance": [
+        "pisces-sun",
+        "pisces-moon",
+        "pisces-rising",
+        "neptune-dominant",
+        "water-dominant"
+      ],
+      "tags": [
+        "accessories",
+        "gift",
+        "tote-bag",
+        "pisces",
+        "water-sign",
+        "clear-bag",
+        "stadium-approved"
+      ],
+      "accessoriesOnly": true,
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "taurus-ram-hoodie",
+      "title": "Taurus Ram Head Unisex Hoodie",
+      "sign": "Taurus",
+      "element": "Earth",
+      "collection": "Taurus Collection",
+      "category": "unisex",
+      "type": "apparel",
+      "description": "Bold cosmic statement piece. Premium unisex hoodie featuring the Taurus ram head in striking pink detail. For those born under the sign of strength and determination.",
+      "images": [
+        "/images/products/taurus-ram-hoodie-lifestyle-1-crop.jpg",
+        "/images/products/taurus-ram-hoodie-lifestyle-1.jpg",
+        "/images/products/taurus-ram-hoodie-lifestyle-2.jpg",
+        "/images/products/taurus-ram-hoodie-lifestyle-3.jpg",
+        "/images/products/taurus-ram-hoodie-lifestyle-4.jpg",
+        "/images/products/taurus-ram-hoodie-lifestyle-5.jpg",
+        "/images/products/taurus-ram-hoodie-lifestyle-6.jpg",
+        "/images/products/taurus-ram-hoodie-lifestyle-7.jpg",
+        "/images/products/taurus-ram-hoodie-lifestyle-8.jpg"
+      ],
+      "link": "/shop/taurus-ram-hoodie.html",
+      "price_gbp": {
+        "min": 58.99,
+        "max": 61.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 58.99,
+          "printful_variant_id": "69652e9a3966c2",
+          "sku": "LYR-TAUR-RAM-HOOD-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 58.99,
+          "printful_variant_id": "69652e9a396769",
+          "sku": "LYR-TAUR-RAM-HOOD-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 58.99,
+          "printful_variant_id": "69652e9a3967f1",
+          "sku": "LYR-TAUR-RAM-HOOD-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 58.99,
+          "printful_variant_id": "69652e9a396882",
+          "sku": "LYR-TAUR-RAM-HOOD-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 60.99,
+          "printful_variant_id": "69652e9a396905",
+          "sku": "LYR-TAUR-RAM-HOOD-2XL"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 61.99,
+          "printful_variant_id": "69652e9a396987",
+          "sku": "LYR-TAUR-RAM-HOOD-3XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Unisex Hoodie",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium heavyweight fleece",
+        "Unisex relaxed fit",
+        "Adjustable drawstring hood",
+        "Front kangaroo pocket",
+        "Soft brushed interior",
+        "Taurus ram head design in striking pink detail",
+        "Perfect Taurus birthday gift (April 20 - May 20)"
+      ],
+      "mysticalCopy": "April 20 - May 20. For those born under the sign of strength and determination.",
+      "careInstructions": "Machine wash cold, tumble dry low. Your strength endures.",
+      "seoTitle": "Taurus Ram Head Unisex Hoodie | Bold Cosmic Statement | Lyrīon Atelier",
+      "seoDescription": "Bold cosmic statement piece. Premium unisex hoodie featuring the Taurus ram head in striking pink detail. For those born under the sign of strength and determination.",
+      "chartResonance": [
+        "taurus-sun",
+        "taurus-moon",
+        "taurus-rising",
+        "venus-dominant",
+        "2nd-house-emphasis",
+        "earth-dominant"
+      ],
+      "tags": [
+        "taurus",
+        "earth-sign",
+        "zodiac",
+        "hoodie",
+        "unisex",
+        "fixed",
+        "venus-ruled",
+        "ram-head",
+        "gift"
+      ],
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "taurus-organic-tee",
+      "title": "Taurus Unisex Organic Ribbed Neck T-Shirt",
+      "sign": "Taurus",
+      "element": "Earth",
+      "collection": "Taurus Collection",
+      "category": "unisex",
+      "type": "apparel",
+      "description": "Sustainable luxury meets cosmic style. Premium organic cotton tee with ribbed neckline featuring the Taurus constellation. For the Earth sign who values quality and sustainability.",
+      "images": [
+        "/images/products/taurus-organic-tee-lifestyle-4-crop.jpg",
+        "/images/products/taurus-organic-tee-lifestyle-1.jpg",
+        "/images/products/taurus-organic-tee-lifestyle-2.jpg",
+        "/images/products/taurus-organic-tee-lifestyle-3.jpg",
+        "/images/products/taurus-organic-tee-lifestyle-4.jpg",
+        "/images/products/taurus-organic-tee-lifestyle-5.jpg",
+        "/images/products/taurus-organic-tee-lifestyle-6.jpg",
+        "/images/products/taurus-organic-tee-lifestyle-7.jpg",
+        "/images/products/taurus-organic-tee-lifestyle-8.jpg"
+      ],
+      "link": "/shop/taurus-organic-tee.html",
+      "price_gbp": {
+        "min": 42.99,
+        "max": 44.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 42.99,
+          "printful_variant_id": "69653de7ef42f3",
+          "sku": "LYR-TAUR-ORG-TEE-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 42.99,
+          "printful_variant_id": "69653de7ef4361",
+          "sku": "LYR-TAUR-ORG-TEE-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 42.99,
+          "printful_variant_id": "69653de7ef43c4",
+          "sku": "LYR-TAUR-ORG-TEE-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 42.99,
+          "printful_variant_id": "69653de7ef4429",
+          "sku": "LYR-TAUR-ORG-TEE-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 44.99,
+          "printful_variant_id": "69653de7ef4474",
+          "sku": "LYR-TAUR-ORG-TEE-2XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Unisex Organic Ribbed Neck T-Shirt",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "100% organic ring-spun cotton",
+        "Ribbed crew neck detail",
+        "Classic unisex fit",
+        "Soft, breathable fabric",
+        "Taurus constellation design",
+        "Perfect Taurus birthday gift (April 20 - May 20)"
+      ],
+      "mysticalCopy": "April 20 - May 20. For the Earth sign who values quality and sustainability.",
+      "careInstructions": "Machine wash cold, tumble dry low. Your sustainable style endures.",
+      "seoTitle": "Taurus Unisex Organic Ribbed Neck T-Shirt | Sustainable Zodiac Apparel | Lyrīon Atelier",
+      "seoDescription": "Sustainable luxury meets cosmic style. Premium organic cotton tee with ribbed neckline featuring the Taurus constellation. Perfect gift for Taurus (April 20 - May 20).",
+      "chartResonance": [
+        "taurus-sun",
+        "taurus-moon",
+        "taurus-rising",
+        "venus-dominant",
+        "2nd-house-emphasis",
+        "earth-dominant"
+      ],
+      "tags": [
+        "taurus",
+        "earth-sign",
+        "zodiac",
+        "tee",
+        "unisex",
+        "fixed",
+        "venus-ruled",
+        "organic",
+        "sustainable",
+        "gift"
+      ],
+      "launchDate": "2025-01-15"
+    },
+    {
+      "slug": "gemini-love-language-hoodie",
+      "title": "Gemini Love Language Hoodie",
+      "sign": "Gemini",
+      "element": "Air",
+      "collection": "Gemini Collection",
+      "category": "men",
+      "type": "apparel",
+      "description": "For the Gemini who finds intimacy in intellectual connection. Late-night conversations about everything and nothing. Premium box hoodie for those who speak love through words.",
+      "images": [
+        "/images/products/gemini-love-language-hoodie-2-crop.jpg",
+        "/images/products/gemini-love-language-hoodie-1.jpg",
+        "/images/products/gemini-love-language-hoodie-2.jpg",
+        "/images/products/gemini-love-language-hoodie-3.jpg",
+        "/images/products/gemini-love-language-hoodie-4.jpg",
+        "/images/products/gemini-love-language-hoodie-5.jpg",
+        "/images/products/gemini-love-language-hoodie-6.jpg"
+      ],
+      "link": "/shop/gemini-love-language-hoodie.html",
+      "price_gbp": {
+        "min": 65.99,
+        "max": 68.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 65.99,
+          "printful_variant_id": "697bb788231124",
+          "sku": "LYR-GEM-LOVE-LANG-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 65.99,
+          "printful_variant_id": "697bb7882311c2",
+          "sku": "LYR-GEM-LOVE-LANG-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 65.99,
+          "printful_variant_id": "697bb788231256",
+          "sku": "LYR-GEM-LOVE-LANG-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 65.99,
+          "printful_variant_id": "697bb7882312d9",
+          "sku": "LYR-GEM-LOVE-LANG-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 66.99,
+          "printful_variant_id": "697bb788231366",
+          "sku": "LYR-GEM-LOVE-LANG-2XL"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 68.99,
+          "printful_variant_id": "697bb7882313d7",
+          "sku": "LYR-GEM-LOVE-LANG-3XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Premium Box Hoodie",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium heavyweight fleece",
+        "Unisex box fit",
+        "Adjustable drawstring hood",
+        "Front kangaroo pocket",
+        "Soft brushed interior",
+        "Gemini constellation design",
+        "Perfect Gemini birthday gift (May 21 - June 20)"
+      ],
+      "mysticalCopy": "Love Language: 3AM Conversations",
+      "careInstructions": "Machine wash cold, tumble dry low. Your conversations endure.",
+      "seoTitle": "Gemini Love Language Hoodie | 3AM Conversations | Lyrīon Atelier",
+      "seoDescription": "For the Gemini who finds intimacy in intellectual connection. Premium box hoodie for those who speak love through words. Perfect gift for Gemini (May 21 - June 20).",
+      "chartResonance": [
+        "gemini-sun",
+        "gemini-moon",
+        "gemini-rising",
+        "mercury-dominant",
+        "3rd-house-emphasis",
+        "air-dominant"
+      ],
+      "tags": [
+        "gemini",
+        "air-sign",
+        "zodiac",
+        "hoodie",
+        "men",
+        "gifts",
+        "mutable",
+        "mercury-ruled",
+        "love-language"
+      ],
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "mercury-retrograde-hoodie",
+      "title": "Mercury Retrograde Ruined My Love Life Hoodie",
+      "sign": null,
+      "element": null,
+      "collection": "Cosmic Collection",
+      "category": "hoodies",
+      "type": "apparel",
+      "description": "When Mercury goes retrograde, plans derail and love goes sideways. The Beetle that won't start. The flowers that arrived too late. This hoodie captures every missed connection, every 'we need to talk' text that never sent, every relationship that ended because the cosmos said so. For those who've survived Mercury's chaos and lived to laugh about it. Military green. Unisex fit. Cosmic humor meets streetwear.",
+      "images": [
+        "/images/products/mercury-retrograde-hoodie-1-crop.jpg",
+        "/images/products/mercury-retrograde-hoodie-1.jpg",
+        "/images/products/mercury-retrograde-hoodie-2.jpg",
+        "/images/products/mercury-retrograde-hoodie-3.jpg",
+        "/images/products/mercury-retrograde-hoodie-4.jpg",
+        "/images/products/mercury-retrograde-hoodie-5.jpg",
+        "/images/products/mercury-retrograde-hoodie-6.jpg"
+      ],
+      "link": "/shop/mercury-retrograde-hoodie.html",
+      "price_gbp": {
+        "min": 52.99,
+        "max": 56.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 52.99,
+          "printful_variant_id": "697ba455db1785",
+          "sku": "LYR-MERC-RETRO-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 52.99,
+          "printful_variant_id": "697ba455db17f3",
+          "sku": "LYR-MERC-RETRO-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 52.99,
+          "printful_variant_id": "697ba455db1844",
+          "sku": "LYR-MERC-RETRO-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 52.99,
+          "printful_variant_id": "697ba455db1891",
+          "sku": "LYR-MERC-RETRO-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 52.99,
+          "printful_variant_id": "697ba455db18d2",
+          "sku": "LYR-MERC-RETRO-2XL"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 54.99,
+          "printful_variant_id": "697ba455db1926",
+          "sku": "LYR-MERC-RETRO-3XL"
+        },
+        {
+          "size": "4XL",
+          "price_gbp": 54.99,
+          "printful_variant_id": "697ba455db1975",
+          "sku": "LYR-MERC-RETRO-4XL"
+        },
+        {
+          "size": "5XL",
+          "price_gbp": 56.99,
+          "printful_variant_id": "697ba455db19b8",
+          "sku": "LYR-MERC-RETRO-5XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Unisex Hoodie",
+        "sync_product_id": null
+      },
+      "seasonal": false,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium heavyweight fleece",
+        "Unisex fit",
+        "Adjustable drawstring hood",
+        "Front kangaroo pocket",
+        "Soft brushed interior",
+        "Military green color",
+        "Cosmic humor meets streetwear"
+      ],
+      "mysticalCopy": "Survived Mercury Retrograde (barely).",
+      "careInstructions": "Machine wash cold, tumble dry low. May cause spontaneous laughter during retrograde.",
+      "seoTitle": "Mercury Retrograde Ruined My Love Life Hoodie | Lyrīon Atelier",
+      "seoDescription": "When Mercury goes retrograde, plans derail and love goes sideways. Military green hoodie for those who've survived Mercury's chaos and lived to laugh about it.",
+      "chartResonance": [
+        "mercury-dominant",
+        "gemini-placements",
+        "virgo-placements",
+        "3rd-house-emphasis",
+        "6th-house-emphasis"
+      ],
+      "tags": [
+        "hoodie",
+        "unisex",
+        "gift",
+        "cosmic",
+        "mercury-retrograde",
+        "humor",
+        "streetwear"
+      ],
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "single-cosmic-design-mug",
+      "title": "Single by Cosmic Design Mug",
+      "sign": null,
+      "element": null,
+      "collection": "Cosmic Collection",
+      "category": "mug",
+      "type": "home",
+      "description": "For those choosing themselves. Black glossy mug celebrating solo cosmic energy.",
+      "images": [
+        "/images/products/single-cosmic-design-mug-1-crop.jpg",
+        "/images/products/single-cosmic-design-mug-1.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 12.99,
+        "max": 12.99
+      },
+      "variants": [
+        {
+          "size": "11oz",
+          "price_gbp": 12.99,
+          "printful_variant_id": "697ba95a591694",
+          "sku": "LYR-COSMIC-MUG-11OZ"
+        },
+        {
+          "size": "15oz",
+          "price_gbp": 12.99,
+          "printful_variant_id": "697ba95a591743",
+          "sku": "LYR-COSMIC-MUG-15OZ"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Black Glossy Mug",
+        "sync_product_id": null
+      },
+      "seasonal": false,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Black glossy finish",
+        "Available in 11oz and 15oz sizes",
+        "Dishwasher and microwave safe",
+        "Premium ceramic construction",
+        "Celebrates solo cosmic energy"
+      ],
+      "mysticalCopy": "Embrace your cosmic independence.",
+      "careInstructions": "Dishwasher safe. Hand wash recommended for longevity.",
+      "seoTitle": "Single by Cosmic Design Mug | Anti-Valentine's | Lyrīon Atelier",
+      "seoDescription": "For those choosing themselves. Black glossy mug celebrating solo cosmic energy. Perfect anti-Valentine's gift.",
+      "chartResonance": [
+        "all-signs",
+        "independence-themed"
+      ],
+      "tags": [
+        "mug",
+        "unisex",
+        "gift",
+        "curated for gifting",
+        "valentines",
+        "cosmic",
+        "accessories",
+        "anti-valentines"
+      ],
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "saturn-return-hoodie",
+      "title": "My Saturn Return Took My Relationship Hoodie",
+      "sign": null,
+      "element": null,
+      "collection": "Cosmic Collection",
+      "category": "hoodie",
+      "type": "apparel",
+      "description": "For the 28-30 year olds who lost everything during their Saturn Return. Cosmic reckoning. Necessary endings. Premium organic hoodie with side pockets.",
+      "images": [
+        "/images/products/saturn-return-hoodie-1-crop.jpg",
+        "/images/products/saturn-return-hoodie-1.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 67.99,
+        "max": 67.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 67.99,
+          "printful_variant_id": "697bac34ec7015",
+          "sku": "LYR-SATURN-HOODIE-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 67.99,
+          "printful_variant_id": "697bac34ec70c8",
+          "sku": "LYR-SATURN-HOODIE-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 67.99,
+          "printful_variant_id": "697bac34ec7153",
+          "sku": "LYR-SATURN-HOODIE-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 67.99,
+          "printful_variant_id": "697bac34ec71e6",
+          "sku": "LYR-SATURN-HOODIE-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 67.99,
+          "printful_variant_id": "697bac34ec7265",
+          "sku": "LYR-SATURN-HOODIE-2XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Premium Organic Hoodie",
+        "sync_product_id": null
+      },
+      "seasonal": false,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium organic cotton",
+        "Side pockets",
+        "Ribbed cuffs and hem",
+        "Soft brushed interior",
+        "Saturn Return themed design"
+      ],
+      "mysticalCopy": "Saturn teaches through loss. You emerged stronger.",
+      "careInstructions": "Machine wash cold, tumble dry low. Handle with cosmic care.",
+      "seoTitle": "My Saturn Return Took My Relationship Hoodie | Anti-Valentine's | Lyrīon Atelier",
+      "seoDescription": "For the 28-30 year olds who lost everything during their Saturn Return. Cosmic reckoning. Necessary endings. Premium organic hoodie.",
+      "chartResonance": [
+        "all-signs",
+        "saturn-return",
+        "transformation-themed"
+      ],
+      "tags": [
+        "hoodie",
+        "unisex",
+        "gift",
+        "curated for gifting",
+        "valentines",
+        "cosmic",
+        "anti-valentines"
+      ],
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "premium-polo-his",
+      "title": "Lovers' Galaxies Premium Polo - His",
+      "sign": null,
+      "element": null,
+      "collection": "Couples Collection",
+      "category": "polo",
+      "type": "apparel",
+      "description": "When two galaxies collide, stars are born. His side of the cosmic connection. Premium pique polo featuring celestial lovers meeting across the universe. Incomplete without Hers.",
+      "images": [
+        "/images/products/premium-polo-his-1-crop.jpg",
+        "/images/products/premium-polo-his-1.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 39.99,
+        "max": 42.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 39.99,
+          "printful_variant_id": "697bb1ac69d002",
+          "sku": "LYR-POLO-HIS-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 39.99,
+          "printful_variant_id": "697bb1ac69d068",
+          "sku": "LYR-POLO-HIS-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 39.99,
+          "printful_variant_id": "697bb1ac69d0c2",
+          "sku": "LYR-POLO-HIS-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 39.99,
+          "printful_variant_id": "697bb1ac69d105",
+          "sku": "LYR-POLO-HIS-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 40.99,
+          "printful_variant_id": "697bb1ac69d142",
+          "sku": "LYR-POLO-HIS-2XL"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 41.99,
+          "printful_variant_id": "697bb1ac69d183",
+          "sku": "LYR-POLO-HIS-3XL"
+        },
+        {
+          "size": "4XL",
+          "price_gbp": 42.99,
+          "printful_variant_id": "697bb1ac69d1d2",
+          "sku": "LYR-POLO-HIS-4XL"
+        },
+        {
+          "size": "5XL",
+          "price_gbp": 42.99,
+          "printful_variant_id": "697bb1ac69d218",
+          "sku": "LYR-POLO-HIS-5XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Premium Pique Polo",
+        "sync_product_id": null
+      },
+      "seasonal": false,
+      "listed": true,
+      "gender": "men",
+      "features": [
+        "Premium pique fabric",
+        "Classic polo collar",
+        "Celestial lovers design",
+        "Part of couples collection",
+        "Pairs with Hers edition"
+      ],
+      "mysticalCopy": "When two galaxies collide, stars are born.",
+      "careInstructions": "Machine wash cold, tumble dry low. Handle with cosmic care.",
+      "seoTitle": "Lovers' Galaxies Premium Polo - His | Couples Collection | Lyrīon Atelier",
+      "seoDescription": "When two galaxies collide, stars are born. His side of the cosmic connection. Premium pique polo featuring celestial lovers meeting across the universe.",
+      "chartResonance": [
+        "all-signs",
+        "couples-themed",
+        "valentines"
+      ],
+      "tags": [
+        "polo",
+        "men",
+        "gift",
+        "curated for gifting",
+        "valentines",
+        "couples",
+        "better-together"
+      ],
+      "betterTogetherBadge": "Better Together",
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "premium-polo-hers",
+      "title": "Lovers' Galaxies Premium Polo - Hers",
+      "sign": null,
+      "element": null,
+      "collection": "Couples Collection",
+      "category": "polo",
+      "type": "apparel",
+      "description": "When two galaxies collide, stars are born. Her side of the cosmic connection. Premium pique polo featuring celestial lovers meeting across the universe. Incomplete without His.",
+      "images": [
+        "/images/products/premium-polo-hers-1-crop.jpg",
+        "/images/products/premium-polo-hers-1.jpg"
+      ],
+      "link": "/shop/premium-polo-hers.html",
+      "price_gbp": {
+        "min": 39.99,
+        "max": 43.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 39.99,
+          "printful_variant_id": "697bb4f40d65e5",
+          "sku": "LYR-POLO-HERS-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 39.99,
+          "printful_variant_id": "697bb4f40d6649",
+          "sku": "LYR-POLO-HERS-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 39.99,
+          "printful_variant_id": "697bb4f40d66a7",
+          "sku": "LYR-POLO-HERS-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 39.99,
+          "printful_variant_id": "697bb4f40d66f9",
+          "sku": "LYR-POLO-HERS-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 39.99,
+          "printful_variant_id": "697bb4f40d6744",
+          "sku": "LYR-POLO-HERS-2XL"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 41.99,
+          "printful_variant_id": "697bb4f40d6792",
+          "sku": "LYR-POLO-HERS-3XL"
+        },
+        {
+          "size": "4XL",
+          "price_gbp": 42.99,
+          "printful_variant_id": "697bb4f40d67e8",
+          "sku": "LYR-POLO-HERS-4XL"
+        },
+        {
+          "size": "5XL",
+          "price_gbp": 43.99,
+          "printful_variant_id": "697bb4f40d6836",
+          "sku": "LYR-POLO-HERS-5XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Premium Pique Polo",
+        "sync_product_id": null
+      },
+      "seasonal": false,
+      "listed": true,
+      "gender": "women",
+      "features": [
+        "Premium pique fabric",
+        "Classic polo collar",
+        "Celestial lovers design",
+        "Part of couples collection",
+        "Pairs with His edition"
+      ],
+      "mysticalCopy": "When two galaxies collide, stars are born.",
+      "careInstructions": "Machine wash cold, tumble dry low. Handle with cosmic care.",
+      "seoTitle": "Lovers' Galaxies Premium Polo - Hers | Couples Collection | Lyrīon Atelier",
+      "seoDescription": "When two galaxies collide, stars are born. Her side of the cosmic connection. Premium pique polo featuring celestial lovers meeting across the universe.",
+      "chartResonance": [
+        "all-signs",
+        "couples-themed",
+        "valentines"
+      ],
+      "tags": [
+        "polo",
+        "women",
+        "gift",
+        "curated for gifting",
+        "valentines",
+        "couples",
+        "better-together"
+      ],
+      "betterTogetherBadge": "Better Together",
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "gemini-windbreaker",
+      "title": "Gemini Windbreaker - My Love Song is in Gemini",
+      "sign": "Gemini",
+      "element": "Air",
+      "collection": "Gemini Collection",
+      "category": "windbreaker",
+      "type": "apparel",
+      "description": "For the Gemini who speaks love through words, lyrics, and late-night playlists. Every conversation is a verse. Every text is a chorus. Premium windbreaker for those whose love language lives in Gemini season.",
+      "images": [
+        "/images/products/gemini-windbreaker-1-crop.jpg",
+        "/images/products/gemini-windbreaker-1.jpg"
+      ],
+      "link": "/shop/gemini-windbreaker.html",
+      "price_gbp": {
+        "min": 43.99,
+        "max": 46.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 43.99,
+          "printful_variant_id": "697bba6106f234",
+          "sku": "LYR-GEMINI-WINDBREAKER-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 43.99,
+          "printful_variant_id": "697bba6106f2d5",
+          "sku": "LYR-GEMINI-WINDBREAKER-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 43.99,
+          "printful_variant_id": "697bba6106f355",
+          "sku": "LYR-GEMINI-WINDBREAKER-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 43.99,
+          "printful_variant_id": "697bba6106f3c6",
+          "sku": "LYR-GEMINI-WINDBREAKER-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 46.99,
+          "printful_variant_id": "697bba6106f433",
+          "sku": "LYR-GEMINI-WINDBREAKER-2XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Windbreaker",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium windbreaker material",
+        "Gemini zodiac design",
+        "Lightweight and durable",
+        "Water-resistant",
+        "Perfect Gemini birthday gift (May 21 - June 20)"
+      ],
+      "mysticalCopy": "For the Gemini who speaks love through words, lyrics, and late-night playlists.",
+      "careInstructions": "Machine wash cold, tumble dry low. Your cosmic words endure.",
+      "seoTitle": "Gemini Windbreaker - My Love Song is in Gemini | Zodiac Apparel | Lyrīon Atelier",
+      "seoDescription": "For the Gemini who speaks love through words, lyrics, and late-night playlists. Premium windbreaker for those whose love language lives in Gemini season.",
+      "chartResonance": [
+        "gemini-sun",
+        "gemini-moon",
+        "gemini-rising",
+        "mercury-dominant",
+        "3rd-house-emphasis",
+        "air-dominant"
+      ],
+      "tags": [
+        "gemini",
+        "air-sign",
+        "zodiac",
+        "windbreaker",
+        "unisex",
+        "gift",
+        "curated for gifting",
+        "valentines",
+        "love-language"
+      ],
+      "loveLanguageBadge": "Love Language",
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "leo-love-language-tee",
+      "title": "Leo Love Language Tee - Public Adoration",
+      "sign": "Leo",
+      "element": "Fire",
+      "collection": "Leo Collection",
+      "category": "tee",
+      "type": "apparel",
+      "description": "Love Language: Public Adoration. The Leo who needs their person to shout it from the rooftops. Hand-holding in crowded rooms. Instagram stories. Being claimed, celebrated, shown off. Premium organic tee that says what Leos need to hear: You're mine and everyone should know it.",
+      "images": [
+        "/images/products/leo-love-language-tee-1-crop.jpg",
+        "/images/products/leo-love-language-tee-1.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 33.99,
+        "max": 35.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 33.99,
+          "printful_variant_id": "697bc1230bd778",
+          "sku": "LYR-LEO-LOVE-LANG-TEE-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 33.99,
+          "printful_variant_id": "697bc1230bd7e5",
+          "sku": "LYR-LEO-LOVE-LANG-TEE-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 33.99,
+          "printful_variant_id": "697bc1230bd839",
+          "sku": "LYR-LEO-LOVE-LANG-TEE-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 33.99,
+          "printful_variant_id": "697bc1230bd873",
+          "sku": "LYR-LEO-LOVE-LANG-TEE-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 35.99,
+          "printful_variant_id": "697bc1230bd8c9",
+          "sku": "LYR-LEO-LOVE-LANG-TEE-2XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Premium Organic Tee",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium organic cotton",
+        "Leo zodiac design",
+        "Soft and breathable",
+        "Unisex fit",
+        "Perfect Leo birthday gift (July 23 - August 22)"
+      ],
+      "mysticalCopy": "Love Language: Public Adoration. For the Leo who needs to be celebrated.",
+      "careInstructions": "Machine wash cold, tumble dry low. Your cosmic radiance endures.",
+      "seoTitle": "Leo Love Language Tee - Public Adoration | Zodiac Apparel | Lyrīon Atelier",
+      "seoDescription": "Love Language: Public Adoration. Premium organic tee for the Leo who needs their person to shout it from the rooftops. Perfect gift for Leo (July 23 - August 22).",
+      "chartResonance": [
+        "leo-sun",
+        "leo-moon",
+        "leo-rising",
+        "sun-dominant",
+        "5th-house-emphasis",
+        "fire-dominant"
+      ],
+      "tags": [
+        "leo",
+        "fire-sign",
+        "zodiac",
+        "tee",
+        "unisex",
+        "gift",
+        "curated for gifting",
+        "valentines",
+        "love-language"
+      ],
+      "loveLanguageBadge": "Love Language",
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "libra-scale-tote",
+      "title": "Libra All Over Print Tote Bag",
+      "sign": "Libra",
+      "element": "Air",
+      "collection": "Libra Collection",
+      "category": "tote",
+      "type": "accessory",
+      "description": "The Libra who carries balance wherever they go. All-over celestial print featuring the scales of justice and cosmic harmony. Everything in its right place—beauty, function, aesthetic equilibrium. Premium tote for the sign that refuses to compromise on either style or substance.",
+      "images": [
+        "/images/products/libra-scale-tote-1-crop.jpg",
+        "/images/products/libra-scale-tote-1.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 31.99,
+        "max": 31.99
+      },
+      "variants": [
+        {
+          "size": "One Size",
+          "price_gbp": 31.99,
+          "printful_variant_id": "697c09e3136474",
+          "sku": "LYR-LIBRA-TOTE-OS"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "All Over Print Tote Bag",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "All-over celestial print",
+        "Libra scales design",
+        "Premium quality material",
+        "Spacious interior",
+        "Perfect Libra birthday gift (September 23 - October 22)"
+      ],
+      "mysticalCopy": "Balance, beauty, and cosmic harmony in every carry.",
+      "careInstructions": "Spot clean or hand wash cold. Your cosmic balance endures.",
+      "seoTitle": "Libra All Over Print Tote Bag | Zodiac Accessories | Lyrīon Atelier",
+      "seoDescription": "Premium all-over print tote bag featuring celestial Libra scales. Perfect gift for Libra (September 23 - October 22).",
+      "chartResonance": [
+        "libra-sun",
+        "libra-moon",
+        "libra-rising",
+        "venus-dominant",
+        "7th-house-emphasis",
+        "air-dominant"
+      ],
+      "tags": [
+        "libra",
+        "air-sign",
+        "zodiac",
+        "tote",
+        "unisex",
+        "gift",
+        "curated for gifting",
+        "valentines"
+      ],
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "aries-weekender-bag",
+      "title": "Aries Oversized Weekender Bag",
+      "sign": "Aries",
+      "element": "Fire",
+      "collection": "Aries Collection",
+      "category": "bag",
+      "type": "accessory",
+      "description": "The Aries who runs toward adventure, not away from it. Oversized weekender for spontaneous escapes and bold moves. Ram symbol declaring: I go where I want, when I want. Premium bag built for the sign that never asks permission.",
+      "images": [
+        "/images/products/aries-weekender-bag-1-crop.jpg",
+        "/images/products/aries-weekender-bag-1.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 38.99,
+        "max": 38.99
+      },
+      "variants": [
+        {
+          "size": "One Size",
+          "price_gbp": 38.99,
+          "printful_variant_id": "697c0a161b4606",
+          "sku": "LYR-ARIES-WEEKENDER-OS"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Oversized Weekender Bag",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Oversized weekender design",
+        "Ram symbol decoration",
+        "Premium quality material",
+        "Spacious interior for spontaneous escapes",
+        "Perfect Aries birthday gift (March 21 - April 19)"
+      ],
+      "mysticalCopy": "For the Aries who runs toward adventure, not away from it.",
+      "careInstructions": "Spot clean or hand wash cold. Your cosmic armor for adventure endures.",
+      "seoTitle": "Aries Oversized Weekender Bag | Zodiac Accessories | Lyrīon Atelier",
+      "seoDescription": "Premium oversized weekender bag featuring Aries ram symbol. Perfect gift for Aries (March 21 - April 19).",
+      "chartResonance": [
+        "aries-sun",
+        "aries-moon",
+        "aries-rising",
+        "mars-dominant",
+        "1st-house-emphasis",
+        "fire-dominant"
+      ],
+      "tags": [
+        "aries",
+        "fire-sign",
+        "zodiac",
+        "bag",
+        "unisex",
+        "gift",
+        "curated for gifting",
+        "valentines"
+      ],
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "virgo-mousepad",
+      "title": "Virgo Round Mousepad",
+      "sign": "Virgo",
+      "element": "Earth",
+      "collection": "Virgo Collection",
+      "category": "mousepad",
+      "type": "home",
+      "description": "The Virgo workspace necessity. Clean lines. Perfect alignment. A mousepad that stays exactly where you put it. No chaos allowed—just organized excellence and the maiden's quiet precision.",
+      "images": [
+        "/images/products/virgo-mousepad-1.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 19.99,
+        "max": 19.99
+      },
+      "variants": [
+        {
+          "size": "One Size",
+          "price_gbp": 19.99,
+          "printful_variant_id": "697c0c6089091f6",
+          "sku": "LYR-VIRGO-MOUSEPAD-OS"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Round Mousepad",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium round mousepad",
+        "Virgo constellation design",
+        "Non-slip rubber base",
+        "Smooth surface for precision",
+        "Perfect Virgo birthday gift (August 23 - September 22)"
+      ],
+      "mysticalCopy": "Organized excellence and the maiden's quiet precision.",
+      "careInstructions": "Wipe clean with damp cloth. Your cosmic workspace endures.",
+      "seoTitle": "Virgo Round Mousepad | Zodiac Accessories | Lyrīon Atelier",
+      "seoDescription": "Premium round mousepad featuring Virgo constellation design. Perfect gift for Virgo (August 23 - September 22).",
+      "chartResonance": [
+        "virgo-sun",
+        "virgo-moon",
+        "virgo-rising",
+        "mercury-dominant",
+        "6th-house-emphasis",
+        "earth-dominant"
+      ],
+      "tags": [
+        "virgo",
+        "earth-sign",
+        "zodiac",
+        "mousepad",
+        "unisex",
+        "gift",
+        "curated for gifting",
+        "valentines"
+      ],
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "virgo-bandana",
+      "title": "Virgo All-Over Print Bandana",
+      "sign": "Virgo",
+      "element": "Earth",
+      "collection": "Virgo Collection",
+      "category": "bandana",
+      "type": "accessory",
+      "description": "Practical meets celestial. The Virgo bandana that serves a purpose—hair control, neck protection, pocket square precision. All-over maiden print for the sign that believes accessories should work as hard as they do.",
+      "images": [
+        "/images/products/virgo-bandana-2-crop.jpg",
+        "/images/products/virgo-bandana-1.jpg",
+        "/images/products/virgo-bandana-2.jpg",
+        "/images/products/virgo-bandana-3.jpg",
+        "/images/products/virgo-bandana-4.jpg",
+        "/images/products/virgo-bandana-5.jpg",
+        "/images/products/virgo-bandana-6.jpg"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 20.99,
+        "max": 21.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 20.99,
+          "printful_variant_id": "697c1335c39ee7",
+          "sku": "LYR-VIRGO-BANDANA-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 20.99,
+          "printful_variant_id": "697c1335c39f42",
+          "sku": "LYR-VIRGO-BANDANA-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 21.99,
+          "printful_variant_id": "697c1335c39fa3",
+          "sku": "LYR-VIRGO-BANDANA-L"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "All-Over Print Bandana",
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "All-over Virgo maiden print",
+        "Premium polyester fabric",
+        "Versatile wear options",
+        "Hair control and neck protection",
+        "Perfect Virgo birthday gift (August 23 - September 22)"
+      ],
+      "mysticalCopy": "Accessories should work as hard as you do.",
+      "careInstructions": "Machine wash cold, tumble dry low. Your cosmic accessory endures.",
+      "seoTitle": "Virgo All-Over Print Bandana | Zodiac Accessories | Lyrīon Atelier",
+      "seoDescription": "Premium all-over print bandana featuring Virgo maiden design. Perfect gift for Virgo (August 23 - September 22).",
+      "chartResonance": [
+        "virgo-sun",
+        "virgo-moon",
+        "virgo-rising",
+        "mercury-dominant",
+        "6th-house-emphasis",
+        "earth-dominant"
+      ],
+      "tags": [
+        "virgo",
+        "earth-sign",
+        "zodiac",
+        "bandana",
+        "unisex",
+        "gift",
+        "curated for gifting",
+        "valentines"
+      ],
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "saturn-return-white-hoodie",
+      "title": "My Saturn Return Took My Relationship Hoodie - White",
+      "sign": null,
+      "element": null,
+      "collection": "Saturn Return Collection",
+      "category": "hoodie",
+      "type": "apparel",
+      "description": "Saturn Return hits different. When the planet completes its 29-year orbit and reality checks every choice you've made. Relationships transform. Foundations rebuild. This hoodie speaks to cosmic reckonings, necessary endings, and the clarity that comes after chaos. White colorway for fresh starts.",
+      "images": [
+        "/images/products/saturn-return-white-hoodie-1-crop.jpg",
+        "/images/products/saturn-return-white-hoodie-1.jpg",
+        "/images/products/saturn-return-white-hoodie-2.jpg",
+        "/images/products/saturn-return-white-hoodie-3.jpg",
+        "/images/products/saturn-return-white-hoodie-4.jpg",
+        "/images/products/saturn-return-white-hoodie-5.jpg",
+        "/images/products/saturn-return-white-hoodie-6.jpg",
+        "/images/products/saturn-return-white-hoodie-7.jpg"
+      ],
+      "link": "/shop/saturn-return-white-hoodie.html",
+      "price_gbp": {
+        "min": 50.99,
+        "max": 54.99
+      },
+      "variants": [
+        {
+          "size": "S",
+          "price_gbp": 50.99,
+          "printful_variant_id": "697c0e9b30b4c3",
+          "sku": "LYR-SATURN-WHITE-HOODIE-S"
+        },
+        {
+          "size": "M",
+          "price_gbp": 50.99,
+          "printful_variant_id": "697c0e9b30b525",
+          "sku": "LYR-SATURN-WHITE-HOODIE-M"
+        },
+        {
+          "size": "L",
+          "price_gbp": 50.99,
+          "printful_variant_id": "697c0e9b30b579",
+          "sku": "LYR-SATURN-WHITE-HOODIE-L"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 50.99,
+          "printful_variant_id": "697c0e9b30b5c1",
+          "sku": "LYR-SATURN-WHITE-HOODIE-XL"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 52.99,
+          "printful_variant_id": "697c0e9b30b612",
+          "sku": "LYR-SATURN-WHITE-HOODIE-2XL"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 54.99,
+          "printful_variant_id": "697c0e9b30b656",
+          "sku": "LYR-SATURN-WHITE-HOODIE-3XL"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": "Unisex Hoodie",
+        "sync_product_id": null
+      },
+      "seasonal": false,
+      "listed": true,
+      "gender": "unisex",
+      "features": [
+        "Premium unisex fit",
+        "Saturn Return design",
+        "White colorway",
+        "Soft brushed interior",
+        "Ribbed cuffs and hem",
+        "Perfect gift for cosmic reawakening"
+      ],
+      "careInstructions": "Machine wash cold, tumble dry low. Your cosmic armor endures.",
+      "seoTitle": "My Saturn Return Took My Relationship Hoodie - White | Lyrīon Atelier",
+      "seoDescription": "Saturn Return hits different. White colorway hoodie for fresh starts after cosmic reckonings. Perfect anti-valentine's gift.",
+      "chartResonance": [
+        "saturn-dominant",
+        "capricorn-sun",
+        "aquarius-sun",
+        "10th-house-emphasis",
+        "11th-house-emphasis"
+      ],
+      "tags": [
+        "saturn-return",
+        "cosmic",
+        "zodiac",
+        "hoodie",
+        "unisex",
+        "gift",
+        "curated for gifting",
+        "valentines",
+        "anti-valentines"
+      ],
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "cosmic-curiosity-box",
+      "title": "Cosmic Curiosity Box",
+      "sign": null,
+      "element": null,
+      "collection": "Mystery Collection",
+      "category": "mystery",
+      "type": "mystery-box",
+      "description": "Value $60-80. Surprise zodiac item curated by the stars. Could be apparel, accessories, or cosmic essentials. Your sign influences what you receive. Every box is different.",
+      "images": [
+        "/images/products/mystery-box-curiosity.png"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 35.99,
+        "max": 35.99
+      },
+      "variants": [
+        {
+          "size": "One Size",
+          "price_gbp": 35.99,
+          "printful_variant_id": null,
+          "sku": "LYR-MYSTERY-CURIOSITY-ONE"
+        }
+      ],
+      "fulfilment": "manual",
+      "printful": null,
+      "seasonal": false,
+      "listed": false,
+      "gender": "unisex",
+      "features": [
+        "Value $60-80",
+        "Mystery zodiac item",
+        "Curated by the cosmos",
+        "Your sign influences the gift",
+        "Every box is different",
+        "Perfect surprise gift"
+      ],
+      "mysticalCopy": "Trust the stars. Receive your cosmic gift.",
+      "careInstructions": "Contents vary. Let the universe surprise you.",
+      "seoTitle": "Cosmic Curiosity Box - Mystery Zodiac Gift | Lyrīon Atelier",
+      "seoDescription": "Value $60-80. Mystery zodiac item curated by the cosmos. Your sign influences what you receive. Every box is different.",
+      "tags": [
+        "mystery",
+        "gift",
+        "limited-edition",
+        "curated for gifting",
+        "zodiac"
+      ],
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "zodiac-mystery-vault",
+      "title": "Zodiac Mystery Vault",
+      "sign": null,
+      "element": null,
+      "collection": "Mystery Collection",
+      "category": "mystery",
+      "type": "mystery-box",
+      "description": "Value $120-150. Premium zodiac surprise. Hoodie, tee, tote, or accessories chosen for you. What will you discover? Open your vault and reveal your cosmic gift.",
+      "images": [
+        "/images/products/mystery-box-vault.png"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 69.99,
+        "max": 69.99
+      },
+      "variants": [
+        {
+          "size": "One Size",
+          "price_gbp": 69.99,
+          "printful_variant_id": null,
+          "sku": "LYR-MYSTERY-VAULT-ONE"
+        }
+      ],
+      "fulfilment": "manual",
+      "printful": null,
+      "seasonal": false,
+      "listed": false,
+      "gender": "unisex",
+      "features": [
+        "Value $120-150",
+        "Premium zodiac mystery",
+        "Could include hoodie, tee, tote, or accessories",
+        "Curated by cosmic energy",
+        "Discover your destined piece",
+        "Perfect premium gift"
+      ],
+      "mysticalCopy": "Open your vault. Discover your destiny.",
+      "careInstructions": "Contents vary. Trust the cosmic selection.",
+      "seoTitle": "Zodiac Mystery Vault - Premium Mystery Box | Lyrīon Atelier",
+      "seoDescription": "Value $120-150. Premium zodiac mystery. Hoodie, tee, tote, or accessories curated by cosmic energy.",
+      "tags": [
+        "mystery",
+        "gift",
+        "limited-edition",
+        "curated for gifting",
+        "zodiac",
+        "premium"
+      ],
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "lovers-fate-box",
+      "title": "Lovers' Fate Box",
+      "sign": null,
+      "element": null,
+      "collection": "Mystery Collection",
+      "category": "mystery",
+      "type": "mystery-box",
+      "description": "Value $200+. His & Hers surprise items cosmically curated for your connection. Two products chosen by the stars, one cosmic bond. Perfect for couples.",
+      "images": [
+        "/images/products/mystery-box-lovers.png"
+      ],
+      "link": null,
+      "price_gbp": {
+        "min": 117.99,
+        "max": 117.99
+      },
+      "variants": [
+        {
+          "size": "One Size",
+          "price_gbp": 117.99,
+          "printful_variant_id": null,
+          "sku": "LYR-MYSTERY-LOVERS-ONE"
+        }
+      ],
+      "fulfilment": "manual",
+      "printful": null,
+      "seasonal": false,
+      "listed": false,
+      "gender": "unisex",
+      "features": [
+        "Value $200+",
+        "His & Hers mystery items",
+        "Cosmically curated for couples",
+        "Two products chosen by the stars",
+        "One cosmic bond",
+        "Perfect Valentine's gift"
+      ],
+      "mysticalCopy": "Two souls. One cosmic bond. Trust the universe.",
+      "careInstructions": "Contents vary. A gift for cosmic connections.",
+      "seoTitle": "Lovers' Fate Box - His & Hers Mystery Gift | Lyrīon Atelier",
+      "seoDescription": "Value $200+. His & Hers mystery items cosmically curated for your connection. Perfect for couples ready to trust the universe.",
+      "tags": [
+        "mystery",
+        "gift",
+        "limited-edition",
+        "curated for gifting",
+        "zodiac",
+        "valentine",
+        "couples"
+      ],
+      "launchDate": "2025-02-04"
+    },
+    {
+      "slug": "taurus-tank-top",
+      "title": "Taurus Micro-Rib Tank Top - Women's",
+      "sign": "Taurus",
+      "element": "Earth",
+      "collection": "Taurus Collection",
+      "category": "women",
+      "type": "apparel",
+      "description": "Luxe micro-rib tank with Taurus constellation. Form-fitting, versatile, elevated basics for Taurus (April 20-May 20). Premium zodiac fashion.",
+      "images": [
+        "/shop-images/taurus-tank-top/taurus-tank-top-lifestyle-front.jpg",
+        "/shop-images/taurus-tank-top/taurus-tank-top-lifestyle-back.jpg",
+        "/shop-images/taurus-tank-top/taurus-tank-top-ghost-front.jpg",
+        "/shop-images/taurus-tank-top/taurus-tank-top-ghost-back.jpg"
+      ],
+      "link": "/shop/taurus-tank-top.html",
+      "price_gbp": {
+        "min": 32.99,
+        "max": 34.0
+      },
+      "variants": [
+        {
+          "size": "XS",
+          "price_gbp": 32.99,
+          "printful_variant_id": "6951c9104965e8"
+        },
+        {
+          "size": "S",
+          "price_gbp": 32.99,
+          "printful_variant_id": "6951c910496649"
+        },
+        {
+          "size": "M",
+          "price_gbp": 32.99,
+          "printful_variant_id": "6951c910496698"
+        },
+        {
+          "size": "L",
+          "price_gbp": 32.99,
+          "printful_variant_id": "6951c9104966d6"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 32.99,
+          "printful_variant_id": "6951c910496729"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 34.0,
+          "printful_variant_id": "6951c910496768"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": null,
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "tags": [
+        "taurus",
+        "earth-sign",
+        "zodiac"
+      ]
+    },
+    {
+      "slug": "taurus-baseball-jersey",
+      "title": "Taurus Recycled Baseball Jersey - Unisex",
+      "sign": "Taurus",
+      "element": "Earth",
+      "collection": "Taurus Collection",
+      "category": "unisex",
+      "type": "apparel",
+      "description": "Sustainable baseball jersey with Taurus constellation design. Made from recycled materials. Unisex sizes XS-3XL. Eco-luxury zodiac fashion for conscious bulls.",
+      "images": [
+        "/shop-images/taurus-baseball-jersey/taurus-baseball-jersey-back.png",
+        "/shop-images/taurus-baseball-jersey/taurus-baseball-jersey-female-front-1.jpg",
+        "/shop-images/taurus-baseball-jersey/taurus-baseball-jersey-male-front-1.jpg",
+        "/shop-images/taurus-baseball-jersey/taurus-baseball-jersey-female-front-2.jpg",
+        "/shop-images/taurus-baseball-jersey/taurus-baseball-jersey-male-front-2.jpg"
+      ],
+      "link": "/shop/taurus-baseball-jersey.html",
+      "price_gbp": {
+        "min": 49.99,
+        "max": 56.99
+      },
+      "variants": [
+        {
+          "size": "XS",
+          "price_gbp": 49.99,
+          "printful_variant_id": "6951db0b91f1d8"
+        },
+        {
+          "size": "S",
+          "price_gbp": 49.99,
+          "printful_variant_id": "6951db0b91f249"
+        },
+        {
+          "size": "M",
+          "price_gbp": 49.99,
+          "printful_variant_id": "6951db0b91f294"
+        },
+        {
+          "size": "L",
+          "price_gbp": 49.99,
+          "printful_variant_id": "6951db0b91f2d5"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 49.99,
+          "printful_variant_id": "6951db0b91f321"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 53.99,
+          "printful_variant_id": "6951db0b91f368"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 56.99,
+          "printful_variant_id": "6951db0b91f3b4"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": null,
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "tags": [
+        "taurus",
+        "earth-sign",
+        "zodiac"
+      ]
+    },
+    {
+      "slug": "taurus-crop-tee",
+      "title": "Taurus All-Over Print Crop Tee",
+      "sign": "Taurus",
+      "element": "Earth",
+      "collection": "Taurus Collection",
+      "category": "women",
+      "type": "apparel",
+      "description": "Bold Taurus crop tee with all-over celestial print. Perfect for Taurus season (April 20-May 20). Sizes XS-3XL. Statement zodiac fashion.",
+      "images": [
+        "/shop-images/taurus-crop-tee/taurus-crop-tee-lifestyle-bicycle.jpg",
+        "/shop-images/taurus-crop-tee/taurus-crop-tee-lifestyle-front-1.jpg",
+        "/shop-images/taurus-crop-tee/taurus-crop-tee-lifestyle-front-2.jpg",
+        "/shop-images/taurus-crop-tee/taurus-crop-tee-ghost-front.png",
+        "/shop-images/taurus-crop-tee/taurus-crop-tee-back.png"
+      ],
+      "link": "/shop/taurus-crop-tee.html",
+      "price_gbp": {
+        "min": 34.99,
+        "max": 37.99
+      },
+      "variants": [
+        {
+          "size": "XS",
+          "price_gbp": 34.99,
+          "printful_variant_id": "6951cf089ec022"
+        },
+        {
+          "size": "S",
+          "price_gbp": 34.99,
+          "printful_variant_id": "6951cf089ec096"
+        },
+        {
+          "size": "M",
+          "price_gbp": 34.99,
+          "printful_variant_id": "6951cf089ec0f9"
+        },
+        {
+          "size": "L",
+          "price_gbp": 34.99,
+          "printful_variant_id": "6951cf089ec157"
+        },
+        {
+          "size": "XL",
+          "price_gbp": 34.99,
+          "printful_variant_id": "6951cf089ec1a9"
+        },
+        {
+          "size": "2XL",
+          "price_gbp": 35.99,
+          "printful_variant_id": "6951cf089ec1f4"
+        },
+        {
+          "size": "3XL",
+          "price_gbp": 37.99,
+          "printful_variant_id": "6951cf089ec243"
+        }
+      ],
+      "fulfilment": "printful",
+      "printful": {
+        "product": null,
+        "sync_product_id": null
+      },
+      "seasonal": true,
+      "listed": true,
+      "tags": [
+        "taurus",
+        "earth-sign",
+        "zodiac"
+      ]
+    },
+    {
+      "slug": "2026-reading",
+      "title": "What 2026 Has Written for You",
+      "sign": null,
+      "element": null,
+      "collection": "Readings",
+      "category": "Readings",
+      "type": "reading",
+      "description": "",
+      "images": [
+        "/oracle-images/2026-written-for-you.png"
+      ],
+      "link": "/oracle/2026-reading",
+      "price_gbp": {
+        "min": 124.0,
+        "max": 124.0
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 124.0,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "digital",
+      "printful": null,
+      "personalisation": "person",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "life-path-reading",
+      "title": "Life Path Reading",
+      "sign": null,
+      "element": null,
+      "collection": "Readings",
+      "category": "Readings",
+      "type": "reading",
+      "description": "",
+      "images": [
+        "/oracle-images/life-path-reading.jpg"
+      ],
+      "link": "/oracle/life-path-reading",
+      "price_gbp": {
+        "min": 50.0,
+        "max": 50.0
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 50.0,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "digital",
+      "printful": null,
+      "personalisation": "person",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "solar-return-reading",
+      "title": "Solar Return Reading",
+      "sign": null,
+      "element": null,
+      "collection": "Readings",
+      "category": "Readings",
+      "type": "reading",
+      "description": "",
+      "images": [
+        "/images/oracle/solar-return-reading-cover.webp"
+      ],
+      "link": "/oracle/solar-return-reading",
+      "price_gbp": {
+        "min": 58.0,
+        "max": 58.0
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 58.0,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "digital",
+      "printful": null,
+      "personalisation": "person",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "natal-chart-blueprint",
+      "title": "Natal Chart Blueprint",
+      "sign": null,
+      "element": null,
+      "collection": "Readings",
+      "category": "Readings",
+      "type": "reading",
+      "description": "",
+      "images": [
+        "/images/oracle/natal-chart-blueprint.png"
+      ],
+      "link": "/oracle/natal-chart-blueprint",
+      "price_gbp": {
+        "min": 70.0,
+        "max": 70.0
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 70.0,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "digital",
+      "printful": null,
+      "personalisation": "person",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "career-purpose-reading",
+      "title": "Career & Purpose Reading",
+      "sign": null,
+      "element": null,
+      "collection": "Readings",
+      "category": "Readings",
+      "type": "reading",
+      "description": "",
+      "images": [
+        "/images/oracle/career-path-compass-oracle-card.webp"
+      ],
+      "link": "/oracle/career-purpose-reading",
+      "price_gbp": {
+        "min": 75.0,
+        "max": 75.0
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 75.0,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "digital",
+      "printful": null,
+      "personalisation": "person",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "relationship-synastry",
+      "title": "Relationship Synastry",
+      "sign": null,
+      "element": null,
+      "collection": "Readings",
+      "category": "Readings",
+      "type": "reading",
+      "description": "",
+      "images": [
+        "/images/oracle/love-relationships-spread-oracle-card.webp"
+      ],
+      "link": "/oracle/relationship-synastry",
+      "price_gbp": {
+        "min": 88.0,
+        "max": 88.0
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 88.0,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "digital",
+      "printful": null,
+      "personalisation": "couple",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "transit-forecast",
+      "title": "Transit Forecast",
+      "sign": null,
+      "element": null,
+      "collection": "Readings",
+      "category": "Readings",
+      "type": "reading",
+      "description": "",
+      "images": [
+        "/images/oracle/monthly-guidance-package-oracle-card.webp"
+      ],
+      "link": "/oracle/transit-forecast",
+      "price_gbp": {
+        "min": 65.0,
+        "max": 65.0
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 65.0,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "digital",
+      "printful": null,
+      "personalisation": "person",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "lunar-nodes-reading",
+      "title": "Lunar Nodes Reading",
+      "sign": null,
+      "element": null,
+      "collection": "Readings",
+      "category": "Readings",
+      "type": "reading",
+      "description": "",
+      "images": [
+        "/images/oracle/past-life-reading-oracle-card.webp"
+      ],
+      "link": "/oracle/lunar-nodes-reading",
+      "price_gbp": {
+        "min": 60.0,
+        "max": 60.0
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 60.0,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "digital",
+      "printful": null,
+      "personalisation": "person",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "chiron-wound-healing",
+      "title": "Chiron Wound Healing",
+      "sign": null,
+      "element": null,
+      "collection": "Readings",
+      "category": "Readings",
+      "type": "reading",
+      "description": "",
+      "images": [
+        "/oracle-images/chiron-wound-healing.jpg"
+      ],
+      "link": "/oracle/chiron-wound-healing",
+      "price_gbp": {
+        "min": 68.0,
+        "max": 68.0
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 68.0,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "digital",
+      "printful": null,
+      "personalisation": "person",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "full-cosmic-synthesis",
+      "title": "Full Cosmic Synthesis",
+      "sign": null,
+      "element": null,
+      "collection": "Readings",
+      "category": "Readings",
+      "type": "reading",
+      "description": "",
+      "images": [
+        "/images/oracle/the-oracles-lantern-cover.webp"
+      ],
+      "link": "/oracle/full-cosmic-synthesis",
+      "price_gbp": {
+        "min": 135.0,
+        "max": 135.0
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 135.0,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "digital",
+      "printful": null,
+      "personalisation": "person",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "compatibility-digital-certificate",
+      "title": "Digital Compatibility Certificate",
+      "sign": null,
+      "element": null,
+      "collection": "Certificates",
+      "category": "Certificates",
+      "type": "certificate",
+      "description": "",
+      "images": [
+        "/compatibility-images/digital-certificate.jpg"
+      ],
+      "link": "/compatibility/digital-certificate",
+      "price_gbp": {
+        "min": 39,
+        "max": 39
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 39,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "digital",
+      "printful": null,
+      "personalisation": "couple",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "compatibility-luxury-print",
+      "title": "Luxury Print Compatibility Certificate",
+      "sign": null,
+      "element": null,
+      "collection": "Certificates",
+      "category": "Certificates",
+      "type": "certificate",
+      "description": "",
+      "images": [
+        "/compatibility-images/luxury-print.jpg"
+      ],
+      "link": "/compatibility/luxury-print",
+      "price_gbp": {
+        "min": 149,
+        "max": 149
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 149,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "enquiry",
+      "printful": null,
+      "personalisation": "couple",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "compatibility-museum-framed",
+      "title": "Museum Framed Compatibility Certificate",
+      "sign": null,
+      "element": null,
+      "collection": "Certificates",
+      "category": "Certificates",
+      "type": "certificate",
+      "description": "",
+      "images": [
+        "/compatibility-images/museum-framed.jpg"
+      ],
+      "link": "/compatibility/museum-framed",
+      "price_gbp": {
+        "min": 349,
+        "max": 349
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 349,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "enquiry",
+      "printful": null,
+      "personalisation": "couple",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "compatibility-twin-flames",
+      "title": "Twin Flames Compatibility Certificate Set",
+      "sign": null,
+      "element": null,
+      "collection": "Certificates",
+      "category": "Certificates",
+      "type": "certificate",
+      "description": "",
+      "images": [
+        "/compatibility-images/twin-flames.jpg"
+      ],
+      "link": "/compatibility/twin-flames",
+      "price_gbp": {
+        "min": 449,
+        "max": 449
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 449,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "enquiry",
+      "printful": null,
+      "personalisation": "couple",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "pet-birth-chart-keepsake",
+      "title": "Pet Birth Chart Keepsake",
+      "sign": null,
+      "element": null,
+      "collection": "Certificates",
+      "category": "Certificates",
+      "type": "certificate",
+      "description": "A printable A4 keepsake for a pet: their name, birthday or adoption day, Sun sign, element and ruling planet, with a short, light-hearted portrait of the sign's traditional character. Written for fun, read by us, and emailed within 48 hours.",
+      "images": [
+        "/images/samples/sample-pet-chart.jpg"
+      ],
+      "link": "/charts/pet-birth-chart",
+      "price_gbp": {
+        "min": 39,
+        "max": 39
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 39,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "digital",
+      "printful": null,
+      "personalisation": "pet",
+      "seasonal": false,
+      "listed": true
+    },
+    {
+      "slug": "newborn-birth-chart-keepsake",
+      "title": "Newborn Birth Chart Keepsake",
+      "sign": null,
+      "element": null,
+      "collection": "Certificates",
+      "category": "Certificates",
+      "type": "certificate",
+      "description": "A printable A4 keepsake for a new baby: their name, date, time and place of birth, Sun sign, element and ruling planet, with a gentle portrait of the qualities traditionally linked with the sign. Read by us and emailed within 48 hours.",
+      "images": [
+        "/images/samples/sample-newborn-keepsake.jpg"
+      ],
+      "link": "/charts/newborn-birth-chart",
+      "price_gbp": {
+        "min": 39,
+        "max": 39
+      },
+      "variants": [
+        {
+          "size": "Standard",
+          "price_gbp": 39,
+          "printful_variant_id": null
+        }
+      ],
+      "fulfilment": "digital",
+      "printful": null,
+      "personalisation": "newborn",
+      "seasonal": false,
+      "listed": true
+    }
+  ]
+}

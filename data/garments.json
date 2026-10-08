@@ -1,0 +1,32 @@
+{
+  "written_by": "Site configuration for the design intake (scripts/design-intake.mjs). Maps the engine's free-text garment and decoration to a Printful blank. Prices are the owner's decision: a design stays unlisted until its garment has a price for every size it is made in.",
+  "garments": {
+    "tee": {
+      "match": ["tee", "t-shirt", "tshirt", "t shirt"],
+      "printful": { "brand": "Bella + Canvas", "model": "3001" },
+      "type": "apparel",
+      "category": "unisex",
+      "colour": "Black",
+      "placements": { "print": "front", "embroidery": "embroidery_chest_left" },
+      "price_gbp_by_size": null
+    },
+    "hoodie": {
+      "match": ["hoodie", "hooded"],
+      "printful": { "brand": "Gildan", "model": "18500" },
+      "type": "apparel",
+      "category": "unisex",
+      "colour": "Black",
+      "placements": { "print": "front", "embroidery": "embroidery_chest_left" },
+      "price_gbp_by_size": null
+    },
+    "sweatshirt": {
+      "match": ["sweatshirt", "crewneck", "crew neck", "jumper"],
+      "printful": { "brand": "Gildan", "model": "18000" },
+      "type": "apparel",
+      "category": "unisex",
+      "colour": "Black",
+      "placements": { "print": "front", "embroidery": "embroidery_chest_left" },
+      "price_gbp_by_size": null
+    }
+  }
+}

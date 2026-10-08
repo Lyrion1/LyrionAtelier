@@ -3,6 +3,7 @@
 <head>
 <script src="/js/analytics.js"></script>
   <meta charset="UTF-8">
+  <meta name="lyrion:product" content="taurus-ram-hoodie">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Taurus Ram Head Unisex Hoodie - Bold Cosmic Statement | Lyrīon Atelier</title>
   <meta name="description" content="Bold cosmic statement piece. Premium unisex hoodie featuring the Taurus ram head in striking pink detail. For those born under the sign of strength and determination.">
@@ -39,8 +40,8 @@
   "offers": {
     "@type": "Offer",
     "url": "https://lyrionatelier.com/shop/taurus-ram-hoodie",
-    "priceCurrency": "USD",
-    "price": "59.99",
+    "priceCurrency": "GBP",
+    "price": "58.99",
     "availability": "https://schema.org/InStock"
   }
 }
@@ -72,6 +73,7 @@
 }
 </script>
   <link rel="stylesheet" href="/css/restoration.css">
+  <link rel="stylesheet" href="/css/house.css">
   <link rel="stylesheet" href="/css/pdp-layout.css">
 </head>
 <body data-page="product">
@@ -111,6 +113,8 @@
      <a href="/curated-for-gifting?for=couples">For Couples</a>
      <a href="/curated-for-gifting?for=self">For Self</a>
      <a href="/curated-for-gifting?for=birthday">Birthday &amp; Milestone</a>
+     <a href="/gift-concierge">Gift Concierge</a>
+     <a href="/birthday-book">Birthday Book</a>
    </div>
  </div>
  <a href="/codex">About / Journal</a>
@@ -148,12 +152,12 @@
     <div class="pdp-selector">
       <label for="size-select">Size</label>
       <select id="size-select" class="input-select">
-              <option value="69652e9a3966c2">S - $75.00</option>
-              <option value="69652e9a396769" selected>M - $75.00</option>
-              <option value="69652e9a3967f1">L - $75.00</option>
-              <option value="69652e9a396882">XL - $75.00</option>
-              <option value="69652e9a396905">2XL - $77.00</option>
-              <option value="69652e9a396987">3XL - $79.00</option>
+              <option value="69652e9a3966c2">S - $58.99</option>
+              <option value="69652e9a396769" selected>M - $58.99</option>
+              <option value="69652e9a3967f1">L - $58.99</option>
+              <option value="69652e9a396882">XL - $58.99</option>
+              <option value="69652e9a396905">2XL - $60.99</option>
+              <option value="69652e9a396987">3XL - $61.99</option>
             </select>
       <p class="sizing-note">Unisex relaxed fit. True to size for comfortable wear.</p>
     </div>
@@ -275,7 +279,7 @@
             <svg class="pdp-accordion__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="pdp-accordion__panel" id="pdp-acc-shipping-panel">
-            <p>Ships within 2&ndash;5 business days of your order. Delivery 5&ndash;10 business days. Free returns within 30 days.</p>
+            <p>Made to order by Printful, usually dispatched within 2&ndash;5 business days; delivery time depends on where it is going. Free delivery on orders of $50 or more. Size exchanges within 14 days of delivery: see our <a href="/refund-policy">refund policy</a>.</p>
           </div>
         </div>
 
@@ -378,19 +382,20 @@
         </a>
       </div>
   </div>
-</footer>
+  <p class="footer-legal">&copy; <span data-year>2026</span> LYRION LTD. Lyr&#299;on Atelier is operated by LYRION LTD, company number 16904877, registered in England and Wales. Registered office: Flat 9 Centro, 399 South Row, Milton Keynes, MK9 2PG.</p>
+  </footer>
 
 <script src="/js/cart.js"></script>
 <script src="/js/main.js"></script>
 <script>
   (function() {
     const variants = [
-      { size: 'S', variantId: '69652e9a3966c2', price: 75.00 },
-      { size: 'M', variantId: '69652e9a396769', price: 75.00 },
-      { size: 'L', variantId: '69652e9a3967f1', price: 75.00 },
-      { size: 'XL', variantId: '69652e9a396882', price: 75.00 },
-      { size: '2XL', variantId: '69652e9a396905', price: 77.00 },
-      { size: '3XL', variantId: '69652e9a396987', price: 79.00 }
+      { size: 'S', variantId: '69652e9a3966c2', price: 58.99 },
+      { size: 'M', variantId: '69652e9a396769', price: 58.99 },
+      { size: 'L', variantId: '69652e9a3967f1', price: 58.99 },
+      { size: 'XL', variantId: '69652e9a396882', price: 58.99 },
+      { size: '2XL', variantId: '69652e9a396905', price: 60.99 },
+      { size: '3XL', variantId: '69652e9a396987', price: 61.99 }
     ];
 
     const defaultVariant = variants.find((variant) => variant.size === 'M') || variants[0];
@@ -488,5 +493,7 @@
     } catch (e) {}
   });
 </script>
+<script src="/js/house.js"></script>
+<script src="/js/house-pdp.js"></script>
 </body>
 </html>

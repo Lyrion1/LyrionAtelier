@@ -1,124 +1,178 @@
 /**
- * Shared catalog rules. This is the ONE place that knows how a product's
- * slug and its canonical price are derived. The site catalog, the generated
- * checkout price map, and the verifier all import from here so a slug or a
- * price rule is never written down twice.
+ * Shared catalogue rules for every Node script: the build, the CI checks and
+ * the design intake workflow. data/catalogue.json is the one list of products;
+ * the checkout price map (public/data/products.json) and the static product
+ * pages are derived from it and checked against it.
  */
 import { readFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = path.resolve(HERE, '..', '..');
-
-export const CATALOG_PATH = path.join(REPO_ROOT, 'data', 'all-products.json');
+export const CATALOGUE_PATH = path.join(REPO_ROOT, 'data', 'catalogue.json');
 export const CHECKOUT_MAP_PATH = path.join(REPO_ROOT, 'public', 'data', 'products.json');
+export const PRINTFUL_SNAPSHOT_PATH = path.join(REPO_ROOT, 'data', 'printful-sync.json');
+
+const require = createRequire(import.meta.url);
+export const houseCore = require('../../js/house-core.js');
 
 /** The store settles in GBP: Stripe charges GBP and prices are stored in GBP. */
 export const BASE_CURRENCY = 'GBP';
 
-/**
- * Canonical slug for a product. Every consumer calls this rather than
- * reaching for `.slug` or `.id` directly, so the cart, the product page and
- * the checkout map can never disagree about what a product is called.
- */
-export function canonicalSlug(product = {}) {
-  const explicit = typeof product.slug === 'string' ? product.slug.trim() : '';
-  if (explicit) return explicit;
-  const id = product.id == null ? '' : String(product.id).trim();
-  if (id) return id;
-  const title = product.title || product.name || '';
-  return String(title)
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
-}
+export const PRODUCT_TYPES = ['apparel', 'accessory', 'home', 'mystery-box', 'reading', 'certificate'];
+export const FULFILMENT = ['printful', 'digital', 'manual', 'enquiry'];
+export const PERSONALISATION = ['person', 'couple', 'pet', 'newborn'];
+const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+// Printful sync variant external ids (hex, as Printful generates them) or
+// numeric sync variant ids.
+const PRINTFUL_VARIANT = /^(?:[0-9a-f]{12,16}|\d{6,12})$/;
 
-/** A product is offered for sale only when it is both published and ready. */
-export function isListedForSale(product = {}) {
-  const state = product.state || {};
-  return Boolean(state.published && state.ready);
-}
-
-/**
- * Round a converted amount to a retail-looking figure rather than leaving the
- * raw output of a multiplication (50.6153) on a price tag. Nearest whole unit,
- * then one penny below it, so everything lands on a .99 ending.
- */
-export function retailRound(amount) {
-  const n = Number(amount);
-  if (!Number.isFinite(n) || n <= 0) return null;
-  return Math.max(0.99, Math.round(n) - 0.01);
-}
-
-/**
- * Canonical price in GBP pence, the integer Stripe is charged.
- * Some products price as a range rather than a single figure; the base
- * (smallest) price is the one shown on the card and the product page, so
- * that is the one checkout has to agree with.
- */
-export function priceGBPPence(product = {}) {
-  const candidates = [
-    product.priceGBP != null ? Number(product.priceGBP) / 100 : null,
-    typeof product.price === 'number' ? product.price : null,
-    product.price && typeof product.price === 'object' ? Number(product.price.min) : null,
-    product.price_range && typeof product.price_range === 'object'
-      ? Number(product.price_range.min)
-      : null
-  ];
-  for (const value of candidates) {
-    if (Number.isFinite(value) && value > 0) return Math.round(value * 100);
-  }
-  return null;
-}
-
-export function firstImage(product = {}) {
-  if (typeof product.mainImage === 'string' && product.mainImage) return product.mainImage;
-  if (Array.isArray(product.images) && product.images.length) return product.images[0];
-  if (typeof product.image === 'string' && product.image) return product.image;
-  return '';
-}
-
-export function productSizes(product = {}) {
-  const opts = product.options || {};
-  const fromOptions = []
-    .concat(Array.isArray(opts.size) ? opts.size : [])
-    .concat(Array.isArray(opts.sizes) ? opts.sizes : []);
-  const fromVariants = (Array.isArray(product.variants) ? product.variants : [])
-    .map((v) => v?.options?.size ?? v?.size)
-    .filter(Boolean);
-  return Array.from(new Set([...fromOptions, ...fromVariants].filter(Boolean)));
-}
-
-export function printfulVariantIds(product = {}) {
-  const ids = (Array.isArray(product.variants) ? product.variants : [])
-    .map((v) => v?.printfulVariantId || v?.printful_variant_id || v?.variant_id || null)
-    .filter(Boolean);
-  return ids.length ? ids : undefined;
-}
-
-export async function loadCatalog() {
-  const raw = await readFile(CATALOG_PATH, 'utf8');
+export async function loadCatalogue() {
+  const raw = await readFile(CATALOGUE_PATH, 'utf8');
   const data = JSON.parse(raw);
-  if (!Array.isArray(data)) throw new Error('data/all-products.json must be an array');
+  if (!data || typeof data !== 'object' || !Array.isArray(data.products)) {
+    throw new Error('data/catalogue.json must be an object with a "products" array');
+  }
   return data;
 }
 
-/** The exact shape the checkout Edge Function consumes. */
-export function toCheckoutEntry(product) {
+function isMoney(n) {
+  return typeof n === 'number' && Number.isFinite(n) && n > 0 && n < 2000 && Math.abs(Math.round(n * 100) - n * 100) < 1e-6;
+}
+
+function localFileExists(url, root = REPO_ROOT) {
+  if (typeof url !== 'string' || !url.startsWith('/')) return true;
+  const clean = decodeURI(url.split('?')[0].split('#')[0]);
+  const candidates = [clean, `${clean}.html`, path.join(clean, 'index.html')];
+  return candidates.some((c) => existsSync(path.join(root, c)));
+}
+
+/**
+ * Every rule a product must meet. Returns a list of problems (empty = valid).
+ * This is what makes a malformed catalogue fail CI.
+ */
+export function validateCatalogue(data, root = REPO_ROOT) {
+  const errors = [];
+  if (!data || typeof data !== 'object' || !Array.isArray(data.products)) {
+    return ['data/catalogue.json must be an object with a "products" array'];
+  }
+  const slugs = new Set();
+  const variantOwner = new Map();
+  data.products.forEach((p, i) => {
+    const at = p && typeof p.slug === 'string' && p.slug ? `"${p.slug}"` : `product #${i}`;
+    if (!p || typeof p !== 'object') { errors.push(`${at} is not an object`); return; }
+    if (typeof p.slug !== 'string' || !SLUG.test(p.slug)) errors.push(`${at}: slug must be lower-case words joined by hyphens`);
+    else if (slugs.has(p.slug)) errors.push(`${at}: slug is used by more than one product`);
+    else slugs.add(p.slug);
+    if (typeof p.title !== 'string' || !p.title.trim()) errors.push(`${at}: title is missing`);
+    if (p.sign !== null && !houseCore.isSign(p.sign)) errors.push(`${at}: sign must be one of the twelve signs with a capital letter, or null`);
+    if (p.sign && p.element !== houseCore.ELEMENT_OF[p.sign]) errors.push(`${at}: element must be ${houseCore.ELEMENT_OF[p.sign]} for ${p.sign}`);
+    if (!p.sign && p.element) errors.push(`${at}: element is set but sign is not`);
+    if (typeof p.collection !== 'string' || !p.collection.trim()) errors.push(`${at}: collection is missing`);
+    if (!PRODUCT_TYPES.includes(p.type)) errors.push(`${at}: type must be one of ${PRODUCT_TYPES.join(', ')}`);
+    if (typeof p.description !== 'string') errors.push(`${at}: description must be text`);
+    if (!Array.isArray(p.images) || !p.images.length || p.images.some((u) => typeof u !== 'string' || !u)) {
+      errors.push(`${at}: needs at least one image`);
+    } else {
+      p.images.forEach((u) => { if (!localFileExists(u, root)) errors.push(`${at}: image ${u} does not exist`); });
+    }
+    if (p.link != null && (typeof p.link !== 'string' || !p.link.startsWith('/') || !localFileExists(p.link, root))) {
+      errors.push(`${at}: link ${p.link} does not lead to a page in this site`);
+    }
+    if (typeof p.seasonal !== 'boolean') errors.push(`${at}: seasonal must be true or false`);
+    if (typeof p.listed !== 'boolean') errors.push(`${at}: listed must be true or false`);
+    if (p.seasonal === true && !p.sign) errors.push(`${at}: a seasonal product needs a sign`);
+    if ((p.type === 'reading' || p.type === 'certificate') && p.seasonal) errors.push(`${at}: readings and certificates never retire, so seasonal must be false`);
+    if (!FULFILMENT.includes(p.fulfilment)) errors.push(`${at}: fulfilment must be one of ${FULFILMENT.join(', ')}`);
+    if (p.personalisation != null && !PERSONALISATION.includes(p.personalisation)) errors.push(`${at}: personalisation must be one of ${PERSONALISATION.join(', ')}`);
+    if ((p.type === 'reading' || p.type === 'certificate') && !p.personalisation) errors.push(`${at}: readings and certificates need a personalisation kind`);
+
+    if (!Array.isArray(p.variants) || !p.variants.length) {
+      // An unlisted draft may not have its variants yet; anything for sale must.
+      if (p.listed) errors.push(`${at}: needs at least one variant`);
+      if (p.price_gbp != null && !(isMoney(p.price_gbp.min) && isMoney(p.price_gbp.max))) errors.push(`${at}: price_gbp must have min and max in pounds`);
+      return;
+    }
+    const combos = new Set();
+    p.variants.forEach((v, j) => {
+      const vat = `${at} variant ${j}`;
+      if (!v || typeof v !== 'object') { errors.push(`${vat} is not an object`); return; }
+      if (typeof v.size !== 'string' || !v.size) errors.push(`${vat}: size is missing`);
+      const combo = `${v.size}|${v.color || ''}`;
+      if (combos.has(combo)) errors.push(`${vat}: size and colour repeat another variant`);
+      combos.add(combo);
+      // A built design waiting for the owner's price is unlisted with no price yet.
+      const awaitingPrice = !p.listed && v.price_gbp === null;
+      if (!awaitingPrice && !isMoney(v.price_gbp)) errors.push(`${vat}: price_gbp must be pounds and pence (51.99), not pence (5199)`);
+      if (p.fulfilment === 'printful') {
+        const id = v.printful_variant_id;
+        if (typeof id !== 'string' || !PRINTFUL_VARIANT.test(id)) {
+          errors.push(`${vat}: printful_variant_id ${JSON.stringify(id)} is not a Printful sync variant id`);
+        } else if (variantOwner.has(id) && variantOwner.get(id) !== p.slug) {
+          errors.push(`${vat}: Printful variant ${id} is also used by "${variantOwner.get(id)}"`);
+        } else {
+          variantOwner.set(id, p.slug);
+        }
+      }
+    });
+    if (p.fulfilment === 'printful' && (!p.printful || typeof p.printful !== 'object')) {
+      errors.push(`${at}: a Printful product needs a "printful" block`);
+    }
+    const prices = p.variants.map((v) => v && v.price_gbp).filter(isMoney);
+    if (!p.listed && p.price_gbp === null && !prices.length) return;
+    if (!p.price_gbp || !isMoney(p.price_gbp.min) || !isMoney(p.price_gbp.max)) {
+      errors.push(`${at}: price_gbp must have min and max in pounds`);
+    } else if (prices.length) {
+      const min = Math.min(...prices);
+      const max = Math.max(...prices);
+      if (p.price_gbp.min !== min || p.price_gbp.max !== max) {
+        errors.push(`${at}: price_gbp ${p.price_gbp.min} to ${p.price_gbp.max} disagrees with its variants (${min} to ${max})`);
+      }
+    }
+  });
+  return errors;
+}
+
+/** Products that can go into a basket at all (the house may still rest them). */
+export function sellable(product) {
+  return product.listed === true && product.fulfilment !== 'enquiry';
+}
+
+/**
+ * One checkout price map entry. Older fields (priceGBP, sizes,
+ * printfulVariantId) keep the currently deployed checkout function working;
+ * the variant list is what the current function prices and fulfils from.
+ */
+export function toCheckoutEntry(p) {
   const entry = {
-    id: canonicalSlug(product),
-    name: product.name || product.title || canonicalSlug(product),
-    priceGBP: priceGBPPence(product),
-    image: firstImage(product)
+    id: p.slug,
+    name: p.title,
+    type: p.type,
+    fulfilment: p.fulfilment,
+    sign: p.sign,
+    seasonal: p.seasonal,
+    priceGBP: Math.round(p.price_gbp.min * 100),
+    image: p.images[0]
   };
-  const sizes = productSizes(product);
-  if (sizes.length) entry.sizes = sizes;
-  const pf = printfulVariantIds(product);
-  if (pf) entry.printfulVariantId = pf;
+  if (p.personalisation) entry.personalisation = p.personalisation;
+  const sizes = [...new Set(p.variants.map((v) => v.size))];
+  if (p.fulfilment === 'printful') {
+    entry.sizes = sizes;
+    entry.printfulVariantId = p.variants.map((v) => v.printful_variant_id);
+  }
+  entry.variants = p.variants.map((v) => {
+    const out = { size: v.size };
+    if (v.color) out.color = v.color;
+    out.priceGBP = Math.round(v.price_gbp * 100);
+    if (v.printful_variant_id) out.printfulVariantId = v.printful_variant_id;
+    return out;
+  });
   return entry;
 }
 
-export function buildCheckoutMap(catalog) {
-  return catalog.filter(isListedForSale).map(toCheckoutEntry);
+export function buildCheckoutMap(catalogue) {
+  return catalogue.products.filter(sellable).map(toCheckoutEntry);
 }

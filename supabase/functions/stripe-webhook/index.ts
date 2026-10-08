@@ -1,154 +1,170 @@
-import Stripe from 'https://esm.sh/stripe@14?target=deno';
+// Stripe webhook: turns a paid checkout into fulfilment.
+//
+//   physical pieces   -> a confirmed Printful order (right variants, address
+//                        and gift note), retried on failure, owner emailed
+//   readings and      -> a delivery record, a draft written from the birth
+//   certificates         details, and an approval email to the owner
+//
+// Stripe redelivers on any non-2xx response, and every step here is
+// idempotent, so a redelivery finishes whatever did not finish before.
+import Stripe from 'npm:stripe@14.25.0';
+import { OWNER_EMAIL, requireEnv } from '../_shared/env.ts';
+import { db } from '../_shared/db.ts';
+import { sendMail } from '../_shared/mail.ts';
+import { loadShop } from '../_shared/catalogue.ts';
+import { unpackDetails } from '../_shared/details.ts';
+import { acknowledgeDigital, fulfilPrintful, generateDelivery, type PrintfulPayload } from '../_shared/fulfil.ts';
+import { orderLine } from '../_shared/printful.ts';
 
-const STRIPE_WEBHOOK_SECRET = Deno.env.get('STRIPE_WEBHOOK_SECRET') ?? '';
-const PRINTFUL_API_KEY = Deno.env.get('PRINTFUL_API_KEY');
-
-const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') ?? '', {
+const stripe = new Stripe(requireEnv('STRIPE_SECRET_KEY'), {
   apiVersion: '2023-10-16',
   httpClient: Stripe.createFetchHttpClient(),
 });
 
-interface BasketItem {
-  id: string;
-  qty: number;
-  size: string | null;
-  printfulVariantId: string | string[] | null;
+declare const EdgeRuntime: { waitUntil(p: Promise<unknown>): void } | undefined;
+
+function background(p: Promise<unknown>) {
+  const guarded = p.catch((e) => console.error('[stripe-webhook] background task failed', e));
+  if (typeof EdgeRuntime !== 'undefined') EdgeRuntime.waitUntil(guarded);
 }
 
-interface PrintfulRecipient {
-  name: string;
-  address1: string;
-  address2?: string;
-  city: string;
-  state_code?: string;
-  country_code: string;
-  zip: string;
-}
+async function handlePaidSession(sessionId: string): Promise<boolean> {
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
+  if (session.payment_status !== 'paid') return true;
 
-async function createPrintfulOrder(
-  recipient: PrintfulRecipient,
-  items: BasketItem[],
-  externalId: string,
-): Promise<void> {
-  if (!PRINTFUL_API_KEY) {
-    console.error(
-      '[stripe-webhook] FATAL: PRINTFUL_API_KEY secret is not set. Fulfilment cannot proceed.',
-    );
-    throw new Error('PRINTFUL_API_KEY is not configured');
-  }
+  const { data: existing } = await db().from('orders').select('*').eq('stripe_session_id', session.id).maybeSingle();
+  const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 100, expand: ['data.price.product'] });
+  const { products } = await loadShop();
+  const bySlug = new Map(products.map((p) => [p.id, p]));
 
-  const printfulItems = items.flatMap((item) => {
-    const variants = Array.isArray(item.printfulVariantId)
-      ? item.printfulVariantId
-      : item.printfulVariantId
-      ? [item.printfulVariantId]
-      : [];
+  const printfulItems: PrintfulPayload['items'] = [];
+  const manual: string[] = [];
+  const digital: { line: number; slug: string; title: string; type: 'reading' | 'certificate' }[] = [];
 
-    if (variants.length === 0 || variants[0] === 'manual-fulfillment') {
-      console.warn(
-        `[stripe-webhook] Product ${item.id} uses manual fulfilment – skipping Printful line item`,
-      );
-      return [];
+  for (const item of lineItems.data) {
+    const product = item.price?.product as Stripe.Product | undefined;
+    const meta = product?.metadata ?? {};
+    const entry = bySlug.get(meta.slug);
+    if (!entry) {
+      manual.push(`${item.quantity} x ${item.description} (not in the catalogue)`);
+      continue;
     }
-
-    return [{ sync_variant_id: variants[0], quantity: item.qty }];
-  });
-
-  if (printfulItems.length === 0) {
-    console.log(
-      '[stripe-webhook] No Printful-eligible items in order – skipping Printful order creation',
-    );
-    return;
+    if (entry.fulfilment === 'printful' && meta.variant) {
+      printfulItems.push(orderLine(meta.variant, item.quantity ?? 1));
+    } else if (entry.fulfilment === 'digital' && (entry.type === 'reading' || entry.type === 'certificate')) {
+      digital.push({ line: Number(meta.line), slug: entry.id, title: entry.name, type: entry.type });
+    } else {
+      manual.push(`${item.quantity} x ${item.description}`);
+    }
   }
 
-  const body = { recipient, items: printfulItems, external_id: externalId };
+  const customerEmail = session.customer_details?.email ?? '';
+  const giftNote = session.metadata?.gift || undefined;
+  const shipping = session.shipping_details;
+  const payload: PrintfulPayload | null = printfulItems.length && shipping?.address
+    ? {
+      // Printful external ids are short; the payment intent id is unique per payment.
+      externalId: (typeof session.payment_intent === 'string' ? session.payment_intent : session.id).slice(0, 32),
+      recipient: {
+        name: shipping.name ?? session.customer_details?.name ?? 'Customer',
+        address1: shipping.address.line1 ?? '',
+        ...(shipping.address.line2 ? { address2: shipping.address.line2 } : {}),
+        city: shipping.address.city ?? '',
+        ...(shipping.address.state ? { state_code: shipping.address.state } : {}),
+        country_code: shipping.address.country ?? 'GB',
+        zip: shipping.address.postal_code ?? '',
+        ...(customerEmail ? { email: customerEmail } : {}),
+      },
+      items: printfulItems,
+      ...(giftNote ? { giftNote } : {}),
+    }
+    : null;
 
-  const authHeader = 'Bearer ' + PRINTFUL_API_KEY;
-  const resp = await fetch('https://api.printful.com/orders', {
-    method: 'POST',
-    headers: {
-      Authorization: authHeader,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
+  let orderId = existing?.id as string | undefined;
+  if (!orderId) {
+    const { data, error } = await db().from('orders').insert({
+      stripe_session_id: session.id,
+      payment_intent: typeof session.payment_intent === 'string' ? session.payment_intent : null,
+      customer_email: customerEmail,
+      gift_note: giftNote ?? null,
+      printful_status: payload ? 'pending' : 'none',
+      printful_payload: payload,
+    }).select('id').single();
+    if (error) {
+      // A concurrent delivery of the same event inserted it first.
+      const { data: again } = await db().from('orders').select('id').eq('stripe_session_id', session.id).single();
+      orderId = again?.id;
+    } else {
+      orderId = data.id;
+    }
+    if (manual.length) {
+      await sendMail({
+        to: OWNER_EMAIL,
+        subject: `Order needs fulfilling by hand: ${session.id}`,
+        text: `These lines are not sent to Printful automatically:\n\n${manual.join('\n')}\n\nCustomer: ${customerEmail}`,
+      }).catch((e) => console.error('[stripe-webhook] manual alert failed', e));
+    }
+    if (printfulItems.length && !payload) {
+      await sendMail({
+        to: OWNER_EMAIL,
+        subject: `Paid order has no delivery address: ${session.id}`,
+        text: `Printful items were paid for but Stripe returned no shipping address. Please contact ${customerEmail}.`,
+      }).catch((e) => console.error('[stripe-webhook] address alert failed', e));
+    }
+  }
+  if (!orderId) throw new Error('Could not record the order');
 
-  const data = await resp.json() as {
-    code?: number;
-    result?: unknown;
-    error?: { message?: string };
-  };
-
-  if (!resp.ok || (data.code && data.code >= 400)) {
-    const msg = data.error?.message ?? JSON.stringify(data);
-    console.error('[stripe-webhook] Printful API error:', msg);
-    throw new Error('Printful order creation failed: ' + msg);
+  // Readings and certificates: one delivery per line, then write in the background.
+  if (digital.length && customerEmail) {
+    const rows = digital.map((d) => ({
+      order_id: orderId,
+      stripe_session_id: session.id,
+      line: d.line,
+      product_slug: d.slug,
+      product_title: d.title,
+      product_type: d.type,
+      details: unpackDetails(session.metadata?.[`d${d.line}`]),
+      customer_email: customerEmail,
+      recipient_email: session.metadata?.recipient || null,
+      gift_note: giftNote ?? null,
+    })).filter((r) => r.details);
+    const { data: inserted } = await db().from('deliveries')
+      .upsert(rows, { onConflict: 'stripe_session_id,line', ignoreDuplicates: true })
+      .select('id');
+    if (inserted?.length) {
+      background(acknowledgeDigital(customerEmail, digital.map((d) => d.title)));
+      for (const row of inserted) background(generateDelivery(row.id));
+    }
   }
 
-  console.log('[stripe-webhook] Printful order created:', JSON.stringify(data.result ?? data));
+  // Physical pieces: a confirmed Printful order.
+  if (payload) return await fulfilPrintful(orderId);
+  return true;
 }
 
 Deno.serve(async (req: Request) => {
-  if (req.method !== 'POST') {
-    return new Response('Method not allowed', { status: 405 });
-  }
-
+  if (req.method !== 'POST') return new Response('Method not allowed', { status: 405 });
   const sig = req.headers.get('stripe-signature');
-  if (!sig) {
-    return new Response('Missing Stripe-Signature', { status: 400 });
-  }
+  if (!sig) return new Response('Missing Stripe-Signature', { status: 400 });
 
   let event: Stripe.Event;
   try {
-    const rawBody = await req.text();
-    event = await stripe.webhooks.constructEventAsync(rawBody, sig, STRIPE_WEBHOOK_SECRET);
+    event = await stripe.webhooks.constructEventAsync(await req.text(), sig, requireEnv('STRIPE_WEBHOOK_SECRET'));
   } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err);
-    console.error('[stripe-webhook] Signature verification failed:', msg);
-    return new Response('Webhook Error: ' + msg, { status: 400 });
+    console.error('[stripe-webhook] signature verification failed:', err instanceof Error ? err.message : err);
+    return new Response('Bad signature', { status: 400 });
   }
 
-  if (event.type === 'checkout.session.completed') {
+  if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
     const session = event.data.object as Stripe.Checkout.Session;
-
-    const basketRaw = session.metadata?.basket;
-    if (!basketRaw) {
-      console.error('[stripe-webhook] No basket metadata in session', session.id);
-      return new Response('OK', { status: 200 });
-    }
-
-    let basket: BasketItem[];
     try {
-      basket = JSON.parse(basketRaw) as BasketItem[];
-    } catch {
-      console.error('[stripe-webhook] Invalid basket JSON in metadata');
-      return new Response('OK', { status: 200 });
-    }
-
-    const shipping = session.shipping_details;
-    if (!shipping?.address) {
-      console.error('[stripe-webhook] No shipping address on session', session.id);
-      return new Response('OK', { status: 200 });
-    }
-
-    const recipient: PrintfulRecipient = {
-      name: shipping.name ?? session.customer_details?.name ?? 'Customer',
-      address1: shipping.address.line1 ?? '',
-      address2: shipping.address.line2 ?? undefined,
-      city: shipping.address.city ?? '',
-      state_code: shipping.address.state ?? undefined,
-      country_code: shipping.address.country ?? 'GB',
-      zip: shipping.address.postal_code ?? '',
-    };
-
-    try {
-      await createPrintfulOrder(recipient, basket, session.id);
+      const ok = await handlePaidSession(session.id);
+      // A non-2xx makes Stripe redeliver; house-cron retries as well.
+      if (!ok) return new Response('Printful not yet accepted; will retry', { status: 500 });
     } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      console.error('[stripe-webhook] Printful order failed:', msg);
-      // Return 200 to Stripe so it does not retry; error is logged for manual review
+      console.error('[stripe-webhook]', err instanceof Error ? err.message : err);
+      return new Response('Fulfilment error; will retry', { status: 500 });
     }
   }
-
   return new Response('OK', { status: 200 });
 });

@@ -32,6 +32,19 @@
   "@type": "Organization",
   "name": "Lyr\u012bon Atelier",
   "alternateName": "Lyrion Atelier",
+  "legalName": "LYRION LTD",
+  "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "Companies House company number",
+    "value": "16904877"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Flat 9 Centro, 399 South Row",
+    "addressLocality": "Milton Keynes",
+    "postalCode": "MK9 2PG",
+    "addressCountry": "GB"
+  },
   "url": "https://lyrionatelier.com",
   "logo": "https://lyrionatelier.com/images/lyrion-logo.png",
   "description": "Luxury astrology lifestyle brand offering zodiac apparel, personalized astrology readings, and cosmic compatibility certificates.",
@@ -82,7 +95,7 @@
       "name": "How long does a personalized astrology reading take?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Personalized astrology readings at Lyr\u012bon Atelier are delivered within 24-48 hours of booking."
+        "text": "Personalized astrology readings at Lyr\u012bon Atelier are written from your birth details, read by us, and emailed within 48 hours of your order."
       }
     },
     {
@@ -97,6 +110,7 @@
 }
 </script>
   <link rel="stylesheet" href="/css/restoration.css">
+  <link rel="stylesheet" href="/css/house.css">
 </head>
 <body>
 <header class="site-header" data-nav-version="nav-v4">
@@ -135,6 +149,8 @@
      <a href="/curated-for-gifting?for=couples">For Couples</a>
      <a href="/curated-for-gifting?for=self">For Self</a>
      <a href="/curated-for-gifting?for=birthday">Birthday &amp; Milestone</a>
+     <a href="/gift-concierge">Gift Concierge</a>
+     <a href="/birthday-book">Birthday Book</a>
    </div>
  </div>
  <a href="/codex">About / Journal</a>
@@ -189,7 +205,7 @@
           <button class="book-reading-btn"
             data-name="What 2026 Has Written for You - Oracle Reading"
             data-price="124.00"
-            data-reading-id="2026-written-for-you"
+            data-reading-id="2026-reading"
             onclick="bookOracleReading(event)">
             Book Reading
           </button>
@@ -212,7 +228,7 @@
           <button class="book-reading-btn"
             data-name="Life Path Reading - Oracle Reading"
             data-price="50.00"
-            data-reading-id="life-path"
+            data-reading-id="life-path-reading"
             onclick="bookOracleReading(event)">
             Book Reading
           </button>
@@ -227,12 +243,12 @@
             <div class="reading-price">$58</div>
           </div>
           <p class="reading-description">
-            Your cosmic forecast for the year ahead based on your solar return chart.
+            Your year ahead, read from your solar return, as themes to reflect on.
           </p>
           <button class="book-reading-btn"
             data-name="Solar Return Reading - Oracle Reading"
             data-price="58.00"
-            data-reading-id="solar-return"
+            data-reading-id="solar-return-reading"
             onclick="bookOracleReading(event)">
             Book Reading
           </button>
@@ -265,11 +281,11 @@
         <span>Free Shipping Over $50</span>
         <span>Personalized Oracle Readings</span>
         <span>Lyrīon Essentials — Coming Soon</span>
-        <span>30-Day Returns</span>
+        <span>14-Day Exchanges</span>
         <span>Free Shipping Over $50</span>
         <span>Personalized Oracle Readings</span>
         <span>Lyrīon Essentials — Coming Soon</span>
-        <span>30-Day Returns</span>
+        <span>14-Day Exchanges</span>
       </div>
     </div>
 
@@ -295,14 +311,31 @@
       </div>
     </section>
 
+    <!-- Campaign feature: switched on and off by the house engine (data/house.json campaigns) -->
+    <section class="soho-section soho-section--dark house-campaign" data-campaign-feature hidden>
+      <div class="soho-container soho-video-split">
+        <div>
+          <p class="soho-eyebrow" data-campaign-eyebrow></p>
+          <h2 class="soho-heading" data-campaign-title></h2>
+          <p class="house-campaign__body" data-campaign-body></p>
+          <div class="soho-hero__actions">
+            <a class="soho-btn soho-btn--gold" data-campaign-cta href="/shop">Shop the edit</a>
+          </div>
+        </div>
+        <div class="soho-video">
+          <img data-campaign-image src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="1200" height="1500" loading="lazy">
+        </div>
+      </div>
+    </section>
+
     <!-- Featured / new arrivals grid -->
     <section class="soho-section">
       <div class="soho-container">
         <div class="soho-section-head">
           <div>
-            <p class="soho-eyebrow">Featured</p>
-            <h2 class="soho-heading">Customer Favorites</h2>
-            <p>A handful of pieces and readings to explore first.</p>
+            <p class="soho-eyebrow" data-featured-eyebrow>Featured</p>
+            <h2 class="soho-heading" data-featured-title>From the collection</h2>
+            <p data-featured-note>A handful of pieces to explore first.</p>
           </div>
           <a class="soho-link-arrow" href="/shop">View All</a>
         </div>
@@ -351,18 +384,22 @@
             <h2 class="soho-heading">Shop By Element</h2>
           </div>
         </div>
-        <div class="soho-video-trio">
-          <figure>
-            <div class="soho-video soho-kenburns"><a href="/shop?zodiac=aries"><img src="/gemini-starlight-tee/gemini-starlight-tee-model-side.jpg" alt="Fire sign apparel" loading="lazy"></a></div>
+        <div class="soho-video-trio soho-video-trio--four" data-element-grid>
+          <figure data-element="Fire">
+            <div class="soho-video soho-kenburns"><a href="/shop?element=fire"><img src="/leo-zodiac-hoodie/leo-zodiac-hoodie-girl.jpg" alt="Fire sign apparel: the Leo Zodiac Hoodie" loading="lazy" width="1200" height="1600"></a></div>
             <figcaption>Fire Signs</figcaption>
           </figure>
-          <figure>
-            <div class="soho-video soho-kenburns"><a href="/shop?zodiac=pisces"><img src="/pisces-hoodie/pisces-hoodie-female.jpg" alt="Water sign apparel" loading="lazy"></a></div>
-            <figcaption>Water Signs</figcaption>
+          <figure data-element="Earth">
+            <div class="soho-video soho-kenburns"><a href="/shop?element=earth"><img src="/shop-images/taurus-crop-tee/taurus-crop-tee-lifestyle-front-1.jpg" alt="Earth sign apparel: the Taurus crop tee" loading="lazy" width="1200" height="1600"></a></div>
+            <figcaption>Earth Signs</figcaption>
           </figure>
-          <figure>
-            <div class="soho-video soho-kenburns"><a href="/shop?zodiac=gemini"><img src="/leo-zodiac-hoodie/leo-zodiac-hoodie-girl.jpg" alt="Air sign apparel" loading="lazy"></a></div>
+          <figure data-element="Air">
+            <div class="soho-video soho-kenburns"><a href="/shop?element=air"><img src="/gemini-starlight-tee/gemini-starlight-tee-model-side.jpg" alt="Air sign apparel: the Gemini Starlight Tee" loading="lazy" width="1200" height="1600"></a></div>
             <figcaption>Air Signs</figcaption>
+          </figure>
+          <figure data-element="Water">
+            <div class="soho-video soho-kenburns"><a href="/shop?element=water"><img src="/pisces-hoodie/pisces-hoodie-female.jpg" alt="Water sign apparel: the Pisces Hoodie" loading="lazy" width="1200" height="1600"></a></div>
+            <figcaption>Water Signs</figcaption>
           </figure>
         </div>
       </div>
@@ -374,7 +411,7 @@
         <div>
           <p class="soho-eyebrow">New</p>
           <h2 class="soho-heading" style="font-size:clamp(1.9rem,3vw,2.6rem);">Cosmic Compatibility Certificates</h2>
-          <p style="margin:1rem 0 1.75rem;color:var(--soho-on-midnight-soft) !important;max-width:46ch;">Your connection, written in the stars. Transform your astrological compatibility into a beautiful certificate — from digital keepsakes to museum-quality framed art. The perfect anniversary or wedding gift.</p>
+          <p style="margin:1rem 0 1.75rem;color:var(--soho-on-midnight-soft) !important;max-width:46ch;">Your connection, written in the stars. Your two signs, written up as a keepsake certificate: emailed as a PDF within 48 hours, with printed and framed editions made to order. A thoughtful anniversary or wedding gift.</p>
           <div class="soho-hero__actions">
             <a class="soho-btn soho-btn--gold" href="/compatibility">Explore Certificates</a>
             <a class="soho-btn soho-btn--outline" href="/compatibility#preview">Try Free Preview</a>
@@ -438,26 +475,27 @@
       <div class="soho-container">
         <div class="soho-tiles soho-tiles--quad">
           <div class="soho-tile">
-            <h4>Join 874+ Customers</h4>
-            <p>Growing community of cosmic souls</p>
+            <h4>Printed to order</h4>
+            <p>Each piece is made for you when you order it, by our production partner Printful.</p>
           </div>
           <div class="soho-tile">
-            <h4>Secure Checkout</h4>
-            <p>256-bit SSL encryption via Stripe</p>
+            <h4>Secure checkout</h4>
+            <p>Payments are taken by Stripe; we never see your card details.</p>
           </div>
           <div class="soho-tile">
-            <h4>30-Day Returns</h4>
-            <p>No questions asked guarantee</p>
+            <h4>14-day exchanges</h4>
+            <p>Size exchanges within 14 days of delivery. See our refund policy.</p>
           </div>
           <div class="soho-tile">
-            <h4>Premium Materials</h4>
-            <p>Ethically sourced, quality crafted</p>
+            <h4>Readings within 48 hours</h4>
+            <p>Written from your birth details and read by us before they are sent.</p>
           </div>
         </div>
       </div>
     </section>
   </main>
 
+  <script src="/js/house.js"></script>
   <script type="module" src="/js/featured-grid.js"></script>
 
   <footer class="footer">
@@ -494,8 +532,9 @@
         <a href="/privacy-policy">Privacy Policy</a>
         <a href="/terms-of-service">Terms of Service</a>
         <a href="/refund-policy">Refund Policy</a>
+        <a href="/partners">Partners</a>
       </div>
-      <p>&copy; 2024 Lyrion Atelier. All rights reserved.</p>
+      <p class="footer-legal">&copy; <span data-year>2026</span> LYRION LTD. Lyr&#299;on Atelier is operated by LYRION LTD, company number 16904877, registered in England and Wales. Registered office: Flat 9 Centro, 399 South Row, Milton Keynes, MK9 2PG.</p>
     </div>
   </footer>
 

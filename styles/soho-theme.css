@@ -1505,3 +1505,16 @@ body.soho-lightbox-open { overflow: hidden; }
   .soho-video-split, .soho-video-trio { gap: 1rem; }
   .soho-tiles { gap: 1rem; }
 }
+
+/* Legal operator line in every footer */
+.footer .footer-legal,
+.footer-legal {
+  max-width: 72ch;
+  margin: 1.25rem auto 0 !important;
+  padding-top: 1rem;
+  border-top: 1px solid var(--soho-midnight-line, rgba(247, 231, 196, 0.14));
+  font-size: 0.875rem !important;
+  line-height: 1.6;
+  text-align: center;
+  opacity: 1 !important;
+}

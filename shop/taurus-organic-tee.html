@@ -3,6 +3,7 @@
 <head>
 <script src="/js/analytics.js"></script>
   <meta charset="UTF-8">
+  <meta name="lyrion:product" content="taurus-organic-tee">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Taurus Unisex Organic Ribbed Neck T-Shirt | Lyrīon Atelier</title>
   <meta name="description" content="Sustainable luxury meets cosmic style. Premium organic cotton tee with ribbed neckline featuring the Taurus constellation. Perfect gift for Taurus (April 20 - May 20).">
@@ -39,8 +40,8 @@
   "offers": {
     "@type": "Offer",
     "url": "https://lyrionatelier.com/shop/taurus-organic-tee",
-    "priceCurrency": "USD",
-    "price": "59.99",
+    "priceCurrency": "GBP",
+    "price": "42.99",
     "availability": "https://schema.org/InStock"
   }
 }
@@ -72,6 +73,7 @@
 }
 </script>
   <link rel="stylesheet" href="/css/restoration.css">
+  <link rel="stylesheet" href="/css/house.css">
   <link rel="stylesheet" href="/css/pdp-layout.css">
 </head>
 <body data-page="product">
@@ -111,6 +113,8 @@
      <a href="/curated-for-gifting?for=couples">For Couples</a>
      <a href="/curated-for-gifting?for=self">For Self</a>
      <a href="/curated-for-gifting?for=birthday">Birthday &amp; Milestone</a>
+     <a href="/gift-concierge">Gift Concierge</a>
+     <a href="/birthday-book">Birthday Book</a>
    </div>
  </div>
  <a href="/codex">About / Journal</a>
@@ -148,11 +152,11 @@
     <div class="pdp-selector">
       <label for="size-select">Size</label>
       <select id="size-select" class="input-select">
-              <option value="69653de7ef42f3">S - $54.00</option>
-              <option value="69653de7ef4361" selected>M - $54.00</option>
-              <option value="69653de7ef43c4">L - $54.00</option>
-              <option value="69653de7ef4429">XL - $54.00</option>
-              <option value="69653de7ef4474">2XL - $56.64</option>
+              <option value="69653de7ef42f3">S - $42.99</option>
+              <option value="69653de7ef4361" selected>M - $42.99</option>
+              <option value="69653de7ef43c4">L - $42.99</option>
+              <option value="69653de7ef4429">XL - $42.99</option>
+              <option value="69653de7ef4474">2XL - $44.99</option>
             </select>
       <p class="sizing-note">Classic unisex fit. True to size for comfortable wear.</p>
     </div>
@@ -240,7 +244,6 @@
               <li>Ribbed crew neck detail</li>
               <li>Classic unisex fit</li>
               <li>Soft, breathable fabric</li>
-              <li>Ethically made</li>
               <li>Taurus constellation design</li>
               <li>Perfect Taurus birthday gift (April 20 - May 20)</li>
               <li>Sustainable luxury for conscious consumers</li>
@@ -274,7 +277,7 @@
             <svg class="pdp-accordion__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="pdp-accordion__panel" id="pdp-acc-shipping-panel">
-            <p>Ships within 2&ndash;5 business days of your order. Delivery 5&ndash;10 business days. Free returns within 30 days.</p>
+            <p>Made to order by Printful, usually dispatched within 2&ndash;5 business days; delivery time depends on where it is going. Free delivery on orders of $50 or more. Size exchanges within 14 days of delivery: see our <a href="/refund-policy">refund policy</a>.</p>
           </div>
         </div>
 
@@ -377,18 +380,19 @@
         </a>
       </div>
   </div>
-</footer>
+  <p class="footer-legal">&copy; <span data-year>2026</span> LYRION LTD. Lyr&#299;on Atelier is operated by LYRION LTD, company number 16904877, registered in England and Wales. Registered office: Flat 9 Centro, 399 South Row, Milton Keynes, MK9 2PG.</p>
+  </footer>
 
 <script src="/js/cart.js"></script>
 <script src="/js/main.js"></script>
 <script>
   (function() {
     const variants = [
-      { size: 'S', variantId: '69653de7ef42f3', price: 54.00 },
-      { size: 'M', variantId: '69653de7ef4361', price: 54.00 },
-      { size: 'L', variantId: '69653de7ef43c4', price: 54.00 },
-      { size: 'XL', variantId: '69653de7ef4429', price: 54.00 },
-      { size: '2XL', variantId: '69653de7ef4474', price: 56.64 }
+      { size: 'S', variantId: '69653de7ef42f3', price: 42.99 },
+      { size: 'M', variantId: '69653de7ef4361', price: 42.99 },
+      { size: 'L', variantId: '69653de7ef43c4', price: 42.99 },
+      { size: 'XL', variantId: '69653de7ef4429', price: 42.99 },
+      { size: '2XL', variantId: '69653de7ef4474', price: 44.99 }
     ];
 
     const defaultVariant = variants.find((variant) => variant.size === 'M') || variants[0];
@@ -486,5 +490,7 @@
     } catch (e) {}
   });
 </script>
+<script src="/js/house.js"></script>
+<script src="/js/house-pdp.js"></script>
 </body>
 </html>

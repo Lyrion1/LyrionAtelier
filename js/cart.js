@@ -47,7 +47,10 @@ const upsertCartItem = (nextItem) => {
   );
 
   if (matchIndex > -1) {
-    cart[matchIndex].quantity = (cart[matchIndex].quantity || 1) + (nextItem.quantity || 1);
+    // A reading or certificate is written for one set of details, so it is one piece.
+    cart[matchIndex].quantity = DIGITAL_CATEGORIES.includes(String(nextItem.category || '').toLowerCase())
+      ? 1
+      : (cart[matchIndex].quantity || 1) + (nextItem.quantity || 1);
     cart[matchIndex].price = nextItem.price;
     cart[matchIndex].name = nextItem.name;
     cart[matchIndex].image = nextItem.image || cart[matchIndex].image || null;
@@ -266,7 +269,7 @@ function updateQuantity(productId, size, newQuantity) {
   const item = cart.find(item => String(item.id) === String(productId) && item.size === size);
 
   if (item) {
-    item.quantity = newQuantity;
+    item.quantity = DIGITAL_CATEGORIES.includes(String(item.category || '').toLowerCase()) ? 1 : newQuantity;
     writeCart(cart);
     displayCart();
     updateCartCount();
@@ -283,6 +286,17 @@ function evaluateBundleDiscount(cart = readCart()) {
 }
 
 const formatMoney = (amount) => `$${amount.toFixed(2)}`;
+
+// Readings and certificates are emailed, so only posted pieces count towards
+// delivery. Must match create-checkout: free from £50 of posted pieces,
+// £5.99 below that, nothing at all when nothing is posted.
+const DIGITAL_CATEGORIES = ['oracle_reading', 'compatibility_certificate', 'reading', 'certificate'];
+const isPostedItem = (item = {}) => !DIGITAL_CATEGORIES.includes(String(item.category || '').toLowerCase());
+function shippingFor(cart = []) {
+  const posted = cart.filter(isPostedItem).reduce((sum, item) => sum + ((toNumber(item.price) || 0) * (item.quantity || 1)), 0);
+  if (posted <= 0) return 0;
+  return posted >= 50 ? 0 : 5.99;
+}
 
 const syncBundleChips = () => {};
 const bindBundleChips = () => {};
@@ -363,7 +377,7 @@ function displayCart() {
   
   // Calculate and update order summary
   const subtotal = cart.reduce((sum, item) => sum + ((toNumber(item.price) || 0) * (item.quantity || 1)), 0);
-  const shipping = subtotal > 50 ? 0 : 5.99;
+  const shipping = shippingFor(cart);
   const { savingsCents } = evaluateBundleDiscount(cart);
   const discount = (savingsCents || 0) / 100;
   const total = subtotal - discount + shipping;
@@ -465,7 +479,7 @@ function displayCheckoutSummary() {
   });
   
   const subtotal = cart.reduce((sum, item) => sum + ((toNumber(item.price) || 0) * (item.quantity || 1)), 0);
-  const shipping = subtotal > 50 ? 0 : 5.99;
+  const shipping = shippingFor(cart);
   const { savingsCents } = evaluateBundleDiscount(cart);
   const discount = (savingsCents || 0) / 100;
   const total = subtotal - discount + shipping;

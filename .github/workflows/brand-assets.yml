@@ -1,46 +1,44 @@
 name: Normalize Brand Assets
 
+# Manual only. This builds brand marks from whatever images it finds and
+# commits them; it was never able to run before (the file was not valid YAML),
+# and running it on a schedule would commit unreviewed assets.
 on:
-workflow_dispatch:
-schedule:
-- cron: '15 3 * * *' # daily 03:15 UTC
+  workflow_dispatch:
 
 permissions:
-contents: write
+  contents: write
 
 jobs:
-normalize:
-runs-on: ubuntu-latest
-steps:
-- name: Checkout
-uses: actions/checkout@v4
+  normalize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-- name: Setup Node
-uses: actions/setup-node@v4
-with:
-node-version: '20'
-cache: 'npm'
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-- name: Install deps
-run: |
-npm ci || npm i
-npm i --no-save sharp fast-glob
+      - name: Install deps
+        run: npm install --no-save sharp fast-glob
 
-- name: Normalize brand marks
-run: node scripts/normalize-brand.mjs
+      - name: Normalize brand marks
+        run: node scripts/normalize-brand.mjs
 
-- name: Build neck label (optional)
-run: node scripts/build-neck-label.mjs
-continue-on-error: true
+      - name: Build neck label (optional)
+        run: node scripts/build-neck-label.mjs
+        continue-on-error: true
 
-- name: Commit changes (if any)
-run: |
-git config user.name "lyrion-bot"
-git config user.email "bot@users.noreply.github.com"
-git add -A
-if git diff --cached --quiet; then
-echo "No changes"
-else
-git commit -m "chore(assets): normalize brand assets"
-git push
-fi
+      - name: Commit changes (if any)
+        run: |
+          git config user.name "lyrion-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add printful-files/brand
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "chore(assets): normalize brand assets"
+            git push
+          fi

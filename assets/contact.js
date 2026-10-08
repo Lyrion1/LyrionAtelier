@@ -82,10 +82,19 @@ async function handleSubmit(event) {
     controller.abort();
   }, FORM_SUBMIT_TIMEOUT);
   try {
-    const response = await fetch(form.getAttribute('action') || '/', {
+    // The site is static, so messages go to the enquiry function, which
+    // stores them and emails them to the owner with the sender as reply-to.
+    const response = await fetch('https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/enquiry', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encodeFormData(formData),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        kind: 'contact',
+        name: formData.get('name') || '',
+        email: formData.get('email') || '',
+        subject: formData.get('reason') || formData.get('subject') || '',
+        message: formData.get('message') || '',
+        website: formData.get('bot-field') || ''
+      }),
       signal: controller.signal
     });
     if (!response.ok) throw new Error('Network response was not ok');
@@ -115,6 +124,14 @@ async function handleSubmit(event) {
 function initContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
+  // Links such as /contact?subject=Luxury%20Print%20certificate start the message for the customer.
+  const subject = new URLSearchParams(location.search).get('subject');
+  if (subject) {
+    const reason = form.querySelector('#contact-reason');
+    const message = form.querySelector('#contact-message');
+    if (reason && /certificate/i.test(subject)) reason.value = 'Compatibility Certificate';
+    if (message && !message.value) message.value = `Enquiry about the ${subject.slice(0, 80)}: `;
+  }
   form.addEventListener('submit', handleSubmit);
 }
 

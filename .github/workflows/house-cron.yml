@@ -1,0 +1,29 @@
+name: House sweep and keep-alive
+
+# Every three hours: retry Printful orders that failed, retry readings that
+# could not be written, remind the owner of anything awaiting approval, and
+# write a heartbeat row. The heartbeat keeps the Supabase project that hosts
+# checkout from being paused for inactivity (free projects pause after seven
+# days without activity). The 05:23 run is the daily keep-alive.
+on:
+  schedule:
+    - cron: '23 */3 * * *'
+  workflow_dispatch:
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call house-cron
+        env:
+          HOUSE_CRON_KEY: ${{ secrets.HOUSE_CRON_KEY }}
+        run: |
+          if [ -z "$HOUSE_CRON_KEY" ]; then
+            echo "::error::HOUSE_CRON_KEY is not set, so the sweep and keep-alive cannot run."
+            exit 1
+          fi
+          status=$(curl -sS -o response.json -w '%{http_code}' --max-time 140 \
+            -X POST -H "x-house-key: $HOUSE_CRON_KEY" \
+            https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/house-cron)
+          cat response.json; echo
+          test "$status" = "200"

@@ -1,0 +1,9 @@
+{
+  "updated": "2026-10-07T06:00:00Z",
+  "written_by": "Lyrion house engine. Do not edit by hand.",
+  "lead_sign": "Libra",
+  "on_show": ["Libra", "Scorpio"],
+  "last_chance": ["Virgo"],
+  "retired_until_next_season": ["Leo"],
+  "campaigns": [{ "key": "retrograde-edit", "title": "Run the Retrograde Edit", "start": "2026-10-24", "end": "2026-11-13" }]
+}

@@ -1120,6 +1120,8 @@ function buildSiteFooter() {
           <a href="/shop?collection=essentials">Lyrīon Essentials</a>
           <a href="/shop?collection=accessories">Accessories &amp; Home</a>
           <a href="/curated-for-gifting">Gifts</a>
+          <a href="/gift-concierge">Gift Concierge</a>
+          <a href="/birthday-book">Birthday Book</a>
         </div>
       </div>
       <div class="footer-col">
@@ -1128,6 +1130,7 @@ function buildSiteFooter() {
           <a href="/oracle">Readings</a>
           <a href="/compatibility">Compatibility</a>
           <a href="/codex">Codex</a>
+          <a href="/partners">Partners</a>
           <a href="/#about">About</a>
         </div>
       </div>
@@ -1140,7 +1143,7 @@ function buildSiteFooter() {
           <a href="/refund-policy">Refund Policy</a>
         </div>
       </div>
-      <p>&copy; 2024 Lyrion Atelier. All rights reserved.</p>
+      <p class="footer-legal">&copy; <span data-year>${new Date().getFullYear()}</span> LYRION LTD. Lyr&#299;on Atelier is operated by LYRION LTD, company number 16904877, registered in England and Wales. Registered office: Flat 9 Centro, 399 South Row, Milton Keynes, MK9 2PG.</p>
     </div>`;
   return footer;
 }
@@ -2031,3 +2034,13 @@ function handleEmailSignup(event) {
     form.reset();
   }, 1000);
 }
+
+// Footer copyright year: always the current year.
+(function setFooterYear() {
+  const apply = () => {
+    const year = String(new Date().getFullYear());
+    document.querySelectorAll('[data-year]').forEach((node) => { node.textContent = year; });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply);
+  else apply();
+})();

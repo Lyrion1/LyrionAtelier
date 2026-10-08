@@ -3,7 +3,9 @@ import path from 'path';
 const ROOT = process.cwd();
 const PUBLIC_DIR = path.join(ROOT, 'public');
 const DATA_JS = path.join(ROOT, 'js', 'products.js');
-const DATA_JSON = path.join(ROOT, 'data', 'all-products.json');
+// Suggestions only: data/catalogue.json's images are chosen by hand, so this
+// writes its zodiac image matches to a report instead of into the catalogue.
+const DATA_JSON = path.join(ROOT, 'data', 'image-attach-report.json');
 const ZS = ["aries","taurus","gemini","cancer","leo","virgo","libra","scorpio","sagittarius","capricorn","aquarius","pisces"];
 const exts = /\.(png|jpg|jpeg|webp|avif)$/i;
 

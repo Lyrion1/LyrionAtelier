@@ -113,8 +113,26 @@ test.describe('shop fallback art', () => {
     await page.route('**/js/products.js', (route) =>
       route.fulfill({ status: 200, contentType: 'application/javascript', body: '' })
     );
-    await page.route('**/data/all-products.json', (route) =>
-      route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(SAMPLE_PRODUCTS) })
+    // The shop reads data/catalogue.json through js/house.js.
+    const catalogue = {
+      products: SAMPLE_PRODUCTS.map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        sign: 'zodiac' in p ? 'Aries' : null,
+        element: 'zodiac' in p ? 'Fire' : null,
+        collection: 'Test',
+        type: 'apparel',
+        description: '',
+        images: 'images' in p ? [...p.images] : [],
+        price_gbp: { min: p.price, max: p.price },
+        variants: [{ size: 'M', price_gbp: p.price, printful_variant_id: p.variants[0].id }],
+        fulfilment: 'printful',
+        seasonal: false,
+        listed: true
+      }))
+    };
+    await page.route('**/data/catalogue.json', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(catalogue) })
     );
 
     await page.addInitScript((products) => {

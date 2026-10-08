@@ -40,7 +40,7 @@ function loadDynamicShopSlugs(): Set<string> {
   const slugs = new Set<string>();
   const files = [
     path.join(ROOT, 'public/data/products.json'),
-    path.join(ROOT, 'data/all-products.json'),
+    path.join(ROOT, 'data/catalogue.json'),
     path.join(ROOT, 'js/products.js')
   ];
   for (const file of files) {
@@ -121,7 +121,7 @@ test('all internal links resolve to a real file or supported dynamic route', asy
     ];
 
     // For products catalog JSON, also check every explicit "link" field value
-    if (file.endsWith('all-products.json') || file.endsWith('products.json')) {
+    if (file.endsWith('catalogue.json') || file.endsWith('products.json')) {
       try {
         const parsed = JSON.parse(text);
         const visit = (value: any) => {

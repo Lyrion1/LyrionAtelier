@@ -5,13 +5,17 @@
     "brand:images": "node scripts/attach-images.mjs",
     "build:images": "node scripts/build-images-map.mjs",
     "prepare:catalog": "node tools/prepare-catalog-images.mjs",
-    "build": "npm run prepare:catalog && npm run build:images && npm run build:catalog && npm run test:images && npm run test:catalog",
+    "build": "npm run prepare:catalog && npm run build:images && npm run build:catalog && npm run sync:pages && npm run test:images && npm run test:catalog",
     "optimize:images": "node scripts/optimize-images.mjs",
     "test:shop": "playwright test tests",
     "test:images": "node tests/validate-image-references.mjs",
     "fetch-printful": "node scripts/fetch-printful-variants.js",
     "build:catalog": "node scripts/build-checkout-catalog.mjs",
-    "test:catalog": "node scripts/verify-catalog.mjs"
+    "test:catalog": "node scripts/verify-catalog.mjs",
+    "sync:pages": "node scripts/sync-static-pages.mjs",
+    "publish:codex": "node scripts/publish-codex.mjs",
+    "design:intake": "node scripts/design-intake.mjs",
+    "test:house": "node --test tests/house.test.mjs tests/design-intake.test.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.30.0",

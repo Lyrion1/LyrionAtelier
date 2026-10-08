@@ -1,41 +1,38 @@
-name: Sync Printful Products
+name: Sync Printful snapshot
 
-# Run every day at 3 AM, or manually
+# Records which sync products and variants exist in the Printful store
+# (data/printful-sync.json). CI checks data/catalogue.json against it.
 on:
   schedule:
-    - cron: '0 3 * * *' # 3 AM daily
-  workflow_dispatch: # Allows manual running
+    - cron: '17 3 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  sync-products:
+  snapshot:
     runs-on: ubuntu-latest
-
     steps:
-      # Step 1: Checkout your repo
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Use Node.js 20 (for fetch support)
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      # Step 2: Fetch detailed sync products (with variants + mockups) from Printful
-      - name: Fetch Printful sync products
+      - name: Fetch the Printful store
         env:
           PRINTFUL_API_KEY: ${{ secrets.PRINTFUL_API_KEY }}
-        run: node scripts/sync-printful.js
-
-      # Step 3: Commit and push changes
-      - name: Commit products file
+          PRINTFUL_STORE_ID: ${{ secrets.PRINTFUL_STORE_ID }}
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add data/all-products.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "🔄 Auto-update Printful products"
-          git push
+          if [ -z "$PRINTFUL_API_KEY" ]; then
+            echo "::warning::PRINTFUL_API_KEY is not set, so no snapshot was taken."
+            exit 0
+          fi
+          node scripts/sync-printful.js
+      - name: Check the catalogue against it
+        run: node scripts/verify-catalog.mjs
+      - name: Commit the snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/printful-sync.json 2>/dev/null || true
+          git diff --cached --quiet && echo "No changes" || (git commit -m "chore(printful): refresh store snapshot" && git push)
