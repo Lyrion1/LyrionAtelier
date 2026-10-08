@@ -4,7 +4,7 @@ name: House sweep and keep-alive
 # could not be written, remind the owner of anything awaiting approval, and
 # write a heartbeat row. The heartbeat keeps the Supabase project that hosts
 # checkout from being paused for inactivity (free projects pause after seven
-# days without activity). The 05:23 run is the daily keep-alive.
+# days without activity); eight runs a day comfortably cover the daily keep-alive.
 on:
   schedule:
     - cron: '23 */3 * * *'
