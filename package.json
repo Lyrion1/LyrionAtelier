@@ -15,7 +15,7 @@
     "sync:pages": "node scripts/sync-static-pages.mjs",
     "publish:codex": "node scripts/publish-codex.mjs",
     "design:intake": "node scripts/design-intake.mjs",
-    "test:house": "node --test tests/house.test.mjs tests/design-intake.test.mjs"
+    "test:house": "node --test tests/house.test.mjs tests/design-intake.test.mjs tests/ci-scripts.test.mjs tests/engine-files.test.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.30.0",

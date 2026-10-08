@@ -14,8 +14,8 @@ const path = require('path');
 
 const token = process.env.PRINTFUL_API_KEY;
 if (!token) {
-  console.error('PRINTFUL_API_KEY is not configured.');
-  process.exit(1);
+  console.log('::notice::Skipped: PRINTFUL_API_KEY is not set, so the Printful store was not read. Add it under GitHub > Settings > Secrets and variables > Actions.');
+  process.exit(0);
 }
 
 const OUT_FILE = path.join(process.cwd(), 'data', 'printful-sync.json');

@@ -1,5 +1,5 @@
 // Fulfilment tests against a stand-in Printful API.
-//   cd supabase/functions && deno test --allow-net --allow-env --allow-read tests/
+//   cd supabase/functions && tests/with-postgres.sh deno test --allow-all tests/
 import { assert, assertEquals } from 'jsr:@std/assert@1';
 
 const calls: { method: string; path: string; body: any }[] = [];

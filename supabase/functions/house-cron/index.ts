@@ -17,7 +17,12 @@ Deno.serve(async (req: Request) => {
   const beat = await db().from('heartbeat').upsert({ id: 1, beat_at: new Date().toISOString() });
   report.heartbeat = !beat.error;
 
-  const { data: failed } = await db().from('orders').select('id, printful_attempts').eq('printful_status', 'failed').limit(20);
+  // Failed sends, and sends whose worker stopped mid-way (a claim older than
+  // ten minutes; the claim function lets the retry take it over).
+  const stale = new Date(Date.now() - 10 * 60_000).toISOString();
+  const { data: failed } = await db().from('orders').select('id, printful_attempts')
+    .or(`printful_status.eq.failed,and(printful_status.eq.sending,printful_claimed_at.lt.${stale})`)
+    .limit(20);
   for (const o of failed ?? []) {
     if (!canRetryPrintful(o.printful_attempts)) continue;
     report.printful_retried += 1;

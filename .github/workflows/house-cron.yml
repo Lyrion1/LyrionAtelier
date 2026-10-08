@@ -14,16 +14,8 @@ jobs:
   sweep:
     runs-on: ubuntu-latest
     steps:
-      - name: Call house-cron
+      - uses: actions/checkout@v4
+      - name: Call house-cron (skips cleanly until HOUSE_CRON_KEY is set and the function is deployed)
         env:
           HOUSE_CRON_KEY: ${{ secrets.HOUSE_CRON_KEY }}
-        run: |
-          if [ -z "$HOUSE_CRON_KEY" ]; then
-            echo "::error::HOUSE_CRON_KEY is not set, so the sweep and keep-alive cannot run."
-            exit 1
-          fi
-          status=$(curl -sS -o response.json -w '%{http_code}' --max-time 140 \
-            -X POST -H "x-house-key: $HOUSE_CRON_KEY" \
-            https://zqomzteaeiqtnipkgyuo.supabase.co/functions/v1/house-cron)
-          cat response.json; echo
-          test "$status" = "200"
+        run: scripts/ci/house-sweep.sh

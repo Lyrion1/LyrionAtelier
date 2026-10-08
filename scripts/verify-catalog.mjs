@@ -4,8 +4,9 @@
  *
  * Fails when
  *   1. data/catalogue.json is malformed or breaks a catalogue rule,
- *   2. the checkout price map (public/data/products.json) differs from what
- *      the catalogue generates,
+ *   2. the checkout price map (public/data/products.json), or the Printful-only
+ *      map for the previous checkout function (data/products.json), differs
+ *      from what the catalogue generates,
  *   3. a hand-built product page (shop/*.html) sells a slug, variant or price
  *      the catalogue does not have,
  *   4. a reading, certificate or keepsake button names a product or price the
@@ -26,10 +27,12 @@ import path from 'node:path';
 import {
   REPO_ROOT,
   CHECKOUT_MAP_PATH,
+  LEGACY_CHECKOUT_MAP_PATH,
   PRINTFUL_SNAPSHOT_PATH,
   loadCatalogue,
   validateCatalogue,
   buildCheckoutMap,
+  buildLegacyCheckoutMap,
   houseCore,
 } from './lib/catalog.mjs';
 import { checkStaticPages } from './sync-static-pages.mjs';
@@ -61,6 +64,18 @@ try {
   }
 } catch (err) {
   errors.push(`could not read the checkout price map: ${err.message}`);
+}
+
+try {
+  const legacy = JSON.parse(await readFile(LEGACY_CHECKOUT_MAP_PATH, 'utf8'));
+  if (JSON.stringify(legacy) !== JSON.stringify(buildLegacyCheckoutMap(catalogue))) {
+    errors.push('data/products.json differs from what the catalogue generates; run npm run build:catalog');
+  }
+  for (const e of legacy) {
+    if (bySlug.get(e.id)?.fulfilment !== 'printful') errors.push(`data/products.json: "${e.id}" is not a Printful piece`);
+  }
+} catch (err) {
+  errors.push(`could not read data/products.json: ${err.message}`);
 }
 
 // 3. Static product pages

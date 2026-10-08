@@ -55,23 +55,26 @@ export function giftBlock(note?: string): { subject: string; message: string } |
   return { subject: 'A gift for you', message: clean.slice(0, 200) };
 }
 
+/** The order Printful already holds for this payment, confirmed if it was left as a draft. */
+async function findExisting(externalId: string): Promise<{ id: number; status: string } | null> {
+  const existing = await call('GET', `/orders/@${encodeURIComponent(externalId)}`);
+  if (existing.status !== 200 || !existing.data?.result?.id) return null;
+  const order = existing.data.result;
+  if (order.status === 'draft') {
+    const confirmed = await call('POST', `/orders/${order.id}/confirm`);
+    if (confirmed.status >= 400) throw new Error(`Printful confirm failed: ${confirmed.data?.error?.message ?? confirmed.status}`);
+    return { id: order.id, status: confirmed.data?.result?.status ?? 'pending' };
+  }
+  return { id: order.id, status: order.status };
+}
+
 /**
- * Create and confirm the order. An order already created for this payment
- * (same external id) is found and returned rather than duplicated, so Stripe
- * redelivering the webhook can never ship twice.
+ * Create and confirm the order. Before every attempt, Printful is asked for an
+ * order with this payment's external id, and one that exists is returned
+ * rather than duplicated. That covers Stripe redelivering the webhook and an
+ * attempt whose reply was lost after Printful had accepted the order.
  */
 export async function createConfirmedOrder(input: PrintfulOrderInput, attempts = 3): Promise<{ id: number; status: string }> {
-  const existing = await call('GET', `/orders/@${encodeURIComponent(input.externalId)}`);
-  if (existing.status === 200 && existing.data?.result?.id) {
-    const order = existing.data.result;
-    if (order.status === 'draft') {
-      const confirmed = await call('POST', `/orders/${order.id}/confirm`);
-      if (confirmed.status >= 400) throw new Error(`Printful confirm failed: ${confirmed.data?.error?.message ?? confirmed.status}`);
-      return { id: order.id, status: confirmed.data?.result?.status ?? 'pending' };
-    }
-    return { id: order.id, status: order.status };
-  }
-
   const body: Record<string, unknown> = {
     external_id: input.externalId,
     recipient: input.recipient,
@@ -80,8 +83,10 @@ export async function createConfirmedOrder(input: PrintfulOrderInput, attempts =
   const gift = giftBlock(input.giftNote);
   if (gift) body.gift = gift;
 
-  let lastError = '';
+  let lastError: unknown = '';
   for (let i = 0; i < attempts; i += 1) {
+    const found = await findExisting(input.externalId);
+    if (found) return found;
     const res = await call('POST', '/orders?confirm=true', body);
     if (res.status < 300 && res.data?.result?.id) {
       return { id: res.data.result.id, status: res.data.result.status };
@@ -89,7 +94,10 @@ export async function createConfirmedOrder(input: PrintfulOrderInput, attempts =
     lastError = res.data?.error?.message || res.data?.result || `HTTP ${res.status}`;
     // A 4xx other than rate limiting will not succeed on retry.
     if (res.status >= 400 && res.status < 500 && res.status !== 429) break;
-    await new Promise((r) => setTimeout(r, 1000 * 2 ** i));
+    if (i < attempts - 1) await new Promise((r) => setTimeout(r, 1000 * 2 ** i));
   }
+  // The last attempt's reply may itself have been lost.
+  const found = await findExisting(input.externalId);
+  if (found) return found;
   throw new Error(`Printful order failed: ${typeof lastError === 'string' ? lastError : JSON.stringify(lastError)}`);
 }
