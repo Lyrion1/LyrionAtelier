@@ -897,14 +897,14 @@ const products = [
     element: "air",
     gender: "women",
     collection: "Zodiac Hero",
-    image: "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+    image: "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
     images: [
-      "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
-      "/aquarius-crop-hoodie/aquarius-crop-hoodie-front2.jpg",
       "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
-      "/aquarius-crop-hoodie/aquarius-crop-hoodie-side.jpg"
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-side.jpg",
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-front2.jpg"
     ],
-    mainImage: "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+    mainImage: "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
     description: "The water bearer flows through you. Aquarius doesn't carry water—they ARE the water, the life force, the current that nourishes all of humanity. This cropped hoodie channels Aquarian defiance through sacred water symbolism, wrapping visionary souls in comfort designed for those who refuse to follow the current—they create it.",
     mysticalCopy: "Water is life. I am water. I flow where others fear to tread.",
     sizes: ["S", "M", "L", "XL", "2XL"],

@@ -258,14 +258,15 @@ function pickRandom(list = []) {
 }
 
 function extractLoveLanguageText(product = {}) {
+  // Only an explicit love-language line. A loose match on "fire" or "heart"
+  // was painting a "Love Language" badge on pieces that are not in that edit,
+  // including the Aquarius crop hoodie.
   const sources = [
     product.loveLanguage,
     product.love_language,
     product.copy?.loveLanguage,
-    product.copy?.quote,
-    product.quote,
-    product.copy?.notes,
-    product.description
+    product.mysticalCopy,
+    product.copy?.mysticalCopy
   ].filter(Boolean);
 
   for (const source of sources) {
@@ -273,10 +274,7 @@ function extractLoveLanguageText(product = {}) {
       .split(/\n+/)
       .map((line) => line.replace(/^[•\-]\s*/, '').trim())
       .filter(Boolean);
-
-    const match =
-      lines.find((line) => /love language/i.test(line)) ||
-      lines.find((line) => /quote|means|heart|fire|courage/i.test(line));
+    const match = lines.find((line) => /love language/i.test(line));
     if (match) return match;
   }
 
@@ -292,10 +290,10 @@ function buildTagGroup(title, items = []) {
   if (!items.length) return null;
   const group = document.createElement('section');
   group.className = 'product-tag-group';
-  group.innerHTML = `<h2 class="product-tag-group__title">${title}</h2><div class="product-tag-list"></div>`;
+  group.innerHTML = `<h2 class="product-tag-group__title">${title}</h2><ul class="product-tag-list"></ul>`;
   const list = group.querySelector('.product-tag-list');
   items.forEach((item) => {
-    const tag = document.createElement('span');
+    const tag = document.createElement('li');
     tag.className = 'product-tag';
     tag.textContent = item;
     list.appendChild(tag);
@@ -324,11 +322,13 @@ function renderLoveLanguage(product = {}) {
   if (!wrap || !textEl) return;
   const text = extractLoveLanguageText(product);
   if (!text) {
+    wrap.hidden = true;
     wrap.classList.remove('is-visible');
     textEl.textContent = '';
     return;
   }
   textEl.textContent = text;
+  wrap.hidden = false;
   wrap.classList.add('is-visible');
 }
 

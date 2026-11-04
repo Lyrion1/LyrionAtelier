@@ -667,9 +667,16 @@ function getSeoTemplate(pathname) {
       || document.querySelector('#product-description')?.textContent
       || 'Premium zodiac apparel featuring celestial symbolism from Lyrīon Atelier.'
     ).trim();
-    if (existing) return { title: existing, description };
-    const name = (document.querySelector('#product-name')?.textContent || 'Zodiac Apparel').trim();
-    return { title: `${name} | Lyrīon Atelier - Luxury Astrology & Zodiac Apparel`, description };
+    const generic = !existing || /^zodiac apparel \|/i.test(existing);
+    if (!generic) return { title: existing, description };
+    const name = (
+      document.querySelector('h1.pdp-name, h1.product-title, #product-name')?.textContent
+      || ''
+    ).trim();
+    if (name && !/^product$/i.test(name) && !/^zodiac apparel$/i.test(name)) {
+      return { title: `${name} | Lyrīon Atelier`, description };
+    }
+    return { title: existing || `${name || 'Zodiac Apparel'} | Lyrīon Atelier`, description };
   }
   return {
     title: document.title || 'Lyrīon Atelier - Luxury Astrology, Oracle Readings & Zodiac Apparel',
@@ -1119,7 +1126,8 @@ function ensureSeoMetadata() {
       "logo": `${SITE_ORIGIN}/images/lyrion-logo.png`,
       "sameAs": [
         "https://www.youtube.com/@LyrionAtelier",
-        "https://www.instagram.com/lyrionatelier?igsh=cG85eGhodzJkb2Jj&utm_source=qr"
+        "https://www.instagram.com/lyrionatelier/",
+        "https://www.tiktok.com/@lyrion_atelier"
       ],
       "priceRange": "$$-$$$"
     });
@@ -1201,6 +1209,11 @@ const FOOTER_INSTAGRAM_ICON = `
     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
   </svg>`;
 
+const FOOTER_TIKTOK_ICON = `
+  <svg class="footer-social__icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.54V6.79a4.85 4.85 0 01-1.02-.1z"/>
+  </svg>`;
+
 function buildSiteFooter() {
   const footer = document.createElement('footer');
   footer.className = 'footer';
@@ -1209,8 +1222,11 @@ function buildSiteFooter() {
       <a class="footer-social__link" href="https://www.youtube.com/@LyrionAtelier" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on YouTube">
         ${FOOTER_YOUTUBE_ICON}
       </a>
-      <a class="footer-social__link" href="https://www.instagram.com/lyrionatelier?igsh=cG85eGhodzJkb2Jj&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on Instagram">
+      <a class="footer-social__link" href="https://www.instagram.com/lyrionatelier/" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on Instagram">
         ${FOOTER_INSTAGRAM_ICON}
+      </a>
+      <a class="footer-social__link" href="https://www.tiktok.com/@lyrion_atelier" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on TikTok">
+        ${FOOTER_TIKTOK_ICON}
       </a>
     </div>`;
   footer.innerHTML = `

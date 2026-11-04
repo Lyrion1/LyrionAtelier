@@ -229,7 +229,7 @@ import { formatPrice } from './price-utils.js';
     };
     const resolveCollection = () => firstValue(p?.meta?.collection) || firstValue(p.collection) || '';
     const meta = {
-      category: p?.meta?.category || p.category || p.product_type || p.department || '',
+      category: canonicalFilterValue(p?.meta?.category || p.category || p.product_type || p.department || ''),
       collection: resolveCollection(),
       zodiac: p?.meta?.zodiac || p.zodiac || p.attributes?.zodiac || '',
       soldOut: p?.meta?.soldOut ?? p.soldOut ?? false
@@ -518,9 +518,64 @@ import { formatPrice } from './price-utils.js';
     values.forEach(add);
     return result;
   };
-  const setOptions = (select, values, allLabel = 'All', allValue = 'all') => {
+  // Slugs stored on products, and the words a shopper should see.
+  // hoodie/hoodies and Accessories/accessories collapse to one option.
+  const FILTER_LABELS = {
+    accessories: 'Accessories',
+    bag: 'Bags',
+    bandana: 'Bandanas',
+    hoodie: 'Hoodies',
+    hoodies: 'Hoodies',
+    'logo-line': 'Logo line',
+    men: 'Men',
+    mousepad: 'Mousepads',
+    mug: 'Mugs',
+    polo: 'Polos',
+    sleepwear: 'Sleepwear',
+    tee: 'Tees',
+    tshirts: 'T-shirts',
+    tote: 'Totes',
+    unisex: 'Unisex',
+    windbreaker: 'Windbreakers',
+    women: 'Women',
+    youth: 'Youth',
+    'zodiac-hero': 'Zodiac Hero',
+    'zodiac-relief': 'Zodiac relief',
+    'zodiac-collection': 'Zodiac collection',
+    mystery: 'Mystery boxes',
+    'eclipse-gilded': 'Eclipse gilded'
+  };
+  const canonicalFilterValue = (value) => {
+    const key = String(value || '').trim().toLowerCase();
+    if (key === 'hoodie') return 'hoodies';
+    if (key === 'accessories') return 'accessories';
+    return key;
+  };
+  const filterLabel = (value) => {
+    const key = canonicalFilterValue(value);
+    if (FILTER_LABELS[key]) return FILTER_LABELS[key];
+    const raw = String(value || '').trim();
+    if (/\s/.test(raw)) return raw;
+    return key.replace(/[-_]+/g, ' ').replace(/\b\w/g, (ch) => ch.toUpperCase());
+  };
+  const uniqueFilterEntries = (values) => {
+    const seen = new Set();
+    const entries = [];
+    values.forEach((value) => {
+      const raw = normalizeLabel(value);
+      if (!raw) return;
+      const key = canonicalFilterValue(raw);
+      if (seen.has(key)) return;
+      seen.add(key);
+      entries.push({ value: key, label: filterLabel(raw) });
+    });
+    entries.sort((a, b) => a.label.localeCompare(b.label));
+    return entries;
+  };
+
+  const setOptions = (select, entries, allLabel = 'All', allValue = 'all') => {
     if (!select) return;
-    const previous = select.value || allValue;
+    const previous = canonicalFilterValue(select.value || allValue);
     select.innerHTML = '';
     const addOpt = (value, label) => {
       const opt = document.createElement('option');
@@ -529,18 +584,16 @@ import { formatPrice } from './price-utils.js';
       select.appendChild(opt);
     };
     addOpt(allValue, allLabel);
-    values.forEach((val) => addOpt(val, val));
-    const match = values.find((val) => val.toLowerCase() === (previous || '').toLowerCase());
-    select.value = match || allValue;
+    entries.forEach((entry) => addOpt(entry.value, entry.label));
+    const match = entries.find((entry) => entry.value === previous);
+    select.value = match ? match.value : allValue;
   };
 
   const populateFilterOptions = (catalog = []) => {
-    const categoryValues = dedupeOrdered(
-      CATEGORY_ORDER,
+    const categoryValues = uniqueFilterEntries(
       catalog.map((p = {}) => p?.meta?.category || p?.category).filter(Boolean)
     );
-    const collectionValues = dedupeOrdered(
-      COLLECTION_ORDER,
+    const collectionValues = uniqueFilterEntries(
       catalog.flatMap((p = {}) => toList(p?.meta?.collection || p?.collection)).filter(Boolean)
     );
     const zodiacValues = dedupeOrdered(

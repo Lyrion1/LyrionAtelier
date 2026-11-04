@@ -105,3 +105,37 @@ html body table.cart-table button.quantity-btn,
 .owner-note {
   display: none !important;
 }
+
+/* Product copy sits above the falling-emoji layer so a glyph cannot cover
+   the title, the love-language line, or the features. */
+.product-detail__info,
+.soho-pdp__info {
+  position: relative;
+  z-index: 50;
+}
+
+.product-love-note[hidden] {
+  display: none !important;
+}
+
+.product-tag-group__title {
+  margin: 1.25rem 0 0.4rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.product-tag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0 0 0 1.15rem;
+  list-style: disc;
+}
+
+.product-tag {
+  display: list-item;
+  margin: 0;
+  line-height: 1.45;
+}

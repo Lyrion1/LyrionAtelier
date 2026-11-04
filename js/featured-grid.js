@@ -123,7 +123,9 @@ async function loadFeaturedProducts() {
     renderCampaigns(ctx);
     renderHeading(ctx);
     orderElements(ctx);
-    const shopItems = ctx.products.filter((p) => SHOP_TYPES.includes(p.type) && p.state.published);
+    // The Aquarius crop hoodie photos still show the print as a flat white
+    // rectangle. Keep it out of the homepage grid until it is reshot.
+    const shopItems = ctx.products.filter((p) => SHOP_TYPES.includes(p.type) && p.state.published && p.slug !== 'aquarius-crop-hoodie');
     const featured = ctx.house.valid
       ? shopItems.filter((p) => ['lead', 'on_show', 'last_chance'].includes(p.houseState)).slice(0, FEATURED_COUNT)
       : shopItems.slice(0, FEATURED_COUNT);
