@@ -521,6 +521,7 @@ function buildSiteHeader() {
 
   const giftsPanel = buildSimpleMegaPanel({
     links: [
+      { href: '/gifts', label: 'By Star Sign' },
       { href: '/curated-for-gifting?for=couples', label: 'For Couples' },
       { href: '/curated-for-gifting?for=self', label: 'For Self' },
       { href: '/curated-for-gifting?for=birthday', label: 'Birthday &amp; Milestone' }
@@ -1227,6 +1228,7 @@ function buildSiteFooter() {
           <a href="/shop?collection=essentials">Lyrīon Essentials</a>
           <a href="/shop?collection=accessories">Accessories &amp; Home</a>
           <a href="/curated-for-gifting">Gifts</a>
+          <a href="/gifts">By Star Sign</a>
           <a href="/gift-concierge">Gift Concierge</a>
           <a href="/birthday-book">Birthday Book</a>
         </div>

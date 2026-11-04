@@ -412,6 +412,41 @@ function initProductMagic() {
   timers.push(window.setTimeout(spawnEmoji, 1800));
 }
 
+const GIFT_SIGNS = {
+  aries: 'Aries',
+  taurus: 'Taurus',
+  gemini: 'Gemini',
+  cancer: 'Cancer',
+  leo: 'Leo',
+  virgo: 'Virgo',
+  libra: 'Libra',
+  scorpio: 'Scorpio',
+  sagittarius: 'Sagittarius',
+  capricorn: 'Capricorn',
+  aquarius: 'Aquarius',
+  pisces: 'Pisces'
+};
+
+function renderGiftGuideLink(product) {
+  const raw = String(product?.sign || '').trim().toLowerCase();
+  const label = GIFT_SIGNS[raw];
+  const existing = document.getElementById('product-gift-guide');
+  if (!label) {
+    existing?.remove();
+    return;
+  }
+  const host = document.querySelector('.product-detail__story') || document.getElementById('product-description');
+  if (!host) return;
+  const el = existing || document.createElement('p');
+  el.id = 'product-gift-guide';
+  el.className = 'product-gift-guide';
+  const link = document.createElement('a');
+  link.href = `/gifts/${raw}`;
+  link.textContent = `More gifts for ${label}`;
+  el.replaceChildren(link);
+  host.appendChild(el);
+}
+
 async function hydrateProductPage() {
   const slug = getSlug();
   if (!slug) return showError('Product not found.');
@@ -465,6 +500,7 @@ async function hydrateProductPage() {
   if (careEl) careEl.textContent = care;
   renderLoveLanguage(product);
   renderDetailTags(product);
+  renderGiftGuideLink(product);
 
   const sizes = unique(
     (product.options?.sizes || [])
