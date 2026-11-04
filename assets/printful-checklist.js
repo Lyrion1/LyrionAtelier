@@ -4,7 +4,11 @@ async function loadProd(slug){ try{ const r=await fetch('/data/products/'+slug+'
 async function exists(url){
  try{ const r = await fetch(url, { method:'HEAD', cache:'no-store' }); return r.ok; } catch { return false; }
 }
-function money(c){ return '$'+(Number(c||0)/100).toFixed(2); }
+function money(c){
+  const major = (Number(c) || 0) / 100;
+  if (window.LyrionMoney) return window.LyrionMoney.format(major);
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(major);
+}
 function esc(x){
  const map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
  return (x||'').replace(/[&<>"']/g, c=>map[c]);
@@ -23,7 +27,7 @@ function copyBtn(label, getText){
 async function card(p){
  const el = document.createElement('div'); el.className='pf-card';
  const img = (p.images||[])[0] || '';
- const price = p.variants && p.variants[0] ? money(p.variants[0].price) : '$0.00';
+ const price = p.variants && p.variants[0] ? money(p.variants[0].price) : money(0);
 
  // Check files
  const frontOK = img ? await exists(img) : false;

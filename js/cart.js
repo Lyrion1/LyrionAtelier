@@ -285,17 +285,61 @@ function evaluateBundleDiscount(cart = readCart()) {
   return { selectedBundle: null, savingsCents: 0, eligibleBundles: [], subtotalCents };
 }
 
-const formatMoney = (amount) => `$${amount.toFixed(2)}`;
+const moneyApi = () => (typeof window !== 'undefined' ? window.LyrionMoney : null);
+const formatMoney = (amount) => {
+  const money = moneyApi();
+  if (money) return money.format(amount);
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(Number(amount) || 0);
+};
+const formatMinor = (minor) => {
+  const money = moneyApi();
+  if (money) return money.formatMinor(minor, money.getCurrency());
+  return formatMoney((Number(minor) || 0) / 100);
+};
 
 // Readings and certificates are emailed, so only posted pieces count towards
-// delivery. Must match create-checkout: free from £50 of posted pieces,
-// £5.99 below that, nothing at all when nothing is posted.
+// delivery. Must match create-checkout: free from the presented equivalent of
+// £50 of posted pieces, the presented equivalent of £5.99 below that, nothing
+// when nothing is posted. Line prices stored in the cart are GBP.
 const DIGITAL_CATEGORIES = ['oracle_reading', 'compatibility_certificate', 'reading', 'certificate'];
 const isPostedItem = (item = {}) => !DIGITAL_CATEGORIES.includes(String(item.category || '').toLowerCase());
-function shippingFor(cart = []) {
-  const posted = cart.filter(isPostedItem).reduce((sum, item) => sum + ((toNumber(item.price) || 0) * (item.quantity || 1)), 0);
-  if (posted <= 0) return 0;
-  return posted >= 50 ? 0 : 5.99;
+
+function linePresentment(item) {
+  const gbp = toNumber(item?.price) || 0;
+  const qty = item?.quantity || 1;
+  const money = moneyApi();
+  if (!money) {
+    const minor = Math.round(gbp * 100) * qty;
+    return { unitMinor: Math.round(gbp * 100), lineMinor: minor, qty };
+  }
+  const unit = money.presentmentPence(Math.round(gbp * 100));
+  return { unitMinor: unit.minor, lineMinor: unit.minor * qty, qty };
+}
+
+function basketPresentment(cart = []) {
+  let subtotalMinor = 0;
+  cart.forEach((item) => { subtotalMinor += linePresentment(item).lineMinor; });
+  const money = moneyApi();
+  const posted = cart.filter(isPostedItem).map((item) => ({
+    gbpMajor: toNumber(item.price) || 0,
+    qty: item.quantity || 1
+  }));
+  const quote = money
+    ? money.quoteShipping(posted)
+    : { minor: 0, major: 0, free: true, empty: posted.length === 0 };
+  if (!money) {
+    const postedGbp = posted.reduce((sum, line) => sum + line.gbpMajor * line.qty, 0);
+    quote.minor = postedGbp <= 0 ? 0 : (postedGbp >= 50 ? 0 : 599);
+    quote.free = quote.minor === 0;
+    quote.empty = postedGbp <= 0;
+  }
+  return { subtotalMinor, shipping: quote, totalMinor: subtotalMinor + (quote.minor || 0) };
+}
+
+function deliveryNote() {
+  const money = moneyApi();
+  if (!money) return 'Free delivery on posted orders over £50.';
+  return `Free delivery on posted orders over ${money.format(50)}. Below that, delivery is ${money.format(5.99)}.`;
 }
 
 const syncBundleChips = () => {};
@@ -318,7 +362,7 @@ function displayCart() {
     if (emptyCartMessage) {
       emptyCartMessage.style.display = 'block';
     }
-    updateOrderSummary(0, 0, 0);
+    updateOrderSummary(basketPresentment([]), 0);
     return;
   }
   
@@ -331,8 +375,7 @@ function displayCart() {
   
   // Render each cart item
   cart.forEach(item => {
-    const unitPrice = toNumber(item.price) || 0;
-    const lineTotal = unitPrice * (item.quantity || 1);
+    const shown = linePresentment(item);
     const row = document.createElement('tr');
     row.className = 'cart-item-row';
     row.innerHTML = `
@@ -345,7 +388,7 @@ function displayCart() {
         <strong>${item.name}</strong><br>
         <small style="color: var(--gray-medium);">Size: ${item.size}</small>
       </td>
-      <td class="cart-price">${formatMoney(unitPrice)}</td>
+      <td class="cart-price">${formatMinor(shown.unitMinor)}</td>
       <td>
         <div class="quantity-controls">
           <button class="quantity-btn decrement" aria-label="Decrease quantity">-</button>
@@ -353,7 +396,7 @@ function displayCart() {
           <button class="quantity-btn increment" aria-label="Increase quantity">+</button>
         </div>
       </td>
-      <td class="cart-total"><strong>${formatMoney(lineTotal)}</strong></td>
+      <td class="cart-total"><strong>${formatMinor(shown.lineMinor)}</strong></td>
       <td>
         <button class="btn btn-outline btn-sm remove-item" 
                 aria-label="Remove ${item.name} from cart">Remove</button>
@@ -376,34 +419,36 @@ function displayCart() {
   });
   
   // Calculate and update order summary
-  const subtotal = cart.reduce((sum, item) => sum + ((toNumber(item.price) || 0) * (item.quantity || 1)), 0);
-  const shipping = shippingFor(cart);
+  const totals = basketPresentment(cart);
   const { savingsCents } = evaluateBundleDiscount(cart);
-  const discount = (savingsCents || 0) / 100;
-  const total = subtotal - discount + shipping;
-  updateOrderSummary(subtotal, shipping, total, discount);
+  const discountMinor = savingsCents || 0;
+  updateOrderSummary(totals, discountMinor);
 }
 
 /**
  * Update Order Summary
  * Updates the order summary display with current totals
  */
-function updateOrderSummary(subtotal, shipping, total, discount = 0) {
+function updateOrderSummary(totals, discountMinor = 0) {
   const subtotalElement = document.getElementById('cart-subtotal');
   const shippingElement = document.getElementById('cart-shipping');
   const totalElement = document.getElementById('cart-total');
   const discountRow = document.getElementById('cart-discount');
-  if (subtotalElement) subtotalElement.textContent = formatMoney(subtotal);
-  if (shippingElement) shippingElement.textContent = shipping === 0 ? 'FREE' : formatMoney(shipping);
+  const note = document.getElementById('cart-delivery-note');
+  const subtotalMinor = totals?.subtotalMinor || 0;
+  const shippingMinor = totals?.shipping?.minor || 0;
+  if (subtotalElement) subtotalElement.textContent = formatMinor(subtotalMinor);
+  if (shippingElement) shippingElement.textContent = shippingMinor === 0 ? 'FREE' : formatMinor(shippingMinor);
   if (discountRow) {
-    if (discount > 0) {
-      discountRow.textContent = `-${formatMoney(discount)}`;
+    if (discountMinor > 0) {
+      discountRow.textContent = `-${formatMinor(discountMinor)}`;
       discountRow.parentElement.style.display = '';
     } else {
       discountRow.parentElement.style.display = 'none';
     }
   }
-  if (totalElement) totalElement.textContent = formatMoney(total);
+  if (totalElement) totalElement.textContent = formatMinor(Math.max(0, subtotalMinor - discountMinor + shippingMinor));
+  if (note) note.textContent = deliveryNote();
 }
 
 /**
@@ -473,33 +518,34 @@ function displayCheckoutSummary() {
           <strong>${item.name}</strong><br>
           <small style="color: var(--gray-medium);">Size: ${item.size} | Qty: ${item.quantity}</small>
         </div>
-        <div>$${(item.price * item.quantity).toFixed(2)}</div>
+        <div>${formatMinor(linePresentment(item).lineMinor)}</div>
       </div>
     `;
   });
   
-  const subtotal = cart.reduce((sum, item) => sum + ((toNumber(item.price) || 0) * (item.quantity || 1)), 0);
-  const shipping = shippingFor(cart);
+  const totals = basketPresentment(cart);
   const { savingsCents } = evaluateBundleDiscount(cart);
-  const discount = (savingsCents || 0) / 100;
-  const total = subtotal - discount + shipping;
-  
+  const discountMinor = savingsCents || 0;
+  const shippingMinor = totals.shipping.minor || 0;
+  const totalMinor = Math.max(0, totals.subtotalMinor - discountMinor + shippingMinor);
+
   html += `
     <div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
       <span>Subtotal:</span>
-      <span>$${subtotal.toFixed(2)}</span>
+      <span>${formatMinor(totals.subtotalMinor)}</span>
     </div>
-    ${discount > 0 ? `<div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+    ${discountMinor > 0 ? `<div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
       <span>Discount:</span>
-      <span>- $${discount.toFixed(2)}</span>
+      <span>- ${formatMinor(discountMinor)}</span>
     </div>` : ''}
     <div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
       <span>Shipping:</span>
-      <span>${shipping === 0 ? 'FREE' : '$' + shipping.toFixed(2)}</span>
+      <span>${shippingMinor === 0 ? 'FREE' : formatMinor(shippingMinor)}</span>
     </div>
+    <p class="muted">${deliveryNote()}</p>
     <div class="summary-row total" style="display: flex; justify-content: space-between; margin-top: 1rem; padding-top: 1rem; border-top: 2px solid var(--purple); font-size: 1.25rem; font-weight: 600;">
       <span>Total:</span>
-      <span>$${total.toFixed(2)}</span>
+      <span>${formatMinor(totalMinor)}</span>
     </div>
   `;
   
@@ -512,6 +558,10 @@ function displayCheckoutSummary() {
  * Sets up event listeners and displays cart data
  */
 document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('lyrion:currencychange', function() {
+    if (document.querySelector('.cart-table')) displayCart();
+    if (document.getElementById('checkout-cart-summary')) displayCheckoutSummary();
+  });
   // Display cart on cart page
   if (document.querySelector('.cart-table')) {
     displayCart();

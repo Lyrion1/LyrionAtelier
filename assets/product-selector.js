@@ -50,7 +50,9 @@ async function initSelector(){
  return okC && v.options?.size === sel.size;
  });
 
- const price = c => `$${(c/100).toFixed(2)}`;
+ const price = (c) => (window.LyrionMoney
+   ? window.LyrionMoney.formatPence(c)
+   : new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(c / 100));
  const refresh = ()=>{
  const sel = getSel();
  const v = findVar(sel);

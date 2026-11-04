@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <script src="/js/analytics.js"></script>
+<script src="/js/money.js"></script>
   <meta charset="UTF-8">
   <meta name="lyrion:product" content="gemini-windbreaker">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
@@ -145,11 +146,11 @@
     <div class="pdp-selector">
       <label for="size-select">Size</label>
       <select id="size-select" class="input-select">
-              <option value="697bba6106f234">S - $43.99</option>
-              <option value="697bba6106f2d5" selected>M - $43.99</option>
-              <option value="697bba6106f355">L - $43.99</option>
-              <option value="697bba6106f3c6">XL - $43.99</option>
-              <option value="697bba6106f433">2XL - $46.99</option>
+              <option value="697bba6106f234" data-gbp="43.99" data-size="S">S</option>
+              <option value="697bba6106f2d5" selected data-gbp="43.99" data-size="M">M</option>
+              <option value="697bba6106f355" data-gbp="43.99" data-size="L">L</option>
+              <option value="697bba6106f3c6" data-gbp="43.99" data-size="XL">XL</option>
+              <option value="697bba6106f433" data-gbp="46.99" data-size="2XL">2XL</option>
             </select>
     </div>
 
@@ -268,7 +269,7 @@
             <svg class="pdp-accordion__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="pdp-accordion__panel" id="pdp-acc-shipping-panel">
-            <p>Made to order by Printful, usually dispatched within 2&ndash;5 business days; delivery time depends on where it is going. Free delivery on orders of $50 or more. Size exchanges within 14 days of delivery: see our <a href="/refund-policy">refund policy</a>.</p>
+            <p>Made to order by Printful, usually dispatched within 2&ndash;5 business days; delivery time depends on where it is going. Free delivery on orders of <span data-gbp="50"></span> or more. Size exchanges within 14 days of delivery: see our <a href="/refund-policy">refund policy</a>.</p>
           </div>
         </div>
 
@@ -411,13 +412,14 @@
       if (!variant) return;
       const price = Number(variant.price || product.price || 0);
       const formatted = price.toFixed(2);
-      priceDisplay.textContent = `$${formatted}`;
+      priceDisplay.textContent = window.LyrionMoney.format(Number(formatted));
       if (addBtn) {
-        addBtn.textContent = `Add to Cart - $${formatted}`;
+        addBtn.textContent = 'Add to Cart — ' + window.LyrionMoney.format(Number(formatted));
       }
     };
 
     updatePrice();
+    document.addEventListener('lyrion:currencychange', () => { if (typeof initializePrice === 'function') initializePrice(); if (typeof updatePrice === 'function') updatePrice(); });
     sizeSelect.addEventListener('change', updatePrice);
 
     addBtn.addEventListener('click', () => {

@@ -59,7 +59,11 @@ export function priceNumber(source = {}) {
 export function centsFrom(value) {
   const num = Number(value);
   if (!Number.isFinite(num) || num <= 0) return null;
-  return num >= 200 ? Math.round(num) : Math.round(num * 100);
+  // Integers from 1000 up are already pence (£10.00 and above). Smaller
+  // numbers, including whole-pound readings such as 349 and 449, are GBP
+  // major amounts. A threshold of 200 used to turn those into a few pounds.
+  if (Number.isInteger(num) && num >= 1000) return Math.round(num);
+  return Math.round(num * 100);
 }
 
 export function formatPrice(value, fallback = PRICE_FALLBACK) {
@@ -70,12 +74,12 @@ export function formatPrice(value, fallback = PRICE_FALLBACK) {
 export function formatPriceWithCurrency(value, currency = BASE_CURRENCY, fallback = PRICE_FALLBACK, language = 'en') {
   const cents = centsFrom(value);
   if (cents === null) return fallback;
-  const localizationCurrency = typeof window !== 'undefined' ? window.__lyrionLocalization?.currency : null;
-  const targetCurrencyRaw = localizationCurrency || currency;
+  const localization = typeof window !== 'undefined' ? (window.__lyrionLocalization || {}) : {};
+  const targetCurrencyRaw = localization.currency || currency;
   const targetCurrency = SUPPORTED_CURRENCIES.has(String(targetCurrencyRaw).toUpperCase()) ? String(targetCurrencyRaw).toUpperCase() : BASE_CURRENCY;
+  const money = typeof window !== 'undefined' ? window.LyrionMoney : null;
+  if (money) return money.formatPence(cents, targetCurrency, localization.language || language);
   const base = cents / 100;
-  // The base currency is the price as stored and as charged, so it is never
-  // rounded or scaled. Only genuine conversions get retail rounding.
   const converted = targetCurrency === BASE_CURRENCY
     ? base
     : (targetCurrency === 'JPY'
@@ -85,6 +89,7 @@ export function formatPriceWithCurrency(value, currency = BASE_CURRENCY, fallbac
     return new Intl.NumberFormat(language || 'en', {
       style: 'currency',
       currency: targetCurrency,
+      minimumFractionDigits: targetCurrency === 'JPY' ? 0 : 2,
       maximumFractionDigits: targetCurrency === 'JPY' ? 0 : 2
     }).format(converted);
   } catch {

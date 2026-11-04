@@ -13,7 +13,9 @@ function loadProduct() {
   document.title = `${product.name} | Lyrīon Atelier`;
   document.getElementById('product-name').textContent = product.name;
   document.getElementById('product-description').textContent = product.description;
-  document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;
+  document.getElementById('product-price').textContent = window.LyrionMoney
+    ? window.LyrionMoney.format(product.price)
+    : new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(product.price);
   document.getElementById('product-pill').textContent = `${product.category} • ${(product.zodiac || '').toUpperCase()}`;
 
   const imageWrap = document.getElementById('product-image');

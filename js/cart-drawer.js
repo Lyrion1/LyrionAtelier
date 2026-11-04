@@ -21,9 +21,14 @@
     if (typeof window.updateCartCount === 'function') window.updateCartCount();
   }
 
-  function formatPrice(amount) {
-    const num = Number(amount);
-    return `$${(Number.isFinite(num) ? num : 0).toFixed(2)}`;
+  function formatLine(gbpMajor, qty) {
+    const money = window.LyrionMoney;
+    const q = qty || 1;
+    if (!money) {
+      return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format((Number(gbpMajor) || 0) * q);
+    }
+    const unit = money.presentmentPence(Math.round((Number(gbpMajor) || 0) * 100));
+    return money.formatMinor(unit.minor * q, money.getCurrency());
   }
 
   let drawer = null;
@@ -51,7 +56,7 @@
       </div>
       <div class="soho-cart-drawer__items"></div>
       <div class="soho-cart-drawer__foot">
-        <div class="soho-cart-drawer__subtotal"><span>Subtotal</span><span class="soho-cart-drawer__subtotal-amount">$0.00</span></div>
+        <div class="soho-cart-drawer__subtotal"><span>Subtotal</span><span class="soho-cart-drawer__subtotal-amount"></span></div>
         <a href="/cart" class="soho-btn soho-btn--dark soho-btn--full">Checkout</a>
       </div>`;
     document.body.appendChild(drawer);
@@ -88,13 +93,20 @@
             <p class="soho-cart-drawer__item-meta">Size ${item.size || '—'} &middot; Qty ${qty}</p>
             <button type="button" class="soho-cart-drawer__item-remove" data-index="${index}">Remove</button>
           </div>
-          <span class="soho-cart-drawer__item-price">${formatPrice((Number(item.price) || 0) * qty)}</span>`;
+          <span class="soho-cart-drawer__item-price">${formatLine(item.price, qty)}</span>`;
         itemsEl.appendChild(row);
       });
     }
 
-    const subtotal = cart.reduce((sum, item) => sum + (Number(item.price) || 0) * (Number(item.quantity) || 1), 0);
-    subtotalEl.textContent = formatPrice(subtotal);
+    const subtotalMinor = cart.reduce((sum, item) => {
+      const money = window.LyrionMoney;
+      const qty = Number(item.quantity) || 1;
+      if (!money) return sum + Math.round((Number(item.price) || 0) * 100) * qty;
+      return sum + money.presentmentPence(Math.round((Number(item.price) || 0) * 100)).minor * qty;
+    }, 0);
+    subtotalEl.textContent = window.LyrionMoney
+      ? window.LyrionMoney.formatMinor(subtotalMinor, window.LyrionMoney.getCurrency())
+      : formatLine(subtotalMinor / 100, 1);
 
     itemsEl.querySelectorAll('.soho-cart-drawer__item-remove').forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -124,6 +136,9 @@
   }
 
   document.addEventListener('cart:updated', () => {
+    if (drawer && drawer.classList.contains('is-open')) render();
+  });
+  document.addEventListener('lyrion:currencychange', () => {
     if (drawer && drawer.classList.contains('is-open')) render();
   });
 

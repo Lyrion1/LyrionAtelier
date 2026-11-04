@@ -21,7 +21,15 @@ const EMPTY_ITEMS = [];
 window.__LYRION_FILTERS = window.__LYRION_FILTERS || {
   state: { sign: new Set(), element: new Set(), collection: new Set(), palette: new Set(), size: new Set(), price: new Set(), sort: 'featured' },
   // Price bands in cents
-  bands: { 'Under $50': [0, 4999], '$50–$79': [5000, 7999], '$80–$200': [8000, 20000] },
+  bands: { 'under-50': [0, 4999], '50-79': [5000, 7999], '80-200': [8000, 20000] },
+  bandLabel(key) {
+    const money = window.LyrionMoney;
+    const fmt = (gbp) => (money ? money.format(gbp) : `${gbp} GBP`);
+    if (key === 'under-50') return `Under ${fmt(50)}`;
+    if (key === '50-79') return `${fmt(50)}–${fmt(79)}`;
+    if (key === '80-200') return `${fmt(80)}–${fmt(200)}`;
+    return key;
+  },
   mount(items) {
     if (routeIsEventish()) return;
     const path = (location.pathname || '').toLowerCase();
@@ -99,7 +107,9 @@ window.__LYRION_FILTERS = window.__LYRION_FILTERS || {
 
     const chip = (val, active = false) => {
       const b = document.createElement('button'); b.className = 'sf-chip'; b.type = 'button';
-      b.textContent = val; b.setAttribute('aria-pressed', active ? 'true' : 'false'); return b;
+      b.dataset.value = val;
+      b.textContent = this.bandLabel && this.bands[val] ? this.bandLabel(val) : val;
+      b.setAttribute('aria-pressed', active ? 'true' : 'false'); return b;
     };
 
     const groups = [
@@ -130,7 +140,7 @@ window.__LYRION_FILTERS = window.__LYRION_FILTERS || {
       const act = this.state[k];
       if (!(act instanceof Set) || !act.size) continue;
       wrap.querySelectorAll(`.sf-group[data-k="${k}"] .sf-chip`).forEach(b => {
-        if (act.has(b.textContent)) b.setAttribute('aria-pressed', 'true');
+        if (act.has(b.dataset.value || b.textContent)) b.setAttribute('aria-pressed', 'true');
       });
     }
     wrap.querySelector('#sf-sort').value = this.state.sort;
@@ -140,8 +150,9 @@ window.__LYRION_FILTERS = window.__LYRION_FILTERS || {
       const b = e.target.closest('.sf-chip'); if (!b) return;
       const grp = b.closest('.sf-group'); const k = grp.getAttribute('data-k');
       const isOn = b.getAttribute('aria-pressed') === 'true';
-      if (isOn) { b.setAttribute('aria-pressed', 'false'); this.state[k].delete(b.textContent); }
-      else { b.setAttribute('aria-pressed', 'true'); this.state[k].add(b.textContent); }
+      const value = b.dataset.value || b.textContent;
+      if (isOn) { b.setAttribute('aria-pressed', 'false'); this.state[k].delete(value); }
+      else { b.setAttribute('aria-pressed', 'true'); this.state[k].add(value); }
       this.syncURL(); this.notify();
     });
     wrap.querySelector('.sf-reset').addEventListener('click', () => {

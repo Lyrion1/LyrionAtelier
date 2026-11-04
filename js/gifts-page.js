@@ -217,6 +217,11 @@ import { formatPrice } from './price-utils.js';
     const priceEl = document.createElement('p');
     priceEl.className = 'price';
     const priceDisplay = formatPrice(Number.isFinite(priceCents) ? priceCents : priceValue, fallbackLabel);
+    const gbpMajor = Number.isFinite(priceCents) ? priceCents / 100 : priceValue;
+    if (Number.isFinite(gbpMajor) && gbpMajor > 0) {
+      priceEl.dataset.gbp = String(gbpMajor);
+      if (Array.isArray(p.variants) && p.variants.length > 1) priceEl.dataset.prefix = 'From ';
+    }
     // Check if product has multiple variants before showing "From" prefix
     const hasMultipleVariants = Array.isArray(p.variants) && p.variants.length > 1;
     priceEl.textContent = priceDisplay === PRICE_UNAVAILABLE_LABEL ? PRICE_UNAVAILABLE_LABEL : (hasMultipleVariants ? `From ${priceDisplay}` : priceDisplay);

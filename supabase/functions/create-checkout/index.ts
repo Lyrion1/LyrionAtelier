@@ -9,16 +9,23 @@ import Stripe from 'npm:stripe@14.25.0';
 import { corsHeaders, json, requireEnv, SITE_URL } from '../_shared/env.ts';
 import { loadShop, pickVariant, resting, type CheckoutProduct } from '../_shared/catalogue.ts';
 import { cleanDetails, packDetails, type RawDetails } from '../_shared/details.ts';
+import {
+  SHIPPING_COST_GBP_PENCE,
+  SHIPPING_FREE_GBP_PENCE,
+  loadRates,
+  normaliseCurrency,
+  presentmentPence,
+} from '../_shared/money.ts';
 
 const stripe = new Stripe(requireEnv('STRIPE_SECRET_KEY'), {
   apiVersion: '2023-10-16',
   httpClient: Stripe.createFetchHttpClient(),
 });
 
-// Delivery for physical pieces, as the basket shows it (js/shipping-config.js):
-// free from £50 of physical goods, £5.99 below that. Digital items never ship.
-const SHIPPING_FREE_FROM_PENCE = 5000;
-const SHIPPING_PENCE = 599;
+// Delivery for physical pieces, as the basket shows it (js/money.js):
+// free from £50 of physical goods, £5.99 below that, both converted with the
+// same .99 rule as the product prices when the shopper is not paying in GBP.
+// Digital items never ship. The browser sends a currency code only.
 
 const SHIPPING_COUNTRIES: Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[] = [
   'GB', 'IE', 'FR', 'DE', 'IT', 'ES', 'NL', 'BE', 'PT', 'SE', 'NO', 'DK', 'CH', 'AT',
@@ -80,6 +87,7 @@ Deno.serve(async (req: Request) => {
       discountPrize?: Prize;
       giftNote?: string;
       recipientEmail?: string;
+      currency?: string;
     };
     const basket = body.basket ?? body.items ?? body.cart;
     if (!Array.isArray(basket) || basket.length === 0) return json({ error: 'Empty basket' }, 400);
@@ -87,12 +95,15 @@ Deno.serve(async (req: Request) => {
 
     const { products, house } = await loadShop();
     const bySlug = new Map<string, CheckoutProduct>(products.map((p) => [p.id, p]));
+    // Currency is a preference. The amount is never taken from the client.
+    const currency = normaliseCurrency(body.currency);
+    const rates = await loadRates();
 
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
     const metadata: Record<string, string> = {};
     const unavailable: { id: string; reason: string }[] = [];
     const needsDetails: string[] = [];
-    let physicalPence = 0;
+    let physicalMinor = 0;
 
     for (const line of basket) {
       const product = bySlug.get(String(line.id || ''));
@@ -116,14 +127,15 @@ Deno.serve(async (req: Request) => {
         metadata[`d${index}`] = packed;
         quantity = 1; // one set of details, one piece
       }
-      if (product.fulfilment === 'printful' || product.fulfilment === 'manual') physicalPence += variant.priceGBP * quantity;
+      const presented = presentmentPence(variant.priceGBP, currency, rates);
+      if (product.fulfilment === 'printful' || product.fulfilment === 'manual') physicalMinor += presented.minor * quantity;
 
       const label = [variant.size !== 'Standard' && variant.size !== 'One Size' ? variant.size : '', variant.color || ''].filter(Boolean).join(', ');
       lineItems.push({
         quantity,
         price_data: {
-          currency: 'gbp',
-          unit_amount: variant.priceGBP,
+          currency: presented.currency.toLowerCase(),
+          unit_amount: presented.minor,
           product_data: {
             name: label ? `${product.name} (${label})` : product.name,
             ...(product.image ? { images: [absolute(product.image)] } : {}),
@@ -143,8 +155,11 @@ Deno.serve(async (req: Request) => {
     const prize = wheelPrize(body.discountCode, body.discountPrize);
     let discounts: Stripe.Checkout.SessionCreateParams.Discount[] | undefined;
     if (prize?.percent || prize?.fixedPence) {
+      const fixed = prize.fixedPence ? presentmentPence(prize.fixedPence, currency, rates) : null;
       const coupon = await stripe.coupons.create({
-        ...(prize.percent ? { percent_off: prize.percent } : { amount_off: prize.fixedPence, currency: 'gbp' }),
+        ...(prize.percent
+          ? { percent_off: prize.percent }
+          : { amount_off: fixed!.minor, currency: fixed!.currency.toLowerCase() }),
         duration: 'once',
         max_redemptions: 1,
         name: prize.code,
@@ -153,8 +168,11 @@ Deno.serve(async (req: Request) => {
       metadata.discount = prize.code;
     }
 
-    const ships = physicalPence > 0;
-    const freeShipping = !!prize?.freeShipping || physicalPence >= SHIPPING_FREE_FROM_PENCE;
+    const threshold = presentmentPence(SHIPPING_FREE_GBP_PENCE, currency, rates);
+    const shipping = presentmentPence(SHIPPING_COST_GBP_PENCE, currency, rates);
+    const ships = physicalMinor > 0;
+    const freeShipping = !!prize?.freeShipping || physicalMinor >= threshold.minor;
+    metadata.currency = currency;
     if (prize?.freeShipping) metadata.discount = prize.code;
 
     const giftNote = String(body.giftNote || '').replace(/\s+/g, ' ').trim().slice(0, 200);
@@ -173,7 +191,7 @@ Deno.serve(async (req: Request) => {
           shipping_rate_data: {
             type: 'fixed_amount',
             display_name: freeShipping ? 'Free delivery' : 'Standard delivery',
-            fixed_amount: { amount: freeShipping ? 0 : SHIPPING_PENCE, currency: 'gbp' },
+            fixed_amount: { amount: freeShipping ? 0 : shipping.minor, currency: shipping.currency.toLowerCase() },
           },
         }],
       } : {}),

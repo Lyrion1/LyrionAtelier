@@ -11,7 +11,9 @@
     STORAGE_KEY: 'lyrion_wheel_last_spin',
     DISCOUNT_KEY: 'lyrion_wheel_discount',
     HOURS_BETWEEN_SPINS: 24,
-    POPUP_DELAY_MS: 5000,
+    POPUP_DELAY_MS: 20000,
+    SCROLL_PX: 480,
+    PROMPTED_KEY: 'lyrion_wheel_prompted',
     SPIN_DURATION_MS: 4000,
     SPIN_ROTATIONS: 5,
     DISCOUNT_EXPIRY_DAYS: 7
@@ -21,7 +23,7 @@
   const PRIZES = [
     { id: 'off10', label: '10% Off', weight: 30, type: 'discount', value: 10 },
     { id: 'freeship', label: 'Free Shipping', weight: 25, type: 'shipping', value: 0 },
-    { id: 'off5', label: '$5 Off', weight: 20, type: 'fixed', value: 5 },
+    { id: 'off5', label: '5 Off', weight: 20, type: 'fixed', value: 5 },
     { id: 'off15', label: '15% Off', weight: 10, type: 'discount', value: 15 },
     { id: 'mystery', label: 'Mystery Gift', weight: 8, type: 'mystery', value: 0 },
     { id: 'reading', label: 'Free Reading Preview', weight: 5, type: 'reading', value: 0 },
@@ -138,6 +140,16 @@
   /**
    * Draw the wheel on canvas
    */
+  function moneyText(gbpMajor) {
+    if (window.LyrionMoney) return window.LyrionMoney.format(gbpMajor);
+    return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(gbpMajor);
+  }
+
+  function segmentLabel(prize) {
+    if (prize.type === 'fixed') return `${moneyText(prize.value)} Off`;
+    return prize.label;
+  }
+
   function drawWheel() {
     if (!wheelCanvas || !wheelCtx) return;
 
@@ -185,7 +197,7 @@
       wheelCtx.textAlign = 'right';
       wheelCtx.fillStyle = isEven ? COLORS.goldLight : '#fff';
       wheelCtx.font = 'bold 12px "Source Serif 4", serif';
-      wheelCtx.fillText(prize.label, radius - 15, 4);
+      wheelCtx.fillText(segmentLabel(prize), radius - 15, 4);
       wheelCtx.restore();
     });
 
@@ -287,8 +299,8 @@
       case 'fixed':
         prizeHTML = `
           <div class="prize-emoji">🎉</div>
-          <h3>You Won ${prize.label}!</h3>
-          <p class="prize-details">Use this code at checkout for $${prize.value} off your order!</p>
+          <h3>You Won ${segmentLabel(prize)}!</h3>
+          <p class="prize-details">Use this code at checkout for ${moneyText(prize.value)} off your order!</p>
           <div class="spin-wheel-code">
             <span class="spin-wheel-code-text" id="discount-code">${discountCode}</span>
             <button class="spin-wheel-copy-btn">Copy</button>
@@ -316,7 +328,7 @@
         prizeHTML = `
           <div class="prize-emoji">🎁</div>
           <h3>Mystery Gift Unlocked!</h3>
-          <p class="prize-details">A mystery gift will be added to your next order over $50!</p>
+          <p class="prize-details">A mystery gift will be added to your next order over ${moneyText(50)}!</p>
           <div class="spin-wheel-code">
             <span class="spin-wheel-code-text" id="discount-code">${discountCode}</span>
             <button class="spin-wheel-copy-btn">Copy</button>
@@ -564,24 +576,71 @@
   /**
    * Initialize the spinning wheel
    */
+  function alreadyPrompted() {
+    try {
+      return localStorage.getItem(WHEEL_CONFIG.PROMPTED_KEY) === '1';
+    } catch {
+      return false;
+    }
+  }
+
+  function markPrompted() {
+    try {
+      localStorage.setItem(WHEEL_CONFIG.PROMPTED_KEY, '1');
+    } catch {
+      // Once-per-visitor is best-effort if storage is blocked.
+    }
+  }
+
+  function cookieBannerVisible() {
+    return !!document.getElementById('la-consent-banner');
+  }
+
   function init() {
-    // Only show on homepage
     if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
       return;
     }
+    if (alreadyPrompted() || !canUserSpin()) return;
 
-    // Check if user can spin
-    if (!canUserSpin()) {
-      return;
-    }
-
-    // Create popup structure
     createPopupHTML();
 
-    // Show popup after delay
-    setTimeout(() => {
+    let opened = false;
+    let delayReached = false;
+    let scrolled = false;
+    const started = Date.now();
+
+    const tryOpen = () => {
+      if (opened || alreadyPrompted()) return;
+      if (cookieBannerVisible()) return;
+      if (!delayReached && !scrolled) return;
+      opened = true;
+      markPrompted();
       openSpinWheel();
+    };
+
+    window.setTimeout(() => {
+      delayReached = true;
+      tryOpen();
     }, WHEEL_CONFIG.POPUP_DELAY_MS);
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY >= WHEEL_CONFIG.SCROLL_PX) {
+        scrolled = true;
+        tryOpen();
+      }
+    }, { passive: true });
+
+    document.addEventListener('mouseout', (event) => {
+      if (event.clientY > 0) return;
+      if (Date.now() - started < 8000) return;
+      delayReached = true;
+      tryOpen();
+    });
+
+    const watchCookies = new MutationObserver(() => {
+      if (!cookieBannerVisible()) tryOpen();
+    });
+    watchCookies.observe(document.body, { childList: true, subtree: true });
   }
 
   // Initialize when DOM is ready

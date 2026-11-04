@@ -1050,6 +1050,35 @@ body.nav-open { overflow: hidden; }
 /* =========================================================================
    FOOTER
    ========================================================================= */
+.locale-switch {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0.35rem;
+}
+.locale-switch select {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.06);
+  color: #f4efe4;
+  border: 1px solid rgba(201, 168, 76, 0.75);
+  border-radius: 999px;
+  min-height: 44px;
+  padding: 0 0.9rem;
+  font: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+.locale-switch select:focus-visible {
+  outline: 2px solid #e2b959;
+  outline-offset: 2px;
+}
+.footer .locale-switch {
+  margin: 0.75rem 0 0;
+}
+.footer .locale-switch select {
+  background: #140c1c;
+}
+
 .footer {
   background: var(--soho-midnight) !important;
   color: var(--soho-on-midnight-soft) !important;

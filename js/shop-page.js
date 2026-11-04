@@ -425,6 +425,11 @@ import { formatPrice } from './price-utils.js';
     const priceEl = document.createElement('p');
     priceEl.className = 'product-card-price product-card__price price';
     const priceDisplay = formatPrice(Number.isFinite(priceCents) ? priceCents : priceValue, fallbackLabel);
+    const gbpMajor = Number.isFinite(priceCents) ? priceCents / 100 : priceValue;
+    if (Number.isFinite(gbpMajor) && gbpMajor > 0) {
+      priceEl.dataset.gbp = String(gbpMajor);
+      priceEl.dataset.prefix = 'From ';
+    }
     priceEl.textContent = priceDisplay === PRICE_UNAVAILABLE_LABEL ? PRICE_UNAVAILABLE_LABEL : `From ${priceDisplay}`;
 
     const actions = document.createElement('div');
