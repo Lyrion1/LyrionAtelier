@@ -513,7 +513,7 @@ function displayCheckoutSummary() {
   
   cart.forEach(item => {
     html += `
-      <div class="summary-item" style="display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(139, 92, 246, 0.1);">
+      <div class="summary-item" style="display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(201, 146, 43, 0.1);">
         <div>
           <strong>${item.name}</strong><br>
           <small style="color: var(--gray-medium);">Size: ${item.size} | Qty: ${item.quantity}</small>

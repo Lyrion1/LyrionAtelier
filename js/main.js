@@ -31,7 +31,7 @@ const SEO_TEMPLATES = {
   },
   '/about': {
     title: 'About Lyrīon Atelier | LYRION LTD',
-    description: 'Lyrīon Atelier is the astrology lifestyle house of LYRION LTD in Milton Keynes. This brand story is a placeholder for the owner to complete.'
+    description: 'Lyrīon Atelier is the astrology lifestyle house of LYRION LTD in Milton Keynes.'
   },
   '/shipping': {
     title: 'Shipping & Delivery | Lyrīon Atelier',
@@ -244,6 +244,7 @@ let activeLocalization = null;
 
   ensureStylesheet('/css/restoration.css');
   ensureStylesheet('/styles/soho-theme.css');
+  ensureStylesheet('/css/brand-tokens.css');
 })();
 
 /**
@@ -453,9 +454,33 @@ function buildSimpleMegaPanel({ links, image, caption }) {
     </div>`;
 }
 
+function multiCurrencyOn() {
+  return !!(window.LyrionMoney && typeof window.LyrionMoney.multiCurrencyEnabled === 'function' && window.LyrionMoney.multiCurrencyEnabled());
+}
+
 function currencySwitcherHtml() {
+  if (!multiCurrencyOn()) return '';
   const options = CURRENCY_OPTIONS.map((code) => `<option value="${code}">${code}</option>`).join('');
   return `<label class="locale-switch"><span class="visually-hidden">Currency</span><select data-locale-currency aria-label="Currency">${options}</select></label>`;
+}
+
+function ensureCurrencySwitcher() {
+  const nav = document.querySelector('#primary-nav');
+  if (!nav) return;
+  const existing = nav.querySelector('.locale-switch');
+  if (!multiCurrencyOn()) {
+    existing?.remove();
+    return;
+  }
+  if (existing) return;
+  const holder = document.createElement('div');
+  holder.innerHTML = currencySwitcherHtml();
+  const node = holder.firstElementChild;
+  if (!node) return;
+  const cart = nav.querySelector('.cart-icon');
+  if (cart) nav.insertBefore(node, cart);
+  else nav.appendChild(node);
+  bindCurrencyControls();
 }
 
 const ORACLE_NAV = [
@@ -634,10 +659,17 @@ function getSeoTemplate(pathname) {
   const normalized = normalizePathname(pathname);
   if (SEO_TEMPLATES[normalized]) return SEO_TEMPLATES[normalized];
   if (normalized.startsWith('/shop/')) {
+    // Static product pages already publish a specific <title>. Replacing it
+    // with the name node produced "Zodiac Apparel | …" before that node existed.
+    const existing = (document.title || '').trim();
+    const description = (
+      document.querySelector('meta[name="description"]')?.getAttribute('content')
+      || document.querySelector('#product-description')?.textContent
+      || 'Premium zodiac apparel featuring celestial symbolism from Lyrīon Atelier.'
+    ).trim();
+    if (existing) return { title: existing, description };
     const name = (document.querySelector('#product-name')?.textContent || 'Zodiac Apparel').trim();
-    const title = `${name} | Lyrīon Atelier - Luxury Astrology & Zodiac Apparel`;
-    const description = (document.querySelector('#product-description')?.textContent || 'Premium zodiac apparel featuring celestial symbolism from Lyrīon Atelier.').trim();
-    return { title, description };
+    return { title: `${name} | Lyrīon Atelier - Luxury Astrology & Zodiac Apparel`, description };
   }
   return {
     title: document.title || 'Lyrīon Atelier - Luxury Astrology, Oracle Readings & Zodiac Apparel',
@@ -877,8 +909,11 @@ function saveLocalizationPreferences(localization) {
 
 function detectDefaultLocalization() {
   const preferences = readLocalizationPreferences();
-  if (preferences) return preferences;
-  const language = normalizeLanguage(navigator.language || 'en');
+  const language = preferences?.language || normalizeLanguage(navigator.language || 'en');
+  // The switch in data/fx-rates.json is off until checkout can charge
+  // the currency on the bag. A saved USD preference must not leak through.
+  if (!multiCurrencyOn()) return { language, currency: 'GBP' };
+  if (preferences) return { language, currency: normalizeCurrency(preferences.currency) };
   if (/^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname)) {
     return { language, currency: 'GBP' };
   }
@@ -940,7 +975,7 @@ function formatLocalizedPrice(baseAmount, currency = BASE_CURRENCY, language = '
 function applyLocalization(localization, { persist = false } = {}) {
   activeLocalization = {
     language: normalizeLanguage(localization?.language),
-    currency: normalizeCurrency(localization?.currency)
+    currency: multiCurrencyOn() ? normalizeCurrency(localization?.currency) : 'GBP'
   };
   document.documentElement.lang = activeLocalization.language;
   window.__lyrionLocalization = { ...activeLocalization };
@@ -963,13 +998,11 @@ async function refreshExchangeRates() {
   const next = window.LyrionMoney.rates();
   Object.keys(next).forEach((code) => { CURRENCY_RATES[code] = next[code]; });
   window.__lyrionRates = { ...next };
-  localizeDisplayedPrices(document.body);
-  document.dispatchEvent(new CustomEvent('lyrion:currencychange', { detail: { ...activeLocalization } }));
+  ensureCurrencySwitcher();
+  applyLocalization(detectDefaultLocalization(), { persist: false });
 }
 
-function initLocalizationSystem() {
-  const initial = detectDefaultLocalization();
-  applyLocalization(initial, { persist: false });
+function bindCurrencyControls() {
   document.querySelectorAll('[data-locale-language]').forEach((languageControl) => {
     if (languageControl.dataset.bound === '1') return;
     languageControl.dataset.bound = '1';
@@ -990,6 +1023,12 @@ function initLocalizationSystem() {
       }, { persist: true });
     });
   });
+}
+
+function initLocalizationSystem() {
+  ensureCurrencySwitcher();
+  applyLocalization(detectDefaultLocalization(), { persist: false });
+  bindCurrencyControls();
   const observer = new MutationObserver(() => localizeDisplayedPrices(document.body));
   observer.observe(document.body, { childList: true, subtree: true });
   refreshExchangeRates();

@@ -3,24 +3,26 @@
  * Palette, aesthetics, typography, mobile & performance.
  * This file loads last and overrides the dark navy/gold theme.
  *
- * New palette:
- *   --cream:   #FDF8F0  page background
- *   --ink:     #2B2440  body text
- *   --plum:    #5B4B7A  headings
- *   --cta:     #2B2440  primary control fill
- *   --cta-ink: #FDF8F0  label on that fill
+ * Palette (gold, espresso, cream — the logo):
+ *   --cream:   #F8F4EC  page background
+ *   --ink:     #2C1810  body text (was the plum-black #2B2440)
+ *   --plum:    #3C2415  headings, now espresso (was #5B4B7A)
+ *   --muted:   #5C4336  secondary text (was #6D627E)
+ *   --cta:     #3C2415  primary control fill
+ *   --cta-ink: #F8F4EC  label on that fill
  *   --gold:    #C9922B  fine line detail and decorative badges only
  *
  * Retired in this pass: --apricot #F0A868, --rose #E8A0A8, --sage #8FB09A.
  * None were in the brand palette, which is ivory ground, ink text and gold
  * as a fine accent. Controls now fill with ink and label in ivory.
  *
- * WCAG AA pairs:
- *   ink (#2B2440)    on cream  (#FDF8F0)  12.4:1
- *   plum (#5B4B7A)   on cream  (#FDF8F0)   7.2:1
- *   cream (#FDF8F0)  on ink    (#2B2440)  12.4:1  [filled controls]
- *   ink (#2B2440)    on gold   (#C9922B)   4.9:1  [badges]
- *   gold (#C9922B)   on cream  (#FDF8F0)   2.6:1  [never text, lines only]
+ * WCAG AA pairs on the cream ground:
+ *   ink (#2C1810)       on cream (#F8F4EC)  15.4:1
+ *   espresso (#3C2415)  on cream (#F8F4EC)  13.2:1
+ *   taupe (#5C4336)     on cream (#F8F4EC)   8.3:1
+ *   gold-ink (#7A5A24)  on cream (#F8F4EC)   5.8:1  [small accent text]
+ *   cream (#F8F4EC)     on espresso          13.2:1  [filled controls]
+ *   gold (#C9922B)      on cream             ~2.6:1  [never text, lines only]
  */
 
 /* ═══════════════════════════════════════════════════
@@ -28,26 +30,34 @@
 ═══════════════════════════════════════════════════ */
 
 :root {
-  /* New brand palette */
-  --cream:   #FDF8F0;
-  --ink:     #2B2440;
-  --plum:    #5B4B7A;
+  /* Brand tokens. --plum / --ink / --muted keep their old names so existing
+     rules follow the espresso and brown without a hunt through every file. */
+  --brand-cream: #F8F4EC;
+  --brand-gold: #C9922B;
+  --brand-gold-ink: #7A5A24;
+  --brand-espresso: #3C2415;
+  --brand-ink: #2C1810;
+  --brand-taupe: #5C4336;
+  --brand-midnight: #2A1810;
+  --cream:   var(--brand-cream);
+  --ink:     var(--brand-ink);
+  --plum:    var(--brand-espresso);
   /* Retired: --apricot #F0A868, --rose #E8A0A8, --sage #8FB09A. None were
      in the brand palette (ivory ground, ink text, gold as a fine accent),
      and rose scored 1.96:1 as a text colour on cream. Left undefined on
      purpose so a stray reference fails visibly instead of painting orange. */
-  --cta:       #2B2440;
-  --cta-ink:   #FDF8F0;
-  --cta-hover: #5B4B7A;
-  --gold:    #C9922B;
+  --cta:       var(--brand-espresso);
+  --cta-ink:   var(--brand-cream);
+  --cta-hover: #4E3120;
+  --gold:    var(--brand-gold);
 
   /* Semantic aliases */
   --bg:          var(--cream);
   --text:        var(--ink);
-  --muted:       #6D627E;
-  --border:      rgba(91, 75, 122, 0.18);
+  --muted:       var(--brand-taupe);
+  --border:      rgba(60, 36, 21, 0.18);
   --card-bg:     var(--cream);
-  --card-shadow: 0 4px 24px rgba(43, 36, 64, 0.10);
+  --card-shadow: 0 4px 24px rgba(42, 24, 16, 0.10);
 
   /* Spacing rhythm */
   --section-padding: clamp(2.5rem, 6vw, 5rem);
@@ -65,7 +75,6 @@
   --white:        var(--cream);
   --white-80:     var(--ink);
   --white-60:     var(--muted);
-  --brand-gold:   var(--gold);
 
   /* Valentines page variables */
   --val-gold:     var(--gold);

@@ -19,7 +19,7 @@
    product page.
 ----------------------------------------------------------------- */
 [data-page="product"] {
-  --pdp-ink: #2B2440;
+  --pdp-ink: var(--brand-ink, #2C1810);
   --pdp-ivory: #FDF8F0;
   --pdp-gold: #C9922B;
   --pdp-hairline: rgba(43, 36, 64, 0.14);

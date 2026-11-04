@@ -1,0 +1,4 @@
+{
+  "status": "awaiting-engine",
+  "note": "Stand-in so the browser does not request a missing file. The house sweep replaces this whole file. Without a lead_sign the shop shows every listed piece, the same as when the file is absent. Do not add a lead_sign by hand."
+}

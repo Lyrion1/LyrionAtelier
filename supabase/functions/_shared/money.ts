@@ -51,22 +51,43 @@ export function applyRates(raw: unknown): Record<string, number> {
   return rates;
 }
 
-const rateCache: { at: number; rates: Record<string, number> } = { at: 0, rates: { ...FALLBACK_RATES } };
+const rateCache: { at: number; rates: Record<string, number>; multiCurrencyEnabled: boolean } = {
+  at: 0,
+  rates: { ...FALLBACK_RATES },
+  // Same switch as data/fx-rates.json. False charges GBP even if the
+  // browser asks for another currency, which is the safe state until the
+  // owner sets multi_currency_enabled to true after this function is live.
+  multiCurrencyEnabled: false,
+};
 
-/** Rates published with the site. Falls back to the copy baked in above. */
-export async function loadRates(): Promise<Record<string, number>> {
-  if (Date.now() - rateCache.at < 60_000) return rateCache.rates;
+async function refreshFx(): Promise<void> {
+  if (rateCache.at !== 0 && Date.now() - rateCache.at < 60_000) return;
   try {
     const resp = await fetch(`${SITE_URL}/data/fx-rates.json`, { headers: { 'Cache-Control': 'no-cache' } });
     if (resp.ok) {
-      const data = await resp.json() as { rates?: unknown };
+      const data = await resp.json() as { rates?: unknown; multi_currency_enabled?: unknown };
       rateCache.rates = applyRates(data?.rates);
+      rateCache.multiCurrencyEnabled = data?.multi_currency_enabled === true;
       rateCache.at = Date.now();
+      return;
     }
   } catch {
     rateCache.rates = applyRates(null);
   }
+  rateCache.multiCurrencyEnabled = false;
+  rateCache.at = Date.now();
+}
+
+/** Rates published with the site. Falls back to the copy baked in above. */
+export async function loadRates(): Promise<Record<string, number>> {
+  await refreshFx();
   return rateCache.rates;
+}
+
+/** True only when data/fx-rates.json explicitly enables other currencies. */
+export async function multiCurrencyEnabled(): Promise<boolean> {
+  await refreshFx();
+  return rateCache.multiCurrencyEnabled;
 }
 
 export function presentmentPence(gbpPence: number, code: unknown, rates: Record<string, number>): Presentment {

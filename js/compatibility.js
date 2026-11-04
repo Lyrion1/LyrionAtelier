@@ -159,7 +159,7 @@ async function generatePreview() {
         <span style="color: #fbbf24; font-size: 24px;"> </span>
         <span style="font-size: 48px;">${data.person2.zodiacEmoji || ' '}</span>
       </div>
-      <p style="color: #a78bfa; font-size: 18px; margin: 0;">
+      <p style="color: var(--brand-espresso); font-size: 18px; margin: 0;">
         ${data.person1.name} (${data.person1.zodiacSign}) & ${data.person2.name} (${data.person2.zodiacSign})
       </p>
       `;

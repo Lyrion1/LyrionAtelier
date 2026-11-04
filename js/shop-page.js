@@ -110,15 +110,9 @@ import { formatPrice } from './price-utils.js';
         map[sign] = imageMap[sign];
         continue;
       }
-      // Try multiple file paths for fallback
-      const candidate =
-        pick(
-          `/assets/catalog/zodiac/${sign}.webp`,
-          `/assets/catalog/zodiac/${sign}.png`,
-          `/assets/catalog/${sign}.webp`,
-          `/assets/catalog/${sign}.png`
-        ) || null;
-      map[sign] = candidate || FALLBACK;
+      // Do not invent a .webp path. Those files are not in the catalogue
+      // and the request 404s. The shared placeholder is a real file.
+      map[sign] = FALLBACK;
     }
     cachedZodiacMap = map;
     return map;

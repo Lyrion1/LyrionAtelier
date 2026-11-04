@@ -1,0 +1,107 @@
+/* Brand tokens, loaded last.
+   Gold, espresso and cream from the mark. The old plum
+   (#5B4B7A, #2B2440, #6D627E) and the lavender accents
+   (#a78bfa, #8b5cf6, #9b59b6, #6d4c86) resolve through these
+   names. Change a colour here and the named tokens follow. */
+
+:root {
+  --brand-cream: #F8F4EC;
+  --brand-paper: #FFFDF8;
+  --brand-gold: #C9922B;
+  --brand-gold-ink: #7A5A24;
+  --brand-espresso: #3C2415;
+  --brand-ink: #2C1810;
+  --brand-taupe: #5C4336;
+  --brand-midnight: #2A1810;
+
+  --plum: var(--brand-espresso);
+  --ink: var(--brand-ink);
+  --muted: var(--brand-taupe);
+  --cream: var(--brand-cream);
+  --gold: var(--brand-gold);
+  --cta: var(--brand-espresso);
+  --cta-ink: var(--brand-cream);
+  --accent: var(--brand-gold);
+  --soho-ink: var(--brand-ink);
+  --soho-ink-soft: var(--brand-taupe);
+  --soho-plum: var(--brand-espresso);
+  --soho-plum-deep: #4E3120;
+  --soho-gold: var(--brand-gold);
+  --soho-midnight: var(--brand-midnight);
+  --soho-canvas: var(--brand-cream);
+}
+
+/* Codex event titles used to be white on the cream page. */
+.codex-event-title,
+.codex-entry.past .codex-event-title {
+  color: var(--brand-espresso) !important;
+}
+.codex-event-meta {
+  color: var(--brand-gold-ink) !important;
+}
+.codex-event-copy {
+  color: var(--brand-ink) !important;
+}
+.codex-entry.past .codex-event-copy {
+  color: var(--brand-taupe) !important;
+}
+.codex-past-badge {
+  background: rgba(60, 36, 21, 0.08) !important;
+  color: var(--brand-taupe) !important;
+}
+
+/* Compatibility hero: the description was white on cream. */
+.hero-compatibility {
+  background: var(--brand-cream) !important;
+  border-bottom: 1px solid rgba(60, 36, 21, 0.14) !important;
+}
+.hero-tagline {
+  color: var(--brand-gold-ink) !important;
+}
+.hero-text {
+  color: var(--brand-ink) !important;
+}
+.generator-container h2 {
+  color: var(--brand-espresso) !important;
+}
+
+/* 404 "Return to Earth" was a lavender pill. */
+a.error-link,
+.error-link {
+  background: var(--brand-espresso) !important;
+  border: 1.5px solid var(--brand-espresso) !important;
+  color: var(--brand-cream) !important;
+}
+
+/* Oracle premium tier used a purple border. */
+.subscription-card.premium {
+  border-color: var(--brand-gold) !important;
+  background: rgba(201, 146, 43, 0.06) !important;
+}
+
+/* Basket quantity stepper: the glyphs were the same tone as the page. */
+html body table.cart-table button.quantity-btn,
+.soho-scope table.cart-table button.quantity-btn,
+.soho-scope .quantity-btn {
+  color: var(--brand-espresso) !important;
+  background: var(--brand-cream) !important;
+  border: 1px solid var(--brand-espresso) !important;
+  font-weight: 700 !important;
+  width: 44px !important;
+  min-width: 44px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  font-size: 1.25rem !important;
+}
+
+/* Header and footer sit on espresso, not the old purple midnight. */
+.site-header,
+.footer {
+  background: var(--brand-midnight) !important;
+}
+
+/* Owner instructions stay in the HTML for the person editing the page.
+   Visitors do not see them. */
+.owner-note {
+  display: none !important;
+}
