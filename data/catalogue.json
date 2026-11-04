@@ -989,6 +989,8 @@
       },
       "seasonal": true,
       "listed": true,
+      "hidden": true,
+      "hidden_reason": "Front photographs show the print as a flat white rectangle, not a finished product photo.",
       "gender": "women",
       "features": [
         "Premium cropped fit for modern style",

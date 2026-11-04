@@ -59,6 +59,7 @@ for (const [loc, freq, priority] of STATIC) {
   blocks.push(urlEntry(loc === '/' ? `${SITE}/` : `${SITE}${loc}`, freq, priority));
 }
 for (const product of catalogue.products) {
+  if (product.hidden === true) continue;
   const loc = productLoc(product);
   if (!loc || seen.has(loc)) continue;
   if (loc.includes('?collection=') || loc.includes('?for=')) continue;

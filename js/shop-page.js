@@ -18,7 +18,6 @@ import { formatPrice } from './price-utils.js';
   const SHOP_TYPES = ['apparel', 'accessory', 'home', 'mystery-box'];
   // Values above this threshold are treated as cents and converted to dollars.
   const PRICE_CENTS_THRESHOLD = 200;
-  const INITIAL_PRODUCT_BATCH = 12;
   const ZODIAC_SIGNS = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'];
   const ZODIAC_ORDER = ZODIAC_SIGNS.map((z) => z.charAt(0).toUpperCase() + z.slice(1));
   const CATEGORY_ORDER = ['Men', 'Women', 'Unisex', 'Youth', 'Accessories', 'Rituals'];
@@ -459,22 +458,7 @@ import { formatPrice } from './price-utils.js';
     grid.innerHTML = '';
     grid.style.display = '';
     const allItems = Array.isArray(items) ? items : [];
-    const initial = allItems.slice(0, INITIAL_PRODUCT_BATCH);
-    const remaining = allItems.slice(INITIAL_PRODUCT_BATCH);
-    initial.forEach((p) => grid.append(createCard(p)));
-    if (remaining.length) {
-      const sentinel = document.createElement('div');
-      sentinel.className = 'shop-grid-sentinel';
-      sentinel.setAttribute('aria-hidden', 'true');
-      grid.append(sentinel);
-      const observer = new IntersectionObserver((entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        observer.disconnect();
-        sentinel.remove();
-        remaining.forEach((p) => grid.append(createCard(p)));
-      }, { rootMargin: '200px 0px' });
-      observer.observe(sentinel);
-    }
+    allItems.forEach((p) => grid.append(createCard(p)));
     highlightFromQuery();
   };
 
@@ -586,6 +570,8 @@ import { formatPrice } from './price-utils.js';
     addOpt(allValue, allLabel);
     entries.forEach((entry) => addOpt(entry.value, entry.label));
     const match = entries.find((entry) => entry.value === previous);
+    select.size = 1;
+    select.removeAttribute('multiple');
     select.value = match ? match.value : allValue;
   };
 

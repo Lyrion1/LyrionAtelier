@@ -645,7 +645,7 @@
               // The one product list; shaped for this grid the way js/house.js shapes it.
               if (Array.isArray(data?.products)) {
                 return data.products
-                  .filter((p) => p.listed && ['apparel', 'accessory', 'home'].includes(p.type))
+                  .filter((p) => p.listed && p.hidden !== true && ['apparel', 'accessory', 'home'].includes(p.type))
                   .map((p) => ({ ...p, name: p.title, zodiac: p.sign ? p.sign.toLowerCase() : null, price: p.price_gbp?.min, mainImage: p.images[0], image: p.images[0], state: { published: true, ready: true } }));
               }
             } else {

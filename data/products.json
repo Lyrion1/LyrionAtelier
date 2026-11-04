@@ -156,31 +156,6 @@
     ]
   },
   {
-    "id": "aquarius-crop-hoodie",
-    "name": "Aquarius Crop Hoodie",
-    "priceGBP": 5099,
-    "image": "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "printfulVariantId": [
-      "694c9c3fbcb066",
-      "694c9c3fbcb105",
-      "694c9c3fbcb198",
-      "694c9c3fbcb21e",
-      "694c9c3fbcb2a3",
-      "694c9c3fbcb325",
-      "694c9c3fbcb3a5",
-      "694c9c3fbcb428",
-      "694c9c3fbcb4a5",
-      "694c9c3fbcb529"
-    ]
-  },
-  {
     "id": "fisherman-beanie",
     "name": "Lyrīon Fisherman Beanie",
     "priceGBP": 2399,

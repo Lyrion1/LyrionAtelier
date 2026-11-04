@@ -102,7 +102,10 @@
         if (!house.valid && res[1] !== null && !awaiting) {
           console.warn('[house] data/house.json ignored:', house.reason);
         }
-        var products = core.rank(catalogue, house).map(function (p) { return toLegacy(p, core, house); });
+        // hidden: true takes a piece off the shop, home, gifts and product
+        // pages. The record stays in the catalogue with hidden_reason.
+        var visible = catalogue.filter(function (p) { return p.hidden !== true; });
+        var products = core.rank(visible, house).map(function (p) { return toLegacy(p, core, house); });
         var ctx = {
           core: core,
           house: house,
