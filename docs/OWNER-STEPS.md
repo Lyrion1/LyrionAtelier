@@ -144,3 +144,31 @@ Compatibility Certificate (`/compatibility/digital-certificate`) with two
 real birth dates. Within minutes you get an "Approve:" email; open the link,
 read the draft, tap send, and the PDF arrives in the buyer's inbox. Refund
 it in Stripe afterwards.
+
+---
+
+## 3. Multi-currency checkout (do this before the site shows other currencies)
+
+The shop can show GBP, USD, EUR, CAD, AUD (and NZD, JPY, CHF). The price on
+the page and the price Stripe charges are the same sum: catalogue pounds,
+times the rate in `data/fx-rates.json`, rounded so the figure ends in .99.
+GBP is never converted. The browser does not send a price.
+
+That only works after the updated `create-checkout` function is deployed.
+Until then, leave the site on the current checkout: a visitor could be shown
+dollars and still be charged the pound amount.
+
+1. In Stripe → **Settings → Payments**, confirm the account can charge in
+   USD, EUR, CAD and AUD (a UK account usually can). Leave **Adaptive Pricing
+   off**. This shop already chooses the currency; Adaptive Pricing would
+   convert it a second time.
+2. Deploy the checkout functions (section 1, step 5) **before** the website
+   that contains this currency work is published.
+3. Place one small order with the currency switcher set to USD and one in
+   GBP. The embedded checkout total should match the bag. Refund both.
+4. To change rates later, edit `data/fx-rates.json` and publish the site.
+   The function reads that file; it does not need a redeploy for a rate change.
+   It does need a redeploy for the currency behaviour itself.
+
+The About page (`/about`) and the carrier line on `/shipping` are placeholders
+for you to rewrite. `/blog` sends people to the Codex.

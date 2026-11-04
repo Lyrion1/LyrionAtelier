@@ -30,13 +30,20 @@ export function pageSlug(html) {
 
 export function syncPage(html, product) {
   let out = html.replace(/const variants = \[[\s\S]*?\n\s*\];/, variantsBlock(product));
-  // Size dropdown labels ("M - $46.99"): "$" plus the GBP amount is the
-  // site's price token, which js/main.js shows in the shopper's currency.
+  // Size options carry data-gbp. js/money.js writes the visible price in the
+  // shopper's currency, so the HTML never hard-codes a currency symbol.
   for (const v of product.variants) {
     const id = v.printful_variant_id;
+    if (!id) continue;
     out = out.replace(
-      new RegExp(`(<option value="${id}"[^>]*>)([^<]*?) - \\$[0-9.]+(</option>)`),
-      `$1$2 - $$${v.price_gbp.toFixed(2)}$3`
+      new RegExp(`<option value="${id}"([^>]*)>[^<]*</option>`),
+      (full, attrs) => {
+        const clean = String(attrs)
+          .replace(/\sdata-gbp="[^"]*"/g, '')
+          .replace(/\sdata-size="[^"]*"/g, '');
+        const size = String(v.size).replace(/"/g, '');
+        return `<option value="${id}"${clean} data-gbp="${v.price_gbp.toFixed(2)}" data-size="${size}">${size}</option>`;
+      }
     );
   }
   // Structured data: GBP, the lowest variant price, availability from listing.

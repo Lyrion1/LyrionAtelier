@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <script src="/js/analytics.js"></script>
+<script src="/js/money.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta property="og:title" content="Lyrion Atelier - Celestial Guidance & Astrology">
@@ -10,6 +11,18 @@
   <meta property="og:url" content="https://lyrionatelier.com">
   <meta name="twitter:card" content="summary_large_image">
   <title>Cart | Lyrīon Atelier</title>
+  <meta name="description" content="Review your Lyrīon Atelier bag before checkout. The currency you choose is the currency you are charged.">
+  <link rel="canonical" href="https://lyrionatelier.com/cart">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Your Bag | Lyrīon Atelier">
+  <meta property="og:description" content="Review your Lyrīon Atelier bag before checkout. The currency you choose is the currency you are charged.">
+  <meta property="og:url" content="https://lyrionatelier.com/cart">
+  <meta property="og:image" content="https://lyrionatelier.com/images/lyrion-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Your Bag | Lyrīon Atelier">
+  <meta name="twitter:description" content="Review your Lyrīon Atelier bag before checkout. The currency you choose is the currency you are charged.">
+  <meta name="twitter:image" content="https://lyrionatelier.com/images/lyrion-logo.png">
+
   <link rel="stylesheet" href="/styles/design-system.css">
   <link rel="stylesheet" href="/css/type-scale.css">
   <link rel="stylesheet" href="/styles/soho-theme.css">
@@ -97,10 +110,11 @@
 
         <div class="soho-cart-summary">
           <h2>Order Summary</h2>
-          <div class="soho-cart-summary-row"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
-          <div class="soho-cart-summary-row" style="display:none;"><span class="discount-label">Bundle Savings</span><strong id="cart-discount">$0.00</strong></div>
-          <div class="soho-cart-summary-row"><span>Shipping</span><strong id="cart-shipping">$0.00</strong></div>
-          <div class="soho-cart-summary-row soho-cart-summary-row--total"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+          <div class="soho-cart-summary-row"><span>Subtotal</span><strong id="cart-subtotal"></strong></div>
+          <div class="soho-cart-summary-row" style="display:none;"><span class="discount-label">Bundle Savings</span><strong id="cart-discount"></strong></div>
+          <div class="soho-cart-summary-row"><span>Shipping</span><strong id="cart-shipping"></strong></div>
+          <p id="cart-delivery-note" class="muted"></p>
+          <div class="soho-cart-summary-row soho-cart-summary-row--total"><span>Total</span><strong id="cart-total"></strong></div>
           <div class="soho-pdp__actions" style="flex-direction:column;margin-top:1.5rem;">
             <button class="btn btn-primary soho-btn soho-btn--dark soho-btn--full" type="button" id="checkoutBtn">Checkout</button>
             <button class="btn continue-shopping-button soho-btn soho-btn--ghost soho-btn--full" type="button" onclick="window.location.href='/shop'">Continue Shopping</button>

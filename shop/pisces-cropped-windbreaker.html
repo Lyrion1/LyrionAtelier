@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <script src="/js/analytics.js"></script>
+<script src="/js/money.js"></script>
   <meta charset="UTF-8">
   <meta name="lyrion:product" content="pisces-cropped-windbreaker">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
@@ -149,12 +150,12 @@
     <div class="pdp-selector">
       <label for="size-select">Size</label>
       <select id="size-select" class="input-select">
-              <option value="6960112a067091">XS - $68.99</option>
-              <option value="6960112a0670f3">S - $68.99</option>
-              <option value="6960112a067149" selected>M - $68.99</option>
-              <option value="6960112a067193">L - $68.99</option>
-              <option value="6960112a0671d2">XL - $68.99</option>
-              <option value="6960112a067227">2XL - $69.99</option>
+              <option value="6960112a067091" data-gbp="68.99" data-size="XS">XS</option>
+              <option value="6960112a0670f3" data-gbp="68.99" data-size="S">S</option>
+              <option value="6960112a067149" selected data-gbp="68.99" data-size="M">M</option>
+              <option value="6960112a067193" data-gbp="68.99" data-size="L">L</option>
+              <option value="6960112a0671d2" data-gbp="68.99" data-size="XL">XL</option>
+              <option value="6960112a067227" data-gbp="69.99" data-size="2XL">2XL</option>
             </select>
     </div>
 
@@ -273,7 +274,7 @@
             <svg class="pdp-accordion__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="pdp-accordion__panel" id="pdp-acc-shipping-panel">
-            <p>Made to order by Printful, usually dispatched within 2&ndash;5 business days; delivery time depends on where it is going. Free delivery on orders of $50 or more. Size exchanges within 14 days of delivery: see our <a href="/refund-policy">refund policy</a>.</p>
+            <p>Made to order by Printful, usually dispatched within 2&ndash;5 business days; delivery time depends on where it is going. Free delivery on orders of <span data-gbp="50"></span> or more. Size exchanges within 14 days of delivery: see our <a href="/refund-policy">refund policy</a>.</p>
           </div>
         </div>
 
@@ -417,13 +418,14 @@
       if (!variant) return;
       const price = Number(variant.price || product.price || 0);
       const formatted = price.toFixed(2);
-      priceDisplay.textContent = `$${formatted}`;
+      priceDisplay.textContent = window.LyrionMoney.format(Number(formatted));
       if (addBtn) {
-        addBtn.textContent = `Add to Cart - $${formatted}`;
+        addBtn.textContent = 'Add to Cart — ' + window.LyrionMoney.format(Number(formatted));
       }
     };
 
     updatePrice();
+    document.addEventListener('lyrion:currencychange', () => { if (typeof initializePrice === 'function') initializePrice(); if (typeof updatePrice === 'function') updatePrice(); });
     sizeSelect.addEventListener('change', updatePrice);
 
     addBtn.addEventListener('click', () => {

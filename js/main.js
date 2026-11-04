@@ -11,7 +11,7 @@ const SEO_TEMPLATES = {
   },
   '/shop': {
     title: 'Luxury Zodiac Apparel - Hoodies, Tees & Accessories | Lyrīon Atelier',
-    description: 'Premium astrology-themed apparel for every zodiac sign. Cosmic hoodies, celestial tees, and mystical accessories designed with intention. Free shipping over $50.'
+    description: 'Premium astrology-themed apparel for every zodiac sign. Cosmic hoodies, celestial tees, and mystical accessories designed with intention. Free delivery on qualifying posted orders.'
   },
   '/oracle': {
     title: 'Personalized Oracle Readings - Birth Chart Analysis | Lyrīon Atelier',
@@ -28,12 +28,73 @@ const SEO_TEMPLATES = {
   '/contact': {
     title: 'Contact Lyrīon Atelier | Astrology & Oracle Support',
     description: 'Reach the Lyrīon Atelier team for oracle readings, order support, and cosmic concierge assistance.'
+  },
+  '/about': {
+    title: 'About Lyrīon Atelier | LYRION LTD',
+    description: 'Lyrīon Atelier is the astrology lifestyle house of LYRION LTD in Milton Keynes. This brand story is a placeholder for the owner to complete.'
+  },
+  '/shipping': {
+    title: 'Shipping & Delivery | Lyrīon Atelier',
+    description: 'Made-to-order delivery from Lyrīon Atelier. Posted orders over the equivalent of £50 ship free; a flat delivery charge applies below that. Readings are emailed.'
+  },
+  '/refund-policy': {
+    title: 'Refund Policy | Lyrīon Atelier',
+    description: 'Refunds, size exchanges and digital readings at Lyrīon Atelier, operated by LYRION LTD in England and Wales.'
+  },
+  '/privacy-policy': {
+    title: 'Privacy Policy | Lyrīon Atelier',
+    description: 'How LYRION LTD collects, uses and stores personal information on lyrionatelier.com, including cookies and analytics consent.'
+  },
+  '/terms-of-service': {
+    title: 'Terms of Service | Lyrīon Atelier',
+    description: 'The terms for shopping, readings and certificates from Lyrīon Atelier, operated by LYRION LTD.'
+  },
+  '/cart': {
+    title: 'Your Bag | Lyrīon Atelier',
+    description: 'Review your Lyrīon Atelier bag. Prices are shown in your chosen currency and checkout charges that same amount.'
+  },
+  '/oracle/2026-reading': {
+    title: 'What 2026 Has Written for You | Lyrīon Atelier',
+    description: 'A personalised year-ahead astrology reading from your birth details. Written for reflection and emailed within 48 hours by Lyrīon Atelier.'
+  },
+  '/oracle/life-path-reading': {
+    title: 'Life Path Reading | Lyrīon Atelier',
+    description: 'A life path reading exploring strengths and the patterns in your birth chart. Delivered as a PDF within 48 hours by Lyrīon Atelier.'
+  },
+  '/oracle/solar-return-reading': {
+    title: 'Solar Return Reading | Lyrīon Atelier',
+    description: 'Your year ahead, read from your solar return as themes to reflect on. Emailed within 48 hours by Lyrīon Atelier.'
+  },
+  '/oracle/natal-chart-blueprint': {
+    title: 'Natal Chart Blueprint | Lyrīon Atelier',
+    description: 'A full natal chart reading: personality, relationships, career and growth, from the sky at your birth. Emailed within 48 hours.'
+  },
+  '/oracle/career-purpose-reading': {
+    title: 'Career & Purpose Reading | Lyrīon Atelier',
+    description: 'A career and purpose reading drawn from your birth chart. Written for reflection and emailed within 48 hours by Lyrīon Atelier.'
+  },
+  '/oracle/relationship-synastry': {
+    title: 'Relationship Synastry Reading | Lyrīon Atelier',
+    description: 'A synastry reading of two birth charts, written as a relationship portrait for reflection. Emailed within 48 hours by Lyrīon Atelier.'
+  },
+  '/oracle/transit-forecast': {
+    title: 'Transit Forecast | Lyrīon Atelier',
+    description: 'A transit forecast reading the current sky against your birth chart. Delivered within 48 hours by Lyrīon Atelier.'
+  },
+  '/oracle/lunar-nodes-reading': {
+    title: 'Lunar Nodes Reading | Lyrīon Atelier',
+    description: 'A lunar nodes reading on direction and growth in your chart. Written for reflection and emailed within 48 hours.'
+  },
+  '/oracle/chiron-wound-healing': {
+    title: 'Chiron Wound Healing Reading | Lyrīon Atelier',
+    description: 'A Chiron reading on the wound and the gift in your chart. Written for reflection and emailed within 48 hours.'
+  },
+  '/oracle/full-cosmic-synthesis': {
+    title: 'Full Cosmic Synthesis | Lyrīon Atelier',
+    description: 'The longest Lyrīon Atelier reading: natal chart, year ahead and relationships in one synthesis, emailed within 48 hours.'
   }
 };
 const LOCALIZATION_STORAGE_KEY = 'lyrion_locale_preferences';
-const PRICE_TEXT_CACHE = new WeakMap();
-const PRICE_TOKEN_REGEX = /\bUSD\s*([\d,]+(?:\.\d{1,2})?)|\$([\d,]+(?:\.\d{1,2})?)/gi;
-const PRICE_TOKEN_TEST_REGEX = /\bUSD\s*([\d,]+(?:\.\d{1,2})?)|\$([\d,]+(?:\.\d{1,2})?)/i;
 /**
  * Catalog prices are stored in GBP and Stripe settles in GBP, so GBP is the
  * base and its rate is exactly 1. That is what makes the price on the tag the
@@ -392,20 +453,46 @@ function buildSimpleMegaPanel({ links, image, caption }) {
     </div>`;
 }
 
+function currencySwitcherHtml() {
+  const options = CURRENCY_OPTIONS.map((code) => `<option value="${code}">${code}</option>`).join('');
+  return `<label class="locale-switch"><span class="visually-hidden">Currency</span><select data-locale-currency aria-label="Currency">${options}</select></label>`;
+}
+
+const ORACLE_NAV = [
+  { href: '/oracle', label: 'All readings' },
+  { href: '/oracle/2026-reading', label: 'What 2026 Has Written for You' },
+  { href: '/oracle/life-path-reading', label: 'Life Path' },
+  { href: '/oracle/solar-return-reading', label: 'Solar Return' },
+  { href: '/oracle/natal-chart-blueprint', label: 'Natal Chart Blueprint' },
+  { href: '/oracle/career-purpose-reading', label: 'Career &amp; Purpose' },
+  { href: '/oracle/relationship-synastry', label: 'Relationship Synastry' },
+  { href: '/oracle/transit-forecast', label: 'Transit Forecast' },
+  { href: '/oracle/lunar-nodes-reading', label: 'Lunar Nodes' },
+  { href: '/oracle/chiron-wound-healing', label: 'Chiron' },
+  { href: '/oracle/full-cosmic-synthesis', label: 'Full Cosmic Synthesis' },
+  { href: '/compatibility', label: 'Compatibility Certificates' },
+  { href: '/oracle#free', label: 'Free Reading' }
+];
+
 function buildSiteHeader() {
   const header = document.createElement('header');
   header.className = 'site-header';
   header.dataset.navVersion = NAV_VERSION;
 
-  const readingsPanel = buildSimpleMegaPanel({
-    links: [
-      { href: '/compatibility', label: 'Compatibility Certificates' },
-      { href: '/oracle', label: 'Personalized Readings' },
-      { href: '/oracle#free', label: 'Free Reading' }
-    ],
-    image: '/pisces-hoodie/pisces-hoodie-couple.jpg',
-    caption: 'Readings &amp; Certificates'
-  });
+  const readingItems = ORACLE_NAV.map(({ href, label }) => `<li><a href="${href}">${label}</a></li>`).join('');
+  const readingsPanel = `
+    <div class="soho-mega-panel soho-mega-panel--simple" role="menu">
+      <div class="soho-mega-panel__inner" style="grid-template-columns: 1fr 1fr;">
+        <div class="soho-mega-col soho-mega-col--featured">
+          <h4>Readings</h4>
+          <ul>${readingItems}</ul>
+        </div>
+        <figure class="soho-mega-visual">
+          <img src="/pisces-hoodie/pisces-hoodie-couple.jpg" alt="Readings and certificates" loading="lazy">
+          <figcaption>Readings &amp; Certificates</figcaption>
+        </figure>
+      </div>
+    </div>`;
 
   const giftsPanel = buildSimpleMegaPanel({
     links: [
@@ -441,8 +528,9 @@ function buildSiteHeader() {
       ${giftsPanel}
     </div>
     <a href="/codex">Codex</a>
-    <a href="/#about">About</a>
+    <a href="/about">About</a>
     <a href="/contact">Contact</a>
+    ${currencySwitcherHtml()}
     <a href="/cart" class="cart-icon">Cart <span class="cart-count" aria-live="polite" style="display:none;">0</span></a>
     </div>
     </nav>`;
@@ -722,39 +810,16 @@ function localizeDisplayedPrices(root = document.body) {
   if (!root || !activeLocalization) return;
   const locale = activeLocalization.language || 'en';
   const currency = activeLocalization.currency || BASE_CURRENCY;
-  const formatAmount = (amount) => formatLocalizedPrice(amount, currency, locale);
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-    acceptNode(node) {
-      const parent = node.parentElement;
-      if (!parent) return NodeFilter.FILTER_REJECT;
-      if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEXTAREA'].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
-      const value = node.textContent || '';
-      return PRICE_TOKEN_TEST_REGEX.test(value)
-        ? NodeFilter.FILTER_ACCEPT
-        : NodeFilter.FILTER_REJECT;
-    }
-  });
-  const updates = [];
-  while (walker.nextNode()) {
-    const node = walker.currentNode;
-    const current = node.textContent || '';
-    const original = PRICE_TEXT_CACHE.get(node) || current;
-    PRICE_TEXT_CACHE.set(node, original);
-    const nextValue = original.replace(PRICE_TOKEN_REGEX, (_, usdA, usdB) => {
-      const raw = usdA || usdB;
-      const amount = Number.parseFloat(String(raw || '').replace(/,/g, ''));
-      if (!Number.isFinite(amount)) return raw || '';
-      return formatAmount(amount);
-    });
-    if (nextValue !== current) updates.push([node, nextValue]);
+  if (window.LyrionMoney) {
+    window.LyrionMoney.setLocale({ currency, language: locale });
+    window.LyrionMoney.fill(root);
   }
-  updates.forEach(([node, next]) => {
-    node.textContent = next;
-  });
-
+  // Prices are marked with data-gbp and drawn by LyrionMoney. A text scan for
+  // "$" cannot be used as well: a formatted US dollar amount contains "$",
+  // and scanning it again treats that amount as a new pound price.
   root.querySelectorAll('[data-price-display]').forEach((node) => {
     const raw = Number.parseFloat(node.getAttribute('data-price-display') || '');
-    if (Number.isFinite(raw)) node.textContent = formatAmount(raw);
+    if (Number.isFinite(raw)) node.textContent = formatLocalizedPrice(raw, currency, locale);
   });
 }
 
@@ -825,10 +890,10 @@ function detectDefaultLocalization() {
 }
 
 function syncLocalizationControls() {
-  const languageControl = document.querySelector('[data-locale-language]');
-  const currencyControl = document.querySelector('[data-locale-currency]');
-  if (languageControl) languageControl.value = activeLocalization?.language || 'en';
-  if (currencyControl) currencyControl.value = activeLocalization?.currency || BASE_CURRENCY;
+  const language = activeLocalization?.language || 'en';
+  const currency = activeLocalization?.currency || BASE_CURRENCY;
+  document.querySelectorAll('[data-locale-language]').forEach((control) => { control.value = language; });
+  document.querySelectorAll('[data-locale-currency]').forEach((control) => { control.value = currency; });
 }
 
 /**
@@ -854,13 +919,15 @@ function convertBaseToCurrency(baseAmount, currency) {
 }
 
 function formatLocalizedPrice(baseAmount, currency = BASE_CURRENCY, language = 'en') {
+  if (window.LyrionMoney) return window.LyrionMoney.format(baseAmount, currency, language);
   const converted = convertBaseToCurrency(baseAmount, currency);
   if (!Number.isFinite(converted)) return '—';
   try {
-    return new Intl.NumberFormat(`${language}-${detectCountryCode()}`, {
+    return new Intl.NumberFormat('en-GB', {
       style: 'currency',
       currency,
-      maximumFractionDigits: currency === 'JPY' ? 0 : 2
+      maximumFractionDigits: currency === 'JPY' ? 0 : 2,
+      minimumFractionDigits: currency === 'JPY' ? 0 : 2
     }).format(converted);
   } catch {
     return new Intl.NumberFormat('en-GB', {
@@ -879,53 +946,49 @@ function applyLocalization(localization, { persist = false } = {}) {
   window.__lyrionLocalization = { ...activeLocalization };
   // Publish the rates so js/price-utils.js (an ES module, which cannot import
   // from this classic script) converts through exactly the same numbers.
-  window.__lyrionRates = { ...CURRENCY_RATES };
+  window.__lyrionRates = window.LyrionMoney ? window.LyrionMoney.rates() : { ...CURRENCY_RATES };
+  if (window.LyrionMoney) window.LyrionMoney.setLocale(activeLocalization);
   if (persist) saveLocalizationPreferences(activeLocalization);
   syncLocalizationControls();
   localizeDisplayedPrices(document.body);
+  document.dispatchEvent(new CustomEvent('lyrion:currencychange', { detail: { ...activeLocalization } }));
   setTimeout(() => localizeDisplayedPrices(document.body), 350);
 }
 
 async function refreshExchangeRates() {
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 1800);
-    const response = await fetch(`https://open.er-api.com/v6/latest/${BASE_CURRENCY}`, {
-      signal: controller.signal,
-      cache: 'no-store'
-    });
-    clearTimeout(timeout);
-    if (!response.ok) return;
-    const payload = await response.json();
-    if (!payload || payload.result !== 'success' || typeof payload.rates !== 'object') return;
-    CURRENCY_OPTIONS.forEach((currency) => {
-      // The base currency is the price as stored and as charged. It must stay
-      // exactly 1 whatever the rate feed says, or displayed prices would drift
-      // away from what Stripe actually takes.
-      if (currency === BASE_CURRENCY) return;
-      const nextRate = Number(payload.rates[currency]);
-      if (Number.isFinite(nextRate) && nextRate > 0) CURRENCY_RATES[currency] = nextRate;
-    });
-    localizeDisplayedPrices(document.body);
-  } catch {}
+  // Rates come from /data/fx-rates.json, the same file checkout reads.
+  // A live FX feed would make the tag disagree with the amount Stripe charges.
+  if (!window.LyrionMoney) return;
+  await window.LyrionMoney.loadRates();
+  const next = window.LyrionMoney.rates();
+  Object.keys(next).forEach((code) => { CURRENCY_RATES[code] = next[code]; });
+  window.__lyrionRates = { ...next };
+  localizeDisplayedPrices(document.body);
+  document.dispatchEvent(new CustomEvent('lyrion:currencychange', { detail: { ...activeLocalization } }));
 }
 
 function initLocalizationSystem() {
   const initial = detectDefaultLocalization();
   applyLocalization(initial, { persist: false });
-  const languageControl = document.querySelector('[data-locale-language]');
-  const currencyControl = document.querySelector('[data-locale-currency]');
-  languageControl?.addEventListener('change', () => {
-    applyLocalization({
-      language: languageControl.value,
-      currency: activeLocalization?.currency || BASE_CURRENCY
-    }, { persist: true });
+  document.querySelectorAll('[data-locale-language]').forEach((languageControl) => {
+    if (languageControl.dataset.bound === '1') return;
+    languageControl.dataset.bound = '1';
+    languageControl.addEventListener('change', () => {
+      applyLocalization({
+        language: languageControl.value,
+        currency: activeLocalization?.currency || BASE_CURRENCY
+      }, { persist: true });
+    });
   });
-  currencyControl?.addEventListener('change', () => {
-    applyLocalization({
-      language: activeLocalization?.language || 'en',
-      currency: currencyControl.value
-    }, { persist: true });
+  document.querySelectorAll('[data-locale-currency]').forEach((currencyControl) => {
+    if (currencyControl.dataset.bound === '1') return;
+    currencyControl.dataset.bound = '1';
+    currencyControl.addEventListener('change', () => {
+      applyLocalization({
+        language: activeLocalization?.language || 'en',
+        currency: currencyControl.value
+      }, { persist: true });
+    });
   });
   const observer = new MutationObserver(() => localizeDisplayedPrices(document.body));
   observer.observe(document.body, { childList: true, subtree: true });
@@ -952,7 +1015,12 @@ function ensureSeoMetadata() {
 
   const pathname = normalizePathname(window.location.pathname);
   const seo = getSeoTemplate(pathname);
-  const canonicalHref = `${SITE_ORIGIN}${pathname}`;
+  const params = new URLSearchParams(window.location.search);
+  const productSlug = params.get('slug');
+  const canonicalPath = (pathname === '/product' || pathname === '/product.html') && productSlug
+    ? `/product?slug=${encodeURIComponent(productSlug)}`
+    : (pathname === '/product.html' ? '/product' : pathname);
+  const canonicalHref = `${SITE_ORIGIN}${canonicalPath}`;
 
   document.title = seo.title;
 
@@ -999,8 +1067,8 @@ function ensureSeoMetadata() {
   upsertMeta('X-UA-Compatible', 'IE=edge', 'http-equiv');
 
   upsertLink('canonical', canonicalHref);
-  upsertLink('icon', '/images/favicon/favicon.png');
-  upsertLink('apple-touch-icon', '/images/favicon/favicon.png');
+  upsertLink('icon', '/favicon.ico', { type: 'image/x-icon' });
+  upsertLink('apple-touch-icon', '/images/favicon/apple-touch-icon.png', { sizes: '180x180' });
 
   if (pathname === '/') {
     ensureJsonLd('ldjson-store', {
@@ -1130,17 +1198,19 @@ function buildSiteFooter() {
           <a href="/oracle">Readings</a>
           <a href="/compatibility">Compatibility</a>
           <a href="/codex">Codex</a>
+          <a href="/about">About</a>
           <a href="/partners">Partners</a>
-          <a href="/#about">About</a>
         </div>
       </div>
       <div class="footer-col">
         <h5 class="soho-footer-col-title">Support</h5>
         <div class="footer-links">
           <a href="/contact">Contact</a>
+          <a href="/shipping">Shipping</a>
           <a href="/privacy-policy">Privacy Policy</a>
           <a href="/terms-of-service">Terms of Service</a>
           <a href="/refund-policy">Refund Policy</a>
+          ${currencySwitcherHtml()}
         </div>
       </div>
       <p class="footer-legal">&copy; <span data-year>${new Date().getFullYear()}</span> LYRION LTD. Lyr&#299;on Atelier is operated by LYRION LTD, company number 16904877, registered in England and Wales. Registered office: Flat 9 Centro, 399 South Row, Milton Keynes, MK9 2PG.</p>
@@ -1568,7 +1638,9 @@ function formatListingFeeValue(value) {
   if (!normalized) return 'Free';
   const numericValue = Number(normalized.replace(/[^0-9.]/g, ''));
   if (/^free$/i.test(normalized) || numericValue === 0) return 'Free';
-  return normalized.startsWith('$') ? normalized : `$${normalized}`;
+  if (!Number.isFinite(numericValue)) return 'Free';
+  // Codex event cards list third-party ticket prices already denominated in USD.
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'USD' }).format(numericValue);
 }
 
 function getPriceLabel(event) {

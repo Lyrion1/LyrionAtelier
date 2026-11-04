@@ -34,7 +34,9 @@ async function loadProd(slug) {
 }
 
 function money(cents) {
-  return '$' + (cents / 100).toFixed(2);
+  const major = (Number(cents) || 0) / 100;
+  if (window.LyrionMoney) return window.LyrionMoney.format(major);
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(major);
 }
 
 function resolveProductImage(p = {}, imageMap = {}) {

@@ -15,9 +15,8 @@ function resolveImage(product) {
 function priceLabel(product) {
   const min = Number(product.price_range?.min ?? product.price);
   if (!Number.isFinite(min) || min <= 0) return '';
-  // "$" plus the base (GBP) amount is the site's price token: js/main.js
-  // rewrites it into the shopper's own currency, as on every other page.
-  return `From $${min.toFixed(2)}`;
+  if (window.LyrionMoney) return `From ${window.LyrionMoney.format(min)}`;
+  return '';
 }
 
 function createCard(product) {
@@ -44,6 +43,11 @@ function createCard(product) {
 
   const priceEl = document.createElement('p');
   priceEl.className = 'product-card-price product-card__price price';
+  const min = Number(product.price_range?.min ?? product.price);
+  if (Number.isFinite(min) && min > 0) {
+    priceEl.dataset.gbp = String(min);
+    priceEl.dataset.prefix = 'From ';
+  }
   priceEl.textContent = priceLabel(product);
 
   const actions = document.createElement('div');

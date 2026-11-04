@@ -35,6 +35,10 @@
 /privacy-policy     /privacy-policy.html  200
 /terms-of-service   /terms-of-service.html 200
 /refund-policy      /refund-policy.html   200
+/about              /about.html           200
+/shipping           /shipping.html        200
+/blog               /codex                301
+/blog.html          /codex                301
 /admin/printful-status /admin/printful-status.html 200
 /product            /product.html         200
 /shop/:slug         /product.html?slug=:slug 200

@@ -103,7 +103,8 @@ function renderCard(product) {
   desc.textContent = product.description || product.desc || product?.copy?.notes || '';
   const price = document.createElement('p');
   price.className = 'product-card-price product-card__price price';
-  price.textContent = Number.isFinite(priceNum) ? `$${priceNum.toFixed(2)}` : 'Price unavailable';
+  price.textContent = Number.isFinite(priceNum) && window.LyrionMoney ? window.LyrionMoney.format(priceNum) : (Number.isFinite(priceNum) ? '' : 'Price unavailable');
+  if (Number.isFinite(priceNum)) price.dataset.gbp = String(priceNum);
 
   const actions = document.createElement('div');
   actions.className = 'product-card-buttons product-card__actions';
@@ -122,7 +123,7 @@ function renderCard(product) {
   buy.dataset.name = title;
   buy.dataset.slug = slug;
   buy.dataset.variantId = variant?.id || '';
-  buy.dataset.price = Number.isFinite(priceNum) ? `$${priceNum.toFixed(2)}` : '';
+  buy.dataset.price = Number.isFinite(priceNum) ? String(priceNum) : '';
   buy.dataset.productId = product.id || slug;
   if (!variant?.id) {
     buy.setAttribute('aria-disabled', 'true');
@@ -217,7 +218,8 @@ function renderGrid(items){
 
     const price = document.createElement('p');
     price.className = 'card__price price';
-    price.textContent = Number.isFinite(p.price) ? `$${p.price.toFixed(2)}` : 'Price unavailable';
+    price.textContent = Number.isFinite(p.price) && window.LyrionMoney ? window.LyrionMoney.format(p.price) : (Number.isFinite(p.price) ? '' : 'Price unavailable');
+    if (Number.isFinite(p.price)) price.dataset.gbp = String(p.price);
 
     infoWrapper.append(title, desc, price);
     card.append(imageWrapper, infoWrapper);

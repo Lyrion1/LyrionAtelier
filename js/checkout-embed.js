@@ -185,8 +185,10 @@
 
       const discount = readDiscount();
       const gift = window.LyrionCartDetails ? window.LyrionCartDetails.gift() : {};
+      const currency = window.LyrionMoney ? window.LyrionMoney.getCurrency() : (window.__lyrionLocalization?.currency || 'GBP');
       const payload = {
         basket,
+        currency,
         ...(discount ? { discountCode: discount.code, discountPrize: discount.prize } : {}),
         ...(gift.note ? { giftNote: gift.note } : {}),
         ...(gift.recipient ? { recipientEmail: gift.recipient } : {})

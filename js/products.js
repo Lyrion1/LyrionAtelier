@@ -1451,7 +1451,7 @@ const products = [
     category: "mystery",
     zodiac: "all",
     image: "/images/products/mystery-box-curiosity.png",
-    description: "Value $60-80. Surprise zodiac item curated by the stars. Could be apparel, accessories, or cosmic essentials. Your sign influences what you receive. Every box is different.",
+    description: "A surprise zodiac item curated by the stars. It may be apparel, an accessory, or another cosmic essential. Your sign influences what you receive. Every box is different.",
     sizes: ["One Size"],
     printfulVariants: {
       "One Size": "manual-fulfillment"
@@ -1468,7 +1468,7 @@ const products = [
     category: "mystery",
     zodiac: "all",
     image: "/images/products/mystery-box-vault.png",
-    description: "Value $120-150. Premium zodiac surprise. Hoodie, tee, tote, or accessories chosen for you. What will you discover? Open your vault and reveal your cosmic gift.",
+    description: "A premium zodiac surprise. Hoodie, tee, tote, or accessories chosen for you. What will you discover? Open your vault and reveal your cosmic gift.",
     sizes: ["One Size"],
     printfulVariants: {
       "One Size": "manual-fulfillment"
@@ -1485,7 +1485,7 @@ const products = [
     category: "mystery",
     zodiac: "all",
     image: "/images/products/mystery-box-lovers.png",
-    description: "Value $200+. His & Hers surprise items cosmically curated for your connection. Two products chosen by the stars, one cosmic bond. Perfect for couples.",
+    description: "His and hers surprise items cosmically curated for your connection. Two products chosen by the stars, one cosmic bond. Perfect for couples.",
     sizes: ["One Size"],
     printfulVariants: {
       "One Size": "manual-fulfillment"
@@ -1600,7 +1600,7 @@ function displayProducts(productsToShow = products) {
         </div>
         <div class="product-info">
           <h3 class="product-title">${product.name}</h3>
-          <p class="product-price">$${product.price.toFixed(2)}</p>
+          <p class="product-price" data-gbp="${product.price}"></p>
           <button class="btn btn-primary add-to-cart" type="button" aria-label="Add ${product.name} to cart">Add to Cart</button>
         </div>
       `;
@@ -1815,7 +1815,10 @@ function displayProductDetails() {
   const productDescription = document.getElementById('product-description');
   
   if (productName) productName.textContent = product.name;
-  if (productPrice) productPrice.textContent = `$${product.price.toFixed(2)}`;
+  if (productPrice) {
+    productPrice.dataset.gbp = String(product.price);
+    productPrice.textContent = window.LyrionMoney ? window.LyrionMoney.format(product.price) : '';
+  }
   if (productDescription) productDescription.textContent = product.description;
   
   // Display available sizes if element exists
@@ -1965,7 +1968,7 @@ function displayOracleReadings() {
         <h3 class="oracle-title">${reading.name}</h3>
         <p class="oracle-description">${reading.description}</p>
       </div>
-      <div class="oracle-price">$${reading.price.toFixed(2)}</div>
+      <div class="oracle-price" data-gbp="${reading.price}"></div>
       <div class="button-row tight">
          <a class="btn btn-outline" href="/contact">Ask the oracle</a>
         <button class="btn btn-primary book-reading-btn" data-product="${reading.key}" aria-label="Book ${reading.name}">Book</button>
