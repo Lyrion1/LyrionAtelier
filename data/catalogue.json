@@ -1668,31 +1668,37 @@
       "variants": [
         {
           "size": "S",
+          "color": "Black",
           "price_gbp": 50.99,
           "printful_variant_id": "694ab7d2e5aae1"
         },
         {
           "size": "M",
+          "color": "Black",
           "price_gbp": 50.99,
           "printful_variant_id": "694ab7d2e5ab58"
         },
         {
           "size": "L",
+          "color": "Black",
           "price_gbp": 50.99,
           "printful_variant_id": "694ab7d2e5abb8"
         },
         {
           "size": "XL",
+          "color": "Black",
           "price_gbp": 52.99,
           "printful_variant_id": "694ab7d2e5abf3"
         },
         {
           "size": "2XL",
+          "color": "Black",
           "price_gbp": 52.99,
           "printful_variant_id": "694ab7d2e5ac45"
         },
         {
           "size": "3XL",
+          "color": "Black",
           "price_gbp": 54.99,
           "printful_variant_id": "694ab7d2e5ac97"
         }
@@ -2757,48 +2763,56 @@
       "variants": [
         {
           "size": "S",
+          "color": "Military Green",
           "price_gbp": 52.99,
           "printful_variant_id": "697ba455db1785",
           "sku": "LYR-MERC-RETRO-S"
         },
         {
           "size": "M",
+          "color": "Military Green",
           "price_gbp": 52.99,
           "printful_variant_id": "697ba455db17f3",
           "sku": "LYR-MERC-RETRO-M"
         },
         {
           "size": "L",
+          "color": "Military Green",
           "price_gbp": 52.99,
           "printful_variant_id": "697ba455db1844",
           "sku": "LYR-MERC-RETRO-L"
         },
         {
           "size": "XL",
+          "color": "Military Green",
           "price_gbp": 52.99,
           "printful_variant_id": "697ba455db1891",
           "sku": "LYR-MERC-RETRO-XL"
         },
         {
           "size": "2XL",
+          "color": "Military Green",
           "price_gbp": 52.99,
           "printful_variant_id": "697ba455db18d2",
           "sku": "LYR-MERC-RETRO-2XL"
         },
         {
           "size": "3XL",
+          "color": "Military Green",
           "price_gbp": 54.99,
           "printful_variant_id": "697ba455db1926",
           "sku": "LYR-MERC-RETRO-3XL"
         },
         {
           "size": "4XL",
+          "color": "Military Green",
           "price_gbp": 54.99,
           "printful_variant_id": "697ba455db1975",
           "sku": "LYR-MERC-RETRO-4XL"
         },
         {
           "size": "5XL",
+          "color": "Military Green",
           "price_gbp": 56.99,
           "printful_variant_id": "697ba455db19b8",
           "sku": "LYR-MERC-RETRO-5XL"
@@ -3688,36 +3702,42 @@
       "variants": [
         {
           "size": "S",
+          "color": "White",
           "price_gbp": 50.99,
           "printful_variant_id": "697c0e9b30b4c3",
           "sku": "LYR-SATURN-WHITE-HOODIE-S"
         },
         {
           "size": "M",
+          "color": "White",
           "price_gbp": 50.99,
           "printful_variant_id": "697c0e9b30b525",
           "sku": "LYR-SATURN-WHITE-HOODIE-M"
         },
         {
           "size": "L",
+          "color": "White",
           "price_gbp": 50.99,
           "printful_variant_id": "697c0e9b30b579",
           "sku": "LYR-SATURN-WHITE-HOODIE-L"
         },
         {
           "size": "XL",
+          "color": "White",
           "price_gbp": 50.99,
           "printful_variant_id": "697c0e9b30b5c1",
           "sku": "LYR-SATURN-WHITE-HOODIE-XL"
         },
         {
           "size": "2XL",
+          "color": "White",
           "price_gbp": 52.99,
           "printful_variant_id": "697c0e9b30b612",
           "sku": "LYR-SATURN-WHITE-HOODIE-2XL"
         },
         {
           "size": "3XL",
+          "color": "White",
           "price_gbp": 54.99,
           "printful_variant_id": "697c0e9b30b656",
           "sku": "LYR-SATURN-WHITE-HOODIE-3XL"
