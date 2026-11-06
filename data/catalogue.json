@@ -230,7 +230,7 @@
       "collection": "Youth Spark",
       "category": "youth",
       "type": "apparel",
-      "description": "",
+      "description": "Aries Fire Tee (Youth). Unisex youth tee, sizes XS to XL.",
       "images": [
         "/youth-aries-fire-tee/youth-aries-fire-tee-boy-crop.jpg",
         "/youth-aries-fire-tee/youth-aries-fire-tee-lifestyle.jpg",
@@ -899,11 +899,11 @@
       "type": "apparel",
       "description": "The water bearer flows through you. Aquarius doesn't carry water—they ARE the water, the life force, the current that nourishes all of humanity. Born under Uranus' revolutionary reign, they understand that true change flows like a river: persistent, unstoppable, reshaping everything it touches. This cropped hoodie channels Aquarian defiance through sacred water symbolism, wrapping visionary souls in comfort designed for those who refuse to follow the current—they create it.",
       "images": [
-        "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1-crop.jpg",
+        "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
+        "/aquarius-crop-hoodie/aquarius-crop-hoodie-side.jpg",
         "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
         "/aquarius-crop-hoodie/aquarius-crop-hoodie-front2.jpg",
-        "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
-        "/aquarius-crop-hoodie/aquarius-crop-hoodie-side.jpg"
+        "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1-crop.jpg"
       ],
       "link": null,
       "price_gbp": {
@@ -989,6 +989,8 @@
       },
       "seasonal": true,
       "listed": true,
+      "hidden": true,
+      "hidden_reason": "Front photographs show the print as a flat white rectangle, not a finished product photo.",
       "gender": "women",
       "features": [
         "Premium cropped fit for modern style",
@@ -2111,7 +2113,7 @@
       "sign": "Pisces",
       "element": "Water",
       "collection": "Accessories",
-      "category": "Accessories",
+      "category": "accessories",
       "type": "home",
       "description": "Luxury Pisces Mouse Pad\n\nElevate your workspace with cosmic elegance. Premium mouse pad featuring the ethereal Pisces twin fish in stunning detail.\n\n• Smooth glide surface for precision\n• Non-slip rubber base\n• Vibrant, fade-resistant print\n• Generous size for comfort\n• Premium quality materials\n\nPerfect for the Pisces in your life (February 19 - March 20) or anyone who appreciates celestial design.",
       "images": [
@@ -2914,7 +2916,7 @@
       "sign": null,
       "element": null,
       "collection": "Cosmic Collection",
-      "category": "hoodie",
+      "category": "hoodies",
       "type": "apparel",
       "description": "For the 28-30 year olds who lost everything during their Saturn Return. Cosmic reckoning. Necessary endings. Premium organic hoodie with side pockets.",
       "images": [
@@ -3665,7 +3667,7 @@
       "sign": null,
       "element": null,
       "collection": "Saturn Return Collection",
-      "category": "hoodie",
+      "category": "hoodies",
       "type": "apparel",
       "description": "Saturn Return hits different. When the planet completes its 29-year orbit and reality checks every choice you've made. Relationships transform. Foundations rebuild. This hoodie speaks to cosmic reckonings, necessary endings, and the clarity that comes after chaos. White colorway for fresh starts.",
       "images": [

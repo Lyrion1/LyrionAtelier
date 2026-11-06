@@ -141,7 +141,7 @@ export function validateCatalogue(data, root = REPO_ROOT) {
 
 /** Products that can go into a basket at all (the house may still rest them). */
 export function sellable(product) {
-  return product.listed === true && product.fulfilment !== 'enquiry';
+  return product.listed === true && product.hidden !== true && product.fulfilment !== 'enquiry';
 }
 
 /**

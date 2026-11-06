@@ -61,7 +61,7 @@ html body #products-grid-local > .house-row__head:first-child { margin-top: 0; }
   text-transform: uppercase;
   color: var(--soho-gold-ink, #8a6d2f) !important;
 }
-.house-label--last-chance { color: var(--soho-plum-deep, #4a2f61) !important; }
+.house-label--last-chance { color: var(--soho-plum-deep, var(--brand-espresso)) !important; }
 .house-label--retired { color: var(--soho-ink-soft, #4a4152) !important; }
 
 .product-card[data-house-state="retired"] .product-card-image,

@@ -1,9 +1,9 @@
 :root {
-  --cream: #FDF8F0;
+  --cream: var(--brand-cream, #F8F4EC);
   --paper: #F5EFE3;
-  --ink: #3A2E33;
-  --plum: #5B4B7A;
-  --gold: #C9922B;
+  --ink: var(--brand-ink, #2C1810);
+  --plum: var(--brand-espresso, #3C2415);
+  --gold: var(--brand-gold, #C9922B);
 
   /* Primary control fill. This replaces the old --apricot (#F0A868), which
      was not in the brand palette: the site is ivory ground, ink text, gold
@@ -11,9 +11,9 @@
      rule still reaching for it fails loudly rather than painting orange.
      --rose (#E8A0A8) and --sage (#8FB09A) are gone for the same reason;
      rose also failed contrast as a text colour (1.96:1 on cream). */
-  --cta: #2B2440;
-  --cta-ink: #FDF8F0;
-  --cta-hover: #5B4B7A;
+  --cta: var(--brand-espresso, #3C2415);
+  --cta-ink: var(--brand-cream, #F8F4EC);
+  --cta-hover: #4E3120;
   --container-width: 1200px;
   --section-space: clamp(2rem, 3.5vw, 3.5rem);
   --text-width: 34rem;

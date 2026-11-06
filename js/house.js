@@ -95,10 +95,17 @@
       return Promise.all([getJSON(CATALOGUE_URL), getJSON(HOUSE_URL), getJSON(CAMPAIGNS_URL)]).then(function (res) {
         var catalogue = res[0] && Array.isArray(res[0].products) ? res[0].products : [];
         var house = core.normaliseHouse(res[1]);
-        if (!house.valid && res[1] !== null) {
+        // status "awaiting-engine" is the committed stand-in. It is not a
+        // broken file, so it does not warn, and it is not a season, so the
+        // shop keeps showing every listed piece.
+        var awaiting = res[1] && res[1].status === 'awaiting-engine';
+        if (!house.valid && res[1] !== null && !awaiting) {
           console.warn('[house] data/house.json ignored:', house.reason);
         }
-        var products = core.rank(catalogue, house).map(function (p) { return toLegacy(p, core, house); });
+        // hidden: true takes a piece off the shop, home, gifts and product
+        // pages. The record stays in the catalogue with hidden_reason.
+        var visible = catalogue.filter(function (p) { return p.hidden !== true; });
+        var products = core.rank(visible, house).map(function (p) { return toLegacy(p, core, house); });
         var ctx = {
           core: core,
           house: house,

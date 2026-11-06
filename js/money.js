@@ -34,6 +34,10 @@
   var rates = Object.assign({}, FALLBACK_RATES);
   var currency = BASE;
   var language = 'en';
+  // ONE SWITCH. False until data/fx-rates.json sets multi_currency_enabled
+  // to true. While it is false the shop shows and sends pounds only, because
+  // the live checkout function still charges GBP. See docs/OWNER-STEPS.md.
+  var multiCurrencyEnabled = false;
 
   function normaliseCurrency(code) {
     var upper = String(code || BASE).toUpperCase();
@@ -54,8 +58,13 @@
 
   function setLocale(next) {
     if (!next) return;
-    if (next.currency) currency = normaliseCurrency(next.currency);
+    if (next.currency) currency = multiCurrencyEnabled ? normaliseCurrency(next.currency) : BASE;
     if (next.language) language = String(next.language || 'en').split(/[-_]/)[0] || 'en';
+  }
+
+  function setMultiCurrencyEnabled(on) {
+    multiCurrencyEnabled = on === true;
+    if (!multiCurrencyEnabled) currency = BASE;
   }
 
   function retailMajor(gbpPence, rate) {
@@ -169,6 +178,7 @@
       .then(function (res) { return res.ok ? res.json() : null; })
       .then(function (data) {
         if (data && data.rates) setRates(data.rates);
+        setMultiCurrencyEnabled(!!(data && data.multi_currency_enabled === true));
         return rates;
       })
       .catch(function () { return rates; });
@@ -182,7 +192,9 @@
     normaliseCurrency: normaliseCurrency,
     setRates: setRates,
     setLocale: setLocale,
-    getCurrency: function () { return currency; },
+    setMultiCurrencyEnabled: setMultiCurrencyEnabled,
+    multiCurrencyEnabled: function () { return multiCurrencyEnabled; },
+    getCurrency: function () { return multiCurrencyEnabled ? currency : BASE; },
     getLanguage: function () { return language; },
     rates: function () { return Object.assign({}, rates); },
     presentmentPence: presentmentPence,

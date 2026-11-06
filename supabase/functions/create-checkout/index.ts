@@ -13,8 +13,10 @@ import {
   SHIPPING_COST_GBP_PENCE,
   SHIPPING_FREE_GBP_PENCE,
   loadRates,
+  multiCurrencyEnabled,
   normaliseCurrency,
   presentmentPence,
+  BASE,
 } from '../_shared/money.ts';
 
 const stripe = new Stripe(requireEnv('STRIPE_SECRET_KEY'), {
@@ -96,8 +98,10 @@ Deno.serve(async (req: Request) => {
     const { products, house } = await loadShop();
     const bySlug = new Map<string, CheckoutProduct>(products.map((p) => [p.id, p]));
     // Currency is a preference. The amount is never taken from the client.
-    const currency = normaliseCurrency(body.currency);
+    // While multi_currency_enabled is false in data/fx-rates.json, ignore the
+    // requested currency and charge GBP — the same figure the page shows.
     const rates = await loadRates();
+    const currency = (await multiCurrencyEnabled()) ? normaliseCurrency(body.currency) : BASE;
 
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
     const metadata: Record<string, string> = {};

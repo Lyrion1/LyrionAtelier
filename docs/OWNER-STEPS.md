@@ -147,7 +147,7 @@ it in Stripe afterwards.
 
 ---
 
-## 3. Multi-currency checkout (do this before the site shows other currencies)
+## 3. Multi-currency is switched off on purpose
 
 The shop can show GBP, USD, EUR, CAD, AUD (and NZD, JPY, CHF). The price on
 the page and the price Stripe charges are the same sum: catalogue pounds,
@@ -155,20 +155,60 @@ times the rate in `data/fx-rates.json`, rounded so the figure ends in .99.
 GBP is never converted. The browser does not send a price.
 
 That only works after the updated `create-checkout` function is deployed.
-Until then, leave the site on the current checkout: a visitor could be shown
-dollars and still be charged the pound amount.
+The function on the live site today still charges pounds and ignores the
+currency the page sends. So the site is held on pounds until you flip one
+switch.
 
-1. In Stripe → **Settings → Payments**, confirm the account can charge in
+**The switch** is the line `"multi_currency_enabled": false` near the top of
+`data/fx-rates.json`. While it says `false`:
+
+- every price is in pounds
+- the currency menu in the header is hidden
+- checkout is asked for GBP, and the new function (once it is deployed)
+  refuses any other currency as well
+
+Leave it `false` until the steps below are done. Setting it to `true` before
+the new function is actually live brings the mismatch back: a visitor outside
+the UK would see dollars and still be charged pounds.
+
+1. Fix GitHub Actions (section 0) and deploy the checkout functions
+   (section 1, step 5). Open that run. It must show a machine and steps, not
+   the billing-lock message, and it must not say it skipped the deploy.
+2. In Stripe → **Settings → Payments**, confirm the account can charge in
    USD, EUR, CAD and AUD (a UK account usually can). Leave **Adaptive Pricing
    off**. This shop already chooses the currency; Adaptive Pricing would
    convert it a second time.
-2. Deploy the checkout functions (section 1, step 5) **before** the website
-   that contains this currency work is published.
-3. Place one small order with the currency switcher set to USD and one in
-   GBP. The embedded checkout total should match the bag. Refund both.
-4. To change rates later, edit `data/fx-rates.json` and publish the site.
-   The function reads that file; it does not need a redeploy for a rate change.
-   It does need a redeploy for the currency behaviour itself.
+3. Only then, change `multi_currency_enabled` from `false` to `true` in
+   `data/fx-rates.json` and publish the site (a normal push to the main
+   branch is enough; the function reads this file and does not need another
+   deploy for the switch or for a later rate change).
+4. On a phone, open the shop. The currency menu should be back, in the
+   header next to the bag. Set it to USD. The bag should show dollars.
+   Place one small order. The embedded checkout total should match the bag,
+   in dollars. Place one in GBP as well. Refund both.
 
-The About page (`/about`) and the carrier line on `/shipping` are placeholders
-for you to rewrite. `/blog` sends people to the Codex.
+To change rates later, edit the numbers in `data/fx-rates.json` and publish.
+Do not edit `js/money.js` for a rate change.
+
+## 4. Words only you can write
+
+These notes are hidden on the live pages. They are not invented copy.
+
+**About** (`/about`). The page currently shows only the company facts
+(LYRION LTD, number 16904877, Flat 9 Centro, 399 South Row, Milton Keynes,
+MK9 2PG). Still to write, in your own voice:
+
+- How the house began, who makes the readings, and why the clothes carry
+  the signs they do.
+- What a visitor can expect: made-to-order apparel, readings written from
+  birth details and emailed within 48 hours, and compatibility certificates.
+  Link the sentences you want kept to the shop, the readings, and the Codex.
+
+**Shipping** (`/shipping`). The page already states made-to-order dispatch
+(usually 2–5 business days), free delivery from £50, and £5.99 below that.
+Still to add, only if it is true of the Printful account:
+
+- The carrier name.
+- A typical transit time for the UK and for international orders.
+
+Do not name a courier Printful is not using. `/blog` sends people to the Codex.

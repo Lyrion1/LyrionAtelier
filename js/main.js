@@ -31,7 +31,7 @@ const SEO_TEMPLATES = {
   },
   '/about': {
     title: 'About Lyrīon Atelier | LYRION LTD',
-    description: 'Lyrīon Atelier is the astrology lifestyle house of LYRION LTD in Milton Keynes. This brand story is a placeholder for the owner to complete.'
+    description: 'Lyrīon Atelier is the astrology lifestyle house of LYRION LTD in Milton Keynes.'
   },
   '/shipping': {
     title: 'Shipping & Delivery | Lyrīon Atelier',
@@ -244,6 +244,7 @@ let activeLocalization = null;
 
   ensureStylesheet('/css/restoration.css');
   ensureStylesheet('/styles/soho-theme.css');
+  ensureStylesheet('/css/brand-tokens.css');
 })();
 
 /**
@@ -453,9 +454,33 @@ function buildSimpleMegaPanel({ links, image, caption }) {
     </div>`;
 }
 
+function multiCurrencyOn() {
+  return !!(window.LyrionMoney && typeof window.LyrionMoney.multiCurrencyEnabled === 'function' && window.LyrionMoney.multiCurrencyEnabled());
+}
+
 function currencySwitcherHtml() {
+  if (!multiCurrencyOn()) return '';
   const options = CURRENCY_OPTIONS.map((code) => `<option value="${code}">${code}</option>`).join('');
   return `<label class="locale-switch"><span class="visually-hidden">Currency</span><select data-locale-currency aria-label="Currency">${options}</select></label>`;
+}
+
+function ensureCurrencySwitcher() {
+  const nav = document.querySelector('#primary-nav');
+  if (!nav) return;
+  const existing = nav.querySelector('.locale-switch');
+  if (!multiCurrencyOn()) {
+    existing?.remove();
+    return;
+  }
+  if (existing) return;
+  const holder = document.createElement('div');
+  holder.innerHTML = currencySwitcherHtml();
+  const node = holder.firstElementChild;
+  if (!node) return;
+  const cart = nav.querySelector('.cart-icon');
+  if (cart) nav.insertBefore(node, cart);
+  else nav.appendChild(node);
+  bindCurrencyControls();
 }
 
 const ORACLE_NAV = [
@@ -634,10 +659,24 @@ function getSeoTemplate(pathname) {
   const normalized = normalizePathname(pathname);
   if (SEO_TEMPLATES[normalized]) return SEO_TEMPLATES[normalized];
   if (normalized.startsWith('/shop/')) {
-    const name = (document.querySelector('#product-name')?.textContent || 'Zodiac Apparel').trim();
-    const title = `${name} | Lyrīon Atelier - Luxury Astrology & Zodiac Apparel`;
-    const description = (document.querySelector('#product-description')?.textContent || 'Premium zodiac apparel featuring celestial symbolism from Lyrīon Atelier.').trim();
-    return { title, description };
+    // Static product pages already publish a specific <title>. Replacing it
+    // with the name node produced "Zodiac Apparel | …" before that node existed.
+    const existing = (document.title || '').trim();
+    const description = (
+      document.querySelector('meta[name="description"]')?.getAttribute('content')
+      || document.querySelector('#product-description')?.textContent
+      || 'Premium zodiac apparel featuring celestial symbolism from Lyrīon Atelier.'
+    ).trim();
+    const generic = !existing || /^zodiac apparel \|/i.test(existing);
+    if (!generic) return { title: existing, description };
+    const name = (
+      document.querySelector('h1.pdp-name, h1.product-title, #product-name')?.textContent
+      || ''
+    ).trim();
+    if (name && !/^product$/i.test(name) && !/^zodiac apparel$/i.test(name)) {
+      return { title: `${name} | Lyrīon Atelier`, description };
+    }
+    return { title: existing || `${name || 'Zodiac Apparel'} | Lyrīon Atelier`, description };
   }
   return {
     title: document.title || 'Lyrīon Atelier - Luxury Astrology, Oracle Readings & Zodiac Apparel',
@@ -877,8 +916,11 @@ function saveLocalizationPreferences(localization) {
 
 function detectDefaultLocalization() {
   const preferences = readLocalizationPreferences();
-  if (preferences) return preferences;
-  const language = normalizeLanguage(navigator.language || 'en');
+  const language = preferences?.language || normalizeLanguage(navigator.language || 'en');
+  // The switch in data/fx-rates.json is off until checkout can charge
+  // the currency on the bag. A saved USD preference must not leak through.
+  if (!multiCurrencyOn()) return { language, currency: 'GBP' };
+  if (preferences) return { language, currency: normalizeCurrency(preferences.currency) };
   if (/^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname)) {
     return { language, currency: 'GBP' };
   }
@@ -940,7 +982,7 @@ function formatLocalizedPrice(baseAmount, currency = BASE_CURRENCY, language = '
 function applyLocalization(localization, { persist = false } = {}) {
   activeLocalization = {
     language: normalizeLanguage(localization?.language),
-    currency: normalizeCurrency(localization?.currency)
+    currency: multiCurrencyOn() ? normalizeCurrency(localization?.currency) : 'GBP'
   };
   document.documentElement.lang = activeLocalization.language;
   window.__lyrionLocalization = { ...activeLocalization };
@@ -963,13 +1005,11 @@ async function refreshExchangeRates() {
   const next = window.LyrionMoney.rates();
   Object.keys(next).forEach((code) => { CURRENCY_RATES[code] = next[code]; });
   window.__lyrionRates = { ...next };
-  localizeDisplayedPrices(document.body);
-  document.dispatchEvent(new CustomEvent('lyrion:currencychange', { detail: { ...activeLocalization } }));
+  ensureCurrencySwitcher();
+  applyLocalization(detectDefaultLocalization(), { persist: false });
 }
 
-function initLocalizationSystem() {
-  const initial = detectDefaultLocalization();
-  applyLocalization(initial, { persist: false });
+function bindCurrencyControls() {
   document.querySelectorAll('[data-locale-language]').forEach((languageControl) => {
     if (languageControl.dataset.bound === '1') return;
     languageControl.dataset.bound = '1';
@@ -990,6 +1030,12 @@ function initLocalizationSystem() {
       }, { persist: true });
     });
   });
+}
+
+function initLocalizationSystem() {
+  ensureCurrencySwitcher();
+  applyLocalization(detectDefaultLocalization(), { persist: false });
+  bindCurrencyControls();
   const observer = new MutationObserver(() => localizeDisplayedPrices(document.body));
   observer.observe(document.body, { childList: true, subtree: true });
   refreshExchangeRates();
@@ -1080,7 +1126,8 @@ function ensureSeoMetadata() {
       "logo": `${SITE_ORIGIN}/images/lyrion-logo.png`,
       "sameAs": [
         "https://www.youtube.com/@LyrionAtelier",
-        "https://www.instagram.com/lyrionatelier?igsh=cG85eGhodzJkb2Jj&utm_source=qr"
+        "https://www.instagram.com/lyrionatelier/",
+        "https://www.tiktok.com/@lyrion_atelier"
       ],
       "priceRange": "$$-$$$"
     });
@@ -1162,6 +1209,11 @@ const FOOTER_INSTAGRAM_ICON = `
     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
   </svg>`;
 
+const FOOTER_TIKTOK_ICON = `
+  <svg class="footer-social__icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.54V6.79a4.85 4.85 0 01-1.02-.1z"/>
+  </svg>`;
+
 function buildSiteFooter() {
   const footer = document.createElement('footer');
   footer.className = 'footer';
@@ -1170,8 +1222,11 @@ function buildSiteFooter() {
       <a class="footer-social__link" href="https://www.youtube.com/@LyrionAtelier" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on YouTube">
         ${FOOTER_YOUTUBE_ICON}
       </a>
-      <a class="footer-social__link" href="https://www.instagram.com/lyrionatelier?igsh=cG85eGhodzJkb2Jj&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on Instagram">
+      <a class="footer-social__link" href="https://www.instagram.com/lyrionatelier/" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on Instagram">
         ${FOOTER_INSTAGRAM_ICON}
+      </a>
+      <a class="footer-social__link" href="https://www.tiktok.com/@lyrion_atelier" target="_blank" rel="noopener noreferrer" aria-label="Lyrion Atelier on TikTok">
+        ${FOOTER_TIKTOK_ICON}
       </a>
     </div>`;
   footer.innerHTML = `

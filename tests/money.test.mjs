@@ -48,6 +48,19 @@ test('free delivery uses the presented sum, matching the £50 banner', () => {
   assert.equal(gbp.minor, 599);
 });
 
+test('the currency switch stays off until fx-rates.json turns it on', () => {
+  const fx = JSON.parse(readFileSync(new URL('../data/fx-rates.json', import.meta.url), 'utf8'));
+  assert.equal(fx.multi_currency_enabled, false);
+  assert.equal(money.multiCurrencyEnabled(), false);
+  money.setLocale({ currency: 'USD', language: 'en' });
+  assert.equal(money.getCurrency(), 'GBP');
+  money.setMultiCurrencyEnabled(true);
+  money.setLocale({ currency: 'USD', language: 'en' });
+  assert.equal(money.getCurrency(), 'USD');
+  money.setMultiCurrencyEnabled(false);
+  assert.equal(money.getCurrency(), 'GBP');
+});
+
 test('the Deno checkout copy publishes the same fallback rates', () => {
   const ts = readFileSync(new URL('../supabase/functions/_shared/money.ts', import.meta.url), 'utf8');
   for (const [code, rate] of Object.entries(money.FALLBACK_RATES)) {
@@ -56,4 +69,5 @@ test('the Deno checkout copy publishes the same fallback rates', () => {
   assert.match(ts, /nearest - 0\.01/);
   assert.match(ts, /SHIPPING_FREE_GBP_PENCE = 5000/);
   assert.match(ts, /SHIPPING_COST_GBP_PENCE = 599/);
+  assert.match(ts, /multi_currency_enabled === true/);
 });

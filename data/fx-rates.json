@@ -1,5 +1,6 @@
 {
   "base": "GBP",
+  "multi_currency_enabled": false,
   "updated": "2026-11-04",
   "rounding": "GBP is charged as catalogued. Other currencies are catalogue pounds times the rate below, then rounded to the nearest whole unit minus 0.01 (so prices end in .99). Yen rounds to a whole yen. Checkout recomputes this from catalogue pence and ignores any price sent by the browser. Edit the rates here; the live checkout function reads this file.",
   "rates": {

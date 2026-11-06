@@ -1,0 +1,354 @@
+/* Brand tokens, loaded last.
+   Gold, espresso and cream from the mark. The old plum
+   (#5B4B7A, #2B2440, #6D627E) and the lavender accents
+   (#a78bfa, #8b5cf6, #9b59b6, #6d4c86) resolve through these
+   names. Change a colour here and the named tokens follow. */
+
+:root {
+  --brand-cream: #F8F4EC;
+  --brand-paper: #FFFDF8;
+  --brand-gold: #C9922B;
+  --brand-gold-ink: #7A5A24;
+  --brand-espresso: #3C2415;
+  --brand-ink: #2C1810;
+  --brand-taupe: #5C4336;
+  --brand-midnight: #2A1810;
+
+  --plum: var(--brand-espresso);
+  --ink: var(--brand-ink);
+  --muted: var(--brand-taupe);
+  --cream: var(--brand-cream);
+  --gold: var(--brand-gold);
+  --cta: var(--brand-espresso);
+  --cta-ink: var(--brand-cream);
+  --accent: var(--brand-gold);
+  --soho-ink: var(--brand-ink);
+  --soho-ink-soft: var(--brand-taupe);
+  --soho-plum: var(--brand-espresso);
+  --soho-plum-deep: #4E3120;
+  --soho-gold: var(--brand-gold);
+  --soho-midnight: var(--brand-midnight);
+  --soho-canvas: var(--brand-cream);
+}
+
+/* Codex event titles used to be white on the cream page. */
+.codex-event-title,
+.codex-entry.past .codex-event-title {
+  color: var(--brand-espresso) !important;
+}
+.codex-event-meta {
+  color: var(--brand-gold-ink) !important;
+}
+.codex-event-copy {
+  color: var(--brand-ink) !important;
+}
+.codex-entry.past .codex-event-copy {
+  color: var(--brand-taupe) !important;
+}
+.codex-past-badge {
+  background: rgba(60, 36, 21, 0.08) !important;
+  color: var(--brand-taupe) !important;
+}
+
+/* Compatibility hero: the description was white on cream. */
+.hero-compatibility {
+  background: var(--brand-cream) !important;
+  border-bottom: 1px solid rgba(60, 36, 21, 0.14) !important;
+}
+.hero-tagline {
+  color: var(--brand-gold-ink) !important;
+}
+.hero-text {
+  color: var(--brand-ink) !important;
+}
+.generator-container h2 {
+  color: var(--brand-espresso) !important;
+}
+
+/* 404 "Return to Earth" was a lavender pill. */
+a.error-link,
+.error-link {
+  background: var(--brand-espresso) !important;
+  border: 1.5px solid var(--brand-espresso) !important;
+  color: var(--brand-cream) !important;
+}
+
+/* Oracle premium tier used a purple border. */
+.subscription-card.premium {
+  border-color: var(--brand-gold) !important;
+  background: rgba(201, 146, 43, 0.06) !important;
+}
+
+/* Basket quantity stepper: the glyphs were the same tone as the page. */
+html body table.cart-table button.quantity-btn,
+.soho-scope table.cart-table button.quantity-btn,
+.soho-scope .quantity-btn {
+  color: var(--brand-espresso) !important;
+  background: var(--brand-cream) !important;
+  border: 1px solid var(--brand-espresso) !important;
+  font-weight: 700 !important;
+  width: 44px !important;
+  min-width: 44px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  font-size: 1.25rem !important;
+}
+
+/* Header and footer sit on espresso, not the old purple midnight. */
+.site-header,
+.footer {
+  background: var(--brand-midnight) !important;
+}
+
+/* Owner instructions stay in the HTML for the person editing the page.
+   Visitors do not see them. */
+.owner-note {
+  display: none !important;
+}
+
+/* Product copy sits above the falling-emoji layer so a glyph cannot cover
+   the title, the love-language line, or the features. */
+.product-detail__info,
+.soho-pdp__info {
+  position: relative;
+  z-index: 50;
+}
+
+.product-love-note[hidden] {
+  display: none !important;
+}
+
+.product-tag-group__title {
+  margin: 1.25rem 0 0.4rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.product-tag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0 0 0 1.15rem;
+  list-style: disc;
+}
+
+.product-tag {
+  display: list-item;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Shop toolbar: one aligned row. Selects stay single-line dropdowns
+   (a multi-line listbox inside a pill clipped the labels). */
+html body .soho-shop-toolbar {
+  display: block !important;
+  margin: 0 0 2rem !important;
+  padding: 1rem 0 1.15rem !important;
+}
+html body .soho-shop-toolbar__filters {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
+  width: 100% !important;
+}
+html body .soho-shop-toolbar input[type="search"],
+html body .soho-shop-toolbar select,
+html body .soho-shop-toolbar button#filter-apply {
+  box-sizing: border-box !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+  margin: 0 !important;
+  border-radius: 2px !important;
+  border: 1px solid rgba(44, 24, 16, 0.28) !important;
+  background: #fffdf8 !important;
+  color: #2c1810 !important;
+  font-family: Inter, sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  box-shadow: none !important;
+  width: auto !important;
+  appearance: auto;
+}
+html body .soho-shop-toolbar input[type="search"] {
+  flex: 1 1 16rem !important;
+  min-width: min(100%, 14rem) !important;
+  padding: 0 0.9rem !important;
+}
+html body .soho-shop-toolbar input[type="search"]::placeholder {
+  color: #6b5344 !important;
+  opacity: 1 !important;
+}
+html body .soho-shop-toolbar select {
+  flex: 0 1 auto !important;
+  min-width: 10.75rem !important;
+  max-width: 100% !important;
+  padding: 0 1.75rem 0 0.85rem !important;
+  background-image: linear-gradient(45deg, transparent 50%, #3c2415 50%), linear-gradient(135deg, #3c2415 50%, transparent 50%) !important;
+  background-position: calc(100% - 16px) 19px, calc(100% - 11px) 19px !important;
+  background-size: 5px 5px, 5px 5px !important;
+  background-repeat: no-repeat !important;
+}
+html body .soho-shop-toolbar button#filter-apply {
+  flex: 0 0 auto !important;
+  padding: 0 1.15rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  font-size: 0.78rem !important;
+  cursor: pointer !important;
+}
+@media (max-width: 720px) {
+  html body .soho-shop-toolbar input[type="search"] {
+    flex: 1 1 100% !important;
+  }
+  html body .soho-shop-toolbar select {
+    flex: 1 1 calc(50% - 0.4rem) !important;
+    min-width: 0 !important;
+  }
+  html body .soho-shop-toolbar button#filter-apply {
+    flex: 1 1 auto !important;
+  }
+}
+
+/* Product cards: the photograph fills the top. Title, price and button
+   sit in one column with no extra white panels. */
+html body.soho-scope .soho-product-grid,
+html body.soho-scope #products-grid-local,
+html body.soho-scope #featured-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 2rem 1.25rem !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: none !important;
+  align-items: stretch !important;
+}
+@media (max-width: 900px) {
+  html body.soho-scope .soho-product-grid,
+  html body.soho-scope #products-grid-local,
+  html body.soho-scope #featured-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 560px) {
+  html body.soho-scope .soho-product-grid,
+  html body.soho-scope #products-grid-local,
+  html body.soho-scope #featured-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+html body.soho-scope #products-grid-local .product-card,
+html body.soho-scope #featured-grid .product-card,
+html body.soho-scope .soho-product-grid .product-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  gap: 0 !important;
+}
+html body.soho-scope #products-grid-local .product-card > img,
+html body.soho-scope #featured-grid .product-card > img,
+html body.soho-scope .soho-product-grid .product-card > img,
+html body.soho-scope .product-card-image {
+  width: 100% !important;
+  height: 340px !important;
+  min-height: 340px !important;
+  max-height: 340px !important;
+  object-fit: cover !important;
+  object-position: center 18% !important;
+  background: #f4efe6 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 2px !important;
+  display: block !important;
+}
+/* shop-fixes.css paints every class containing "product-card" as a white
+   card, which boxed the title and the price separately. */
+html body.soho-scope #products-grid-local [class*="product-card"]:not(.product-card),
+html body.soho-scope #featured-grid [class*="product-card"]:not(.product-card),
+html body.soho-scope .soho-product-grid [class*="product-card"]:not(.product-card) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+html body.soho-scope #products-grid-local .product-card-content,
+html body.soho-scope #featured-grid .product-card-content,
+html body.soho-scope .product-card-content,
+html body.soho-scope .product-card__body {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0.75rem 0 0 !important;
+  margin: 0 !important;
+  flex: 1 1 auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.35rem !important;
+}
+html body.soho-scope #products-grid-local .product-card-title,
+html body.soho-scope #featured-grid .product-card-title,
+html body.soho-scope .product-card-title,
+html body.soho-scope .product-card__title {
+  margin: 0 !important;
+  max-height: none !important;
+  color: var(--brand-ink) !important;
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-size: 1.25rem !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+}
+html body.soho-scope #products-grid-local .product-card-price,
+html body.soho-scope #featured-grid .product-card-price,
+html body.soho-scope .product-card-price,
+html body.soho-scope .product-card__price {
+  margin: 0 !important;
+  color: var(--brand-espresso) !important;
+  font-family: Inter, sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+}
+html body.soho-scope #products-grid-local .product-card-buttons,
+html body.soho-scope #featured-grid .product-card-buttons,
+html body.soho-scope .product-card-buttons,
+html body.soho-scope .product-card__actions {
+  margin-top: auto !important;
+  padding-top: 0.65rem !important;
+  background: transparent !important;
+}
+html body.soho-scope #products-grid-local .view-product-button,
+html body.soho-scope #featured-grid .view-product-button,
+html body.soho-scope .product-card .view-product-button,
+html body.soho-scope .product-card .view-product-btn {
+  width: 100% !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  border-radius: 2px !important;
+  background: var(--brand-espresso) !important;
+  color: var(--brand-cream) !important;
+  font-family: Cinzel, serif !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.12em !important;
+}

@@ -17,7 +17,7 @@ function escapeSvgText(value = '') {
 
 function buildProductPlaceholder(label = 'Lyrīon Atelier') {
   const title = escapeSvgText(String(label || 'Lyrīon Atelier').trim().slice(0, 56) || 'Lyrīon Atelier');
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-label="${title}"><rect width="1200" height="1500" rx="48" fill="#FDF8F0"/><rect x="38" y="38" width="1124" height="1424" rx="36" fill="none" stroke="#5B4B7A" stroke-width="4"/><circle cx="600" cy="420" r="122" fill="none" stroke="#C9922B" stroke-width="8"/><path d="M600 260v320M440 420h320M492 312c52 34 164 34 216 0M492 528c52-34 164-34 216 0" fill="none" stroke="#5B4B7A" stroke-width="8" stroke-linecap="round" opacity=".75"/><text x="600" y="780" text-anchor="middle" fill="#5B4B7A" font-family="Georgia, 'Times New Roman', serif" font-size="68" letter-spacing="10">LYRĪON</text><foreignObject x="170" y="860" width="860" height="300"><div xmlns="http://www.w3.org/1999/xhtml" style="height:300px;display:flex;align-items:flex-start;justify-content:center;text-align:center;color:#2B2440;font-family:Georgia,'Times New Roman',serif;font-size:54px;line-height:1.25;padding:0 24px;">${title}</div></foreignObject></svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-label="${title}"><rect width="1200" height="1500" rx="48" fill="#FDF8F0"/><rect x="38" y="38" width="1124" height="1424" rx="36" fill="none" stroke="#3C2415" stroke-width="4"/><circle cx="600" cy="420" r="122" fill="none" stroke="#C9922B" stroke-width="8"/><path d="M600 260v320M440 420h320M492 312c52 34 164 34 216 0M492 528c52-34 164-34 216 0" fill="none" stroke="#3C2415" stroke-width="8" stroke-linecap="round" opacity=".75"/><text x="600" y="780" text-anchor="middle" fill="#3C2415" font-family="'Cormorant Garamond', Georgia, serif" font-size="68" letter-spacing="10">LYRĪON</text><foreignObject x="170" y="860" width="860" height="300"><div xmlns="http://www.w3.org/1999/xhtml" style="height:300px;display:flex;align-items:flex-start;justify-content:center;text-align:center;color:#2C1810;font-family:'Cormorant Garamond',Georgia,serif;font-size:54px;line-height:1.25;padding:0 24px;">${title}</div></foreignObject></svg>`;
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
@@ -47,8 +47,11 @@ function isSeasonalProduct(product = {}) {
  * Falls back to the original src if the WebP fails to load.
  */
 function toWebPSrc(src) {
+  // Keep the published file. Rewriting jpg/png to .webp asked for siblings
+  // that were never generated, and each miss was a 404 in the console.
+  // A path that is already .webp is returned unchanged.
   if (typeof src !== 'string' || src.startsWith('data:')) return src;
-  return src.replace(/\.(jpe?g|png)(\?.*)?$/i, '.webp$2');
+  return src;
 }
 
 /**
@@ -894,14 +897,14 @@ const products = [
     element: "air",
     gender: "women",
     collection: "Zodiac Hero",
-    image: "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+    image: "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
     images: [
-      "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
-      "/aquarius-crop-hoodie/aquarius-crop-hoodie-front2.jpg",
       "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
-      "/aquarius-crop-hoodie/aquarius-crop-hoodie-side.jpg"
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-side.jpg",
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+      "/aquarius-crop-hoodie/aquarius-crop-hoodie-front2.jpg"
     ],
-    mainImage: "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+    mainImage: "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
     description: "The water bearer flows through you. Aquarius doesn't carry water—they ARE the water, the life force, the current that nourishes all of humanity. This cropped hoodie channels Aquarian defiance through sacred water symbolism, wrapping visionary souls in comfort designed for those who refuse to follow the current—they create it.",
     mysticalCopy: "Water is life. I am water. I flow where others fear to tread.",
     sizes: ["S", "M", "L", "XL", "2XL"],

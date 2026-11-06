@@ -19,27 +19,27 @@
   --soho-canvas: #f8f4ec;
   --soho-canvas-alt: #f1ebe0;
   --soho-paper: #fffdf9;
-  --soho-ink: #1c1420;
-  --soho-ink-soft: #4a4152;
+  --soho-ink: var(--brand-ink, #2C1810);
+  --soho-ink-soft: var(--brand-taupe, #5C4336);
   --soho-line: rgba(28, 20, 32, 0.12);
   --soho-line-soft: rgba(28, 20, 32, 0.07);
 
   /* ---- Deep cosmic sections (header/footer/hero) ---- */
-  --soho-midnight: #140b1f;
-  --soho-midnight-alt: #1d1129;
+  --soho-midnight: var(--brand-midnight, #2A1810);
+  --soho-midnight-alt: #3A2418;
   --soho-midnight-line: rgba(247, 231, 196, 0.14);
   --soho-on-midnight: #f4ecd8;
   --soho-on-midnight-soft: rgba(244, 236, 216, 0.86); /* 0.68 read 3.54:1 on midnight, under AA */
 
   /* ---- Brand accents ---- */
-  --soho-gold: #c6a76b;
+  --soho-gold: var(--brand-gold, #C9922B);
   --soho-gold-soft: #ddc48c;
   /* Same antique gold, dark enough to be legible ON light backgrounds.
      The brand gold is 2.17:1 on cream, which fails AA for small text; this
      is 4.61:1. Bright gold stays in use anywhere the background is dark. */
   --soho-gold-ink: #8a6d2f;
-  --soho-plum: #6d4c86;
-  --soho-plum-deep: #4a2f61;
+  --soho-plum: var(--brand-espresso);
+  --soho-plum-deep: var(--brand-espresso);
 
   /* ---- Type ---- */
   --soho-font-display: 'Cormorant Garamond', 'Cinzel', serif;
@@ -126,7 +126,7 @@
   position: sticky !important;
   top: 0;
   z-index: 200;
-  background: rgba(18, 10, 27, 0.98) !important;
+  background: var(--brand-midnight, #2A1810) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border-bottom: 1px solid var(--soho-midnight-line) !important;
@@ -387,7 +387,7 @@
   position: absolute;
   left: 0; right: 0; bottom: 0;
   padding: 1.1rem 1.2rem;
-  background: linear-gradient(180deg, transparent, rgba(20, 11, 31, 0.78));
+  background: linear-gradient(180deg, transparent, rgba(42, 24, 16, 0.78));
   color: #fff !important;
   font-family: var(--soho-font-eyebrow);
   font-size: 0.72rem;
@@ -623,15 +623,15 @@ body.nav-open { overflow: hidden; }
   inset: 0;
   background:
     linear-gradient(96deg,
-      rgba(20, 11, 31, 0.86) 0%,
-      rgba(20, 11, 31, 0.72) 26%,
-      rgba(20, 11, 31, 0.30) 52%,
-      rgba(20, 11, 31, 0.06) 72%,
-      rgba(20, 11, 31, 0) 100%),
+      rgba(42, 24, 16, 0.86) 0%,
+      rgba(42, 24, 16, 0.72) 26%,
+      rgba(42, 24, 16, 0.30) 52%,
+      rgba(42, 24, 16, 0.06) 72%,
+      rgba(42, 24, 16, 0) 100%),
     linear-gradient(180deg,
-      rgba(20, 11, 31, 0.20) 0%,
-      rgba(20, 11, 31, 0) 40%,
-      rgba(20, 11, 31, 0.34) 100%);
+      rgba(42, 24, 16, 0.20) 0%,
+      rgba(42, 24, 16, 0) 40%,
+      rgba(42, 24, 16, 0.34) 100%);
 }
 .soho-hero__content {
   position: relative;
@@ -735,10 +735,10 @@ body.nav-open { overflow: hidden; }
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(20, 11, 31, 0) 0%,
-    rgba(20, 11, 31, 0.45) 42%,
-    rgba(20, 11, 31, 0.88) 78%,
-    rgba(20, 11, 31, 0.94) 100%
+    rgba(42, 24, 16, 0) 0%,
+    rgba(42, 24, 16, 0.45) 42%,
+    rgba(42, 24, 16, 0.88) 78%,
+    rgba(42, 24, 16, 0.94) 100%
   );
 }
 .soho-split__body { position: relative; z-index: 2; padding: clamp(1.75rem, 3vw, 3rem); }
@@ -1076,7 +1076,7 @@ body.nav-open { overflow: hidden; }
   margin: 0.75rem 0 0;
 }
 .footer .locale-switch select {
-  background: #140c1c;
+  background: var(--brand-midnight, #2A1810);
 }
 
 .footer {
@@ -1299,7 +1299,7 @@ body.nav-open { overflow: hidden; }
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(20, 11, 31, 0.72);
+  background: rgba(42, 24, 16, 0.72);
   pointer-events: none;
   z-index: 2;
 }
@@ -1322,7 +1322,7 @@ body.nav-open { overflow: hidden; }
   position: fixed;
   inset: 0;
   z-index: 500;
-  background: rgba(20, 11, 31, 0.94);
+  background: rgba(42, 24, 16, 0.94);
   align-items: center;
   justify-content: center;
   padding: clamp(1rem, 4vw, 3rem);
@@ -1350,7 +1350,7 @@ body.nav-open { overflow: hidden; }
   padding: 0 !important;
   border-radius: 50% !important;
   border: 1px solid rgba(244, 236, 216, 0.4) !important;
-  background: rgba(20, 11, 31, 0.85) !important;
+  background: rgba(42, 24, 16, 0.85) !important;
   color: var(--soho-on-midnight) !important;
   font-size: 1.6rem !important;
   line-height: 1 !important;
@@ -1451,8 +1451,8 @@ body.soho-lightbox-open { overflow: hidden; }
 }
 .soho-scope .cart-table td { padding: 1.25rem 0.5rem 1.25rem 0; border-bottom: 1px solid var(--soho-line-soft); vertical-align: middle; }
 .soho-scope .cart-item-image { width: 80px; height: 96px; object-fit: cover; border-radius: 2px; background: var(--soho-canvas-alt); }
-.soho-scope .quantity-controls { display: inline-flex; align-items: center; gap: 0.6rem; border: 1px solid var(--soho-line); border-radius: 999px; padding: 0.25rem 0.6rem; }
-.soho-scope .quantity-btn { background: none !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; min-height: 0 !important; padding: 0 !important; font-size: 1rem; cursor: pointer; width: 24px; }
+.soho-scope .quantity-controls { display: inline-flex; align-items: center; gap: 0.35rem; border: 1px solid var(--brand-espresso, #3C2415); border-radius: 999px; padding: 0.2rem 0.35rem; background: var(--brand-cream, #F8F4EC); }
+.soho-scope .quantity-btn { background: var(--brand-cream, #F8F4EC) !important; border: 1px solid var(--brand-espresso, #3C2415) !important; border-radius: 999px !important; box-shadow: none !important; min-height: 36px !important; min-width: 36px !important; padding: 0 !important; font-size: 1.15rem; font-weight: 700; cursor: pointer; width: 36px; height: 36px; color: var(--brand-espresso, #3C2415) !important; line-height: 1; }
 .soho-scope .quantity-input { width: 2.4rem; text-align: center; border: none; background: none; font-family: var(--soho-font-body); }
 .soho-scope .remove-item { background: none !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; min-height: 0 !important; padding: 0 !important; color: var(--soho-ink-soft) !important; font-size: 0.78rem; text-decoration: underline; cursor: pointer; }
 
@@ -1525,10 +1525,10 @@ body.soho-lightbox-open { overflow: hidden; }
      than gold does. */
   .soho-hero__media::after {
     background: linear-gradient(180deg,
-      rgba(20, 11, 31, 0.46) 0%,
-      rgba(20, 11, 31, 0.54) 34%,
-      rgba(20, 11, 31, 0.78) 64%,
-      rgba(20, 11, 31, 0.92) 100%);
+      rgba(42, 24, 16, 0.46) 0%,
+      rgba(42, 24, 16, 0.54) 34%,
+      rgba(42, 24, 16, 0.78) 64%,
+      rgba(42, 24, 16, 0.92) 100%);
   }
   .soho-hero__content .soho-eyebrow { color: var(--soho-on-midnight) !important; }
   .soho-video-split, .soho-video-trio { gap: 1rem; }

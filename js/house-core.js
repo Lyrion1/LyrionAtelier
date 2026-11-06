@@ -107,6 +107,7 @@
   /** Whether the product can be added to a basket right now. */
   function isPurchasable(product, house) {
     if (!product || product.listed !== true) return false;
+    if (product.hidden === true) return false;
     if (product.fulfilment === 'enquiry') return false;
     return productState(product, house) !== 'retired';
   }

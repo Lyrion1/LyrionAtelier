@@ -25,12 +25,12 @@
   },
   "currency": "USD",
   "images": [
-    "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
-    "/aquarius-crop-hoodie/aquarius-crop-hoodie-front2.jpg",
     "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
-    "/aquarius-crop-hoodie/aquarius-crop-hoodie-side.jpg"
+    "/aquarius-crop-hoodie/aquarius-crop-hoodie-side.jpg",
+    "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+    "/aquarius-crop-hoodie/aquarius-crop-hoodie-front2.jpg"
   ],
-  "mainImage": "/aquarius-crop-hoodie/aquarius-crop-hoodie-front1.jpg",
+  "mainImage": "/aquarius-crop-hoodie/aquarius-crop-hoodie-back.jpg",
   "options": {
     "color": ["Military Green", "Storm"],
     "size": ["S", "M", "L", "XL", "2XL"]
