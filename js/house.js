@@ -302,9 +302,23 @@
     });
   }
 
-  /** Find a product in the loaded catalogue by its one slug. */
+  /** Find a product in the loaded catalogue by its one slug.
+   *  Hidden pieces are omitted from the shop list, but a direct product URL
+   *  still resolves so the page can refuse the sale. */
   function find(ctx, slug) {
-    return (ctx.products || []).find(function (p) { return p.slug === slug; }) || null;
+    var hit = (ctx.products || []).find(function (p) { return p.slug === slug; });
+    if (hit) return hit;
+    var raw = (ctx.catalogue || []).find(function (p) { return p && p.slug === slug; });
+    if (!raw || raw.hidden !== true) return null;
+    return {
+      slug: raw.slug,
+      sign: raw.sign,
+      name: raw.title,
+      fulfilment: raw.fulfilment,
+      purchasable: false,
+      houseState: 'open',
+      hidden: true
+    };
   }
 
   window.LyrionHouse = {

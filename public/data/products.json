@@ -6,7 +6,7 @@
     "fulfilment": "printful",
     "sign": "Aries",
     "seasonal": true,
-    "priceGBP": 5199,
+    "priceGBP": 7900,
     "image": "/images/products/aries-diamond-hoodie-lifestyle-1-crop.jpg",
     "sizes": [
       "XS",
@@ -27,32 +27,32 @@
     "variants": [
       {
         "size": "XS",
-        "priceGBP": 5199,
+        "priceGBP": 7900,
         "printfulVariantId": "6970bd2c23d913"
       },
       {
         "size": "S",
-        "priceGBP": 5199,
+        "priceGBP": 7900,
         "printfulVariantId": "6970bd2c23d983"
       },
       {
         "size": "M",
-        "priceGBP": 5199,
+        "priceGBP": 7900,
         "printfulVariantId": "6970bd2c23d9d7"
       },
       {
         "size": "L",
-        "priceGBP": 5199,
+        "priceGBP": 7900,
         "printfulVariantId": "6970bd2c23da15"
       },
       {
         "size": "XL",
-        "priceGBP": 5199,
+        "priceGBP": 7900,
         "printfulVariantId": "6970bd2c23da61"
       },
       {
         "size": "2XL",
-        "priceGBP": 5299,
+        "priceGBP": 8000,
         "printfulVariantId": "6970bd2c23daa1"
       }
     ]
@@ -64,7 +64,7 @@
     "fulfilment": "printful",
     "sign": "Aries",
     "seasonal": true,
-    "priceGBP": 5099,
+    "priceGBP": 6400,
     "image": "/images/products/aries-love-language-hoodie-4-crop.jpg",
     "sizes": [
       "S",
@@ -89,42 +89,42 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 5099,
+        "priceGBP": 6400,
         "printfulVariantId": "6973fd61a6ab49"
       },
       {
         "size": "M",
-        "priceGBP": 5099,
+        "priceGBP": 6400,
         "printfulVariantId": "6973fd61a6abd4"
       },
       {
         "size": "L",
-        "priceGBP": 5099,
+        "priceGBP": 6400,
         "printfulVariantId": "6973fd61a6ac52"
       },
       {
         "size": "XL",
-        "priceGBP": 5099,
+        "priceGBP": 6400,
         "printfulVariantId": "6973fd61a6acc4"
       },
       {
         "size": "2XL",
-        "priceGBP": 5199,
+        "priceGBP": 6500,
         "printfulVariantId": "6973fd61a6ad32"
       },
       {
         "size": "3XL",
-        "priceGBP": 5299,
+        "priceGBP": 6600,
         "printfulVariantId": "6973fd61a6ada2"
       },
       {
         "size": "4XL",
-        "priceGBP": 5499,
+        "priceGBP": 6800,
         "printfulVariantId": "6973fd61a6ae15"
       },
       {
         "size": "5XL",
-        "priceGBP": 5599,
+        "priceGBP": 6900,
         "printfulVariantId": "6973fd61a6ae89"
       }
     ]
@@ -136,7 +136,7 @@
     "fulfilment": "printful",
     "sign": "Aries",
     "seasonal": true,
-    "priceGBP": 2799,
+    "priceGBP": 2800,
     "image": "/youth-aries-fire-tee/youth-aries-fire-tee-boy-crop.jpg",
     "sizes": [
       "XS",
@@ -156,31 +156,31 @@
       {
         "size": "XS",
         "color": "Lunar Sand",
-        "priceGBP": 2799,
+        "priceGBP": 2800,
         "printfulVariantId": "694615f9707d64"
       },
       {
         "size": "S",
         "color": "Lunar Sand",
-        "priceGBP": 2799,
+        "priceGBP": 2800,
         "printfulVariantId": "694615f9707dd3"
       },
       {
         "size": "M",
         "color": "Lunar Sand",
-        "priceGBP": 2799,
+        "priceGBP": 2800,
         "printfulVariantId": "694615f9707e25"
       },
       {
         "size": "L",
         "color": "Lunar Sand",
-        "priceGBP": 2899,
+        "priceGBP": 2900,
         "printfulVariantId": "694615f9707e72"
       },
       {
         "size": "XL",
         "color": "Lunar Sand",
-        "priceGBP": 3099,
+        "priceGBP": 3100,
         "printfulVariantId": "694615f9707eb6"
       }
     ]
@@ -192,7 +192,7 @@
     "fulfilment": "printful",
     "sign": "Aries",
     "seasonal": true,
-    "priceGBP": 3399,
+    "priceGBP": 3800,
     "image": "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-lifestyle.jpg",
     "sizes": [
       "XS",
@@ -211,27 +211,27 @@
     "variants": [
       {
         "size": "XS",
-        "priceGBP": 3399,
+        "priceGBP": 3800,
         "printfulVariantId": "694ed9706ecda1"
       },
       {
         "size": "S",
-        "priceGBP": 3399,
+        "priceGBP": 3800,
         "printfulVariantId": "694ed9706ece08"
       },
       {
         "size": "M",
-        "priceGBP": 3399,
+        "priceGBP": 3800,
         "printfulVariantId": "694ed9706ece51"
       },
       {
         "size": "L",
-        "priceGBP": 3399,
+        "priceGBP": 3800,
         "printfulVariantId": "694ed9706ecea1"
       },
       {
         "size": "XL",
-        "priceGBP": 3399,
+        "priceGBP": 3800,
         "printfulVariantId": "694ed9706ecee2"
       }
     ]
@@ -243,7 +243,7 @@
     "fulfilment": "printful",
     "sign": "Leo",
     "seasonal": true,
-    "priceGBP": 4699,
+    "priceGBP": 8400,
     "image": "/leo-zodiac-hoodie/leo-zodiac-hoodie-boy-crop.jpg",
     "sizes": [
       "S",
@@ -264,32 +264,32 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 4699,
+        "priceGBP": 8400,
         "printfulVariantId": "694b0b7b4276f7"
       },
       {
         "size": "M",
-        "priceGBP": 4699,
+        "priceGBP": 8400,
         "printfulVariantId": "694b0b7b427766"
       },
       {
         "size": "L",
-        "priceGBP": 4699,
+        "priceGBP": 8400,
         "printfulVariantId": "694b0b7b4277b7"
       },
       {
         "size": "XL",
-        "priceGBP": 4899,
+        "priceGBP": 8600,
         "printfulVariantId": "694b0b7b427801"
       },
       {
         "size": "2XL",
-        "priceGBP": 4899,
+        "priceGBP": 8600,
         "printfulVariantId": "694b0b7b427857"
       },
       {
         "size": "3XL",
-        "priceGBP": 5099,
+        "priceGBP": 8800,
         "printfulVariantId": "694b0b7b4278a6"
       }
     ]
@@ -301,7 +301,7 @@
     "fulfilment": "printful",
     "sign": "Pisces",
     "seasonal": true,
-    "priceGBP": 4399,
+    "priceGBP": 6900,
     "image": "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-ghost.jpg",
     "sizes": [
       "XS",
@@ -322,32 +322,32 @@
     "variants": [
       {
         "size": "XS",
-        "priceGBP": 4399,
+        "priceGBP": 6900,
         "printfulVariantId": "694b39d6493ff5"
       },
       {
         "size": "S",
-        "priceGBP": 4399,
+        "priceGBP": 6900,
         "printfulVariantId": "694b39d6494068"
       },
       {
         "size": "M",
-        "priceGBP": 4399,
+        "priceGBP": 6900,
         "printfulVariantId": "694b39d64940c4"
       },
       {
         "size": "L",
-        "priceGBP": 4399,
+        "priceGBP": 6900,
         "printfulVariantId": "694b39d6494116"
       },
       {
         "size": "XL",
-        "priceGBP": 4599,
+        "priceGBP": 7100,
         "printfulVariantId": "694b39d6494168"
       },
       {
         "size": "2XL",
-        "priceGBP": 4699,
+        "priceGBP": 7200,
         "printfulVariantId": "694b39d64941a6"
       }
     ]
@@ -359,7 +359,7 @@
     "fulfilment": "printful",
     "sign": "Gemini",
     "seasonal": true,
-    "priceGBP": 3399,
+    "priceGBP": 3400,
     "image": "/gemini-starlight-tee/gemini-starlight-tee-ghost-crop.jpg",
     "sizes": [
       "S",
@@ -382,37 +382,37 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 3399,
+        "priceGBP": 3400,
         "printfulVariantId": "694d9579acfff1"
       },
       {
         "size": "M",
-        "priceGBP": 3399,
+        "priceGBP": 3400,
         "printfulVariantId": "694d9579ad00a5"
       },
       {
         "size": "L",
-        "priceGBP": 3399,
+        "priceGBP": 3400,
         "printfulVariantId": "694d9579ad0139"
       },
       {
         "size": "XL",
-        "priceGBP": 3399,
+        "priceGBP": 3400,
         "printfulVariantId": "694d9579ad01d1"
       },
       {
         "size": "2XL",
-        "priceGBP": 3599,
+        "priceGBP": 3600,
         "printfulVariantId": "694d9579ad0252"
       },
       {
         "size": "3XL",
-        "priceGBP": 3699,
+        "priceGBP": 3700,
         "printfulVariantId": "694d9579ad02e2"
       },
       {
         "size": "4XL",
-        "priceGBP": 3699,
+        "priceGBP": 3700,
         "printfulVariantId": "694d9579ad0373"
       }
     ]
@@ -424,7 +424,7 @@
     "fulfilment": "printful",
     "sign": null,
     "seasonal": false,
-    "priceGBP": 2399,
+    "priceGBP": 3800,
     "image": "/fisherman-beanie/fisherman-beanie-front-crop.jpg",
     "sizes": [
       "One Size"
@@ -435,7 +435,7 @@
     "variants": [
       {
         "size": "One Size",
-        "priceGBP": 2399,
+        "priceGBP": 3800,
         "printfulVariantId": "6948ab6e63d308"
       }
     ]
@@ -447,7 +447,7 @@
     "fulfilment": "printful",
     "sign": "Pisces",
     "seasonal": true,
-    "priceGBP": 4299,
+    "priceGBP": 4500,
     "image": "/images/pisces-hoodie-new-ghost-crop.jpg",
     "sizes": [
       "S",
@@ -472,42 +472,42 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 4299,
+        "priceGBP": 4500,
         "printfulVariantId": "694da2910d2079"
       },
       {
         "size": "M",
-        "priceGBP": 4299,
+        "priceGBP": 4500,
         "printfulVariantId": "694da2910d20e9"
       },
       {
         "size": "L",
-        "priceGBP": 4299,
+        "priceGBP": 4500,
         "printfulVariantId": "694da2910d2134"
       },
       {
         "size": "XL",
-        "priceGBP": 4299,
+        "priceGBP": 4500,
         "printfulVariantId": "694da2910d2187"
       },
       {
         "size": "2XL",
-        "priceGBP": 4499,
+        "priceGBP": 4700,
         "printfulVariantId": "694da2910d21d6"
       },
       {
         "size": "3XL",
-        "priceGBP": 4699,
+        "priceGBP": 4900,
         "printfulVariantId": "694da2910d2222"
       },
       {
         "size": "4XL",
-        "priceGBP": 4799,
+        "priceGBP": 5000,
         "printfulVariantId": "694da2910d2273"
       },
       {
         "size": "5XL",
-        "priceGBP": 4999,
+        "priceGBP": 5200,
         "printfulVariantId": "694da2910d22c1"
       }
     ]
@@ -519,7 +519,7 @@
     "fulfilment": "printful",
     "sign": null,
     "seasonal": false,
-    "priceGBP": 3599,
+    "priceGBP": 3600,
     "image": "/lyrion-pique-polo/lyrion-pique-polo-girl-front-crop.jpg",
     "sizes": [
       "S",
@@ -550,85 +550,85 @@
       {
         "size": "S",
         "color": "Navy",
-        "priceGBP": 3599,
+        "priceGBP": 3600,
         "printfulVariantId": "694dba199bfc65"
       },
       {
         "size": "M",
         "color": "Navy",
-        "priceGBP": 3599,
+        "priceGBP": 3600,
         "printfulVariantId": "694dba199bfcc2"
       },
       {
         "size": "L",
         "color": "Navy",
-        "priceGBP": 3599,
+        "priceGBP": 3600,
         "printfulVariantId": "694dba199bfd21"
       },
       {
         "size": "XL",
         "color": "Navy",
-        "priceGBP": 3599,
+        "priceGBP": 3600,
         "printfulVariantId": "694dba199bfd71"
       },
       {
         "size": "2XL",
         "color": "Navy",
-        "priceGBP": 3699,
+        "priceGBP": 3700,
         "printfulVariantId": "694dba199bfdb3"
       },
       {
         "size": "3XL",
         "color": "Navy",
-        "priceGBP": 3899,
+        "priceGBP": 3900,
         "printfulVariantId": "694dba199bfe02"
       },
       {
         "size": "4XL",
         "color": "Navy",
-        "priceGBP": 3999,
+        "priceGBP": 4000,
         "printfulVariantId": "694dba199bfe43"
       },
       {
         "size": "S",
         "color": "White",
-        "priceGBP": 3599,
+        "priceGBP": 3600,
         "printfulVariantId": "694dba199bfe93"
       },
       {
         "size": "M",
         "color": "White",
-        "priceGBP": 3599,
+        "priceGBP": 3600,
         "printfulVariantId": "694dba199bfed9"
       },
       {
         "size": "L",
         "color": "White",
-        "priceGBP": 3599,
+        "priceGBP": 3600,
         "printfulVariantId": "694dba199bff26"
       },
       {
         "size": "XL",
         "color": "White",
-        "priceGBP": 3599,
+        "priceGBP": 3600,
         "printfulVariantId": "694dba199bff64"
       },
       {
         "size": "2XL",
         "color": "White",
-        "priceGBP": 3699,
+        "priceGBP": 3700,
         "printfulVariantId": "694dba199bffb3"
       },
       {
         "size": "3XL",
         "color": "White",
-        "priceGBP": 3899,
+        "priceGBP": 3900,
         "printfulVariantId": "694dba199bfff2"
       },
       {
         "size": "4XL",
         "color": "White",
-        "priceGBP": 3999,
+        "priceGBP": 4000,
         "printfulVariantId": "694dba199c0035"
       }
     ]
@@ -640,7 +640,7 @@
     "fulfilment": "printful",
     "sign": "Aries",
     "seasonal": true,
-    "priceGBP": 4299,
+    "priceGBP": 7400,
     "image": "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-02-front-crop.jpg",
     "sizes": [
       "S",
@@ -661,32 +661,32 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 4299,
+        "priceGBP": 7400,
         "printfulVariantId": "694f2f2cb54069"
       },
       {
         "size": "M",
-        "priceGBP": 4299,
+        "priceGBP": 7400,
         "printfulVariantId": "694f2f2cb540d9"
       },
       {
         "size": "L",
-        "priceGBP": 4299,
+        "priceGBP": 7400,
         "printfulVariantId": "694f2f2cb54126"
       },
       {
         "size": "XL",
-        "priceGBP": 4299,
+        "priceGBP": 7400,
         "printfulVariantId": "694f2f2cb54164"
       },
       {
         "size": "2XL",
-        "priceGBP": 4399,
+        "priceGBP": 7500,
         "printfulVariantId": "694f2f2cb541b5"
       },
       {
         "size": "3XL",
-        "priceGBP": 4599,
+        "priceGBP": 7700,
         "printfulVariantId": "694f2f2cb54208"
       }
     ]
@@ -698,7 +698,7 @@
     "fulfilment": "printful",
     "sign": "Pisces",
     "seasonal": true,
-    "priceGBP": 4399,
+    "priceGBP": 4500,
     "image": "/pisces-intuition-hoodie/pisces-intuition-hoodie-back-crop.jpg",
     "sizes": [
       "S",
@@ -723,42 +723,42 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 4399,
+        "priceGBP": 4500,
         "printfulVariantId": "694d5eae116cb7"
       },
       {
         "size": "M",
-        "priceGBP": 4399,
+        "priceGBP": 4500,
         "printfulVariantId": "694d5eae116d62"
       },
       {
         "size": "L",
-        "priceGBP": 4399,
+        "priceGBP": 4500,
         "printfulVariantId": "694d5eae116de7"
       },
       {
         "size": "XL",
-        "priceGBP": 4399,
+        "priceGBP": 4500,
         "printfulVariantId": "694d5eae116e72"
       },
       {
         "size": "2XL",
-        "priceGBP": 4599,
+        "priceGBP": 4700,
         "printfulVariantId": "694d5eae116f01"
       },
       {
         "size": "3XL",
-        "priceGBP": 4599,
+        "priceGBP": 4700,
         "printfulVariantId": "694d5eae116f86"
       },
       {
         "size": "4XL",
-        "priceGBP": 4699,
+        "priceGBP": 4800,
         "printfulVariantId": "694d5eae117019"
       },
       {
         "size": "5XL",
-        "priceGBP": 4699,
+        "priceGBP": 4800,
         "printfulVariantId": "694d5eae117098"
       }
     ]
@@ -770,7 +770,7 @@
     "fulfilment": "printful",
     "sign": "Taurus",
     "seasonal": true,
-    "priceGBP": 3599,
+    "priceGBP": 4500,
     "image": "/shop-images/taurus-pyjamas/taurus-pyjamas-front-crop.jpg",
     "sizes": [
       "XS",
@@ -791,105 +791,33 @@
     "variants": [
       {
         "size": "XS",
-        "priceGBP": 3599,
+        "priceGBP": 4500,
         "printfulVariantId": "6951f0e5ede708"
       },
       {
         "size": "S",
-        "priceGBP": 3599,
+        "priceGBP": 4500,
         "printfulVariantId": "6951f0e5ede7b3"
       },
       {
         "size": "M",
-        "priceGBP": 3599,
+        "priceGBP": 4500,
         "printfulVariantId": "6951f0e5ede838"
       },
       {
         "size": "L",
-        "priceGBP": 3599,
+        "priceGBP": 4500,
         "printfulVariantId": "6951f0e5ede8b2"
       },
       {
         "size": "XL",
-        "priceGBP": 3599,
+        "priceGBP": 4500,
         "printfulVariantId": "6951f0e5ede948"
       },
       {
         "size": "2XL",
-        "priceGBP": 3699,
+        "priceGBP": 4600,
         "printfulVariantId": "6951f0e5ede9c2"
-      }
-    ]
-  },
-  {
-    "id": "taurus-celestial-slides",
-    "name": "Taurus Celestial Slides",
-    "type": "accessory",
-    "fulfilment": "printful",
-    "sign": "Taurus",
-    "seasonal": true,
-    "priceGBP": 4299,
-    "image": "/images/products/taurus-slides-flat-crop.jpg",
-    "sizes": [
-      "6.5",
-      "7",
-      "8",
-      "8.5",
-      "9.5",
-      "10",
-      "11",
-      "11.5"
-    ],
-    "printfulVariantId": [
-      "695dd0eb3db803",
-      "695dd0eb3db895",
-      "695dd0eb3db918",
-      "695dd0eb3db991",
-      "695dd0eb3dba01",
-      "695dd0eb3dba81",
-      "695dd0eb3dbb19",
-      "695dd0eb3dbb94"
-    ],
-    "variants": [
-      {
-        "size": "6.5",
-        "priceGBP": 4299,
-        "printfulVariantId": "695dd0eb3db803"
-      },
-      {
-        "size": "7",
-        "priceGBP": 4299,
-        "printfulVariantId": "695dd0eb3db895"
-      },
-      {
-        "size": "8",
-        "priceGBP": 4299,
-        "printfulVariantId": "695dd0eb3db918"
-      },
-      {
-        "size": "8.5",
-        "priceGBP": 4299,
-        "printfulVariantId": "695dd0eb3db991"
-      },
-      {
-        "size": "9.5",
-        "priceGBP": 4299,
-        "printfulVariantId": "695dd0eb3dba01"
-      },
-      {
-        "size": "10",
-        "priceGBP": 4299,
-        "printfulVariantId": "695dd0eb3dba81"
-      },
-      {
-        "size": "11",
-        "priceGBP": 4299,
-        "printfulVariantId": "695dd0eb3dbb19"
-      },
-      {
-        "size": "11.5",
-        "priceGBP": 4299,
-        "printfulVariantId": "695dd0eb3dbb94"
       }
     ]
   },
@@ -900,7 +828,7 @@
     "fulfilment": "printful",
     "sign": "Pisces",
     "seasonal": true,
-    "priceGBP": 2899,
+    "priceGBP": 2900,
     "image": "/images/products/pisces-mousepad-lifestyle-1.jpg",
     "sizes": [
       "One Size"
@@ -911,7 +839,7 @@
     "variants": [
       {
         "size": "One Size",
-        "priceGBP": 2899,
+        "priceGBP": 2900,
         "printfulVariantId": "69600a547890d5"
       }
     ]
@@ -923,7 +851,7 @@
     "fulfilment": "printful",
     "sign": "Pisces",
     "seasonal": true,
-    "priceGBP": 6899,
+    "priceGBP": 8900,
     "image": "/images/products/pisces-windbreaker-lifestyle-3-crop.jpg",
     "sizes": [
       "XS",
@@ -944,32 +872,32 @@
     "variants": [
       {
         "size": "XS",
-        "priceGBP": 6899,
+        "priceGBP": 8900,
         "printfulVariantId": "6960112a067091"
       },
       {
         "size": "S",
-        "priceGBP": 6899,
+        "priceGBP": 8900,
         "printfulVariantId": "6960112a0670f3"
       },
       {
         "size": "M",
-        "priceGBP": 6899,
+        "priceGBP": 8900,
         "printfulVariantId": "6960112a067149"
       },
       {
         "size": "L",
-        "priceGBP": 6899,
+        "priceGBP": 8900,
         "printfulVariantId": "6960112a067193"
       },
       {
         "size": "XL",
-        "priceGBP": 6899,
+        "priceGBP": 8900,
         "printfulVariantId": "6960112a0671d2"
       },
       {
         "size": "2XL",
-        "priceGBP": 6999,
+        "priceGBP": 9000,
         "printfulVariantId": "6960112a067227"
       }
     ]
@@ -981,7 +909,7 @@
     "fulfilment": "printful",
     "sign": "Taurus",
     "seasonal": true,
-    "priceGBP": 2699,
+    "priceGBP": 4200,
     "image": "/images/products/taurus-pillow-lifestyle-1.jpg",
     "sizes": [
       "20″×12″",
@@ -996,17 +924,17 @@
     "variants": [
       {
         "size": "20″×12″",
-        "priceGBP": 2699,
+        "priceGBP": 4200,
         "printfulVariantId": "69601af7eb63e1"
       },
       {
         "size": "18″×18″",
-        "priceGBP": 2899,
+        "priceGBP": 4400,
         "printfulVariantId": "69601af7eb6342"
       },
       {
         "size": "22″×22″",
-        "priceGBP": 3199,
+        "priceGBP": 4700,
         "printfulVariantId": "69601af7eb6461"
       }
     ]
@@ -1018,7 +946,7 @@
     "fulfilment": "printful",
     "sign": "Pisces",
     "seasonal": true,
-    "priceGBP": 3599,
+    "priceGBP": 3600,
     "image": "/images/products/pisces-tote-lifestyle-1-crop.jpg",
     "sizes": [
       "One Size"
@@ -1029,7 +957,7 @@
     "variants": [
       {
         "size": "One Size",
-        "priceGBP": 3599,
+        "priceGBP": 3600,
         "printfulVariantId": "6960171c551b37"
       }
     ]
@@ -1041,7 +969,7 @@
     "fulfilment": "printful",
     "sign": "Taurus",
     "seasonal": true,
-    "priceGBP": 5899,
+    "priceGBP": 5900,
     "image": "/images/products/taurus-ram-hoodie-lifestyle-1-crop.jpg",
     "sizes": [
       "S",
@@ -1062,32 +990,32 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 5899,
+        "priceGBP": 5900,
         "printfulVariantId": "69652e9a3966c2"
       },
       {
         "size": "M",
-        "priceGBP": 5899,
+        "priceGBP": 5900,
         "printfulVariantId": "69652e9a396769"
       },
       {
         "size": "L",
-        "priceGBP": 5899,
+        "priceGBP": 5900,
         "printfulVariantId": "69652e9a3967f1"
       },
       {
         "size": "XL",
-        "priceGBP": 5899,
+        "priceGBP": 5900,
         "printfulVariantId": "69652e9a396882"
       },
       {
         "size": "2XL",
-        "priceGBP": 6099,
+        "priceGBP": 6100,
         "printfulVariantId": "69652e9a396905"
       },
       {
         "size": "3XL",
-        "priceGBP": 6199,
+        "priceGBP": 6200,
         "printfulVariantId": "69652e9a396987"
       }
     ]
@@ -1099,7 +1027,7 @@
     "fulfilment": "printful",
     "sign": "Taurus",
     "seasonal": true,
-    "priceGBP": 4299,
+    "priceGBP": 4300,
     "image": "/images/products/taurus-organic-tee-lifestyle-4-crop.jpg",
     "sizes": [
       "S",
@@ -1118,27 +1046,27 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 4299,
+        "priceGBP": 4300,
         "printfulVariantId": "69653de7ef42f3"
       },
       {
         "size": "M",
-        "priceGBP": 4299,
+        "priceGBP": 4300,
         "printfulVariantId": "69653de7ef4361"
       },
       {
         "size": "L",
-        "priceGBP": 4299,
+        "priceGBP": 4300,
         "printfulVariantId": "69653de7ef43c4"
       },
       {
         "size": "XL",
-        "priceGBP": 4299,
+        "priceGBP": 4300,
         "printfulVariantId": "69653de7ef4429"
       },
       {
         "size": "2XL",
-        "priceGBP": 4499,
+        "priceGBP": 4500,
         "printfulVariantId": "69653de7ef4474"
       }
     ]
@@ -1150,7 +1078,7 @@
     "fulfilment": "printful",
     "sign": "Gemini",
     "seasonal": true,
-    "priceGBP": 6599,
+    "priceGBP": 7900,
     "image": "/images/products/gemini-love-language-hoodie-2-crop.jpg",
     "sizes": [
       "S",
@@ -1171,32 +1099,32 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 6599,
+        "priceGBP": 7900,
         "printfulVariantId": "697bb788231124"
       },
       {
         "size": "M",
-        "priceGBP": 6599,
+        "priceGBP": 7900,
         "printfulVariantId": "697bb7882311c2"
       },
       {
         "size": "L",
-        "priceGBP": 6599,
+        "priceGBP": 7900,
         "printfulVariantId": "697bb788231256"
       },
       {
         "size": "XL",
-        "priceGBP": 6599,
+        "priceGBP": 7900,
         "printfulVariantId": "697bb7882312d9"
       },
       {
         "size": "2XL",
-        "priceGBP": 6699,
+        "priceGBP": 8000,
         "printfulVariantId": "697bb788231366"
       },
       {
         "size": "3XL",
-        "priceGBP": 6899,
+        "priceGBP": 8200,
         "printfulVariantId": "697bb7882313d7"
       }
     ]
@@ -1208,7 +1136,7 @@
     "fulfilment": "printful",
     "sign": null,
     "seasonal": false,
-    "priceGBP": 5299,
+    "priceGBP": 5300,
     "image": "/images/products/mercury-retrograde-hoodie-1-crop.jpg",
     "sizes": [
       "S",
@@ -1233,42 +1161,42 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 5299,
+        "priceGBP": 5300,
         "printfulVariantId": "697ba455db1785"
       },
       {
         "size": "M",
-        "priceGBP": 5299,
+        "priceGBP": 5300,
         "printfulVariantId": "697ba455db17f3"
       },
       {
         "size": "L",
-        "priceGBP": 5299,
+        "priceGBP": 5300,
         "printfulVariantId": "697ba455db1844"
       },
       {
         "size": "XL",
-        "priceGBP": 5299,
+        "priceGBP": 5300,
         "printfulVariantId": "697ba455db1891"
       },
       {
         "size": "2XL",
-        "priceGBP": 5299,
+        "priceGBP": 5300,
         "printfulVariantId": "697ba455db18d2"
       },
       {
         "size": "3XL",
-        "priceGBP": 5499,
+        "priceGBP": 5500,
         "printfulVariantId": "697ba455db1926"
       },
       {
         "size": "4XL",
-        "priceGBP": 5499,
+        "priceGBP": 5500,
         "printfulVariantId": "697ba455db1975"
       },
       {
         "size": "5XL",
-        "priceGBP": 5699,
+        "priceGBP": 5700,
         "printfulVariantId": "697ba455db19b8"
       }
     ]
@@ -1280,7 +1208,7 @@
     "fulfilment": "printful",
     "sign": null,
     "seasonal": false,
-    "priceGBP": 1299,
+    "priceGBP": 2200,
     "image": "/images/products/single-cosmic-design-mug-1-crop.jpg",
     "sizes": [
       "11oz",
@@ -1293,12 +1221,12 @@
     "variants": [
       {
         "size": "11oz",
-        "priceGBP": 1299,
+        "priceGBP": 2200,
         "printfulVariantId": "697ba95a591694"
       },
       {
         "size": "15oz",
-        "priceGBP": 1299,
+        "priceGBP": 2200,
         "printfulVariantId": "697ba95a591743"
       }
     ]
@@ -1310,7 +1238,7 @@
     "fulfilment": "printful",
     "sign": null,
     "seasonal": false,
-    "priceGBP": 6799,
+    "priceGBP": 9500,
     "image": "/images/products/saturn-return-hoodie-1-crop.jpg",
     "sizes": [
       "S",
@@ -1329,27 +1257,27 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 6799,
+        "priceGBP": 9500,
         "printfulVariantId": "697bac34ec7015"
       },
       {
         "size": "M",
-        "priceGBP": 6799,
+        "priceGBP": 9500,
         "printfulVariantId": "697bac34ec70c8"
       },
       {
         "size": "L",
-        "priceGBP": 6799,
+        "priceGBP": 9500,
         "printfulVariantId": "697bac34ec7153"
       },
       {
         "size": "XL",
-        "priceGBP": 6799,
+        "priceGBP": 9500,
         "printfulVariantId": "697bac34ec71e6"
       },
       {
         "size": "2XL",
-        "priceGBP": 6799,
+        "priceGBP": 9500,
         "printfulVariantId": "697bac34ec7265"
       }
     ]
@@ -1361,7 +1289,7 @@
     "fulfilment": "printful",
     "sign": null,
     "seasonal": false,
-    "priceGBP": 3999,
+    "priceGBP": 4000,
     "image": "/images/products/premium-polo-his-1-crop.jpg",
     "sizes": [
       "S",
@@ -1386,42 +1314,42 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 3999,
+        "priceGBP": 4000,
         "printfulVariantId": "697bb1ac69d002"
       },
       {
         "size": "M",
-        "priceGBP": 3999,
+        "priceGBP": 4000,
         "printfulVariantId": "697bb1ac69d068"
       },
       {
         "size": "L",
-        "priceGBP": 3999,
+        "priceGBP": 4000,
         "printfulVariantId": "697bb1ac69d0c2"
       },
       {
         "size": "XL",
-        "priceGBP": 3999,
+        "priceGBP": 4000,
         "printfulVariantId": "697bb1ac69d105"
       },
       {
         "size": "2XL",
-        "priceGBP": 4099,
+        "priceGBP": 4100,
         "printfulVariantId": "697bb1ac69d142"
       },
       {
         "size": "3XL",
-        "priceGBP": 4199,
+        "priceGBP": 4200,
         "printfulVariantId": "697bb1ac69d183"
       },
       {
         "size": "4XL",
-        "priceGBP": 4299,
+        "priceGBP": 4300,
         "printfulVariantId": "697bb1ac69d1d2"
       },
       {
         "size": "5XL",
-        "priceGBP": 4299,
+        "priceGBP": 4300,
         "printfulVariantId": "697bb1ac69d218"
       }
     ]
@@ -1433,7 +1361,7 @@
     "fulfilment": "printful",
     "sign": null,
     "seasonal": false,
-    "priceGBP": 3999,
+    "priceGBP": 4000,
     "image": "/images/products/premium-polo-hers-1-crop.jpg",
     "sizes": [
       "S",
@@ -1458,42 +1386,42 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 3999,
+        "priceGBP": 4000,
         "printfulVariantId": "697bb4f40d65e5"
       },
       {
         "size": "M",
-        "priceGBP": 3999,
+        "priceGBP": 4000,
         "printfulVariantId": "697bb4f40d6649"
       },
       {
         "size": "L",
-        "priceGBP": 3999,
+        "priceGBP": 4000,
         "printfulVariantId": "697bb4f40d66a7"
       },
       {
         "size": "XL",
-        "priceGBP": 3999,
+        "priceGBP": 4000,
         "printfulVariantId": "697bb4f40d66f9"
       },
       {
         "size": "2XL",
-        "priceGBP": 3999,
+        "priceGBP": 4000,
         "printfulVariantId": "697bb4f40d6744"
       },
       {
         "size": "3XL",
-        "priceGBP": 4199,
+        "priceGBP": 4200,
         "printfulVariantId": "697bb4f40d6792"
       },
       {
         "size": "4XL",
-        "priceGBP": 4299,
+        "priceGBP": 4300,
         "printfulVariantId": "697bb4f40d67e8"
       },
       {
         "size": "5XL",
-        "priceGBP": 4399,
+        "priceGBP": 4400,
         "printfulVariantId": "697bb4f40d6836"
       }
     ]
@@ -1505,7 +1433,7 @@
     "fulfilment": "printful",
     "sign": "Gemini",
     "seasonal": true,
-    "priceGBP": 4399,
+    "priceGBP": 9500,
     "image": "/images/products/gemini-windbreaker-1-crop.jpg",
     "sizes": [
       "S",
@@ -1524,27 +1452,27 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 4399,
+        "priceGBP": 9500,
         "printfulVariantId": "697bba6106f234"
       },
       {
         "size": "M",
-        "priceGBP": 4399,
+        "priceGBP": 9500,
         "printfulVariantId": "697bba6106f2d5"
       },
       {
         "size": "L",
-        "priceGBP": 4399,
+        "priceGBP": 9500,
         "printfulVariantId": "697bba6106f355"
       },
       {
         "size": "XL",
-        "priceGBP": 4399,
+        "priceGBP": 9500,
         "printfulVariantId": "697bba6106f3c6"
       },
       {
         "size": "2XL",
-        "priceGBP": 4699,
+        "priceGBP": 9800,
         "printfulVariantId": "697bba6106f433"
       }
     ]
@@ -1556,7 +1484,7 @@
     "fulfilment": "printful",
     "sign": "Leo",
     "seasonal": true,
-    "priceGBP": 3399,
+    "priceGBP": 3400,
     "image": "/images/products/leo-love-language-tee-1-crop.jpg",
     "sizes": [
       "S",
@@ -1575,27 +1503,27 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 3399,
+        "priceGBP": 3400,
         "printfulVariantId": "697bc1230bd778"
       },
       {
         "size": "M",
-        "priceGBP": 3399,
+        "priceGBP": 3400,
         "printfulVariantId": "697bc1230bd7e5"
       },
       {
         "size": "L",
-        "priceGBP": 3399,
+        "priceGBP": 3400,
         "printfulVariantId": "697bc1230bd839"
       },
       {
         "size": "XL",
-        "priceGBP": 3399,
+        "priceGBP": 3400,
         "printfulVariantId": "697bc1230bd873"
       },
       {
         "size": "2XL",
-        "priceGBP": 3599,
+        "priceGBP": 3600,
         "printfulVariantId": "697bc1230bd8c9"
       }
     ]
@@ -1607,7 +1535,7 @@
     "fulfilment": "printful",
     "sign": "Libra",
     "seasonal": true,
-    "priceGBP": 3199,
+    "priceGBP": 3600,
     "image": "/images/products/libra-scale-tote-1-crop.jpg",
     "sizes": [
       "One Size"
@@ -1618,31 +1546,8 @@
     "variants": [
       {
         "size": "One Size",
-        "priceGBP": 3199,
+        "priceGBP": 3600,
         "printfulVariantId": "697c09e3136474"
-      }
-    ]
-  },
-  {
-    "id": "aries-weekender-bag",
-    "name": "Aries Oversized Weekender Bag",
-    "type": "accessory",
-    "fulfilment": "printful",
-    "sign": "Aries",
-    "seasonal": true,
-    "priceGBP": 3899,
-    "image": "/images/products/aries-weekender-bag-1-crop.jpg",
-    "sizes": [
-      "One Size"
-    ],
-    "printfulVariantId": [
-      "697c0a161b4606"
-    ],
-    "variants": [
-      {
-        "size": "One Size",
-        "priceGBP": 3899,
-        "printfulVariantId": "697c0a161b4606"
       }
     ]
   },
@@ -1653,7 +1558,7 @@
     "fulfilment": "printful",
     "sign": "Virgo",
     "seasonal": true,
-    "priceGBP": 1999,
+    "priceGBP": 2400,
     "image": "/images/products/virgo-mousepad-1.jpg",
     "sizes": [
       "One Size"
@@ -1664,7 +1569,7 @@
     "variants": [
       {
         "size": "One Size",
-        "priceGBP": 1999,
+        "priceGBP": 2400,
         "printfulVariantId": "697c0c6089091f6"
       }
     ]
@@ -1676,7 +1581,7 @@
     "fulfilment": "printful",
     "sign": "Virgo",
     "seasonal": true,
-    "priceGBP": 2099,
+    "priceGBP": 2600,
     "image": "/images/products/virgo-bandana-2-crop.jpg",
     "sizes": [
       "S",
@@ -1691,17 +1596,17 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 2099,
+        "priceGBP": 2600,
         "printfulVariantId": "697c1335c39ee7"
       },
       {
         "size": "M",
-        "priceGBP": 2099,
+        "priceGBP": 2600,
         "printfulVariantId": "697c1335c39f42"
       },
       {
         "size": "L",
-        "priceGBP": 2199,
+        "priceGBP": 2700,
         "printfulVariantId": "697c1335c39fa3"
       }
     ]
@@ -1713,7 +1618,7 @@
     "fulfilment": "printful",
     "sign": null,
     "seasonal": false,
-    "priceGBP": 5099,
+    "priceGBP": 5100,
     "image": "/images/products/saturn-return-white-hoodie-1-crop.jpg",
     "sizes": [
       "S",
@@ -1734,32 +1639,32 @@
     "variants": [
       {
         "size": "S",
-        "priceGBP": 5099,
+        "priceGBP": 5100,
         "printfulVariantId": "697c0e9b30b4c3"
       },
       {
         "size": "M",
-        "priceGBP": 5099,
+        "priceGBP": 5100,
         "printfulVariantId": "697c0e9b30b525"
       },
       {
         "size": "L",
-        "priceGBP": 5099,
+        "priceGBP": 5100,
         "printfulVariantId": "697c0e9b30b579"
       },
       {
         "size": "XL",
-        "priceGBP": 5099,
+        "priceGBP": 5100,
         "printfulVariantId": "697c0e9b30b5c1"
       },
       {
         "size": "2XL",
-        "priceGBP": 5299,
+        "priceGBP": 5300,
         "printfulVariantId": "697c0e9b30b612"
       },
       {
         "size": "3XL",
-        "priceGBP": 5499,
+        "priceGBP": 5500,
         "printfulVariantId": "697c0e9b30b656"
       }
     ]
@@ -1771,7 +1676,7 @@
     "fulfilment": "printful",
     "sign": "Taurus",
     "seasonal": true,
-    "priceGBP": 3299,
+    "priceGBP": 4500,
     "image": "/shop-images/taurus-tank-top/taurus-tank-top-lifestyle-front.jpg",
     "sizes": [
       "XS",
@@ -1792,98 +1697,33 @@
     "variants": [
       {
         "size": "XS",
-        "priceGBP": 3299,
+        "priceGBP": 4500,
         "printfulVariantId": "6951c9104965e8"
       },
       {
         "size": "S",
-        "priceGBP": 3299,
+        "priceGBP": 4500,
         "printfulVariantId": "6951c910496649"
       },
       {
         "size": "M",
-        "priceGBP": 3299,
+        "priceGBP": 4500,
         "printfulVariantId": "6951c910496698"
       },
       {
         "size": "L",
-        "priceGBP": 3299,
+        "priceGBP": 4500,
         "printfulVariantId": "6951c9104966d6"
       },
       {
         "size": "XL",
-        "priceGBP": 3299,
+        "priceGBP": 4500,
         "printfulVariantId": "6951c910496729"
       },
       {
         "size": "2XL",
-        "priceGBP": 3400,
+        "priceGBP": 4601,
         "printfulVariantId": "6951c910496768"
-      }
-    ]
-  },
-  {
-    "id": "taurus-baseball-jersey",
-    "name": "Taurus Recycled Baseball Jersey - Unisex",
-    "type": "apparel",
-    "fulfilment": "printful",
-    "sign": "Taurus",
-    "seasonal": true,
-    "priceGBP": 4999,
-    "image": "/shop-images/taurus-baseball-jersey/taurus-baseball-jersey-back.png",
-    "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL"
-    ],
-    "printfulVariantId": [
-      "6951db0b91f1d8",
-      "6951db0b91f249",
-      "6951db0b91f294",
-      "6951db0b91f2d5",
-      "6951db0b91f321",
-      "6951db0b91f368",
-      "6951db0b91f3b4"
-    ],
-    "variants": [
-      {
-        "size": "XS",
-        "priceGBP": 4999,
-        "printfulVariantId": "6951db0b91f1d8"
-      },
-      {
-        "size": "S",
-        "priceGBP": 4999,
-        "printfulVariantId": "6951db0b91f249"
-      },
-      {
-        "size": "M",
-        "priceGBP": 4999,
-        "printfulVariantId": "6951db0b91f294"
-      },
-      {
-        "size": "L",
-        "priceGBP": 4999,
-        "printfulVariantId": "6951db0b91f2d5"
-      },
-      {
-        "size": "XL",
-        "priceGBP": 4999,
-        "printfulVariantId": "6951db0b91f321"
-      },
-      {
-        "size": "2XL",
-        "priceGBP": 5399,
-        "printfulVariantId": "6951db0b91f368"
-      },
-      {
-        "size": "3XL",
-        "priceGBP": 5699,
-        "printfulVariantId": "6951db0b91f3b4"
       }
     ]
   },
@@ -1894,7 +1734,7 @@
     "fulfilment": "printful",
     "sign": "Taurus",
     "seasonal": true,
-    "priceGBP": 3499,
+    "priceGBP": 3900,
     "image": "/shop-images/taurus-crop-tee/taurus-crop-tee-lifestyle-bicycle.jpg",
     "sizes": [
       "XS",
@@ -1917,37 +1757,37 @@
     "variants": [
       {
         "size": "XS",
-        "priceGBP": 3499,
+        "priceGBP": 3900,
         "printfulVariantId": "6951cf089ec022"
       },
       {
         "size": "S",
-        "priceGBP": 3499,
+        "priceGBP": 3900,
         "printfulVariantId": "6951cf089ec096"
       },
       {
         "size": "M",
-        "priceGBP": 3499,
+        "priceGBP": 3900,
         "printfulVariantId": "6951cf089ec0f9"
       },
       {
         "size": "L",
-        "priceGBP": 3499,
+        "priceGBP": 3900,
         "printfulVariantId": "6951cf089ec157"
       },
       {
         "size": "XL",
-        "priceGBP": 3499,
+        "priceGBP": 3900,
         "printfulVariantId": "6951cf089ec1a9"
       },
       {
         "size": "2XL",
-        "priceGBP": 3599,
+        "priceGBP": 4000,
         "printfulVariantId": "6951cf089ec1f4"
       },
       {
         "size": "3XL",
-        "priceGBP": 3799,
+        "priceGBP": 4200,
         "printfulVariantId": "6951cf089ec243"
       }
     ]
