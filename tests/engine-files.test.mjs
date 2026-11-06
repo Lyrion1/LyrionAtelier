@@ -90,7 +90,9 @@ for (const [name, setUp] of Object.entries(STATES)) {
       try { raw = JSON.parse(read('data/house.json')); } catch { raw = null; }
       const house = H.normaliseHouse(raw);
       const catalogue = JSON.parse(read('data/catalogue.json'));
-      const resting = catalogue.products.filter((p) => p.listed && p.fulfilment !== 'enquiry' && !H.isPurchasable(p, house)).map((p) => p.sign);
+      // hidden: true is a catalogue decision, not a season. A missing house
+      // still sells every other listed piece.
+      const resting = catalogue.products.filter((p) => p.listed && p.hidden !== true && p.fulfilment !== 'enquiry' && !H.isPurchasable(p, house)).map((p) => p.sign);
       if (name === 'present and valid') {
         assert.ok(resting.length > 0 && resting.every((s) => !['Libra', 'Scorpio', 'Virgo'].includes(s)), resting.join());
       } else {

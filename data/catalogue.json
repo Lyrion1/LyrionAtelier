@@ -21,43 +21,43 @@
       ],
       "link": "/shop/aries-diamond-hoodie.html",
       "price_gbp": {
-        "min": 51.99,
-        "max": 52.99
+        "min": 79.0,
+        "max": 80.0
       },
       "variants": [
         {
           "size": "XS",
-          "price_gbp": 51.99,
+          "price_gbp": 79.0,
           "printful_variant_id": "6970bd2c23d913",
           "sku": "LYR-ARIES-DIAMOND-HOODIE-XS"
         },
         {
           "size": "S",
-          "price_gbp": 51.99,
+          "price_gbp": 79.0,
           "printful_variant_id": "6970bd2c23d983",
           "sku": "LYR-ARIES-DIAMOND-HOODIE-S"
         },
         {
           "size": "M",
-          "price_gbp": 51.99,
+          "price_gbp": 79.0,
           "printful_variant_id": "6970bd2c23d9d7",
           "sku": "LYR-ARIES-DIAMOND-HOODIE-M"
         },
         {
           "size": "L",
-          "price_gbp": 51.99,
+          "price_gbp": 79.0,
           "printful_variant_id": "6970bd2c23da15",
           "sku": "LYR-ARIES-DIAMOND-HOODIE-L"
         },
         {
           "size": "XL",
-          "price_gbp": 51.99,
+          "price_gbp": 79.0,
           "printful_variant_id": "6970bd2c23da61",
           "sku": "LYR-ARIES-DIAMOND-HOODIE-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 52.99,
+          "price_gbp": 80.0,
           "printful_variant_id": "6970bd2c23daa1",
           "sku": "LYR-ARIES-DIAMOND-HOODIE-2XL"
         }
@@ -124,55 +124,55 @@
       ],
       "link": "/shop/aries-love-language-hoodie.html",
       "price_gbp": {
-        "min": 50.99,
-        "max": 55.99
+        "min": 64.0,
+        "max": 69.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 50.99,
+          "price_gbp": 64.0,
           "printful_variant_id": "6973fd61a6ab49",
           "sku": "LYR-ARIES-LOVE-LANG-S"
         },
         {
           "size": "M",
-          "price_gbp": 50.99,
+          "price_gbp": 64.0,
           "printful_variant_id": "6973fd61a6abd4",
           "sku": "LYR-ARIES-LOVE-LANG-M"
         },
         {
           "size": "L",
-          "price_gbp": 50.99,
+          "price_gbp": 64.0,
           "printful_variant_id": "6973fd61a6ac52",
           "sku": "LYR-ARIES-LOVE-LANG-L"
         },
         {
           "size": "XL",
-          "price_gbp": 50.99,
+          "price_gbp": 64.0,
           "printful_variant_id": "6973fd61a6acc4",
           "sku": "LYR-ARIES-LOVE-LANG-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 51.99,
+          "price_gbp": 65.0,
           "printful_variant_id": "6973fd61a6ad32",
           "sku": "LYR-ARIES-LOVE-LANG-2XL"
         },
         {
           "size": "3XL",
-          "price_gbp": 52.99,
+          "price_gbp": 66.0,
           "printful_variant_id": "6973fd61a6ada2",
           "sku": "LYR-ARIES-LOVE-LANG-3XL"
         },
         {
           "size": "4XL",
-          "price_gbp": 54.99,
+          "price_gbp": 68.0,
           "printful_variant_id": "6973fd61a6ae15",
           "sku": "LYR-ARIES-LOVE-LANG-4XL"
         },
         {
           "size": "5XL",
-          "price_gbp": 55.99,
+          "price_gbp": 69.0,
           "printful_variant_id": "6973fd61a6ae89",
           "sku": "LYR-ARIES-LOVE-LANG-5XL"
         }
@@ -239,42 +239,42 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 27.99,
-        "max": 30.99
+        "min": 28.0,
+        "max": 31.0
       },
       "variants": [
         {
           "size": "XS",
           "color": "Lunar Sand",
-          "price_gbp": 27.99,
+          "price_gbp": 28.0,
           "printful_variant_id": "694615f9707d64",
           "sku": "LYR-YTH-ARIES-FIRE-XS"
         },
         {
           "size": "S",
           "color": "Lunar Sand",
-          "price_gbp": 27.99,
+          "price_gbp": 28.0,
           "printful_variant_id": "694615f9707dd3",
           "sku": "LYR-YTH-ARIES-FIRE-S"
         },
         {
           "size": "M",
           "color": "Lunar Sand",
-          "price_gbp": 27.99,
+          "price_gbp": 28.0,
           "printful_variant_id": "694615f9707e25",
           "sku": "LYR-YTH-ARIES-FIRE-M"
         },
         {
           "size": "L",
           "color": "Lunar Sand",
-          "price_gbp": 28.99,
+          "price_gbp": 29.0,
           "printful_variant_id": "694615f9707e72",
           "sku": "LYR-YTH-ARIES-FIRE-L"
         },
         {
           "size": "XL",
           "color": "Lunar Sand",
-          "price_gbp": 30.99,
+          "price_gbp": 31.0,
           "printful_variant_id": "694615f9707eb6",
           "sku": "LYR-YTH-ARIES-FIRE-XL"
         }
@@ -344,37 +344,37 @@
       ],
       "link": "/shop/youth-aries-hoodie.html",
       "price_gbp": {
-        "min": 33.99,
-        "max": 33.99
+        "min": 38.0,
+        "max": 38.0
       },
       "variants": [
         {
           "size": "XS",
-          "price_gbp": 33.99,
+          "price_gbp": 38.0,
           "printful_variant_id": "694ed9706ecda1",
           "sku": "LYR-ARIES-YOUTH-HOODIE-XS"
         },
         {
           "size": "S",
-          "price_gbp": 33.99,
+          "price_gbp": 38.0,
           "printful_variant_id": "694ed9706ece08",
           "sku": "LYR-ARIES-YOUTH-HOODIE-S"
         },
         {
           "size": "M",
-          "price_gbp": 33.99,
+          "price_gbp": 38.0,
           "printful_variant_id": "694ed9706ece51",
           "sku": "LYR-ARIES-YOUTH-HOODIE-M"
         },
         {
           "size": "L",
-          "price_gbp": 33.99,
+          "price_gbp": 38.0,
           "printful_variant_id": "694ed9706ecea1",
           "sku": "LYR-ARIES-YOUTH-HOODIE-L"
         },
         {
           "size": "XL",
-          "price_gbp": 33.99,
+          "price_gbp": 38.0,
           "printful_variant_id": "694ed9706ecee2",
           "sku": "LYR-ARIES-YOUTH-HOODIE-XL"
         }
@@ -442,55 +442,55 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 37.99,
-        "max": 42.99
+        "min": 38.0,
+        "max": 43.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 37.99,
+          "price_gbp": 38.0,
           "printful_variant_id": "694c1247f214e9",
           "sku": "LYR-CAP-SWEAT-S"
         },
         {
           "size": "M",
-          "price_gbp": 37.99,
+          "price_gbp": 38.0,
           "printful_variant_id": "694c1247f21558",
           "sku": "LYR-CAP-SWEAT-M"
         },
         {
           "size": "L",
-          "price_gbp": 37.99,
+          "price_gbp": 38.0,
           "printful_variant_id": "694c1247f215a7",
           "sku": "LYR-CAP-SWEAT-L"
         },
         {
           "size": "XL",
-          "price_gbp": 37.99,
+          "price_gbp": 38.0,
           "printful_variant_id": "694c1247f215f5",
           "sku": "LYR-CAP-SWEAT-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 41.99,
+          "price_gbp": 42.0,
           "printful_variant_id": "694c1247f21649",
           "sku": "LYR-CAP-SWEAT-2XL"
         },
         {
           "size": "3XL",
-          "price_gbp": 41.99,
+          "price_gbp": 42.0,
           "printful_variant_id": "694c1247f21691",
           "sku": "LYR-CAP-SWEAT-3XL"
         },
         {
           "size": "4XL",
-          "price_gbp": 42.99,
+          "price_gbp": 43.0,
           "printful_variant_id": "694c1247f216d4",
           "sku": "LYR-CAP-SWEAT-4XL"
         },
         {
           "size": "5XL",
-          "price_gbp": 42.99,
+          "price_gbp": 43.0,
           "printful_variant_id": "694c1247f21712",
           "sku": "LYR-CAP-SWEAT-5XL"
         }
@@ -557,43 +557,43 @@
       ],
       "link": "/shop/leo-hoodie.html",
       "price_gbp": {
-        "min": 46.99,
-        "max": 50.99
+        "min": 84.0,
+        "max": 88.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 46.99,
+          "price_gbp": 84.0,
           "printful_variant_id": "694b0b7b4276f7",
           "sku": "LYR-LEO-HOOD-S"
         },
         {
           "size": "M",
-          "price_gbp": 46.99,
+          "price_gbp": 84.0,
           "printful_variant_id": "694b0b7b427766",
           "sku": "LYR-LEO-HOOD-M"
         },
         {
           "size": "L",
-          "price_gbp": 46.99,
+          "price_gbp": 84.0,
           "printful_variant_id": "694b0b7b4277b7",
           "sku": "LYR-LEO-HOOD-L"
         },
         {
           "size": "XL",
-          "price_gbp": 48.99,
+          "price_gbp": 86.0,
           "printful_variant_id": "694b0b7b427801",
           "sku": "LYR-LEO-HOOD-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 48.99,
+          "price_gbp": 86.0,
           "printful_variant_id": "694b0b7b427857",
           "sku": "LYR-LEO-HOOD-2XL"
         },
         {
           "size": "3XL",
-          "price_gbp": 50.99,
+          "price_gbp": 88.0,
           "printful_variant_id": "694b0b7b4278a6",
           "sku": "LYR-LEO-HOOD-3XL"
         }
@@ -664,43 +664,43 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 43.99,
-        "max": 46.99
+        "min": 69.0,
+        "max": 72.0
       },
       "variants": [
         {
           "size": "XS",
-          "price_gbp": 43.99,
+          "price_gbp": 69.0,
           "printful_variant_id": "694b39d6493ff5",
           "sku": "LYR-PISC-CREW-XS"
         },
         {
           "size": "S",
-          "price_gbp": 43.99,
+          "price_gbp": 69.0,
           "printful_variant_id": "694b39d6494068",
           "sku": "LYR-PISC-CREW-S"
         },
         {
           "size": "M",
-          "price_gbp": 43.99,
+          "price_gbp": 69.0,
           "printful_variant_id": "694b39d64940c4",
           "sku": "LYR-PISC-CREW-M"
         },
         {
           "size": "L",
-          "price_gbp": 43.99,
+          "price_gbp": 69.0,
           "printful_variant_id": "694b39d6494116",
           "sku": "LYR-PISC-CREW-L"
         },
         {
           "size": "XL",
-          "price_gbp": 45.99,
+          "price_gbp": 71.0,
           "printful_variant_id": "694b39d6494168",
           "sku": "LYR-PISC-CREW-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 46.99,
+          "price_gbp": 72.0,
           "printful_variant_id": "694b39d64941a6",
           "sku": "LYR-PISC-CREW-2XL"
         }
@@ -772,49 +772,49 @@
       ],
       "link": "/shop/gemini-tee.html",
       "price_gbp": {
-        "min": 33.99,
-        "max": 36.99
+        "min": 34.0,
+        "max": 37.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 33.99,
+          "price_gbp": 34.0,
           "printful_variant_id": "694d9579acfff1",
           "sku": "LYR-GEM-STAR-TEE-S"
         },
         {
           "size": "M",
-          "price_gbp": 33.99,
+          "price_gbp": 34.0,
           "printful_variant_id": "694d9579ad00a5",
           "sku": "LYR-GEM-STAR-TEE-M"
         },
         {
           "size": "L",
-          "price_gbp": 33.99,
+          "price_gbp": 34.0,
           "printful_variant_id": "694d9579ad0139",
           "sku": "LYR-GEM-STAR-TEE-L"
         },
         {
           "size": "XL",
-          "price_gbp": 33.99,
+          "price_gbp": 34.0,
           "printful_variant_id": "694d9579ad01d1",
           "sku": "LYR-GEM-STAR-TEE-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 35.99,
+          "price_gbp": 36.0,
           "printful_variant_id": "694d9579ad0252",
           "sku": "LYR-GEM-STAR-TEE-2XL"
         },
         {
           "size": "3XL",
-          "price_gbp": 36.99,
+          "price_gbp": 37.0,
           "printful_variant_id": "694d9579ad02e2",
           "sku": "LYR-GEM-STAR-TEE-3XL"
         },
         {
           "size": "4XL",
-          "price_gbp": 36.99,
+          "price_gbp": 37.0,
           "printful_variant_id": "694d9579ad0373",
           "sku": "LYR-GEM-STAR-TEE-4XL"
         }
@@ -875,8 +875,8 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 57.99,
-        "max": 57.99
+        "min": 58.0,
+        "max": 58.0
       },
       "variants": [],
       "fulfilment": "printful",
@@ -907,77 +907,77 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 50.99,
-        "max": 53.99
+        "min": 74.0,
+        "max": 77.0
       },
       "variants": [
         {
           "size": "S",
           "color": "Military Green",
-          "price_gbp": 50.99,
+          "price_gbp": 74.0,
           "printful_variant_id": "694c9c3fbcb066",
           "sku": "LYR-AQU-CROP-MG-S"
         },
         {
           "size": "M",
           "color": "Military Green",
-          "price_gbp": 50.99,
+          "price_gbp": 74.0,
           "printful_variant_id": "694c9c3fbcb105",
           "sku": "LYR-AQU-CROP-MG-M"
         },
         {
           "size": "L",
           "color": "Military Green",
-          "price_gbp": 50.99,
+          "price_gbp": 74.0,
           "printful_variant_id": "694c9c3fbcb198",
           "sku": "LYR-AQU-CROP-MG-L"
         },
         {
           "size": "XL",
           "color": "Military Green",
-          "price_gbp": 50.99,
+          "price_gbp": 74.0,
           "printful_variant_id": "694c9c3fbcb21e",
           "sku": "LYR-AQU-CROP-MG-XL"
         },
         {
           "size": "2XL",
           "color": "Military Green",
-          "price_gbp": 53.99,
+          "price_gbp": 77.0,
           "printful_variant_id": "694c9c3fbcb2a3",
           "sku": "LYR-AQU-CROP-MG-2XL"
         },
         {
           "size": "S",
           "color": "Storm",
-          "price_gbp": 50.99,
+          "price_gbp": 74.0,
           "printful_variant_id": "694c9c3fbcb325",
           "sku": "LYR-AQU-CROP-ST-S"
         },
         {
           "size": "M",
           "color": "Storm",
-          "price_gbp": 50.99,
+          "price_gbp": 74.0,
           "printful_variant_id": "694c9c3fbcb3a5",
           "sku": "LYR-AQU-CROP-ST-M"
         },
         {
           "size": "L",
           "color": "Storm",
-          "price_gbp": 50.99,
+          "price_gbp": 74.0,
           "printful_variant_id": "694c9c3fbcb428",
           "sku": "LYR-AQU-CROP-ST-L"
         },
         {
           "size": "XL",
           "color": "Storm",
-          "price_gbp": 50.99,
+          "price_gbp": 74.0,
           "printful_variant_id": "694c9c3fbcb4a5",
           "sku": "LYR-AQU-CROP-ST-XL"
         },
         {
           "size": "2XL",
           "color": "Storm",
-          "price_gbp": 53.99,
+          "price_gbp": 77.0,
           "printful_variant_id": "694c9c3fbcb529",
           "sku": "LYR-AQU-CROP-ST-2XL"
         }
@@ -1054,13 +1054,13 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 23.99,
-        "max": 23.99
+        "min": 38.0,
+        "max": 38.0
       },
       "variants": [
         {
           "size": "One Size",
-          "price_gbp": 23.99,
+          "price_gbp": 38.0,
           "printful_variant_id": "6948ab6e63d308",
           "sku": "LYR-BEANIE-FISH-TREE"
         }
@@ -1134,55 +1134,55 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 42.99,
-        "max": 49.99
+        "min": 45.0,
+        "max": 52.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 42.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "694da2910d2079",
           "sku": "LYR-PISC-HOOD-S"
         },
         {
           "size": "M",
-          "price_gbp": 42.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "694da2910d20e9",
           "sku": "LYR-PISC-HOOD-M"
         },
         {
           "size": "L",
-          "price_gbp": 42.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "694da2910d2134",
           "sku": "LYR-PISC-HOOD-L"
         },
         {
           "size": "XL",
-          "price_gbp": 42.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "694da2910d2187",
           "sku": "LYR-PISC-HOOD-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 44.99,
+          "price_gbp": 47.0,
           "printful_variant_id": "694da2910d21d6",
           "sku": "LYR-PISC-HOOD-2XL"
         },
         {
           "size": "3XL",
-          "price_gbp": 46.99,
+          "price_gbp": 49.0,
           "printful_variant_id": "694da2910d2222",
           "sku": "LYR-PISC-HOOD-3XL"
         },
         {
           "size": "4XL",
-          "price_gbp": 47.99,
+          "price_gbp": 50.0,
           "printful_variant_id": "694da2910d2273",
           "sku": "LYR-PISC-HOOD-4XL"
         },
         {
           "size": "5XL",
-          "price_gbp": 49.99,
+          "price_gbp": 52.0,
           "printful_variant_id": "694da2910d22c1",
           "sku": "LYR-PISC-HOOD-5XL"
         }
@@ -1250,105 +1250,105 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 35.99,
-        "max": 39.99
+        "min": 36.0,
+        "max": 40.0
       },
       "variants": [
         {
           "size": "S",
           "color": "Navy",
-          "price_gbp": 35.99,
+          "price_gbp": 36.0,
           "printful_variant_id": "694dba199bfc65",
           "sku": "LYR-POLO-NAVY-S"
         },
         {
           "size": "M",
           "color": "Navy",
-          "price_gbp": 35.99,
+          "price_gbp": 36.0,
           "printful_variant_id": "694dba199bfcc2",
           "sku": "LYR-POLO-NAVY-M"
         },
         {
           "size": "L",
           "color": "Navy",
-          "price_gbp": 35.99,
+          "price_gbp": 36.0,
           "printful_variant_id": "694dba199bfd21",
           "sku": "LYR-POLO-NAVY-L"
         },
         {
           "size": "XL",
           "color": "Navy",
-          "price_gbp": 35.99,
+          "price_gbp": 36.0,
           "printful_variant_id": "694dba199bfd71",
           "sku": "LYR-POLO-NAVY-XL"
         },
         {
           "size": "2XL",
           "color": "Navy",
-          "price_gbp": 36.99,
+          "price_gbp": 37.0,
           "printful_variant_id": "694dba199bfdb3",
           "sku": "LYR-POLO-NAVY-2XL"
         },
         {
           "size": "3XL",
           "color": "Navy",
-          "price_gbp": 38.99,
+          "price_gbp": 39.0,
           "printful_variant_id": "694dba199bfe02",
           "sku": "LYR-POLO-NAVY-3XL"
         },
         {
           "size": "4XL",
           "color": "Navy",
-          "price_gbp": 39.99,
+          "price_gbp": 40.0,
           "printful_variant_id": "694dba199bfe43",
           "sku": "LYR-POLO-NAVY-4XL"
         },
         {
           "size": "S",
           "color": "White",
-          "price_gbp": 35.99,
+          "price_gbp": 36.0,
           "printful_variant_id": "694dba199bfe93",
           "sku": "LYR-POLO-WHITE-S"
         },
         {
           "size": "M",
           "color": "White",
-          "price_gbp": 35.99,
+          "price_gbp": 36.0,
           "printful_variant_id": "694dba199bfed9",
           "sku": "LYR-POLO-WHITE-M"
         },
         {
           "size": "L",
           "color": "White",
-          "price_gbp": 35.99,
+          "price_gbp": 36.0,
           "printful_variant_id": "694dba199bff26",
           "sku": "LYR-POLO-WHITE-L"
         },
         {
           "size": "XL",
           "color": "White",
-          "price_gbp": 35.99,
+          "price_gbp": 36.0,
           "printful_variant_id": "694dba199bff64",
           "sku": "LYR-POLO-WHITE-XL"
         },
         {
           "size": "2XL",
           "color": "White",
-          "price_gbp": 36.99,
+          "price_gbp": 37.0,
           "printful_variant_id": "694dba199bffb3",
           "sku": "LYR-POLO-WHITE-2XL"
         },
         {
           "size": "3XL",
           "color": "White",
-          "price_gbp": 38.99,
+          "price_gbp": 39.0,
           "printful_variant_id": "694dba199bfff2",
           "sku": "LYR-POLO-WHITE-3XL"
         },
         {
           "size": "4XL",
           "color": "White",
-          "price_gbp": 39.99,
+          "price_gbp": 40.0,
           "printful_variant_id": "694dba199c0035",
           "sku": "LYR-POLO-WHITE-4XL"
         }
@@ -1412,13 +1412,13 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 35.99,
-        "max": 35.99
+        "min": 38.0,
+        "max": 38.0
       },
       "variants": [
         {
           "size": "One Size",
-          "price_gbp": 35.99,
+          "price_gbp": 38.0,
           "printful_variant_id": "6948a81b91a8b1",
           "sku": "LYR-CAP-CORD-SUNCREST"
         }
@@ -1486,43 +1486,43 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 42.99,
-        "max": 45.99
+        "min": 74.0,
+        "max": 77.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 42.99,
+          "price_gbp": 74.0,
           "printful_variant_id": "694f2f2cb54069",
           "sku": "LYR-ARIES-OSHW-SWEAT-S"
         },
         {
           "size": "M",
-          "price_gbp": 42.99,
+          "price_gbp": 74.0,
           "printful_variant_id": "694f2f2cb540d9",
           "sku": "LYR-ARIES-OSHW-SWEAT-M"
         },
         {
           "size": "L",
-          "price_gbp": 42.99,
+          "price_gbp": 74.0,
           "printful_variant_id": "694f2f2cb54126",
           "sku": "LYR-ARIES-OSHW-SWEAT-L"
         },
         {
           "size": "XL",
-          "price_gbp": 42.99,
+          "price_gbp": 74.0,
           "printful_variant_id": "694f2f2cb54164",
           "sku": "LYR-ARIES-OSHW-SWEAT-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 43.99,
+          "price_gbp": 75.0,
           "printful_variant_id": "694f2f2cb541b5",
           "sku": "LYR-ARIES-OSHW-SWEAT-2XL"
         },
         {
           "size": "3XL",
-          "price_gbp": 45.99,
+          "price_gbp": 77.0,
           "printful_variant_id": "694f2f2cb54208",
           "sku": "LYR-ARIES-OSHW-SWEAT-3XL"
         }
@@ -1612,6 +1612,8 @@
       },
       "seasonal": false,
       "listed": false,
+      "hidden": true,
+      "hidden_reason": "Retired from the shop: this blank cannot reach a sound margin at a believable price, and it is fulfilled outside the UK and EU.",
       "gender": "unisex",
       "features": [
         "Premium cotton blend with stretch",
@@ -1662,38 +1664,38 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 50.99,
-        "max": 54.99
+        "min": 84.0,
+        "max": 88.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 50.99,
+          "price_gbp": 84.0,
           "printful_variant_id": "694ab7d2e5aae1"
         },
         {
           "size": "M",
-          "price_gbp": 50.99,
+          "price_gbp": 84.0,
           "printful_variant_id": "694ab7d2e5ab58"
         },
         {
           "size": "L",
-          "price_gbp": 50.99,
+          "price_gbp": 84.0,
           "printful_variant_id": "694ab7d2e5abb8"
         },
         {
           "size": "XL",
-          "price_gbp": 52.99,
+          "price_gbp": 86.0,
           "printful_variant_id": "694ab7d2e5abf3"
         },
         {
           "size": "2XL",
-          "price_gbp": 52.99,
+          "price_gbp": 86.0,
           "printful_variant_id": "694ab7d2e5ac45"
         },
         {
           "size": "3XL",
-          "price_gbp": 54.99,
+          "price_gbp": 88.0,
           "printful_variant_id": "694ab7d2e5ac97"
         }
       ],
@@ -1723,55 +1725,55 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 43.99,
-        "max": 46.99
+        "min": 45.0,
+        "max": 48.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 43.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "694d5eae116cb7",
           "sku": "LYR-PISC-INTUIT-S"
         },
         {
           "size": "M",
-          "price_gbp": 43.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "694d5eae116d62",
           "sku": "LYR-PISC-INTUIT-M"
         },
         {
           "size": "L",
-          "price_gbp": 43.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "694d5eae116de7",
           "sku": "LYR-PISC-INTUIT-L"
         },
         {
           "size": "XL",
-          "price_gbp": 43.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "694d5eae116e72",
           "sku": "LYR-PISC-INTUIT-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 45.99,
+          "price_gbp": 47.0,
           "printful_variant_id": "694d5eae116f01",
           "sku": "LYR-PISC-INTUIT-2XL"
         },
         {
           "size": "3XL",
-          "price_gbp": 45.99,
+          "price_gbp": 47.0,
           "printful_variant_id": "694d5eae116f86",
           "sku": "LYR-PISC-INTUIT-3XL"
         },
         {
           "size": "4XL",
-          "price_gbp": 46.99,
+          "price_gbp": 48.0,
           "printful_variant_id": "694d5eae117019",
           "sku": "LYR-PISC-INTUIT-4XL"
         },
         {
           "size": "5XL",
-          "price_gbp": 46.99,
+          "price_gbp": 48.0,
           "printful_variant_id": "694d5eae117098",
           "sku": "LYR-PISC-INTUIT-5XL"
         }
@@ -1841,13 +1843,13 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 27.99,
-        "max": 27.99
+        "min": 38.0,
+        "max": 38.0
       },
       "variants": [
         {
           "size": "One Size",
-          "price_gbp": 27.99,
+          "price_gbp": 38.0,
           "printful_variant_id": "694f1219bafde5",
           "sku": "LYR-ARIES-BUCKET-DENIM"
         }
@@ -1915,43 +1917,43 @@
       ],
       "link": "/shop/taurus-pyjama-top.html",
       "price_gbp": {
-        "min": 35.99,
-        "max": 36.99
+        "min": 45.0,
+        "max": 46.0
       },
       "variants": [
         {
           "size": "XS",
-          "price_gbp": 35.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "6951f0e5ede708",
           "sku": "LYR-TAUR-PJ-XS"
         },
         {
           "size": "S",
-          "price_gbp": 35.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "6951f0e5ede7b3",
           "sku": "LYR-TAUR-PJ-S"
         },
         {
           "size": "M",
-          "price_gbp": 35.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "6951f0e5ede838",
           "sku": "LYR-TAUR-PJ-M"
         },
         {
           "size": "L",
-          "price_gbp": 35.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "6951f0e5ede8b2",
           "sku": "LYR-TAUR-PJ-L"
         },
         {
           "size": "XL",
-          "price_gbp": 35.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "6951f0e5ede948",
           "sku": "LYR-TAUR-PJ-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 36.99,
+          "price_gbp": 46.0,
           "printful_variant_id": "6951f0e5ede9c2",
           "sku": "LYR-TAUR-PJ-2XL"
         }
@@ -2075,6 +2077,8 @@
       },
       "seasonal": true,
       "listed": true,
+      "hidden": true,
+      "hidden_reason": "Retired from the shop: this blank cannot reach a sound margin at a believable price, and it is fulfilled outside the UK and EU.",
       "gender": "unisex",
       "features": [
         "Taurus bull constellation design",
@@ -2123,13 +2127,13 @@
       ],
       "link": "/shop/pisces-luxury-mousepad.html",
       "price_gbp": {
-        "min": 28.99,
-        "max": 28.99
+        "min": 29.0,
+        "max": 29.0
       },
       "variants": [
         {
           "size": "One Size",
-          "price_gbp": 28.99,
+          "price_gbp": 29.0,
           "printful_variant_id": "69600a547890d5",
           "sku": "LYR-PISC-MOUSEPAD"
         }
@@ -2191,43 +2195,43 @@
       ],
       "link": "/shop/pisces-cropped-windbreaker.html",
       "price_gbp": {
-        "min": 68.99,
-        "max": 69.99
+        "min": 89.0,
+        "max": 90.0
       },
       "variants": [
         {
           "size": "XS",
-          "price_gbp": 68.99,
+          "price_gbp": 89.0,
           "printful_variant_id": "6960112a067091",
           "sku": "LYR-PISC-WIND-XS"
         },
         {
           "size": "S",
-          "price_gbp": 68.99,
+          "price_gbp": 89.0,
           "printful_variant_id": "6960112a0670f3",
           "sku": "LYR-PISC-WIND-S"
         },
         {
           "size": "M",
-          "price_gbp": 68.99,
+          "price_gbp": 89.0,
           "printful_variant_id": "6960112a067149",
           "sku": "LYR-PISC-WIND-M"
         },
         {
           "size": "L",
-          "price_gbp": 68.99,
+          "price_gbp": 89.0,
           "printful_variant_id": "6960112a067193",
           "sku": "LYR-PISC-WIND-L"
         },
         {
           "size": "XL",
-          "price_gbp": 68.99,
+          "price_gbp": 89.0,
           "printful_variant_id": "6960112a0671d2",
           "sku": "LYR-PISC-WIND-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 69.99,
+          "price_gbp": 90.0,
           "printful_variant_id": "6960112a067227",
           "sku": "LYR-PISC-WIND-2XL"
         }
@@ -2290,25 +2294,25 @@
       ],
       "link": "/shop/taurus-luxury-pillow.html",
       "price_gbp": {
-        "min": 26.99,
-        "max": 31.99
+        "min": 42.0,
+        "max": 47.0
       },
       "variants": [
         {
           "size": "20″×12″",
-          "price_gbp": 26.99,
+          "price_gbp": 42.0,
           "printful_variant_id": "69601af7eb63e1",
           "sku": "LYR-TAUR-PILLOW-20x12"
         },
         {
           "size": "18″×18″",
-          "price_gbp": 28.99,
+          "price_gbp": 44.0,
           "printful_variant_id": "69601af7eb6342",
           "sku": "LYR-TAUR-PILLOW-18x18"
         },
         {
           "size": "22″×22″",
-          "price_gbp": 31.99,
+          "price_gbp": 47.0,
           "printful_variant_id": "69601af7eb6461",
           "sku": "LYR-TAUR-PILLOW-22x22"
         }
@@ -2374,13 +2378,13 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 35.99,
-        "max": 35.99
+        "min": 36.0,
+        "max": 36.0
       },
       "variants": [
         {
           "size": "One Size",
-          "price_gbp": 35.99,
+          "price_gbp": 36.0,
           "printful_variant_id": "6960171c551b37",
           "sku": "LYR-PISC-TOTE-CLEAR"
         }
@@ -2446,43 +2450,43 @@
       ],
       "link": "/shop/taurus-ram-hoodie.html",
       "price_gbp": {
-        "min": 58.99,
-        "max": 61.99
+        "min": 59.0,
+        "max": 62.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 58.99,
+          "price_gbp": 59.0,
           "printful_variant_id": "69652e9a3966c2",
           "sku": "LYR-TAUR-RAM-HOOD-S"
         },
         {
           "size": "M",
-          "price_gbp": 58.99,
+          "price_gbp": 59.0,
           "printful_variant_id": "69652e9a396769",
           "sku": "LYR-TAUR-RAM-HOOD-M"
         },
         {
           "size": "L",
-          "price_gbp": 58.99,
+          "price_gbp": 59.0,
           "printful_variant_id": "69652e9a3967f1",
           "sku": "LYR-TAUR-RAM-HOOD-L"
         },
         {
           "size": "XL",
-          "price_gbp": 58.99,
+          "price_gbp": 59.0,
           "printful_variant_id": "69652e9a396882",
           "sku": "LYR-TAUR-RAM-HOOD-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 60.99,
+          "price_gbp": 61.0,
           "printful_variant_id": "69652e9a396905",
           "sku": "LYR-TAUR-RAM-HOOD-2XL"
         },
         {
           "size": "3XL",
-          "price_gbp": 61.99,
+          "price_gbp": 62.0,
           "printful_variant_id": "69652e9a396987",
           "sku": "LYR-TAUR-RAM-HOOD-3XL"
         }
@@ -2551,37 +2555,37 @@
       ],
       "link": "/shop/taurus-organic-tee.html",
       "price_gbp": {
-        "min": 42.99,
-        "max": 44.99
+        "min": 43.0,
+        "max": 45.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 42.99,
+          "price_gbp": 43.0,
           "printful_variant_id": "69653de7ef42f3",
           "sku": "LYR-TAUR-ORG-TEE-S"
         },
         {
           "size": "M",
-          "price_gbp": 42.99,
+          "price_gbp": 43.0,
           "printful_variant_id": "69653de7ef4361",
           "sku": "LYR-TAUR-ORG-TEE-M"
         },
         {
           "size": "L",
-          "price_gbp": 42.99,
+          "price_gbp": 43.0,
           "printful_variant_id": "69653de7ef43c4",
           "sku": "LYR-TAUR-ORG-TEE-L"
         },
         {
           "size": "XL",
-          "price_gbp": 42.99,
+          "price_gbp": 43.0,
           "printful_variant_id": "69653de7ef4429",
           "sku": "LYR-TAUR-ORG-TEE-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 44.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "69653de7ef4474",
           "sku": "LYR-TAUR-ORG-TEE-2XL"
         }
@@ -2648,43 +2652,43 @@
       ],
       "link": "/shop/gemini-love-language-hoodie.html",
       "price_gbp": {
-        "min": 65.99,
-        "max": 68.99
+        "min": 79.0,
+        "max": 82.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 65.99,
+          "price_gbp": 79.0,
           "printful_variant_id": "697bb788231124",
           "sku": "LYR-GEM-LOVE-LANG-S"
         },
         {
           "size": "M",
-          "price_gbp": 65.99,
+          "price_gbp": 79.0,
           "printful_variant_id": "697bb7882311c2",
           "sku": "LYR-GEM-LOVE-LANG-M"
         },
         {
           "size": "L",
-          "price_gbp": 65.99,
+          "price_gbp": 79.0,
           "printful_variant_id": "697bb788231256",
           "sku": "LYR-GEM-LOVE-LANG-L"
         },
         {
           "size": "XL",
-          "price_gbp": 65.99,
+          "price_gbp": 79.0,
           "printful_variant_id": "697bb7882312d9",
           "sku": "LYR-GEM-LOVE-LANG-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 66.99,
+          "price_gbp": 80.0,
           "printful_variant_id": "697bb788231366",
           "sku": "LYR-GEM-LOVE-LANG-2XL"
         },
         {
           "size": "3XL",
-          "price_gbp": 68.99,
+          "price_gbp": 82.0,
           "printful_variant_id": "697bb7882313d7",
           "sku": "LYR-GEM-LOVE-LANG-3XL"
         }
@@ -2751,55 +2755,55 @@
       ],
       "link": "/shop/mercury-retrograde-hoodie.html",
       "price_gbp": {
-        "min": 52.99,
-        "max": 56.99
+        "min": 53.0,
+        "max": 57.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 52.99,
+          "price_gbp": 53.0,
           "printful_variant_id": "697ba455db1785",
           "sku": "LYR-MERC-RETRO-S"
         },
         {
           "size": "M",
-          "price_gbp": 52.99,
+          "price_gbp": 53.0,
           "printful_variant_id": "697ba455db17f3",
           "sku": "LYR-MERC-RETRO-M"
         },
         {
           "size": "L",
-          "price_gbp": 52.99,
+          "price_gbp": 53.0,
           "printful_variant_id": "697ba455db1844",
           "sku": "LYR-MERC-RETRO-L"
         },
         {
           "size": "XL",
-          "price_gbp": 52.99,
+          "price_gbp": 53.0,
           "printful_variant_id": "697ba455db1891",
           "sku": "LYR-MERC-RETRO-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 52.99,
+          "price_gbp": 53.0,
           "printful_variant_id": "697ba455db18d2",
           "sku": "LYR-MERC-RETRO-2XL"
         },
         {
           "size": "3XL",
-          "price_gbp": 54.99,
+          "price_gbp": 55.0,
           "printful_variant_id": "697ba455db1926",
           "sku": "LYR-MERC-RETRO-3XL"
         },
         {
           "size": "4XL",
-          "price_gbp": 54.99,
+          "price_gbp": 55.0,
           "printful_variant_id": "697ba455db1975",
           "sku": "LYR-MERC-RETRO-4XL"
         },
         {
           "size": "5XL",
-          "price_gbp": 56.99,
+          "price_gbp": 57.0,
           "printful_variant_id": "697ba455db19b8",
           "sku": "LYR-MERC-RETRO-5XL"
         }
@@ -2858,19 +2862,19 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 12.99,
-        "max": 12.99
+        "min": 22.0,
+        "max": 22.0
       },
       "variants": [
         {
           "size": "11oz",
-          "price_gbp": 12.99,
+          "price_gbp": 22.0,
           "printful_variant_id": "697ba95a591694",
           "sku": "LYR-COSMIC-MUG-11OZ"
         },
         {
           "size": "15oz",
-          "price_gbp": 12.99,
+          "price_gbp": 22.0,
           "printful_variant_id": "697ba95a591743",
           "sku": "LYR-COSMIC-MUG-15OZ"
         }
@@ -2925,37 +2929,37 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 67.99,
-        "max": 67.99
+        "min": 95.0,
+        "max": 95.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 67.99,
+          "price_gbp": 95.0,
           "printful_variant_id": "697bac34ec7015",
           "sku": "LYR-SATURN-HOODIE-S"
         },
         {
           "size": "M",
-          "price_gbp": 67.99,
+          "price_gbp": 95.0,
           "printful_variant_id": "697bac34ec70c8",
           "sku": "LYR-SATURN-HOODIE-M"
         },
         {
           "size": "L",
-          "price_gbp": 67.99,
+          "price_gbp": 95.0,
           "printful_variant_id": "697bac34ec7153",
           "sku": "LYR-SATURN-HOODIE-L"
         },
         {
           "size": "XL",
-          "price_gbp": 67.99,
+          "price_gbp": 95.0,
           "printful_variant_id": "697bac34ec71e6",
           "sku": "LYR-SATURN-HOODIE-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 67.99,
+          "price_gbp": 95.0,
           "printful_variant_id": "697bac34ec7265",
           "sku": "LYR-SATURN-HOODIE-2XL"
         }
@@ -3010,55 +3014,55 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 39.99,
-        "max": 42.99
+        "min": 40.0,
+        "max": 43.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 39.99,
+          "price_gbp": 40.0,
           "printful_variant_id": "697bb1ac69d002",
           "sku": "LYR-POLO-HIS-S"
         },
         {
           "size": "M",
-          "price_gbp": 39.99,
+          "price_gbp": 40.0,
           "printful_variant_id": "697bb1ac69d068",
           "sku": "LYR-POLO-HIS-M"
         },
         {
           "size": "L",
-          "price_gbp": 39.99,
+          "price_gbp": 40.0,
           "printful_variant_id": "697bb1ac69d0c2",
           "sku": "LYR-POLO-HIS-L"
         },
         {
           "size": "XL",
-          "price_gbp": 39.99,
+          "price_gbp": 40.0,
           "printful_variant_id": "697bb1ac69d105",
           "sku": "LYR-POLO-HIS-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 40.99,
+          "price_gbp": 41.0,
           "printful_variant_id": "697bb1ac69d142",
           "sku": "LYR-POLO-HIS-2XL"
         },
         {
           "size": "3XL",
-          "price_gbp": 41.99,
+          "price_gbp": 42.0,
           "printful_variant_id": "697bb1ac69d183",
           "sku": "LYR-POLO-HIS-3XL"
         },
         {
           "size": "4XL",
-          "price_gbp": 42.99,
+          "price_gbp": 43.0,
           "printful_variant_id": "697bb1ac69d1d2",
           "sku": "LYR-POLO-HIS-4XL"
         },
         {
           "size": "5XL",
-          "price_gbp": 42.99,
+          "price_gbp": 43.0,
           "printful_variant_id": "697bb1ac69d218",
           "sku": "LYR-POLO-HIS-5XL"
         }
@@ -3114,55 +3118,55 @@
       ],
       "link": "/shop/premium-polo-hers.html",
       "price_gbp": {
-        "min": 39.99,
-        "max": 43.99
+        "min": 40.0,
+        "max": 44.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 39.99,
+          "price_gbp": 40.0,
           "printful_variant_id": "697bb4f40d65e5",
           "sku": "LYR-POLO-HERS-S"
         },
         {
           "size": "M",
-          "price_gbp": 39.99,
+          "price_gbp": 40.0,
           "printful_variant_id": "697bb4f40d6649",
           "sku": "LYR-POLO-HERS-M"
         },
         {
           "size": "L",
-          "price_gbp": 39.99,
+          "price_gbp": 40.0,
           "printful_variant_id": "697bb4f40d66a7",
           "sku": "LYR-POLO-HERS-L"
         },
         {
           "size": "XL",
-          "price_gbp": 39.99,
+          "price_gbp": 40.0,
           "printful_variant_id": "697bb4f40d66f9",
           "sku": "LYR-POLO-HERS-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 39.99,
+          "price_gbp": 40.0,
           "printful_variant_id": "697bb4f40d6744",
           "sku": "LYR-POLO-HERS-2XL"
         },
         {
           "size": "3XL",
-          "price_gbp": 41.99,
+          "price_gbp": 42.0,
           "printful_variant_id": "697bb4f40d6792",
           "sku": "LYR-POLO-HERS-3XL"
         },
         {
           "size": "4XL",
-          "price_gbp": 42.99,
+          "price_gbp": 43.0,
           "printful_variant_id": "697bb4f40d67e8",
           "sku": "LYR-POLO-HERS-4XL"
         },
         {
           "size": "5XL",
-          "price_gbp": 43.99,
+          "price_gbp": 44.0,
           "printful_variant_id": "697bb4f40d6836",
           "sku": "LYR-POLO-HERS-5XL"
         }
@@ -3218,37 +3222,37 @@
       ],
       "link": "/shop/gemini-windbreaker.html",
       "price_gbp": {
-        "min": 43.99,
-        "max": 46.99
+        "min": 95.0,
+        "max": 98.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 43.99,
+          "price_gbp": 95.0,
           "printful_variant_id": "697bba6106f234",
           "sku": "LYR-GEMINI-WINDBREAKER-S"
         },
         {
           "size": "M",
-          "price_gbp": 43.99,
+          "price_gbp": 95.0,
           "printful_variant_id": "697bba6106f2d5",
           "sku": "LYR-GEMINI-WINDBREAKER-M"
         },
         {
           "size": "L",
-          "price_gbp": 43.99,
+          "price_gbp": 95.0,
           "printful_variant_id": "697bba6106f355",
           "sku": "LYR-GEMINI-WINDBREAKER-L"
         },
         {
           "size": "XL",
-          "price_gbp": 43.99,
+          "price_gbp": 95.0,
           "printful_variant_id": "697bba6106f3c6",
           "sku": "LYR-GEMINI-WINDBREAKER-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 46.99,
+          "price_gbp": 98.0,
           "printful_variant_id": "697bba6106f433",
           "sku": "LYR-GEMINI-WINDBREAKER-2XL"
         }
@@ -3309,37 +3313,37 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 33.99,
-        "max": 35.99
+        "min": 34.0,
+        "max": 36.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 33.99,
+          "price_gbp": 34.0,
           "printful_variant_id": "697bc1230bd778",
           "sku": "LYR-LEO-LOVE-LANG-TEE-S"
         },
         {
           "size": "M",
-          "price_gbp": 33.99,
+          "price_gbp": 34.0,
           "printful_variant_id": "697bc1230bd7e5",
           "sku": "LYR-LEO-LOVE-LANG-TEE-M"
         },
         {
           "size": "L",
-          "price_gbp": 33.99,
+          "price_gbp": 34.0,
           "printful_variant_id": "697bc1230bd839",
           "sku": "LYR-LEO-LOVE-LANG-TEE-L"
         },
         {
           "size": "XL",
-          "price_gbp": 33.99,
+          "price_gbp": 34.0,
           "printful_variant_id": "697bc1230bd873",
           "sku": "LYR-LEO-LOVE-LANG-TEE-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 35.99,
+          "price_gbp": 36.0,
           "printful_variant_id": "697bc1230bd8c9",
           "sku": "LYR-LEO-LOVE-LANG-TEE-2XL"
         }
@@ -3400,13 +3404,13 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 31.99,
-        "max": 31.99
+        "min": 36.0,
+        "max": 36.0
       },
       "variants": [
         {
           "size": "One Size",
-          "price_gbp": 31.99,
+          "price_gbp": 36.0,
           "printful_variant_id": "697c09e3136474",
           "sku": "LYR-LIBRA-TOTE-OS"
         }
@@ -3483,6 +3487,8 @@
       },
       "seasonal": true,
       "listed": true,
+      "hidden": true,
+      "hidden_reason": "Retired from the shop: this blank cannot reach a sound margin at a believable price, and it is fulfilled outside the UK and EU.",
       "gender": "unisex",
       "features": [
         "Oversized weekender design",
@@ -3529,13 +3535,13 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 19.99,
-        "max": 19.99
+        "min": 24.0,
+        "max": 24.0
       },
       "variants": [
         {
           "size": "One Size",
-          "price_gbp": 19.99,
+          "price_gbp": 24.0,
           "printful_variant_id": "697c0c6089091f6",
           "sku": "LYR-VIRGO-MOUSEPAD-OS"
         }
@@ -3599,25 +3605,25 @@
       ],
       "link": null,
       "price_gbp": {
-        "min": 20.99,
-        "max": 21.99
+        "min": 26.0,
+        "max": 27.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 20.99,
+          "price_gbp": 26.0,
           "printful_variant_id": "697c1335c39ee7",
           "sku": "LYR-VIRGO-BANDANA-S"
         },
         {
           "size": "M",
-          "price_gbp": 20.99,
+          "price_gbp": 26.0,
           "printful_variant_id": "697c1335c39f42",
           "sku": "LYR-VIRGO-BANDANA-M"
         },
         {
           "size": "L",
-          "price_gbp": 21.99,
+          "price_gbp": 27.0,
           "printful_variant_id": "697c1335c39fa3",
           "sku": "LYR-VIRGO-BANDANA-L"
         }
@@ -3682,43 +3688,43 @@
       ],
       "link": "/shop/saturn-return-white-hoodie.html",
       "price_gbp": {
-        "min": 50.99,
-        "max": 54.99
+        "min": 51.0,
+        "max": 55.0
       },
       "variants": [
         {
           "size": "S",
-          "price_gbp": 50.99,
+          "price_gbp": 51.0,
           "printful_variant_id": "697c0e9b30b4c3",
           "sku": "LYR-SATURN-WHITE-HOODIE-S"
         },
         {
           "size": "M",
-          "price_gbp": 50.99,
+          "price_gbp": 51.0,
           "printful_variant_id": "697c0e9b30b525",
           "sku": "LYR-SATURN-WHITE-HOODIE-M"
         },
         {
           "size": "L",
-          "price_gbp": 50.99,
+          "price_gbp": 51.0,
           "printful_variant_id": "697c0e9b30b579",
           "sku": "LYR-SATURN-WHITE-HOODIE-L"
         },
         {
           "size": "XL",
-          "price_gbp": 50.99,
+          "price_gbp": 51.0,
           "printful_variant_id": "697c0e9b30b5c1",
           "sku": "LYR-SATURN-WHITE-HOODIE-XL"
         },
         {
           "size": "2XL",
-          "price_gbp": 52.99,
+          "price_gbp": 53.0,
           "printful_variant_id": "697c0e9b30b612",
           "sku": "LYR-SATURN-WHITE-HOODIE-2XL"
         },
         {
           "size": "3XL",
-          "price_gbp": 54.99,
+          "price_gbp": 55.0,
           "printful_variant_id": "697c0e9b30b656",
           "sku": "LYR-SATURN-WHITE-HOODIE-3XL"
         }
@@ -3935,38 +3941,38 @@
       ],
       "link": "/shop/taurus-tank-top.html",
       "price_gbp": {
-        "min": 32.99,
-        "max": 34.0
+        "min": 45.0,
+        "max": 46.01
       },
       "variants": [
         {
           "size": "XS",
-          "price_gbp": 32.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "6951c9104965e8"
         },
         {
           "size": "S",
-          "price_gbp": 32.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "6951c910496649"
         },
         {
           "size": "M",
-          "price_gbp": 32.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "6951c910496698"
         },
         {
           "size": "L",
-          "price_gbp": 32.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "6951c9104966d6"
         },
         {
           "size": "XL",
-          "price_gbp": 32.99,
+          "price_gbp": 45.0,
           "printful_variant_id": "6951c910496729"
         },
         {
           "size": "2XL",
-          "price_gbp": 34.0,
+          "price_gbp": 46.01,
           "printful_variant_id": "6951c910496768"
         }
       ],
@@ -4048,6 +4054,8 @@
       },
       "seasonal": true,
       "listed": true,
+      "hidden": true,
+      "hidden_reason": "Retired from the shop: this blank cannot reach a sound margin at a believable price, and it is fulfilled outside the UK and EU.",
       "tags": [
         "taurus",
         "earth-sign",
@@ -4072,43 +4080,43 @@
       ],
       "link": "/shop/taurus-crop-tee.html",
       "price_gbp": {
-        "min": 34.99,
-        "max": 37.99
+        "min": 39.0,
+        "max": 42.0
       },
       "variants": [
         {
           "size": "XS",
-          "price_gbp": 34.99,
+          "price_gbp": 39.0,
           "printful_variant_id": "6951cf089ec022"
         },
         {
           "size": "S",
-          "price_gbp": 34.99,
+          "price_gbp": 39.0,
           "printful_variant_id": "6951cf089ec096"
         },
         {
           "size": "M",
-          "price_gbp": 34.99,
+          "price_gbp": 39.0,
           "printful_variant_id": "6951cf089ec0f9"
         },
         {
           "size": "L",
-          "price_gbp": 34.99,
+          "price_gbp": 39.0,
           "printful_variant_id": "6951cf089ec157"
         },
         {
           "size": "XL",
-          "price_gbp": 34.99,
+          "price_gbp": 39.0,
           "printful_variant_id": "6951cf089ec1a9"
         },
         {
           "size": "2XL",
-          "price_gbp": 35.99,
+          "price_gbp": 40.0,
           "printful_variant_id": "6951cf089ec1f4"
         },
         {
           "size": "3XL",
-          "price_gbp": 37.99,
+          "price_gbp": 42.0,
           "printful_variant_id": "6951cf089ec243"
         }
       ],

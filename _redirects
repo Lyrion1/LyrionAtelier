@@ -8,6 +8,22 @@
 /shop/taurus-pyjama-top /shop/taurus-pyjama-top.html 200
 /shop/taurus-pyjama-top.html /shop/taurus-pyjama-top.html 200
 
+# Gift guides
+/gifts/index.html   /gifts                    301
+/gifts              /gifts/index.html         200
+/gifts/aries        /gifts/aries.html         200
+/gifts/taurus       /gifts/taurus.html        200
+/gifts/gemini       /gifts/gemini.html        200
+/gifts/cancer       /gifts/cancer.html        200
+/gifts/leo          /gifts/leo.html           200
+/gifts/virgo        /gifts/virgo.html         200
+/gifts/libra        /gifts/libra.html         200
+/gifts/scorpio      /gifts/scorpio.html       200
+/gifts/sagittarius  /gifts/sagittarius.html   200
+/gifts/capricorn    /gifts/capricorn.html     200
+/gifts/aquarius     /gifts/aquarius.html      200
+/gifts/pisces       /gifts/pisces.html        200
+
 # Clean URLs - Remove .html extension
 /shop               /shop.html            200
 /cart               /cart.html            200

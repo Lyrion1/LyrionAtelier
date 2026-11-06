@@ -2,7 +2,7 @@
   {
     "id": "aries-diamond-hoodie",
     "name": "Aries Diamond Women's Relaxed Hoodie",
-    "priceGBP": 5199,
+    "priceGBP": 7900,
     "image": "/images/products/aries-diamond-hoodie-lifestyle-1-crop.jpg",
     "sizes": [
       "XS",
@@ -24,7 +24,7 @@
   {
     "id": "aries-love-language-hoodie",
     "name": "Aries Love Language Hoodie",
-    "priceGBP": 5099,
+    "priceGBP": 6400,
     "image": "/images/products/aries-love-language-hoodie-4-crop.jpg",
     "sizes": [
       "S",
@@ -50,7 +50,7 @@
   {
     "id": "youth-aries-fire-tee",
     "name": "Aries Fire Tee (Youth)",
-    "priceGBP": 2799,
+    "priceGBP": 2800,
     "image": "/youth-aries-fire-tee/youth-aries-fire-tee-boy-crop.jpg",
     "sizes": [
       "XS",
@@ -70,7 +70,7 @@
   {
     "id": "youth-aries-heavy-blend-hoodie",
     "name": "Youth Aries Heavy Blend Hoodie",
-    "priceGBP": 3399,
+    "priceGBP": 3800,
     "image": "/youth-aries-heavy-blend-hoodie/youth-aries-hoodie-lifestyle.jpg",
     "sizes": [
       "XS",
@@ -90,7 +90,7 @@
   {
     "id": "leo-zodiac-hoodie",
     "name": "Leo Zodiac Hoodie",
-    "priceGBP": 4699,
+    "priceGBP": 8400,
     "image": "/leo-zodiac-hoodie/leo-zodiac-hoodie-boy-crop.jpg",
     "sizes": [
       "S",
@@ -112,7 +112,7 @@
   {
     "id": "cosmic-crewneck-pisces",
     "name": "Cosmic Crewneck - Pisces",
-    "priceGBP": 4399,
+    "priceGBP": 6900,
     "image": "/cosmic-crewneck-pisces/cosmic-crewneck-pisces-ghost.jpg",
     "sizes": [
       "XS",
@@ -134,7 +134,7 @@
   {
     "id": "gemini-starlight-tee",
     "name": "Gemini Starlight Tee",
-    "priceGBP": 3399,
+    "priceGBP": 3400,
     "image": "/gemini-starlight-tee/gemini-starlight-tee-ghost-crop.jpg",
     "sizes": [
       "S",
@@ -158,7 +158,7 @@
   {
     "id": "fisherman-beanie",
     "name": "Lyrīon Fisherman Beanie",
-    "priceGBP": 2399,
+    "priceGBP": 3800,
     "image": "/fisherman-beanie/fisherman-beanie-front-crop.jpg",
     "sizes": [
       "One Size"
@@ -170,7 +170,7 @@
   {
     "id": "pisces-hoodie",
     "name": "Pisces Hoodie",
-    "priceGBP": 4299,
+    "priceGBP": 4500,
     "image": "/images/pisces-hoodie-new-ghost-crop.jpg",
     "sizes": [
       "S",
@@ -196,7 +196,7 @@
   {
     "id": "lyrion-pique-polo",
     "name": "Lyrīon Pique Polo Shirt",
-    "priceGBP": 3599,
+    "priceGBP": 3600,
     "image": "/lyrion-pique-polo/lyrion-pique-polo-girl-front-crop.jpg",
     "sizes": [
       "S",
@@ -227,7 +227,7 @@
   {
     "id": "aries-oversized-heavyweight-sweatshirt",
     "name": "Aries Oversized Heavyweight Sweatshirt",
-    "priceGBP": 4299,
+    "priceGBP": 7400,
     "image": "/assets/products/aries/aries-oversized-heavyweight-sweatshirt/aries-oversized-sweatshirt-02-front-crop.jpg",
     "sizes": [
       "S",
@@ -249,7 +249,7 @@
   {
     "id": "pisces-intuition-hoodie",
     "name": "Pisces Intuition Hoodie",
-    "priceGBP": 4399,
+    "priceGBP": 4500,
     "image": "/pisces-intuition-hoodie/pisces-intuition-hoodie-back-crop.jpg",
     "sizes": [
       "S",
@@ -275,7 +275,7 @@
   {
     "id": "taurus-pyjama-top",
     "name": "Taurus Constellation Pyjama Top",
-    "priceGBP": 3599,
+    "priceGBP": 4500,
     "image": "/shop-images/taurus-pyjamas/taurus-pyjamas-front-crop.jpg",
     "sizes": [
       "XS",
@@ -295,35 +295,9 @@
     ]
   },
   {
-    "id": "taurus-celestial-slides",
-    "name": "Taurus Celestial Slides",
-    "priceGBP": 4299,
-    "image": "/images/products/taurus-slides-flat-crop.jpg",
-    "sizes": [
-      "6.5",
-      "7",
-      "8",
-      "8.5",
-      "9.5",
-      "10",
-      "11",
-      "11.5"
-    ],
-    "printfulVariantId": [
-      "695dd0eb3db803",
-      "695dd0eb3db895",
-      "695dd0eb3db918",
-      "695dd0eb3db991",
-      "695dd0eb3dba01",
-      "695dd0eb3dba81",
-      "695dd0eb3dbb19",
-      "695dd0eb3dbb94"
-    ]
-  },
-  {
     "id": "pisces-luxury-mousepad",
     "name": "Pisces Luxury Mouse Pad",
-    "priceGBP": 2899,
+    "priceGBP": 2900,
     "image": "/images/products/pisces-mousepad-lifestyle-1.jpg",
     "sizes": [
       "One Size"
@@ -335,7 +309,7 @@
   {
     "id": "pisces-cropped-windbreaker",
     "name": "Pisces Cropped Windbreaker",
-    "priceGBP": 6899,
+    "priceGBP": 8900,
     "image": "/images/products/pisces-windbreaker-lifestyle-3-crop.jpg",
     "sizes": [
       "XS",
@@ -357,7 +331,7 @@
   {
     "id": "taurus-luxury-pillow",
     "name": "Taurus Luxury Throw Pillow",
-    "priceGBP": 2699,
+    "priceGBP": 4200,
     "image": "/images/products/taurus-pillow-lifestyle-1.jpg",
     "sizes": [
       "20″×12″",
@@ -373,7 +347,7 @@
   {
     "id": "pisces-clear-tote-bag",
     "name": "Pisces Clear Tote Bag",
-    "priceGBP": 3599,
+    "priceGBP": 3600,
     "image": "/images/products/pisces-tote-lifestyle-1-crop.jpg",
     "sizes": [
       "One Size"
@@ -385,7 +359,7 @@
   {
     "id": "taurus-ram-hoodie",
     "name": "Taurus Ram Head Unisex Hoodie",
-    "priceGBP": 5899,
+    "priceGBP": 5900,
     "image": "/images/products/taurus-ram-hoodie-lifestyle-1-crop.jpg",
     "sizes": [
       "S",
@@ -407,7 +381,7 @@
   {
     "id": "taurus-organic-tee",
     "name": "Taurus Unisex Organic Ribbed Neck T-Shirt",
-    "priceGBP": 4299,
+    "priceGBP": 4300,
     "image": "/images/products/taurus-organic-tee-lifestyle-4-crop.jpg",
     "sizes": [
       "S",
@@ -427,7 +401,7 @@
   {
     "id": "gemini-love-language-hoodie",
     "name": "Gemini Love Language Hoodie",
-    "priceGBP": 6599,
+    "priceGBP": 7900,
     "image": "/images/products/gemini-love-language-hoodie-2-crop.jpg",
     "sizes": [
       "S",
@@ -449,7 +423,7 @@
   {
     "id": "mercury-retrograde-hoodie",
     "name": "Mercury Retrograde Ruined My Love Life Hoodie",
-    "priceGBP": 5299,
+    "priceGBP": 5300,
     "image": "/images/products/mercury-retrograde-hoodie-1-crop.jpg",
     "sizes": [
       "S",
@@ -475,7 +449,7 @@
   {
     "id": "single-cosmic-design-mug",
     "name": "Single by Cosmic Design Mug",
-    "priceGBP": 1299,
+    "priceGBP": 2200,
     "image": "/images/products/single-cosmic-design-mug-1-crop.jpg",
     "sizes": [
       "11oz",
@@ -489,7 +463,7 @@
   {
     "id": "saturn-return-hoodie",
     "name": "My Saturn Return Took My Relationship Hoodie",
-    "priceGBP": 6799,
+    "priceGBP": 9500,
     "image": "/images/products/saturn-return-hoodie-1-crop.jpg",
     "sizes": [
       "S",
@@ -509,7 +483,7 @@
   {
     "id": "premium-polo-his",
     "name": "Lovers' Galaxies Premium Polo - His",
-    "priceGBP": 3999,
+    "priceGBP": 4000,
     "image": "/images/products/premium-polo-his-1-crop.jpg",
     "sizes": [
       "S",
@@ -535,7 +509,7 @@
   {
     "id": "premium-polo-hers",
     "name": "Lovers' Galaxies Premium Polo - Hers",
-    "priceGBP": 3999,
+    "priceGBP": 4000,
     "image": "/images/products/premium-polo-hers-1-crop.jpg",
     "sizes": [
       "S",
@@ -561,7 +535,7 @@
   {
     "id": "gemini-windbreaker",
     "name": "Gemini Windbreaker - My Love Song is in Gemini",
-    "priceGBP": 4399,
+    "priceGBP": 9500,
     "image": "/images/products/gemini-windbreaker-1-crop.jpg",
     "sizes": [
       "S",
@@ -581,7 +555,7 @@
   {
     "id": "leo-love-language-tee",
     "name": "Leo Love Language Tee - Public Adoration",
-    "priceGBP": 3399,
+    "priceGBP": 3400,
     "image": "/images/products/leo-love-language-tee-1-crop.jpg",
     "sizes": [
       "S",
@@ -601,7 +575,7 @@
   {
     "id": "libra-scale-tote",
     "name": "Libra All Over Print Tote Bag",
-    "priceGBP": 3199,
+    "priceGBP": 3600,
     "image": "/images/products/libra-scale-tote-1-crop.jpg",
     "sizes": [
       "One Size"
@@ -611,21 +585,9 @@
     ]
   },
   {
-    "id": "aries-weekender-bag",
-    "name": "Aries Oversized Weekender Bag",
-    "priceGBP": 3899,
-    "image": "/images/products/aries-weekender-bag-1-crop.jpg",
-    "sizes": [
-      "One Size"
-    ],
-    "printfulVariantId": [
-      "697c0a161b4606"
-    ]
-  },
-  {
     "id": "virgo-mousepad",
     "name": "Virgo Round Mousepad",
-    "priceGBP": 1999,
+    "priceGBP": 2400,
     "image": "/images/products/virgo-mousepad-1.jpg",
     "sizes": [
       "One Size"
@@ -637,7 +599,7 @@
   {
     "id": "virgo-bandana",
     "name": "Virgo All-Over Print Bandana",
-    "priceGBP": 2099,
+    "priceGBP": 2600,
     "image": "/images/products/virgo-bandana-2-crop.jpg",
     "sizes": [
       "S",
@@ -653,7 +615,7 @@
   {
     "id": "saturn-return-white-hoodie",
     "name": "My Saturn Return Took My Relationship Hoodie - White",
-    "priceGBP": 5099,
+    "priceGBP": 5100,
     "image": "/images/products/saturn-return-white-hoodie-1-crop.jpg",
     "sizes": [
       "S",
@@ -675,7 +637,7 @@
   {
     "id": "taurus-tank-top",
     "name": "Taurus Micro-Rib Tank Top - Women's",
-    "priceGBP": 3299,
+    "priceGBP": 4500,
     "image": "/shop-images/taurus-tank-top/taurus-tank-top-lifestyle-front.jpg",
     "sizes": [
       "XS",
@@ -695,33 +657,9 @@
     ]
   },
   {
-    "id": "taurus-baseball-jersey",
-    "name": "Taurus Recycled Baseball Jersey - Unisex",
-    "priceGBP": 4999,
-    "image": "/shop-images/taurus-baseball-jersey/taurus-baseball-jersey-back.png",
-    "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL"
-    ],
-    "printfulVariantId": [
-      "6951db0b91f1d8",
-      "6951db0b91f249",
-      "6951db0b91f294",
-      "6951db0b91f2d5",
-      "6951db0b91f321",
-      "6951db0b91f368",
-      "6951db0b91f3b4"
-    ]
-  },
-  {
     "id": "taurus-crop-tee",
     "name": "Taurus All-Over Print Crop Tee",
-    "priceGBP": 3499,
+    "priceGBP": 3900,
     "image": "/shop-images/taurus-crop-tee/taurus-crop-tee-lifestyle-bicycle.jpg",
     "sizes": [
       "XS",
